@@ -1,0 +1,85 @@
+@startuml
+
+' -- Create entity
+
+' ** Note : Permission to role -> module -> view
+' * Person
+' * Role
+' * User
+' * Module
+' * View
+' * Action ****?
+' * UserRole
+' * RoleModule
+' * ViewModule
+' * ViewAction ****?
+' *
+' *
+' * Category
+' * Product
+' * Inventory
+' * Cart
+' * Bill
+' * BillDetail
+
+note as N1
+    <b>Nota Importante:</b>
+    Todas las entidades del sistema tendrán
+    sus respectivos métodos de encapsulamiento
+    para cada atributo:
+    
+    • <i>get()</i>: Para obtener el valor del atributo
+    • <i>set()</i>: Para asignar/modificar el valor del atributo
+    
+    Ejemplo: Para el atributo "name"
+    - getName(): string
+    - setName(string): void
+end note
+
+' save () : void | object
+' delete () : void | object
+' update () : void | object
+' findById (id: int) : Person
+' findAll () : List<Person>
+
+class Person {
+    -id: int
+    -name: string
+    -email: string
+    -phone: string
+}
+
+class Role {
+    -id: int
+    -name: string
+    -description: string
+}
+
+class User {
+    -id: int
+    -username: string
+    -password: string
+    -email: string
+}
+
+class Module {
+    -id: int
+    -name: string
+    -description: string
+}
+
+class View {
+    -id: int
+    -name: string
+    -description: string
+}
+
+class UserRole {
+    -id: int
+    -userId: User
+    -roleId: Role
+}
+
+UserRole *-- User 
+UserRole *-- Role
+@enduml
