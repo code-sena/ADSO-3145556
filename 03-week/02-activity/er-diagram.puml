@@ -1,0 +1,260 @@
+@startuml Coffee Shop ER Diagram
+
+!theme plain
+hide circle
+
+' ========================
+' SECURITY MODULE
+' ========================
+
+entity "person" as person {
+    * person_id : INT <<PK>>
+    * first_name : VARCHAR(100)
+    * last_name : VARCHAR(100)
+    * email : VARCHAR(255) <<UNIQUE>>
+    phone : VARCHAR(20)
+    address : VARCHAR(500)
+    created_at : TIMESTAMP
+    updated_at : TIMESTAMP
+}
+
+entity "role" as role {
+    * role_id : INT <<PK>>
+    * name : VARCHAR(50) <<UNIQUE>>
+    description : VARCHAR(255)
+    is_active : BOOLEAN
+    created_at : TIMESTAMP
+    updated_at : TIMESTAMP
+}
+
+entity "user" as user {
+    * user_id : INT <<PK>>
+    * person_id : INT <<FK>>
+    * email : VARCHAR(255) <<UNIQUE>>
+    * password_hash : VARCHAR(255)
+    is_active : BOOLEAN
+    last_login : TIMESTAMP
+    created_at : TIMESTAMP
+    updated_at : TIMESTAMP
+}
+
+entity "module" as module {
+    * module_id : INT <<PK>>
+    * name : VARCHAR(100) <<UNIQUE>>
+    description : VARCHAR(255)
+    route_path : VARCHAR(100)
+    icon : VARCHAR(50)
+    parent_module_id : INT <<FK>>
+    sort_order : INT
+    is_active : BOOLEAN
+    created_at : TIMESTAMP
+}
+
+entity "view" as view {
+    * view_id : INT <<PK>>
+    * module_id : INT <<FK>>
+    * name : VARCHAR(100)
+    * route_path : VARCHAR(100)
+    description : VARCHAR(255)
+    sort_order : INT
+    is_active : BOOLEAN
+    created_at : TIMESTAMP
+}
+
+entity "action" as action {
+    * action_id : INT <<PK>>
+    * name : VARCHAR(50) <<UNIQUE>>
+    description : VARCHAR(255)
+    created_at : TIMESTAMP
+}
+
+entity "user_role" as user_role {
+    * user_role_id : INT <<PK>>
+    * user_id : INT <<FK>>
+    * role_id : INT <<FK>>
+    assigned_at : TIMESTAMP
+    assigned_by : INT <<FK>>
+}
+
+entity "role_module" as role_module {
+    * role_module_id : INT <<PK>>
+    * role_id : INT <<FK>>
+    * module_id : INT <<FK>>
+    can_read : BOOLEAN
+    can_create : BOOLEAN
+    can_update : BOOLEAN
+    can_delete : BOOLEAN
+    created_at : TIMESTAMP
+}
+
+entity "view_module" as view_module {
+    * view_module_id : INT <<PK>>
+    * view_id : INT <<FK>>
+    * module_id : INT <<FK>>
+    created_at : TIMESTAMP
+}
+
+entity "view_action" as view_action {
+    * view_action_id : INT <<PK>>
+    * view_id : INT <<FK>>
+    * action_id : INT <<FK>>
+    created_at : TIMESTAMP
+}
+
+' Security Relationships
+person ||--|| user
+user ||--|| user_role
+role ||--|| user_role
+role ||--|| role_module
+module ||--|| role_module
+module ||--|| view
+view ||--|| view_module
+view ||--|| view_action
+module ||--|| view_module
+action ||--|| view_action
+
+' ========================
+' BUSINESS MODULE
+' ========================
+
+entity "category" as category {
+    * category_id : INT <<PK>>
+    * name : VARCHAR(100) <<UNIQUE>>
+    description : VARCHAR(255)
+    image_url : VARCHAR(500)
+    is_active : BOOLEAN
+    created_at : TIMESTAMP
+    updated_at : TIMESTAMP
+}
+
+entity "product" as product {
+    * product_id : INT <<PK>>
+    * category_id : INT <<FK>>
+    * name : VARCHAR(255)
+    description : TEXT
+    * price : DECIMAL(10,2)
+    image_url : VARCHAR(500)
+    is_available : BOOLEAN
+    is_active : BOOLEAN
+    created_at : TIMESTAMP
+    updated_at : TIMESTAMP
+}
+
+entity "inventory" as inventory {
+    * inventory_id : INT <<PK>>
+    * product_id : INT <<FK>>
+    * current_stock : INT
+    * minimum_stock : INT
+    * maximum_stock : INT
+    * reorder_point : INT
+    last_restocked_at : TIMESTAMP
+    created_at : TIMESTAMP
+    updated_at : TIMESTAMP
+}
+
+entity "stock_movement" as stock_movement {
+    * movement_id : INT <<PK>>
+    * product_id : INT <<FK>>
+    * movement_type : ENUM
+    * quantity : INT
+    reason : VARCHAR(255)
+    reference_id : INT
+    * performed_by : INT <<FK>>
+    created_at : TIMESTAMP
+}
+
+entity "cart" as cart {
+    * cart_id : INT <<PK>>
+    * user_id : INT <<FK>>
+    status : ENUM
+    created_at : TIMESTAMP
+    updated_at : TIMESTAMP
+}
+
+entity "cart_item" as cart_item {
+    * cart_item_id : INT <<PK>>
+    * cart_id : INT <<FK>>
+    * product_id : INT <<FK>>
+    * quantity : INT
+    * unit_price : DECIMAL(10,2)
+    created_at : TIMESTAMP
+}
+
+entity "payment_method" as payment_method {
+    * payment_method_id : INT <<PK>>
+    * name : VARCHAR(50) <<UNIQUE>>
+    is_active : BOOLEAN
+    created_at : TIMESTAMP
+}
+
+entity "payment_status" as payment_status {
+    * status_id : INT <<PK>>
+    * name : VARCHAR(50) <<UNIQUE>>
+    description : VARCHAR(255)
+    created_at : TIMESTAMP
+}
+
+entity "bill_status" as bill_status {
+    * status_id : INT <<PK>>
+    * name : VARCHAR(50) <<UNIQUE>>
+    description : VARCHAR(255)
+    created_at : TIMESTAMP
+}
+
+entity "bill" as bill {
+    * bill_id : INT <<PK>>
+    * user_id : INT <<FK>>
+    * bill_number : VARCHAR(50) <<UNIQUE>>
+    * status_id : INT <<FK>>
+    * payment_method_id : INT <<FK>>
+    * payment_status_id : INT <<FK>>
+    * subtotal : DECIMAL(10,2)
+    tax_amount : DECIMAL(10,2)
+    discount_amount : DECIMAL(10,2)
+    * total_amount : DECIMAL(10,2)
+    shipping_address : TEXT
+    notes : TEXT
+    billed_at : TIMESTAMP
+    updated_at : TIMESTAMP
+}
+
+entity "bill_detail" as bill_detail {
+    * bill_detail_id : INT <<PK>>
+    * bill_id : INT <<FK>>
+    * product_id : INT <<FK>>
+    * quantity : INT
+    * unit_price : DECIMAL(10,2)
+    * subtotal : DECIMAL(10,2)
+    created_at : TIMESTAMP
+}
+
+entity "audit_log" as audit_log {
+    * audit_id : BIGINT <<PK>>
+    * table_name : VARCHAR(100)
+    * record_id : INT
+    * action : ENUM
+    old_data : JSON
+    new_data : JSON
+    changed_by : INT <<FK>>
+    ip_address : VARCHAR(45)
+    created_at : TIMESTAMP
+}
+
+' Business Relationships
+category ||--|| product
+product ||--|| inventory
+product ||--|| stock_movement
+user ||--|| cart
+cart ||--|| cart_item
+product ||--|| cart_item
+user ||--|| bill
+bill ||--|| bill_detail
+product ||--|| bill_detail
+payment_method ||--|| bill
+payment_status ||--|| bill
+bill_status ||--|| bill
+
+' Audit
+user ||--|| audit_log
+
+@enduml
