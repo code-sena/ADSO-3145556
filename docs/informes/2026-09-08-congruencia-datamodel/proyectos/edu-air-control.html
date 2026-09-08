@@ -1,0 +1,221 @@
+<title>edu-air-control - modelo de datos</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap"><style>
+:root{--ground:#F4F7F4;--surface:#FFFFFF;--sunk:#EDF1ED;--ink:#101815;--ink2:#3D4E46;--ink3:#6B7C73;
+--line:#DCE4DE;--lineS:#C2CEC6;--accent:#2C6E31;--accentS:#E2EFE1;--bar:#4F9A45;--warn:#8A5300;--warnS:#F7EBD8;
+--fd:"IBM Plex Sans Condensed","Arial Narrow",system-ui,sans-serif;--fb:"IBM Plex Sans",system-ui,sans-serif;
+--fm:"IBM Plex Mono",ui-monospace,Consolas,monospace;}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ground:#0D1211;--surface:#151C19;--sunk:#101614;
+--ink:#E7EEE9;--ink2:#B3C2B9;--ink3:#83948B;--line:#26312B;--lineS:#35443C;--accent:#6FC05C;--accentS:#1B2B1D;
+--bar:#5AA84B;--warn:#D69B3E;--warnS:#2C2418;}}
+:root[data-theme="dark"]{--ground:#0D1211;--surface:#151C19;--sunk:#101614;--ink:#E7EEE9;--ink2:#B3C2B9;--ink3:#83948B;
+--line:#26312B;--lineS:#35443C;--accent:#6FC05C;--accentS:#1B2B1D;--bar:#5AA84B;--warn:#D69B3E;--warnS:#2C2418;}
+*{box-sizing:border-box}
+body{background:var(--ground);color:var(--ink);font-family:var(--fb);font-size:15px;line-height:1.55;
+-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:38px 22px 80px;display:flex;flex-direction:column;gap:38px}
+.eyebrow{font-family:var(--fm);font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink3)}
+h1{font-family:var(--fd);font-weight:700;font-size:clamp(32px,5vw,50px);line-height:1.02;letter-spacing:-.015em;margin:0;text-wrap:balance}
+h2{font-family:var(--fd);font-size:24px;font-weight:600;margin:0;padding-bottom:8px;border-bottom:1px solid var(--lineS)}
+h3{font-family:var(--fd);font-size:17px;font-weight:600;margin:0}
+section{display:flex;flex-direction:column;gap:14px}
+p{margin:0;max-width:76ch;color:var(--ink2)}
+code{font-family:var(--fm);font-size:.87em}
+a{color:var(--accent)}
+.hero{display:flex;flex-wrap:wrap;gap:20px 32px;align-items:center;padding:20px 22px;background:var(--surface);
+border:1px solid var(--line);border-left:3px solid var(--accent)}
+.hero .big{font-family:var(--fd);font-size:54px;font-weight:700;line-height:.95;color:var(--accent);font-variant-numeric:tabular-nums}
+.hero .cap{font-size:14px;color:var(--ink2);max-width:52ch}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.gi{background:var(--surface);padding:14px 16px;display:flex;flex-direction:column;gap:3px}
+.gi .k{font-family:var(--fm);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3)}
+.gi .v{font-family:var(--fd);font-size:23px;font-weight:600;font-variant-numeric:tabular-nums}
+.gi .t{font-size:12.5px;color:var(--ink3)}
+.verd{background:var(--warnS);border:1px solid var(--warn);padding:18px 20px}
+.verd p{color:var(--ink);max-width:84ch}
+.scroll{overflow-x:auto;border:1px solid var(--line);background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:13.5px;min-width:700px}
+th{font-family:var(--fm);font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink3);text-align:left;
+padding:10px 11px;border-bottom:1px solid var(--lineS);background:var(--sunk);white-space:nowrap}
+td{padding:9px 11px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:none}
+td.mono,.mono{font-family:var(--fm);font-size:12.5px}
+.tbl{border:1px solid var(--line);background:var(--surface);margin-bottom:14px}
+.tbl .hd{padding:12px 15px;background:var(--sunk);border-bottom:1px solid var(--line)}
+.tbl .hd .n{font-family:var(--fm);font-size:14px;font-weight:600;color:var(--accent)}
+.tbl .hd .sch{font-family:var(--fm);font-size:11px;color:var(--ink3)}
+.tbl .hd .d{font-size:13px;color:var(--ink2);margin-top:3px}
+.tbl .note{padding:10px 15px;background:var(--accentS);font-size:12.5px;color:var(--ink2);border-top:1px solid var(--line)}
+.fix{display:flex;flex-direction:column;border:1px solid var(--line);background:var(--surface)}
+.fix>div{padding:14px 17px;border-bottom:1px solid var(--line)}
+.fix>div:last-child{border-bottom:none}
+.fix .tag{display:inline-block;font-family:var(--fm);font-size:10px;font-weight:600;letter-spacing:.06em;
+text-transform:uppercase;background:var(--accentS);color:var(--accent);padding:2px 7px;margin-bottom:5px}
+.fix p{font-size:13.5px}
+ul.dom{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:0;border:1px solid var(--line);background:var(--surface)}
+ul.dom li{padding:12px 16px;border-bottom:1px solid var(--line);display:flex;gap:14px;align-items:baseline;flex-wrap:wrap}
+ul.dom li:last-child{border-bottom:none}
+ul.dom .nm{font-family:var(--fm);font-size:13px;font-weight:600;min-width:190px}
+ul.dom .ds{font-size:13.5px;color:var(--ink2);flex:1;min-width:240px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips span{font-family:var(--fm);font-size:11.5px;background:var(--sunk);border:1px solid var(--line);padding:3px 8px}
+.note{font-size:13px;color:var(--ink3);border-top:1px solid var(--line);padding-top:12px}
+</style>
+<div class="wrap">
+<header style="display:flex;flex-direction:column;gap:14px"><div class="eyebrow"><a href="index.html">Ficha ADSO-3145556</a> &middot; repositorio ea-control-docs &middot; 2026-09-08</div><h1>edu-air-control</h1><p>Monitoreo de calidad del aire en ambientes educativos, con analisis por periodo.</p></header>
+<div class="hero"><span class="big">53%</span><span class="cap">Madurez documental sobre las carpetas 00 a 06. Congruencia 02&nbsp;&rarr;&nbsp;06 del <strong>25%</strong>. Nivel de normalizacion actual: <strong>3FN parcial</strong>.</span></div>
+<section><h2>Estado de las carpetas evaluadas</h2><div class="grid3">
+<div class="gi"><span class="k">02-domain</span><span class="t">Avanzado: 4 entidades, 2 value objects, 3 agregados.</span></div>
+<div class="gi"><span class="k">03-product</span><span class="t">Inicial: 85 lineas.</span></div>
+<div class="gi"><span class="k">06-data</span><span class="t">Real pero desviado: 66 KB en dos servicios (IAM y sensores). `models.md` sigue siendo la plantilla.</span></div>
+</div>
+<div class="verd"><h3 style="margin-bottom:6px">Congruencia 02 &middot; 03 &middot; 06</h3><p>La incongruencia mas grave de la ficha. Modelaron a fondo la identidad y el catalogo de sensores, y **no existe tabla alguna para mediciones ni para analisis ambiental**, que es el proposito del proyecto. Tienen 16 tablas y ninguna guarda un dato de aire.</p></div>
+</section>
+<section><h2>Hallazgos que corrige la contrapropuesta</h2><div class="fix">
+<div><span class="tag">Congruencia critica</span><p>El dominio declara `EducationalEnvironment`, `EnvironmentData` y `EnvironmentalDataAnalysis`; el modelo solo tiene IAM y el catalogo de sensores. **Las tres entidades del nucleo del proyecto no existen como tablas.** Es la brecha 02 a 06 mas grave de la ficha.</p></div>
+<div><span class="tag">Cobertura</span><p>`06-data/models.md` sigue siendo la plantilla intacta; el trabajo real esta en `06-data/domain/ms-iam.md` y `ms-sensor-management.md`. Falta el servicio que da sentido al proyecto.</p></div>
+<div><span class="tag">3FN</span><p>El umbral de alerta pertenece a la configuracion de la variable, no a cada medicion. Se referencia por FK con vigencia.</p></div>
+<div><span class="tag">1FN</span><p>Una medicion no puede guardar varias variables en una fila: una fila por sensor, variable e instante.</p></div>
+</div></section>
+<section><h2>Dominios posibles segun la documentacion</h2><p>Bounded contexts que el propio proyecto sustenta. Ninguno se invento.</p><ul class="dom">
+<li><span class="nm">Identity &amp; Access</span><span class="ds">Usuario, roles, permisos, sesiones y politica de contrasena. Ya modelado.</span></li>
+<li><span class="nm">Environment</span><span class="ds">Ambiente educativo monitoreado: sede, aula, capacidad.</span></li>
+<li><span class="nm">Sensor</span><span class="ds">Sensor fisico, variables que mide y su configuracion.</span></li>
+<li><span class="nm">Measurement</span><span class="ds">Lectura de variable ambiental en el tiempo.</span></li>
+<li><span class="nm">Analysis</span><span class="ds">Analisis de datos ambientales por periodo, con su resultado.</span></li>
+<li><span class="nm">Alert</span><span class="ds">Alerta por umbral superado.</span></li>
+<li><span class="nm">Audit</span><span class="ds">Bitacora de acciones y errores.</span></li>
+</ul></section>
+<section><h2>Modelo de datos propuesto &mdash; 3FN</h2><p>Todas las tablas llevan el bloque de auditoria completo: <code>created_at</code>, <code>created_by</code>, <code>updated_at</code>, <code>updated_by</code>, <code>deleted_at</code>, <code>deleted_by</code> y <code>row_version</code>. Nomenclatura integramente en ingles.</p>
+<h3 style="margin-top:14px">Esquema <code>environment</code></h3>
+<div class="tbl"><div class="hd"><span class="n">campus</span> <span class="sch">environment</span><div class="d">Sede de la institucion.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">campus_id</td><td class="mono">SERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">code</td><td class="mono">VARCHAR(30)</td><td class="mono">NOT NULL UNIQUE</td><td></td></tr>
+<tr><td class="mono">name</td><td class="mono">VARCHAR(150)</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">city_id</td><td class="mono">INTEGER</td><td class="mono">NOT NULL REFERENCES city(city_id)</td><td></td></tr>
+</tbody></table></div>
+</div>
+<div class="tbl"><div class="hd"><span class="n">educational_environment</span> <span class="sch">environment</span><div class="d">Ambiente educativo monitoreado. Entidad nuclear ausente del modelo actual.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">educational_environment_id</td><td class="mono">SERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">campus_id</td><td class="mono">INTEGER</td><td class="mono">NOT NULL REFERENCES campus(campus_id)</td><td></td></tr>
+<tr><td class="mono">code</td><td class="mono">VARCHAR(30)</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">name</td><td class="mono">VARCHAR(120)</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">environment_type_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES environment_type(environment_type_id)</td><td></td></tr>
+<tr><td class="mono">floor_area_m2</td><td class="mono">NUMERIC(8,2)</td><td class="mono">NULL</td><td></td></tr>
+<tr><td class="mono">occupancy_capacity</td><td class="mono">SMALLINT</td><td class="mono">NULL</td><td></td></tr>
+</tbody></table></div>
+<div class="note" style="border:0;padding:10px 15px;background:var(--accentS)">Congruencia 02 a 06: `EducationalEnvironment` pasa por fin a existir como tabla.</div>
+</div>
+<h3 style="margin-top:14px">Esquema <code>sensor</code></h3>
+<div class="tbl"><div class="hd"><span class="n">sensor</span> <span class="sch">sensor</span><div class="d">Sensor fisico instalado.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">sensor_id</td><td class="mono">BIGSERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">serial_number</td><td class="mono">VARCHAR(60)</td><td class="mono">NOT NULL UNIQUE</td><td></td></tr>
+<tr><td class="mono">sensor_model_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES sensor_model(sensor_model_id)</td><td></td></tr>
+<tr><td class="mono">sensor_status_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES sensor_status(sensor_status_id)</td><td></td></tr>
+<tr><td class="mono">last_seen_at</td><td class="mono">TIMESTAMPTZ</td><td class="mono">NULL</td><td></td></tr>
+</tbody></table></div>
+<div class="note" style="border:0;padding:10px 15px;background:var(--accentS)">3FN: fabricante y rango de medicion pertenecen al modelo, no a la unidad.</div>
+</div>
+<div class="tbl"><div class="hd"><span class="n">sensor_installation</span> <span class="sch">sensor</span><div class="d">Instalacion de un sensor en un ambiente, con vigencia.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">sensor_installation_id</td><td class="mono">BIGSERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">sensor_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES sensor(sensor_id)</td><td></td></tr>
+<tr><td class="mono">educational_environment_id</td><td class="mono">INTEGER</td><td class="mono">NOT NULL REFERENCES educational_environment(educational_environment_id)</td><td></td></tr>
+<tr><td class="mono">installed_at</td><td class="mono">TIMESTAMPTZ</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">removed_at</td><td class="mono">TIMESTAMPTZ</td><td class="mono">NULL</td><td></td></tr>
+</tbody></table></div>
+<div class="note" style="border:0;padding:10px 15px;background:var(--accentS)">Historico: un sensor puede rotar entre ambientes sin perder la trazabilidad de sus mediciones.</div>
+</div>
+<div class="tbl"><div class="hd"><span class="n">variable</span> <span class="sch">sensor</span><div class="d">Variable ambiental medible: CO2, temperatura, humedad, PM2.5.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">variable_id</td><td class="mono">SMALLSERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">code</td><td class="mono">VARCHAR(30)</td><td class="mono">NOT NULL UNIQUE</td><td></td></tr>
+<tr><td class="mono">name</td><td class="mono">VARCHAR(80)</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">unit_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES measurement_unit(unit_id)</td><td></td></tr>
+</tbody></table></div>
+<div class="note" style="border:0;padding:10px 15px;background:var(--accentS)">3FN: la unidad sale a catalogo; antes viajaba como texto junto a cada medicion.</div>
+</div>
+<div class="tbl"><div class="hd"><span class="n">sensor_variable</span> <span class="sch">sensor</span><div class="d">Variables que efectivamente mide un sensor.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">sensor_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES sensor(sensor_id)</td><td>PK compuesta</td></tr>
+<tr><td class="mono">variable_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES variable(variable_id)</td><td>PK compuesta</td></tr>
+</tbody></table></div>
+<div class="note" style="border:0;padding:10px 15px;background:var(--accentS)">Resuelve la N:M sensor-variable.</div>
+</div>
+<div class="tbl"><div class="hd"><span class="n">variable_threshold</span> <span class="sch">sensor</span><div class="d">Umbral vigente por variable y tipo de ambiente.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">variable_threshold_id</td><td class="mono">SERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">variable_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES variable(variable_id)</td><td></td></tr>
+<tr><td class="mono">environment_type_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES environment_type(environment_type_id)</td><td></td></tr>
+<tr><td class="mono">min_value</td><td class="mono">NUMERIC(12,4)</td><td class="mono">NULL</td><td></td></tr>
+<tr><td class="mono">max_value</td><td class="mono">NUMERIC(12,4)</td><td class="mono">NULL</td><td></td></tr>
+<tr><td class="mono">severity_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES severity(severity_id)</td><td></td></tr>
+<tr><td class="mono">valid_from</td><td class="mono">DATE</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">valid_to</td><td class="mono">DATE</td><td class="mono">NULL</td><td></td></tr>
+</tbody></table></div>
+<div class="note" style="border:0;padding:10px 15px;background:var(--accentS)">3FN: el umbral NO se copia en cada medicion. Se resuelve por FK con vigencia, de modo que un cambio de norma no reescribe el historico.</div>
+</div>
+<h3 style="margin-top:14px">Esquema <code>measurement</code></h3>
+<div class="tbl"><div class="hd"><span class="n">environment_measurement</span> <span class="sch">measurement</span><div class="d">Medicion puntual. Entidad nuclear ausente del modelo actual. Serie temporal particionada por fecha.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">environment_measurement_id</td><td class="mono">BIGSERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">sensor_installation_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES sensor_installation(sensor_installation_id)</td><td></td></tr>
+<tr><td class="mono">variable_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES variable(variable_id)</td><td></td></tr>
+<tr><td class="mono">measured_value</td><td class="mono">NUMERIC(12,4)</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">measured_at</td><td class="mono">TIMESTAMPTZ</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">quality_flag_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES quality_flag(quality_flag_id)</td><td></td></tr>
+</tbody></table></div>
+<div class="note" style="border:0;padding:10px 15px;background:var(--accentS)">1FN: una fila por instalacion, variable e instante. Nunca columnas `co2`, `temp`, `humidity` en la misma fila, que obligarian a alterar la tabla al agregar una variable. Inmutable: solo `created_at`.</div>
+</div>
+<h3 style="margin-top:14px">Esquema <code>analysis</code></h3>
+<div class="tbl"><div class="hd"><span class="n">environmental_analysis</span> <span class="sch">analysis</span><div class="d">Analisis por periodo. Entidad nuclear ausente del modelo actual.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">environmental_analysis_id</td><td class="mono">BIGSERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">educational_environment_id</td><td class="mono">INTEGER</td><td class="mono">NOT NULL REFERENCES educational_environment(educational_environment_id)</td><td></td></tr>
+<tr><td class="mono">period_start</td><td class="mono">TIMESTAMPTZ</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">period_end</td><td class="mono">TIMESTAMPTZ</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">analysis_status_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES analysis_status(analysis_status_id)</td><td></td></tr>
+<tr><td class="mono">requested_by</td><td class="mono">BIGINT</td><td class="mono">NULL REFERENCES app_user(user_id)</td><td></td></tr>
+<tr><td class="mono">computed_at</td><td class="mono">TIMESTAMPTZ</td><td class="mono">NULL</td><td></td></tr>
+</tbody></table></div>
+<div class="note" style="border:0;padding:10px 15px;background:var(--accentS)">Congruencia: materializa el value object `AnalysisPeriod` como rango explicito, no como texto.</div>
+</div>
+<div class="tbl"><div class="hd"><span class="n">analysis_result</span> <span class="sch">analysis</span><div class="d">Resultado por variable dentro de un analisis.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">analysis_result_id</td><td class="mono">BIGSERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">environmental_analysis_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES environmental_analysis(environmental_analysis_id)</td><td></td></tr>
+<tr><td class="mono">variable_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES variable(variable_id)</td><td></td></tr>
+<tr><td class="mono">min_value</td><td class="mono">NUMERIC(12,4)</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">max_value</td><td class="mono">NUMERIC(12,4)</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">avg_value</td><td class="mono">NUMERIC(12,4)</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">sample_count</td><td class="mono">INTEGER</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">exceedance_count</td><td class="mono">INTEGER</td><td class="mono">NOT NULL</td><td></td></tr>
+</tbody></table></div>
+<div class="note" style="border:0;padding:10px 15px;background:var(--accentS)">1FN: una fila por variable analizada; nunca un bloque de texto con todos los resultados.</div>
+</div>
+<h3 style="margin-top:14px">Esquema <code>alert</code></h3>
+<div class="tbl"><div class="hd"><span class="n">environment_alert</span> <span class="sch">alert</span><div class="d">Alerta por umbral superado.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">environment_alert_id</td><td class="mono">BIGSERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">educational_environment_id</td><td class="mono">INTEGER</td><td class="mono">NOT NULL REFERENCES educational_environment(educational_environment_id)</td><td></td></tr>
+<tr><td class="mono">variable_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES variable(variable_id)</td><td></td></tr>
+<tr><td class="mono">variable_threshold_id</td><td class="mono">INTEGER</td><td class="mono">NOT NULL REFERENCES variable_threshold(variable_threshold_id)</td><td>Umbral vigente al disparar</td></tr>
+<tr><td class="mono">triggering_measurement_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES environment_measurement(environment_measurement_id)</td><td></td></tr>
+<tr><td class="mono">raised_at</td><td class="mono">TIMESTAMPTZ</td><td class="mono">NOT NULL DEFAULT now()</td><td></td></tr>
+<tr><td class="mono">acknowledged_at</td><td class="mono">TIMESTAMPTZ</td><td class="mono">NULL</td><td></td></tr>
+<tr><td class="mono">acknowledged_by</td><td class="mono">BIGINT</td><td class="mono">NULL REFERENCES app_user(user_id)</td><td></td></tr>
+</tbody></table></div>
+<div class="note" style="border:0;padding:10px 15px;background:var(--accentS)">Trazabilidad completa: la alerta apunta a la medicion que la disparo y al umbral que regia en ese momento.</div>
+</div>
+</section>
+<section><h2>Nucleo compartido y catalogos</h2><p>Las tablas de identidad y auditoria son identicas en los diez proyectos de la ficha, para que un mismo criterio de seguridad y trazabilidad aplique a todos.</p><div class="chips">
+<span>identity.app_user</span>
+<span>identity.person</span>
+<span>identity.role</span>
+<span>identity.permission</span>
+<span>identity.role_permission</span>
+<span>identity.user_role</span>
+<span>identity.user_session</span>
+<span>audit.audit_log</span>
+</div><p style="margin-top:10px">Catalogos propios de este proyecto:</p><div class="chips">
+<span>city</span>
+<span>environment_type</span>
+<span>sensor_model</span>
+<span>sensor_status</span>
+<span>measurement_unit</span>
+<span>quality_flag</span>
+<span>severity</span>
+<span>analysis_status</span>
+</div>
+<p class="note">El detalle completo, con tipos y restricciones listo para implementar, esta en <code>propuestas/edu-air-control-06.md</code>.</p></section>
+</div>

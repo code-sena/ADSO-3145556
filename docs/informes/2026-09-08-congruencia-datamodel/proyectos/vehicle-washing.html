@@ -1,0 +1,235 @@
+<title>vehicle-washing - modelo de datos</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap"><style>
+:root{--ground:#F4F7F4;--surface:#FFFFFF;--sunk:#EDF1ED;--ink:#101815;--ink2:#3D4E46;--ink3:#6B7C73;
+--line:#DCE4DE;--lineS:#C2CEC6;--accent:#2C6E31;--accentS:#E2EFE1;--bar:#4F9A45;--warn:#8A5300;--warnS:#F7EBD8;
+--fd:"IBM Plex Sans Condensed","Arial Narrow",system-ui,sans-serif;--fb:"IBM Plex Sans",system-ui,sans-serif;
+--fm:"IBM Plex Mono",ui-monospace,Consolas,monospace;}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ground:#0D1211;--surface:#151C19;--sunk:#101614;
+--ink:#E7EEE9;--ink2:#B3C2B9;--ink3:#83948B;--line:#26312B;--lineS:#35443C;--accent:#6FC05C;--accentS:#1B2B1D;
+--bar:#5AA84B;--warn:#D69B3E;--warnS:#2C2418;}}
+:root[data-theme="dark"]{--ground:#0D1211;--surface:#151C19;--sunk:#101614;--ink:#E7EEE9;--ink2:#B3C2B9;--ink3:#83948B;
+--line:#26312B;--lineS:#35443C;--accent:#6FC05C;--accentS:#1B2B1D;--bar:#5AA84B;--warn:#D69B3E;--warnS:#2C2418;}
+*{box-sizing:border-box}
+body{background:var(--ground);color:var(--ink);font-family:var(--fb);font-size:15px;line-height:1.55;
+-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:38px 22px 80px;display:flex;flex-direction:column;gap:38px}
+.eyebrow{font-family:var(--fm);font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink3)}
+h1{font-family:var(--fd);font-weight:700;font-size:clamp(32px,5vw,50px);line-height:1.02;letter-spacing:-.015em;margin:0;text-wrap:balance}
+h2{font-family:var(--fd);font-size:24px;font-weight:600;margin:0;padding-bottom:8px;border-bottom:1px solid var(--lineS)}
+h3{font-family:var(--fd);font-size:17px;font-weight:600;margin:0}
+section{display:flex;flex-direction:column;gap:14px}
+p{margin:0;max-width:76ch;color:var(--ink2)}
+code{font-family:var(--fm);font-size:.87em}
+a{color:var(--accent)}
+.hero{display:flex;flex-wrap:wrap;gap:20px 32px;align-items:center;padding:20px 22px;background:var(--surface);
+border:1px solid var(--line);border-left:3px solid var(--accent)}
+.hero .big{font-family:var(--fd);font-size:54px;font-weight:700;line-height:.95;color:var(--accent);font-variant-numeric:tabular-nums}
+.hero .cap{font-size:14px;color:var(--ink2);max-width:52ch}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.gi{background:var(--surface);padding:14px 16px;display:flex;flex-direction:column;gap:3px}
+.gi .k{font-family:var(--fm);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3)}
+.gi .v{font-family:var(--fd);font-size:23px;font-weight:600;font-variant-numeric:tabular-nums}
+.gi .t{font-size:12.5px;color:var(--ink3)}
+.verd{background:var(--warnS);border:1px solid var(--warn);padding:18px 20px}
+.verd p{color:var(--ink);max-width:84ch}
+.scroll{overflow-x:auto;border:1px solid var(--line);background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:13.5px;min-width:700px}
+th{font-family:var(--fm);font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink3);text-align:left;
+padding:10px 11px;border-bottom:1px solid var(--lineS);background:var(--sunk);white-space:nowrap}
+td{padding:9px 11px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:none}
+td.mono,.mono{font-family:var(--fm);font-size:12.5px}
+.tbl{border:1px solid var(--line);background:var(--surface);margin-bottom:14px}
+.tbl .hd{padding:12px 15px;background:var(--sunk);border-bottom:1px solid var(--line)}
+.tbl .hd .n{font-family:var(--fm);font-size:14px;font-weight:600;color:var(--accent)}
+.tbl .hd .sch{font-family:var(--fm);font-size:11px;color:var(--ink3)}
+.tbl .hd .d{font-size:13px;color:var(--ink2);margin-top:3px}
+.tbl .note{padding:10px 15px;background:var(--accentS);font-size:12.5px;color:var(--ink2);border-top:1px solid var(--line)}
+.fix{display:flex;flex-direction:column;border:1px solid var(--line);background:var(--surface)}
+.fix>div{padding:14px 17px;border-bottom:1px solid var(--line)}
+.fix>div:last-child{border-bottom:none}
+.fix .tag{display:inline-block;font-family:var(--fm);font-size:10px;font-weight:600;letter-spacing:.06em;
+text-transform:uppercase;background:var(--accentS);color:var(--accent);padding:2px 7px;margin-bottom:5px}
+.fix p{font-size:13.5px}
+ul.dom{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:0;border:1px solid var(--line);background:var(--surface)}
+ul.dom li{padding:12px 16px;border-bottom:1px solid var(--line);display:flex;gap:14px;align-items:baseline;flex-wrap:wrap}
+ul.dom li:last-child{border-bottom:none}
+ul.dom .nm{font-family:var(--fm);font-size:13px;font-weight:600;min-width:190px}
+ul.dom .ds{font-size:13.5px;color:var(--ink2);flex:1;min-width:240px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips span{font-family:var(--fm);font-size:11.5px;background:var(--sunk);border:1px solid var(--line);padding:3px 8px}
+.note{font-size:13px;color:var(--ink3);border-top:1px solid var(--line);padding-top:12px}
+</style>
+<div class="wrap">
+<header style="display:flex;flex-direction:column;gap:14px"><div class="eyebrow"><a href="index.html">Ficha ADSO-3145556</a> &middot; repositorio vehicle-w-docs &middot; 2026-09-08</div><h1>vehicle-washing</h1><p>Lavado de vehiculos con agendamiento de citas, catalogo de servicios y promociones.</p></header>
+<div class="hero"><span class="big">26%</span><span class="cap">Madurez documental sobre las carpetas 00 a 06. Congruencia 02&nbsp;&rarr;&nbsp;06 del <strong>0%</strong>. Nivel de normalizacion actual: <strong>Sin modelo</strong>.</span></div>
+<section><h2>Estado de las carpetas evaluadas</h2><div class="grid3">
+<div class="gi"><span class="k">02-domain</span><span class="t">Plantilla intacta. Cero entidades declaradas.</span></div>
+<div class="gi"><span class="k">03-product</span><span class="t">Completo y el mas extenso de la ficha: 3613 lineas con discovery, backlog, roadmap y vision.</span></div>
+<div class="gi"><span class="k">06-data</span><span class="t">Plantilla intacta.</span></div>
+</div>
+<div class="verd"><h3 style="margin-bottom:6px">Congruencia 02 &middot; 03 &middot; 06</h3><p>Caso invertido respecto al resto de la ficha: definieron el producto sin modelar el dominio. Las entrevistas identifican clientes, vehiculos, servicios, citas, promociones y pagos, pero ninguno de esos conceptos llego a 02 ni a 06.</p></div>
+</section>
+<section><h2>Hallazgos que corrige la contrapropuesta</h2><div class="fix">
+<div><span class="tag">Congruencia invertida</span><p>Es el caso opuesto al resto: `03-product` tiene 3613 lineas (discovery, backlog, roadmap, vision) y `02-domain` es **la plantilla intacta**. Se documento el producto sin modelar el dominio, y por tanto sin datos.</p></div>
+<div><span class="tag">Origen del modelo</span><p>Al no existir 02-domain, las entidades de esta propuesta se derivan del propio `discovery-brief` y `product-backlog` del equipo: clientes, vehiculos, servicios, citas, promociones y pagos son los conceptos que ellos mismos identificaron en las entrevistas.</p></div>
+<div><span class="tag">2FN</span><p>El precio depende del servicio y del tipo de vehiculo, no solo del servicio: vive en `service_price`.</p></div>
+<div><span class="tag">1FN</span><p>La disponibilidad no es un campo de texto de horarios: se modela como franjas por dia en `business_hour`.</p></div>
+</div></section>
+<section><h2>Dominios posibles segun la documentacion</h2><p>Bounded contexts que el propio proyecto sustenta. Ninguno se invento.</p><ul class="dom">
+<li><span class="nm">Identity &amp; Access</span><span class="ds">Usuario, roles y sesiones.</span></li>
+<li><span class="nm">Customer</span><span class="ds">Cliente y sus vehiculos.</span></li>
+<li><span class="nm">Service Catalog</span><span class="ds">Servicios ofrecidos, precios por tipo de vehiculo y duracion.</span></li>
+<li><span class="nm">Appointment</span><span class="ds">Cita agendada, franjas disponibles y estado.</span></li>
+<li><span class="nm">Execution</span><span class="ds">Ejecucion del servicio y operario asignado.</span></li>
+<li><span class="nm">Promotion</span><span class="ds">Promociones, vigencias y aplicacion a una cita.</span></li>
+<li><span class="nm">Payment</span><span class="ds">Pagos y comprobantes.</span></li>
+</ul></section>
+<section><h2>Modelo de datos propuesto &mdash; 3FN</h2><p>Todas las tablas llevan el bloque de auditoria completo: <code>created_at</code>, <code>created_by</code>, <code>updated_at</code>, <code>updated_by</code>, <code>deleted_at</code>, <code>deleted_by</code> y <code>row_version</code>. Nomenclatura integramente en ingles.</p>
+<h3 style="margin-top:14px">Esquema <code>customer</code></h3>
+<div class="tbl"><div class="hd"><span class="n">customer</span> <span class="sch">customer</span><div class="d">Cliente del establecimiento.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">customer_id</td><td class="mono">BIGSERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">person_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL UNIQUE REFERENCES person(person_id)</td><td></td></tr>
+<tr><td class="mono">loyalty_points</td><td class="mono">INTEGER</td><td class="mono">NOT NULL DEFAULT 0</td><td></td></tr>
+<tr><td class="mono">customer_since</td><td class="mono">DATE</td><td class="mono">NOT NULL DEFAULT CURRENT_DATE</td><td></td></tr>
+</tbody></table></div>
+<div class="note" style="border:0;padding:10px 15px;background:var(--accentS)">3FN: no duplica nombre ni telefono; los alcanza por `person`.</div>
+</div>
+<div class="tbl"><div class="hd"><span class="n">vehicle_type</span> <span class="sch">customer</span><div class="d">Tipo de vehiculo: moto, automovil, camioneta.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">vehicle_type_id</td><td class="mono">SMALLSERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">code</td><td class="mono">VARCHAR(30)</td><td class="mono">NOT NULL UNIQUE</td><td></td></tr>
+<tr><td class="mono">name</td><td class="mono">VARCHAR(60)</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">size_factor</td><td class="mono">NUMERIC(4,2)</td><td class="mono">NOT NULL</td><td></td></tr>
+</tbody></table></div>
+</div>
+<div class="tbl"><div class="hd"><span class="n">customer_vehicle</span> <span class="sch">customer</span><div class="d">Vehiculo del cliente.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">customer_vehicle_id</td><td class="mono">BIGSERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">customer_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES customer(customer_id)</td><td></td></tr>
+<tr><td class="mono">license_plate</td><td class="mono">VARCHAR(10)</td><td class="mono">NOT NULL UNIQUE</td><td></td></tr>
+<tr><td class="mono">vehicle_type_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES vehicle_type(vehicle_type_id)</td><td></td></tr>
+<tr><td class="mono">brand</td><td class="mono">VARCHAR(50)</td><td class="mono">NULL</td><td></td></tr>
+<tr><td class="mono">color</td><td class="mono">VARCHAR(30)</td><td class="mono">NULL</td><td></td></tr>
+</tbody></table></div>
+<div class="note" style="border:0;padding:10px 15px;background:var(--accentS)">1FN: un vehiculo por fila. Un cliente con tres carros tiene tres filas, no un campo con placas separadas por comas.</div>
+</div>
+<h3 style="margin-top:14px">Esquema <code>catalog</code></h3>
+<div class="tbl"><div class="hd"><span class="n">service</span> <span class="sch">catalog</span><div class="d">Servicio ofrecido.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">service_id</td><td class="mono">SERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">code</td><td class="mono">VARCHAR(30)</td><td class="mono">NOT NULL UNIQUE</td><td></td></tr>
+<tr><td class="mono">name</td><td class="mono">VARCHAR(100)</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">description</td><td class="mono">TEXT</td><td class="mono">NULL</td><td></td></tr>
+<tr><td class="mono">service_category_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES service_category(service_category_id)</td><td></td></tr>
+<tr><td class="mono">is_active</td><td class="mono">BOOLEAN</td><td class="mono">NOT NULL DEFAULT true</td><td></td></tr>
+</tbody></table></div>
+<div class="note" style="border:0;padding:10px 15px;background:var(--accentS)">3FN: el precio NO va aqui, porque depende del tipo de vehiculo.</div>
+</div>
+<div class="tbl"><div class="hd"><span class="n">service_price</span> <span class="sch">catalog</span><div class="d">Precio y duracion por servicio y tipo de vehiculo, con vigencia.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">service_price_id</td><td class="mono">BIGSERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">service_id</td><td class="mono">INTEGER</td><td class="mono">NOT NULL REFERENCES service(service_id)</td><td></td></tr>
+<tr><td class="mono">vehicle_type_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES vehicle_type(vehicle_type_id)</td><td></td></tr>
+<tr><td class="mono">price</td><td class="mono">NUMERIC(12,2)</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">estimated_minutes</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">valid_from</td><td class="mono">DATE</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">valid_to</td><td class="mono">DATE</td><td class="mono">NULL</td><td></td></tr>
+</tbody></table></div>
+<div class="note" style="border:0;padding:10px 15px;background:var(--accentS)">2FN: la dependencia es del par completo (servicio, tipo de vehiculo). Guardar el precio en `service` seria una dependencia parcial.</div>
+</div>
+<h3 style="margin-top:14px">Esquema <code>appointment</code></h3>
+<div class="tbl"><div class="hd"><span class="n">business_hour</span> <span class="sch">appointment</span><div class="d">Franja de atencion por dia de la semana.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">business_hour_id</td><td class="mono">SMALLSERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">day_of_week</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL CHECK (day_of_week BETWEEN 1 AND 7)</td><td></td></tr>
+<tr><td class="mono">opens_at</td><td class="mono">TIME</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">closes_at</td><td class="mono">TIME</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">concurrent_bays</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL</td><td></td></tr>
+</tbody></table></div>
+<div class="note" style="border:0;padding:10px 15px;background:var(--accentS)">1FN: una franja por fila, en lugar de un campo de texto con el horario.</div>
+</div>
+<div class="tbl"><div class="hd"><span class="n">appointment</span> <span class="sch">appointment</span><div class="d">Cita agendada.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">appointment_id</td><td class="mono">BIGSERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">customer_vehicle_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES customer_vehicle(customer_vehicle_id)</td><td></td></tr>
+<tr><td class="mono">scheduled_start</td><td class="mono">TIMESTAMPTZ</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">scheduled_end</td><td class="mono">TIMESTAMPTZ</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">appointment_status_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES appointment_status(appointment_status_id)</td><td></td></tr>
+<tr><td class="mono">booked_by</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES app_user(user_id)</td><td></td></tr>
+<tr><td class="mono">cancellation_reason_id</td><td class="mono">SMALLINT</td><td class="mono">NULL REFERENCES cancellation_reason(reason_id)</td><td></td></tr>
+</tbody></table></div>
+<div class="note" style="border:0;padding:10px 15px;background:var(--accentS)">3FN: el estado y el motivo de cancelacion salen a catalogo.</div>
+</div>
+<div class="tbl"><div class="hd"><span class="n">appointment_service</span> <span class="sch">appointment</span><div class="d">Servicios incluidos en una cita.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">appointment_service_id</td><td class="mono">BIGSERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">appointment_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES appointment(appointment_id)</td><td></td></tr>
+<tr><td class="mono">service_price_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES service_price(service_price_id)</td><td>Precio vigente al agendar</td></tr>
+<tr><td class="mono">quantity</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL DEFAULT 1</td><td></td></tr>
+</tbody></table></div>
+<div class="note" style="border:0;padding:10px 15px;background:var(--accentS)">1FN: un servicio por fila. Resuelve la N:M cita-servicio y congela la tarifa por FK, no por copia.</div>
+</div>
+<h3 style="margin-top:14px">Esquema <code>execution</code></h3>
+<div class="tbl"><div class="hd"><span class="n">operator</span> <span class="sch">execution</span><div class="d">Operario que ejecuta el lavado.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">operator_id</td><td class="mono">SERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">person_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL UNIQUE REFERENCES person(person_id)</td><td></td></tr>
+<tr><td class="mono">hired_on</td><td class="mono">DATE</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">is_active</td><td class="mono">BOOLEAN</td><td class="mono">NOT NULL DEFAULT true</td><td></td></tr>
+</tbody></table></div>
+</div>
+<div class="tbl"><div class="hd"><span class="n">service_execution</span> <span class="sch">execution</span><div class="d">Ejecucion real del servicio.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">service_execution_id</td><td class="mono">BIGSERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">appointment_service_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL UNIQUE REFERENCES appointment_service(appointment_service_id)</td><td></td></tr>
+<tr><td class="mono">operator_id</td><td class="mono">INTEGER</td><td class="mono">NOT NULL REFERENCES operator(operator_id)</td><td></td></tr>
+<tr><td class="mono">started_at</td><td class="mono">TIMESTAMPTZ</td><td class="mono">NULL</td><td></td></tr>
+<tr><td class="mono">finished_at</td><td class="mono">TIMESTAMPTZ</td><td class="mono">NULL</td><td></td></tr>
+<tr><td class="mono">execution_status_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES execution_status(execution_status_id)</td><td></td></tr>
+<tr><td class="mono">quality_rating</td><td class="mono">SMALLINT</td><td class="mono">NULL CHECK (quality_rating BETWEEN 1 AND 5)</td><td></td></tr>
+</tbody></table></div>
+<div class="note" style="border:0;padding:10px 15px;background:var(--accentS)">Responde a la falta de visibilidad del servicio que el equipo identifico en sus entrevistas.</div>
+</div>
+<h3 style="margin-top:14px">Esquema <code>promotion</code></h3>
+<div class="tbl"><div class="hd"><span class="n">promotion</span> <span class="sch">promotion</span><div class="d">Promocion vigente.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">promotion_id</td><td class="mono">SERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">code</td><td class="mono">VARCHAR(30)</td><td class="mono">NOT NULL UNIQUE</td><td></td></tr>
+<tr><td class="mono">name</td><td class="mono">VARCHAR(100)</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">discount_type_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES discount_type(discount_type_id)</td><td>PERCENT / FIXED</td></tr>
+<tr><td class="mono">discount_value</td><td class="mono">NUMERIC(12,2)</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">valid_from</td><td class="mono">DATE</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">valid_to</td><td class="mono">DATE</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">max_redemptions</td><td class="mono">INTEGER</td><td class="mono">NULL</td><td></td></tr>
+</tbody></table></div>
+<div class="note" style="border:0;padding:10px 15px;background:var(--accentS)">Responde a la incertidumbre de promociones que el equipo documento.</div>
+</div>
+<div class="tbl"><div class="hd"><span class="n">appointment_promotion</span> <span class="sch">promotion</span><div class="d">Promocion aplicada a una cita.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">appointment_promotion_id</td><td class="mono">BIGSERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">appointment_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES appointment(appointment_id)</td><td></td></tr>
+<tr><td class="mono">promotion_id</td><td class="mono">INTEGER</td><td class="mono">NOT NULL REFERENCES promotion(promotion_id)</td><td></td></tr>
+<tr><td class="mono">applied_amount</td><td class="mono">NUMERIC(12,2)</td><td class="mono">NOT NULL</td><td>Descuento efectivo calculado al aplicar</td></tr>
+</tbody></table></div>
+<div class="note" style="border:0;padding:10px 15px;background:var(--accentS)">Se guarda el monto aplicado porque la promocion puede cambiar despues; el descuento concedido es un hecho historico.</div>
+</div>
+<h3 style="margin-top:14px">Esquema <code>payment</code></h3>
+<div class="tbl"><div class="hd"><span class="n">payment</span> <span class="sch">payment</span><div class="d">Cobro de la cita.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">payment_id</td><td class="mono">BIGSERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">appointment_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES appointment(appointment_id)</td><td></td></tr>
+<tr><td class="mono">amount</td><td class="mono">NUMERIC(12,2)</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">payment_method_type_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES payment_method_type(payment_method_type_id)</td><td></td></tr>
+<tr><td class="mono">payment_status_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES payment_status(payment_status_id)</td><td></td></tr>
+<tr><td class="mono">processed_at</td><td class="mono">TIMESTAMPTZ</td><td class="mono">NULL</td><td></td></tr>
+</tbody></table></div>
+</div>
+</section>
+<section><h2>Nucleo compartido y catalogos</h2><p>Las tablas de identidad y auditoria son identicas en los diez proyectos de la ficha, para que un mismo criterio de seguridad y trazabilidad aplique a todos.</p><div class="chips">
+<span>identity.app_user</span>
+<span>identity.person</span>
+<span>identity.role</span>
+<span>identity.permission</span>
+<span>identity.role_permission</span>
+<span>identity.user_role</span>
+<span>identity.user_session</span>
+<span>audit.audit_log</span>
+</div><p style="margin-top:10px">Catalogos propios de este proyecto:</p><div class="chips">
+<span>service_category</span>
+<span>appointment_status</span>
+<span>cancellation_reason</span>
+<span>execution_status</span>
+<span>discount_type</span>
+<span>payment_method_type</span>
+<span>payment_status</span>
+</div>
+<p class="note">El detalle completo, con tipos y restricciones listo para implementar, esta en <code>propuestas/vehicle-washing-06.md</code>.</p></section>
+</div>

@@ -1,0 +1,225 @@
+<title>your-event - modelo de datos</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap"><style>
+:root{--ground:#F4F7F4;--surface:#FFFFFF;--sunk:#EDF1ED;--ink:#101815;--ink2:#3D4E46;--ink3:#6B7C73;
+--line:#DCE4DE;--lineS:#C2CEC6;--accent:#2C6E31;--accentS:#E2EFE1;--bar:#4F9A45;--warn:#8A5300;--warnS:#F7EBD8;
+--fd:"IBM Plex Sans Condensed","Arial Narrow",system-ui,sans-serif;--fb:"IBM Plex Sans",system-ui,sans-serif;
+--fm:"IBM Plex Mono",ui-monospace,Consolas,monospace;}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ground:#0D1211;--surface:#151C19;--sunk:#101614;
+--ink:#E7EEE9;--ink2:#B3C2B9;--ink3:#83948B;--line:#26312B;--lineS:#35443C;--accent:#6FC05C;--accentS:#1B2B1D;
+--bar:#5AA84B;--warn:#D69B3E;--warnS:#2C2418;}}
+:root[data-theme="dark"]{--ground:#0D1211;--surface:#151C19;--sunk:#101614;--ink:#E7EEE9;--ink2:#B3C2B9;--ink3:#83948B;
+--line:#26312B;--lineS:#35443C;--accent:#6FC05C;--accentS:#1B2B1D;--bar:#5AA84B;--warn:#D69B3E;--warnS:#2C2418;}
+*{box-sizing:border-box}
+body{background:var(--ground);color:var(--ink);font-family:var(--fb);font-size:15px;line-height:1.55;
+-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:38px 22px 80px;display:flex;flex-direction:column;gap:38px}
+.eyebrow{font-family:var(--fm);font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink3)}
+h1{font-family:var(--fd);font-weight:700;font-size:clamp(32px,5vw,50px);line-height:1.02;letter-spacing:-.015em;margin:0;text-wrap:balance}
+h2{font-family:var(--fd);font-size:24px;font-weight:600;margin:0;padding-bottom:8px;border-bottom:1px solid var(--lineS)}
+h3{font-family:var(--fd);font-size:17px;font-weight:600;margin:0}
+section{display:flex;flex-direction:column;gap:14px}
+p{margin:0;max-width:76ch;color:var(--ink2)}
+code{font-family:var(--fm);font-size:.87em}
+a{color:var(--accent)}
+.hero{display:flex;flex-wrap:wrap;gap:20px 32px;align-items:center;padding:20px 22px;background:var(--surface);
+border:1px solid var(--line);border-left:3px solid var(--accent)}
+.hero .big{font-family:var(--fd);font-size:54px;font-weight:700;line-height:.95;color:var(--accent);font-variant-numeric:tabular-nums}
+.hero .cap{font-size:14px;color:var(--ink2);max-width:52ch}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.gi{background:var(--surface);padding:14px 16px;display:flex;flex-direction:column;gap:3px}
+.gi .k{font-family:var(--fm);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3)}
+.gi .v{font-family:var(--fd);font-size:23px;font-weight:600;font-variant-numeric:tabular-nums}
+.gi .t{font-size:12.5px;color:var(--ink3)}
+.verd{background:var(--warnS);border:1px solid var(--warn);padding:18px 20px}
+.verd p{color:var(--ink);max-width:84ch}
+.scroll{overflow-x:auto;border:1px solid var(--line);background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:13.5px;min-width:700px}
+th{font-family:var(--fm);font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink3);text-align:left;
+padding:10px 11px;border-bottom:1px solid var(--lineS);background:var(--sunk);white-space:nowrap}
+td{padding:9px 11px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:none}
+td.mono,.mono{font-family:var(--fm);font-size:12.5px}
+.tbl{border:1px solid var(--line);background:var(--surface);margin-bottom:14px}
+.tbl .hd{padding:12px 15px;background:var(--sunk);border-bottom:1px solid var(--line)}
+.tbl .hd .n{font-family:var(--fm);font-size:14px;font-weight:600;color:var(--accent)}
+.tbl .hd .sch{font-family:var(--fm);font-size:11px;color:var(--ink3)}
+.tbl .hd .d{font-size:13px;color:var(--ink2);margin-top:3px}
+.tbl .note{padding:10px 15px;background:var(--accentS);font-size:12.5px;color:var(--ink2);border-top:1px solid var(--line)}
+.fix{display:flex;flex-direction:column;border:1px solid var(--line);background:var(--surface)}
+.fix>div{padding:14px 17px;border-bottom:1px solid var(--line)}
+.fix>div:last-child{border-bottom:none}
+.fix .tag{display:inline-block;font-family:var(--fm);font-size:10px;font-weight:600;letter-spacing:.06em;
+text-transform:uppercase;background:var(--accentS);color:var(--accent);padding:2px 7px;margin-bottom:5px}
+.fix p{font-size:13.5px}
+ul.dom{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:0;border:1px solid var(--line);background:var(--surface)}
+ul.dom li{padding:12px 16px;border-bottom:1px solid var(--line);display:flex;gap:14px;align-items:baseline;flex-wrap:wrap}
+ul.dom li:last-child{border-bottom:none}
+ul.dom .nm{font-family:var(--fm);font-size:13px;font-weight:600;min-width:190px}
+ul.dom .ds{font-size:13.5px;color:var(--ink2);flex:1;min-width:240px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips span{font-family:var(--fm);font-size:11.5px;background:var(--sunk);border:1px solid var(--line);padding:3px 8px}
+.note{font-size:13px;color:var(--ink3);border-top:1px solid var(--line);padding-top:12px}
+</style>
+<div class="wrap">
+<header style="display:flex;flex-direction:column;gap:14px"><div class="eyebrow"><a href="index.html">Ficha ADSO-3145556</a> &middot; repositorio yev-docs &middot; 2026-09-08</div><h1>your-event</h1><p>Venta de entradas para eventos con seleccion de asiento y compra en linea.</p></header>
+<div class="hero"><span class="big">58%</span><span class="cap">Madurez documental sobre las carpetas 00 a 06. Congruencia 02&nbsp;&rarr;&nbsp;06 del <strong>0%</strong>. Nivel de normalizacion actual: <strong>Sin modelo</strong>.</span></div>
+<section><h2>Estado de las carpetas evaluadas</h2><div class="grid3">
+<div class="gi"><span class="k">02-domain</span><span class="t">Completo: 5 entidades, 3 value objects, reglas criticas y blandas separadas.</span></div>
+<div class="gi"><span class="k">03-product</span><span class="t">En desarrollo: 263 lineas.</span></div>
+<div class="gi"><span class="k">06-data</span><span class="t">Plantilla intacta (7369 bytes, identica al scaffold).</span></div>
+</div>
+<div class="verd"><h3 style="margin-bottom:6px">Congruencia 02 &middot; 03 &middot; 06</h3><p>Dominio claro y pequeno, gobernanza y contexto completos, y ni una tabla. Es el proyecto donde menos cuesta cerrar la brecha: cinco entidades bien definidas se traducen casi directamente.</p></div>
+</section>
+<section><h2>Hallazgos que corrige la contrapropuesta</h2><div class="fix">
+<div><span class="tag">Congruencia</span><p>El dominio declara `User`, `Event`, `Seat`, `Ticket` y `Order`, con reglas de negocio explicitas, y no hay ninguna tabla: `06-data/models.md` es la plantilla.</p></div>
+<div><span class="tag">3FN</span><p>El asiento pertenece al recinto, no al evento. Modelarlo colgado del evento obligaria a duplicar el mapa de asientos en cada funcion.</p></div>
+<div><span class="tag">2FN</span><p>El precio depende de la zona y la funcion, no del asiento individual: vive en `event_zone_price`.</p></div>
+<div><span class="tag">1FN</span><p>La reserva temporal necesita tabla propia con expiracion; no es un booleano dentro de `seat`, que impediria dos funciones simultaneas.</p></div>
+</div></section>
+<section><h2>Dominios posibles segun la documentacion</h2><p>Bounded contexts que el propio proyecto sustenta. Ninguno se invento.</p><ul class="dom">
+<li><span class="nm">Identity &amp; Access</span><span class="ds">Usuario, roles y sesiones.</span></li>
+<li><span class="nm">Venue</span><span class="ds">Recinto, zonas y asientos fisicos.</span></li>
+<li><span class="nm">Event</span><span class="ds">Evento, funcion y disponibilidad por zona.</span></li>
+<li><span class="nm">Ticketing</span><span class="ds">Entrada emitida y su ciclo de vida.</span></li>
+<li><span class="nm">Order</span><span class="ds">Pedido, lineas y reserva temporal de asiento.</span></li>
+<li><span class="nm">Payment</span><span class="ds">Pagos y reembolsos.</span></li>
+</ul></section>
+<section><h2>Modelo de datos propuesto &mdash; 3FN</h2><p>Todas las tablas llevan el bloque de auditoria completo: <code>created_at</code>, <code>created_by</code>, <code>updated_at</code>, <code>updated_by</code>, <code>deleted_at</code>, <code>deleted_by</code> y <code>row_version</code>. Nomenclatura integramente en ingles.</p>
+<h3 style="margin-top:14px">Esquema <code>venue</code></h3>
+<div class="tbl"><div class="hd"><span class="n">venue</span> <span class="sch">venue</span><div class="d">Recinto.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">venue_id</td><td class="mono">SERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">name</td><td class="mono">VARCHAR(150)</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">address_line</td><td class="mono">VARCHAR(200)</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">city_id</td><td class="mono">INTEGER</td><td class="mono">NOT NULL REFERENCES city(city_id)</td><td></td></tr>
+<tr><td class="mono">total_capacity</td><td class="mono">INTEGER</td><td class="mono">NOT NULL</td><td></td></tr>
+</tbody></table></div>
+</div>
+<div class="tbl"><div class="hd"><span class="n">venue_zone</span> <span class="sch">venue</span><div class="d">Zona o localidad del recinto.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">venue_zone_id</td><td class="mono">SERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">venue_id</td><td class="mono">INTEGER</td><td class="mono">NOT NULL REFERENCES venue(venue_id)</td><td></td></tr>
+<tr><td class="mono">code</td><td class="mono">VARCHAR(30)</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">name</td><td class="mono">VARCHAR(80)</td><td class="mono">NOT NULL</td><td></td></tr>
+</tbody></table></div>
+</div>
+<div class="tbl"><div class="hd"><span class="n">seat</span> <span class="sch">venue</span><div class="d">Asiento fisico. Pertenece al recinto, no al evento.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">seat_id</td><td class="mono">BIGSERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">venue_zone_id</td><td class="mono">INTEGER</td><td class="mono">NOT NULL REFERENCES venue_zone(venue_zone_id)</td><td></td></tr>
+<tr><td class="mono">row_label</td><td class="mono">VARCHAR(10)</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">seat_number</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL</td><td></td></tr>
+</tbody></table></div>
+<div class="note" style="border:0;padding:10px 15px;background:var(--accentS)">3FN: UNIQUE(venue_zone_id, row_label, seat_number). El mapa se define una vez y se reutiliza en todas las funciones.</div>
+</div>
+<h3 style="margin-top:14px">Esquema <code>event</code></h3>
+<div class="tbl"><div class="hd"><span class="n">event</span> <span class="sch">event</span><div class="d">Evento comercial.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">event_id</td><td class="mono">BIGSERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">name</td><td class="mono">VARCHAR(200)</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">event_category_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES event_category(event_category_id)</td><td></td></tr>
+<tr><td class="mono">organizer_user_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES app_user(user_id)</td><td></td></tr>
+<tr><td class="mono">description</td><td class="mono">TEXT</td><td class="mono">NULL</td><td></td></tr>
+<tr><td class="mono">event_status_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES event_status(event_status_id)</td><td></td></tr>
+</tbody></table></div>
+</div>
+<div class="tbl"><div class="hd"><span class="n">event_session</span> <span class="sch">event</span><div class="d">Funcion concreta de un evento en fecha y recinto.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">event_session_id</td><td class="mono">BIGSERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">event_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES event(event_id)</td><td></td></tr>
+<tr><td class="mono">venue_id</td><td class="mono">INTEGER</td><td class="mono">NOT NULL REFERENCES venue(venue_id)</td><td></td></tr>
+<tr><td class="mono">starts_at</td><td class="mono">TIMESTAMPTZ</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">ends_at</td><td class="mono">TIMESTAMPTZ</td><td class="mono">NULL</td><td></td></tr>
+<tr><td class="mono">doors_open_at</td><td class="mono">TIMESTAMPTZ</td><td class="mono">NULL</td><td></td></tr>
+<tr><td class="mono">sales_open_at</td><td class="mono">TIMESTAMPTZ</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">sales_close_at</td><td class="mono">TIMESTAMPTZ</td><td class="mono">NOT NULL</td><td></td></tr>
+</tbody></table></div>
+<div class="note" style="border:0;padding:10px 15px;background:var(--accentS)">Un evento con varias fechas no duplica su descripcion ni su organizador.</div>
+</div>
+<div class="tbl"><div class="hd"><span class="n">event_zone_price</span> <span class="sch">event</span><div class="d">Precio por zona y funcion.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">event_zone_price_id</td><td class="mono">BIGSERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">event_session_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES event_session(event_session_id)</td><td></td></tr>
+<tr><td class="mono">venue_zone_id</td><td class="mono">INTEGER</td><td class="mono">NOT NULL REFERENCES venue_zone(venue_zone_id)</td><td></td></tr>
+<tr><td class="mono">price</td><td class="mono">NUMERIC(12,2)</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">currency_code</td><td class="mono">CHAR(3)</td><td class="mono">NOT NULL DEFAULT &#x27;COP&#x27;</td><td></td></tr>
+</tbody></table></div>
+<div class="note" style="border:0;padding:10px 15px;background:var(--accentS)">2FN: el precio depende de zona mas funcion, no del asiento. UNIQUE(event_session_id, venue_zone_id).</div>
+</div>
+<h3 style="margin-top:14px">Esquema <code>order</code></h3>
+<div class="tbl"><div class="hd"><span class="n">seat_hold</span> <span class="sch">order</span><div class="d">Reserva temporal de un asiento mientras se completa la compra.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">seat_hold_id</td><td class="mono">BIGSERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">event_session_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES event_session(event_session_id)</td><td></td></tr>
+<tr><td class="mono">seat_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES seat(seat_id)</td><td></td></tr>
+<tr><td class="mono">user_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES app_user(user_id)</td><td></td></tr>
+<tr><td class="mono">held_at</td><td class="mono">TIMESTAMPTZ</td><td class="mono">NOT NULL DEFAULT now()</td><td></td></tr>
+<tr><td class="mono">expires_at</td><td class="mono">TIMESTAMPTZ</td><td class="mono">NOT NULL</td><td></td></tr>
+</tbody></table></div>
+<div class="note" style="border:0;padding:10px 15px;background:var(--accentS)">Indice unico parcial sobre (event_session_id, seat_id) cuando no ha expirado: impide vender dos veces el mismo asiento.</div>
+</div>
+<div class="tbl"><div class="hd"><span class="n">customer_order</span> <span class="sch">order</span><div class="d">Pedido de compra.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">customer_order_id</td><td class="mono">BIGSERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">user_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES app_user(user_id)</td><td></td></tr>
+<tr><td class="mono">order_number</td><td class="mono">VARCHAR(30)</td><td class="mono">NOT NULL UNIQUE</td><td></td></tr>
+<tr><td class="mono">order_status_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES order_status(order_status_id)</td><td></td></tr>
+<tr><td class="mono">placed_at</td><td class="mono">TIMESTAMPTZ</td><td class="mono">NOT NULL DEFAULT now()</td><td></td></tr>
+</tbody></table></div>
+<div class="note" style="border:0;padding:10px 15px;background:var(--accentS)">3FN: sin `total`. El total se calcula desde las lineas; asi no puede quedar desincronizado.</div>
+</div>
+<div class="tbl"><div class="hd"><span class="n">order_line</span> <span class="sch">order</span><div class="d">Linea del pedido: un asiento en una funcion.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">order_line_id</td><td class="mono">BIGSERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">customer_order_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES customer_order(customer_order_id)</td><td></td></tr>
+<tr><td class="mono">event_session_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES event_session(event_session_id)</td><td></td></tr>
+<tr><td class="mono">seat_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES seat(seat_id)</td><td></td></tr>
+<tr><td class="mono">unit_price</td><td class="mono">NUMERIC(12,2)</td><td class="mono">NOT NULL</td><td>Precio congelado al comprar</td></tr>
+</tbody></table></div>
+<div class="note" style="border:0;padding:10px 15px;background:var(--accentS)">Excepcion justificada: el precio se congela porque un cambio de tarifa posterior no puede alterar una compra ya hecha.</div>
+</div>
+<h3 style="margin-top:14px">Esquema <code>ticketing</code></h3>
+<div class="tbl"><div class="hd"><span class="n">ticket</span> <span class="sch">ticketing</span><div class="d">Entrada emitida a partir de una linea de pedido.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">ticket_id</td><td class="mono">BIGSERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">order_line_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL UNIQUE REFERENCES order_line(order_line_id)</td><td></td></tr>
+<tr><td class="mono">ticket_code</td><td class="mono">VARCHAR(40)</td><td class="mono">NOT NULL UNIQUE</td><td>Codigo QR</td></tr>
+<tr><td class="mono">holder_person_id</td><td class="mono">BIGINT</td><td class="mono">NULL REFERENCES person(person_id)</td><td></td></tr>
+<tr><td class="mono">ticket_status_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES ticket_status(ticket_status_id)</td><td></td></tr>
+<tr><td class="mono">checked_in_at</td><td class="mono">TIMESTAMPTZ</td><td class="mono">NULL</td><td></td></tr>
+</tbody></table></div>
+<div class="note" style="border:0;padding:10px 15px;background:var(--accentS)">1:1 con la linea: una entrada por asiento vendido.</div>
+</div>
+<h3 style="margin-top:14px">Esquema <code>payment</code></h3>
+<div class="tbl"><div class="hd"><span class="n">payment</span> <span class="sch">payment</span><div class="d">Intento de cobro del pedido.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">payment_id</td><td class="mono">BIGSERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">customer_order_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES customer_order(customer_order_id)</td><td></td></tr>
+<tr><td class="mono">amount</td><td class="mono">NUMERIC(12,2)</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">currency_code</td><td class="mono">CHAR(3)</td><td class="mono">NOT NULL DEFAULT &#x27;COP&#x27;</td><td></td></tr>
+<tr><td class="mono">payment_method_type_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES payment_method_type(payment_method_type_id)</td><td></td></tr>
+<tr><td class="mono">payment_status_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES payment_status(payment_status_id)</td><td></td></tr>
+<tr><td class="mono">gateway_reference</td><td class="mono">VARCHAR(100)</td><td class="mono">NULL</td><td></td></tr>
+<tr><td class="mono">processed_at</td><td class="mono">TIMESTAMPTZ</td><td class="mono">NULL</td><td></td></tr>
+</tbody></table></div>
+<div class="note" style="border:0;padding:10px 15px;background:var(--accentS)">Un intento fallido tambien deja fila; nunca se borra.</div>
+</div>
+<div class="tbl"><div class="hd"><span class="n">refund</span> <span class="sch">payment</span><div class="d">Reembolso sobre un pago.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">refund_id</td><td class="mono">BIGSERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">payment_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES payment(payment_id)</td><td></td></tr>
+<tr><td class="mono">amount</td><td class="mono">NUMERIC(12,2)</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">refund_reason_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES refund_reason(refund_reason_id)</td><td></td></tr>
+<tr><td class="mono">processed_at</td><td class="mono">TIMESTAMPTZ</td><td class="mono">NULL</td><td></td></tr>
+<tr><td class="mono">authorized_by</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES app_user(user_id)</td><td></td></tr>
+</tbody></table></div>
+</div>
+</section>
+<section><h2>Nucleo compartido y catalogos</h2><p>Las tablas de identidad y auditoria son identicas en los diez proyectos de la ficha, para que un mismo criterio de seguridad y trazabilidad aplique a todos.</p><div class="chips">
+<span>identity.app_user</span>
+<span>identity.person</span>
+<span>identity.role</span>
+<span>identity.permission</span>
+<span>identity.role_permission</span>
+<span>identity.user_role</span>
+<span>identity.user_session</span>
+<span>audit.audit_log</span>
+</div><p style="margin-top:10px">Catalogos propios de este proyecto:</p><div class="chips">
+<span>city</span>
+<span>event_category</span>
+<span>event_status</span>
+<span>order_status</span>
+<span>ticket_status</span>
+<span>payment_method_type</span>
+<span>payment_status</span>
+<span>refund_reason</span>
+</div>
+<p class="note">El detalle completo, con tipos y restricciones listo para implementar, esta en <code>propuestas/your-event-06.md</code>.</p></section>
+</div>

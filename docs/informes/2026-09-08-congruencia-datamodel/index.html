@@ -1,0 +1,84 @@
+<title>Modelo de datos ADSO-3145556</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap"><style>
+:root{--ground:#F4F7F4;--surface:#FFFFFF;--sunk:#EDF1ED;--ink:#101815;--ink2:#3D4E46;--ink3:#6B7C73;
+--line:#DCE4DE;--lineS:#C2CEC6;--accent:#2C6E31;--accentS:#E2EFE1;--bar:#4F9A45;--warn:#8A5300;--warnS:#F7EBD8;
+--fd:"IBM Plex Sans Condensed","Arial Narrow",system-ui,sans-serif;--fb:"IBM Plex Sans",system-ui,sans-serif;
+--fm:"IBM Plex Mono",ui-monospace,Consolas,monospace;}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ground:#0D1211;--surface:#151C19;--sunk:#101614;
+--ink:#E7EEE9;--ink2:#B3C2B9;--ink3:#83948B;--line:#26312B;--lineS:#35443C;--accent:#6FC05C;--accentS:#1B2B1D;
+--bar:#5AA84B;--warn:#D69B3E;--warnS:#2C2418;}}
+:root[data-theme="dark"]{--ground:#0D1211;--surface:#151C19;--sunk:#101614;--ink:#E7EEE9;--ink2:#B3C2B9;--ink3:#83948B;
+--line:#26312B;--lineS:#35443C;--accent:#6FC05C;--accentS:#1B2B1D;--bar:#5AA84B;--warn:#D69B3E;--warnS:#2C2418;}
+*{box-sizing:border-box}
+body{background:var(--ground);color:var(--ink);font-family:var(--fb);font-size:15px;line-height:1.55;
+-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:38px 22px 80px;display:flex;flex-direction:column;gap:38px}
+.eyebrow{font-family:var(--fm);font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink3)}
+h1{font-family:var(--fd);font-weight:700;font-size:clamp(32px,5vw,50px);line-height:1.02;letter-spacing:-.015em;margin:0;text-wrap:balance}
+h2{font-family:var(--fd);font-size:24px;font-weight:600;margin:0;padding-bottom:8px;border-bottom:1px solid var(--lineS)}
+h3{font-family:var(--fd);font-size:17px;font-weight:600;margin:0}
+section{display:flex;flex-direction:column;gap:14px}
+p{margin:0;max-width:76ch;color:var(--ink2)}
+code{font-family:var(--fm);font-size:.87em}
+a{color:var(--accent)}
+.hero{display:flex;flex-wrap:wrap;gap:20px 32px;align-items:center;padding:20px 22px;background:var(--surface);
+border:1px solid var(--line);border-left:3px solid var(--accent)}
+.hero .big{font-family:var(--fd);font-size:54px;font-weight:700;line-height:.95;color:var(--accent);font-variant-numeric:tabular-nums}
+.hero .cap{font-size:14px;color:var(--ink2);max-width:52ch}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.gi{background:var(--surface);padding:14px 16px;display:flex;flex-direction:column;gap:3px}
+.gi .k{font-family:var(--fm);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3)}
+.gi .v{font-family:var(--fd);font-size:23px;font-weight:600;font-variant-numeric:tabular-nums}
+.gi .t{font-size:12.5px;color:var(--ink3)}
+.verd{background:var(--warnS);border:1px solid var(--warn);padding:18px 20px}
+.verd p{color:var(--ink);max-width:84ch}
+.scroll{overflow-x:auto;border:1px solid var(--line);background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:13.5px;min-width:700px}
+th{font-family:var(--fm);font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink3);text-align:left;
+padding:10px 11px;border-bottom:1px solid var(--lineS);background:var(--sunk);white-space:nowrap}
+td{padding:9px 11px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:none}
+td.mono,.mono{font-family:var(--fm);font-size:12.5px}
+.tbl{border:1px solid var(--line);background:var(--surface);margin-bottom:14px}
+.tbl .hd{padding:12px 15px;background:var(--sunk);border-bottom:1px solid var(--line)}
+.tbl .hd .n{font-family:var(--fm);font-size:14px;font-weight:600;color:var(--accent)}
+.tbl .hd .sch{font-family:var(--fm);font-size:11px;color:var(--ink3)}
+.tbl .hd .d{font-size:13px;color:var(--ink2);margin-top:3px}
+.tbl .note{padding:10px 15px;background:var(--accentS);font-size:12.5px;color:var(--ink2);border-top:1px solid var(--line)}
+.fix{display:flex;flex-direction:column;border:1px solid var(--line);background:var(--surface)}
+.fix>div{padding:14px 17px;border-bottom:1px solid var(--line)}
+.fix>div:last-child{border-bottom:none}
+.fix .tag{display:inline-block;font-family:var(--fm);font-size:10px;font-weight:600;letter-spacing:.06em;
+text-transform:uppercase;background:var(--accentS);color:var(--accent);padding:2px 7px;margin-bottom:5px}
+.fix p{font-size:13.5px}
+ul.dom{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:0;border:1px solid var(--line);background:var(--surface)}
+ul.dom li{padding:12px 16px;border-bottom:1px solid var(--line);display:flex;gap:14px;align-items:baseline;flex-wrap:wrap}
+ul.dom li:last-child{border-bottom:none}
+ul.dom .nm{font-family:var(--fm);font-size:13px;font-weight:600;min-width:190px}
+ul.dom .ds{font-size:13.5px;color:var(--ink2);flex:1;min-width:240px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips span{font-family:var(--fm);font-size:11.5px;background:var(--sunk);border:1px solid var(--line);padding:3px 8px}
+.note{font-size:13px;color:var(--ink3);border-top:1px solid var(--line);padding-top:12px}
+</style>
+<div class="wrap">
+<header style="display:flex;flex-direction:column;gap:14px"><div class="eyebrow">Ficha ADSO-3145556 &middot; org code-sena &middot; 2026-09-08</div><h1>Congruencia 02 &middot; 03 &middot; 06</h1><p>Evaluacion de la coherencia entre dominio, producto y datos en los diez proyectos de la ficha, con el nivel de normalizacion actual de cada modelo y una contrapropuesta de <code>06.md</code> en 3FN.</p></header>
+<div class="hero"><span class="big">4/10</span><span class="cap">proyectos tienen alguna tabla en <code>06-data</code>. Entre los diez suman <strong>86 tablas</strong>, y <strong>seis repositorios</strong> conservan el archivo de plantilla sin tocar.</span></div>
+<section><h2>Cuadro comparativo</h2><div class="scroll"><table><thead><tr><th>Proyecto</th><th>Madurez</th><th>Entidades en 02</th><th>Tablas en 06</th><th>Congruencia 02&rarr;06</th><th>Normalizacion actual</th><th>Informe</th></tr></thead><tbody>
+<tr><td><strong>rent-car</strong><br><span class="mono" style="color:var(--ink3)">rtm-docs</span></td><td class="mono">82%</td><td class="mono">25</td><td class="mono">25</td><td class="mono" style="color:var(--accent)"><strong>100%</strong></td><td>3FN con una fuga de 1FN</td><td><a href="proyectos/rent-car.html">ver</a></td></tr>
+<tr><td><strong>your-event</strong><br><span class="mono" style="color:var(--ink3)">yev-docs</span></td><td class="mono">58%</td><td class="mono">5</td><td class="mono">0</td><td class="mono" style="color:var(--warn)"><strong>0%</strong></td><td>Sin modelo</td><td><a href="proyectos/your-event.html">ver</a></td></tr>
+<tr><td><strong>faceattend-edu</strong><br><span class="mono" style="color:var(--ink3)">fae-docs</span></td><td class="mono">55%</td><td class="mono">19</td><td class="mono">27</td><td class="mono" style="color:var(--accent)"><strong>63%</strong></td><td>2FN</td><td><a href="proyectos/faceattend-edu.html">ver</a></td></tr>
+<tr><td><strong>translates-sign-language</strong><br><span class="mono" style="color:var(--ink3)">trans-sl-docs</span></td><td class="mono">54%</td><td class="mono">18</td><td class="mono">0</td><td class="mono" style="color:var(--warn)"><strong>0%</strong></td><td>Sin modelo</td><td><a href="proyectos/translates-sign-language.html">ver</a></td></tr>
+<tr><td><strong>save-your-water</strong><br><span class="mono" style="color:var(--ink3)">sy-water-docs</span></td><td class="mono">53%</td><td class="mono">7</td><td class="mono">18</td><td class="mono" style="color:var(--accent)"><strong>100%</strong></td><td>3FN</td><td><a href="proyectos/save-your-water.html">ver</a></td></tr>
+<tr><td><strong>edu-air-control</strong><br><span class="mono" style="color:var(--ink3)">ea-control-docs</span></td><td class="mono">53%</td><td class="mono">4</td><td class="mono">16</td><td class="mono" style="color:var(--warn)"><strong>25%</strong></td><td>3FN parcial</td><td><a href="proyectos/edu-air-control.html">ver</a></td></tr>
+<tr><td><strong>school-guardian</strong><br><span class="mono" style="color:var(--ink3)">sg-docs</span></td><td class="mono">35%</td><td class="mono">14</td><td class="mono">0</td><td class="mono" style="color:var(--warn)"><strong>0%</strong></td><td>Sin modelo</td><td><a href="proyectos/school-guardian.html">ver</a></td></tr>
+<tr><td><strong>vehicle-washing</strong><br><span class="mono" style="color:var(--ink3)">vehicle-w-docs</span></td><td class="mono">26%</td><td class="mono">0</td><td class="mono">0</td><td class="mono" style="color:var(--warn)"><strong>0%</strong></td><td>Sin modelo</td><td><a href="proyectos/vehicle-washing.html">ver</a></td></tr>
+<tr><td><strong>woman-alert</strong><br><span class="mono" style="color:var(--ink3)">wal-docs</span></td><td class="mono">16%</td><td class="mono">26</td><td class="mono">0</td><td class="mono" style="color:var(--warn)"><strong>0%</strong></td><td>Sin modelo</td><td><a href="proyectos/woman-alert.html">ver</a></td></tr>
+<tr><td><strong>energy-monitor</strong><br><span class="mono" style="color:var(--ink3)">en-monitor-docs</span></td><td class="mono">9%</td><td class="mono">0</td><td class="mono">0</td><td class="mono" style="color:var(--warn)"><strong>0%</strong></td><td>Sin modelo</td><td><a href="proyectos/energy-monitor.html">ver</a></td></tr>
+</tbody></table></div></section>
+<section><h2>Lectura de conjunto</h2><div class="fix">
+<div><h3 style="margin-bottom:5px">La cadena 02 &rarr; 03 &rarr; 06 se rompe casi siempre en el ultimo paso</h3><p>Nueve de diez proyectos trabajaron el dominio, ocho trabajaron producto, y solo cuatro llegaron a los datos. El curso sabe describir lo que hace el sistema y no ha aprendido a persistirlo.</p></div>
+<div><h3 style="margin-bottom:5px">Tener dominio no garantiza tener datos, y tener datos no garantiza congruencia</h3><p>school-guardian, woman-alert y translates-sign-language reunen 58 entidades documentadas y cero tablas. En el otro extremo, edu-air-control tiene 16 tablas y ninguna guarda una medicion de aire: modelaron todo menos el proposito del proyecto.</p></div>
+<div><h3 style="margin-bottom:5px">La auditoria es el punto ciego general</h3><p>rent-car tiene el mejor modelo de la ficha con la peor auditoria: 8 menciones de campos temporales en 21 KB. save-your-water pone deleted_at en 40 tablas y created_by en ninguna: sabe cuando cambio algo y no quien. Solo faceattend-edu registra autoria de forma consistente.</p></div>
+<div><h3 style="margin-bottom:5px">vehicle-washing es el caso invertido</h3><p>3613 lineas de producto sobre un 02-domain que sigue siendo la plantilla. Sus entrevistas identifican clientes, vehiculos, servicios, citas y promociones, pero esos conceptos nunca bajaron a dominio ni a datos.</p></div>
+</div></section>
+<section><h2>Que contiene cada informe</h2><p>Por proyecto: estado real de 02, 03 y 06; veredicto de congruencia; nivel de normalizacion encontrado; los dominios que su propia documentacion sustenta; y el modelo de datos propuesto en 3FN, en ingles, con bloque de auditoria en todas las tablas.</p><p class="note">Regla de oro respetada en los diez: ninguna contrapropuesta cambia el enfoque del proyecto. Las entidades salen de lo que cada equipo ya escribio. El <code>06.md</code> listo para copiar al repositorio esta en la carpeta <code>propuestas/</code>.</p></section>
+</div>

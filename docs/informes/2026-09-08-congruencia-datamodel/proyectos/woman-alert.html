@@ -1,0 +1,254 @@
+<title>woman-alert - modelo de datos</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap"><style>
+:root{--ground:#F4F7F4;--surface:#FFFFFF;--sunk:#EDF1ED;--ink:#101815;--ink2:#3D4E46;--ink3:#6B7C73;
+--line:#DCE4DE;--lineS:#C2CEC6;--accent:#2C6E31;--accentS:#E2EFE1;--bar:#4F9A45;--warn:#8A5300;--warnS:#F7EBD8;
+--fd:"IBM Plex Sans Condensed","Arial Narrow",system-ui,sans-serif;--fb:"IBM Plex Sans",system-ui,sans-serif;
+--fm:"IBM Plex Mono",ui-monospace,Consolas,monospace;}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ground:#0D1211;--surface:#151C19;--sunk:#101614;
+--ink:#E7EEE9;--ink2:#B3C2B9;--ink3:#83948B;--line:#26312B;--lineS:#35443C;--accent:#6FC05C;--accentS:#1B2B1D;
+--bar:#5AA84B;--warn:#D69B3E;--warnS:#2C2418;}}
+:root[data-theme="dark"]{--ground:#0D1211;--surface:#151C19;--sunk:#101614;--ink:#E7EEE9;--ink2:#B3C2B9;--ink3:#83948B;
+--line:#26312B;--lineS:#35443C;--accent:#6FC05C;--accentS:#1B2B1D;--bar:#5AA84B;--warn:#D69B3E;--warnS:#2C2418;}
+*{box-sizing:border-box}
+body{background:var(--ground);color:var(--ink);font-family:var(--fb);font-size:15px;line-height:1.55;
+-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:38px 22px 80px;display:flex;flex-direction:column;gap:38px}
+.eyebrow{font-family:var(--fm);font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink3)}
+h1{font-family:var(--fd);font-weight:700;font-size:clamp(32px,5vw,50px);line-height:1.02;letter-spacing:-.015em;margin:0;text-wrap:balance}
+h2{font-family:var(--fd);font-size:24px;font-weight:600;margin:0;padding-bottom:8px;border-bottom:1px solid var(--lineS)}
+h3{font-family:var(--fd);font-size:17px;font-weight:600;margin:0}
+section{display:flex;flex-direction:column;gap:14px}
+p{margin:0;max-width:76ch;color:var(--ink2)}
+code{font-family:var(--fm);font-size:.87em}
+a{color:var(--accent)}
+.hero{display:flex;flex-wrap:wrap;gap:20px 32px;align-items:center;padding:20px 22px;background:var(--surface);
+border:1px solid var(--line);border-left:3px solid var(--accent)}
+.hero .big{font-family:var(--fd);font-size:54px;font-weight:700;line-height:.95;color:var(--accent);font-variant-numeric:tabular-nums}
+.hero .cap{font-size:14px;color:var(--ink2);max-width:52ch}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.gi{background:var(--surface);padding:14px 16px;display:flex;flex-direction:column;gap:3px}
+.gi .k{font-family:var(--fm);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3)}
+.gi .v{font-family:var(--fd);font-size:23px;font-weight:600;font-variant-numeric:tabular-nums}
+.gi .t{font-size:12.5px;color:var(--ink3)}
+.verd{background:var(--warnS);border:1px solid var(--warn);padding:18px 20px}
+.verd p{color:var(--ink);max-width:84ch}
+.scroll{overflow-x:auto;border:1px solid var(--line);background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:13.5px;min-width:700px}
+th{font-family:var(--fm);font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink3);text-align:left;
+padding:10px 11px;border-bottom:1px solid var(--lineS);background:var(--sunk);white-space:nowrap}
+td{padding:9px 11px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:none}
+td.mono,.mono{font-family:var(--fm);font-size:12.5px}
+.tbl{border:1px solid var(--line);background:var(--surface);margin-bottom:14px}
+.tbl .hd{padding:12px 15px;background:var(--sunk);border-bottom:1px solid var(--line)}
+.tbl .hd .n{font-family:var(--fm);font-size:14px;font-weight:600;color:var(--accent)}
+.tbl .hd .sch{font-family:var(--fm);font-size:11px;color:var(--ink3)}
+.tbl .hd .d{font-size:13px;color:var(--ink2);margin-top:3px}
+.tbl .note{padding:10px 15px;background:var(--accentS);font-size:12.5px;color:var(--ink2);border-top:1px solid var(--line)}
+.fix{display:flex;flex-direction:column;border:1px solid var(--line);background:var(--surface)}
+.fix>div{padding:14px 17px;border-bottom:1px solid var(--line)}
+.fix>div:last-child{border-bottom:none}
+.fix .tag{display:inline-block;font-family:var(--fm);font-size:10px;font-weight:600;letter-spacing:.06em;
+text-transform:uppercase;background:var(--accentS);color:var(--accent);padding:2px 7px;margin-bottom:5px}
+.fix p{font-size:13.5px}
+ul.dom{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:0;border:1px solid var(--line);background:var(--surface)}
+ul.dom li{padding:12px 16px;border-bottom:1px solid var(--line);display:flex;gap:14px;align-items:baseline;flex-wrap:wrap}
+ul.dom li:last-child{border-bottom:none}
+ul.dom .nm{font-family:var(--fm);font-size:13px;font-weight:600;min-width:190px}
+ul.dom .ds{font-size:13.5px;color:var(--ink2);flex:1;min-width:240px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips span{font-family:var(--fm);font-size:11.5px;background:var(--sunk);border:1px solid var(--line);padding:3px 8px}
+.note{font-size:13px;color:var(--ink3);border-top:1px solid var(--line);padding-top:12px}
+</style>
+<div class="wrap">
+<header style="display:flex;flex-direction:column;gap:14px"><div class="eyebrow"><a href="index.html">Ficha ADSO-3145556</a> &middot; repositorio wal-docs &middot; 2026-09-08</div><h1>woman-alert</h1><p>Alerta de emergencia para mujeres, con contactos de confianza, ubicacion y evidencia.</p></header>
+<div class="hero"><span class="big">16%</span><span class="cap">Madurez documental sobre las carpetas 00 a 06. Congruencia 02&nbsp;&rarr;&nbsp;06 del <strong>0%</strong>. Nivel de normalizacion actual: <strong>Sin modelo</strong>.</span></div>
+<section><h2>Estado de las carpetas evaluadas</h2><div class="grid3">
+<div class="gi"><span class="k">02-domain</span><span class="t">Avanzado: 26 entidades organizadas en 7 bounded contexts.</span></div>
+<div class="gi"><span class="k">03-product</span><span class="t">Inicial: 84 lineas.</span></div>
+<div class="gi"><span class="k">06-data</span><span class="t">Plantilla intacta.</span></div>
+</div>
+<div class="verd"><h3 style="margin-bottom:6px">Congruencia 02 &middot; 03 &middot; 06</h3><p>Segundo dominio mejor estructurado de la ficha, con separacion limpia por contexto, y cero traduccion a datos. Es tambien el proyecto con la informacion mas sensible, lo que hace la ausencia de modelo mas costosa.</p></div>
+</section>
+<section><h2>Hallazgos que corrige la contrapropuesta</h2><div class="fix">
+<div><span class="tag">Congruencia critica</span><p>26 entidades declaradas en 7 bounded contexts, con 25 KB de documentacion, y **cero tablas**. Es el dominio mejor estructurado de la ficha sin ninguna traduccion a datos.</p></div>
+<div><span class="tag">Privacidad</span><p>Es el proyecto con el dato mas sensible de la ficha. El rastro de ubicacion se separa de la alerta y recibe politica de retencion explicita mediante `retention_expires_at`.</p></div>
+<div><span class="tag">1FN</span><p>`AlertContact` existe porque una alerta notifica a varios contactos: nunca una lista dentro de `alert`.</p></div>
+<div><span class="tag">3FN</span><p>El estado de la alerta sale a catalogo; el nombre y telefono del contacto NO se copian en `alert_contact`, se alcanzan por FK.</p></div>
+</div></section>
+<section><h2>Dominios posibles segun la documentacion</h2><p>Bounded contexts que el propio proyecto sustenta. Ninguno se invento.</p><ul class="dom">
+<li><span class="nm">Identity &amp; Accounts</span><span class="ds">Usuario, cuenta, perfil, recuperacion, dispositivos y preferencias.</span></li>
+<li><span class="nm">Emergency Contacts</span><span class="ds">Red de contactos de confianza.</span></li>
+<li><span class="nm">Alert Management</span><span class="ds">Alerta activa, contactos notificados, rastro de ubicacion y recordatorios.</span></li>
+<li><span class="nm">Evidence</span><span class="ds">Audio, foto o video capturado durante la alerta.</span></li>
+<li><span class="nm">Notification</span><span class="ds">Avisos a contactos y autoridades.</span></li>
+<li><span class="nm">Zones &amp; Resources</span><span class="ds">Zonas de riesgo reportadas y recursos de ayuda.</span></li>
+<li><span class="nm">Administration &amp; Moderation</span><span class="ds">Reportes de usuario, acciones de moderacion y parametros.</span></li>
+</ul></section>
+<section><h2>Modelo de datos propuesto &mdash; 3FN</h2><p>Todas las tablas llevan el bloque de auditoria completo: <code>created_at</code>, <code>created_by</code>, <code>updated_at</code>, <code>updated_by</code>, <code>deleted_at</code>, <code>deleted_by</code> y <code>row_version</code>. Nomenclatura integramente en ingles.</p>
+<h3 style="margin-top:14px">Esquema <code>identity</code></h3>
+<div class="tbl"><div class="hd"><span class="n">user_profile</span> <span class="sch">identity</span><div class="d">Perfil extendido de la usuaria.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">user_profile_id</td><td class="mono">BIGSERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">user_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL UNIQUE REFERENCES app_user(user_id)</td><td></td></tr>
+<tr><td class="mono">display_name</td><td class="mono">VARCHAR(80)</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">blood_type_id</td><td class="mono">SMALLINT</td><td class="mono">NULL REFERENCES blood_type(blood_type_id)</td><td></td></tr>
+<tr><td class="mono">medical_notes</td><td class="mono">TEXT</td><td class="mono">NULL</td><td></td></tr>
+</tbody></table></div>
+</div>
+<div class="tbl"><div class="hd"><span class="n">user_device</span> <span class="sch">identity</span><div class="d">Dispositivo desde el que se puede disparar la alerta.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">user_device_id</td><td class="mono">BIGSERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">user_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES app_user(user_id)</td><td></td></tr>
+<tr><td class="mono">device_fingerprint</td><td class="mono">VARCHAR(120)</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">platform_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES platform(platform_id)</td><td></td></tr>
+<tr><td class="mono">push_token</td><td class="mono">VARCHAR(255)</td><td class="mono">NULL</td><td></td></tr>
+<tr><td class="mono">is_trusted</td><td class="mono">BOOLEAN</td><td class="mono">NOT NULL DEFAULT false</td><td></td></tr>
+</tbody></table></div>
+</div>
+<div class="tbl"><div class="hd"><span class="n">alert_activation_setting</span> <span class="sch">identity</span><div class="d">Como se activa la alerta en cada dispositivo.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">alert_activation_setting_id</td><td class="mono">BIGSERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">user_device_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES user_device(user_device_id)</td><td></td></tr>
+<tr><td class="mono">activation_method_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES activation_method(activation_method_id)</td><td>SHAKE / BUTTON / VOICE</td></tr>
+<tr><td class="mono">is_enabled</td><td class="mono">BOOLEAN</td><td class="mono">NOT NULL DEFAULT true</td><td></td></tr>
+<tr><td class="mono">sensitivity</td><td class="mono">SMALLINT</td><td class="mono">NULL</td><td></td></tr>
+</tbody></table></div>
+<div class="note" style="border:0;padding:10px 15px;background:var(--accentS)">1FN: un metodo por fila; varios metodos activos conviven sin campos multivaluados.</div>
+</div>
+<h3 style="margin-top:14px">Esquema <code>contacts</code></h3>
+<div class="tbl"><div class="hd"><span class="n">emergency_contact</span> <span class="sch">contacts</span><div class="d">Contacto de confianza.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">emergency_contact_id</td><td class="mono">BIGSERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">user_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES app_user(user_id)</td><td></td></tr>
+<tr><td class="mono">full_name</td><td class="mono">VARCHAR(120)</td><td class="mono">NOT NULL</td><td>Contacto externo, sin cuenta en el sistema</td></tr>
+<tr><td class="mono">phone</td><td class="mono">VARCHAR(25)</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">email</td><td class="mono">VARCHAR(150)</td><td class="mono">NULL</td><td></td></tr>
+<tr><td class="mono">relationship_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES relationship_type(relationship_id)</td><td></td></tr>
+<tr><td class="mono">priority_order</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">is_verified</td><td class="mono">BOOLEAN</td><td class="mono">NOT NULL DEFAULT false</td><td></td></tr>
+</tbody></table></div>
+<div class="note" style="border:0;padding:10px 15px;background:var(--accentS)">Excepcion justificada: aqui `full_name` es aceptable porque el contacto es una persona externa sin registro propio; no hay `person` de la cual derivarlo.</div>
+</div>
+<h3 style="margin-top:14px">Esquema <code>alert</code></h3>
+<div class="tbl"><div class="hd"><span class="n">alert</span> <span class="sch">alert</span><div class="d">Alerta disparada. Raiz de agregado.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">alert_id</td><td class="mono">BIGSERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">user_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES app_user(user_id)</td><td></td></tr>
+<tr><td class="mono">user_device_id</td><td class="mono">BIGINT</td><td class="mono">NULL REFERENCES user_device(user_device_id)</td><td></td></tr>
+<tr><td class="mono">activation_method_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES activation_method(activation_method_id)</td><td></td></tr>
+<tr><td class="mono">alert_status_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES alert_status(alert_status_id)</td><td></td></tr>
+<tr><td class="mono">triggered_at</td><td class="mono">TIMESTAMPTZ</td><td class="mono">NOT NULL DEFAULT now()</td><td></td></tr>
+<tr><td class="mono">resolved_at</td><td class="mono">TIMESTAMPTZ</td><td class="mono">NULL</td><td></td></tr>
+<tr><td class="mono">resolution_id</td><td class="mono">SMALLINT</td><td class="mono">NULL REFERENCES alert_resolution(resolution_id)</td><td></td></tr>
+</tbody></table></div>
+<div class="note" style="border:0;padding:10px 15px;background:var(--accentS)">3FN: el estado y la resolucion salen a catalogo, no como texto libre.</div>
+</div>
+<div class="tbl"><div class="hd"><span class="n">alert_contact</span> <span class="sch">alert</span><div class="d">Contacto notificado en una alerta concreta.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">alert_contact_id</td><td class="mono">BIGSERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">alert_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES alert(alert_id)</td><td></td></tr>
+<tr><td class="mono">emergency_contact_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES emergency_contact(emergency_contact_id)</td><td></td></tr>
+<tr><td class="mono">notified_at</td><td class="mono">TIMESTAMPTZ</td><td class="mono">NULL</td><td></td></tr>
+<tr><td class="mono">acknowledged_at</td><td class="mono">TIMESTAMPTZ</td><td class="mono">NULL</td><td></td></tr>
+<tr><td class="mono">delivery_status_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES delivery_status(delivery_status_id)</td><td></td></tr>
+</tbody></table></div>
+<div class="note" style="border:0;padding:10px 15px;background:var(--accentS)">1FN: una fila por contacto notificado. 3FN: no copia nombre ni telefono; los alcanza por FK.</div>
+</div>
+<div class="tbl"><div class="hd"><span class="n">location_log</span> <span class="sch">alert</span><div class="d">Rastro de ubicacion durante la alerta. Dato altamente sensible.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">location_log_id</td><td class="mono">BIGSERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">alert_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES alert(alert_id)</td><td></td></tr>
+<tr><td class="mono">latitude</td><td class="mono">NUMERIC(9,6)</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">longitude</td><td class="mono">NUMERIC(9,6)</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">accuracy_m</td><td class="mono">NUMERIC(7,2)</td><td class="mono">NULL</td><td></td></tr>
+<tr><td class="mono">recorded_at</td><td class="mono">TIMESTAMPTZ</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">retention_expires_at</td><td class="mono">TIMESTAMPTZ</td><td class="mono">NOT NULL</td><td>Purga automatica</td></tr>
+</tbody></table></div>
+<div class="note" style="border:0;padding:10px 15px;background:var(--accentS)">Inmutable y con caducidad explicita. Solo `created_at` del bloque de auditoria.</div>
+</div>
+<h3 style="margin-top:14px">Esquema <code>evidence</code></h3>
+<div class="tbl"><div class="hd"><span class="n">evidence</span> <span class="sch">evidence</span><div class="d">Audio, foto o video capturado durante la alerta.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">evidence_id</td><td class="mono">BIGSERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">alert_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES alert(alert_id)</td><td></td></tr>
+<tr><td class="mono">evidence_type_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES evidence_type(evidence_type_id)</td><td></td></tr>
+<tr><td class="mono">storage_uri</td><td class="mono">VARCHAR(500)</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">mime_type</td><td class="mono">VARCHAR(80)</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">size_bytes</td><td class="mono">BIGINT</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">checksum_sha256</td><td class="mono">CHAR(64)</td><td class="mono">NOT NULL</td><td>Integridad probatoria</td></tr>
+<tr><td class="mono">captured_at</td><td class="mono">TIMESTAMPTZ</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">retention_expires_at</td><td class="mono">TIMESTAMPTZ</td><td class="mono">NOT NULL</td><td></td></tr>
+</tbody></table></div>
+<div class="note" style="border:0;padding:10px 15px;background:var(--accentS)">El checksum permite sostener la evidencia como prueba no alterada.</div>
+</div>
+<h3 style="margin-top:14px">Esquema <code>zones</code></h3>
+<div class="tbl"><div class="hd"><span class="n">zone</span> <span class="sch">zones</span><div class="d">Zona geografica con nivel de riesgo.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">zone_id</td><td class="mono">SERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">name</td><td class="mono">VARCHAR(120)</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">city_id</td><td class="mono">INTEGER</td><td class="mono">NOT NULL REFERENCES city(city_id)</td><td></td></tr>
+<tr><td class="mono">risk_level_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES risk_level(risk_level_id)</td><td></td></tr>
+<tr><td class="mono">center_latitude</td><td class="mono">NUMERIC(9,6)</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">center_longitude</td><td class="mono">NUMERIC(9,6)</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">radius_m</td><td class="mono">INTEGER</td><td class="mono">NOT NULL</td><td></td></tr>
+</tbody></table></div>
+</div>
+<div class="tbl"><div class="hd"><span class="n">zone_report</span> <span class="sch">zones</span><div class="d">Reporte de incidente en una zona.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">zone_report_id</td><td class="mono">BIGSERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">zone_id</td><td class="mono">INTEGER</td><td class="mono">NOT NULL REFERENCES zone(zone_id)</td><td></td></tr>
+<tr><td class="mono">reported_by</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES app_user(user_id)</td><td></td></tr>
+<tr><td class="mono">incident_type_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES incident_type(incident_type_id)</td><td></td></tr>
+<tr><td class="mono">description</td><td class="mono">TEXT</td><td class="mono">NULL</td><td></td></tr>
+<tr><td class="mono">occurred_at</td><td class="mono">TIMESTAMPTZ</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">moderation_status_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES moderation_status(moderation_status_id)</td><td></td></tr>
+</tbody></table></div>
+</div>
+<div class="tbl"><div class="hd"><span class="n">emergency_resource</span> <span class="sch">zones</span><div class="d">Recurso de ayuda: CAI, hospital, linea de atencion.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">emergency_resource_id</td><td class="mono">SERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">resource_type_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES emergency_resource_type(resource_type_id)</td><td></td></tr>
+<tr><td class="mono">name</td><td class="mono">VARCHAR(150)</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">phone</td><td class="mono">VARCHAR(25)</td><td class="mono">NULL</td><td></td></tr>
+<tr><td class="mono">city_id</td><td class="mono">INTEGER</td><td class="mono">NOT NULL REFERENCES city(city_id)</td><td></td></tr>
+<tr><td class="mono">latitude</td><td class="mono">NUMERIC(9,6)</td><td class="mono">NULL</td><td></td></tr>
+<tr><td class="mono">longitude</td><td class="mono">NUMERIC(9,6)</td><td class="mono">NULL</td><td></td></tr>
+</tbody></table></div>
+</div>
+<h3 style="margin-top:14px">Esquema <code>moderation</code></h3>
+<div class="tbl"><div class="hd"><span class="n">user_report</span> <span class="sch">moderation</span><div class="d">Reporte de una usuaria sobre contenido o conducta.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">user_report_id</td><td class="mono">BIGSERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">reported_by</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES app_user(user_id)</td><td></td></tr>
+<tr><td class="mono">target_entity</td><td class="mono">VARCHAR(60)</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">target_entity_id</td><td class="mono">VARCHAR(60)</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">report_reason_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES report_reason(report_reason_id)</td><td></td></tr>
+<tr><td class="mono">moderation_status_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES moderation_status(moderation_status_id)</td><td></td></tr>
+</tbody></table></div>
+</div>
+<div class="tbl"><div class="hd"><span class="n">moderation_action</span> <span class="sch">moderation</span><div class="d">Accion tomada por un moderador.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">moderation_action_id</td><td class="mono">BIGSERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">user_report_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES user_report(user_report_id)</td><td></td></tr>
+<tr><td class="mono">moderator_user_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES app_user(user_id)</td><td></td></tr>
+<tr><td class="mono">action_type_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES moderation_action_type(action_type_id)</td><td></td></tr>
+<tr><td class="mono">notes</td><td class="mono">TEXT</td><td class="mono">NULL</td><td></td></tr>
+<tr><td class="mono">taken_at</td><td class="mono">TIMESTAMPTZ</td><td class="mono">NOT NULL DEFAULT now()</td><td></td></tr>
+</tbody></table></div>
+</div>
+</section>
+<section><h2>Nucleo compartido y catalogos</h2><p>Las tablas de identidad y auditoria son identicas en los diez proyectos de la ficha, para que un mismo criterio de seguridad y trazabilidad aplique a todos.</p><div class="chips">
+<span>identity.app_user</span>
+<span>identity.person</span>
+<span>identity.role</span>
+<span>identity.permission</span>
+<span>identity.role_permission</span>
+<span>identity.user_role</span>
+<span>identity.user_session</span>
+<span>audit.audit_log</span>
+</div><p style="margin-top:10px">Catalogos propios de este proyecto:</p><div class="chips">
+<span>city</span>
+<span>blood_type</span>
+<span>platform</span>
+<span>activation_method</span>
+<span>relationship_type</span>
+<span>alert_status</span>
+<span>alert_resolution</span>
+<span>delivery_status</span>
+<span>evidence_type</span>
+<span>risk_level</span>
+<span>incident_type</span>
+<span>moderation_status</span>
+<span>emergency_resource_type</span>
+<span>report_reason</span>
+<span>moderation_action_type</span>
+</div>
+<p class="note">El detalle completo, con tipos y restricciones listo para implementar, esta en <code>propuestas/woman-alert-06.md</code>.</p></section>
+</div>

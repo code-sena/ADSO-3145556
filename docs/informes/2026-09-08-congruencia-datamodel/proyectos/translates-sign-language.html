@@ -1,0 +1,241 @@
+<title>translates-sign-language - modelo de datos</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap"><style>
+:root{--ground:#F4F7F4;--surface:#FFFFFF;--sunk:#EDF1ED;--ink:#101815;--ink2:#3D4E46;--ink3:#6B7C73;
+--line:#DCE4DE;--lineS:#C2CEC6;--accent:#2C6E31;--accentS:#E2EFE1;--bar:#4F9A45;--warn:#8A5300;--warnS:#F7EBD8;
+--fd:"IBM Plex Sans Condensed","Arial Narrow",system-ui,sans-serif;--fb:"IBM Plex Sans",system-ui,sans-serif;
+--fm:"IBM Plex Mono",ui-monospace,Consolas,monospace;}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ground:#0D1211;--surface:#151C19;--sunk:#101614;
+--ink:#E7EEE9;--ink2:#B3C2B9;--ink3:#83948B;--line:#26312B;--lineS:#35443C;--accent:#6FC05C;--accentS:#1B2B1D;
+--bar:#5AA84B;--warn:#D69B3E;--warnS:#2C2418;}}
+:root[data-theme="dark"]{--ground:#0D1211;--surface:#151C19;--sunk:#101614;--ink:#E7EEE9;--ink2:#B3C2B9;--ink3:#83948B;
+--line:#26312B;--lineS:#35443C;--accent:#6FC05C;--accentS:#1B2B1D;--bar:#5AA84B;--warn:#D69B3E;--warnS:#2C2418;}
+*{box-sizing:border-box}
+body{background:var(--ground);color:var(--ink);font-family:var(--fb);font-size:15px;line-height:1.55;
+-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:38px 22px 80px;display:flex;flex-direction:column;gap:38px}
+.eyebrow{font-family:var(--fm);font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink3)}
+h1{font-family:var(--fd);font-weight:700;font-size:clamp(32px,5vw,50px);line-height:1.02;letter-spacing:-.015em;margin:0;text-wrap:balance}
+h2{font-family:var(--fd);font-size:24px;font-weight:600;margin:0;padding-bottom:8px;border-bottom:1px solid var(--lineS)}
+h3{font-family:var(--fd);font-size:17px;font-weight:600;margin:0}
+section{display:flex;flex-direction:column;gap:14px}
+p{margin:0;max-width:76ch;color:var(--ink2)}
+code{font-family:var(--fm);font-size:.87em}
+a{color:var(--accent)}
+.hero{display:flex;flex-wrap:wrap;gap:20px 32px;align-items:center;padding:20px 22px;background:var(--surface);
+border:1px solid var(--line);border-left:3px solid var(--accent)}
+.hero .big{font-family:var(--fd);font-size:54px;font-weight:700;line-height:.95;color:var(--accent);font-variant-numeric:tabular-nums}
+.hero .cap{font-size:14px;color:var(--ink2);max-width:52ch}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.gi{background:var(--surface);padding:14px 16px;display:flex;flex-direction:column;gap:3px}
+.gi .k{font-family:var(--fm);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3)}
+.gi .v{font-family:var(--fd);font-size:23px;font-weight:600;font-variant-numeric:tabular-nums}
+.gi .t{font-size:12.5px;color:var(--ink3)}
+.verd{background:var(--warnS);border:1px solid var(--warn);padding:18px 20px}
+.verd p{color:var(--ink);max-width:84ch}
+.scroll{overflow-x:auto;border:1px solid var(--line);background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:13.5px;min-width:700px}
+th{font-family:var(--fm);font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink3);text-align:left;
+padding:10px 11px;border-bottom:1px solid var(--lineS);background:var(--sunk);white-space:nowrap}
+td{padding:9px 11px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:none}
+td.mono,.mono{font-family:var(--fm);font-size:12.5px}
+.tbl{border:1px solid var(--line);background:var(--surface);margin-bottom:14px}
+.tbl .hd{padding:12px 15px;background:var(--sunk);border-bottom:1px solid var(--line)}
+.tbl .hd .n{font-family:var(--fm);font-size:14px;font-weight:600;color:var(--accent)}
+.tbl .hd .sch{font-family:var(--fm);font-size:11px;color:var(--ink3)}
+.tbl .hd .d{font-size:13px;color:var(--ink2);margin-top:3px}
+.tbl .note{padding:10px 15px;background:var(--accentS);font-size:12.5px;color:var(--ink2);border-top:1px solid var(--line)}
+.fix{display:flex;flex-direction:column;border:1px solid var(--line);background:var(--surface)}
+.fix>div{padding:14px 17px;border-bottom:1px solid var(--line)}
+.fix>div:last-child{border-bottom:none}
+.fix .tag{display:inline-block;font-family:var(--fm);font-size:10px;font-weight:600;letter-spacing:.06em;
+text-transform:uppercase;background:var(--accentS);color:var(--accent);padding:2px 7px;margin-bottom:5px}
+.fix p{font-size:13.5px}
+ul.dom{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:0;border:1px solid var(--line);background:var(--surface)}
+ul.dom li{padding:12px 16px;border-bottom:1px solid var(--line);display:flex;gap:14px;align-items:baseline;flex-wrap:wrap}
+ul.dom li:last-child{border-bottom:none}
+ul.dom .nm{font-family:var(--fm);font-size:13px;font-weight:600;min-width:190px}
+ul.dom .ds{font-size:13.5px;color:var(--ink2);flex:1;min-width:240px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips span{font-family:var(--fm);font-size:11.5px;background:var(--sunk);border:1px solid var(--line);padding:3px 8px}
+.note{font-size:13px;color:var(--ink3);border-top:1px solid var(--line);padding-top:12px}
+</style>
+<div class="wrap">
+<header style="display:flex;flex-direction:column;gap:14px"><div class="eyebrow"><a href="index.html">Ficha ADSO-3145556</a> &middot; repositorio trans-sl-docs &middot; 2026-09-08</div><h1>translates-sign-language</h1><p>Traduccion de lengua de senas a texto, con catalogo de senas y entrenamiento del modelo.</p></header>
+<div class="hero"><span class="big">54%</span><span class="cap">Madurez documental sobre las carpetas 00 a 06. Congruencia 02&nbsp;&rarr;&nbsp;06 del <strong>0%</strong>. Nivel de normalizacion actual: <strong>Sin modelo</strong>.</span></div>
+<section><h2>Estado de las carpetas evaluadas</h2><div class="grid3">
+<div class="gi"><span class="k">02-domain</span><span class="t">Completo y el mas extenso de la ficha: 50 KB, 18 entidades con versionado v1.1 documentado.</span></div>
+<div class="gi"><span class="k">03-product</span><span class="t">Completo, pero en la rama `docs`, separado del dominio que vive en `dev`.</span></div>
+<div class="gi"><span class="k">06-data</span><span class="t">Plantilla intacta.</span></div>
+</div>
+<div class="verd"><h3 style="margin-bottom:6px">Congruencia 02 &middot; 03 &middot; 06</h3><p>Riesgo doble: no hay modelo de datos y el dominio esta partido entre dos ramas que divergen. El trabajo existe y es bueno; el problema es que nadie puede verlo junto.</p></div>
+</section>
+<section><h2>Hallazgos que corrige la contrapropuesta</h2><div class="fix">
+<div><span class="tag">Congruencia critica</span><p>39 elementos declarados en el dominio (18 entidades reales mas eventos) y **cero tablas**. `06-data/models.md` es la plantilla intacta.</p></div>
+<div><span class="tag">Riesgo de ramas</span><p>El dominio esta partido entre `docs` y `dev`, que divergen: `dev` tiene 890 lineas mas de dominio y `docs` tiene `03-product`. El modelo debe construirse sobre la union, no sobre una sola rama.</p></div>
+<div><span class="tag">1FN</span><p>`SignLocalization` existe justamente porque una sena tiene varias glosas regionales: nunca un campo `regions` con valores separados por comas.</p></div>
+<div><span class="tag">Privacidad</span><p>El consentimiento es dato sensible: `consent_grant` guarda otorgamiento y revocacion como filas separadas, sin sobreescribir, porque hay que poder probar que hubo consentimiento en el momento de la captura.</p></div>
+</div></section>
+<section><h2>Dominios posibles segun la documentacion</h2><p>Bounded contexts que el propio proyecto sustenta. Ninguno se invento.</p><ul class="dom">
+<li><span class="nm">Identity &amp; Access</span><span class="ds">Usuario, roles, permisos, dispositivos y politica de contrasena.</span></li>
+<li><span class="nm">Sign Catalog</span><span class="ds">Sena, categoria, localizacion por region y recurso multimedia.</span></li>
+<li><span class="nm">Translation</span><span class="ds">Sesion de traduccion y sus traducciones individuales.</span></li>
+<li><span class="nm">Consent</span><span class="ds">Otorgamiento y revocacion de consentimiento sobre datos biometricos.</span></li>
+<li><span class="nm">Training</span><span class="ds">Muestras de entrenamiento aportadas y su curaduria.</span></li>
+<li><span class="nm">Model</span><span class="ds">Versiones del modelo de reconocimiento y sus metricas.</span></li>
+<li><span class="nm">Notification</span><span class="ds">Tipos de notificacion y avisos emitidos.</span></li>
+<li><span class="nm">Gamification</span><span class="ds">Logros y progreso del usuario.</span></li>
+</ul></section>
+<section><h2>Modelo de datos propuesto &mdash; 3FN</h2><p>Todas las tablas llevan el bloque de auditoria completo: <code>created_at</code>, <code>created_by</code>, <code>updated_at</code>, <code>updated_by</code>, <code>deleted_at</code>, <code>deleted_by</code> y <code>row_version</code>. Nomenclatura integramente en ingles.</p>
+<h3 style="margin-top:14px">Esquema <code>catalog</code></h3>
+<div class="tbl"><div class="hd"><span class="n">sign_category</span> <span class="sch">catalog</span><div class="d">Categoria de senas.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">sign_category_id</td><td class="mono">SMALLSERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">code</td><td class="mono">VARCHAR(40)</td><td class="mono">NOT NULL UNIQUE</td><td></td></tr>
+<tr><td class="mono">name</td><td class="mono">VARCHAR(100)</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">parent_category_id</td><td class="mono">SMALLINT</td><td class="mono">NULL REFERENCES sign_category(sign_category_id)</td><td></td></tr>
+</tbody></table></div>
+<div class="note" style="border:0;padding:10px 15px;background:var(--accentS)">Jerarquia auto-referenciada; evita duplicar niveles como columnas.</div>
+</div>
+<div class="tbl"><div class="hd"><span class="n">sign</span> <span class="sch">catalog</span><div class="d">Sena del catalogo. Sustituye a `AlphabetLetter`, como definio el equipo en v1.1.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">sign_id</td><td class="mono">BIGSERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">code</td><td class="mono">VARCHAR(50)</td><td class="mono">NOT NULL UNIQUE</td><td></td></tr>
+<tr><td class="mono">sign_category_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES sign_category(sign_category_id)</td><td></td></tr>
+<tr><td class="mono">difficulty_level_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES difficulty_level(difficulty_level_id)</td><td></td></tr>
+</tbody></table></div>
+<div class="note" style="border:0;padding:10px 15px;background:var(--accentS)">3FN: el nombre legible NO va aqui, porque cambia por region. Vive en `sign_localization`.</div>
+</div>
+<div class="tbl"><div class="hd"><span class="n">sign_localization</span> <span class="sch">catalog</span><div class="d">Glosa de una sena en una region y lengua.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">sign_localization_id</td><td class="mono">BIGSERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">sign_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES sign(sign_id)</td><td></td></tr>
+<tr><td class="mono">locale_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES locale(locale_id)</td><td></td></tr>
+<tr><td class="mono">gloss</td><td class="mono">VARCHAR(150)</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">description</td><td class="mono">TEXT</td><td class="mono">NULL</td><td></td></tr>
+</tbody></table></div>
+<div class="note" style="border:0;padding:10px 15px;background:var(--accentS)">1FN: una glosa por fila. UNIQUE(sign_id, locale_id).</div>
+</div>
+<div class="tbl"><div class="hd"><span class="n">multimedia_resource</span> <span class="sch">catalog</span><div class="d">Video o imagen asociado a una sena.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">multimedia_resource_id</td><td class="mono">BIGSERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">sign_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES sign(sign_id)</td><td></td></tr>
+<tr><td class="mono">resource_type_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES resource_type(resource_type_id)</td><td></td></tr>
+<tr><td class="mono">storage_uri</td><td class="mono">VARCHAR(500)</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">mime_type</td><td class="mono">VARCHAR(80)</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">duration_ms</td><td class="mono">INTEGER</td><td class="mono">NULL</td><td></td></tr>
+</tbody></table></div>
+<div class="note" style="border:0;padding:10px 15px;background:var(--accentS)">1FN: un recurso por fila; una sena puede tener varios.</div>
+</div>
+<h3 style="margin-top:14px">Esquema <code>translation</code></h3>
+<div class="tbl"><div class="hd"><span class="n">translation_session</span> <span class="sch">translation</span><div class="d">Sesion de traduccion. Raiz de agregado segun el dominio.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">translation_session_id</td><td class="mono">BIGSERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">user_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES app_user(user_id)</td><td></td></tr>
+<tr><td class="mono">user_device_id</td><td class="mono">BIGINT</td><td class="mono">NULL REFERENCES user_device(user_device_id)</td><td></td></tr>
+<tr><td class="mono">recognition_model_id</td><td class="mono">INTEGER</td><td class="mono">NOT NULL REFERENCES recognition_model(recognition_model_id)</td><td>Version usada, congelada</td></tr>
+<tr><td class="mono">started_at</td><td class="mono">TIMESTAMPTZ</td><td class="mono">NOT NULL DEFAULT now()</td><td></td></tr>
+<tr><td class="mono">ended_at</td><td class="mono">TIMESTAMPTZ</td><td class="mono">NULL</td><td></td></tr>
+<tr><td class="mono">session_status_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES session_status(session_status_id)</td><td></td></tr>
+</tbody></table></div>
+<div class="note" style="border:0;padding:10px 15px;background:var(--accentS)">Trazabilidad: la sesion apunta a la version del modelo que la atendio, para poder explicar un resultado meses despues.</div>
+</div>
+<div class="tbl"><div class="hd"><span class="n">translation</span> <span class="sch">translation</span><div class="d">Traduccion individual dentro de la sesion.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">translation_id</td><td class="mono">BIGSERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">translation_session_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES translation_session(translation_session_id)</td><td></td></tr>
+<tr><td class="mono">sign_id</td><td class="mono">BIGINT</td><td class="mono">NULL REFERENCES sign(sign_id)</td><td>NULL si no hubo coincidencia</td></tr>
+<tr><td class="mono">recognized_text</td><td class="mono">VARCHAR(255)</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">confidence_score</td><td class="mono">NUMERIC(5,4)</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">sequence_number</td><td class="mono">INTEGER</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">recognized_at</td><td class="mono">TIMESTAMPTZ</td><td class="mono">NOT NULL</td><td></td></tr>
+</tbody></table></div>
+<div class="note" style="border:0;padding:10px 15px;background:var(--accentS)">1FN: una sena reconocida por fila, en orden. Nunca una cadena con toda la frase.</div>
+</div>
+<h3 style="margin-top:14px">Esquema <code>consent</code></h3>
+<div class="tbl"><div class="hd"><span class="n">consent_grant</span> <span class="sch">consent</span><div class="d">Otorgamiento o revocacion de consentimiento. Nunca se sobreescribe.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">consent_grant_id</td><td class="mono">BIGSERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">user_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES app_user(user_id)</td><td></td></tr>
+<tr><td class="mono">consent_type_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES consent_type(consent_type_id)</td><td></td></tr>
+<tr><td class="mono">consent_action_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES consent_action(consent_action_id)</td><td>GRANT / REVOKE</td></tr>
+<tr><td class="mono">policy_version</td><td class="mono">VARCHAR(20)</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">occurred_at</td><td class="mono">TIMESTAMPTZ</td><td class="mono">NOT NULL DEFAULT now()</td><td></td></tr>
+<tr><td class="mono">ip_address</td><td class="mono">INET</td><td class="mono">NULL</td><td></td></tr>
+</tbody></table></div>
+<div class="note" style="border:0;padding:10px 15px;background:var(--accentS)">Inmutable por diseno legal: el estado vigente se calcula tomando la ultima fila por usuario y tipo.</div>
+</div>
+<h3 style="margin-top:14px">Esquema <code>training</code></h3>
+<div class="tbl"><div class="hd"><span class="n">training_sample</span> <span class="sch">training</span><div class="d">Muestra aportada para entrenar el modelo.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">training_sample_id</td><td class="mono">BIGSERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">sign_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES sign(sign_id)</td><td></td></tr>
+<tr><td class="mono">contributed_by</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES app_user(user_id)</td><td></td></tr>
+<tr><td class="mono">consent_grant_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES consent_grant(consent_grant_id)</td><td>Consentimiento bajo el que se capturo</td></tr>
+<tr><td class="mono">storage_uri</td><td class="mono">VARCHAR(500)</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">review_status_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES review_status(review_status_id)</td><td></td></tr>
+<tr><td class="mono">reviewed_by</td><td class="mono">BIGINT</td><td class="mono">NULL REFERENCES app_user(user_id)</td><td></td></tr>
+</tbody></table></div>
+<div class="note" style="border:0;padding:10px 15px;background:var(--accentS)">Cada muestra queda amarrada al consentimiento concreto que la habilito.</div>
+</div>
+<h3 style="margin-top:14px">Esquema <code>model</code></h3>
+<div class="tbl"><div class="hd"><span class="n">recognition_model</span> <span class="sch">model</span><div class="d">Version del modelo de reconocimiento.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">recognition_model_id</td><td class="mono">SERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">version_tag</td><td class="mono">VARCHAR(30)</td><td class="mono">NOT NULL UNIQUE</td><td></td></tr>
+<tr><td class="mono">trained_at</td><td class="mono">TIMESTAMPTZ</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">accuracy</td><td class="mono">NUMERIC(5,4)</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">sample_count</td><td class="mono">INTEGER</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">is_active</td><td class="mono">BOOLEAN</td><td class="mono">NOT NULL DEFAULT false</td><td></td></tr>
+</tbody></table></div>
+<div class="note" style="border:0;padding:10px 15px;background:var(--accentS)">Solo una activa a la vez, garantizado por indice unico parcial.</div>
+</div>
+<h3 style="margin-top:14px">Esquema <code>identity</code></h3>
+<div class="tbl"><div class="hd"><span class="n">user_device</span> <span class="sch">identity</span><div class="d">Dispositivo registrado por el usuario.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">user_device_id</td><td class="mono">BIGSERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">user_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES app_user(user_id)</td><td></td></tr>
+<tr><td class="mono">device_fingerprint</td><td class="mono">VARCHAR(120)</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">platform_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES platform(platform_id)</td><td></td></tr>
+<tr><td class="mono">push_token</td><td class="mono">VARCHAR(255)</td><td class="mono">NULL</td><td></td></tr>
+<tr><td class="mono">registered_at</td><td class="mono">TIMESTAMPTZ</td><td class="mono">NOT NULL DEFAULT now()</td><td></td></tr>
+</tbody></table></div>
+</div>
+<h3 style="margin-top:14px">Esquema <code>notification</code></h3>
+<div class="tbl"><div class="hd"><span class="n">notification</span> <span class="sch">notification</span><div class="d">Aviso emitido.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">notification_id</td><td class="mono">BIGSERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">user_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES app_user(user_id)</td><td></td></tr>
+<tr><td class="mono">notification_type_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES notification_type(notification_type_id)</td><td></td></tr>
+<tr><td class="mono">title</td><td class="mono">VARCHAR(150)</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">body</td><td class="mono">TEXT</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">sent_at</td><td class="mono">TIMESTAMPTZ</td><td class="mono">NULL</td><td></td></tr>
+<tr><td class="mono">read_at</td><td class="mono">TIMESTAMPTZ</td><td class="mono">NULL</td><td></td></tr>
+</tbody></table></div>
+</div>
+<h3 style="margin-top:14px">Esquema <code>gamification</code></h3>
+<div class="tbl"><div class="hd"><span class="n">achievement</span> <span class="sch">gamification</span><div class="d">Logro disponible.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">achievement_id</td><td class="mono">SMALLSERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">code</td><td class="mono">VARCHAR(40)</td><td class="mono">NOT NULL UNIQUE</td><td></td></tr>
+<tr><td class="mono">name</td><td class="mono">VARCHAR(100)</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">points</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL</td><td></td></tr>
+</tbody></table></div>
+</div>
+<div class="tbl"><div class="hd"><span class="n">user_achievement</span> <span class="sch">gamification</span><div class="d">Logro obtenido por un usuario.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">user_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES app_user(user_id)</td><td>PK compuesta</td></tr>
+<tr><td class="mono">achievement_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES achievement(achievement_id)</td><td>PK compuesta</td></tr>
+<tr><td class="mono">earned_at</td><td class="mono">TIMESTAMPTZ</td><td class="mono">NOT NULL DEFAULT now()</td><td></td></tr>
+</tbody></table></div>
+<div class="note" style="border:0;padding:10px 15px;background:var(--accentS)">3FN: los puntos NO se copian aqui; se alcanzan por FK. Si cambia el valor del logro, no hay que reescribir el historico.</div>
+</div>
+</section>
+<section><h2>Nucleo compartido y catalogos</h2><p>Las tablas de identidad y auditoria son identicas en los diez proyectos de la ficha, para que un mismo criterio de seguridad y trazabilidad aplique a todos.</p><div class="chips">
+<span>identity.app_user</span>
+<span>identity.person</span>
+<span>identity.role</span>
+<span>identity.permission</span>
+<span>identity.role_permission</span>
+<span>identity.user_role</span>
+<span>identity.user_session</span>
+<span>audit.audit_log</span>
+</div><p style="margin-top:10px">Catalogos propios de este proyecto:</p><div class="chips">
+<span>difficulty_level</span>
+<span>locale</span>
+<span>resource_type</span>
+<span>session_status</span>
+<span>consent_type</span>
+<span>consent_action</span>
+<span>review_status</span>
+<span>platform</span>
+<span>notification_type</span>
+</div>
+<p class="note">El detalle completo, con tipos y restricciones listo para implementar, esta en <code>propuestas/translates-sign-language-06.md</code>.</p></section>
+</div>

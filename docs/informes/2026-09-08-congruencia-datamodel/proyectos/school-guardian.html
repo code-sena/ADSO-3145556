@@ -1,0 +1,267 @@
+<title>school-guardian - modelo de datos</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap"><style>
+:root{--ground:#F4F7F4;--surface:#FFFFFF;--sunk:#EDF1ED;--ink:#101815;--ink2:#3D4E46;--ink3:#6B7C73;
+--line:#DCE4DE;--lineS:#C2CEC6;--accent:#2C6E31;--accentS:#E2EFE1;--bar:#4F9A45;--warn:#8A5300;--warnS:#F7EBD8;
+--fd:"IBM Plex Sans Condensed","Arial Narrow",system-ui,sans-serif;--fb:"IBM Plex Sans",system-ui,sans-serif;
+--fm:"IBM Plex Mono",ui-monospace,Consolas,monospace;}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ground:#0D1211;--surface:#151C19;--sunk:#101614;
+--ink:#E7EEE9;--ink2:#B3C2B9;--ink3:#83948B;--line:#26312B;--lineS:#35443C;--accent:#6FC05C;--accentS:#1B2B1D;
+--bar:#5AA84B;--warn:#D69B3E;--warnS:#2C2418;}}
+:root[data-theme="dark"]{--ground:#0D1211;--surface:#151C19;--sunk:#101614;--ink:#E7EEE9;--ink2:#B3C2B9;--ink3:#83948B;
+--line:#26312B;--lineS:#35443C;--accent:#6FC05C;--accentS:#1B2B1D;--bar:#5AA84B;--warn:#D69B3E;--warnS:#2C2418;}
+*{box-sizing:border-box}
+body{background:var(--ground);color:var(--ink);font-family:var(--fb);font-size:15px;line-height:1.55;
+-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:38px 22px 80px;display:flex;flex-direction:column;gap:38px}
+.eyebrow{font-family:var(--fm);font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink3)}
+h1{font-family:var(--fd);font-weight:700;font-size:clamp(32px,5vw,50px);line-height:1.02;letter-spacing:-.015em;margin:0;text-wrap:balance}
+h2{font-family:var(--fd);font-size:24px;font-weight:600;margin:0;padding-bottom:8px;border-bottom:1px solid var(--lineS)}
+h3{font-family:var(--fd);font-size:17px;font-weight:600;margin:0}
+section{display:flex;flex-direction:column;gap:14px}
+p{margin:0;max-width:76ch;color:var(--ink2)}
+code{font-family:var(--fm);font-size:.87em}
+a{color:var(--accent)}
+.hero{display:flex;flex-wrap:wrap;gap:20px 32px;align-items:center;padding:20px 22px;background:var(--surface);
+border:1px solid var(--line);border-left:3px solid var(--accent)}
+.hero .big{font-family:var(--fd);font-size:54px;font-weight:700;line-height:.95;color:var(--accent);font-variant-numeric:tabular-nums}
+.hero .cap{font-size:14px;color:var(--ink2);max-width:52ch}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.gi{background:var(--surface);padding:14px 16px;display:flex;flex-direction:column;gap:3px}
+.gi .k{font-family:var(--fm);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3)}
+.gi .v{font-family:var(--fd);font-size:23px;font-weight:600;font-variant-numeric:tabular-nums}
+.gi .t{font-size:12.5px;color:var(--ink3)}
+.verd{background:var(--warnS);border:1px solid var(--warn);padding:18px 20px}
+.verd p{color:var(--ink);max-width:84ch}
+.scroll{overflow-x:auto;border:1px solid var(--line);background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:13.5px;min-width:700px}
+th{font-family:var(--fm);font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink3);text-align:left;
+padding:10px 11px;border-bottom:1px solid var(--lineS);background:var(--sunk);white-space:nowrap}
+td{padding:9px 11px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:none}
+td.mono,.mono{font-family:var(--fm);font-size:12.5px}
+.tbl{border:1px solid var(--line);background:var(--surface);margin-bottom:14px}
+.tbl .hd{padding:12px 15px;background:var(--sunk);border-bottom:1px solid var(--line)}
+.tbl .hd .n{font-family:var(--fm);font-size:14px;font-weight:600;color:var(--accent)}
+.tbl .hd .sch{font-family:var(--fm);font-size:11px;color:var(--ink3)}
+.tbl .hd .d{font-size:13px;color:var(--ink2);margin-top:3px}
+.tbl .note{padding:10px 15px;background:var(--accentS);font-size:12.5px;color:var(--ink2);border-top:1px solid var(--line)}
+.fix{display:flex;flex-direction:column;border:1px solid var(--line);background:var(--surface)}
+.fix>div{padding:14px 17px;border-bottom:1px solid var(--line)}
+.fix>div:last-child{border-bottom:none}
+.fix .tag{display:inline-block;font-family:var(--fm);font-size:10px;font-weight:600;letter-spacing:.06em;
+text-transform:uppercase;background:var(--accentS);color:var(--accent);padding:2px 7px;margin-bottom:5px}
+.fix p{font-size:13.5px}
+ul.dom{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:0;border:1px solid var(--line);background:var(--surface)}
+ul.dom li{padding:12px 16px;border-bottom:1px solid var(--line);display:flex;gap:14px;align-items:baseline;flex-wrap:wrap}
+ul.dom li:last-child{border-bottom:none}
+ul.dom .nm{font-family:var(--fm);font-size:13px;font-weight:600;min-width:190px}
+ul.dom .ds{font-size:13.5px;color:var(--ink2);flex:1;min-width:240px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips span{font-family:var(--fm);font-size:11.5px;background:var(--sunk);border:1px solid var(--line);padding:3px 8px}
+.note{font-size:13px;color:var(--ink3);border-top:1px solid var(--line);padding-top:12px}
+</style>
+<div class="wrap">
+<header style="display:flex;flex-direction:column;gap:14px"><div class="eyebrow"><a href="index.html">Ficha ADSO-3145556</a> &middot; repositorio sg-docs &middot; 2026-09-08</div><h1>school-guardian</h1><p>Seguimiento de rutas escolares con GPS y control de abordaje de estudiantes.</p></header>
+<div class="hero"><span class="big">35%</span><span class="cap">Madurez documental sobre las carpetas 00 a 06. Congruencia 02&nbsp;&rarr;&nbsp;06 del <strong>0%</strong>. Nivel de normalizacion actual: <strong>Sin modelo</strong>.</span></div>
+<section><h2>Estado de las carpetas evaluadas</h2><div class="grid3">
+<div class="gi"><span class="k">02-domain</span><span class="t">Completo: 14 entidades, 4 value objects, 4 agregados, 51 KB de eventos de dominio.</span></div>
+<div class="gi"><span class="k">03-product</span><span class="t">Inicial: 128 lineas.</span></div>
+<div class="gi"><span class="k">06-data</span><span class="t">Plantilla con una nota de ADR-002 insertada. Cero tablas.</span></div>
+</div>
+<div class="verd"><h3 style="margin-bottom:6px">Congruencia 02 &middot; 03 &middot; 06</h3><p>El dominio mas elaborado de la ficha sin una sola tabla. Incluso escribieron una seccion titulada &#x27;Relacion con la base de datos&#x27; y decisiones de modelado, pero no llegaron a definirla.</p></div>
+</section>
+<section><h2>Hallazgos que corrige la contrapropuesta</h2><div class="fix">
+<div><span class="tag">Congruencia critica</span><p>El equipo tiene el dominio mas elaborado de la ficha (30 KB de entidades, 51 KB de eventos, 14 entidades declaradas) y **cero tablas**. `06-data/models.md` es la plantilla con una nota de ADR-002 insertada: no hay modelo de datos.</p></div>
+<div><span class="tag">1FN</span><p>`Family` no puede guardar la lista de estudiantes en un campo. La relacion acudiente-estudiante es N:M y necesita tabla propia.</p></div>
+<div><span class="tag">3FN</span><p>La parada pertenece a la ruta y su orden es un atributo de la relacion, no de la parada: se resuelve en `route_stop` con `stop_sequence`.</p></div>
+<div><span class="tag">2FN</span><p>Las asignaciones ruta-bus y ruta-estudiante tienen vigencia; sin fecha se pierde el historico del ano escolar.</p></div>
+</div></section>
+<section><h2>Dominios posibles segun la documentacion</h2><p>Bounded contexts que el propio proyecto sustenta. Ninguno se invento.</p><ul class="dom">
+<li><span class="nm">Identity &amp; Access</span><span class="ds">Persona, cuenta, roles y permisos.</span></li>
+<li><span class="nm">School</span><span class="ds">Institucion y estructura escolar.</span></li>
+<li><span class="nm">Family</span><span class="ds">Nucleo familiar y vinculo acudiente-estudiante.</span></li>
+<li><span class="nm">Fleet</span><span class="ds">Bus escolar y su conductor asignado.</span></li>
+<li><span class="nm">Route</span><span class="ds">Ruta, paradas y asignaciones de bus y estudiante.</span></li>
+<li><span class="nm">Tracking</span><span class="ds">Dispositivo GPS y posiciones reportadas.</span></li>
+<li><span class="nm">Boarding</span><span class="ds">Abordaje y descenso del estudiante.</span></li>
+<li><span class="nm">Alert</span><span class="ds">Alertas de desvio, retraso y no abordaje.</span></li>
+</ul></section>
+<section><h2>Modelo de datos propuesto &mdash; 3FN</h2><p>Todas las tablas llevan el bloque de auditoria completo: <code>created_at</code>, <code>created_by</code>, <code>updated_at</code>, <code>updated_by</code>, <code>deleted_at</code>, <code>deleted_by</code> y <code>row_version</code>. Nomenclatura integramente en ingles.</p>
+<h3 style="margin-top:14px">Esquema <code>school</code></h3>
+<div class="tbl"><div class="hd"><span class="n">school</span> <span class="sch">school</span><div class="d">Institucion educativa.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">school_id</td><td class="mono">SERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">code</td><td class="mono">VARCHAR(30)</td><td class="mono">NOT NULL UNIQUE</td><td></td></tr>
+<tr><td class="mono">name</td><td class="mono">VARCHAR(150)</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">address_line</td><td class="mono">VARCHAR(200)</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">city_id</td><td class="mono">INTEGER</td><td class="mono">NOT NULL REFERENCES city(city_id)</td><td></td></tr>
+<tr><td class="mono">latitude</td><td class="mono">NUMERIC(9,6)</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">longitude</td><td class="mono">NUMERIC(9,6)</td><td class="mono">NOT NULL</td><td></td></tr>
+</tbody></table></div>
+</div>
+<h3 style="margin-top:14px">Esquema <code>family</code></h3>
+<div class="tbl"><div class="hd"><span class="n">family</span> <span class="sch">family</span><div class="d">Nucleo familiar.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">family_id</td><td class="mono">BIGSERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">code</td><td class="mono">VARCHAR(30)</td><td class="mono">NOT NULL UNIQUE</td><td></td></tr>
+<tr><td class="mono">primary_contact_person_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES person(person_id)</td><td></td></tr>
+</tbody></table></div>
+</div>
+<div class="tbl"><div class="hd"><span class="n">guardian_student</span> <span class="sch">family</span><div class="d">Vinculo entre acudiente y estudiante. Resuelve la N:M.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">guardian_student_id</td><td class="mono">BIGSERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">guardian_person_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES person(person_id)</td><td></td></tr>
+<tr><td class="mono">student_person_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES person(person_id)</td><td></td></tr>
+<tr><td class="mono">family_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES family(family_id)</td><td></td></tr>
+<tr><td class="mono">relationship_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES relationship_type(relationship_id)</td><td></td></tr>
+<tr><td class="mono">is_authorized_pickup</td><td class="mono">BOOLEAN</td><td class="mono">NOT NULL DEFAULT false</td><td></td></tr>
+</tbody></table></div>
+<div class="note" style="border:0;padding:10px 15px;background:var(--accentS)">1FN: un vinculo por fila. Un estudiante puede tener varios acudientes y un acudiente varios estudiantes.</div>
+</div>
+<h3 style="margin-top:14px">Esquema <code>school</code></h3>
+<div class="tbl"><div class="hd"><span class="n">student_profile</span> <span class="sch">school</span><div class="d">Datos escolares del estudiante, sobre `person`.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">student_profile_id</td><td class="mono">BIGSERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">person_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL UNIQUE REFERENCES person(person_id)</td><td></td></tr>
+<tr><td class="mono">school_id</td><td class="mono">INTEGER</td><td class="mono">NOT NULL REFERENCES school(school_id)</td><td></td></tr>
+<tr><td class="mono">grade_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES grade(grade_id)</td><td></td></tr>
+<tr><td class="mono">family_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES family(family_id)</td><td></td></tr>
+</tbody></table></div>
+<div class="note" style="border:0;padding:10px 15px;background:var(--accentS)">3FN: no duplica nombre ni documento; los toma de `person`.</div>
+</div>
+<h3 style="margin-top:14px">Esquema <code>fleet</code></h3>
+<div class="tbl"><div class="hd"><span class="n">bus</span> <span class="sch">fleet</span><div class="d">Bus escolar.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">bus_id</td><td class="mono">SERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">school_id</td><td class="mono">INTEGER</td><td class="mono">NOT NULL REFERENCES school(school_id)</td><td></td></tr>
+<tr><td class="mono">license_plate</td><td class="mono">VARCHAR(10)</td><td class="mono">NOT NULL UNIQUE</td><td></td></tr>
+<tr><td class="mono">seat_capacity</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">bus_status_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES bus_status(bus_status_id)</td><td></td></tr>
+</tbody></table></div>
+</div>
+<div class="tbl"><div class="hd"><span class="n">driver_assignment</span> <span class="sch">fleet</span><div class="d">Conductor asignado a un bus, con vigencia.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">driver_assignment_id</td><td class="mono">BIGSERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">bus_id</td><td class="mono">INTEGER</td><td class="mono">NOT NULL REFERENCES bus(bus_id)</td><td></td></tr>
+<tr><td class="mono">driver_person_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES person(person_id)</td><td></td></tr>
+<tr><td class="mono">assigned_from</td><td class="mono">DATE</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">assigned_to</td><td class="mono">DATE</td><td class="mono">NULL</td><td></td></tr>
+</tbody></table></div>
+<div class="note" style="border:0;padding:10px 15px;background:var(--accentS)">Historico: no se sobreescribe al cambiar de conductor.</div>
+</div>
+<h3 style="margin-top:14px">Esquema <code>route</code></h3>
+<div class="tbl"><div class="hd"><span class="n">route</span> <span class="sch">route</span><div class="d">Ruta escolar.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">route_id</td><td class="mono">SERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">school_id</td><td class="mono">INTEGER</td><td class="mono">NOT NULL REFERENCES school(school_id)</td><td></td></tr>
+<tr><td class="mono">name</td><td class="mono">VARCHAR(100)</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">route_direction_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES route_direction(direction_id)</td><td>INBOUND / OUTBOUND</td></tr>
+<tr><td class="mono">scheduled_start</td><td class="mono">TIME</td><td class="mono">NOT NULL</td><td></td></tr>
+</tbody></table></div>
+</div>
+<div class="tbl"><div class="hd"><span class="n">stop</span> <span class="sch">route</span><div class="d">Parada fisica, reutilizable entre rutas.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">stop_id</td><td class="mono">SERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">name</td><td class="mono">VARCHAR(120)</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">address_line</td><td class="mono">VARCHAR(200)</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">latitude</td><td class="mono">NUMERIC(9,6)</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">longitude</td><td class="mono">NUMERIC(9,6)</td><td class="mono">NOT NULL</td><td></td></tr>
+</tbody></table></div>
+<div class="note" style="border:0;padding:10px 15px;background:var(--accentS)">3FN: la parada existe por si misma; su posicion en una ruta no es un atributo suyo.</div>
+</div>
+<div class="tbl"><div class="hd"><span class="n">route_stop</span> <span class="sch">route</span><div class="d">Parada dentro de una ruta, con su orden.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">route_stop_id</td><td class="mono">SERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">route_id</td><td class="mono">INTEGER</td><td class="mono">NOT NULL REFERENCES route(route_id)</td><td></td></tr>
+<tr><td class="mono">stop_id</td><td class="mono">INTEGER</td><td class="mono">NOT NULL REFERENCES stop(stop_id)</td><td></td></tr>
+<tr><td class="mono">stop_sequence</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">scheduled_time</td><td class="mono">TIME</td><td class="mono">NOT NULL</td><td></td></tr>
+</tbody></table></div>
+<div class="note" style="border:0;padding:10px 15px;background:var(--accentS)">El orden es atributo de la relacion. UNIQUE(route_id, stop_sequence).</div>
+</div>
+<div class="tbl"><div class="hd"><span class="n">route_bus_assignment</span> <span class="sch">route</span><div class="d">Bus asignado a una ruta, con vigencia.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">route_bus_assignment_id</td><td class="mono">BIGSERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">route_id</td><td class="mono">INTEGER</td><td class="mono">NOT NULL REFERENCES route(route_id)</td><td></td></tr>
+<tr><td class="mono">bus_id</td><td class="mono">INTEGER</td><td class="mono">NOT NULL REFERENCES bus(bus_id)</td><td></td></tr>
+<tr><td class="mono">assigned_from</td><td class="mono">DATE</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">assigned_to</td><td class="mono">DATE</td><td class="mono">NULL</td><td></td></tr>
+</tbody></table></div>
+</div>
+<div class="tbl"><div class="hd"><span class="n">route_student_assignment</span> <span class="sch">route</span><div class="d">Estudiante asignado a una ruta y parada.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">route_student_assignment_id</td><td class="mono">BIGSERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">route_id</td><td class="mono">INTEGER</td><td class="mono">NOT NULL REFERENCES route(route_id)</td><td></td></tr>
+<tr><td class="mono">student_profile_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES student_profile(student_profile_id)</td><td></td></tr>
+<tr><td class="mono">route_stop_id</td><td class="mono">INTEGER</td><td class="mono">NOT NULL REFERENCES route_stop(route_stop_id)</td><td></td></tr>
+<tr><td class="mono">assigned_from</td><td class="mono">DATE</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">assigned_to</td><td class="mono">DATE</td><td class="mono">NULL</td><td></td></tr>
+</tbody></table></div>
+</div>
+<h3 style="margin-top:14px">Esquema <code>tracking</code></h3>
+<div class="tbl"><div class="hd"><span class="n">gps_device</span> <span class="sch">tracking</span><div class="d">Dispositivo GPS del bus.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">gps_device_id</td><td class="mono">SERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">bus_id</td><td class="mono">INTEGER</td><td class="mono">NOT NULL REFERENCES bus(bus_id)</td><td></td></tr>
+<tr><td class="mono">serial_number</td><td class="mono">VARCHAR(60)</td><td class="mono">NOT NULL UNIQUE</td><td></td></tr>
+<tr><td class="mono">device_status_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES device_status(device_status_id)</td><td></td></tr>
+<tr><td class="mono">installed_at</td><td class="mono">TIMESTAMPTZ</td><td class="mono">NOT NULL</td><td></td></tr>
+</tbody></table></div>
+</div>
+<div class="tbl"><div class="hd"><span class="n">trip</span> <span class="sch">tracking</span><div class="d">Recorrido concreto de una ruta en una fecha.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">trip_id</td><td class="mono">BIGSERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">route_id</td><td class="mono">INTEGER</td><td class="mono">NOT NULL REFERENCES route(route_id)</td><td></td></tr>
+<tr><td class="mono">bus_id</td><td class="mono">INTEGER</td><td class="mono">NOT NULL REFERENCES bus(bus_id)</td><td></td></tr>
+<tr><td class="mono">driver_person_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES person(person_id)</td><td></td></tr>
+<tr><td class="mono">trip_date</td><td class="mono">DATE</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">started_at</td><td class="mono">TIMESTAMPTZ</td><td class="mono">NULL</td><td></td></tr>
+<tr><td class="mono">ended_at</td><td class="mono">TIMESTAMPTZ</td><td class="mono">NULL</td><td></td></tr>
+<tr><td class="mono">trip_status_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES trip_status(trip_status_id)</td><td></td></tr>
+</tbody></table></div>
+<div class="note" style="border:0;padding:10px 15px;background:var(--accentS)">Sin esta tabla el abordaje no tiene a que colgarse: la ruta es el plan, el viaje es el hecho.</div>
+</div>
+<div class="tbl"><div class="hd"><span class="n">gps_location</span> <span class="sch">tracking</span><div class="d">Posicion reportada. Serie temporal particionada por fecha.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">gps_location_id</td><td class="mono">BIGSERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">gps_device_id</td><td class="mono">INTEGER</td><td class="mono">NOT NULL REFERENCES gps_device(gps_device_id)</td><td></td></tr>
+<tr><td class="mono">trip_id</td><td class="mono">BIGINT</td><td class="mono">NULL REFERENCES trip(trip_id)</td><td></td></tr>
+<tr><td class="mono">latitude</td><td class="mono">NUMERIC(9,6)</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">longitude</td><td class="mono">NUMERIC(9,6)</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">speed_kmh</td><td class="mono">NUMERIC(6,2)</td><td class="mono">NULL</td><td></td></tr>
+<tr><td class="mono">recorded_at</td><td class="mono">TIMESTAMPTZ</td><td class="mono">NOT NULL</td><td></td></tr>
+</tbody></table></div>
+<div class="note" style="border:0;padding:10px 15px;background:var(--accentS)">Inmutable: solo `created_at`.</div>
+</div>
+<h3 style="margin-top:14px">Esquema <code>boarding</code></h3>
+<div class="tbl"><div class="hd"><span class="n">boarding</span> <span class="sch">boarding</span><div class="d">Abordaje o descenso del estudiante.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">boarding_id</td><td class="mono">BIGSERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">trip_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES trip(trip_id)</td><td></td></tr>
+<tr><td class="mono">student_profile_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES student_profile(student_profile_id)</td><td></td></tr>
+<tr><td class="mono">route_stop_id</td><td class="mono">INTEGER</td><td class="mono">NOT NULL REFERENCES route_stop(route_stop_id)</td><td></td></tr>
+<tr><td class="mono">boarding_event_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES boarding_event(boarding_event_id)</td><td>BOARD / ALIGHT</td></tr>
+<tr><td class="mono">occurred_at</td><td class="mono">TIMESTAMPTZ</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">registered_by</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES app_user(user_id)</td><td></td></tr>
+</tbody></table></div>
+<div class="note" style="border:0;padding:10px 15px;background:var(--accentS)">1FN: abordaje y descenso son filas distintas del mismo estudiante, no dos columnas.</div>
+</div>
+<h3 style="margin-top:14px">Esquema <code>alert</code></h3>
+<div class="tbl"><div class="hd"><span class="n">trip_alert</span> <span class="sch">alert</span><div class="d">Alerta durante un viaje.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">trip_alert_id</td><td class="mono">BIGSERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">trip_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES trip(trip_id)</td><td></td></tr>
+<tr><td class="mono">alert_type_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES alert_type(alert_type_id)</td><td>DEVIATION / DELAY / NO_BOARDING</td></tr>
+<tr><td class="mono">student_profile_id</td><td class="mono">BIGINT</td><td class="mono">NULL REFERENCES student_profile(student_profile_id)</td><td></td></tr>
+<tr><td class="mono">severity_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES severity(severity_id)</td><td></td></tr>
+<tr><td class="mono">raised_at</td><td class="mono">TIMESTAMPTZ</td><td class="mono">NOT NULL DEFAULT now()</td><td></td></tr>
+<tr><td class="mono">acknowledged_at</td><td class="mono">TIMESTAMPTZ</td><td class="mono">NULL</td><td></td></tr>
+</tbody></table></div>
+</div>
+</section>
+<section><h2>Nucleo compartido y catalogos</h2><p>Las tablas de identidad y auditoria son identicas en los diez proyectos de la ficha, para que un mismo criterio de seguridad y trazabilidad aplique a todos.</p><div class="chips">
+<span>identity.app_user</span>
+<span>identity.person</span>
+<span>identity.role</span>
+<span>identity.permission</span>
+<span>identity.role_permission</span>
+<span>identity.user_role</span>
+<span>identity.user_session</span>
+<span>audit.audit_log</span>
+</div><p style="margin-top:10px">Catalogos propios de este proyecto:</p><div class="chips">
+<span>city</span>
+<span>relationship_type</span>
+<span>grade</span>
+<span>bus_status</span>
+<span>route_direction</span>
+<span>device_status</span>
+<span>trip_status</span>
+<span>boarding_event</span>
+<span>alert_type</span>
+<span>severity</span>
+</div>
+<p class="note">El detalle completo, con tipos y restricciones listo para implementar, esta en <code>propuestas/school-guardian-06.md</code>.</p></section>
+</div>

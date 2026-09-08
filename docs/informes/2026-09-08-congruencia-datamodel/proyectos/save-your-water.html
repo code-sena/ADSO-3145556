@@ -1,0 +1,228 @@
+<title>save-your-water - modelo de datos</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap"><style>
+:root{--ground:#F4F7F4;--surface:#FFFFFF;--sunk:#EDF1ED;--ink:#101815;--ink2:#3D4E46;--ink3:#6B7C73;
+--line:#DCE4DE;--lineS:#C2CEC6;--accent:#2C6E31;--accentS:#E2EFE1;--bar:#4F9A45;--warn:#8A5300;--warnS:#F7EBD8;
+--fd:"IBM Plex Sans Condensed","Arial Narrow",system-ui,sans-serif;--fb:"IBM Plex Sans",system-ui,sans-serif;
+--fm:"IBM Plex Mono",ui-monospace,Consolas,monospace;}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ground:#0D1211;--surface:#151C19;--sunk:#101614;
+--ink:#E7EEE9;--ink2:#B3C2B9;--ink3:#83948B;--line:#26312B;--lineS:#35443C;--accent:#6FC05C;--accentS:#1B2B1D;
+--bar:#5AA84B;--warn:#D69B3E;--warnS:#2C2418;}}
+:root[data-theme="dark"]{--ground:#0D1211;--surface:#151C19;--sunk:#101614;--ink:#E7EEE9;--ink2:#B3C2B9;--ink3:#83948B;
+--line:#26312B;--lineS:#35443C;--accent:#6FC05C;--accentS:#1B2B1D;--bar:#5AA84B;--warn:#D69B3E;--warnS:#2C2418;}
+*{box-sizing:border-box}
+body{background:var(--ground);color:var(--ink);font-family:var(--fb);font-size:15px;line-height:1.55;
+-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:38px 22px 80px;display:flex;flex-direction:column;gap:38px}
+.eyebrow{font-family:var(--fm);font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink3)}
+h1{font-family:var(--fd);font-weight:700;font-size:clamp(32px,5vw,50px);line-height:1.02;letter-spacing:-.015em;margin:0;text-wrap:balance}
+h2{font-family:var(--fd);font-size:24px;font-weight:600;margin:0;padding-bottom:8px;border-bottom:1px solid var(--lineS)}
+h3{font-family:var(--fd);font-size:17px;font-weight:600;margin:0}
+section{display:flex;flex-direction:column;gap:14px}
+p{margin:0;max-width:76ch;color:var(--ink2)}
+code{font-family:var(--fm);font-size:.87em}
+a{color:var(--accent)}
+.hero{display:flex;flex-wrap:wrap;gap:20px 32px;align-items:center;padding:20px 22px;background:var(--surface);
+border:1px solid var(--line);border-left:3px solid var(--accent)}
+.hero .big{font-family:var(--fd);font-size:54px;font-weight:700;line-height:.95;color:var(--accent);font-variant-numeric:tabular-nums}
+.hero .cap{font-size:14px;color:var(--ink2);max-width:52ch}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.gi{background:var(--surface);padding:14px 16px;display:flex;flex-direction:column;gap:3px}
+.gi .k{font-family:var(--fm);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3)}
+.gi .v{font-family:var(--fd);font-size:23px;font-weight:600;font-variant-numeric:tabular-nums}
+.gi .t{font-size:12.5px;color:var(--ink3)}
+.verd{background:var(--warnS);border:1px solid var(--warn);padding:18px 20px}
+.verd p{color:var(--ink);max-width:84ch}
+.scroll{overflow-x:auto;border:1px solid var(--line);background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:13.5px;min-width:700px}
+th{font-family:var(--fm);font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink3);text-align:left;
+padding:10px 11px;border-bottom:1px solid var(--lineS);background:var(--sunk);white-space:nowrap}
+td{padding:9px 11px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:none}
+td.mono,.mono{font-family:var(--fm);font-size:12.5px}
+.tbl{border:1px solid var(--line);background:var(--surface);margin-bottom:14px}
+.tbl .hd{padding:12px 15px;background:var(--sunk);border-bottom:1px solid var(--line)}
+.tbl .hd .n{font-family:var(--fm);font-size:14px;font-weight:600;color:var(--accent)}
+.tbl .hd .sch{font-family:var(--fm);font-size:11px;color:var(--ink3)}
+.tbl .hd .d{font-size:13px;color:var(--ink2);margin-top:3px}
+.tbl .note{padding:10px 15px;background:var(--accentS);font-size:12.5px;color:var(--ink2);border-top:1px solid var(--line)}
+.fix{display:flex;flex-direction:column;border:1px solid var(--line);background:var(--surface)}
+.fix>div{padding:14px 17px;border-bottom:1px solid var(--line)}
+.fix>div:last-child{border-bottom:none}
+.fix .tag{display:inline-block;font-family:var(--fm);font-size:10px;font-weight:600;letter-spacing:.06em;
+text-transform:uppercase;background:var(--accentS);color:var(--accent);padding:2px 7px;margin-bottom:5px}
+.fix p{font-size:13.5px}
+ul.dom{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:0;border:1px solid var(--line);background:var(--surface)}
+ul.dom li{padding:12px 16px;border-bottom:1px solid var(--line);display:flex;gap:14px;align-items:baseline;flex-wrap:wrap}
+ul.dom li:last-child{border-bottom:none}
+ul.dom .nm{font-family:var(--fm);font-size:13px;font-weight:600;min-width:190px}
+ul.dom .ds{font-size:13.5px;color:var(--ink2);flex:1;min-width:240px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips span{font-family:var(--fm);font-size:11.5px;background:var(--sunk);border:1px solid var(--line);padding:3px 8px}
+.note{font-size:13px;color:var(--ink3);border-top:1px solid var(--line);padding-top:12px}
+</style>
+<div class="wrap">
+<header style="display:flex;flex-direction:column;gap:14px"><div class="eyebrow"><a href="index.html">Ficha ADSO-3145556</a> &middot; repositorio sy-water-docs &middot; 2026-09-08</div><h1>save-your-water</h1><p>Monitoreo del consumo de agua en hogares, con deteccion de fugas y corte de valvula.</p></header>
+<div class="hero"><span class="big">53%</span><span class="cap">Madurez documental sobre las carpetas 00 a 06. Congruencia 02&nbsp;&rarr;&nbsp;06 del <strong>100%</strong>. Nivel de normalizacion actual: <strong>3FN</strong>.</span></div>
+<section><h2>Estado de las carpetas evaluadas</h2><div class="grid3">
+<div class="gi"><span class="k">02-domain</span><span class="t">Avanzado: 7 entidades, 5 value objects, entregas escalonadas marcadas.</span></div>
+<div class="gi"><span class="k">03-product</span><span class="t">Inicial: 70 lineas.</span></div>
+<div class="gi"><span class="k">06-data</span><span class="t">Real: 29 KB, 18 tablas en 6 esquemas, con principios de modelado declarados.</span></div>
+</div>
+<div class="verd"><h3 style="margin-bottom:6px">Congruencia 02 &middot; 03 &middot; 06</h3><p>El modelo mejor estructurado despues de rent-car, y el unico que declara sus principios de modelado por escrito. Su unica falla es de auditoria: 40 tablas con `deleted_at` y ninguna con `created_by`.</p></div>
+</section>
+<section><h2>Hallazgos que corrige la contrapropuesta</h2><div class="fix">
+<div><span class="tag">Auditoria</span><p>El modelo tiene `created_at`, `updated_at` y `deleted_at` en 40 tablas, pero CERO `created_by` / `updated_by`: se sabe cuando cambio algo y no quien. Se completan las seis columnas.</p></div>
+<div><span class="tag">3FN</span><p>`place` guarda ciudad y estrato como texto; salen a los catalogos `city` y `socioeconomic_stratum`.</p></div>
+<div><span class="tag">1FN</span><p>Se separa la lectura cruda del agregado: `device_reading` es serie temporal y `consumption_record` es el consolidado por periodo. Nunca la misma tabla.</p></div>
+<div><span class="tag">2FN</span><p>La tarifa se referencia por FK con vigencia en vez de copiar el precio unitario en cada factura.</p></div>
+</div></section>
+<section><h2>Dominios posibles segun la documentacion</h2><p>Bounded contexts que el propio proyecto sustenta. Ninguno se invento.</p><ul class="dom">
+<li><span class="nm">Identity</span><span class="ds">Cuentas, sesiones e intentos de acceso. Ya modelado por el equipo.</span></li>
+<li><span class="nm">Place</span><span class="ds">Vivienda o predio monitoreado y sus miembros.</span></li>
+<li><span class="nm">Device</span><span class="ds">Medidor instalado y sus lecturas crudas.</span></li>
+<li><span class="nm">Consumption</span><span class="ds">Consumo agregado, metas, tarifas y facturas comparadas.</span></li>
+<li><span class="nm">Valve</span><span class="ds">Valvula, acciones de corte y reglas automaticas.</span></li>
+<li><span class="nm">Notification</span><span class="ds">Alertas de fuga y preferencias de aviso.</span></li>
+</ul></section>
+<section><h2>Modelo de datos propuesto &mdash; 3FN</h2><p>Todas las tablas llevan el bloque de auditoria completo: <code>created_at</code>, <code>created_by</code>, <code>updated_at</code>, <code>updated_by</code>, <code>deleted_at</code>, <code>deleted_by</code> y <code>row_version</code>. Nomenclatura integramente en ingles.</p>
+<h3 style="margin-top:14px">Esquema <code>place</code></h3>
+<div class="tbl"><div class="hd"><span class="n">place</span> <span class="sch">place</span><div class="d">Predio monitoreado.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">place_id</td><td class="mono">BIGSERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">owner_user_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES app_user(user_id)</td><td></td></tr>
+<tr><td class="mono">alias</td><td class="mono">VARCHAR(80)</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">address_line</td><td class="mono">VARCHAR(200)</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">city_id</td><td class="mono">INTEGER</td><td class="mono">NOT NULL REFERENCES city(city_id)</td><td></td></tr>
+<tr><td class="mono">stratum_id</td><td class="mono">SMALLINT</td><td class="mono">NULL REFERENCES socioeconomic_stratum(stratum_id)</td><td></td></tr>
+<tr><td class="mono">resident_count</td><td class="mono">SMALLINT</td><td class="mono">NULL</td><td></td></tr>
+</tbody></table></div>
+<div class="note" style="border:0;padding:10px 15px;background:var(--accentS)">3FN: ciudad y estrato catalogados; antes eran VARCHAR repetidos en cada predio.</div>
+</div>
+<div class="tbl"><div class="hd"><span class="n">place_member</span> <span class="sch">place</span><div class="d">Miembros del hogar con acceso al predio.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">place_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES place(place_id)</td><td>PK compuesta</td></tr>
+<tr><td class="mono">user_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES app_user(user_id)</td><td>PK compuesta</td></tr>
+<tr><td class="mono">member_role_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES member_role(member_role_id)</td><td></td></tr>
+<tr><td class="mono">joined_at</td><td class="mono">TIMESTAMPTZ</td><td class="mono">NOT NULL DEFAULT now()</td><td></td></tr>
+</tbody></table></div>
+<div class="note" style="border:0;padding:10px 15px;background:var(--accentS)">Resuelve la N:M usuario-predio.</div>
+</div>
+<h3 style="margin-top:14px">Esquema <code>device</code></h3>
+<div class="tbl"><div class="hd"><span class="n">device</span> <span class="sch">device</span><div class="d">Medidor instalado.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">device_id</td><td class="mono">BIGSERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">place_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES place(place_id)</td><td></td></tr>
+<tr><td class="mono">serial_number</td><td class="mono">VARCHAR(60)</td><td class="mono">NOT NULL UNIQUE</td><td></td></tr>
+<tr><td class="mono">device_model_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES device_model(device_model_id)</td><td></td></tr>
+<tr><td class="mono">installed_at</td><td class="mono">TIMESTAMPTZ</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">device_status_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES device_status(device_status_id)</td><td></td></tr>
+<tr><td class="mono">last_seen_at</td><td class="mono">TIMESTAMPTZ</td><td class="mono">NULL</td><td></td></tr>
+</tbody></table></div>
+<div class="note" style="border:0;padding:10px 15px;background:var(--accentS)">3FN: fabricante y firmware pertenecen al modelo del dispositivo, no a la unidad instalada.</div>
+</div>
+<div class="tbl"><div class="hd"><span class="n">device_reading</span> <span class="sch">device</span><div class="d">Lectura cruda del medidor. Serie temporal.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">device_reading_id</td><td class="mono">BIGSERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">device_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES device(device_id)</td><td></td></tr>
+<tr><td class="mono">liters</td><td class="mono">NUMERIC(12,3)</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">read_at</td><td class="mono">TIMESTAMPTZ</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">quality_flag_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES quality_flag(quality_flag_id)</td><td></td></tr>
+</tbody></table></div>
+<div class="note" style="border:0;padding:10px 15px;background:var(--accentS)">Inmutable: solo `created_at`. Una lectura corregida genera fila nueva, nunca un UPDATE.</div>
+</div>
+<h3 style="margin-top:14px">Esquema <code>consumption</code></h3>
+<div class="tbl"><div class="hd"><span class="n">consumption_record</span> <span class="sch">consumption</span><div class="d">Consumo agregado por periodo.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">consumption_record_id</td><td class="mono">BIGSERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">place_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES place(place_id)</td><td></td></tr>
+<tr><td class="mono">period_start</td><td class="mono">DATE</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">period_end</td><td class="mono">DATE</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">liters</td><td class="mono">NUMERIC(14,3)</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">aggregation_level_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES aggregation_level(aggregation_level_id)</td><td></td></tr>
+</tbody></table></div>
+<div class="note" style="border:0;padding:10px 15px;background:var(--accentS)">Derivado de `device_reading`: se materializa por rendimiento y queda documentado como recalculable.</div>
+</div>
+<div class="tbl"><div class="hd"><span class="n">tariff</span> <span class="sch">consumption</span><div class="d">Tarifa vigente por estrato y periodo.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">tariff_id</td><td class="mono">SERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">stratum_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES socioeconomic_stratum(stratum_id)</td><td></td></tr>
+<tr><td class="mono">price_per_liter</td><td class="mono">NUMERIC(12,6)</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">valid_from</td><td class="mono">DATE</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">valid_to</td><td class="mono">DATE</td><td class="mono">NULL</td><td></td></tr>
+</tbody></table></div>
+<div class="note" style="border:0;padding:10px 15px;background:var(--accentS)">3FN: la factura referencia la tarifa por FK; no copia el precio unitario.</div>
+</div>
+<div class="tbl"><div class="hd"><span class="n">goal</span> <span class="sch">consumption</span><div class="d">Meta de ahorro fijada por el hogar.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">goal_id</td><td class="mono">BIGSERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">place_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES place(place_id)</td><td></td></tr>
+<tr><td class="mono">target_liters</td><td class="mono">NUMERIC(14,3)</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">period_start</td><td class="mono">DATE</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">period_end</td><td class="mono">DATE</td><td class="mono">NOT NULL</td><td></td></tr>
+</tbody></table></div>
+</div>
+<h3 style="margin-top:14px">Esquema <code>valve</code></h3>
+<div class="tbl"><div class="hd"><span class="n">valve</span> <span class="sch">valve</span><div class="d">Valvula asociada a un medidor.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">valve_id</td><td class="mono">BIGSERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">device_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL UNIQUE REFERENCES device(device_id)</td><td></td></tr>
+<tr><td class="mono">valve_state_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES valve_state(valve_state_id)</td><td></td></tr>
+<tr><td class="mono">last_changed_at</td><td class="mono">TIMESTAMPTZ</td><td class="mono">NULL</td><td></td></tr>
+</tbody></table></div>
+</div>
+<div class="tbl"><div class="hd"><span class="n">valve_action</span> <span class="sch">valve</span><div class="d">Orden de apertura o cierre.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">valve_action_id</td><td class="mono">BIGSERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">valve_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES valve(valve_id)</td><td></td></tr>
+<tr><td class="mono">action_type_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES valve_action_type(action_type_id)</td><td></td></tr>
+<tr><td class="mono">requested_by</td><td class="mono">BIGINT</td><td class="mono">NULL REFERENCES app_user(user_id)</td><td>NULL cuando la dispara una regla</td></tr>
+<tr><td class="mono">shutoff_rule_id</td><td class="mono">BIGINT</td><td class="mono">NULL REFERENCES shutoff_rule(shutoff_rule_id)</td><td></td></tr>
+<tr><td class="mono">requested_at</td><td class="mono">TIMESTAMPTZ</td><td class="mono">NOT NULL DEFAULT now()</td><td></td></tr>
+<tr><td class="mono">executed_at</td><td class="mono">TIMESTAMPTZ</td><td class="mono">NULL</td><td></td></tr>
+<tr><td class="mono">action_status_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES action_status(action_status_id)</td><td></td></tr>
+</tbody></table></div>
+<div class="note" style="border:0;padding:10px 15px;background:var(--accentS)">Trazabilidad: toda accion tiene origen humano o regla. CHECK que impide ambos nulos.</div>
+</div>
+<div class="tbl"><div class="hd"><span class="n">shutoff_rule</span> <span class="sch">valve</span><div class="d">Regla de corte automatico.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">shutoff_rule_id</td><td class="mono">BIGSERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">place_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES place(place_id)</td><td></td></tr>
+<tr><td class="mono">threshold_liters_per_hour</td><td class="mono">NUMERIC(12,3)</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">is_enabled</td><td class="mono">BOOLEAN</td><td class="mono">NOT NULL DEFAULT true</td><td></td></tr>
+</tbody></table></div>
+</div>
+<h3 style="margin-top:14px">Esquema <code>notification</code></h3>
+<div class="tbl"><div class="hd"><span class="n">alert</span> <span class="sch">notification</span><div class="d">Alerta por fuga o umbral superado.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">alert_id</td><td class="mono">BIGSERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">place_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES place(place_id)</td><td></td></tr>
+<tr><td class="mono">alert_type_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES alert_type(alert_type_id)</td><td></td></tr>
+<tr><td class="mono">severity_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES severity(severity_id)</td><td></td></tr>
+<tr><td class="mono">raised_at</td><td class="mono">TIMESTAMPTZ</td><td class="mono">NOT NULL DEFAULT now()</td><td></td></tr>
+<tr><td class="mono">acknowledged_at</td><td class="mono">TIMESTAMPTZ</td><td class="mono">NULL</td><td></td></tr>
+<tr><td class="mono">acknowledged_by</td><td class="mono">BIGINT</td><td class="mono">NULL REFERENCES app_user(user_id)</td><td></td></tr>
+</tbody></table></div>
+</div>
+<div class="tbl"><div class="hd"><span class="n">notification_preference</span> <span class="sch">notification</span><div class="d">Preferencia de canal por usuario y tipo de alerta.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">user_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES app_user(user_id)</td><td>PK compuesta</td></tr>
+<tr><td class="mono">alert_type_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES alert_type(alert_type_id)</td><td>PK compuesta</td></tr>
+<tr><td class="mono">channel_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES notification_channel(channel_id)</td><td>PK compuesta</td></tr>
+<tr><td class="mono">is_enabled</td><td class="mono">BOOLEAN</td><td class="mono">NOT NULL DEFAULT true</td><td></td></tr>
+</tbody></table></div>
+<div class="note" style="border:0;padding:10px 15px;background:var(--accentS)">1FN: un canal por fila; nunca un campo `channels` con valores separados por comas.</div>
+</div>
+</section>
+<section><h2>Nucleo compartido y catalogos</h2><p>Las tablas de identidad y auditoria son identicas en los diez proyectos de la ficha, para que un mismo criterio de seguridad y trazabilidad aplique a todos.</p><div class="chips">
+<span>identity.app_user</span>
+<span>identity.person</span>
+<span>identity.role</span>
+<span>identity.permission</span>
+<span>identity.role_permission</span>
+<span>identity.user_role</span>
+<span>identity.user_session</span>
+<span>audit.audit_log</span>
+</div><p style="margin-top:10px">Catalogos propios de este proyecto:</p><div class="chips">
+<span>city</span>
+<span>socioeconomic_stratum</span>
+<span>member_role</span>
+<span>device_model</span>
+<span>device_status</span>
+<span>quality_flag</span>
+<span>aggregation_level</span>
+<span>valve_state</span>
+<span>valve_action_type</span>
+<span>action_status</span>
+<span>alert_type</span>
+<span>severity</span>
+<span>notification_channel</span>
+</div>
+<p class="note">El detalle completo, con tipos y restricciones listo para implementar, esta en <code>propuestas/save-your-water-06.md</code>.</p></section>
+</div>

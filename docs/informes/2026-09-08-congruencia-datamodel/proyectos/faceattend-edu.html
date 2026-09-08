@@ -1,0 +1,272 @@
+<title>faceattend-edu - modelo de datos</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap"><style>
+:root{--ground:#F4F7F4;--surface:#FFFFFF;--sunk:#EDF1ED;--ink:#101815;--ink2:#3D4E46;--ink3:#6B7C73;
+--line:#DCE4DE;--lineS:#C2CEC6;--accent:#2C6E31;--accentS:#E2EFE1;--bar:#4F9A45;--warn:#8A5300;--warnS:#F7EBD8;
+--fd:"IBM Plex Sans Condensed","Arial Narrow",system-ui,sans-serif;--fb:"IBM Plex Sans",system-ui,sans-serif;
+--fm:"IBM Plex Mono",ui-monospace,Consolas,monospace;}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ground:#0D1211;--surface:#151C19;--sunk:#101614;
+--ink:#E7EEE9;--ink2:#B3C2B9;--ink3:#83948B;--line:#26312B;--lineS:#35443C;--accent:#6FC05C;--accentS:#1B2B1D;
+--bar:#5AA84B;--warn:#D69B3E;--warnS:#2C2418;}}
+:root[data-theme="dark"]{--ground:#0D1211;--surface:#151C19;--sunk:#101614;--ink:#E7EEE9;--ink2:#B3C2B9;--ink3:#83948B;
+--line:#26312B;--lineS:#35443C;--accent:#6FC05C;--accentS:#1B2B1D;--bar:#5AA84B;--warn:#D69B3E;--warnS:#2C2418;}
+*{box-sizing:border-box}
+body{background:var(--ground);color:var(--ink);font-family:var(--fb);font-size:15px;line-height:1.55;
+-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:38px 22px 80px;display:flex;flex-direction:column;gap:38px}
+.eyebrow{font-family:var(--fm);font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink3)}
+h1{font-family:var(--fd);font-weight:700;font-size:clamp(32px,5vw,50px);line-height:1.02;letter-spacing:-.015em;margin:0;text-wrap:balance}
+h2{font-family:var(--fd);font-size:24px;font-weight:600;margin:0;padding-bottom:8px;border-bottom:1px solid var(--lineS)}
+h3{font-family:var(--fd);font-size:17px;font-weight:600;margin:0}
+section{display:flex;flex-direction:column;gap:14px}
+p{margin:0;max-width:76ch;color:var(--ink2)}
+code{font-family:var(--fm);font-size:.87em}
+a{color:var(--accent)}
+.hero{display:flex;flex-wrap:wrap;gap:20px 32px;align-items:center;padding:20px 22px;background:var(--surface);
+border:1px solid var(--line);border-left:3px solid var(--accent)}
+.hero .big{font-family:var(--fd);font-size:54px;font-weight:700;line-height:.95;color:var(--accent);font-variant-numeric:tabular-nums}
+.hero .cap{font-size:14px;color:var(--ink2);max-width:52ch}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.gi{background:var(--surface);padding:14px 16px;display:flex;flex-direction:column;gap:3px}
+.gi .k{font-family:var(--fm);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3)}
+.gi .v{font-family:var(--fd);font-size:23px;font-weight:600;font-variant-numeric:tabular-nums}
+.gi .t{font-size:12.5px;color:var(--ink3)}
+.verd{background:var(--warnS);border:1px solid var(--warn);padding:18px 20px}
+.verd p{color:var(--ink);max-width:84ch}
+.scroll{overflow-x:auto;border:1px solid var(--line);background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:13.5px;min-width:700px}
+th{font-family:var(--fm);font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink3);text-align:left;
+padding:10px 11px;border-bottom:1px solid var(--lineS);background:var(--sunk);white-space:nowrap}
+td{padding:9px 11px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:none}
+td.mono,.mono{font-family:var(--fm);font-size:12.5px}
+.tbl{border:1px solid var(--line);background:var(--surface);margin-bottom:14px}
+.tbl .hd{padding:12px 15px;background:var(--sunk);border-bottom:1px solid var(--line)}
+.tbl .hd .n{font-family:var(--fm);font-size:14px;font-weight:600;color:var(--accent)}
+.tbl .hd .sch{font-family:var(--fm);font-size:11px;color:var(--ink3)}
+.tbl .hd .d{font-size:13px;color:var(--ink2);margin-top:3px}
+.tbl .note{padding:10px 15px;background:var(--accentS);font-size:12.5px;color:var(--ink2);border-top:1px solid var(--line)}
+.fix{display:flex;flex-direction:column;border:1px solid var(--line);background:var(--surface)}
+.fix>div{padding:14px 17px;border-bottom:1px solid var(--line)}
+.fix>div:last-child{border-bottom:none}
+.fix .tag{display:inline-block;font-family:var(--fm);font-size:10px;font-weight:600;letter-spacing:.06em;
+text-transform:uppercase;background:var(--accentS);color:var(--accent);padding:2px 7px;margin-bottom:5px}
+.fix p{font-size:13.5px}
+ul.dom{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:0;border:1px solid var(--line);background:var(--surface)}
+ul.dom li{padding:12px 16px;border-bottom:1px solid var(--line);display:flex;gap:14px;align-items:baseline;flex-wrap:wrap}
+ul.dom li:last-child{border-bottom:none}
+ul.dom .nm{font-family:var(--fm);font-size:13px;font-weight:600;min-width:190px}
+ul.dom .ds{font-size:13.5px;color:var(--ink2);flex:1;min-width:240px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips span{font-family:var(--fm);font-size:11.5px;background:var(--sunk);border:1px solid var(--line);padding:3px 8px}
+.note{font-size:13px;color:var(--ink3);border-top:1px solid var(--line);padding-top:12px}
+</style>
+<div class="wrap">
+<header style="display:flex;flex-direction:column;gap:14px"><div class="eyebrow"><a href="index.html">Ficha ADSO-3145556</a> &middot; repositorio fae-docs &middot; 2026-09-08</div><h1>faceattend-edu</h1><p>Control de asistencia academica por reconocimiento facial en ambientes de formacion.</p></header>
+<div class="hero"><span class="big">55%</span><span class="cap">Madurez documental sobre las carpetas 00 a 06. Congruencia 02&nbsp;&rarr;&nbsp;06 del <strong>63%</strong>. Nivel de normalizacion actual: <strong>2FN</strong>.</span></div>
+<section><h2>Estado de las carpetas evaluadas</h2><div class="grid3">
+<div class="gi"><span class="k">02-domain</span><span class="t">Avanzado: 19 entidades y 6 value objects mapeados por contexto.</span></div>
+<div class="gi"><span class="k">03-product</span><span class="t">En desarrollo: 210 lineas.</span></div>
+<div class="gi"><span class="k">06-data</span><span class="t">Real y el mas completo de la ficha: 8 archivos por dominio, 27 tablas, auditoria en 119 puntos.</span></div>
+</div>
+<div class="verd"><h3 style="margin-bottom:6px">Congruencia 02 &middot; 03 &middot; 06</h3><p>Deriva en ambas direcciones. El modelo inventa `student`, `teacher` y `enrollment` que el dominio no declara, y omite `Report`, `Alert`, `SupportingDocument` y `AttendanceHistory` que si declara. `student` y `teacher` duplican identidad de `person`: eso es lo que lo deja en 2FN.</p></div>
+</section>
+<section><h2>Hallazgos que corrige la contrapropuesta</h2><div class="fix">
+<div><span class="tag">Congruencia</span><p>El modelo introduce `student`, `teacher` y `enrollment`, que el dominio no declara, y omite `Report`, `Alert`, `SupportingDocument` y `AttendanceHistory`, que si declara. Se alinean ambos lados.</p></div>
+<div><span class="tag">3FN</span><p>`student` y `teacher` duplican nombre, documento y correo de `person`. Se unifican en `academic_actor`, un rol sobre la misma persona.</p></div>
+<div><span class="tag">1FN</span><p>La plantilla biometrica no es un atributo de la persona: sale a `facial_template`, versionada, porque una persona tiene varias en el tiempo.</p></div>
+<div><span class="tag">Auditoria</span><p>Es el proyecto con mejor auditoria de la ficha (119 menciones de `created_by`/`updated_by`). Se conserva ese criterio y se agrega `row_version`.</p></div>
+</div></section>
+<section><h2>Dominios posibles segun la documentacion</h2><p>Bounded contexts que el propio proyecto sustenta. Ninguno se invento.</p><ul class="dom">
+<li><span class="nm">Identity</span><span class="ds">Persona, cuenta, sesiones y politica de contrasena.</span></li>
+<li><span class="nm">Authorization</span><span class="ds">Roles, permisos y su asignacion.</span></li>
+<li><span class="nm">Academic</span><span class="ds">Institucion, programa, curso, ficha, periodo y matricula.</span></li>
+<li><span class="nm">Scheduling</span><span class="ds">Ambiente, bloque horario y sesion de clase.</span></li>
+<li><span class="nm">Attendance</span><span class="ds">Registro de asistencia, justificacion y soporte documental.</span></li>
+<li><span class="nm">Biometric</span><span class="ds">Plantilla facial y su ciclo de actualizacion.</span></li>
+<li><span class="nm">IoT</span><span class="ds">Dispositivo de captura y su asignacion a un ambiente.</span></li>
+<li><span class="nm">Audit &amp; Configuration</span><span class="ds">Bitacora, errores y parametros del sistema.</span></li>
+</ul></section>
+<section><h2>Modelo de datos propuesto &mdash; 3FN</h2><p>Todas las tablas llevan el bloque de auditoria completo: <code>created_at</code>, <code>created_by</code>, <code>updated_at</code>, <code>updated_by</code>, <code>deleted_at</code>, <code>deleted_by</code> y <code>row_version</code>. Nomenclatura integramente en ingles.</p>
+<h3 style="margin-top:14px">Esquema <code>academic</code></h3>
+<div class="tbl"><div class="hd"><span class="n">school</span> <span class="sch">academic</span><div class="d">Institucion educativa.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">school_id</td><td class="mono">SERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">code</td><td class="mono">VARCHAR(30)</td><td class="mono">NOT NULL UNIQUE</td><td></td></tr>
+<tr><td class="mono">name</td><td class="mono">VARCHAR(150)</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">city_id</td><td class="mono">INTEGER</td><td class="mono">NOT NULL REFERENCES city(city_id)</td><td></td></tr>
+</tbody></table></div>
+</div>
+<div class="tbl"><div class="hd"><span class="n">program</span> <span class="sch">academic</span><div class="d">Programa de formacion.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">program_id</td><td class="mono">SERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">school_id</td><td class="mono">INTEGER</td><td class="mono">NOT NULL REFERENCES school(school_id)</td><td></td></tr>
+<tr><td class="mono">code</td><td class="mono">VARCHAR(30)</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">name</td><td class="mono">VARCHAR(150)</td><td class="mono">NOT NULL</td><td></td></tr>
+</tbody></table></div>
+</div>
+<div class="tbl"><div class="hd"><span class="n">academic_period</span> <span class="sch">academic</span><div class="d">Periodo lectivo.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">academic_period_id</td><td class="mono">SERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">name</td><td class="mono">VARCHAR(60)</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">starts_on</td><td class="mono">DATE</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">ends_on</td><td class="mono">DATE</td><td class="mono">NOT NULL</td><td></td></tr>
+</tbody></table></div>
+</div>
+<div class="tbl"><div class="hd"><span class="n">cohort</span> <span class="sch">academic</span><div class="d">Ficha o grupo. El dominio declara `Cohort` y el modelo actual no la tiene.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">cohort_id</td><td class="mono">BIGSERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">program_id</td><td class="mono">INTEGER</td><td class="mono">NOT NULL REFERENCES program(program_id)</td><td></td></tr>
+<tr><td class="mono">academic_period_id</td><td class="mono">INTEGER</td><td class="mono">NOT NULL REFERENCES academic_period(academic_period_id)</td><td></td></tr>
+<tr><td class="mono">code</td><td class="mono">VARCHAR(30)</td><td class="mono">NOT NULL UNIQUE</td><td></td></tr>
+</tbody></table></div>
+<div class="note" style="border:0;padding:10px 15px;background:var(--accentS)">Congruencia 02 a 06: cierra una entidad declarada y no modelada.</div>
+</div>
+<div class="tbl"><div class="hd"><span class="n">course</span> <span class="sch">academic</span><div class="d">Curso o competencia.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">course_id</td><td class="mono">SERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">program_id</td><td class="mono">INTEGER</td><td class="mono">NOT NULL REFERENCES program(program_id)</td><td></td></tr>
+<tr><td class="mono">code</td><td class="mono">VARCHAR(30)</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">name</td><td class="mono">VARCHAR(150)</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">credit_hours</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL</td><td></td></tr>
+</tbody></table></div>
+</div>
+<div class="tbl"><div class="hd"><span class="n">academic_actor</span> <span class="sch">academic</span><div class="d">Rol academico de una persona. Reemplaza `student` y `teacher`.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">academic_actor_id</td><td class="mono">BIGSERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">person_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES person(person_id)</td><td></td></tr>
+<tr><td class="mono">actor_type_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES academic_actor_type(actor_type_id)</td><td>STUDENT / INSTRUCTOR</td></tr>
+<tr><td class="mono">school_id</td><td class="mono">INTEGER</td><td class="mono">NOT NULL REFERENCES school(school_id)</td><td></td></tr>
+<tr><td class="mono">started_on</td><td class="mono">DATE</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">ended_on</td><td class="mono">DATE</td><td class="mono">NULL</td><td></td></tr>
+</tbody></table></div>
+<div class="note" style="border:0;padding:10px 15px;background:var(--accentS)">3FN: elimina la duplicacion de identidad entre `student`, `teacher` y `person`. Una misma persona puede ser instructor y aprendiz sin duplicar sus datos.</div>
+</div>
+<div class="tbl"><div class="hd"><span class="n">enrollment</span> <span class="sch">academic</span><div class="d">Matricula de un aprendiz en una ficha.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">enrollment_id</td><td class="mono">BIGSERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">academic_actor_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES academic_actor(academic_actor_id)</td><td></td></tr>
+<tr><td class="mono">cohort_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES cohort(cohort_id)</td><td></td></tr>
+<tr><td class="mono">enrolled_on</td><td class="mono">DATE</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">enrollment_status_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES enrollment_status(enrollment_status_id)</td><td></td></tr>
+</tbody></table></div>
+</div>
+<h3 style="margin-top:14px">Esquema <code>scheduling</code></h3>
+<div class="tbl"><div class="hd"><span class="n">environment</span> <span class="sch">scheduling</span><div class="d">Ambiente de formacion. El dominio lo llama `Environment`; el modelo lo llamaba `classroom`.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">environment_id</td><td class="mono">SERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">school_id</td><td class="mono">INTEGER</td><td class="mono">NOT NULL REFERENCES school(school_id)</td><td></td></tr>
+<tr><td class="mono">code</td><td class="mono">VARCHAR(30)</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">name</td><td class="mono">VARCHAR(100)</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">capacity</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL</td><td></td></tr>
+</tbody></table></div>
+<div class="note" style="border:0;padding:10px 15px;background:var(--accentS)">Congruencia de nomenclatura entre 02 y 06.</div>
+</div>
+<div class="tbl"><div class="hd"><span class="n">schedule_block</span> <span class="sch">scheduling</span><div class="d">Bloque horario planificado.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">schedule_block_id</td><td class="mono">BIGSERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">cohort_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES cohort(cohort_id)</td><td></td></tr>
+<tr><td class="mono">course_id</td><td class="mono">INTEGER</td><td class="mono">NOT NULL REFERENCES course(course_id)</td><td></td></tr>
+<tr><td class="mono">environment_id</td><td class="mono">INTEGER</td><td class="mono">NOT NULL REFERENCES environment(environment_id)</td><td></td></tr>
+<tr><td class="mono">instructor_actor_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES academic_actor(academic_actor_id)</td><td></td></tr>
+<tr><td class="mono">day_of_week</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL CHECK (day_of_week BETWEEN 1 AND 7)</td><td></td></tr>
+<tr><td class="mono">starts_at</td><td class="mono">TIME</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">ends_at</td><td class="mono">TIME</td><td class="mono">NOT NULL</td><td></td></tr>
+</tbody></table></div>
+<div class="note" style="border:0;padding:10px 15px;background:var(--accentS)">1FN: un bloque por fila; nunca un campo `days` con varios dias.</div>
+</div>
+<div class="tbl"><div class="hd"><span class="n">class_session</span> <span class="sch">scheduling</span><div class="d">Instancia real de un bloque en una fecha.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">class_session_id</td><td class="mono">BIGSERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">schedule_block_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES schedule_block(schedule_block_id)</td><td></td></tr>
+<tr><td class="mono">session_date</td><td class="mono">DATE</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">opened_at</td><td class="mono">TIMESTAMPTZ</td><td class="mono">NULL</td><td></td></tr>
+<tr><td class="mono">closed_at</td><td class="mono">TIMESTAMPTZ</td><td class="mono">NULL</td><td></td></tr>
+<tr><td class="mono">session_status_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES session_status(session_status_id)</td><td></td></tr>
+</tbody></table></div>
+</div>
+<h3 style="margin-top:14px">Esquema <code>attendance</code></h3>
+<div class="tbl"><div class="hd"><span class="n">attendance_record</span> <span class="sch">attendance</span><div class="d">Asistencia de un aprendiz a una sesion.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">attendance_record_id</td><td class="mono">BIGSERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">class_session_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES class_session(class_session_id)</td><td></td></tr>
+<tr><td class="mono">academic_actor_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES academic_actor(academic_actor_id)</td><td></td></tr>
+<tr><td class="mono">attendance_status_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES attendance_status(attendance_status_id)</td><td></td></tr>
+<tr><td class="mono">captured_at</td><td class="mono">TIMESTAMPTZ</td><td class="mono">NULL</td><td></td></tr>
+<tr><td class="mono">capture_method_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES capture_method(capture_method_id)</td><td>FACIAL / MANUAL</td></tr>
+<tr><td class="mono">iot_device_id</td><td class="mono">BIGINT</td><td class="mono">NULL REFERENCES iot_device(iot_device_id)</td><td></td></tr>
+<tr><td class="mono">match_score</td><td class="mono">NUMERIC(5,4)</td><td class="mono">NULL</td><td></td></tr>
+</tbody></table></div>
+<div class="note" style="border:0;padding:10px 15px;background:var(--accentS)">UNIQUE(class_session_id, academic_actor_id): una sola asistencia por sesion y persona. Esa restriccion es la que hace innecesaria una tabla `attendance_history` aparte.</div>
+</div>
+<div class="tbl"><div class="hd"><span class="n">justification</span> <span class="sch">attendance</span><div class="d">Justificacion de inasistencia.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">justification_id</td><td class="mono">BIGSERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">attendance_record_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES attendance_record(attendance_record_id)</td><td></td></tr>
+<tr><td class="mono">justification_type_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES justification_type(justification_type_id)</td><td></td></tr>
+<tr><td class="mono">reason</td><td class="mono">TEXT</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">submitted_at</td><td class="mono">TIMESTAMPTZ</td><td class="mono">NOT NULL DEFAULT now()</td><td></td></tr>
+<tr><td class="mono">reviewed_by</td><td class="mono">BIGINT</td><td class="mono">NULL REFERENCES app_user(user_id)</td><td></td></tr>
+<tr><td class="mono">review_status_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES review_status(review_status_id)</td><td></td></tr>
+</tbody></table></div>
+</div>
+<div class="tbl"><div class="hd"><span class="n">supporting_document</span> <span class="sch">attendance</span><div class="d">Soporte adjunto. Declarado en el dominio, ausente del modelo actual.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">supporting_document_id</td><td class="mono">BIGSERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">justification_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES justification(justification_id)</td><td></td></tr>
+<tr><td class="mono">file_name</td><td class="mono">VARCHAR(200)</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">storage_uri</td><td class="mono">VARCHAR(500)</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">mime_type</td><td class="mono">VARCHAR(80)</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">size_bytes</td><td class="mono">BIGINT</td><td class="mono">NOT NULL</td><td></td></tr>
+</tbody></table></div>
+<div class="note" style="border:0;padding:10px 15px;background:var(--accentS)">1FN: un documento por fila; una justificacion puede tener varios.</div>
+</div>
+<h3 style="margin-top:14px">Esquema <code>biometric</code></h3>
+<div class="tbl"><div class="hd"><span class="n">facial_template</span> <span class="sch">biometric</span><div class="d">Plantilla biometrica versionada.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">facial_template_id</td><td class="mono">BIGSERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">person_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES person(person_id)</td><td></td></tr>
+<tr><td class="mono">template_version</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">encoding</td><td class="mono">BYTEA</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">algorithm_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES biometric_algorithm(algorithm_id)</td><td></td></tr>
+<tr><td class="mono">enrolled_at</td><td class="mono">TIMESTAMPTZ</td><td class="mono">NOT NULL DEFAULT now()</td><td></td></tr>
+<tr><td class="mono">is_active</td><td class="mono">BOOLEAN</td><td class="mono">NOT NULL DEFAULT true</td><td></td></tr>
+</tbody></table></div>
+<div class="note" style="border:0;padding:10px 15px;background:var(--accentS)">1FN y 3FN: saca la biometria de `person`. UNIQUE(person_id, template_version) y una sola activa a la vez.</div>
+</div>
+<h3 style="margin-top:14px">Esquema <code>iot</code></h3>
+<div class="tbl"><div class="hd"><span class="n">iot_device</span> <span class="sch">iot</span><div class="d">Dispositivo de captura.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">iot_device_id</td><td class="mono">BIGSERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">serial_number</td><td class="mono">VARCHAR(60)</td><td class="mono">NOT NULL UNIQUE</td><td></td></tr>
+<tr><td class="mono">device_model_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES device_model(device_model_id)</td><td></td></tr>
+<tr><td class="mono">device_status_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES device_status(device_status_id)</td><td></td></tr>
+</tbody></table></div>
+</div>
+<div class="tbl"><div class="hd"><span class="n">device_assignment</span> <span class="sch">iot</span><div class="d">Asignacion del dispositivo a un ambiente, con vigencia.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">device_assignment_id</td><td class="mono">BIGSERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">iot_device_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES iot_device(iot_device_id)</td><td></td></tr>
+<tr><td class="mono">environment_id</td><td class="mono">INTEGER</td><td class="mono">NOT NULL REFERENCES environment(environment_id)</td><td></td></tr>
+<tr><td class="mono">assigned_from</td><td class="mono">TIMESTAMPTZ</td><td class="mono">NOT NULL</td><td></td></tr>
+<tr><td class="mono">assigned_to</td><td class="mono">TIMESTAMPTZ</td><td class="mono">NULL</td><td></td></tr>
+</tbody></table></div>
+<div class="note" style="border:0;padding:10px 15px;background:var(--accentS)">Historico: no se sobreescribe la asignacion anterior.</div>
+</div>
+<h3 style="margin-top:14px">Esquema <code>notification</code></h3>
+<div class="tbl"><div class="hd"><span class="n">alert</span> <span class="sch">notification</span><div class="d">Alerta academica. Declarada en el dominio, ausente del modelo actual.</div></div><div class="scroll"><table><thead><tr><th>Columna</th><th>Tipo</th><th>Restricciones</th><th>Notas</th></tr></thead><tbody>
+<tr><td class="mono">alert_id</td><td class="mono">BIGSERIAL</td><td class="mono">PK</td><td></td></tr>
+<tr><td class="mono">academic_actor_id</td><td class="mono">BIGINT</td><td class="mono">NOT NULL REFERENCES academic_actor(academic_actor_id)</td><td></td></tr>
+<tr><td class="mono">alert_type_id</td><td class="mono">SMALLINT</td><td class="mono">NOT NULL REFERENCES alert_type(alert_type_id)</td><td></td></tr>
+<tr><td class="mono">raised_at</td><td class="mono">TIMESTAMPTZ</td><td class="mono">NOT NULL DEFAULT now()</td><td></td></tr>
+<tr><td class="mono">resolved_at</td><td class="mono">TIMESTAMPTZ</td><td class="mono">NULL</td><td></td></tr>
+</tbody></table></div>
+</div>
+</section>
+<section><h2>Nucleo compartido y catalogos</h2><p>Las tablas de identidad y auditoria son identicas en los diez proyectos de la ficha, para que un mismo criterio de seguridad y trazabilidad aplique a todos.</p><div class="chips">
+<span>identity.app_user</span>
+<span>identity.person</span>
+<span>identity.role</span>
+<span>identity.permission</span>
+<span>identity.role_permission</span>
+<span>identity.user_role</span>
+<span>identity.user_session</span>
+<span>audit.audit_log</span>
+</div><p style="margin-top:10px">Catalogos propios de este proyecto:</p><div class="chips">
+<span>city</span>
+<span>academic_actor_type</span>
+<span>enrollment_status</span>
+<span>session_status</span>
+<span>attendance_status</span>
+<span>capture_method</span>
+<span>justification_type</span>
+<span>review_status</span>
+<span>biometric_algorithm</span>
+<span>device_model</span>
+<span>device_status</span>
+<span>alert_type</span>
+</div>
+<p class="note">El detalle completo, con tipos y restricciones listo para implementar, esta en <code>propuestas/faceattend-edu-06.md</code>.</p></section>
+</div>
