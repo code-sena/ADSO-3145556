@@ -1,5 +1,23 @@
 [
   {
+    "fecha": "2026-10-21",
+    "ruta": "2026-10-21-evaluacion-e2e-equipos",
+    "titulo": "Evaluación extremo a extremo de los 10 equipos",
+    "resumen": "Revisión estricta de código, flujos pantalla-gateway-servicio-tabla, seguridad, pruebas y proceso en 77 repositorios, con hallazgos y plan de cierre por equipo. Sin nombres de personas.",
+    "archivos": 21,
+    "autor": "Jesús Ariel González Bonilla",
+    "creado_en": "2026-10-21T17:51:18-05:00"
+  },
+  {
+    "fecha": "2026-10-13",
+    "ruta": "2026-10-13-prueba-manager-library-7-informes",
+    "titulo": "Prueba técnica Manager Library: 7 informes por aprendiz",
+    "resumen": "Commits, cambios en docs, congruencia con el spec, sitio page, completitud, extras e idioma del código. Versión anonimizada con códigos por aprendiz.",
+    "archivos": 1,
+    "autor": "Jesús Ariel González Bonilla",
+    "creado_en": "2026-10-13T17:16:45-05:00"
+  },
+  {
     "fecha": "2026-09-22",
     "ruta": "2026-09-22-consistencia-01-06-data-y-recorte-a-microservicios",
     "titulo": "Consistencia 01-06-data y recorte a microservicios",
@@ -16,14 +34,5 @@
     "archivos": 22,
     "autor": "Jesús Ariel González Bonilla",
     "creado_en": "2026-09-08T17:07:13-05:00"
-  },
-  {
-    "fecha": "2026-10-13",
-    "ruta": "2026-10-13-prueba-manager-library-7-informes",
-    "titulo": "Prueba técnica Manager Library: 7 informes por aprendiz",
-    "resumen": "Commits, cambios en docs, congruencia con el spec, sitio page, completitud, extras e idioma del código. Versión anonimizada con códigos por aprendiz.",
-    "archivos": 1,
-    "autor": "Jesús Ariel González Bonilla",
-    "creado_en": "2026-10-13T17:16:45-05:00"
   }
 ]
