@@ -1,12 +1,21 @@
 [
   {
-    "fecha": "2026-09-08",
-    "ruta": "2026-09-08-congruencia-datamodel",
-    "titulo": "Congruencia 02-03-06 y contrapropuesta de modelo de datos",
-    "resumen": "Evaluacion de dominio, producto y datos en los 10 proyectos de la ficha, con nivel de normalizacion actual y una contrapropuesta de 06.md en 3FN para cada equipo.",
-    "archivos": 22,
+    "fecha": "2026-10-21",
+    "ruta": "2026-10-21-evaluacion-e2e-equipos",
+    "titulo": "Evaluación extremo a extremo de los 10 equipos",
+    "resumen": "Revisión estricta de código, flujos pantalla-gateway-servicio-tabla, seguridad, pruebas y proceso en 77 repositorios, con hallazgos y plan de cierre por equipo. Sin nombres de personas.",
+    "archivos": 21,
     "autor": "Jesús Ariel González Bonilla",
-    "creado_en": "2026-09-08T17:07:13-05:00"
+    "creado_en": "2026-10-21T17:51:18-05:00"
+  },
+  {
+    "fecha": "2026-10-13",
+    "ruta": "2026-10-13-prueba-manager-library-7-informes",
+    "titulo": "Prueba técnica Manager Library: 7 informes por aprendiz",
+    "resumen": "Commits, cambios en docs, congruencia con el spec, sitio page, completitud, extras e idioma del código. Versión anonimizada con códigos por aprendiz.",
+    "archivos": 1,
+    "autor": "Jesús Ariel González Bonilla",
+    "creado_en": "2026-10-13T17:16:45-05:00"
   },
   {
     "fecha": "2026-09-22",
@@ -16,5 +25,14 @@
     "archivos": 36,
     "autor": "Jesús Ariel González Bonilla",
     "creado_en": "2026-09-22T15:32:39-05:00"
+  },
+  {
+    "fecha": "2026-09-08",
+    "ruta": "2026-09-08-congruencia-datamodel",
+    "titulo": "Congruencia 02-03-06 y contrapropuesta de modelo de datos",
+    "resumen": "Evaluacion de dominio, producto y datos en los 10 proyectos de la ficha, con nivel de normalizacion actual y una contrapropuesta de 06.md en 3FN para cada equipo.",
+    "archivos": 22,
+    "autor": "Jesús Ariel González Bonilla",
+    "creado_en": "2026-09-08T17:07:13-05:00"
   }
 ]
