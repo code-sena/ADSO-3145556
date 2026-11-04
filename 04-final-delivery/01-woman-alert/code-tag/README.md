@@ -13,9 +13,14 @@ Si falta alguno, agregue la fila. Si uno está vacío o ya no se usa, indíquelo
 | Component / Componente | Repository / Repositorio | Status / Estado | Access for `ariel5253` / Acceso de `ariel5253` | Commit of tag `final-delivery-2026` / Commit del tag | Main version ZIP / ZIP versión main | Full export ZIP / ZIP completo |
 |---|---|---|---|---|---|---|
 | Documentation | [code-sena/wal-docs](https://github.com/code-sena/wal-docs) | **PRIVATE: make it public / PRIVADO: hacerlo público** | Yes / Sí | | | |
-| Main repository | [JustinDanielaBahamon/AlertaMujer](https://github.com/JustinDanielaBahamon/AlertaMujer) | Public / Público | **Add / Agregar** | | | |
+| Mobile app (main repository) / App móvil (repositorio principal) | [JustinDanielaBahamon/AlertaMujer](https://github.com/JustinDanielaBahamon/AlertaMujer) | Public / Público | **Add / Agregar** | | | |
 | Backend | [JustinDanielaBahamon/Backend-ALERTA-MUJER](https://github.com/JustinDanielaBahamon/Backend-ALERTA-MUJER) | Public / Público | **Add / Agregar** | | | |
 | Web frontend | [JustinDanielaBahamon/Frond-end-Web](https://github.com/JustinDanielaBahamon/Frond-end-Web) | Public / Público | **Add / Agregar** | | | |
+| Documentation deliverables / Entregables de documentación | [JustinDanielaBahamon/ALERTAMUJER-DOCUMENTACION](https://github.com/JustinDanielaBahamon/ALERTAMUJER-DOCUMENTACION) | Public / Público | **Add / Agregar** | | | |
+| Code copy (October 2026) / Copia del código (octubre 2026) | [JustinDanielaBahamon/DESARROLLO-BACKEND-MOVIL-Y-WEB-](https://github.com/JustinDanielaBahamon/DESARROLLO-BACKEND-MOVIL-Y-WEB-) | Public / Público | **Add / Agregar** | No longer used: copy of the mobile code with a link to the backend (October 2026); content on `develop` / Ya no se usa: copia del código móvil con un enlace al backend (octubre 2026); contenido en `develop` | | |
+| Personal test copy / Copia de prueba personal | [JoseSebastianSuarezCumaco/Prueba-mia-del-backend-y-font-end-alerta-mujer](https://github.com/JoseSebastianSuarezCumaco/Prueba-mia-del-backend-y-font-end-alerta-mujer) | Public / Público | **Add / Agregar** | No longer used: personal test copy / Ya no se usa: copia de prueba | | |
+| Early web frontend / Frontend web inicial | [menticio/Front-end-Web](https://github.com/menticio/Front-end-Web) | Public / Público | **Add / Agregar** | No longer used: first web repository (May 2026), replaced by Frond-end-Web; its code is on `develop` / Ya no se usa: primer repositorio web (mayo 2026), reemplazado por Frond-end-Web; su código está en `develop` | | |
+| Documentation draft / Borrador de documentación | [JustinDanielaBahamon/Documentaci-n-](https://github.com/JustinDanielaBahamon/Documentaci-n-) | Public / Público | **Add / Agregar** | No longer used: earlier documentation draft (October 2026), replaced by ALERTAMUJER-DOCUMENTACION; its files are on `develop` / Ya no se usa: borrador anterior de la documentación (octubre 2026), reemplazado por ALERTAMUJER-DOCUMENTACION; sus archivos están en `develop` | | |
 
 Before making a repository public, remove `.env` files and change any password, token or key that was ever committed.
 

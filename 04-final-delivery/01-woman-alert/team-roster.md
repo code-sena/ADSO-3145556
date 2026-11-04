@@ -27,6 +27,6 @@ Los aprendices completan su rol, por ejemplo backend, frontend, base de datos, Q
 
 | Full name / Nombre completo | Doc. type / Tipo | Doc. number / Número | Ficha | GitHub user / Usuario | Role in the project / Rol en el proyecto | Author / Autor |
 |---|---|---|---|---|---|---|
-| MICHAEL STIVEN SANCHEZ CASTAÑEDA | CC | 1023375158 | 3145556 | menticio | | Yes / Sí |
-| JUSTIN DANIELA BAHAMON BALOCO | CC | 1015407712 | 3145556 | JustinDanielaBahamon | | Yes / Sí |
-| JOSE SEBASTIAN SUAREZ CUMACO | CC | 1077721136 | 3145556 | JoseSebastianSuarezCumaco | | Yes / Sí |
+| MICHAEL STIVEN SANCHEZ CASTAÑEDA | CC | 1023375158 | 3145556 | menticio | Team lead and integrator: backend (hexagonal microservices), database, DevOps, mobile (native Kotlin module) and web / Líder e integrador: backend (microservicios hexagonales), base de datos, DevOps, móvil (módulo nativo Kotlin) y web | Yes / Sí |
+| JUSTIN DANIELA BAHAMON BALOCO | CC | 1015407712 | 3145556 | JustinDanielaBahamon | Mobile and web frontend, UI/UX and initial database design; repository owner / Frontend móvil y web, UI/UX y diseño inicial de la base de datos; dueña de los repositorios | Yes / Sí |
+| JOSE SEBASTIAN SUAREZ CUMACO | CC | 1077721136 | 3145556 | JoseSebastianSuarezCumaco | Web and mobile frontend (authentication, zones, active alert, map), mobile internationalization and documentation / Frontend web y móvil (autenticación, zonas, alerta activa, mapa), internacionalización móvil y documentación | Yes / Sí |
