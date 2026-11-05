@@ -1,6 +1,6 @@
 # Design patterns and where they are used / Patrones de diseño y dónde se usan
 
-Paths are relative to each repository at tag `final-delivery-2026`: Backend-ALERTA-MUJER `107e63eb` (folder `microservicios/`), AlertaMujer `1f7cf16f` (folder `Frontend-movil/`) and Frond-end-Web `377d7867` (folder `alerta-mujer-web/`). The class diagram `design-patterns-class-diagram.png` shows the conceptual model of these patterns.
+Paths are relative to each repository at tag `final-delivery-2026`: Backend-ALERTA-MUJER `b7cdb06e` (folder `microservicios/`), AlertaMujer `1f7cf16f` (folder `Frontend-movil/`) and Frond-end-Web `377d7867` (folder `alerta-mujer-web/`). The class diagram `design-patterns-class-diagram.png` shows the conceptual model of these patterns.
 
 Las rutas son relativas a cada repositorio en el tag `final-delivery-2026`. El diagrama de clases `design-patterns-class-diagram.png` muestra el modelo conceptual de estos patrones.
 

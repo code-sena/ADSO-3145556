@@ -6,7 +6,7 @@
 
 - [x] Test plan / Plan de pruebas
 - [x] Test cases / Casos de prueba
-- [x] Test results with evidence / Resultados de las pruebas con evidencia — `test-results.pdf` (396 automated tests at tag final-delivery-2026, 0 failures, run 2026-11-05) and the screenshots in `../06-implementation-procedure/deployment-evidence.pdf` (section 7) and `clean-install-test.pdf`
+- [x] Test results with evidence / Resultados de las pruebas con evidencia — `test-results.pdf` (396 automated tests, 0 failures, run 2026-11-05 on backend 107e63e and web 377d786; the backend tag later moved to b7cdb06, which only changes JwtKeyProvider to keep hashes of the burned JWT secrets: 548 backend tests, 0 failures, and CI green on PR #11) and the screenshots in `../06-implementation-procedure/deployment-evidence.pdf` (section 7) and `clean-install-test.pdf`
 
 ## Format / Formato
 
