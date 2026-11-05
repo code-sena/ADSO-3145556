@@ -1,0 +1,33 @@
+databaseChangeLog:
+  - changeSet:
+      id: 006-create-indexes
+      author: eduaircontrol
+      comment: Índices recomendados por 06-data/domain/ms-sensor-management.md y database/negocio.
+      changes:
+        - createIndex:
+            schemaName: sensors
+            tableName: sensor_installation
+            indexName: idx_sensor_installation_sensor_installed
+            columns:
+              - column:
+                  name: sensor_id
+              - column:
+                  name: installed_at
+        - createIndex:
+            schemaName: sensors
+            tableName: sensor_installation
+            indexName: idx_sensor_installation_environment_installed
+            columns:
+              - column:
+                  name: educational_environment_id
+              - column:
+                  name: installed_at
+      rollback:
+        - dropIndex:
+            schemaName: sensors
+            tableName: sensor_installation
+            indexName: idx_sensor_installation_sensor_installed
+        - dropIndex:
+            schemaName: sensors
+            tableName: sensor_installation
+            indexName: idx_sensor_installation_environment_installed

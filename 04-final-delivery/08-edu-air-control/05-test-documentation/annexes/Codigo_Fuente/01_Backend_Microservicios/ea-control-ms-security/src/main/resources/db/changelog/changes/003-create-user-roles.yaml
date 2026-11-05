@@ -1,0 +1,38 @@
+databaseChangeLog:
+  - changeSet:
+      id: 003-create-user-roles
+      author: eduaircontrol
+      comment: Tabla user_roles (N:M users <-> roles, PK compuesto) — data-model.md.
+      changes:
+        - createTable:
+            schemaName: seguridad
+            tableName: user_roles
+            columns:
+              - column:
+                  name: user_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: role_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: assigned_at
+                  type: TIMESTAMPTZ
+                  defaultValueComputed: now()
+                  constraints:
+                    nullable: false
+              - column:
+                  name: assigned_by
+                  type: UUID
+        - addPrimaryKey:
+            schemaName: seguridad
+            tableName: user_roles
+            columnNames: user_id, role_id
+            constraintName: pk_user_roles
+      rollback:
+        - dropTable:
+            schemaName: seguridad
+            tableName: user_roles

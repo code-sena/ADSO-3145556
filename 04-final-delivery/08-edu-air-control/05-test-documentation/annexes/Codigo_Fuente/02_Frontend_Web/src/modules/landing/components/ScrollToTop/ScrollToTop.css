@@ -1,0 +1,161 @@
+/* ============================================================
+   SCROLL TO TOP — Exclusivo del Landing
+   Se posiciona en la esquina inferior derecha, debajo del
+   widget de accesibilidad (que en el landing está elevado).
+   ============================================================ */
+
+.scroll-to-top {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    border: 2px solid rgba(40, 244, 214, 0.45);
+    background: rgba(8, 17, 29, 0.92);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    color: var(--accent);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9997;
+    box-shadow:
+        0 6px 24px rgba(0, 0, 0, 0.35),
+        0 0 0 0 rgba(40, 244, 214, 0);
+
+    transition:
+        transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+        box-shadow 0.3s ease,
+        border-color 0.3s ease,
+        background 0.3s ease,
+        opacity 0.3s ease;
+    opacity: 1;
+    animation: scroll-to-top-enter 0.3s ease-out both;
+
+        transition:
+        opacity .3s ease,
+        transform .3s ease,
+        visibility .3s ease,
+        box-shadow .3s ease,
+        border-color .3s ease;
+    opacity: 0;
+    visibility:hidden;
+    pointer-events:none;
+
+    transform:translateY(20px);
+    animation:
+        scroll-to-top-enter .3s ease-out,
+        floatingButton 3s ease-in-out infinite;
+}
+
+@keyframes scroll-to-top-enter {
+    from { opacity: 0; transform: translateY(20px) scale(0.9); }
+    to   { opacity: 1; transform: translateY(0)    scale(1); }
+}
+
+
+.scroll-to-top:hover {
+    transform: scale(1.1);
+}
+
+@keyframes floatingButton{
+    0%{
+        transform:translateY(0);
+    }
+    50%{
+        transform:translateY(-4px);
+    }
+    100%{
+        transform:translateY(0);
+    }
+}
+
+.scroll-to-top.show{
+    opacity:1;
+    visibility:visible;
+    pointer-events:auto;
+    transform:translateY(0);
+}
+
+
+.scroll-to-top:hover {
+    transform:translateY(-3px) scale(1.08);
+    border-color: rgba(40, 244, 214, 0.8);
+    box-shadow:
+        0 8px 28px rgba(0, 0, 0, 0.4),
+        0 0 0 6px rgba(40, 244, 214, 0.12);
+}
+
+.scroll-to-top:active {
+    transform: scale(0.98);
+}
+
+.scroll-to-top-icon {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    transition:
+        transform .25s ease,
+        opacity .25s ease;
+}
+
+.scroll-to-top:hover .scroll-to-top-icon{
+    transform:translateY(-2px);
+}
+
+/* ── Modo claro ── */
+body:not(.dark-mode) .scroll-to-top {
+    background: rgba(255, 255, 255, 0.95);
+    border-color: rgb(var(--accent-rgb) /  0.5);
+    color: var(--accent);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15);
+}
+
+body:not(.dark-mode) .scroll-to-top:hover {
+    box-shadow:
+        0 8px 28px rgba(0, 0, 0, 0.15),
+        0 0 0 6px rgb(var(--accent-rgb) /  0.1);
+}
+
+/* ── Temas de daltonismo ── */
+body.theme-protanopia .scroll-to-top {
+    border-color: rgba(0, 122, 167, 0.5);
+    color: #007aa7;
+}
+
+body.theme-protanopia.dark-mode .scroll-to-top {
+    color: #0085b5;
+    border-color: rgba(0, 133, 181, 0.5);
+}
+
+body.theme-deuteranopia:not(.dark-mode) .scroll-to-top {
+    border-color: rgba(79, 126, 0, 0.5);
+    color: #4f7e00;
+}
+
+body.theme-deuteranopia.dark-mode .scroll-to-top {
+    border-color: rgba(230, 159, 0, 0.5);
+    color: #e69f00;
+}
+
+body.theme-tritanopia:not(.dark-mode) .scroll-to-top {
+    border-color: rgba(91, 75, 138, 0.5);
+    color: #5b4b8a;
+}
+
+body.theme-tritanopia.dark-mode .scroll-to-top {
+    border-color: rgba(213, 94, 0, 0.5);
+    color: #d55e00;
+}
+
+/* ── Responsive ── */
+@media (max-width: 480px) {
+    .scroll-to-top {
+        width: 48px;
+        height: 48px;
+        bottom: 20px;
+        right: 16px;
+    }
+}

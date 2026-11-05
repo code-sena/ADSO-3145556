@@ -1,0 +1,463 @@
+openapi: 3.0.3
+info:
+  title: Auth Service API
+  version: 1.0.0
+  description: |
+    Authentication service: registration, login, token refresh, and session management.
+
+    ## Authentication flow
+    1. `POST /auth/register` — create an account
+    2. `POST /auth/login` — obtain access_token + refresh_token
+    3. Send `access_token` in the `Authorization: Bearer` header for all other endpoints
+    4. When the access_token expires (1h): `POST /auth/refresh` with the refresh_token
+    5. To log out: `POST /auth/logout`
+
+    ## Tokens
+    - **access_token**: JWT RS256, expires in 1 hour. Includes userId, email, roles, permissions.
+    - **refresh_token**: Opaque token (UUID), expires in 7 days. Valid only once (rotation).
+
+servers:
+  - url: http://localhost:8081/api/v1/auth
+    description: Local development
+  - url: https://api.dev.{domain}/api/v1/auth
+    description: Development
+    variables:
+      domain:
+        default: example.com
+  - url: https://api.{domain}/api/v1/auth
+    description: Production
+    variables:
+      domain:
+        default: example.com
+
+security: []  # Most of these endpoints are public
+
+tags:
+  - name: Auth
+    description: Registration, login, and session management
+  - name: Keys
+    description: Public keys for token verification
+  - name: Health
+    description: Service status
+
+paths:
+  /health:
+    get:
+      summary: Health check
+      tags: [Health]
+      security: []
+      responses:
+        '200':
+          description: Service is healthy
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    enum: [ok]
+                  db:
+                    type: string
+                    enum: [connected, disconnected]
+                  redis:
+                    type: string
+                    enum: [connected, disconnected]
+              example:
+                status: ok
+                db: connected
+                redis: connected
+
+  /register:
+    post:
+      summary: Register a new user
+      operationId: register
+      tags: [Auth]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterRequest'
+            example:
+              email: user@example.com
+              password: "SecurePass123!"
+              username: "maria.garcia"
+      responses:
+        '201':
+          description: User registered successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '409':
+          description: Email is already registered
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error: EMAIL_ALREADY_EXISTS
+                message: Email is already registered
+
+  /login:
+    post:
+      summary: Authenticate a user
+      operationId: login
+      tags: [Auth]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+            example:
+              email: user@example.com
+              password: "SecurePass123!"
+      responses:
+        '200':
+          description: Successful login
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+        '401':
+          description: Invalid credentials
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error: INVALID_CREDENTIALS
+                message: Incorrect email or password
+        '423':
+          description: Account temporarily locked due to failed attempts
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /refresh:
+    post:
+      summary: Refresh the access token
+      operationId: refreshToken
+      tags: [Auth]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [refreshToken]
+              properties:
+                refreshToken:
+                  type: string
+                  description: Refresh token obtained at login or from the last refresh
+      responses:
+        '200':
+          description: Tokens refreshed (the previous refresh token is no longer valid)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+        '401':
+          description: Refresh token invalid, expired, or already used
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /logout:
+    post:
+      summary: Log out
+      operationId: logout
+      tags: [Auth]
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                refreshToken:
+                  type: string
+                  description: If provided, also revokes the refresh token
+                allDevices:
+                  type: boolean
+                  description: If true, revokes all of the user's refresh tokens
+                  default: false
+      responses:
+        '204':
+          description: Session closed successfully
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /jwks:
+    get:
+      summary: Public keys for token verification (JWKS)
+      description: Standard JWKS endpoint so services can verify tokens without calling the auth service.
+      operationId: getJwks
+      tags: [Keys]
+      security: []
+      responses:
+        '200':
+          description: JSON Web Key Set
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  keys:
+                    type: array
+                    items:
+                      type: object
+                      description: JWK (RFC 7517)
+
+  /forgot-password:
+    post:
+      summary: Request a password reset code
+      operationId: forgotPassword
+      tags: [Password]
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email]
+              properties:
+                email:
+                  type: string
+                  format: email
+      responses:
+        '202':
+          description: Reset code sent (or silently accepted)
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /resend-code:
+    post:
+      summary: Resend the password reset code
+      operationId: resendCode
+      tags: [Password]
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email]
+              properties:
+                email:
+                  type: string
+                  format: email
+      responses:
+        '202':
+          description: Code resent
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /verify-code:
+    post:
+      summary: Verify the password reset code
+      operationId: verifyCode
+      tags: [Password]
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email, code]
+              properties:
+                email:
+                  type: string
+                  format: email
+                code:
+                  type: string
+      responses:
+        '200':
+          description: Code verified
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /reset-password:
+    post:
+      summary: Reset the password with a verified code
+      operationId: resetPassword
+      tags: [Password]
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email, code, newPassword]
+              properties:
+                email:
+                  type: string
+                  format: email
+                code:
+                  type: string
+                newPassword:
+                  type: string
+      responses:
+        '200':
+          description: Password reset successfully
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /change-password:
+    post:
+      summary: Change the authenticated user's password
+      operationId: changePassword
+      tags: [Password]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [currentPassword, newPassword]
+              properties:
+                currentPassword:
+                  type: string
+                newPassword:
+                  type: string
+      responses:
+        '200':
+          description: Password changed
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /account:
+    delete:
+      summary: Delete the authenticated user's account
+      operationId: deleteAccount
+      tags: [Account]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [password]
+              properties:
+                password:
+                  type: string
+      responses:
+        '204':
+          description: Account deleted
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+components:
+  schemas:
+    RegisterRequest:
+      type: object
+      required: [email, password, username, companyCode]
+      properties:
+        email:
+          type: string
+          format: email
+          maxLength: 255
+        password:
+          type: string
+          minLength: 8
+          maxLength: 100
+          description: Minimum 8 characters, one uppercase letter, one number
+        username:
+          type: string
+          minLength: 1
+          maxLength: 100
+        companyCode:
+          type: string
+          maxLength: 20
+          description: Institution code the user belongs to (ADR-016), e.g. SEN-444
+        campusId:
+          type: string
+          format: uuid
+          description: Campus (sede) the user belongs to; optional for institution-wide admins
+
+    LoginRequest:
+      type: object
+      required: [email, password]
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+
+    AuthResponse:
+      type: object
+      required: [accessToken, refreshToken, expiresIn, user]
+      properties:
+        accessToken:
+          type: string
+          description: JWT RS256. Include it in the Authorization Bearer header for authenticated requests.
+        refreshToken:
+          type: string
+          description: Opaque token. Use it in POST /refresh when the access token expires.
+        expiresIn:
+          type: integer
+          description: Seconds until the access token expires
+          example: 3600
+        user:
+          $ref: '#/components/schemas/UserSummary'
+
+    UserSummary:
+      type: object
+      required: [id, email, roles]
+      properties:
+        id:
+          $ref: './_shared.yaml#/components/schemas/UUID'
+        email:
+          type: string
+          format: email
+        username:
+          type: string
+        roles:
+          type: array
+          items:
+            type: string
+            enum: [ADMIN, USER, VIEWER]
+        permissions:
+          type: array
+          items:
+            type: string
+            description: Format "[resource]:[action]"
+          example: ["appointment:read", "appointment:write"]
+
+    ErrorResponse:
+      $ref: './_shared.yaml#/components/schemas/ErrorResponse'
+
+  responses:
+    BadRequest:
+      description: Validation error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Invalid or expired token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+
+  securitySchemes:
+    bearerAuth:
+      $ref: './_shared.yaml#/components/securitySchemes/bearerAuth'

@@ -1,0 +1,18 @@
+databaseChangeLog:
+  - changeSet:
+      id: 004-add-profile-avatar-url
+      author: eduaircontrol
+      comment: "URL del avatar del perfil (string, sin file upload)."
+      changes:
+        - addColumn:
+            schemaName: user_management
+            tableName: user_profiles
+            columns:
+              - column:
+                  name: avatar_url
+                  type: VARCHAR(500)
+      rollback:
+        - dropColumn:
+            schemaName: user_management
+            tableName: user_profiles
+            columnName: avatar_url

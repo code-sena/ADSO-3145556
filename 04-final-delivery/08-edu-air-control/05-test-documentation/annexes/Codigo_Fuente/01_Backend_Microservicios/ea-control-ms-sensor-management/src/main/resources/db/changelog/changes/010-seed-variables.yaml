@@ -1,0 +1,26 @@
+databaseChangeLog:
+  - changeSet:
+      id: 010-seed-variables
+      author: eduaircontrol
+      comment: >-
+        Variables ambientales con los MISMOS UUID que environment_monitoring.variable.
+        El firmware envia variableId al ingest de ms-environment-monitoring, asi que
+        los dos catalogos tienen que describir las mismas magnitudes o el dato se
+        pierde en el camino. Los codigos van en minuscula para coincidir con los del
+        servicio de monitoreo.
+      changes:
+        - sql:
+            dbms: postgresql
+            sql: |
+              INSERT INTO sensors.variable
+                  (variable_id, code, name, measurement_unit_id, description) VALUES
+                ('00000000-0000-4000-8000-000000000071','temperature','Temperatura','00000000-0000-4000-8000-000000000001','Temperatura ambiente'),
+                ('00000000-0000-4000-8000-000000000072','humidity','Humedad relativa','00000000-0000-4000-8000-000000000002','Humedad relativa del aire'),
+                ('00000000-0000-4000-8000-000000000073','co2','Dioxido de carbono','00000000-0000-4000-8000-000000000003','Aproximacion por MQ-135'),
+                ('00000000-0000-4000-8000-000000000074','noise','Ruido','00000000-0000-4000-8000-000000000004','Nivel de ruido ambiente');
+      rollback:
+        - sql:
+            dbms: postgresql
+            sql: |
+              DELETE FROM sensors.variable
+                WHERE variable_id LIKE '00000000-0000-4000-8000-%';

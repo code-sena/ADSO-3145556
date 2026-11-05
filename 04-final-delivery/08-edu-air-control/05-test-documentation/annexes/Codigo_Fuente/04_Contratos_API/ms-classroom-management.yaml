@@ -1,0 +1,793 @@
+openapi: 3.0.3
+info:
+  title: Classroom Management API
+  version: 1.0.0
+  description: |
+    API of the `ms-classroom-management` service: educational environment management
+    (campuses, environment types, and educational environments).
+
+    ## Ownership
+    This service is the authoritative owner of the `classrooms` schema
+    (`campuses`, `environment_types`, `educational_environment`).
+
+    ## Authentication
+    All endpoints except `/health` require a valid JWT in the header:
+    ```
+    Authorization: Bearer <token>
+    ```
+    Reads require any valid token; writes (`POST`, `PATCH`, `DELETE`) require the `ADMIN` role.
+
+    ## Error handling
+    All errors follow the `ErrorResponse` schema defined in `_shared.yaml`.
+
+    ## Pagination
+    List endpoints support pagination via `?page=1&limit=20`.
+
+    ## Soft delete
+    `DELETE` performs a soft delete (`deleted_at`); deleted records disappear from
+    list/get responses but keep their history.
+
+servers:
+  - url: http://localhost:3002
+    description: Local development
+  - url: https://api.dev.{domain}
+    description: Development environment
+    variables:
+      domain:
+        default: example.com
+  - url: https://api.{domain}
+    description: Production
+    variables:
+      domain:
+        default: example.com
+
+security:
+  - bearerAuth: []
+
+tags:
+  - name: Campuses
+    description: Campus management
+  - name: Environment Types
+    description: Environment classification
+  - name: Educational Environments
+    description: Educational environment (space) management
+  - name: Health
+    description: Service health check
+
+paths:
+  /health:
+    get:
+      summary: Health check
+      description: Checks that the service is running and its database is reachable.
+      tags:
+        - Health
+      security: []
+      responses:
+        '200':
+          description: Service is healthy
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResponse'
+              example:
+                status: ok
+                timestamp: '2026-09-29T10:30:00Z'
+                dependencies:
+                  database: ok
+        '503':
+          description: Service unavailable (starting up or a dependency is down)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResponse'
+
+  /api/v1/campuses:
+    get:
+      summary: List campuses
+      description: Returns a paginated list of campuses (soft-deleted records are excluded).
+      operationId: listCampuses
+      tags:
+        - Campuses
+      parameters:
+        - $ref: './_shared.yaml#/components/parameters/PageParam'
+        - $ref: './_shared.yaml#/components/parameters/LimitParam'
+        - name: q
+          in: query
+          description: Free-text filter on name, code, or city
+          schema:
+            type: string
+        - name: status
+          in: query
+          description: Filter by lifecycle status
+          schema:
+            type: string
+            enum: [ACTIVE, INACTIVE]
+      responses:
+        '200':
+          description: List of campuses
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [data, meta]
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/CampusResponse'
+                  meta:
+                    $ref: './_shared.yaml#/components/schemas/PaginatedMeta'
+        '401':
+          $ref: './_shared.yaml#/components/responses/Unauthorized'
+        '500':
+          $ref: './_shared.yaml#/components/responses/InternalError'
+
+    post:
+      summary: Create campus
+      description: Creates a new campus. `code` is normalized to uppercase and must be unique.
+      operationId: createCampus
+      tags:
+        - Campuses
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CampusCreateRequest'
+            example:
+              code: CAMP-NORTE
+              name: Campus Norte
+              city: Bogotá
+      responses:
+        '201':
+          description: Campus created successfully
+          headers:
+            Location:
+              description: URL of the created resource
+              schema:
+                type: string
+                example: /api/v1/campuses/550e8400-e29b-41d4-a716-446655440000
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CampusResponse'
+        '400':
+          $ref: './_shared.yaml#/components/responses/BadRequest'
+        '401':
+          $ref: './_shared.yaml#/components/responses/Unauthorized'
+        '403':
+          $ref: './_shared.yaml#/components/responses/Forbidden'
+        '409':
+          $ref: './_shared.yaml#/components/responses/Conflict'
+        '500':
+          $ref: './_shared.yaml#/components/responses/InternalError'
+
+  /api/v1/campuses/{id}:
+    parameters:
+      - $ref: './_shared.yaml#/components/parameters/IdParam'
+
+    get:
+      summary: Get campus by ID
+      operationId: getCampusById
+      tags:
+        - Campuses
+      responses:
+        '200':
+          description: Campus found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CampusResponse'
+        '401':
+          $ref: './_shared.yaml#/components/responses/Unauthorized'
+        '404':
+          $ref: './_shared.yaml#/components/responses/NotFound'
+        '500':
+          $ref: './_shared.yaml#/components/responses/InternalError'
+
+    patch:
+      summary: Update campus
+      description: Partial update (only the submitted fields are modified).
+      operationId: updateCampus
+      tags:
+        - Campuses
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CampusUpdateRequest'
+      responses:
+        '200':
+          description: Campus updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CampusResponse'
+        '400':
+          $ref: './_shared.yaml#/components/responses/BadRequest'
+        '401':
+          $ref: './_shared.yaml#/components/responses/Unauthorized'
+        '403':
+          $ref: './_shared.yaml#/components/responses/Forbidden'
+        '404':
+          $ref: './_shared.yaml#/components/responses/NotFound'
+        '409':
+          $ref: './_shared.yaml#/components/responses/Conflict'
+
+    delete:
+      summary: Delete campus
+      description: Soft delete — the campus is not physically removed.
+      operationId: deleteCampus
+      tags:
+        - Campuses
+      responses:
+        '204':
+          description: Deleted successfully (no response body)
+        '401':
+          $ref: './_shared.yaml#/components/responses/Unauthorized'
+        '403':
+          $ref: './_shared.yaml#/components/responses/Forbidden'
+        '404':
+          $ref: './_shared.yaml#/components/responses/NotFound'
+
+  /api/v1/environment-types:
+    get:
+      summary: List environment types
+      description: Returns a paginated list of environment types (soft-deleted records are excluded).
+      operationId: listEnvironmentTypes
+      tags:
+        - Environment Types
+      parameters:
+        - $ref: './_shared.yaml#/components/parameters/PageParam'
+        - $ref: './_shared.yaml#/components/parameters/LimitParam'
+        - name: q
+          in: query
+          description: Free-text filter on name or code
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of environment types
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [data, meta]
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/EnvironmentTypeResponse'
+                  meta:
+                    $ref: './_shared.yaml#/components/schemas/PaginatedMeta'
+        '401':
+          $ref: './_shared.yaml#/components/responses/Unauthorized'
+        '500':
+          $ref: './_shared.yaml#/components/responses/InternalError'
+
+    post:
+      summary: Create environment type
+      description: Creates a new environment type. `code` and `name` must be unique.
+      operationId: createEnvironmentType
+      tags:
+        - Environment Types
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EnvironmentTypeCreateRequest'
+            example:
+              code: CLASSROOM
+              name: Aula
+              description: Espacio regular de clases
+      responses:
+        '201':
+          description: Environment type created successfully
+          headers:
+            Location:
+              description: URL of the created resource
+              schema:
+                type: string
+                example: /api/v1/environment-types/550e8400-e29b-41d4-a716-446655440000
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnvironmentTypeResponse'
+        '400':
+          $ref: './_shared.yaml#/components/responses/BadRequest'
+        '401':
+          $ref: './_shared.yaml#/components/responses/Unauthorized'
+        '403':
+          $ref: './_shared.yaml#/components/responses/Forbidden'
+        '409':
+          $ref: './_shared.yaml#/components/responses/Conflict'
+        '500':
+          $ref: './_shared.yaml#/components/responses/InternalError'
+
+  /api/v1/environment-types/{id}:
+    parameters:
+      - $ref: './_shared.yaml#/components/parameters/IdParam'
+
+    get:
+      summary: Get environment type by ID
+      operationId: getEnvironmentTypeById
+      tags:
+        - Environment Types
+      responses:
+        '200':
+          description: Environment type found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnvironmentTypeResponse'
+        '401':
+          $ref: './_shared.yaml#/components/responses/Unauthorized'
+        '404':
+          $ref: './_shared.yaml#/components/responses/NotFound'
+        '500':
+          $ref: './_shared.yaml#/components/responses/InternalError'
+
+    patch:
+      summary: Update environment type
+      description: Partial update (only the submitted fields are modified).
+      operationId: updateEnvironmentType
+      tags:
+        - Environment Types
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EnvironmentTypeUpdateRequest'
+      responses:
+        '200':
+          description: Environment type updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnvironmentTypeResponse'
+        '400':
+          $ref: './_shared.yaml#/components/responses/BadRequest'
+        '401':
+          $ref: './_shared.yaml#/components/responses/Unauthorized'
+        '403':
+          $ref: './_shared.yaml#/components/responses/Forbidden'
+        '404':
+          $ref: './_shared.yaml#/components/responses/NotFound'
+        '409':
+          $ref: './_shared.yaml#/components/responses/Conflict'
+
+    delete:
+      summary: Delete environment type
+      description: Soft delete — the environment type is not physically removed.
+      operationId: deleteEnvironmentType
+      tags:
+        - Environment Types
+      responses:
+        '204':
+          description: Deleted successfully (no response body)
+        '401':
+          $ref: './_shared.yaml#/components/responses/Unauthorized'
+        '403':
+          $ref: './_shared.yaml#/components/responses/Forbidden'
+        '404':
+          $ref: './_shared.yaml#/components/responses/NotFound'
+
+  /api/v1/educational-environments:
+    get:
+      summary: List educational environments
+      description: Returns a paginated list of educational environments (soft-deleted records are excluded).
+      operationId: listEducationalEnvironments
+      tags:
+        - Educational Environments
+      parameters:
+        - $ref: './_shared.yaml#/components/parameters/PageParam'
+        - $ref: './_shared.yaml#/components/parameters/LimitParam'
+        - name: q
+          in: query
+          description: Free-text filter on name or code
+          schema:
+            type: string
+        - name: status
+          in: query
+          description: Filter by lifecycle status
+          schema:
+            type: string
+            enum: [ACTIVE, INACTIVE]
+        - name: campusId
+          in: query
+          description: Filter by campus
+          schema:
+            $ref: './_shared.yaml#/components/schemas/UUID'
+        - name: environmentTypeId
+          in: query
+          description: Filter by environment type
+          schema:
+            $ref: './_shared.yaml#/components/schemas/UUID'
+      responses:
+        '200':
+          description: List of educational environments
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [data, meta]
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/EducationalEnvironmentResponse'
+                  meta:
+                    $ref: './_shared.yaml#/components/schemas/PaginatedMeta'
+        '401':
+          $ref: './_shared.yaml#/components/responses/Unauthorized'
+        '500':
+          $ref: './_shared.yaml#/components/responses/InternalError'
+
+    post:
+      summary: Create educational environment
+      description: |
+        Creates a new educational environment. `campusId` and `environmentTypeId` must reference
+        existing active records; `code` is unique per campus. `code` is normalized to uppercase.
+      operationId: createEducationalEnvironment
+      tags:
+        - Educational Environments
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EducationalEnvironmentCreateRequest'
+            example:
+              campusId: 550e8400-e29b-41d4-a716-446655440000
+              code: A-101
+              name: Aula 101
+              environmentTypeId: 660e8400-e29b-41d4-a716-446655440000
+              floor: 1
+              areaM2: 65.50
+              occupancyCapacity: 40
+      responses:
+        '201':
+          description: Educational environment created successfully
+          headers:
+            Location:
+              description: URL of the created resource
+              schema:
+                type: string
+                example: /api/v1/educational-environments/550e8400-e29b-41d4-a716-446655440000
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EducationalEnvironmentResponse'
+        '400':
+          $ref: './_shared.yaml#/components/responses/BadRequest'
+        '401':
+          $ref: './_shared.yaml#/components/responses/Unauthorized'
+        '403':
+          $ref: './_shared.yaml#/components/responses/Forbidden'
+        '409':
+          $ref: './_shared.yaml#/components/responses/Conflict'
+        '500':
+          $ref: './_shared.yaml#/components/responses/InternalError'
+
+  /api/v1/educational-environments/{id}:
+    parameters:
+      - $ref: './_shared.yaml#/components/parameters/IdParam'
+
+    get:
+      summary: Get educational environment by ID
+      operationId: getEducationalEnvironmentById
+      tags:
+        - Educational Environments
+      responses:
+        '200':
+          description: Educational environment found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EducationalEnvironmentResponse'
+        '401':
+          $ref: './_shared.yaml#/components/responses/Unauthorized'
+        '404':
+          $ref: './_shared.yaml#/components/responses/NotFound'
+        '500':
+          $ref: './_shared.yaml#/components/responses/InternalError'
+
+    patch:
+      summary: Update educational environment
+      description: Partial update (only the submitted fields are modified).
+      operationId: updateEducationalEnvironment
+      tags:
+        - Educational Environments
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EducationalEnvironmentUpdateRequest'
+      responses:
+        '200':
+          description: Educational environment updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EducationalEnvironmentResponse'
+        '400':
+          $ref: './_shared.yaml#/components/responses/BadRequest'
+        '401':
+          $ref: './_shared.yaml#/components/responses/Unauthorized'
+        '403':
+          $ref: './_shared.yaml#/components/responses/Forbidden'
+        '404':
+          $ref: './_shared.yaml#/components/responses/NotFound'
+        '409':
+          $ref: './_shared.yaml#/components/responses/Conflict'
+
+    delete:
+      summary: Delete educational environment
+      description: Soft delete — the educational environment is not physically removed.
+      operationId: deleteEducationalEnvironment
+      tags:
+        - Educational Environments
+      responses:
+        '204':
+          description: Deleted successfully (no response body)
+        '401':
+          $ref: './_shared.yaml#/components/responses/Unauthorized'
+        '403':
+          $ref: './_shared.yaml#/components/responses/Forbidden'
+        '404':
+          $ref: './_shared.yaml#/components/responses/NotFound'
+
+components:
+  schemas:
+    # ─── Health ───────────────────────────────────────────────────────────────
+    HealthResponse:
+      type: object
+      required: [status, timestamp]
+      properties:
+        status:
+          type: string
+          enum: [ok, down]
+        timestamp:
+          $ref: './_shared.yaml#/components/schemas/Timestamp'
+        dependencies:
+          type: object
+          properties:
+            database:
+              type: string
+              enum: [ok, degraded, down]
+
+    # ─── Campuses ─────────────────────────────────────────────────────────────
+    CampusCreateRequest:
+      type: object
+      description: Data to create a new campus
+      required: [code, name]
+      properties:
+        code:
+          type: string
+          maxLength: 30
+          description: Unique campus code (normalized to uppercase)
+          example: CAMP-NORTE
+        name:
+          type: string
+          maxLength: 150
+          example: Campus Norte
+        city:
+          type: string
+          maxLength: 100
+          example: Bogotá
+        status:
+          $ref: '#/components/schemas/RecordStatus'
+
+    CampusUpdateRequest:
+      type: object
+      description: Partial update for a campus (omit the fields to keep)
+      properties:
+        code:
+          type: string
+          maxLength: 30
+        name:
+          type: string
+          maxLength: 150
+        city:
+          type: string
+          maxLength: 100
+        status:
+          $ref: '#/components/schemas/RecordStatus'
+
+    CampusResponse:
+      type: object
+      required: [campusId, code, name, status]
+      properties:
+        campusId:
+          $ref: './_shared.yaml#/components/schemas/UUID'
+        code:
+          type: string
+          example: CAMP-NORTE
+        name:
+          type: string
+          example: Campus Norte
+        city:
+          type: string
+          nullable: true
+          example: Bogotá
+        status:
+          type: string
+          enum: [ACTIVE, INACTIVE]
+        createdAt:
+          $ref: './_shared.yaml#/components/schemas/Timestamp'
+        updatedAt:
+          $ref: './_shared.yaml#/components/schemas/Timestamp'
+
+    # ─── Environment types ────────────────────────────────────────────────────
+    EnvironmentTypeCreateRequest:
+      type: object
+      description: Data to create a new environment type
+      required: [code, name]
+      properties:
+        code:
+          type: string
+          maxLength: 30
+          description: Unique code (normalized to uppercase)
+          example: CLASSROOM
+        name:
+          type: string
+          maxLength: 80
+          description: Unique display name
+          example: Aula
+        description:
+          type: string
+          maxLength: 255
+          example: Espacio regular de clases
+
+    EnvironmentTypeUpdateRequest:
+      type: object
+      description: Partial update for an environment type (omit the fields to keep)
+      properties:
+        code:
+          type: string
+          maxLength: 30
+        name:
+          type: string
+          maxLength: 80
+        description:
+          type: string
+          maxLength: 255
+
+    EnvironmentTypeResponse:
+      type: object
+      required: [environmentTypeId, code, name]
+      properties:
+        environmentTypeId:
+          $ref: './_shared.yaml#/components/schemas/UUID'
+        code:
+          type: string
+          example: CLASSROOM
+        name:
+          type: string
+          example: Aula
+        description:
+          type: string
+          nullable: true
+          example: Espacio regular de clases
+        createdAt:
+          $ref: './_shared.yaml#/components/schemas/Timestamp'
+        updatedAt:
+          $ref: './_shared.yaml#/components/schemas/Timestamp'
+
+    # ─── Educational environments ─────────────────────────────────────────────
+    EducationalEnvironmentCreateRequest:
+      type: object
+      description: Data to create a new educational environment
+      required: [campusId, code, name, environmentTypeId]
+      properties:
+        campusId:
+          $ref: './_shared.yaml#/components/schemas/UUID'
+        code:
+          type: string
+          maxLength: 30
+          description: Code within the campus (unique per campus, normalized to uppercase)
+          example: A-101
+        name:
+          type: string
+          maxLength: 120
+          example: Aula 101
+        environmentTypeId:
+          $ref: './_shared.yaml#/components/schemas/UUID'
+        floor:
+          type: integer
+          minimum: 0
+          nullable: true
+          example: 1
+        areaM2:
+          type: number
+          format: double
+          exclusiveMinimum: true
+          minimum: 0
+          nullable: true
+          example: 65.5
+        occupancyCapacity:
+          type: integer
+          minimum: 1
+          nullable: true
+          example: 40
+        status:
+          $ref: '#/components/schemas/RecordStatus'
+
+    EducationalEnvironmentUpdateRequest:
+      type: object
+      description: Partial update for an educational environment (omit the fields to keep)
+      properties:
+        campusId:
+          $ref: './_shared.yaml#/components/schemas/UUID'
+        code:
+          type: string
+          maxLength: 30
+        name:
+          type: string
+          maxLength: 120
+        environmentTypeId:
+          $ref: './_shared.yaml#/components/schemas/UUID'
+        floor:
+          type: integer
+          minimum: 0
+          nullable: true
+        areaM2:
+          type: number
+          format: double
+          exclusiveMinimum: true
+          minimum: 0
+          nullable: true
+        occupancyCapacity:
+          type: integer
+          minimum: 1
+          nullable: true
+        status:
+          $ref: '#/components/schemas/RecordStatus'
+
+    EducationalEnvironmentResponse:
+      type: object
+      required: [educationalEnvironmentId, campusId, code, name, environmentTypeId, status]
+      properties:
+        educationalEnvironmentId:
+          $ref: './_shared.yaml#/components/schemas/UUID'
+        campusId:
+          $ref: './_shared.yaml#/components/schemas/UUID'
+        code:
+          type: string
+          example: A-101
+        name:
+          type: string
+          example: Aula 101
+        environmentTypeId:
+          $ref: './_shared.yaml#/components/schemas/UUID'
+        floor:
+          type: integer
+          nullable: true
+          example: 1
+        areaM2:
+          type: number
+          format: double
+          nullable: true
+          example: 65.5
+        occupancyCapacity:
+          type: integer
+          nullable: true
+          example: 40
+        status:
+          type: string
+          enum: [ACTIVE, INACTIVE]
+        createdAt:
+          $ref: './_shared.yaml#/components/schemas/Timestamp'
+        updatedAt:
+          $ref: './_shared.yaml#/components/schemas/Timestamp'
+
+    # ─── Shared in this contract ──────────────────────────────────────────────
+    RecordStatus:
+      type: string
+      description: Lifecycle status (independent from soft delete)
+      enum: [ACTIVE, INACTIVE]
+      default: ACTIVE

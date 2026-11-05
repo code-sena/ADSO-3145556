@@ -1,0 +1,29 @@
+databaseChangeLog:
+  - changeSet:
+      id: 005-add-foreign-keys
+      author: eduaircontrol
+      comment: "FKs intra-dominio con acciones ON DELETE (Liquibase 5: sql crudo)."
+      changes:
+        - sql:
+            dbms: postgresql
+            sql: |
+              ALTER TABLE seguridad.user_roles
+                  ADD CONSTRAINT fk_user_roles_user
+                  FOREIGN KEY (user_id) REFERENCES seguridad.users (id) ON DELETE CASCADE;
+              ALTER TABLE seguridad.user_roles
+                  ADD CONSTRAINT fk_user_roles_role
+                  FOREIGN KEY (role_id) REFERENCES seguridad.roles (id) ON DELETE RESTRICT;
+              ALTER TABLE seguridad.user_roles
+                  ADD CONSTRAINT fk_user_roles_assigned_by
+                  FOREIGN KEY (assigned_by) REFERENCES seguridad.users (id) ON DELETE RESTRICT;
+              ALTER TABLE seguridad.refresh_tokens
+                  ADD CONSTRAINT fk_refresh_tokens_user
+                  FOREIGN KEY (user_id) REFERENCES seguridad.users (id) ON DELETE CASCADE;
+      rollback:
+        - sql:
+            dbms: postgresql
+            sql: |
+              ALTER TABLE seguridad.refresh_tokens DROP CONSTRAINT IF EXISTS fk_refresh_tokens_user;
+              ALTER TABLE seguridad.user_roles DROP CONSTRAINT IF EXISTS fk_user_roles_assigned_by;
+              ALTER TABLE seguridad.user_roles DROP CONSTRAINT IF EXISTS fk_user_roles_role;
+              ALTER TABLE seguridad.user_roles DROP CONSTRAINT IF EXISTS fk_user_roles_user;

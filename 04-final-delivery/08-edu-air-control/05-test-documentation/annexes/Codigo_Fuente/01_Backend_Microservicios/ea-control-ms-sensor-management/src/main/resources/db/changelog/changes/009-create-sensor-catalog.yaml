@@ -1,0 +1,139 @@
+databaseChangeLog:
+  - changeSet:
+      id: 009-create-sensor-catalog
+      author: eduaircontrol
+      comment: >-
+        Catalogos de hardware (modelo y estado de sensor) y de unidades de medida.
+        Antes Sensor.sensorModelId y Sensor.sensorStatusId eran UUIDs sueltos sin
+        tabla que los respaldara: el alta de un sensor no tenia forma de validarse
+        y ningun cliente podia ofrecerlos.
+      changes:
+        - createTable:
+            schemaName: sensors
+            tableName: sensor_model
+            columns:
+              - column:
+                  name: sensor_model_id
+                  type: UUID
+                  defaultValueComputed: gen_random_uuid()
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pk_sensor_model
+                    nullable: false
+              - column:
+                  name: code
+                  type: VARCHAR(30)
+                  constraints:
+                    nullable: false
+                    unique: true
+                    uniqueConstraintName: uq_sensor_model_code
+              - column:
+                  name: name
+                  type: VARCHAR(80)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: VARCHAR(255)
+              - column:
+                  name: created_at
+                  type: TIMESTAMPTZ
+                  defaultValueComputed: now()
+                  constraints:
+                    nullable: false
+
+        - createTable:
+            schemaName: sensors
+            tableName: sensor_status
+            columns:
+              - column:
+                  name: sensor_status_id
+                  type: UUID
+                  defaultValueComputed: gen_random_uuid()
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pk_sensor_status
+                    nullable: false
+              - column:
+                  name: code
+                  type: VARCHAR(30)
+                  constraints:
+                    nullable: false
+                    unique: true
+                    uniqueConstraintName: uq_sensor_status_code
+              - column:
+                  name: name
+                  type: VARCHAR(80)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: TIMESTAMPTZ
+                  defaultValueComputed: now()
+                  constraints:
+                    nullable: false
+
+        - createTable:
+            schemaName: sensors
+            tableName: measurement_unit
+            columns:
+              - column:
+                  name: measurement_unit_id
+                  type: UUID
+                  defaultValueComputed: gen_random_uuid()
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pk_measurement_unit
+                    nullable: false
+              - column:
+                  name: code
+                  type: VARCHAR(30)
+                  constraints:
+                    nullable: false
+                    unique: true
+                    uniqueConstraintName: uq_measurement_unit_code
+              - column:
+                  name: symbol
+                  type: VARCHAR(10)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(80)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: TIMESTAMPTZ
+                  defaultValueComputed: now()
+                  constraints:
+                    nullable: false
+
+        - sql:
+            dbms: postgresql
+            sql: |
+              -- Los UUID de las unidades coinciden con los de
+              -- environment_monitoring.variable.measurement_unit_id: los dos
+              -- catalogos describen las mismas magnitudes.
+              INSERT INTO sensors.measurement_unit
+                  (measurement_unit_id, code, symbol, name) VALUES
+                ('00000000-0000-4000-8000-000000000001','C','C','Grados Celsius'),
+                ('00000000-0000-4000-8000-000000000002','PERCENT','%','Porcentaje'),
+                ('00000000-0000-4000-8000-000000000003','PPM','ppm','Partes por millon'),
+                ('00000000-0000-4000-8000-000000000004','DECIBEL','dB','Decibelios');
+
+              INSERT INTO sensors.sensor_model (sensor_model_id, code, name, description) VALUES
+                ('00000000-0000-4000-8000-000000000201','ESP32_DHT11','ESP32 con DHT11','Temperatura y humedad'),
+                ('00000000-0000-4000-8000-000000000202','ESP32_KY038','ESP32 con KY-038','Ruido ambiente'),
+                ('00000000-0000-4000-8000-000000000203','ESP32_MQ135','ESP32 con MQ-135','Calidad de aire (aproxima CO2)');
+
+              INSERT INTO sensors.sensor_status (sensor_status_id, code, name) VALUES
+                ('00000000-0000-4000-8000-000000000211','ACTIVE','Activo'),
+                ('00000000-0000-4000-8000-000000000212','INACTIVE','Inactivo');
+      rollback:
+        - sql:
+            dbms: postgresql
+            sql: |
+              DROP TABLE IF EXISTS sensors.measurement_unit;
+              DROP TABLE IF EXISTS sensors.sensor_status;
+              DROP TABLE IF EXISTS sensors.sensor_model;

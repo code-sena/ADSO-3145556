@@ -1,0 +1,45 @@
+{
+  "expo": {
+    "name": "EduAirControl",
+    "slug": "EduAirControl",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/EduAirControlLogo.png",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/EduAirControlLogo.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSPhotoLibraryUsageDescription": "EduAirControl necesita acceso a tus fotos para que puedas elegir tu avatar de perfil."
+      }
+    },
+    "android": {
+      "package": "com.eduaircontrol.app",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/EduAirControlLogo.png",
+        "backgroundColor": "#ffffff"
+      },
+      "edgeToEdgeEnabled": true
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-asset",
+      "expo-font",
+      "expo-image-picker",
+      [
+        "react-native-ble-plx",
+        {
+          "neverForLocation": true,
+          "bluetoothAlwaysPermission": "Esta aplicación requiere Bluetooth para aprovisionar las credenciales Wi-Fi del dispositivo ESP32."
+        }
+      ]
+    ]
+  }
+}

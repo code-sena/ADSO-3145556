@@ -1,0 +1,112 @@
+openapi: 3.0.3
+info:
+  title: API Gateway
+  version: 1.0.0
+  description: |
+    Single entry point to the system. The gateway routes requests to the
+    corresponding microservices based on the path.
+
+    ## Authentication
+    Most endpoints require a valid JWT:
+    ```
+    Authorization: Bearer <access_token>
+    ```
+    The token is obtained from `POST /api/v1/auth/login` (see `auth-service.yaml`).
+
+    ## Internal headers (services only)
+    The gateway adds these headers before forwarding the request to the upstream:
+    - `X-User-Id`: UUID of the authenticated user
+    - `X-User-Role`: Role of the user (ADMIN, USER, VIEWER)
+    - `X-Correlation-Id`: Trace ID used to correlate logs
+
+servers:
+  - url: http://localhost:8080
+    description: Local development
+  - url: https://api.dev.{domain}
+    description: Development
+    variables:
+      domain:
+        default: example.com
+  - url: https://api.{domain}
+    description: Production
+    variables:
+      domain:
+        default: example.com
+
+tags:
+  - name: Health
+    description: Gateway and upstream status
+
+paths:
+  /health:
+    get:
+      summary: Gateway health check
+      description: |
+        Checks that the gateway is running and that all upstream services
+        are responding. Does not require authentication.
+      tags:
+        - Health
+      security: []
+      responses:
+        '200':
+          description: Gateway and upstreams are healthy
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [status, timestamp]
+                properties:
+                  status:
+                    type: string
+                    enum: [ok, degraded]
+                  timestamp:
+                    type: string
+                    format: date-time
+                  upstreams:
+                    type: object
+                    description: Status of each microservice
+                    additionalProperties:
+                      type: string
+                      enum: [ok, degraded, down]
+              example:
+                status: ok
+                timestamp: '2024-01-15T10:30:00Z'
+                upstreams:
+                  auth-service: ok
+                  service-name: ok
+        '503':
+          description: The gateway is starting or a critical upstream is down
+          content:
+            application/json:
+              schema:
+                $ref: './auth-service.yaml#/components/schemas/ErrorResponse'
+
+  /api/v1/me:
+    get:
+      summary: Get the current user's session information
+      description: Returns the authenticated user's identity and OAuth2 token (BFF pattern, ADR-017).
+      operationId: getMe
+      tags: [Session]
+      responses:
+        '200':
+          description: Current user information
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  sub:
+                    type: string
+                  email:
+                    type: string
+                  name:
+                    type: string
+                  accessToken:
+                    type: string
+        '401':
+          description: Not authenticated
+
+components:
+  securitySchemes:
+    bearerAuth:
+      $ref: './_shared.yaml#/components/securitySchemes/bearerAuth'

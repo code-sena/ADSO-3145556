@@ -1,0 +1,51 @@
+databaseChangeLog:
+  - changeSet:
+      id: 008-add-user-institution
+      author: eduaircontrol
+      comment: "Membresia del usuario a institucion y sede (ADR-016)."
+      changes:
+        - addColumn:
+            schemaName: seguridad
+            tableName: users
+            columns:
+              - column:
+                  name: institution_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: campus_id
+                  type: UUID
+        - addForeignKeyConstraint:
+            baseTableSchemaName: seguridad
+            baseTableName: users
+            baseColumnNames: institution_id
+            referencedTableSchemaName: seguridad
+            referencedTableName: institution
+            referencedColumnNames: id
+            constraintName: fk_users_institution
+            onDelete: RESTRICT
+        - createIndex:
+            schemaName: seguridad
+            tableName: users
+            indexName: idx_users_institution_id
+            columns:
+              - column:
+                  name: institution_id
+      rollback:
+        - dropIndex:
+            schemaName: seguridad
+            tableName: users
+            indexName: idx_users_institution_id
+        - dropForeignKeyConstraint:
+            baseTableSchemaName: seguridad
+            baseTableName: users
+            constraintName: fk_users_institution
+        - dropColumn:
+            schemaName: seguridad
+            tableName: users
+            columnName: campus_id
+        - dropColumn:
+            schemaName: seguridad
+            tableName: users
+            columnName: institution_id

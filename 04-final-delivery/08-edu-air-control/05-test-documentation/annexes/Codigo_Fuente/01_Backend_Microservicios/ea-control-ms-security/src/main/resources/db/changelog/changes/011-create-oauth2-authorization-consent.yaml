@@ -1,0 +1,19 @@
+databaseChangeLog:
+  - changeSet:
+      id: 011-create-oauth2-authorization-consent
+      author: eduaircontrol
+      comment: "Consentimiento OAuth2 por cliente/principal (Spring Authorization Server 7, ADR-017)."
+      changes:
+        - sql:
+            dbms: postgresql
+            sql: |
+              CREATE TABLE seguridad.oauth2_authorization_consent (
+                  registered_client_id varchar(100) NOT NULL,
+                  principal_name varchar(200) NOT NULL,
+                  authorities varchar(1000) NOT NULL,
+                  PRIMARY KEY (registered_client_id, principal_name)
+              );
+      rollback:
+        - sql:
+            dbms: postgresql
+            sql: DROP TABLE IF EXISTS seguridad.oauth2_authorization_consent

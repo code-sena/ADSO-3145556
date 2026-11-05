@@ -1,0 +1,317 @@
+# Tres PostgreSQL independientes (una BD por dominio, ADR-003).
+# En producción se recomienda un operador (CloudNativePG/Zalando) o un servicio
+# gestionado; aquí se incluye un StatefulSet mínimo como referencia.
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: postgres-security
+  namespace: eduaircontrol
+spec:
+  serviceName: postgres-security
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres-security
+  template:
+    metadata:
+      labels:
+        app: postgres-security
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:15
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_DB
+              value: eduaircontrol_security
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: eduaircontrol-secrets
+                  key: SECURITY_USER
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: eduaircontrol-secrets
+                  key: SECURITY_PASSWORD
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/postgresql/data
+          readinessProbe:
+            exec:
+              command: ["pg_isready", "-U", "security_user"]
+            initialDelaySeconds: 10
+            periodSeconds: 10
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 5Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-security
+  namespace: eduaircontrol
+spec:
+  selector:
+    app: postgres-security
+  ports:
+    - port: 5432
+      targetPort: 5432
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: postgres-classroom
+  namespace: eduaircontrol
+spec:
+  serviceName: postgres-classroom
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres-classroom
+  template:
+    metadata:
+      labels:
+        app: postgres-classroom
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:15
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_DB
+              value: eduaircontrol_classrooms
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: eduaircontrol-secrets
+                  key: CLASSROOM_USER
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: eduaircontrol-secrets
+                  key: CLASSROOM_PASSWORD
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/postgresql/data
+          readinessProbe:
+            exec:
+              command: ["pg_isready", "-U", "classroom_user"]
+            initialDelaySeconds: 10
+            periodSeconds: 10
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 5Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-classroom
+  namespace: eduaircontrol
+spec:
+  selector:
+    app: postgres-classroom
+  ports:
+    - port: 5432
+      targetPort: 5432
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: postgres-sensor
+  namespace: eduaircontrol
+spec:
+  serviceName: postgres-sensor
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres-sensor
+  template:
+    metadata:
+      labels:
+        app: postgres-sensor
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:15
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_DB
+              value: eduaircontrol_sensors
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: eduaircontrol-secrets
+                  key: SENSOR_USER
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: eduaircontrol-secrets
+                  key: SENSOR_PASSWORD
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/postgresql/data
+          readinessProbe:
+            exec:
+              command: ["pg_isready", "-U", "sensor_user"]
+            initialDelaySeconds: 10
+            periodSeconds: 10
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 5Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-sensor
+  namespace: eduaircontrol
+spec:
+  selector:
+    app: postgres-sensor
+  ports:
+    - port: 5432
+      targetPort: 5432
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: postgres-user-management
+  namespace: eduaircontrol
+spec:
+  serviceName: postgres-user-management
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres-user-management
+  template:
+    metadata:
+      labels:
+        app: postgres-user-management
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:15
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_DB
+              value: eduaircontrol_user_management
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: eduaircontrol-secrets
+                  key: USER_MANAGEMENT_USER
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: eduaircontrol-secrets
+                  key: USER_MANAGEMENT_PASSWORD
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/postgresql/data
+          readinessProbe:
+            exec:
+              command: ["pg_isready", "-U", "user_management_user"]
+            initialDelaySeconds: 10
+            periodSeconds: 10
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 5Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-user-management
+  namespace: eduaircontrol
+spec:
+  selector:
+    app: postgres-user-management
+  ports:
+    - port: 5432
+      targetPort: 5432
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: postgres-monitoring
+  namespace: eduaircontrol
+spec:
+  serviceName: postgres-monitoring
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres-monitoring
+  template:
+    metadata:
+      labels:
+        app: postgres-monitoring
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:15
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_DB
+              value: eduaircontrol_monitoring
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: eduaircontrol-secrets
+                  key: MONITORING_USER
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: eduaircontrol-secrets
+                  key: MONITORING_PASSWORD
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/postgresql/data
+          readinessProbe:
+            exec:
+              command: ["pg_isready", "-U", "monitoring_user"]
+            initialDelaySeconds: 10
+            periodSeconds: 10
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 10Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-monitoring
+  namespace: eduaircontrol
+spec:
+  selector:
+    app: postgres-monitoring
+  ports:
+    - port: 5432
+      targetPort: 5432

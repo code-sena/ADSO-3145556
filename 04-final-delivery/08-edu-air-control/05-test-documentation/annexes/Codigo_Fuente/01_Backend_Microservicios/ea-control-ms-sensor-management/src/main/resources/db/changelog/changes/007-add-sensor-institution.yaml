@@ -1,0 +1,29 @@
+databaseChangeLog:
+  - changeSet:
+      id: 007-add-sensor-institution
+      author: eduaircontrol
+      comment: "Institucion (tenant) del sensor; referencia por UUID a ms-security (ADR-016)."
+      changes:
+        - addColumn:
+            schemaName: sensors
+            tableName: sensor
+            columns:
+              - column:
+                  name: institution_id
+                  type: UUID
+        - createIndex:
+            schemaName: sensors
+            tableName: sensor
+            indexName: idx_sensor_institution_id
+            columns:
+              - column:
+                  name: institution_id
+      rollback:
+        - dropIndex:
+            schemaName: sensors
+            tableName: sensor
+            indexName: idx_sensor_institution_id
+        - dropColumn:
+            schemaName: sensors
+            tableName: sensor
+            columnName: institution_id

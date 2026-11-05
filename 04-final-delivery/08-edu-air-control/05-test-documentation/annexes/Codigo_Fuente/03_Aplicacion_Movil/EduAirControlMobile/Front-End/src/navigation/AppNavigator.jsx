@@ -1,0 +1,151 @@
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import { Ionicons } from '@expo/vector-icons'
+import { useTranslation } from 'react-i18next'
+import { useTheme } from '../context/ThemeContext'
+import authService from '../modules/auth/services/authService'
+
+import DashboardScreen from '../modules/dashboard/pages/dashboard/DashboardScreen'
+import FavoritesScreen from '../modules/favorites/pages/favorites/FavoritesScreen'
+import NotificationsScreen from '../modules/notifications/pages/notifications/NotificationsScreen'
+import ProfileScreen from '../modules/profile/pages/profile/ProfileScreen'
+import SettingsScreen from '../modules/settings/pages/settings/SettingsScreen'
+
+import AllEnvironmentsScreen from '../modules/environment/pages/allEnvironments/AllEnvironmentsScreen'
+import EnvironmentDetailScreen from '../modules/environment/pages/environmentDetail/EnvironmentDetailScreen'
+import EnvironmentManagementScreen from '../modules/environment/pages/environmentManagement/EnvironmentManagementScreen'
+import ProvisioningScreen from '../modules/iot/pages/provisioning/ProvisioningScreen'
+import SuperAdminScreen from '../modules/admin/pages/superAdmin/SuperAdminScreen'
+
+const Tab = createBottomTabNavigator()
+const Stack = createNativeStackNavigator()
+
+function DashboardStack() {
+  return (
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="DashboardHome" component={DashboardScreen} />
+      <Stack.Screen name="EnvironmentDetail" component={EnvironmentDetailScreen} />
+      <Stack.Screen name="NotificationsPanel" component={NotificationsScreen} />
+    </Stack.Navigator>
+  )
+}
+
+function FavoritesStack() {
+  return (
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="FavoritesHome" component={FavoritesScreen} />
+      <Stack.Screen name="EnvironmentDetail" component={EnvironmentDetailScreen} />
+      <Stack.Screen name="NotificationsPanel" component={NotificationsScreen} />
+    </Stack.Navigator>
+  )
+}
+
+function ManagementStack() {
+  return (
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="ManagementHome" component={EnvironmentManagementScreen} />
+      <Stack.Screen name="EnvironmentDetail" component={EnvironmentDetailScreen} />
+      <Stack.Screen name="Provisioning" component={ProvisioningScreen} />
+    </Stack.Navigator>
+  )
+}
+
+function EnvironmentsStack() {
+  return (
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="EnvironmentsHome" component={AllEnvironmentsScreen} />
+      <Stack.Screen name="EnvironmentDetail" component={EnvironmentDetailScreen} />
+      <Stack.Screen name="NotificationsPanel" component={NotificationsScreen} />
+    </Stack.Navigator>
+  )
+}
+
+function ProfileStack() {
+  return (
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="ProfileHome" component={ProfileScreen} />
+      <Stack.Screen name="Settings" component={SettingsScreen} />
+    </Stack.Navigator>
+  )
+}
+
+export default function AppNavigator() {
+  const { currentColors } = useTheme()
+  const { t } = useTranslation()
+  const isAdmin = authService.isAdmin()
+  const isSuperAdmin = authService.isSuperAdmin()
+
+  return (
+    <Tab.Navigator
+      screenOptions={({ route }) => ({
+        headerShown: false,
+        tabBarStyle: {
+          backgroundColor: currentColors.bgCard,
+          borderTopColor: currentColors.borderColor,
+          borderTopWidth: 1,
+          height: 90,
+          paddingBottom: 10,
+          paddingTop: 6,
+        },
+        tabBarActiveTintColor: currentColors.accent,
+        tabBarInactiveTintColor: currentColors.textMuted,
+        tabBarLabelStyle: { fontSize: 11, fontWeight: '600' },
+        tabBarIcon: ({ focused, color, size }) => {
+          let iconName
+          if (route.name === 'Dashboard') {
+            iconName = focused ? 'grid' : 'grid-outline'
+          } else if (route.name === 'Favorites') {
+            iconName = focused ? 'heart' : 'heart-outline'
+          } else if (route.name === 'Management') {
+            iconName = focused ? 'settings' : 'settings-outline'
+          } else if (route.name === 'Environments') {
+            iconName = focused ? 'business' : 'business-outline'
+          } else if (route.name === 'Profile') {
+            iconName = focused ? 'person' : 'person-outline'
+          }
+          return <Ionicons name={iconName} size={size} color={color} />
+        },
+      })}
+    >
+      <Tab.Screen
+        name="Dashboard"
+        component={DashboardStack}
+        options={{ tabBarLabel: t('nav.dashboard') }}
+      />
+      <Tab.Screen
+        name="Favorites"
+        component={FavoritesStack}
+        options={{ tabBarLabel: t('nav.favorites') }}
+      />
+      {isAdmin && (
+        <Tab.Screen
+          name="Management"
+          component={ManagementStack}
+          options={{ tabBarLabel: t('nav.management') }}
+        />
+      )}
+      {isSuperAdmin && (
+        <Tab.Screen
+          name="SuperAdmin"
+          component={SuperAdminScreen}
+          options={{
+            tabBarLabel: t('nav.superAdmin', 'Super Admin'),
+            tabBarIcon: ({ focused, color, size }) => (
+              <Ionicons name={focused ? 'shield' : 'shield-outline'} size={size} color={color} />
+            ),
+          }}
+        />
+      )}
+      <Tab.Screen
+        name="Environments"
+        component={EnvironmentsStack}
+        options={{ tabBarLabel: t('nav.activity') }}
+      />
+      <Tab.Screen
+        name="Profile"
+        component={ProfileStack}
+        options={{ tabBarLabel: t('nav.profile') }}
+      />
+    </Tab.Navigator>
+  )
+}

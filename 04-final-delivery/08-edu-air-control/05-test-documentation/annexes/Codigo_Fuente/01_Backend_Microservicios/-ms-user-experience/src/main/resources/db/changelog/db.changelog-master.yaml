@@ -1,0 +1,54 @@
+databaseChangeLog:
+  # 1) Esquema propio del servicio + extension para UUID.
+  - changeSet:
+      id: ms-user-experience-001-schemas
+      author: eduaircontrol
+      comment: Crea el esquema propio de ms-user-experience (ADR-003).
+      changes:
+        - sqlFile:
+            path: db/changelog/canonical/01_schemas/001_schemas.sql
+
+  # 2) Tablas del dominio de experiencia de usuario.
+  - changeSet:
+      id: ms-user-experience-002-tables
+      author: eduaircontrol
+      comment: Preferencias, favoritos, ratings, busquedas y estado de notificaciones.
+      changes:
+        - sqlFile:
+            path: db/changelog/canonical/03_tables/01_preferences/001_user_preferences.sql
+        - sqlFile:
+            path: db/changelog/canonical/03_tables/02_favorites/001_favorites.sql
+        - sqlFile:
+            path: db/changelog/canonical/03_tables/03_ratings/001_classroom_ratings.sql
+        - sqlFile:
+            path: db/changelog/canonical/03_tables/04_searches/001_searches.sql
+        - sqlFile:
+            path: db/changelog/canonical/03_tables/05_notifications/001_notification_state.sql
+      rollback:
+        - sql:
+            dbms: postgresql
+              DROP TABLE IF EXISTS user_experience.notification_state;
+              DROP TABLE IF EXISTS user_experience.searches;
+              DROP TABLE IF EXISTS user_experience.classroom_ratings;
+              DROP TABLE IF EXISTS user_experience.favorites;
+              DROP TABLE IF EXISTS user_experience.user_preferences;
+
+  # 3) Indices para las consultas frecuentes.
+  - changeSet:
+      id: ms-user-experience-003-indexes
+      author: eduaircontrol
+      comment: Indices por usuario, ambiente y fecha.
+      changes:
+        - sqlFile:
+            path: db/changelog/canonical/10_indexes/001_indexes.sql
+      rollback:
+        - sql:
+            dbms: postgresql
+              DROP INDEX IF EXISTS user_experience.ix_searches_searched_at;
+              DROP INDEX IF EXISTS user_experience.ix_searches_user_id;
+              DROP INDEX IF EXISTS user_experience.ix_classroom_ratings_classroom_id;
+              DROP INDEX IF EXISTS user_experience.ix_classroom_ratings_user_id;
+              DROP INDEX IF EXISTS user_experience.ix_favorites_variable_id;
+              DROP INDEX IF EXISTS user_experience.ix_favorites_classroom_id;
+              DROP INDEX IF EXISTS user_experience.ix_favorites_user_id;
+              DROP INDEX IF EXISTS user_experience.ix_user_preferences_user_id;

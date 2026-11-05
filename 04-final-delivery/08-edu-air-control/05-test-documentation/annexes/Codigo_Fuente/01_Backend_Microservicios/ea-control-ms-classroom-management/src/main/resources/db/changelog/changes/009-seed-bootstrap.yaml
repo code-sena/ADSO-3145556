@@ -1,0 +1,49 @@
+databaseChangeLog:
+  - changeSet:
+      id: 009-seed-bootstrap
+      author: eduaircontrol
+      comment: >-
+        Datos de arranque para poder probar el producto sin crear nada a mano:
+        un campus, los tipos de ambiente que tienen umbrales definidos y un
+        ambiente de prueba. Los UUID de los tipos coinciden con los que usa
+        environment_monitoring.variable_threshold: si no, las mediciones se
+        guardan pero nunca se evaluan contra un umbral y no se genera ninguna
+        alerta.
+      changes:
+        - sql:
+            dbms: postgresql
+            sql: |
+              -- ON CONFLICT DO NOTHING: en bases de desarrollo ya puede haber
+              -- datos creados a mano y el arranque no debe romperse por eso.
+              INSERT INTO classrooms.campuses (campus_id, code, name, city, status)
+              VALUES
+                ('00000000-0000-4000-8000-000000000301','MAIN','Sede Principal','Bogota','ACTIVE')
+              ON CONFLICT DO NOTHING;
+
+              -- Los UUID coinciden con los de environment_monitoring.variable_threshold
+              -- (CLASSROOM 081, LABORATORY 082, LIBRARY 085).
+              INSERT INTO classrooms.environment_types
+                  (environment_type_id, code, name, description)
+              VALUES
+                ('00000000-0000-4000-8000-000000000081','CLASSROOM','Aula','Aula o salon de clases'),
+                ('00000000-0000-4000-8000-000000000082','LABORATORY','Laboratorio','Laboratorio o taller tecnico'),
+                ('00000000-0000-4000-8000-000000000085','LIBRARY','Biblioteca','Biblioteca o sala de estudio')
+              ON CONFLICT DO NOTHING;
+
+              INSERT INTO classrooms.educational_environment
+                  (educational_environment_id, campus_id, code, name,
+                   environment_type_id, floor, occupancy_capacity, status)
+              VALUES
+                ('00000000-0000-4000-8000-000000000401','00000000-0000-4000-8000-000000000301',
+                 'A-101','Aula 101','00000000-0000-4000-8000-000000000081',1,30,'ACTIVE')
+              ON CONFLICT DO NOTHING;
+      rollback:
+        - sql:
+            dbms: postgresql
+            sql: |
+              DELETE FROM classrooms.educational_environment
+                WHERE educational_environment_id = '00000000-0000-4000-8000-000000000401';
+              DELETE FROM classrooms.environment_types
+                WHERE environment_type_id LIKE '00000000-0000-4000-8000-%';
+              DELETE FROM classrooms.campuses
+                WHERE campus_id = '00000000-0000-4000-8000-000000000301';

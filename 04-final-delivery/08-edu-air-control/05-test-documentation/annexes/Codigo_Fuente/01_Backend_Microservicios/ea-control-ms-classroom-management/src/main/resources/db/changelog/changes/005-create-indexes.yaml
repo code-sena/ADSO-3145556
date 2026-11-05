@@ -1,0 +1,40 @@
+databaseChangeLog:
+  - changeSet:
+      id: 005-create-indexes
+      author: eduaircontrol
+      comment: Índices recomendados por 06-data/domain/ms-classroom-management.md.
+      changes:
+        - createIndex:
+            schemaName: classrooms
+            tableName: educational_environment
+            indexName: idx_educational_environment_campus
+            columns:
+              - column:
+                  name: campus_id
+        - createIndex:
+            schemaName: classrooms
+            tableName: educational_environment
+            indexName: idx_educational_environment_type
+            columns:
+              - column:
+                  name: environment_type_id
+        - createIndex:
+            schemaName: classrooms
+            tableName: educational_environment
+            indexName: idx_educational_environment_status
+            columns:
+              - column:
+                  name: status
+      rollback:
+        - dropIndex:
+            schemaName: classrooms
+            tableName: educational_environment
+            indexName: idx_educational_environment_campus
+        - dropIndex:
+            schemaName: classrooms
+            tableName: educational_environment
+            indexName: idx_educational_environment_type
+        - dropIndex:
+            schemaName: classrooms
+            tableName: educational_environment
+            indexName: idx_educational_environment_status

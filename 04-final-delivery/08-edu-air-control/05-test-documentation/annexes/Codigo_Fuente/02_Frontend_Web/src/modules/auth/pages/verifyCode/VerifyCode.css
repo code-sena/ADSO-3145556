@@ -1,0 +1,105 @@
+/* Contenedor principal */
+/* .verify-container estilos movidos a AuthLayout */
+
+/* Tarjeta */
+/* .verify-card estilos movidos a AuthLayout */
+
+/* Ícono */
+.verify-icon {
+  font-size: 60px;
+  color: var(--accent);
+  margin-bottom: 20px;
+}
+
+.verify-card h1 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.verify-description {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 25px;
+  line-height: 1.6;
+}
+
+/* Inputs del código */
+.code-inputs {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.code-inputs input {
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  font-size: 24px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  color: #333;
+}
+
+.code-inputs input:focus {
+  border-color: var(--accent);
+}
+
+.code-inputs input:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Resend code */
+.resend-code {
+  color: var(--accent);
+  font-size: 14px;
+  text-decoration: none;
+  cursor: pointer;
+  display: block;
+  margin-bottom: 20px;
+}
+
+.resend-code:hover {
+  text-decoration: underline;
+}
+
+/* Botón verify */
+.btn-verify {
+  width: 100%;
+  padding: 12px;
+  background-color: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn-verify:hover {
+  background-color: #4dd4b6;
+}
+
+/* Dark Mode */
+/* .verify-container y .verify-card usan AuthLayout */
+
+body.dark-mode .verify-card h1 {
+  color: #e0e0e0;
+}
+
+body.dark-mode .verify-description {
+  color: #aaa;
+}
+
+body.dark-mode .code-inputs input {
+  background-color: #1a2a4a;
+  border-color: #2a3a5a;
+  color: #e0e0e0;
+}
+
+body.dark-mode .code-inputs input:focus {
+  border-color: var(--accent);
+}

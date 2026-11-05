@@ -1,0 +1,41 @@
+services:
+  ms-user-management:
+    build: .
+    container_name: ms-user-management
+    ports:
+      - "3007:3007"
+    environment:
+      SERVER_PORT: 3007
+      # Access tokens RS256 de ms-security (ADR-006). Con compose por servicio no hay
+      # ms-security en la red: se apunta al host. Sobrescriba JWKS_URI si lo hay.
+      JWKS_URI: ${JWKS_URI:-http://host.docker.internal:8081/api/v1/auth/jwks}
+      CORS_ALLOWED_ORIGINS: ${CORS_ALLOWED_ORIGINS:-http://localhost:3000,http://localhost:5173}
+      POSTGRES_URL: jdbc:postgresql://postgres:5432/${POSTGRES_DB:-eduaircontrol_user_management}
+      POSTGRES_USER: ${POSTGRES_USER:-user_management_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD?}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: always
+
+  postgres:
+    image: postgres:15
+    container_name: ms-user-management-db
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-eduaircontrol_user_management}
+      POSTGRES_USER: ${POSTGRES_USER:-user_management_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD?}
+    ports:
+      - "5438:5432"
+    volumes:
+      - user_management_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+    restart: always
+
+volumes:
+  user_management_postgres_data:

@@ -1,0 +1,189 @@
+openapi: 3.0.3
+info:
+  title: Shared Components
+  version: 1.0.0
+  description: |
+    Shared schemas and components used by all API contracts in the project.
+    Reference these components from your contracts with: $ref: './_shared.yaml#/components/...'
+
+components:
+  schemas:
+    # ─── Pagination ───────────────────────────────────────────────────────────
+    PaginatedMeta:
+      type: object
+      description: Pagination metadata included in list responses
+      required: [page, limit, total, totalPages]
+      properties:
+        page:
+          type: integer
+          minimum: 1
+          example: 1
+        limit:
+          type: integer
+          minimum: 1
+          maximum: 100
+          example: 20
+        total:
+          type: integer
+          description: Total records matching the filter
+          example: 142
+        totalPages:
+          type: integer
+          example: 8
+
+    # ─── Errors ──────────────────────────────────────────────────────────────
+    ErrorResponse:
+      type: object
+      description: Standard error format for all endpoints
+      required: [error, message]
+      properties:
+        error:
+          type: string
+          description: Error code in SCREAMING_SNAKE_CASE
+          example: VALIDATION_ERROR
+        message:
+          type: string
+          description: Human-readable message
+          example: The email field is required
+        details:
+          type: array
+          description: List of specific errors (for validation errors)
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+                example: email
+              message:
+                type: string
+                example: The email field is required
+        traceId:
+          type: string
+          description: Trace ID used to correlate logs
+          example: 550e8400-e29b-41d4-a716-446655440000
+
+    # ─── Common types ────────────────────────────────────────────────────────
+    UUID:
+      type: string
+      format: uuid
+      example: 550e8400-e29b-41d4-a716-446655440000
+
+    Timestamp:
+      type: string
+      format: date-time
+      example: '2024-01-15T10:30:00Z'
+
+    AuditFields:
+      type: object
+      description: Audit fields included in all entities
+      properties:
+        createdAt:
+          $ref: '#/components/schemas/Timestamp'
+        updatedAt:
+          $ref: '#/components/schemas/Timestamp'
+        createdBy:
+          $ref: '#/components/schemas/UUID'
+
+  # ─── Reusable parameters ────────────────────────────────────────────
+  parameters:
+    PageParam:
+      name: page
+      in: query
+      description: Page number (starting at 1)
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+
+    LimitParam:
+      name: limit
+      in: query
+      description: Number of results per page
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 20
+
+    IdParam:
+      name: id
+      in: path
+      required: true
+      description: Unique ID of the resource (UUID)
+      schema:
+        $ref: '#/components/schemas/UUID'
+
+  # ─── Reusable responses ────────────────────────────────────────────
+  responses:
+    BadRequest:
+      description: Validation error in the submitted data
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error: VALIDATION_ERROR
+            message: Invalid input data
+            details:
+              - field: email
+                message: Invalid email format
+
+    Unauthorized:
+      description: Authentication token missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error: UNAUTHORIZED
+            message: Authentication token required
+
+    Forbidden:
+      description: The user does not have permissions for this operation
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error: FORBIDDEN
+            message: You do not have permissions to perform this action
+
+    NotFound:
+      description: The requested resource does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error: NOT_FOUND
+            message: The requested resource does not exist
+
+    Conflict:
+      description: The operation conflicts with the current state of the resource (duplicate keys, constraint violations)
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error: CONFLICT
+            message: The resource already exists
+
+    InternalError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error: INTERNAL_ERROR
+            message: Internal server error
+
+  # ─── Security ───────────────────────────────────────────────────────────
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: |
+        JWT obtained from the IAM service POST /auth/login endpoint.
+        Include it in the header: Authorization: Bearer <token>

@@ -1,0 +1,126 @@
+databaseChangeLog:
+  # 1) Esquema propio del servicio + extension para UUID.
+  - changeSet:
+      id: ms-environment-monitoring-001-schemas
+      author: eduaircontrol
+      comment: Crea el esquema propio de ms-environment-monitoring (ADR-003).
+      changes:
+        - sqlFile:
+            path: db/changelog/canonical/01_schemas/001_schemas.sql
+
+  # 2) Read model y registro de entrada del broker.
+  - changeSet:
+      id: ms-environment-monitoring-002-read-model
+      author: eduaircontrol
+      comment: Proyeccion local de mediciones e idempotencia del consumidor.
+      changes:
+        - sqlFile:
+            path: db/changelog/canonical/03_tables/02_read_model/001_environment_measurement.sql
+        - sqlFile:
+            path: db/changelog/canonical/03_tables/02_read_model/002_inbox_message.sql
+      rollback:
+        - sql:
+            dbms: postgresql
+              DROP TABLE IF EXISTS environment_monitoring.inbox_message;
+              DROP TABLE IF EXISTS environment_monitoring.environment_measurement;
+
+  # 3) Replicas de catalogos y tablas propias del dominio.
+  - changeSet:
+      id: ms-environment-monitoring-003-catalog-replicas
+      author: eduaircontrol
+      comment: Catalogos locales y umbrales por tipo de ambiente (ADR-014).
+      changes:
+        - sqlFile:
+            path: db/changelog/canonical/03_tables/01_catalogos/001_variable.sql
+        - sqlFile:
+            path: db/changelog/canonical/03_tables/01_catalogos/002_educational_environment.sql
+        - sqlFile:
+            path: db/changelog/canonical/03_tables/01_catalogos/003_variable_threshold.sql
+        - sqlFile:
+            path: db/changelog/canonical/03_tables/01_catalogos/004_severity.sql
+        - sqlFile:
+            path: db/changelog/canonical/03_tables/01_catalogos/005_quality_flag.sql
+      rollback:
+        - sql:
+            dbms: postgresql
+              DROP TABLE IF EXISTS environment_monitoring.quality_flag;
+              DROP TABLE IF EXISTS environment_monitoring.severity;
+              DROP TABLE IF EXISTS environment_monitoring.variable_threshold;
+              DROP TABLE IF EXISTS environment_monitoring.educational_environment;
+              DROP TABLE IF EXISTS environment_monitoring.variable;
+
+  # 4) Nucleo del analisis (migrado del modelo canonico de monitoring).
+  - changeSet:
+      id: ms-environment-monitoring-004-analysis-core
+      author: eduaircontrol
+      comment: Tablas del nucleo de analisis historico por periodo.
+      changes:
+        - sqlFile:
+            path: db/changelog/canonical/03_tables/03_analisis/001_analysis_statuses.sql
+        - sqlFile:
+            path: db/changelog/canonical/03_tables/03_analisis/002_environmental_analysis.sql
+        - sqlFile:
+            path: db/changelog/canonical/03_tables/03_analisis/003_analysis_result.sql
+      rollback:
+        - sql:
+            dbms: postgresql
+              DROP TABLE IF EXISTS environment_monitoring.analysis_result;
+              DROP TABLE IF EXISTS environment_monitoring.environmental_analysis;
+              DROP TABLE IF EXISTS environment_monitoring.analysis_statuses;
+
+  # 5) Alertas trazables (DEC-006, modelo canonico).
+  - changeSet:
+      id: ms-environment-monitoring-005-alerts
+      author: eduaircontrol
+      comment: Tabla de alertas con trazabilidad a umbral y medicion.
+      changes:
+        - sqlFile:
+            path: db/changelog/canonical/03_tables/04_alertas/001_environment_alert.sql
+      rollback:
+        - sql:
+            dbms: postgresql
+              DROP TABLE IF EXISTS environment_monitoring.environment_alert;
+
+  # 6) Proyeccion local de instalaciones (DEC-006 §4.3).
+  - changeSet:
+      id: ms-environment-monitoring-006-projection
+      author: eduaircontrol
+      comment: Cache local instalacion -> ambiente -> tipo de ambiente.
+      changes:
+        - sqlFile:
+            path: db/changelog/canonical/03_tables/05_proyeccion/001_installation_projection.sql
+      rollback:
+        - sql:
+            dbms: postgresql
+              DROP TABLE IF EXISTS environment_monitoring.installation_projection;
+
+  # 7) Indices al final: referencian tablas de los changesets 2 a 6.
+  - changeSet:
+      id: ms-environment-monitoring-007-indexes
+      author: eduaircontrol
+      comment: Indices para la agregacion por ventana, el listado paginado y las alertas.
+      changes:
+        - sqlFile:
+            path: db/changelog/canonical/10_indexes/001_indexes.sql
+      rollback:
+        - sql:
+            dbms: postgresql
+              DROP INDEX IF EXISTS environment_monitoring.ix_installation_projection_environment;
+              DROP INDEX IF EXISTS environment_monitoring.ix_environment_alert_raised;
+              DROP INDEX IF EXISTS environment_monitoring.ix_environment_alert_environment;
+              DROP INDEX IF EXISTS environment_monitoring.ix_analysis_result_variable;
+              DROP INDEX IF EXISTS environment_monitoring.ix_analysis_result_analysis;
+              DROP INDEX IF EXISTS environment_monitoring.ix_environmental_analysis_status;
+              DROP INDEX IF EXISTS environment_monitoring.ix_environmental_analysis_period_end;
+              DROP INDEX IF EXISTS environment_monitoring.ix_environmental_analysis_period_start;
+              DROP INDEX IF EXISTS environment_monitoring.ix_environmental_analysis_environment;
+              DROP INDEX IF EXISTS environment_monitoring.ix_variable_threshold_type;
+              DROP INDEX IF EXISTS environment_monitoring.ix_variable_threshold_var_type_sev;
+              DROP INDEX IF EXISTS environment_monitoring.ix_environment_measurement_time;
+              DROP INDEX IF EXISTS environment_monitoring.ix_environment_measurement_variable;
+              DROP INDEX IF EXISTS environment_monitoring.ix_environment_measurement_inst_var_time;
+
+  # 6) Seeds de referencia. Los UUID coinciden con los del monolito a proposito:
+  #    asi la migracion de analisis preexistentes no requiere traduccion.
+  - include:
+      file: db/changelog/changes/010-seed-reference.yaml

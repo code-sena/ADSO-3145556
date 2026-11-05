@@ -1,0 +1,51 @@
+@startuml 04-paquetes-servicio-ES
+title Figura — Estructura hexagonal de un microservicio (ejemplo: ms-environment-monitoring)
+skinparam backgroundColor #FFFFFF
+skinparam defaultFontName Inter
+skinparam packageStyle rectangle
+
+package "domain (núcleo, sin dependencias de Spring)" {
+  package "model" as DM {
+    [EnvironmentMeasurement\nEnvironmentAlert\nVariableThreshold]
+  }
+  package "port/in" as PIN {
+    [MeasurementUseCase\nAlertUseCase\nThresholdService]
+  }
+  package "port/out" as POUT {
+    [MeasurementRepository\nAlertRepository\nDomainEventPublisher]
+  }
+  package "event" as EV {
+    [EnvironmentalDataAnalyzed]
+  }
+}
+
+package "application" as APP {
+  [MeasurementService\nAlertService\nThresholdService\nRequestAnalysisService]
+}
+
+package "infrastructure" {
+  package "inbound/web" as WEB {
+    [MeasurementController\nAlertController\nAnalysisController\ndto/*]
+  }
+  package "outbound/persistence" as PERS {
+    [MeasurementRepositoryAdapter\nJpaRepository entities\nMeasurementAggregationDao]
+  }
+  package "messaging" as MSG {
+    [MeasurementEventListener\nInboxMessage\nSpringDomainEventPublisher]
+  }
+  package "security" as SEC {
+    [JwtAuthFilter\nSecurityConfig\nUserIdentityAdapter]
+  }
+  package "config / backfill" as CFG {
+    [AnalysisConfig\nHistoricalBackfillRunner]
+  }
+}
+
+WEB --> PIN : llama casos de uso
+APP --> PIN : implementa
+APP --> POUT : usa puertos
+PERS --> POUT : implementa (adaptador secundario)
+MSG --> POUT : implementa
+SEC --> WEB : protege rutas
+DM <.. APP : modela el dominio
+@enduml

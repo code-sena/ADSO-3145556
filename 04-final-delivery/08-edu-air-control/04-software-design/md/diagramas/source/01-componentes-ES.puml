@@ -1,0 +1,55 @@
+@startuml 01-componentes-ES
+title Figura — Componentes del sistema EduAirControl
+skinparam backgroundColor #FFFFFF
+skinparam componentStyle rectangle
+skinparam defaultFontName Inter
+
+actor "Usuario registrado" as U
+actor "Administrador" as A
+actor "Dispositivo ESP32" as ESP
+
+package "Clientes" {
+  [Frontend Web\nReact + Vite] as WEB
+  [App Móvil\nExpo / React Native] as MOB
+}
+
+package "Plataforma EduAirControl" {
+  [API Gateway\nSpring Cloud Gateway :8080\nJWT JWKS · rate limit · BFF] as GW
+
+  [ms-security\n:8081\nOAuth2/OIDC · JWT RS256] as SEC
+  [ms-classroom-management\n:3002] as CLS
+  [ms-sensor-management\n:3004] as SEN
+  [ms-environment-monitoring\n:3003] as MON
+  [ms-user-management\n:3007] as UM
+  [ms-user-experience\n:3006] as UX
+
+  database "PostgreSQL\n(1 instancia por servicio)" as PG
+  queue "RabbitMQ\ntopic + DLQ" as MQ
+  database "Redis\nsesión · rate limit · deny-list" as RD
+}
+
+U --> WEB
+A --> WEB
+WEB --> GW : HTTPS/REST
+MOB --> GW : HTTPS/REST
+ESP --> GW : HTTP + X-API-Key
+
+GW --> SEC
+GW --> CLS
+GW --> SEN
+GW --> MON
+GW --> UM
+GW --> UX
+
+SEN --> MQ : outbox\n(sensor.installation.*)
+MON --> MQ : consume\n(inbox idempotente)
+MON --> PG
+SEC --> RD : revocación / bloqueo
+GW --> RD : rate limit / sesión
+
+SEC --> PG
+CLS --> PG
+SEN --> PG
+UM --> PG
+UX --> PG
+@enduml

@@ -1,0 +1,72 @@
+databaseChangeLog:
+  - changeSet:
+      id: 003-create-educational-environments
+      author: eduaircontrol
+      comment: Tabla educational_environment — 06-data/domain/ms-classroom-management.md.
+      changes:
+        - createTable:
+            schemaName: classrooms
+            tableName: educational_environment
+            columns:
+              - column:
+                  name: educational_environment_id
+                  type: UUID
+                  defaultValueComputed: gen_random_uuid()
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pk_educational_environment
+                    nullable: false
+              - column:
+                  name: campus_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: code
+                  type: VARCHAR(30)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(120)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: environment_type_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: floor
+                  type: INTEGER
+              - column:
+                  name: area_m2
+                  type: NUMERIC(8,2)
+              - column:
+                  name: occupancy_capacity
+                  type: INTEGER
+              - column:
+                  name: status
+                  type: VARCHAR(30)
+                  defaultValue: ACTIVE
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: TIMESTAMPTZ
+                  defaultValueComputed: now()
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  type: TIMESTAMPTZ
+                  defaultValueComputed: now()
+                  constraints:
+                    nullable: false
+              - column:
+                  name: deleted_at
+                  type: TIMESTAMPTZ
+      rollback:
+        - dropTable:
+            schemaName: classrooms
+            tableName: educational_environment

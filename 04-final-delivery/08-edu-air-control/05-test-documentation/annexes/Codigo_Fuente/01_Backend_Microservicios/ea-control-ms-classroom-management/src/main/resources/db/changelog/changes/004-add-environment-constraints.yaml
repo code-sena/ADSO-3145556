@@ -1,0 +1,37 @@
+databaseChangeLog:
+  - changeSet:
+      id: 004-add-environment-constraints
+      author: eduaircontrol
+      comment: FKs intra-dominio y CHECKs recomendados (§5 del dominio).
+      changes:
+        - sql:
+            dbms: postgresql
+            sql: |
+              ALTER TABLE classrooms.educational_environment
+                  ADD CONSTRAINT fk_educational_environment_campus
+                  FOREIGN KEY (campus_id) REFERENCES classrooms.campuses (campus_id) ON DELETE RESTRICT;
+              ALTER TABLE classrooms.educational_environment
+                  ADD CONSTRAINT fk_educational_environment_type
+                  FOREIGN KEY (environment_type_id) REFERENCES classrooms.environment_types (environment_type_id) ON DELETE RESTRICT;
+              ALTER TABLE classrooms.educational_environment
+                  ADD CONSTRAINT uq_educational_environment_campus_code
+                  UNIQUE (campus_id, code);
+              ALTER TABLE classrooms.educational_environment
+                  ADD CONSTRAINT chk_educational_environment_floor
+                  CHECK (floor IS NULL OR floor >= 0);
+              ALTER TABLE classrooms.educational_environment
+                  ADD CONSTRAINT chk_educational_environment_area
+                  CHECK (area_m2 IS NULL OR area_m2 > 0);
+              ALTER TABLE classrooms.educational_environment
+                  ADD CONSTRAINT chk_educational_environment_capacity
+                  CHECK (occupancy_capacity IS NULL OR occupancy_capacity > 0);
+      rollback:
+        - sql:
+            dbms: postgresql
+            sql: |
+              ALTER TABLE classrooms.educational_environment DROP CONSTRAINT IF EXISTS fk_educational_environment_campus;
+              ALTER TABLE classrooms.educational_environment DROP CONSTRAINT IF EXISTS fk_educational_environment_type;
+              ALTER TABLE classrooms.educational_environment DROP CONSTRAINT IF EXISTS uq_educational_environment_campus_code;
+              ALTER TABLE classrooms.educational_environment DROP CONSTRAINT IF EXISTS chk_educational_environment_floor;
+              ALTER TABLE classrooms.educational_environment DROP CONSTRAINT IF EXISTS chk_educational_environment_area;
+              ALTER TABLE classrooms.educational_environment DROP CONSTRAINT IF EXISTS chk_educational_environment_capacity;

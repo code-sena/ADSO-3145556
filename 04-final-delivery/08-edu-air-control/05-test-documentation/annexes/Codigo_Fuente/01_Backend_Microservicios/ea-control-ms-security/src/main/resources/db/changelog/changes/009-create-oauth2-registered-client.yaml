@@ -1,0 +1,29 @@
+databaseChangeLog:
+  - changeSet:
+      id: 009-create-oauth2-registered-client
+      author: eduaircontrol
+      comment: "Clientes OAuth2 registrados (Spring Authorization Server 7, ADR-017)."
+      changes:
+        - sql:
+            dbms: postgresql
+            sql: |
+              CREATE TABLE seguridad.oauth2_registered_client (
+                  id varchar(100) NOT NULL,
+                  client_id varchar(100) NOT NULL,
+                  client_id_issued_at timestamptz DEFAULT CURRENT_TIMESTAMP NOT NULL,
+                  client_secret varchar(200) DEFAULT NULL,
+                  client_secret_expires_at timestamptz DEFAULT NULL,
+                  client_name varchar(200) NOT NULL,
+                  client_authentication_methods varchar(1000) NOT NULL,
+                  authorization_grant_types varchar(1000) NOT NULL,
+                  redirect_uris varchar(1000) DEFAULT NULL,
+                  post_logout_redirect_uris varchar(1000) DEFAULT NULL,
+                  scopes varchar(1000) NOT NULL,
+                  client_settings varchar(2000) NOT NULL,
+                  token_settings varchar(2000) NOT NULL,
+                  PRIMARY KEY (id)
+              );
+      rollback:
+        - sql:
+            dbms: postgresql
+            sql: DROP TABLE IF EXISTS seguridad.oauth2_registered_client

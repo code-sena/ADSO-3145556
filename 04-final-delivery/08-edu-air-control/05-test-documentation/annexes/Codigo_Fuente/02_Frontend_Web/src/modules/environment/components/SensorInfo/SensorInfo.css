@@ -1,0 +1,70 @@
+.sensor-card{
+  display:flex;
+  gap:18px;
+  align-items:flex-start;
+  padding:20px;
+  border-radius:18px;
+  background:#fff;
+  border:1px solid #ececec;
+  transition:.25s;
+}
+
+.sensor-card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 12px 28px rgba(0,0,0,.08);
+}
+
+.sensor-icon{
+  width:60px;
+  height:60px;
+  border-radius:16px;
+  background:#eef9f1;
+  color:#16a34a;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:30px;
+  flex-shrink:0;
+}
+
+.sensor-content{
+  flex:1;
+}
+
+.sensor-content h4{
+  font-size:17px;
+  font-weight:700;
+  color:#222;
+  margin-bottom:8px;
+}
+
+.sensor-value{
+  display:block;
+  font-size:22px;
+  font-weight:700;
+  color:#16a34a;
+  margin-bottom:10px;
+}
+
+.sensor-content p{
+  color:#777;
+  font-size:14px;
+  line-height:1.6;
+}
+
+body.dark-mode .sensor-card{
+  background:#1f2937;
+  border-color:#374151;
+}
+
+body.dark-mode .sensor-content h4{
+  color:white;
+}
+
+body.dark-mode .sensor-content p{
+  color:#9ca3af;
+}
+
+body.dark-mode .sensor-icon{
+  background:#243447;
+}

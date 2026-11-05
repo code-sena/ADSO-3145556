@@ -1,0 +1,153 @@
+/* Fondo y card */
+.auth-container {
+  background: url('/src/shared/assets/fondo-login.png') no-repeat center center fixed;
+  background-size: cover;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.auth-card {
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  border-radius: 12px;
+  padding: 2rem;
+  width: 100%;
+  max-width: 400px;
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+/* Títulos */
+.auth-card h1,
+.auth-card h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #4caf50;
+}
+
+/* Inputs */
+.auth-card input {
+  width: 100%;
+  padding: 0.8rem;
+  margin: 0.5rem 0;
+  border: none;
+  border-radius: 8px;
+}
+
+/* Botón principal (Iniciar sesión, Registrarse) */
+.auth-card button {
+  width: 100%;
+  padding: 0.8rem;
+  margin-top: 1rem;
+  background: #4caf50;
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.auth-card button:hover {
+  background: #45a049;
+}
+
+/* Botón de Google */
+.btn-google {
+  background: #fff;
+  color: #000;
+  border: 1px solid #ddd;
+}
+
+.btn-google:hover {
+  background: #f2f2f2;
+}
+
+/* Botón de Facebook */
+.btn-facebook {
+  background: #1877f2;
+  color: #fff;
+}
+
+.btn-facebook:hover {
+  background: #145dbf;
+}
+
+/* Texto extra */
+.auth-extra {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.auth-extra a {
+  color: #4caf50;
+  text-decoration: none;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Botón de registro */
+.btn-signup {
+  width: 100%;
+  padding: 0.8rem;
+  margin-top: 1rem;
+  background: #4caf50;
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.btn-signup:hover {
+  background: #45a049;
+}
+
+/* Botones sociales */
+.social-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.btn-google {
+  background: #fff;
+  color: #000;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 0.8rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn-google:hover {
+  background: #f2f2f2;
+}
+
+.btn-facebook {
+  background: #1877f2;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.8rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn-facebook:hover {
+  background: #145dbf;
+}

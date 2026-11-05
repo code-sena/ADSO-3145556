@@ -1,0 +1,38 @@
+databaseChangeLog:
+  - changeSet:
+      id: 002-add-user-profiles-constraints
+      author: eduaircontrol
+      comment: "Unicidad de userId + índices de búsqueda/estado."
+      changes:
+        - addUniqueConstraint:
+            schemaName: user_management
+            tableName: user_profiles
+            columnNames: user_id
+            constraintName: uq_user_profiles_user_id
+        - createIndex:
+            schemaName: user_management
+            tableName: user_profiles
+            indexName: idx_user_profiles_status
+            columns:
+              - column:
+                  name: status
+        - createIndex:
+            schemaName: user_management
+            tableName: user_profiles
+            indexName: idx_user_profiles_deleted_at
+            columns:
+              - column:
+                  name: deleted_at
+      rollback:
+        - dropIndex:
+            schemaName: user_management
+            tableName: user_profiles
+            indexName: idx_user_profiles_deleted_at
+        - dropIndex:
+            schemaName: user_management
+            tableName: user_profiles
+            indexName: idx_user_profiles_status
+        - dropUniqueConstraint:
+            schemaName: user_management
+            tableName: user_profiles
+            constraintName: uq_user_profiles_user_id

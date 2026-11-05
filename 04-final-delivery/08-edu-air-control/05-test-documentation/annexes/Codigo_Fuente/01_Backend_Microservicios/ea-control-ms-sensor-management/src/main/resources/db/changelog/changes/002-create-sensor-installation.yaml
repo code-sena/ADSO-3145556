@@ -1,0 +1,40 @@
+databaseChangeLog:
+  - changeSet:
+      id: 002-create-sensor-installation
+      author: eduaircontrol
+      comment: Tabla sensor_installation (histórico de instalaciones) — 06-data/domain/ms-sensor-management.md.
+      changes:
+        - createTable:
+            schemaName: sensors
+            tableName: sensor_installation
+            columns:
+              - column:
+                  name: sensor_installation_id
+                  type: UUID
+                  defaultValueComputed: gen_random_uuid()
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pk_sensor_installation
+                    nullable: false
+              - column:
+                  name: sensor_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: educational_environment_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: installed_at
+                  type: TIMESTAMPTZ
+                  constraints:
+                    nullable: false
+              - column:
+                  name: removed_at
+                  type: TIMESTAMPTZ
+      rollback:
+        - dropTable:
+            schemaName: sensors
+            tableName: sensor_installation

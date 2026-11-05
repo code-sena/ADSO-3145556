@@ -1,0 +1,89 @@
+databaseChangeLog:
+  - changeSet:
+      id: 008-create-outbox-event
+      author: eduaircontrol
+      comment: >-
+        Outbox transaccional (ADR-007) de los eventos de instalacion de sensores.
+        Se escribe en la misma transaccion que la alta o el cierre de la instalacion
+        y lo publica OutboxRelay hacia eduaircontrol.sensor.
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            tableExists:
+              schemaName: sensors
+              tableName: outbox_event
+      changes:
+        - createTable:
+            schemaName: sensors
+            tableName: outbox_event
+            columns:
+              - column:
+                  name: event_id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pk_outbox_event
+                    nullable: false
+              - column:
+                  name: event_type
+                  type: VARCHAR(80)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: aggregate_type
+                  type: VARCHAR(60)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: aggregate_id
+                  type: VARCHAR(60)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: routing_key
+                  type: VARCHAR(80)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: payload
+                  type: TEXT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: occurred_at
+                  type: TIMESTAMPTZ
+                  constraints:
+                    nullable: false
+              - column:
+                  name: published_at
+                  type: TIMESTAMPTZ
+              - column:
+                  name: attempts
+                  type: INTEGER
+                  defaultValueNumeric: 0
+                  constraints:
+                    nullable: false
+              - column:
+                  name: last_error
+                  type: TEXT
+        - createIndex:
+            schemaName: sensors
+            tableName: outbox_event
+            indexName: ix_outbox_event_pending
+            columns:
+              - column:
+                  name: occurred_at
+            where: published_at IS NULL
+        - createIndex:
+            schemaName: sensors
+            tableName: outbox_event
+            indexName: ix_outbox_event_aggregate
+            columns:
+              - column:
+                  name: aggregate_type
+              - column:
+                  name: aggregate_id
+      rollback:
+        - dropTable:
+            schemaName: sensors
+            tableName: outbox_event

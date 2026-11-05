@@ -1,0 +1,29 @@
+databaseChangeLog:
+  - changeSet:
+      id: 006-add-campus-institution
+      author: eduaircontrol
+      comment: "Institucion (tenant) del campus; referencia por UUID a ms-security (ADR-016)."
+      changes:
+        - addColumn:
+            schemaName: classrooms
+            tableName: campuses
+            columns:
+              - column:
+                  name: institution_id
+                  type: UUID
+        - createIndex:
+            schemaName: classrooms
+            tableName: campuses
+            indexName: idx_campuses_institution_id
+            columns:
+              - column:
+                  name: institution_id
+      rollback:
+        - dropIndex:
+            schemaName: classrooms
+            tableName: campuses
+            indexName: idx_campuses_institution_id
+        - dropColumn:
+            schemaName: classrooms
+            tableName: campuses
+            columnName: institution_id

@@ -1,0 +1,775 @@
+openapi: 3.0.3
+info:
+  title: Sensor Management API
+  version: 1.0.0
+  description: |
+    API of the `ms-sensor-management` service: sensor registration and management
+    (sensors, installation history, variables, and sensor↔variable associations).
+
+    ## Ownership
+    This service is the authoritative owner of the `sensors` schema
+    (`sensor`, `sensor_installation`, `variable`, `sensor_variable`).
+
+    ## Authentication
+    All endpoints except `/health` require a valid JWT in the header:
+    ```
+    Authorization: Bearer <token>
+    ```
+    Reads require any valid token; writes (`POST`, `PATCH`, `DELETE`) require the `ADMIN` role.
+
+    ## Error handling
+    All errors follow the `ErrorResponse` schema defined in `_shared.yaml`.
+
+    ## Pagination
+    List endpoints support pagination via `?page=1&limit=20`.
+    The sensor-variable association list is intentionally unpaginated.
+
+    ## Physical delete
+    This domain has no soft delete (`06-data/domain/ms-sensor-management.md`):
+    `DELETE /sensors/{id}` and `DELETE /variables/{id}` remove rows physically and
+    return `409` when referenced (installations / associations). Installations are
+    never deleted — they are closed with `POST /sensor-installations/{id}/remove`
+    (`removed_at`).
+
+    ## Logical references
+    `sensorModelId`, `sensorStatusId`, `measurementUnitId`, and
+    `educationalEnvironmentId` are logical references to excluded catalogs or other
+    domains; they are validated as UUIDs only (no existence check — see
+    `decisions.md`).
+
+servers:
+  - url: http://localhost:3004
+    description: Local development
+  - url: https://api.dev.{domain}
+    description: Development environment
+    variables:
+      domain:
+        default: example.com
+  - url: https://api.{domain}
+    description: Production
+    variables:
+      domain:
+        default: example.com
+
+security:
+  - bearerAuth: []
+
+tags:
+  - name: Sensors
+    description: Sensor registration and lifecycle
+  - name: Variables
+    description: Measured variables catalog (owned by this service)
+  - name: Sensor Installations
+    description: Installation history of sensors in educational environments
+  - name: Sensor Variables
+    description: N:M associations between sensors and variables
+  - name: Health
+    description: Service health check
+
+paths:
+  /health:
+    get:
+      summary: Health check
+      description: Checks that the service is running and its database is reachable.
+      tags:
+        - Health
+      security: []
+      responses:
+        '200':
+          description: Service is healthy
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResponse'
+              example:
+                status: ok
+                timestamp: '2026-10-06T10:30:00Z'
+                dependencies:
+                  database: ok
+        '503':
+          description: Service unavailable (starting up or a dependency is down)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResponse'
+
+  /api/v1/sensors:
+    get:
+      summary: List sensors
+      description: Returns a paginated list of sensors.
+      operationId: listSensors
+      tags:
+        - Sensors
+      parameters:
+        - $ref: './_shared.yaml#/components/parameters/PageParam'
+        - $ref: './_shared.yaml#/components/parameters/LimitParam'
+        - name: q
+          in: query
+          description: Free-text filter on serial number
+          schema:
+            type: string
+        - name: sensorModelId
+          in: query
+          description: Filter by sensor model (logical reference)
+          schema:
+            $ref: './_shared.yaml#/components/schemas/UUID'
+        - name: sensorStatusId
+          in: query
+          description: Filter by sensor status (logical reference)
+          schema:
+            $ref: './_shared.yaml#/components/schemas/UUID'
+      responses:
+        '200':
+          description: List of sensors
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [data, meta]
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/SensorResponse'
+                  meta:
+                    $ref: './_shared.yaml#/components/schemas/PaginatedMeta'
+        '401':
+          $ref: './_shared.yaml#/components/responses/Unauthorized'
+        '500':
+          $ref: './_shared.yaml#/components/responses/InternalError'
+
+    post:
+      summary: Create sensor
+      description: |
+        Creates a new sensor. `serialNumber` must be unique (case-insensitive check,
+        stored as provided).
+      operationId: createSensor
+      tags:
+        - Sensors
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SensorCreateRequest'
+            example:
+              serialNumber: SN-2026-0001
+              sensorModelId: 550e8400-e29b-41d4-a716-446655440000
+              sensorStatusId: 660e8400-e29b-41d4-a716-446655440000
+      responses:
+        '201':
+          description: Sensor created successfully
+          headers:
+            Location:
+              description: URL of the created resource
+              schema:
+                type: string
+                example: /api/v1/sensors/550e8400-e29b-41d4-a716-446655440000
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SensorResponse'
+        '400':
+          $ref: './_shared.yaml#/components/responses/BadRequest'
+        '401':
+          $ref: './_shared.yaml#/components/responses/Unauthorized'
+        '403':
+          $ref: './_shared.yaml#/components/responses/Forbidden'
+        '409':
+          $ref: './_shared.yaml#/components/responses/Conflict'
+        '500':
+          $ref: './_shared.yaml#/components/responses/InternalError'
+
+  /api/v1/sensors/{id}:
+    parameters:
+      - $ref: './_shared.yaml#/components/parameters/IdParam'
+
+    get:
+      summary: Get sensor by ID
+      operationId: getSensorById
+      tags:
+        - Sensors
+      responses:
+        '200':
+          description: Sensor found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SensorResponse'
+        '401':
+          $ref: './_shared.yaml#/components/responses/Unauthorized'
+        '404':
+          $ref: './_shared.yaml#/components/responses/NotFound'
+        '500':
+          $ref: './_shared.yaml#/components/responses/InternalError'
+
+    patch:
+      summary: Update sensor
+      description: Partial update (only the submitted fields are modified).
+      operationId: updateSensor
+      tags:
+        - Sensors
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SensorUpdateRequest'
+      responses:
+        '200':
+          description: Sensor updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SensorResponse'
+        '400':
+          $ref: './_shared.yaml#/components/responses/BadRequest'
+        '401':
+          $ref: './_shared.yaml#/components/responses/Unauthorized'
+        '403':
+          $ref: './_shared.yaml#/components/responses/Forbidden'
+        '404':
+          $ref: './_shared.yaml#/components/responses/NotFound'
+        '409':
+          $ref: './_shared.yaml#/components/responses/Conflict'
+
+    delete:
+      summary: Delete sensor
+      description: |
+        Physical delete. Returns `409` when the sensor has installation history;
+        variable associations are removed in the same transaction.
+      operationId: deleteSensor
+      tags:
+        - Sensors
+      responses:
+        '204':
+          description: Deleted successfully (no response body)
+        '401':
+          $ref: './_shared.yaml#/components/responses/Unauthorized'
+        '403':
+          $ref: './_shared.yaml#/components/responses/Forbidden'
+        '404':
+          $ref: './_shared.yaml#/components/responses/NotFound'
+        '409':
+          $ref: './_shared.yaml#/components/responses/Conflict'
+
+  /api/v1/variables:
+    get:
+      summary: List variables
+      description: Returns a paginated list of measured variables.
+      operationId: listVariables
+      tags:
+        - Variables
+      parameters:
+        - $ref: './_shared.yaml#/components/parameters/PageParam'
+        - $ref: './_shared.yaml#/components/parameters/LimitParam'
+        - name: q
+          in: query
+          description: Free-text filter on code or name
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of variables
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [data, meta]
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/VariableResponse'
+                  meta:
+                    $ref: './_shared.yaml#/components/schemas/PaginatedMeta'
+        '401':
+          $ref: './_shared.yaml#/components/responses/Unauthorized'
+        '500':
+          $ref: './_shared.yaml#/components/responses/InternalError'
+
+    post:
+      summary: Create variable
+      description: Creates a measured variable. `code` is normalized to uppercase and must be unique.
+      operationId: createVariable
+      tags:
+        - Variables
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VariableCreateRequest'
+            example:
+              code: TEMP
+              name: Temperature
+              measurementUnitId: 770e8400-e29b-41d4-a716-446655440000
+              description: Air temperature
+      responses:
+        '201':
+          description: Variable created successfully
+          headers:
+            Location:
+              description: URL of the created resource
+              schema:
+                type: string
+                example: /api/v1/variables/550e8400-e29b-41d4-a716-446655440000
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VariableResponse'
+        '400':
+          $ref: './_shared.yaml#/components/responses/BadRequest'
+        '401':
+          $ref: './_shared.yaml#/components/responses/Unauthorized'
+        '403':
+          $ref: './_shared.yaml#/components/responses/Forbidden'
+        '409':
+          $ref: './_shared.yaml#/components/responses/Conflict'
+        '500':
+          $ref: './_shared.yaml#/components/responses/InternalError'
+
+  /api/v1/variables/{id}:
+    parameters:
+      - $ref: './_shared.yaml#/components/parameters/IdParam'
+
+    get:
+      summary: Get variable by ID
+      operationId: getVariableById
+      tags:
+        - Variables
+      responses:
+        '200':
+          description: Variable found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VariableResponse'
+        '401':
+          $ref: './_shared.yaml#/components/responses/Unauthorized'
+        '404':
+          $ref: './_shared.yaml#/components/responses/NotFound'
+        '500':
+          $ref: './_shared.yaml#/components/responses/InternalError'
+
+    delete:
+      summary: Delete variable
+      description: |
+        Physical delete. Returns `409` when the variable is referenced by
+        sensor↔variable associations.
+      operationId: deleteVariable
+      tags:
+        - Variables
+      responses:
+        '204':
+          description: Deleted successfully (no response body)
+        '401':
+          $ref: './_shared.yaml#/components/responses/Unauthorized'
+        '403':
+          $ref: './_shared.yaml#/components/responses/Forbidden'
+        '404':
+          $ref: './_shared.yaml#/components/responses/NotFound'
+        '409':
+          $ref: './_shared.yaml#/components/responses/Conflict'
+
+  /api/v1/sensor-installations:
+    get:
+      summary: List sensor installations
+      description: |
+        Returns a paginated installation history. Use `active=true` for open
+        installations and `active=false` for closed ones.
+      operationId: listSensorInstallations
+      tags:
+        - Sensor Installations
+      parameters:
+        - $ref: './_shared.yaml#/components/parameters/PageParam'
+        - $ref: './_shared.yaml#/components/parameters/LimitParam'
+        - name: sensorId
+          in: query
+          description: Filter by sensor
+          schema:
+            $ref: './_shared.yaml#/components/schemas/UUID'
+        - name: educationalEnvironmentId
+          in: query
+          description: Filter by educational environment (logical reference)
+          schema:
+            $ref: './_shared.yaml#/components/schemas/UUID'
+        - name: active
+          in: query
+          description: Filter open (`true`) or closed (`false`) installations
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: List of sensor installations
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [data, meta]
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/SensorInstallationResponse'
+                  meta:
+                    $ref: './_shared.yaml#/components/schemas/PaginatedMeta'
+        '401':
+          $ref: './_shared.yaml#/components/responses/Unauthorized'
+        '500':
+          $ref: './_shared.yaml#/components/responses/InternalError'
+
+    post:
+      summary: Install sensor
+      description: |
+        Registers an installation of a sensor in an educational environment.
+        The sensor must exist (`404`) and must not have an overlapping installation
+        (an open installation, or a period that overlaps `installedAt`) — `409`.
+      operationId: createSensorInstallation
+      tags:
+        - Sensor Installations
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SensorInstallationCreateRequest'
+            example:
+              sensorId: 550e8400-e29b-41d4-a716-446655440000
+              educationalEnvironmentId: 660e8400-e29b-41d4-a716-446655440000
+              installedAt: '2026-10-06T08:00:00Z'
+      responses:
+        '201':
+          description: Installation created successfully
+          headers:
+            Location:
+              description: URL of the created resource
+              schema:
+                type: string
+                example: /api/v1/sensor-installations/550e8400-e29b-41d4-a716-446655440000
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SensorInstallationResponse'
+        '400':
+          $ref: './_shared.yaml#/components/responses/BadRequest'
+        '401':
+          $ref: './_shared.yaml#/components/responses/Unauthorized'
+        '403':
+          $ref: './_shared.yaml#/components/responses/Forbidden'
+        '404':
+          $ref: './_shared.yaml#/components/responses/NotFound'
+        '409':
+          $ref: './_shared.yaml#/components/responses/Conflict'
+        '500':
+          $ref: './_shared.yaml#/components/responses/InternalError'
+
+  /api/v1/sensor-installations/{id}:
+    parameters:
+      - $ref: './_shared.yaml#/components/parameters/IdParam'
+
+    get:
+      summary: Get sensor installation by ID
+      operationId: getSensorInstallationById
+      tags:
+        - Sensor Installations
+      responses:
+        '200':
+          description: Installation found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SensorInstallationResponse'
+        '401':
+          $ref: './_shared.yaml#/components/responses/Unauthorized'
+        '404':
+          $ref: './_shared.yaml#/components/responses/NotFound'
+        '500':
+          $ref: './_shared.yaml#/components/responses/InternalError'
+
+  /api/v1/sensor-installations/{id}/remove:
+    parameters:
+      - $ref: './_shared.yaml#/components/parameters/IdParam'
+
+    post:
+      summary: Close sensor installation
+      description: |
+        Closes an open installation by setting `removedAt` (the row is kept as
+        history — installations are never physically deleted). Returns `409` when
+        already closed, `400` when `installedAt` is in the future.
+      operationId: closeSensorInstallation
+      tags:
+        - Sensor Installations
+      responses:
+        '200':
+          description: Installation closed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SensorInstallationResponse'
+        '400':
+          $ref: './_shared.yaml#/components/responses/BadRequest'
+        '401':
+          $ref: './_shared.yaml#/components/responses/Unauthorized'
+        '403':
+          $ref: './_shared.yaml#/components/responses/Forbidden'
+        '404':
+          $ref: './_shared.yaml#/components/responses/NotFound'
+        '409':
+          $ref: './_shared.yaml#/components/responses/Conflict'
+
+  /api/v1/sensor-variables:
+    get:
+      summary: List sensor-variable associations
+      description: |
+        Returns the N:M associations between sensors and variables. Optional
+        `sensorId` filter. Not paginated (association table).
+      operationId: listSensorVariables
+      tags:
+        - Sensor Variables
+      parameters:
+        - name: sensorId
+          in: query
+          description: Filter associations by sensor
+          schema:
+            $ref: './_shared.yaml#/components/schemas/UUID'
+      responses:
+        '200':
+          description: List of associations
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SensorVariable'
+        '401':
+          $ref: './_shared.yaml#/components/responses/Unauthorized'
+        '500':
+          $ref: './_shared.yaml#/components/responses/InternalError'
+
+    post:
+      summary: Associate sensor with variable
+      description: |
+        Creates a sensor↔variable association. Both records must exist (`404`);
+        the pair must be unique (`409`).
+      operationId: createSensorVariable
+      tags:
+        - Sensor Variables
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SensorVariableRequest'
+            example:
+              sensorId: 550e8400-e29b-41d4-a716-446655440000
+              variableId: 770e8400-e29b-41d4-a716-446655440000
+      responses:
+        '201':
+          description: Association created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SensorVariable'
+        '400':
+          $ref: './_shared.yaml#/components/responses/BadRequest'
+        '401':
+          $ref: './_shared.yaml#/components/responses/Unauthorized'
+        '403':
+          $ref: './_shared.yaml#/components/responses/Forbidden'
+        '404':
+          $ref: './_shared.yaml#/components/responses/NotFound'
+        '409':
+          $ref: './_shared.yaml#/components/responses/Conflict'
+
+  /api/v1/sensor-variables/{sensorId}/{variableId}:
+    parameters:
+      - name: sensorId
+        in: path
+        required: true
+        description: Sensor ID
+        schema:
+          $ref: './_shared.yaml#/components/schemas/UUID'
+      - name: variableId
+        in: path
+        required: true
+        description: Variable ID
+        schema:
+          $ref: './_shared.yaml#/components/schemas/UUID'
+
+    delete:
+      summary: Remove sensor-variable association
+      description: Removes the association between the sensor and the variable.
+      operationId: deleteSensorVariable
+      tags:
+        - Sensor Variables
+      responses:
+        '204':
+          description: Association removed (no response body)
+        '401':
+          $ref: './_shared.yaml#/components/responses/Unauthorized'
+        '403':
+          $ref: './_shared.yaml#/components/responses/Forbidden'
+        '404':
+          $ref: './_shared.yaml#/components/responses/NotFound'
+
+components:
+  schemas:
+    # ─── Health ───────────────────────────────────────────────────────────────
+    HealthResponse:
+      type: object
+      required: [status, timestamp]
+      properties:
+        status:
+          type: string
+          enum: [ok, down]
+        timestamp:
+          $ref: './_shared.yaml#/components/schemas/Timestamp'
+        dependencies:
+          type: object
+          properties:
+            database:
+              type: string
+              enum: [ok, degraded, down]
+
+    # ─── Sensors ──────────────────────────────────────────────────────────────
+    SensorCreateRequest:
+      type: object
+      description: Data to create a new sensor
+      required: [serialNumber, sensorModelId, sensorStatusId]
+      properties:
+        serialNumber:
+          type: string
+          maxLength: 60
+          description: Unique device serial number (stored as provided)
+          example: SN-2026-0001
+        sensorModelId:
+          $ref: './_shared.yaml#/components/schemas/UUID'
+        sensorStatusId:
+          $ref: './_shared.yaml#/components/schemas/UUID'
+
+    SensorUpdateRequest:
+      type: object
+      description: Partial update for a sensor (omit the fields to keep)
+      properties:
+        serialNumber:
+          type: string
+          maxLength: 60
+        sensorModelId:
+          $ref: './_shared.yaml#/components/schemas/UUID'
+        sensorStatusId:
+          $ref: './_shared.yaml#/components/schemas/UUID'
+        lastSeenAt:
+          $ref: './_shared.yaml#/components/schemas/Timestamp'
+
+    SensorResponse:
+      type: object
+      required: [sensorId, serialNumber, sensorModelId, sensorStatusId, createdAt]
+      properties:
+        sensorId:
+          $ref: './_shared.yaml#/components/schemas/UUID'
+        serialNumber:
+          type: string
+          example: SN-2026-0001
+        sensorModelId:
+          $ref: './_shared.yaml#/components/schemas/UUID'
+        sensorStatusId:
+          $ref: './_shared.yaml#/components/schemas/UUID'
+        lastSeenAt:
+          $ref: './_shared.yaml#/components/schemas/Timestamp'
+        createdAt:
+          $ref: './_shared.yaml#/components/schemas/Timestamp'
+        updatedAt:
+          $ref: './_shared.yaml#/components/schemas/Timestamp'
+
+    # ─── Variables ────────────────────────────────────────────────────────────
+    VariableCreateRequest:
+      type: object
+      description: Data to create a measured variable
+      required: [code, name, measurementUnitId]
+      properties:
+        code:
+          type: string
+          maxLength: 30
+          description: Unique variable code (normalized to uppercase)
+          example: TEMP
+        name:
+          type: string
+          maxLength: 80
+          example: Temperature
+        measurementUnitId:
+          $ref: './_shared.yaml#/components/schemas/UUID'
+        description:
+          type: string
+          maxLength: 255
+          example: Air temperature
+
+    VariableResponse:
+      type: object
+      required: [variableId, code, name, measurementUnitId, createdAt]
+      properties:
+        variableId:
+          $ref: './_shared.yaml#/components/schemas/UUID'
+        code:
+          type: string
+          example: TEMP
+        name:
+          type: string
+          example: Temperature
+        measurementUnitId:
+          $ref: './_shared.yaml#/components/schemas/UUID'
+        description:
+          type: string
+          nullable: true
+          example: Air temperature
+        createdAt:
+          $ref: './_shared.yaml#/components/schemas/Timestamp'
+
+    # ─── Installations ────────────────────────────────────────────────────────
+    SensorInstallationCreateRequest:
+      type: object
+      description: Data to register a sensor installation
+      required: [sensorId, educationalEnvironmentId, installedAt]
+      properties:
+        sensorId:
+          $ref: './_shared.yaml#/components/schemas/UUID'
+        educationalEnvironmentId:
+          $ref: './_shared.yaml#/components/schemas/UUID'
+        installedAt:
+          $ref: './_shared.yaml#/components/schemas/Timestamp'
+
+    SensorInstallationResponse:
+      type: object
+      required: [sensorInstallationId, sensorId, educationalEnvironmentId, installedAt]
+      properties:
+        sensorInstallationId:
+          $ref: './_shared.yaml#/components/schemas/UUID'
+        sensorId:
+          $ref: './_shared.yaml#/components/schemas/UUID'
+        educationalEnvironmentId:
+          $ref: './_shared.yaml#/components/schemas/UUID'
+        installedAt:
+          $ref: './_shared.yaml#/components/schemas/Timestamp'
+        removedAt:
+          $ref: './_shared.yaml#/components/schemas/Timestamp'
+
+    # ─── Sensor ↔ Variable ────────────────────────────────────────────────────
+    SensorVariableRequest:
+      type: object
+      description: Data to associate a sensor with a variable
+      required: [sensorId, variableId]
+      properties:
+        sensorId:
+          $ref: './_shared.yaml#/components/schemas/UUID'
+        variableId:
+          $ref: './_shared.yaml#/components/schemas/UUID'
+
+    SensorVariable:
+      type: object
+      description: Association between a sensor and a measured variable
+      required: [sensorId, variableId]
+      properties:
+        sensorId:
+          $ref: './_shared.yaml#/components/schemas/UUID'
+        variableId:
+          $ref: './_shared.yaml#/components/schemas/UUID'

@@ -1,0 +1,25 @@
+databaseChangeLog:
+  - changeSet:
+      id: 005-add-foreign-keys
+      author: eduaircontrol
+      comment: FKs intra-dominio según DDL de referencia (database/negocio).
+      changes:
+        - sql:
+            dbms: postgresql
+            sql: |
+              ALTER TABLE sensors.sensor_installation
+                  ADD CONSTRAINT fk_sensor_installation_sensor
+                  FOREIGN KEY (sensor_id) REFERENCES sensors.sensor (sensor_id) ON DELETE RESTRICT;
+              ALTER TABLE sensors.sensor_variable
+                  ADD CONSTRAINT fk_sensor_variable_sensor
+                  FOREIGN KEY (sensor_id) REFERENCES sensors.sensor (sensor_id) ON DELETE CASCADE;
+              ALTER TABLE sensors.sensor_variable
+                  ADD CONSTRAINT fk_sensor_variable_variable
+                  FOREIGN KEY (variable_id) REFERENCES sensors.variable (variable_id) ON DELETE RESTRICT;
+      rollback:
+        - sql:
+            dbms: postgresql
+            sql: |
+              ALTER TABLE sensors.sensor_installation DROP CONSTRAINT IF EXISTS fk_sensor_installation_sensor;
+              ALTER TABLE sensors.sensor_variable DROP CONSTRAINT IF EXISTS fk_sensor_variable_sensor;
+              ALTER TABLE sensors.sensor_variable DROP CONSTRAINT IF EXISTS fk_sensor_variable_variable;

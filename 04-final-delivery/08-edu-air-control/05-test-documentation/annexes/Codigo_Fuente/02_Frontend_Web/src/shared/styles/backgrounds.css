@@ -1,0 +1,151 @@
+/* =========================================
+   FONDO GLOBAL
+========================================= */
+
+.app-background {
+  min-height: 100vh;
+  width: 100%;
+
+  background: transparent;
+  background-image: url('/Web/Front-End/src/shared/assets/bg.png');
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
+  padding-top: 90px;
+}
+
+/* =========================================
+   CONTENEDORES PRINCIPALES
+========================================= */
+
+.dashboard-page,
+.all-env-container,
+.favorites-content,
+.settings-content,
+.profile-content,
+.mgmt-container {
+  width: 100%;
+  max-width: 1450px;
+
+  margin: 0 auto;
+
+  padding: 30px 40px 60px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+
+  background: transparent !important;
+}
+
+/* =========================================
+   DASHBOARD GRID
+========================================= */
+
+.dashboard-layout {
+  display: grid;
+
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+
+  gap: 24px;
+
+  width: 100%;
+}
+
+/* =========================================
+   CARDS PRINCIPALES
+========================================= */
+
+.settings-card,
+.profile-card,
+.filter-card,
+.mgmt-card {
+  background: var(--bg-card) !important;
+
+  backdrop-filter: blur(14px);
+
+  border: 1px solid var(--lb-glass-border);
+}
+
+.summary-card,
+.env-card {
+  background: var(--bg-card) !important;
+
+  backdrop-filter: blur(14px);
+
+  border: 1px solid var(--lb-glass-border);
+
+  border-radius: 24px;
+
+  box-shadow: var(--shadow-lg);
+
+  overflow: hidden;
+
+  transition: all 0.3s ease;
+}
+
+body.dark-mode .summary-card,
+body.dark-mode .env-card {
+  background: var(--lb-glass-bg) !important;
+}
+
+/* Hover elegante */
+
+.summary-card:hover,
+.env-card:hover,
+.settings-card:hover,
+.profile-card:hover,
+.filter-card:hover,
+.mgmt-card:hover {
+  transform: translateY(-4px);
+
+  border-color: var(--lb-glass-border-hover);
+
+  box-shadow: var(--shadow-xl);
+}
+
+/* =========================================
+   PADDING INTERNO
+========================================= */
+
+.summary-card {
+  padding: 24px;
+}
+
+.env-card {
+  padding: 28px;
+}
+
+.settings-card,
+.profile-card,
+.filter-card,
+.mgmt-card {
+  padding: 24px;
+}
+
+/* =========================================
+   NAVBAR
+========================================= */
+
+.navbar {
+  background: var(--bg-nav) !important;
+
+  backdrop-filter: blur(18px);
+
+  border-bottom: 1px solid var(--lb-glass-border);
+
+  box-shadow: var(--shadow-nav);
+}
+
+/* =========================================
+   ELIMINAR FONDOS VIEJOS
+========================================= */
+
+body,
+main,
+section {
+  background: transparent;
+}

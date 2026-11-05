@@ -1,0 +1,29 @@
+databaseChangeLog:
+  - changeSet:
+      id: 003-add-profile-institution
+      author: eduaircontrol
+      comment: "Institucion (tenant) del perfil; referencia por UUID a ms-security (ADR-016)."
+      changes:
+        - addColumn:
+            schemaName: user_management
+            tableName: user_profiles
+            columns:
+              - column:
+                  name: institution_id
+                  type: UUID
+        - createIndex:
+            schemaName: user_management
+            tableName: user_profiles
+            indexName: idx_user_profiles_institution_id
+            columns:
+              - column:
+                  name: institution_id
+      rollback:
+        - dropIndex:
+            schemaName: user_management
+            tableName: user_profiles
+            indexName: idx_user_profiles_institution_id
+        - dropColumn:
+            schemaName: user_management
+            tableName: user_profiles
+            columnName: institution_id

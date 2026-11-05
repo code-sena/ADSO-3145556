@@ -1,0 +1,49 @@
+services:
+  ms-security:
+    build: .
+    container_name: ms-security
+    ports:
+      - "8081:8081"
+    environment:
+      SERVER_PORT: 8081
+      CORS_ALLOWED_ORIGINS: ${CORS_ALLOWED_ORIGINS:-http://localhost:3000,http://localhost:5173}
+      POSTGRES_URL: jdbc:postgresql://postgres:5432/${POSTGRES_DB:-eduaircontrol_security}
+      POSTGRES_USER: ${POSTGRES_USER:-security_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD?}
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    restart: always
+
+  redis:
+    image: redis:7
+    container_name: ms-security-redis
+    ports:
+      - "6379:6379"
+    restart: always
+
+  postgres:
+    image: postgres:15
+    container_name: ms-security-db
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-eduaircontrol_security}
+      POSTGRES_USER: ${POSTGRES_USER:-security_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD?}
+    ports:
+      - "5437:5432"
+    volumes:
+      - security_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+    restart: always
+
+volumes:
+  security_postgres_data:

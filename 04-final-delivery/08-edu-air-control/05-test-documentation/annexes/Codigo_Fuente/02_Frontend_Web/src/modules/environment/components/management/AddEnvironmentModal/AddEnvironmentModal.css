@@ -1,0 +1,277 @@
+/* ─── Overlay ───────────────────────────────────────────────── */
+.add-env-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 16px;
+  animation: overlay-in 0.15s ease;
+}
+
+@keyframes overlay-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ─── Modal box ─────────────────────────────────────────────── */
+.add-env-modal {
+  background: var(--lb-glass-bg);
+  -webkit-backdrop-filter: var(--lb-glass-blur);
+  backdrop-filter: var(--lb-glass-blur);
+  border: 1px solid var(--lb-glass-border);
+  border-radius: 24px;
+  padding: 28px;
+  width: 100%;
+  max-width: 440px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  animation: modal-in 0.18s ease;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-xl);
+}
+
+.add-env-modal--wide {
+  max-width: 560px;
+}
+
+@keyframes modal-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.add-env-modal__title {
+  color: var(--text-primary);
+  font-size: calc(var(--a11y-font-size) * 1.125);
+  font-weight: 700;
+  margin: 0;
+}
+
+/* ─── Layout ────────────────────────────────────────────────── */
+.add-env-modal__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.add-env-modal__row--sm {
+  grid-template-columns: 1fr 1fr;
+  max-width: 260px;
+}
+
+.add-env-modal__field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* ─── Labels ────────────────────────────────────────────────── */
+.add-env-modal__label {
+  color: var(--text-muted);
+  font-size: calc(var(--a11y-font-size) * 0.75);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.add-env-modal__label--section {
+  font-size: calc(var(--a11y-font-size) * 0.8125);
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--text-primary);
+}
+
+.add-env-modal__required {
+  color: var(--color-danger);
+  margin-left: 2px;
+}
+
+/* ─── Inputs ────────────────────────────────────────────────── */
+.add-env-modal__input {
+  background: var(--bg-input);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  color: var(--text-primary);
+  font-size: 14px;
+  padding: 9px 12px;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+  transition: border-color 0.2s;
+}
+
+.add-env-modal__input:focus {
+  border-color: var(--accent);
+}
+
+.add-env-modal__input:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.add-env-modal__input::placeholder {
+  color: var(--text-muted);
+}
+.add-env-modal__input:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.add-env-modal__select {
+  appearance: none;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%234b5563' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 32px;
+}
+
+/* ─── Section ───────────────────────────────────────────────── */
+.add-env-modal__section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: var(--lb-surface);
+  border: 1px solid var(--lb-glass-border);
+  border-radius: 10px;
+  padding: 14px;
+}
+
+/* ─── Profile buttons ───────────────────────────────────────── */
+.add-env-modal__profiles {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.add-env-modal__profile-btn {
+  background: transparent;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  color: var(--text-muted);
+  font-size: calc(var(--a11y-font-size) * 0.8125);
+  font-weight: 500;
+  padding: 6px 14px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.add-env-modal__profile-btn:hover {
+  border-color: var(--accent);
+  color: var(--text-primary);
+}
+
+.add-env-modal__profile-btn.active {
+  background: var(--accent-light);
+  border-color: var(--accent);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* ─── Actions ───────────────────────────────────────────────── */
+.add-env-modal__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.add-env-modal__btn-cancel {
+  background: transparent;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  color: var(--text-muted);
+  font-size: calc(var(--a11y-font-size) * 0.875);
+  font-weight: 600;
+  padding: 9px 18px;
+  cursor: pointer;
+  transition:
+    border-color 0.2s,
+    color 0.2s;
+}
+
+.add-env-modal__btn-cancel:hover {
+  border-color: var(--accent);
+  color: var(--text-primary);
+}
+
+.add-env-modal__btn-save {
+  background: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  color: #fff;
+  font-size: calc(var(--a11y-font-size) * 0.875);
+  font-weight: 600;
+  padding: 9px 18px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.add-env-modal__btn-save:hover:not(:disabled) {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+}
+.add-env-modal__btn-save:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ─── Delete variant ────────────────────────────────────────── */
+.add-env-modal--delete {
+  text-align: center;
+  max-width: 380px;
+}
+
+.add-env-modal__delete-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  background: color-mix(in srgb, var(--color-danger) 12%, transparent);
+  border-radius: 50%;
+  color: var(--color-danger);
+  margin: 0 auto 4px;
+}
+
+.add-env-modal__delete-desc {
+  color: var(--text-muted);
+  font-size: calc(var(--a11y-font-size) * 0.875);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.add-env-modal__btn-delete {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--color-danger);
+  border: 1px solid var(--color-danger);
+  border-radius: 8px;
+  color: #fff;
+  font-size: calc(var(--a11y-font-size) * 0.875);
+  font-weight: 600;
+  padding: 9px 18px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.add-env-modal__btn-delete:hover {
+  background: color-mix(in srgb, var(--color-danger) 85%, #000);
+  border-color: color-mix(in srgb, var(--color-danger) 85%, #000);
+}

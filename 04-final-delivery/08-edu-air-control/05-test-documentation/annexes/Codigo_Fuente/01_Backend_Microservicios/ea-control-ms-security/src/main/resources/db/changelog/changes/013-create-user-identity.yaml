@@ -1,0 +1,106 @@
+databaseChangeLog:
+  - changeSet:
+      id: 013-create-user-identity
+      author: eduaircontrol
+      changes:
+        - createTable:
+            tableName: user_identity
+            schemaName: seguridad
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                  defaultValueComputed: gen_random_uuid()
+              - column:
+                  name: user_id
+                  type: uuid
+                  constraints:
+                    nullable: false
+              - column:
+                  name: provider
+                  type: varchar(30)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: provider_user_id
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: email
+                  type: varchar(255)
+              - column:
+                  name: display_name
+                  type: varchar(255)
+              - column:
+                  name: avatar_url
+                  type: varchar(500)
+              - column:
+                  name: created_at
+                  type: timestamptz
+                  constraints:
+                    nullable: false
+                  defaultValueComputed: now()
+        - addUniqueConstraint:
+            tableName: user_identity
+            schemaName: seguridad
+            columnNames: provider, provider_user_id
+            constraintName: uq_user_identity_provider
+        - addUniqueConstraint:
+            tableName: user_identity
+            schemaName: seguridad
+            columnNames: user_id, provider
+            constraintName: uq_user_identity_user_provider
+        - addForeignKeyConstraint:
+            baseTableName: user_identity
+            baseTableSchemaName: seguridad
+            baseColumnNames: user_id
+            referencedTableName: users
+            referencedTableSchemaName: seguridad
+            referencedColumnNames: id
+            constraintName: fk_user_identity_user
+      rollback:
+        - dropTable:
+            tableName: user_identity
+            schemaName: seguridad
+
+  - changeSet:
+      id: 013-make-password-nullable
+      author: eduaircontrol
+      changes:
+        - addNotNullConstraint:
+            tableName: users
+            schemaName: seguridad
+            columnName: password_hash
+            columnDataType: varchar(255)
+            validate: false
+        - dropNotNullConstraint:
+            tableName: users
+            schemaName: seguridad
+            columnName: password_hash
+            columnDataType: varchar(255)
+      rollback:
+        - addNotNullConstraint:
+            tableName: users
+            schemaName: seguridad
+            columnName: password_hash
+            columnDataType: varchar(255)
+
+  - changeSet:
+      id: 013-make-institution-nullable
+      author: eduaircontrol
+      changes:
+        - dropNotNullConstraint:
+            tableName: users
+            schemaName: seguridad
+            columnName: institution_id
+            columnDataType: uuid
+      rollback:
+        - addNotNullConstraint:
+            tableName: users
+            schemaName: seguridad
+            columnName: institution_id
+            columnDataType: uuid

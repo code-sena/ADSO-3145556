@@ -1,0 +1,47 @@
+@startuml 02-despliegue-ES
+title Figura — Despliegue (infra/docker-compose.yml)
+skinparam backgroundColor #FFFFFF
+skinparam defaultFontName Inter
+
+node "Navegador / App móvil" as CLIENT
+node "Dispositivo ESP32\n(DHT11 · KY-038)" as IOT
+
+node "Servidor Docker (proyecto eduaircontrol)" as HOST {
+  node "api-gateway :8080" as GW
+  node "ms-security :8081" as SEC
+  node "ms-classroom-management :3002" as CLS
+  node "ms-environment-monitoring :3003" as MON
+  node "ms-sensor-management :3004" as SEN
+  node "ms-user-experience :3006" as UX
+  node "ms-user-management :3007" as UM
+
+  node "postgres-security :5437" as P1
+  node "postgres-classroom :5433" as P2
+  node "postgres-sensor :5434" as P3
+  node "postgres-monitoring :5435" as P4
+  node "postgres-user-management :5438" as P5
+  node "postgres-user-experience :5439" as P6
+
+  node "rabbitmq :5672/:15672" as MQ
+  node "redis :6379" as RD
+}
+
+CLIENT --> GW : HTTPS
+IOT --> GW : HTTP + X-API-Key
+GW --> SEC
+GW --> CLS
+GW --> MON
+GW --> SEN
+GW --> UX
+GW --> UM
+GW --> RD
+SEC --> P1
+CLS --> P2
+SEN --> P3
+MON --> P4
+UM --> P5
+UX --> P6
+SEN --> MQ
+MON --> MQ
+SEC --> RD
+@enduml

@@ -1,0 +1,54 @@
+databaseChangeLog:
+  - changeSet:
+      id: 002-create-environment-types
+      author: eduaircontrol
+      comment: Tabla environment_types — 06-data/domain/ms-classroom-management.md.
+      changes:
+        - createTable:
+            schemaName: classrooms
+            tableName: environment_types
+            columns:
+              - column:
+                  name: environment_type_id
+                  type: UUID
+                  defaultValueComputed: gen_random_uuid()
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pk_environment_types
+                    nullable: false
+              - column:
+                  name: code
+                  type: VARCHAR(30)
+                  constraints:
+                    nullable: false
+                    unique: true
+                    uniqueConstraintName: uq_environment_types_code
+              - column:
+                  name: name
+                  type: VARCHAR(80)
+                  constraints:
+                    nullable: false
+                    unique: true
+                    uniqueConstraintName: uq_environment_types_name
+              - column:
+                  name: description
+                  type: VARCHAR(255)
+              - column:
+                  name: created_at
+                  type: TIMESTAMPTZ
+                  defaultValueComputed: now()
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  type: TIMESTAMPTZ
+                  defaultValueComputed: now()
+                  constraints:
+                    nullable: false
+              - column:
+                  name: deleted_at
+                  type: TIMESTAMPTZ
+      rollback:
+        - dropTable:
+            schemaName: classrooms
+            tableName: environment_types

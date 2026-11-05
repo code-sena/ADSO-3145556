@@ -1,0 +1,218 @@
+.summary-card {
+  box-sizing: border-box;
+  position: relative;
+  z-index: 1;
+  cursor: pointer;
+  overflow: hidden;
+  padding: 22px;
+}
+
+.summary-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 15px;
+  gap: 10px;
+}
+
+.summary-card-header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.summary-card-header h3 {
+  font-size: calc(var(--a11y-font-size) * 1.125);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.summary-card-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 4px;
+}
+
+.summary-status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  padding: 5px 12px;
+  border-radius: 40px;
+  font-size: calc(var(--a11y-font-size) * 0.75);
+  font-weight: 700;
+}
+
+.summary-card-status-bar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 4px;
+}
+
+.summary-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 16px 12px;
+  border-radius: 16px;
+  background: var(--lb-surface);
+  border: 1px solid transparent;
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease;
+  text-align: center;
+}
+
+.summary-item:hover {
+  transform: translateY(-4px);
+  border-color: var(--lb-glass-border);
+}
+
+.summary-icon {
+  font-size: calc(var(--a11y-font-size) * 1.625);
+  padding: 9px;
+  border-radius: 50%;
+  background: var(--lb-glass-bg);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+body.dark-mode .summary-icon {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.summary-icon.temp {
+  color: #ff7a45;
+}
+.summary-icon.humidity {
+  color: #4dabf7;
+}
+.summary-icon.co2 {
+  color: #7c4dff;
+}
+.summary-icon.noise {
+  color: #ffb020;
+}
+
+.summary-item small {
+  font-size: calc(var(--a11y-font-size) * 0.71875);
+  font-weight: 700;
+}
+
+.summary-label {
+  font-size: calc(var(--a11y-font-size) * 0.75);
+  color: var(--text-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.summary-value {
+  font-size: calc(var(--a11y-font-size) * 1.1875);
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.summary-score {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 18px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--lb-glass-border);
+}
+
+.summary-score-circle {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(var(--a11y-font-size) * 1.125);
+  font-weight: 800;
+  color: var(--text-primary);
+  flex-shrink: 0;
+
+  background: conic-gradient(var(--accent) var(--score), var(--lb-surface) 0);
+
+  position: relative;
+}
+
+.summary-score-circle::before {
+  content: '';
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: var(--bg-card, #16213e);
+}
+
+body:not(.dark-mode) .summary-score-circle::before {
+  background: #ffffff;
+}
+
+.summary-score-circle span {
+  position: relative;
+  z-index: 2;
+}
+
+.summary-score h4 {
+  margin: 0;
+  font-size: calc(var(--a11y-font-size) * 0.9375);
+  color: var(--text-primary);
+}
+
+.summary-score p {
+  margin-top: 4px;
+  color: var(--text-muted);
+  font-size: calc(var(--a11y-font-size) * 0.75);
+}
+
+/* ── Favorite button ── */
+.btn-favorite {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  border: 1px solid var(--lb-glass-border);
+  background: var(--lb-surface);
+  color: var(--text-muted);
+  font-size: calc(var(--a11y-font-size) * 0.9375);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+
+.btn-favorite:hover {
+  transform: scale(1.08);
+  color: #f85149;
+  border-color: rgba(248, 81, 73, 0.4);
+}
+
+.btn-favorite.active {
+  color: #f85149;
+  background: rgba(248, 81, 73, 0.1);
+  border-color: rgba(248, 81, 73, 0.3);
+}
+
+@media (max-width: 480px) {
+  .summary-card-grid {
+    gap: 10px;
+  }
+  .summary-item {
+    padding: 12px 8px;
+  }
+}

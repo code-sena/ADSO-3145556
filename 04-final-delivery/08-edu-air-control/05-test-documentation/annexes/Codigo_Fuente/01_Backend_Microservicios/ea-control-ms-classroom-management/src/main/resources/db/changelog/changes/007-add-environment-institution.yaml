@@ -1,0 +1,29 @@
+databaseChangeLog:
+  - changeSet:
+      id: 007-add-environment-institution
+      author: eduaircontrol
+      comment: "Institucion (tenant) del ambiente, denormalizada desde el campus (ADR-016)."
+      changes:
+        - addColumn:
+            schemaName: classrooms
+            tableName: educational_environment
+            columns:
+              - column:
+                  name: institution_id
+                  type: UUID
+        - createIndex:
+            schemaName: classrooms
+            tableName: educational_environment
+            indexName: idx_environments_institution_id
+            columns:
+              - column:
+                  name: institution_id
+      rollback:
+        - dropIndex:
+            schemaName: classrooms
+            tableName: educational_environment
+            indexName: idx_environments_institution_id
+        - dropColumn:
+            schemaName: classrooms
+            tableName: educational_environment
+            columnName: institution_id

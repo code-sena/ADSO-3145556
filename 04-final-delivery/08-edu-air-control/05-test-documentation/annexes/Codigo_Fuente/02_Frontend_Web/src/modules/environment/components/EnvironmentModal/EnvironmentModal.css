@@ -1,0 +1,372 @@
+.environment-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 3000;
+}
+
+.environment-modal {
+  width: min(900px, 92vw);
+  max-height: 90vh;
+  overflow-y: auto;
+  background: var(--lb-glass-bg);
+  -webkit-backdrop-filter: var(--lb-glass-blur);
+  backdrop-filter: var(--lb-glass-blur);
+  border: 1px solid var(--lb-glass-border);
+  border-radius: 28px;
+  padding: 35px;
+  position: relative;
+  color: var(--text-primary);
+  box-shadow: var(--shadow-xl);
+}
+
+.env-modal__close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  border: none;
+  background: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: var(--accent);
+}
+
+.modal-header {
+  text-align: center;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 34px;
+  color: var(--text-primary);
+}
+
+.modal-status {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 8px 20px;
+  border-radius: 40px;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 700;
+}
+
+.modal-score {
+  margin: 35px 0;
+  text-align: center;
+}
+
+.modal-score h1 {
+  font-size: 72px;
+  color: var(--accent);
+  margin: 0;
+}
+
+.modal-sensors {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22px;
+}
+
+.sensor-card {
+  padding: 22px;
+  border-radius: 18px;
+  background: var(--lb-surface);
+  border: 1px solid var(--lb-glass-border);
+}
+
+.sensor-card svg {
+  font-size: 34px;
+  color: var(--accent);
+}
+
+.sensor-card h3 {
+  margin: 15px 0 5px;
+}
+
+.sensor-card strong {
+  display: block;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.sensor-card small {
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+.modal-actions {
+  display: flex;
+  gap: 18px;
+  margin-top: 35px;
+}
+
+.modal-actions button {
+  flex: 1;
+  min-height: 52px;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  white-space: nowrap;
+  line-height: 1.2;
+}
+
+.favorite-btn,
+.modal-favorite-btn {
+  background: var(--accent);
+  color: #fff;
+}
+
+.modal-favorite-btn.active {
+  background: var(--color-danger);
+  color: #fff;
+}
+
+.close-btn {
+  background: var(--bg-subtle);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+
+/*======================================
+RECOMENDACIONES
+======================================*/
+
+.environment-recommendations {
+  margin-top: 35px;
+  padding: 25px;
+  border-radius: 20px;
+  background: var(--lb-surface);
+  border: 1px solid var(--lb-glass-border);
+}
+
+.environment-recommendations h3 {
+  margin-bottom: 18px;
+  color: var(--accent);
+  font-size: 22px;
+}
+
+.environment-recommendations ul {
+  margin: 0;
+  padding-left: 22px;
+}
+
+.environment-recommendations li {
+  margin-bottom: 12px;
+  line-height: 1.7;
+}
+
+.modal-status.normal {
+  background: var(--color-success);
+  color: #fff;
+}
+
+.modal-status.warning {
+  background: var(--color-warning);
+  color: #fff;
+}
+
+.modal-status.danger {
+  background: var(--color-danger);
+  color: #fff;
+}
+
+/*======================================
+SCORE
+======================================*/
+
+.environment-score {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  margin: 30px 0;
+}
+
+.environment-score-circle {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 34px;
+  font-weight: 800;
+  color: #fff;
+  position: relative;
+  background: conic-gradient(var(--accent) var(--score), var(--lb-track-bg) 0);
+}
+
+.environment-score-circle::before {
+  content: '';
+  position: absolute;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: var(--bg-body);
+}
+
+.environment-score-circle span {
+  position: relative;
+  z-index: 2;
+}
+
+.environment-score-info {
+  flex: 1;
+}
+
+.environment-score-info h3 {
+  margin-bottom: 8px;
+  color: var(--accent);
+}
+
+.environment-score-info p {
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+/*======================================
+EXPLICACIÓN
+======================================*/
+
+.environment-explanation {
+  margin-top: 35px;
+}
+
+.environment-explanation h3 {
+  margin-bottom: 22px;
+  color: var(--accent);
+}
+
+.environment-explanation-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+.explanation-card {
+  padding: 20px;
+  border-radius: 18px;
+  background: var(--lb-surface);
+  border: 1px solid var(--lb-glass-border);
+  transition: 0.3s;
+}
+
+.explanation-card:hover {
+  transform: translateY(-4px);
+}
+
+.explanation-card h4 {
+  margin: 12px 0;
+  color: var(--accent);
+}
+
+.explanation-card p {
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+@media (max-width: 768px) {
+  .modal-sensors {
+    grid-template-columns: 1fr;
+  }
+
+  .modal-actions {
+    flex-direction: column;
+  }
+
+  .modal-score h1 {
+    font-size: 56px;
+  }
+
+  .environment-explanation-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.environment-modal .modal-actions {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(150px, 220px);
+  align-items: stretch;
+}
+
+.environment-modal .modal-actions button {
+  width: 100%;
+  min-width: 0;
+  max-width: none;
+  writing-mode: horizontal-tb;
+  text-orientation: mixed;
+  transform: none;
+}
+
+.environment-modal .close-btn {
+  min-width: 150px;
+  background: var(--bg-subtle);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+
+.environment-modal .close-btn:hover {
+  background: var(--lb-glass-bg-hover);
+  border-color: var(--accent);
+  color: var(--text-primary);
+  transform: translateY(-1px);
+}
+
+.environment-modal .env-modal__close {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.environment-modal .env-modal__close:hover {
+  background: color-mix(in srgb, var(--color-danger) 16%, transparent);
+  color: var(--color-danger);
+  transform: none;
+}
+
+@media (max-width: 640px) {
+  .environment-modal .modal-actions {
+    grid-template-columns: 1fr;
+  }
+}
+
+/*======================================
+BOTÓN DE INFORMACIÓN (InfoTooltip)
+======================================*/
+
+.info-section {
+  position: relative;
+}
+
+.sensor-card-wrap {
+  position: relative;
+}
+
+.sensor-card-wrap .sensor-card {
+  padding-right: 44px;
+}
+
+.environment-score.info-section {
+  padding-right: 44px;
+}
+
+.recommendations-wrap {
+  padding-right: 44px;
+}

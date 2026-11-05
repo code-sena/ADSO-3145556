@@ -1,0 +1,48 @@
+databaseChangeLog:
+  - changeSet:
+      id: 003-create-variable
+      author: eduaircontrol
+      comment: Tabla variable — 06-data/domain/ms-sensor-management.md.
+      changes:
+        - createTable:
+            schemaName: sensors
+            tableName: variable
+            columns:
+              - column:
+                  name: variable_id
+                  type: UUID
+                  defaultValueComputed: gen_random_uuid()
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pk_variable
+                    nullable: false
+              - column:
+                  name: code
+                  type: VARCHAR(30)
+                  constraints:
+                    nullable: false
+                    unique: true
+                    uniqueConstraintName: uq_variable_code
+              - column:
+                  name: name
+                  type: VARCHAR(80)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: measurement_unit_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: VARCHAR(255)
+              - column:
+                  name: created_at
+                  type: TIMESTAMPTZ
+                  defaultValueComputed: now()
+                  constraints:
+                    nullable: false
+      rollback:
+        - dropTable:
+            schemaName: sensors
+            tableName: variable

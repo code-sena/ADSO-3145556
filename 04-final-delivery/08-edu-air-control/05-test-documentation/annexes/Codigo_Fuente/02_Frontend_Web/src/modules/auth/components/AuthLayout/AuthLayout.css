@@ -1,0 +1,329 @@
+/* ============================================================
+   AUTH LAYOUT — EduAirControl
+   Usa variables CSS del sistema de temas para modo claro,
+   modo oscuro y temas de daltonismo.
+   ============================================================ */
+
+/* ── Contenedor principal ── */
+.auth-container {
+  min-height: 100vh;
+  min-height: 100dvh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  position: relative;
+  background-color: transparent;
+}
+
+.auth-container.auth-login-background {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  min-height: 0;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  overflow-x: hidden;
+  background-color: #162337;
+  background-image: linear-gradient(145deg, #162337, #152534);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+}
+
+@media (max-width: 767px) {
+  .auth-container.auth-login-background {
+    overflow-y: auto;
+  }
+}
+
+.auth-container.auth-login-background .auth-overlay {
+  position: fixed;
+}
+
+/* ── Overlay ── */
+.auth-overlay {
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+}
+
+body:not(.dark-mode) .auth-overlay {
+  background: linear-gradient(rgba(232, 244, 240, 0.55), rgba(220, 240, 235, 0.65));
+}
+
+/* ── Tarjeta ── */
+.auth-card {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 680px;
+  overflow: hidden;
+  padding: 44px 40px;
+  border-radius: 28px;
+  background: var(--lb-glass-bg);
+  -webkit-backdrop-filter: var(--lb-glass-blur);
+  backdrop-filter: var(--lb-glass-blur);
+  border: 1px solid var(--lb-glass-border);
+  box-shadow: var(--lb-glass-shadow);
+  transition:
+    background 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+@media (min-width: 768px) {
+  .auth-card {
+    max-width: 1080px;
+    padding: 0;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+    overflow: visible;
+  }
+}
+
+/* ── Efecto brillo ── */
+.auth-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -60%;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.06), transparent);
+  transform: rotate(8deg);
+  pointer-events: none;
+}
+
+/* ── Acceso social ── */
+.social-text {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 24px 0 16px;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.social-text::before,
+.social-text::after {
+  flex: 1;
+  height: 1px;
+  background: transparent;
+  border-top: 1px solid var(--lb-glass-border);
+  content: '';
+}
+
+.social-buttons {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.social-buttons button.btn-facebook,
+.social-buttons button.btn-google {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 48px;
+  margin: 0;
+  padding: 12px 16px;
+  border: 1px solid var(--lb-glass-border);
+  border-radius: 12px;
+  font: inherit;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.social-buttons button.btn-facebook {
+  background: #1877f2;
+  border-color: #1877f2;
+  color: #ffffff;
+}
+
+.social-buttons button.btn-google {
+  background: var(--lb-surface);
+  color: var(--text-primary);
+}
+
+.social-buttons button.btn-facebook:hover,
+.social-buttons button.btn-google:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgb(0 0 0 / 0.16);
+}
+
+.social-buttons button.btn-facebook:hover {
+  background: #145dbf;
+  border-color: #145dbf;
+}
+
+.social-buttons button.btn-google:hover {
+  background: var(--lb-glass-bg-hover);
+  border-color: var(--lb-glass-border-hover);
+}
+
+@media (max-width: 480px) {
+  .social-buttons {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Selector de idioma (fijo) ── */
+.language-selector-fixed {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  z-index: 99999;
+}
+
+.lang-btn-premium {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: var(--lb-glass-bg);
+  -webkit-backdrop-filter: var(--lb-glass-blur);
+  backdrop-filter: var(--lb-glass-blur);
+  border: 1px solid var(--lb-glass-border);
+  border-radius: 12px;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    border-color 0.2s;
+}
+
+.lang-btn-premium:hover {
+  background: var(--lb-glass-bg-hover);
+  border-color: var(--lb-glass-border-hover);
+}
+
+.lang-dropdown-premium {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 180px;
+  background: var(--lb-glass-bg);
+  -webkit-backdrop-filter: var(--lb-glass-blur);
+  backdrop-filter: var(--lb-glass-blur);
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--lb-glass-border);
+  box-shadow: var(--shadow-lg);
+  animation: slideDown 0.2s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.lang-option-premium {
+  width: 100%;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    color 0.2s;
+  text-align: left;
+  font-size: 14px;
+}
+
+.lang-option-premium:hover {
+  background: var(--lb-surface);
+  color: var(--accent);
+}
+
+.lang-option-premium.active {
+  background: var(--lb-surface);
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.lang-flag-img {
+  width: 22px;
+  height: 15px;
+  border-radius: 2px;
+  object-fit: cover;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.lang-flag-img-dropdown {
+  width: 24px;
+  height: 16px;
+  border-radius: 2px;
+  object-fit: cover;
+}
+
+.lang-label-text {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.lang-arrow {
+  font-size: 12px;
+  transition: transform 0.25s ease;
+  opacity: 0.7;
+}
+
+.lang-arrow.open {
+  transform: rotate(180deg);
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .auth-card {
+    max-width: 600px;
+    padding: 30px 22px;
+    border-radius: 24px;
+  }
+
+  .language-selector-fixed {
+    top: 16px;
+    right: 16px;
+  }
+
+  .lang-btn-premium {
+    padding: 8px 12px;
+  }
+
+  .lang-label-text {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .auth-card {
+    max-width: 95%;
+    padding: 25px 18px;
+  }
+}

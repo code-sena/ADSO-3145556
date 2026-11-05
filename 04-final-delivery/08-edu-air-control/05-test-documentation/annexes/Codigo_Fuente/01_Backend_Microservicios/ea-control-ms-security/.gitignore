@@ -1,0 +1,18 @@
+target/
+!.mvn/wrapper/maven-wrapper.jar
+*.class
+*.jar
+!mvnw
+
+.idea/
+*.iml
+.vscode/
+.DS_Store
+
+*.log
+.env
+
+# Instrucciones locales de agentes IA (no se comparten con el equipo)
+AGENTS.md
+opencode.json
+.opencode/

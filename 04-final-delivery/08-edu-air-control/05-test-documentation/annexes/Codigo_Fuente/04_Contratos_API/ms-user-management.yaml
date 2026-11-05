@@ -1,0 +1,367 @@
+openapi: 3.0.3
+info:
+  title: User Management API
+  version: 1.0.0
+  description: |
+    API of the `ms-user-management` service: user **profile information** management
+    (context IAM). Identity and credentials belong to `ms-security`; this service only
+    stores the profile, referenced by `userId`.
+
+    ## Ownership
+    Authoritative owner of the `user_management` schema (`user_profiles`).
+
+    ## Authentication
+    All endpoints except `/health` require a valid JWT:
+    ```
+    Authorization: Bearer <token>
+    ```
+    Reads require any valid token; writes (`POST`, `PUT`, `DELETE`) require the `ADMIN` role.
+
+    ## Error handling
+    All errors follow the `ErrorResponse` schema defined in `_shared.yaml`.
+
+    ## Pagination
+    List endpoints support pagination via `?page=1&limit=20`.
+
+    ## Soft delete
+    `DELETE` performs a soft delete (`deleted_at`); deleted profiles disappear from
+    list/get responses but keep their history.
+
+servers:
+  - url: http://localhost:3007
+    description: Local development
+  - url: https://api.dev.{domain}
+    description: Development environment
+    variables:
+      domain:
+        default: example.com
+  - url: https://api.{domain}
+    description: Production
+    variables:
+      domain:
+        default: example.com
+
+security:
+  - bearerAuth: []
+
+tags:
+  - name: Users
+    description: User profile information management
+  - name: Health
+    description: Service health check
+
+paths:
+  /health:
+    get:
+      summary: Health check
+      security: []
+      tags: [Health]
+      responses:
+        '200':
+          description: Service is healthy
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: ok
+                  dependencies:
+                    type: object
+                    properties:
+                      database:
+                        type: string
+                        example: ok
+        '503':
+          description: A dependency is down
+          content:
+            application/json:
+              schema:
+                $ref: './_shared.yaml#/components/schemas/ErrorResponse'
+
+  /api/v1/users:
+    get:
+      summary: List user profiles
+      tags: [Users]
+      parameters:
+        - name: q
+          in: query
+          description: Free-text filter on full name or department
+          schema:
+            type: string
+        - name: status
+          in: query
+          schema:
+            $ref: '#/components/schemas/RecordStatus'
+        - name: page
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            default: 1
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 20
+      responses:
+        '200':
+          description: Paginated list of user profiles
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfilePage'
+        '401':
+          description: Missing or invalid token
+          content:
+            application/json:
+              schema:
+                $ref: './_shared.yaml#/components/schemas/ErrorResponse'
+    post:
+      summary: Create a user profile
+      tags: [Users]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserProfileCreateRequest'
+      responses:
+        '201':
+          description: Profile created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfileResponse'
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: './_shared.yaml#/components/schemas/ErrorResponse'
+        '403':
+          description: Requires ADMIN role
+          content:
+            application/json:
+              schema:
+                $ref: './_shared.yaml#/components/schemas/ErrorResponse'
+        '409':
+          description: The user already has a profile
+          content:
+            application/json:
+              schema:
+                $ref: './_shared.yaml#/components/schemas/ErrorResponse'
+
+  /api/v1/users/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Get a user profile by id
+      tags: [Users]
+      responses:
+        '200':
+          description: Profile found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfileResponse'
+        '404':
+          description: Profile not found
+          content:
+            application/json:
+              schema:
+                $ref: './_shared.yaml#/components/schemas/ErrorResponse'
+    put:
+      summary: Update a user profile
+      tags: [Users]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserProfileUpdateRequest'
+      responses:
+        '200':
+          description: Profile updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfileResponse'
+        '403':
+          description: Requires ADMIN role
+          content:
+            application/json:
+              schema:
+                $ref: './_shared.yaml#/components/schemas/ErrorResponse'
+        '404':
+          description: Profile not found
+          content:
+            application/json:
+              schema:
+                $ref: './_shared.yaml#/components/schemas/ErrorResponse'
+    delete:
+      summary: Soft-delete a user profile
+      tags: [Users]
+      responses:
+        '204':
+          description: Profile deleted
+        '403':
+          description: Requires ADMIN role
+          content:
+            application/json:
+              schema:
+                $ref: './_shared.yaml#/components/schemas/ErrorResponse'
+        '404':
+          description: Profile not found
+          content:
+            application/json:
+              schema:
+                $ref: './_shared.yaml#/components/schemas/ErrorResponse'
+
+  /api/v1/users/by-user/{userId}:
+    get:
+      summary: Get the profile of an identity user
+      tags: [Users]
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Profile found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfileResponse'
+        '404':
+          description: Profile not found for that user
+          content:
+            application/json:
+              schema:
+                $ref: './_shared.yaml#/components/schemas/ErrorResponse'
+
+components:
+  securitySchemes:
+    bearerAuth:
+      $ref: './_shared.yaml#/components/securitySchemes/bearerAuth'
+  schemas:
+    RecordStatus:
+      type: string
+      enum: [ACTIVE, INACTIVE]
+    UserProfileCreateRequest:
+      type: object
+      required: [userId, fullName]
+      properties:
+        userId:
+          type: string
+          format: uuid
+          description: Identity id owned by ms-security
+        fullName:
+          type: string
+          maxLength: 150
+        phone:
+          type: string
+          maxLength: 30
+        department:
+          type: string
+          maxLength: 100
+        position:
+          type: string
+          maxLength: 100
+        locale:
+          type: string
+          maxLength: 10
+        avatarUrl:
+          type: string
+          maxLength: 500
+          description: URL of the user's avatar image
+    UserProfileUpdateRequest:
+      type: object
+      properties:
+        fullName:
+          type: string
+          maxLength: 150
+        phone:
+          type: string
+          maxLength: 30
+        department:
+          type: string
+          maxLength: 100
+        position:
+          type: string
+          maxLength: 100
+        locale:
+          type: string
+          maxLength: 10
+        avatarUrl:
+          type: string
+          maxLength: 500
+          description: URL of the user's avatar image
+        status:
+          $ref: '#/components/schemas/RecordStatus'
+    UserProfileResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        userId:
+          type: string
+          format: uuid
+        fullName:
+          type: string
+        phone:
+          type: string
+          nullable: true
+        department:
+          type: string
+          nullable: true
+        position:
+          type: string
+          nullable: true
+        locale:
+          type: string
+          nullable: true
+        avatarUrl:
+          type: string
+          maxLength: 500
+          nullable: true
+          description: URL of the user's avatar image
+        status:
+          $ref: '#/components/schemas/RecordStatus'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    UserProfilePage:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserProfileResponse'
+        meta:
+          type: object
+          properties:
+            page:
+              type: integer
+            limit:
+              type: integer
+            total:
+              type: integer
+              format: int64
+            totalPages:
+              type: integer

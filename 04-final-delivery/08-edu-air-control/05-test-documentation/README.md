@@ -14,3 +14,8 @@
 - English file names, without spaces or accents: `requirements-specification.pdf`. / Nombres de archivo en inglés, sin espacios ni tildes.
 - Files over 50 MB go to Drive and are listed in the project `README.md`. / Los archivos de más de 50 MB van a Drive y se relacionan en el `README.md` del proyecto.
 - Do not add passwords, tokens, keys or real user data. / No incluya contraseñas, tokens, llaves ni datos reales de usuarios.
+
+## Delivered content / Contenido entregado
+
+- [`test-plan-and-evidence/`](test-plan-and-evidence/): test plan, cases, results and audit. / Plan, casos, resultados y auditoría de pruebas.
+- [`annexes/`](annexes/): annexes, including a source code snapshot the tests come from. The up-to-date code is in the repositories listed in [`code-tag/README.md`](../code-tag/README.md). / Anexos, incluida una copia del código fuente de donde salen las pruebas; el código vigente está en los repositorios de `code-tag`.

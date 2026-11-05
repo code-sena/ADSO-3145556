@@ -1,0 +1,29 @@
+databaseChangeLog:
+  - changeSet:
+      id: 004-create-sensor-variable
+      author: eduaircontrol
+      comment: Tabla sensor_variable (N:M sensor <-> variable) — 06-data/domain/ms-sensor-management.md.
+      changes:
+        - createTable:
+            schemaName: sensors
+            tableName: sensor_variable
+            columns:
+              - column:
+                  name: sensor_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: variable_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+        - addPrimaryKey:
+            schemaName: sensors
+            tableName: sensor_variable
+            columnNames: sensor_id, variable_id
+            constraintName: pk_sensor_variable
+      rollback:
+        - dropTable:
+            schemaName: sensors
+            tableName: sensor_variable

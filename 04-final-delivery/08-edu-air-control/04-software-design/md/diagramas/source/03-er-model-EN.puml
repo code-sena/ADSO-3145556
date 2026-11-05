@@ -1,0 +1,131 @@
+@startuml 03-er-model-EN
+title Figure — Global entity-relationship model (main entities per schema)
+skinparam backgroundColor #FFFFFF
+skinparam defaultFontName Inter
+skinparam linetype ortho
+
+package "seguridad (ms-security)" {
+  entity "institution" as inst {
+    * id : uuid <<PK>>
+    --
+    * name : varchar
+    * status : varchar
+  }
+  entity "users" as users {
+    * id : uuid <<PK>>
+    --
+    * email : varchar <<UK>>
+    * password_hash : varchar
+    * status : varchar
+  }
+  entity "roles" as roles {
+    * id : uuid <<PK>>
+    --
+    * name : varchar <<UK>>
+  }
+  entity "user_roles" as uroles
+  entity "refresh_tokens" as rtok
+  inst ||--o{ users
+  users ||--o{ uroles
+  roles ||--o{ uroles
+  users ||--o{ rtok
+}
+
+package "user_management" {
+  entity "user_profiles" as prof {
+    * id : uuid <<PK>>
+    --
+    * full_name : varchar
+    * avatar_url : varchar
+  }
+}
+
+package "classrooms (ms-classroom-management)" {
+  entity "campuses" as camp {
+    * id : uuid <<PK>>
+    --
+    * name : varchar
+  }
+  entity "environment_types" as etype
+  entity "educational_environment" as env {
+    * id : uuid <<PK>>
+    --
+    * name : varchar
+    * status : varchar
+  }
+  camp ||--o{ env
+  etype ||--o{ env
+}
+
+package "sensors (ms-sensor-management)" {
+  entity "sensor_model" as smodel
+  entity "sensor" as sensor {
+    * id : uuid <<PK>>
+    --
+    * serial_number : varchar <<UK>>
+  }
+  entity "sensor_installation" as instl {
+    * id : uuid <<PK>>
+    --
+    * installed_at : timestamp
+    * removed_at : timestamp
+  }
+  entity "variable" as svar
+  entity "sensor_variable" as svarrel
+  entity "measurement_unit" as unit
+  smodel ||--o{ sensor
+  sensor ||--o{ instl
+  svar ||--o{ svarrel
+  sensor ||--o{ svarrel
+  unit ||--o{ svar
+}
+
+package "environment_monitoring (ms-environment-monitoring)" {
+  entity "variable" as mvar
+  entity "variable_threshold" as thr {
+    * id : uuid <<PK>>
+    --
+    * min_value / max_value : numeric
+    * valid_from / valid_to : timestamp
+  }
+  entity "environment_measurement" as meas {
+    * id : uuid <<PK>>
+    --
+    * measured_at : timestamp
+    * value : numeric
+  }
+  entity "environment_alert" as alert {
+    * id : uuid <<PK>>
+    --
+    * opened_at : timestamp
+    * status : varchar
+  }
+  entity "environmental_analysis" as analysis
+  entity "analysis_result" as ares
+  entity "inbox_message" as inbox
+  entity "installation_projection" as iproj
+  mvar ||--o{ thr
+  mvar ||--o{ meas
+  thr ||--o{ alert
+  analysis ||--o{ ares
+}
+
+package "user_experience" {
+  entity "user_preferences" as prefs
+  entity "favorites" as fav
+  entity "classroom_ratings" as rate
+  entity "searches" as search
+  entity "notification_state" as nstate
+}
+
+users ||--o| prof
+users ||--o{ fav
+users ||--o{ rate
+env ||--o{ fav
+env ||--o{ rate
+env ||--o{ instl
+sensor ||--o{ meas
+env ||--o{ meas
+env ||--o{ alert
+users ||--o{ nstate
+@enduml

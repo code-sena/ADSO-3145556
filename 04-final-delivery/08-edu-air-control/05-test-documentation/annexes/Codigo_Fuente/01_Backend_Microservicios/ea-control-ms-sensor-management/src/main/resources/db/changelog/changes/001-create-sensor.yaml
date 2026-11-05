@@ -1,0 +1,51 @@
+databaseChangeLog:
+  - changeSet:
+      id: 001-create-sensor
+      author: eduaircontrol
+      comment: Tabla sensor — 06-data/domain/ms-sensor-management.md.
+      changes:
+        - createTable:
+            schemaName: sensors
+            tableName: sensor
+            columns:
+              - column:
+                  name: sensor_id
+                  type: UUID
+                  defaultValueComputed: gen_random_uuid()
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pk_sensor
+                    nullable: false
+              - column:
+                  name: serial_number
+                  type: VARCHAR(60)
+                  constraints:
+                    nullable: false
+                    unique: true
+                    uniqueConstraintName: uq_sensor_serial_number
+              - column:
+                  name: sensor_model_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: sensor_status_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: last_seen_at
+                  type: TIMESTAMPTZ
+              - column:
+                  name: created_at
+                  type: TIMESTAMPTZ
+                  defaultValueComputed: now()
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  type: TIMESTAMPTZ
+      rollback:
+        - dropTable:
+            schemaName: sensors
+            tableName: sensor

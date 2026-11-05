@@ -1,0 +1,23 @@
+databaseChangeLog:
+  - changeSet:
+      id: 011-add-full-sensor-model
+      author: eduaircontrol
+      comment: >-
+        Un nodo fisico del proyecto lleva los tres modulos a la vez (DHT-11,
+        KY-038 y MQ-135). sensor.serialNumber es la MAC de la placa, asi que
+        hay UN solo sensor por nodo: el modelo describe el conjunto de sensores
+        que lleva, no cada modulo suelto. Los modelos por modulo se conservan
+        para montajes parciales.
+      changes:
+        - sql:
+            dbms: postgresql
+            sql: |
+              INSERT INTO sensors.sensor_model (sensor_model_id, code, name, description) VALUES
+                ('00000000-0000-4000-8000-000000000204','ESP32_FULL','ESP32 nodo completo',
+                 'DHT-11 (temperatura y humedad) + KY-038 (ruido) + MQ-135 (calidad de aire)');
+      rollback:
+        - sql:
+            dbms: postgresql
+            sql: |
+              DELETE FROM sensors.sensor_model
+                WHERE sensor_model_id = '00000000-0000-4000-8000-000000000204';

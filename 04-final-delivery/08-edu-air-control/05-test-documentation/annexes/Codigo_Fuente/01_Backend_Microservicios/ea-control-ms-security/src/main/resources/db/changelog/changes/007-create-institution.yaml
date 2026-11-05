@@ -1,0 +1,55 @@
+databaseChangeLog:
+  - changeSet:
+      id: 007-create-institution
+      author: eduaircontrol
+      comment: "Instituciones (tenant). company_code = code (ADR-016)."
+      changes:
+        - createTable:
+            schemaName: seguridad
+            tableName: institution
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  defaultValueComputed: gen_random_uuid()
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    primaryKeyName: pk_institution
+              - column:
+                  name: code
+                  type: VARCHAR(20)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(150)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: type
+                  type: VARCHAR(50)
+              - column:
+                  name: status
+                  type: VARCHAR(20)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: TIMESTAMPTZ
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  type: TIMESTAMPTZ
+                  constraints:
+                    nullable: false
+        - addUniqueConstraint:
+            schemaName: seguridad
+            tableName: institution
+            columnNames: code
+            constraintName: uq_institution_code
+      rollback:
+        - dropTable:
+            schemaName: seguridad
+            tableName: institution

@@ -1,0 +1,40 @@
+databaseChangeLog:
+  - changeSet:
+      id: 006-create-indexes
+      author: eduaircontrol
+      comment: Índices de lookup (login, sesiones activas, filtrado de activos).
+      changes:
+        - createIndex:
+            schemaName: seguridad
+            tableName: users
+            indexName: idx_users_deleted_at
+            columns:
+              - column:
+                  name: deleted_at
+        - createIndex:
+            schemaName: seguridad
+            tableName: refresh_tokens
+            indexName: idx_refresh_tokens_user_id
+            columns:
+              - column:
+                  name: user_id
+        - createIndex:
+            schemaName: seguridad
+            tableName: refresh_tokens
+            indexName: idx_refresh_tokens_expires_at
+            columns:
+              - column:
+                  name: expires_at
+      rollback:
+        - dropIndex:
+            schemaName: seguridad
+            tableName: users
+            indexName: idx_users_deleted_at
+        - dropIndex:
+            schemaName: seguridad
+            tableName: refresh_tokens
+            indexName: idx_refresh_tokens_user_id
+        - dropIndex:
+            schemaName: seguridad
+            tableName: refresh_tokens
+            indexName: idx_refresh_tokens_expires_at

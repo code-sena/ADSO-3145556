@@ -1,0 +1,331 @@
+openapi: 3.0.3
+info:
+  title: ms-user-experience API
+  version: 1.0.0
+  description: |
+    User preferences and interaction management: favorites, ratings, searches
+    and notification state.
+
+    ## Alcance
+    Este servicio es dueño de las interacciones del usuario con la plataforma.
+    No es dueño de usuarios, ambientes ni variables: los referencia por UUID.
+
+servers:
+  - url: http://localhost:3006
+    description: Local development
+  - url: https://api.dev.{domain}/api/v1
+    description: Development
+    variables:
+      domain:
+        default: example.com
+  - url: https://api.{domain}/api/v1
+    description: Production
+    variables:
+      domain:
+        default: example.com
+
+tags:
+  - name: Preferences
+    description: User UI preferences (language, theme, timezone, notifications)
+  - name: Favorites
+    description: Favorite classrooms and variables
+  - name: Ratings
+    description: Classroom ratings and comments
+  - name: Searches
+    description: Search history and applied filters
+
+paths:
+  /preferences:
+    get:
+      summary: Get current user preferences
+      operationId: getPreferences
+      tags: [Preferences]
+      responses:
+        '200':
+          description: User preferences
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserPreference'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    put:
+      summary: Update current user preferences
+      operationId: updatePreferences
+      tags: [Preferences]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PreferencesUpdate'
+      responses:
+        '200':
+          description: Updated preferences
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserPreference'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /favorites:
+    get:
+      summary: List current user's favorite IDs
+      operationId: listFavorites
+      tags: [Favorites]
+      responses:
+        '200':
+          description: Array of favorite environment IDs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UUID'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /favorites/{environmentId}/toggle:
+    post:
+      summary: Toggle favorite for an environment
+      operationId: toggleFavorite
+      tags: [Favorites]
+      parameters:
+        - $ref: '#/components/parameters/IdParam'
+      responses:
+        '200':
+          description: Favorite state after toggle
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  environmentId:
+                    $ref: '#/components/schemas/UUID'
+                  favorite:
+                    type: boolean
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /favorites/{environmentId}:
+    delete:
+      summary: Remove a favorite
+      operationId: removeFavorite
+      tags: [Favorites]
+      parameters:
+        - $ref: '#/components/parameters/IdParam'
+      responses:
+        '200':
+          description: Favorite removed
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /classrooms/{id}/ratings:
+    post:
+      summary: Rate a classroom
+      operationId: rateClassroom
+      tags: [Ratings]
+      parameters:
+        - $ref: '#/components/parameters/IdParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RatingRequest'
+      responses:
+        '200':
+          description: Rating created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RatingView'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /ratings:
+    get:
+      summary: List current user's ratings
+      operationId: listRatings
+      tags: [Ratings]
+      responses:
+        '200':
+          description: User's ratings
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RatingView'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /searches:
+    get:
+      summary: List current user's search history
+      operationId: listSearches
+      tags: [Searches]
+      responses:
+        '200':
+          description: User's search history
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SearchView'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      summary: Record a search
+      operationId: recordSearch
+      tags: [Searches]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchRequest'
+      responses:
+        '200':
+          description: Search recorded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchView'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /searches/{searchId}:
+    delete:
+      summary: Delete a search record
+      operationId: deleteSearch
+      tags: [Searches]
+      parameters:
+        - $ref: '#/components/parameters/IdParam'
+      responses:
+        '200':
+          description: Search deleted
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+components:
+  schemas:
+    UserPreference:
+      type: object
+      properties:
+        userId:
+          $ref: '#/components/schemas/UUID'
+        language:
+          type: string
+        colorTheme:
+          type: string
+        notificationsEnabled:
+          type: boolean
+        timeZone:
+          type: string
+        dateFormat:
+          type: string
+        darkMode:
+          type: boolean
+        autoTimezone:
+          type: boolean
+        reminders:
+          type: object
+
+    PreferencesUpdate:
+      type: object
+      properties:
+        language:
+          type: string
+        dateFormat:
+          type: string
+        manualTimezone:
+          type: string
+        reminders:
+          type: object
+          additionalProperties:
+            type: boolean
+        colorTheme:
+          type: string
+        darkMode:
+          type: boolean
+        autoTimezone:
+          type: boolean
+        notificationsEnabled:
+          type: boolean
+
+    RatingRequest:
+      type: object
+      required: [score]
+      properties:
+        score:
+          type: integer
+          minimum: 1
+          maximum: 5
+        comment:
+          type: string
+
+    RatingView:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/UUID'
+        classroomId:
+          $ref: '#/components/schemas/UUID'
+        score:
+          type: integer
+        comment:
+          type: string
+        ratedAt:
+          $ref: '#/components/schemas/Timestamp'
+
+    SearchRequest:
+      type: object
+      properties:
+        searchText:
+          type: string
+        appliedFilter:
+          type: string
+
+    SearchView:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/UUID'
+        searchText:
+          type: string
+        appliedFilter:
+          type: string
+        searchedAt:
+          $ref: '#/components/schemas/Timestamp'
+
+    UUID:
+      type: string
+      format: uuid
+
+    Timestamp:
+      type: string
+      format: date-time
+
+  parameters:
+    IdParam:
+      $ref: './_shared.yaml#/components/parameters/IdParam'
+
+  responses:
+    BadRequest:
+      $ref: './_shared.yaml#/components/responses/BadRequest'
+    Unauthorized:
+      $ref: './_shared.yaml#/components/responses/Unauthorized'
+    NotFound:
+      $ref: './_shared.yaml#/components/responses/NotFound'
+
+security:
+  - bearerAuth: []

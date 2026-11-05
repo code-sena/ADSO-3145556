@@ -1,0 +1,27 @@
+# Ingress de entrada al sistema. Requiere un ingress-controller (nginx).
+# TLS gestionado por cert-manager (anotación cluster-issuer).
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: eduaircontrol
+  namespace: eduaircontrol
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: "5m"
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - api.example.com
+      secretName: eduaircontrol-tls
+  rules:
+    - host: api.example.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: api-gateway
+                port:
+                  number: 8080

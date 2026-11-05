@@ -1,0 +1,10 @@
+.landing{
+    width:100%;
+    min-height:100vh;
+
+    background-color:transparent;
+
+    color:inherit;
+
+    overflow-x:hidden;
+}
