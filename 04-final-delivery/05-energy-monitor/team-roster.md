@@ -15,11 +15,11 @@ Los aprendices completan su rol, por ejemplo backend, frontend, base de datos, Q
 | JESUS ARIEL GONZALEZ BONILLA | Instructor | Inducción | ☐ Direct / Directo ☐ Indirect / Indirecto | Yes / Sí |
 | CARLOS FABIAN MARTINEZ MORA | Instructor | Inducción | ☐ Direct / Directo ☐ Indirect / Indirecto | Yes / Sí |
 | CARLOS JULIO CADENA SARASTY | Instructor | Diseño, Establecimiento de requisitos, Evaluación de requisitos, Herramientas informáticas, Inducción | ☐ Direct / Directo ☐ Indirect / Indirecto | Yes / Sí |
-| JAVIER HUMBERTO PINTO DIAZ | Instructor | To confirm / Por confirmar | ☐ Direct / Directo ☐ Indirect / Indirecto | Yes / Sí |
+| JAVIER HUMBERTO PINTO DIAZ | Instructor | — | ☐ Direct / Directo ☐ Indirect / Indirecto | Yes / Sí |
 | KAROL DANIELA CORREA TRUJILLO | Instructor | Desarrollo, Establecimiento de requisitos, Evaluación de requisitos, Inducción, Propuesta técnica | ☐ Direct / Directo ☐ Indirect / Indirecto | Yes / Sí |
 | JOSE DE JESUS MOTTA VARGAS | Instructor | Establecimiento de requisitos, Evaluación de requisitos, Herramientas informáticas, Propuesta técnica | ☐ Direct / Directo ☐ Indirect / Indirecto | Yes / Sí |
-| FERNELLY CARVAJAL SILVA | Instructor | To confirm / Por confirmar | ☐ Direct / Directo ☐ Indirect / Indirecto | Yes / Sí |
-| EDDIER YAIR LIBERATO CUENCA | Instructor | To confirm / Por confirmar | ☐ Direct / Directo ☐ Indirect / Indirecto | Yes / Sí |
+| FERNELLY CARVAJAL SILVA | Instructor | — | ☐ Direct / Directo ☐ Indirect / Indirecto | Yes / Sí |
+| EDDIER YAIR LIBERATO CUENCA | Instructor | — | ☐ Direct / Directo ☐ Indirect / Indirecto | Yes / Sí |
 | JHON WILLIAN CORREDOR ARAUJO | Instructor | Diseño, Evaluación de requisitos | ☐ Direct / Directo ☐ Indirect / Indirecto | Yes / Sí |
 | ANDRES MORENO COLLAZOS | Instructor | Diseño, Evaluación de requisitos | ☐ Direct / Directo ☐ Indirect / Indirecto | Yes / Sí |
 
@@ -27,5 +27,5 @@ Los aprendices completan su rol, por ejemplo backend, frontend, base de datos, Q
 
 | Full name / Nombre completo | Doc. type / Tipo | Doc. number / Número | Ficha | GitHub user / Usuario | Role in the project / Rol en el proyecto | Author / Autor |
 |---|---|---|---|---|---|---|
-| JUAN ESTEBAN CORTES PARRA | CC | 1079605497 | 3145556 | Juan-Cortes2045 | | Yes / Sí |
-| MIGUEL ANGEL GARCIA ARTUNDUAGA | CC | 1075241131 | 3145556 | angelgarcia0 | | Yes / Sí |
+| JUAN ESTEBAN CORTES PARRA | CC | 1079605497 | 3145556 | Juan-Cortes2045 | Project leader (Project Manager), Scrum Master, system data owner and developer / Líder del proyecto (Project Manager), Scrum Master, responsable de los datos del sistema y desarrollador | Yes / Sí |
+| MIGUEL ANGEL GARCIA ARTUNDUAGA | CC | 1075241131 | 3145556 | angelgarcia0 | Analyst, QA and developer / Analista, QA y desarrollador | Yes / Sí |

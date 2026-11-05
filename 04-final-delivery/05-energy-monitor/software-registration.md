@@ -38,8 +38,8 @@ Authors are the instructors and the apprentices listed in `team-roster.md`. Each
 | EDDIER YAIR LIBERATO CUENCA | | Kept privately / En custodia | | Instructor: see `team-roster.md` / ver `team-roster.md` |
 | JHON WILLIAN CORREDOR ARAUJO | | Kept privately / En custodia | | Instructor: see `team-roster.md` / ver `team-roster.md` |
 | ANDRES MORENO COLLAZOS | | Kept privately / En custodia | | Instructor: see `team-roster.md` / ver `team-roster.md` |
-| JUAN ESTEBAN CORTES PARRA | CC | 1079605497 | 3145556 | |
-| MIGUEL ANGEL GARCIA ARTUNDUAGA | CC | 1075241131 | 3145556 | |
+| JUAN ESTEBAN CORTES PARRA | CC | 1079605497 | 3145556 | Backend of the gateway and the security, device and measurement services; web frontend; infrastructure; documentation / Backend del gateway y de los servicios de seguridad, dispositivos y mediciones; frontend web; infraestructura; documentación |
+| MIGUEL ANGEL GARCIA ARTUNDUAGA | CC | 1075241131 | 3145556 | Backend of the home, notification, alert and recommendation services; mobile app; infrastructure; documentation / Backend de los servicios de hogares, notificaciones, alertas y recomendaciones; app móvil; infraestructura; documentación |
 
 ## 3. Producer / Productor (art. 5, num. 3)
 
@@ -102,7 +102,32 @@ Relacione código, librerías, modelos, imágenes o datos que el equipo no creó
 
 | Component / Componente | Author or source / Autor o fuente | License / Licencia | Where it is used / Dónde se usa |
 |---|---|---|---|
-| | | | |
+| Spring Boot, Spring Security, Spring Data JPA, Spring AMQP, Spring Integration MQTT, Spring Cloud Gateway | VMware / Broadcom (Spring project) | Apache-2.0 | Gateway and the seven services |
+| springdoc-openapi, Caffeine, Apache HttpClient 5 | springdoc contributors; Ben Manes; Apache Software Foundation | Apache-2.0 | Services and gateway |
+| Eclipse Paho MQTT client | Eclipse Foundation | EPL-2.0 / EDL-1.0 | Device and measurement services |
+| MySQL Connector/J | Oracle | GPL-2.0 with FOSS exception | All services with database |
+| Liquibase | Liquibase Inc. | To verify: version 5.x / Por verificar: versión 5.x | Database migrations of each service |
+| React, React DOM, React Router, Vite, Zustand, axios, zod, react-hook-form, i18next, Recharts, react-country-flag and the test tools (Vitest, Testing Library, ESLint) | Their respective maintainers on npm | MIT | Web frontend |
+| lucide-react (icons) | Lucide contributors | ISC | Web frontend |
+| Expo, React Native, Expo Router, react-native-ble-plx, react-native-chart-kit, react-native-svg, Reanimated, Gesture Handler, Google Sign-In for React Native and the rest of the Expo modules | Expo, Meta and community maintainers on npm | MIT | Mobile app |
+| TypeScript | Microsoft | Apache-2.0 | Mobile app |
+| PZEM004Tv30 | mandulaj | MIT | ESP32 firmware |
+| PubSubClient | Nick O'Leary | MIT | ESP32 firmware |
+| WiFiManager | tzapu | MIT | ESP32 firmware |
+| NimBLE-Arduino | h2zero | Apache-2.0 | ESP32 firmware |
+| ArduinoJson | Benoit Blanchon | MIT | ESP32 firmware |
+| Arduino core for ESP32 | Espressif Systems | LGPL-2.1 | ESP32 firmware |
+| Docker images: mysql:8.4, rabbitmq:4.1, mosquitto-go-auth, nginx, node, eclipse-temurin | Oracle; Broadcom (RabbitMQ); Eclipse Foundation and iegomez; F5; OpenJS Foundation; Eclipse Adoptium | GPL-2.0; MPL-2.0; EPL-2.0 and MIT; BSD-2-Clause; MIT; GPL-2.0 with Classpath exception | Infrastructure and Dockerfiles |
+| Documentation scaffold of `en-monitor-docs` (microservices-governance-framework) | Jesús Ariel González Bonilla (instructor) | MIT | Folder structure and templates of the course documentation repository |
+| Google Sign-In (Google Identity Services) | Google | Google APIs Terms of Service | Web and mobile sign-in |
+| Google logo (`google_icon.webp`) | Google | Google brand guidelines | Web sign-in button |
+| Expo push notification service | Expo | Expo Terms of Service | Notification service and mobile app |
+| Images `hero_img.webp`, `img_lp2.webp`, `empty_image.webp` | Generated with ChatGPT (OpenAI) | Output of the tool, under OpenAI's terms of use | Web landing page and empty states |
+| Claude (AI assistant) | Anthropic | Output of the tool, under Anthropic's terms of use | Support in code, tests and documentation of the repositories; reviewed and committed by the team |
+
+Not third-party: the project logo (`logo_proyecto.webp`) is the team's own design, and all other code, tests and documentation were written by the team. Licenses of the Maven and npm libraries were taken from their packages and project files; the transitive dependencies are not listed one by one.
+
+No es de terceros: el logo del proyecto (`logo_proyecto.webp`) es diseño propio del equipo, y el resto del código, pruebas y documentación lo escribió el equipo. Las licencias de las librerías Maven y npm se tomaron de sus paquetes y archivos del proyecto; las dependencias transitivas no se listan una a una.
 
 ## 9. Private data / Datos privados
 
