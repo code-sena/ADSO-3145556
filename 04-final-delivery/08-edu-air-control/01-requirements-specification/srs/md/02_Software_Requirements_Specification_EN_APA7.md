@@ -4,29 +4,30 @@
 
 Servicio Nacional de Aprendizaje (SENA), Programa ADSO-3145556
 
-Instructora: Karol Daniela Correa
+Instructors: Karol Daniela Correa Trujillo; José de Jesús Motta Vargas
 
-12 de octubre de 2026
+November 5, 2026
 
 ---
 
 # Software Requirements Specification (SRS)
 ## EduAirControl
-**Version:** 1.2 — documentary review and alignment with the submitted repository  
-**Date:** October 9, 2026  
+**Version:** 1.3 — alignment with later architectural decisions and correction of inconsistencies  
+**Date:** November 5, 2026  
 **Project:** EduAirControl  
-**Prepared for:** Servicio Nacional de Aprendizaje (SENA), Software Analysis and Development — cohort 3145556  
+**Prepared for:** Servicio Nacional de Aprendizaje (SENA), Software Analysis and Development — ficha (cohort) 3145556  
 **Team members:** María de los Ángeles Olaya García; Jhon Jairo Cortez Vargas  
-**Instructor:** José de Jesús Motta Vargas
+**Instructors:** Karol Daniela Correa Trujillo; José de Jesús Motta Vargas
 
 > **Status convention.** “Implemented,” “Partial,” and “Pending” reproduce the status stated in the source specification and repository documentation. They do not, by themselves, constitute independent certification that a feature works. Quantitative quality targets are proposed acceptance criteria and must be verified with test evidence.
 
 ## Document control
 | Version | Date | Description |
 |---|---|---|
-| 1.0 | 2025 | Initial SRS version. |
+| 1.0 | 2026 (day not recorded) | Initial SRS version. |
 | 1.1 | 2026-10-08 | Updated against web, mobile, and microservices documentation. |
 | 1.2 | 2026-10-09 | Structure, terminology, traceability, statuses, and documentary discrepancies reviewed; implemented capabilities are distinguished from targets still requiring verification. |
+| 1.3 | 2026-11-05 | Instructors and dates unified; status summary now covers 41 rows; thresholds (ADR-014), `/api/v1` routes, architecture (ADR-015, 017, 018, 021) and the status of FR8.2/FR9.5 aligned with the delivered version. |
 
 ## 1. Introduction
 
@@ -75,6 +76,8 @@ Develop a school environmental monitoring system that records and displays tempe
 
 ### 2.3 Product perspective
 The repository documents a distributed architecture with React/Vite web and Expo/React Native mobile clients, Java/Spring Boot services, an API Gateway, PostgreSQL, Redis, and RabbitMQ, as well as Docker containers and integration tooling. Security, user management, classroom/environment management, sensor management, environmental monitoring, and user-experience services are identified. The actual availability of each capability must be confirmed in the deployed version.
+
+**Architecture update (version 1.3).** Since the original drafting: `ms-alert` was folded into `ms-environment-monitoring` (ADR-015), so there are six domain services plus the API Gateway; the web session uses `httpOnly` cookies issued by the BFF (ADR-017) and services validate RS256 tokens through JWKS (ADR-018); and ingestion supports batches, device-side `measuredAt` and offline buffering (ADR-021), with `403`/`410` responses documented in the contract.
 
 **Alignment note:** the source SRS mentions HTTPS or MQTT for telemetry, whereas the architecture documentation describes HTTP ingestion and the monitoring service contains an HTTP controller. The reviewed repository did not provide sufficient evidence to declare MQTT an operational MVP channel. Therefore, HTTP/HTTPS is the documented baseline; MQTT must be confirmed before it is considered implemented.
 
@@ -141,7 +144,7 @@ Institution and campus isolation is mandatory. The documented rule allows an adm
 
 ## 6. Functional requirements
 
-**Priority convention:** High = critical to the main workflow or security; Medium = important for the MVP; Pending = must not be advertised as available. Statuses below come from the source specification and reviewed documentation.
+**Priority convention:** High = critical to the main workflow or security; Medium = important for the MVP; Pending = must not be advertised as available. Statuses below come from the source specification and reviewed documentation. **Revision 1.3:** in the delivered version the web sensor service consumes `/api/v1/sensors` and `/api/v1/sensor-installations` (FR8.2: verify that the panel no longer uses sample data); there is no `/api/v1/devices`, and device onboarding is handled with device tokens at `/api/v1/device-tokens` in `ms-security` (FR9.5 remains partial). The other statuses were not revalidated.
 
 ### FR1. Authentication and access
 | ID | Requirement | Status |
@@ -169,21 +172,21 @@ Institution and campus isolation is mandatory. The documented rule allows an adm
 |---|---|---|
 | FR3.1 | Show authorized environments and their environmental status, with access to details. | Implemented in source |
 | FR3.2 | Show temperature, humidity, CO₂, and noise with value, unit, and status. | Implemented in source |
-| FR3.3 | Calculate a 0–100 score and rank environments according to threshold compliance. | Partial / outside the initial MVP; scope must be confirmed |
+| FR3.3 | Calculate a 0–100 score and rank environments according to threshold compliance. | Withdrawn (v1.3): the web `/ranking` route redirects to the dashboard; there is no score or ranking in the code |
 | FR3.4 | Query current and historical data by day, week, month, and year, selecting a period and variable. | Partial |
 | FR3.5 | Display charts or indicators to compare measurement trends. | Analysis objective; verify per client |
 
 ### FR4. Search and filtering
 | ID | Requirement | Status |
 |---|---|---|
-| FR4.1 | Search environments by name and allow viewing, recording, or clearing search history if the service is available. | Partial |
+| FR4.1 | Search environments by name and allow viewing, recording, or clearing search history if the service is available. | Partial; search history was withdrawn (changeset 005 of `ms-user-experience`) |
 | FR4.2 | Filter by building/block, floor, favorites, and environmental status. Variable-based search remains pending in the source. | Partial |
 
 ### FR5. Environment details and ratings
 | ID | Requirement | Status |
 |---|---|---|
 | FR5.1 | Show location, capacity, type, environmental quality, current metrics, reference ranges, variable explanations, and basic recommendations. | Implemented in source |
-| FR5.2 | Allow users to rate an environment from 1 to 5 and enter a comment up to 1,000 characters. | Partial: source says the screen and moderation are missing |
+| FR5.2 | Allow users to rate an environment from 1 to 5 and enter a comment up to 1,000 characters. | Withdrawn (v1.3): ratings are deprecated (changeset 005); the table was renamed `legacy_classroom_ratings` |
 | FR5.3 | Allow users to view a variable’s detail, current value, status, and history. | Partial |
 
 ### FR6. Alerts and notifications
@@ -193,7 +196,7 @@ Institution and campus isolation is mandatory. The documented rule allows an adm
 | FR6.2 | List alerts and allow users to acknowledge them. | Implemented in source |
 | FR6.3 | Show notifications chronologically, open related items, and mark them read per user. The source warns that part of the UI calculates notifications from fixed client-side values and should consume backend alerts. | Partial |
 | FR6.4 | Allow users to enable/disable alerts, warnings, daily summaries, and sound, according to available preferences. | Implemented in source |
-| FR6.5 | Send alerts outside the application through push notification or email to responsible staff. | Pending |
+| FR6.5 | Send alerts outside the application through push notification or email to responsible staff. | Partial (v1.3): push notification to mobile via Expo (`/api/v1/push-tokens`); email is not implemented |
 
 ### FR7. Profile, favorites, and preferences
 | ID | Requirement | Status |
@@ -201,7 +204,7 @@ Institution and campus isolation is mandatory. The documented rule allows an adm
 | FR7.1 | Allow editing of name, job title, phone, location, and profile photo. | Implemented in source |
 | FR7.2 | Allow users to favorite/unfavorite environments and view their own list. Variable favorites are not included. | Implemented in source |
 | FR7.3 | Provide dark mode, three color-vision options, and three font sizes. | Implemented in source |
-| FR7.4 | Provide Spanish, English, French, and Portuguese. | Implemented in source |
+| FR7.4 | Provide Spanish, English, French, and Portuguese. | Partial on web (v1.3): `i18n.js` declares es/en/fr/pt, but the web only ships `es.json` and `en.json`; mobile ships all four |
 | FR7.5 | Save date format, time zone, and reminder preferences; support local storage while offline where implemented. | Implemented in source |
 
 ### FR8. Environment, sensor, and threshold administration
@@ -226,9 +229,14 @@ Institution and campus isolation is mandatory. The documented rule allows an adm
 | Implemented | 26 | Original count; not an independent audit |
 | Partial | 12 | Gaps must be closed and evidence supplied |
 | Pending | 2 | Second factor and external notifications |
-| **Reported total** | **40** | The source table summarizes sub-requirements; this version reorganizes and clarifies some compound requirements. Do not use this count as an acceptance metric without normalizing the traceability matrix. |
+| Target to verify (FR3.5) | 1 | No implementation status declared in the source |
+| **Reported total** | **40** (source); **41** (rows in this matrix) | The source table summarizes sub-requirements; this version reorganizes and clarifies some compound requirements. Do not use this count as an acceptance metric without normalizing the traceability matrix. |
+
+**Count for this matrix (v1.3), checked against the delivered code:** 25 implemented, 12 partial, 1 pending, 2 withdrawn and 1 target to verify; total 41.
 
 ## 7. Environmental variables and thresholds
+
+**Update (ADR-014, amendment of 2026-10-30).** The tables in sections 7.2 to 7.4 are **reference templates, not defaults**: the administrator defines the effective thresholds, and while a threshold is not configured no alert is generated from the template. The valid ranges in 7.1 are not thresholds. A reading outside the valid range is **stored** with quality `BAD`, raises no alert and is excluded from aggregations; `SUSPECT` is reserved and no rule produces it in this delivery. Today the `010-seed-reference` seed still inserts the templates as effective thresholds, and the thresholds endpoint only handles the `WARNING` level: both gaps are recorded as technical debt.
 
 The following ranges are documented in the source SRS for each environment type. They should be centralized in one configuration and validated with the institution’s responsible staff and actual sensors. They are not medical advice or universal regulatory standards.
 
@@ -284,7 +292,7 @@ The following are measurable targets documented in the quality strategy. Unless 
 | NFR10 | Compatibility and responsiveness | Modern Chrome, Firefox, Edge, and Safari; Android/iOS versions supported by the project’s Expo SDK; responsive layout from 360×640 px to 1280×720 px without loss of core functions or horizontal overflow. |
 
 ### 8.1 Reference critical endpoints
-The quality strategy lists, among others, `POST /api/auth/register`, `POST /api/auth/login`, `GET /api/users/{id}`, `GET /api/environments/{id}`, `GET /api/monitoring/current`, and `GET /api/monitoring/history` as critical. Actual routes must be verified against the deployed controllers and API Gateway; these examples are not a final OpenAPI contract.
+The quality strategy lists, among others, the following critical endpoints, written with the versioned `/api/v1` routes of the controllers in the delivered version: `POST /api/v1/auth/register`, `POST /api/v1/auth/login`, `POST /api/v1/auth/refresh`, `GET /api/v1/users/{id}`, `GET /api/v1/educational-environments`, `POST /api/v1/measurements` (and `/measurements/batch`), `GET /api/v1/environments/{id}/current` and `GET /api/v1/environments/{id}/measurements`. The current contract lives in `07-api/` of `ea-control-docs`; these examples do not replace the OpenAPI contract.
 
 ## 9. Use cases
 
@@ -294,11 +302,11 @@ The quality strategy lists, among others, `POST /api/auth/register`, `POST /api/
 | UC-02 | Log in with email/password | User, Administrator, Super administrator | FR1.1, FR1.8 |
 | UC-03 | Log in with Google or Facebook | User | FR1.4 |
 | UC-04 | Recover or change password | User | FR1.6, FR1.7 |
-| UC-05 | View dashboard and environment ranking | User | FR3.1–FR3.3 |
+| UC-05 | View environment dashboard (ranking withdrawn in v1.3) | User | FR3.1–FR3.3 |
 | UC-06 | Search and filter environments | User | FR4.1, FR4.2 |
 | UC-07 | View environment details and variables | User | FR5.1, FR5.3 |
 | UC-08 | View historical analysis | User | FR3.4, FR9.2 |
-| UC-09 | Rate an environment | User | FR5.2 |
+| UC-09 | Rate an environment (withdrawn in v1.3) | User | FR5.2 |
 | UC-10 | Manage favorites | User | FR7.2 |
 | UC-11 | Review alerts and notifications | User | FR6.1–FR6.4 |
 | UC-12 | Manage profile and preferences | User | FR7.1, FR7.3–FR7.5 |
@@ -320,7 +328,7 @@ The quality strategy lists, among others, `POST /api/auth/register`, `POST /api/
 - Every protected operation requires authentication and role-based authorization.
 - Queries must be restricted to the authorized institution and campus.
 - Measurements must include enough identification to associate them with a sensor, variable, and environment.
-- Values outside a variable’s valid range must be rejected or explicitly marked invalid according to a defined policy; they must not be silently mixed with valid measurements.
+- Values outside a variable’s valid range are stored with quality `BAD`, raise no alerts and are excluded from aggregations (ADR-014); they are never silently mixed with valid measurements.
 - Retried measurements must not create duplicates.
 - Thresholds must have effective periods and preserve change history.
 - `WARNING` means deviation from the normal range within the warning band; `CRITICAL` means reaching the critical limits defined for the environment type.

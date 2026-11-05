@@ -4,29 +4,30 @@
 
 Servicio Nacional de Aprendizaje (SENA), Programa ADSO-3145556
 
-Instructora: Karol Daniela Correa
+Instructores: Karol Daniela Correa Trujillo; José de Jesús Motta Vargas
 
-12 de octubre de 2026
+5 de noviembre de 2026
 
 ---
 
 # Especificación de Requisitos de Software (SRS)
 ## EduAirControl
-**Versión:** 1.2 — revisión documental y alineación con el repositorio entregado  
-**Fecha:** 9 de octubre de 2026  
+**Versión:** 1.3 — alineación con las decisiones arquitectónicas posteriores y corrección de inconsistencias  
+**Fecha:** 5 de noviembre de 2026  
 **Proyecto:** EduAirControl  
 **Elaborado para:** Servicio Nacional de Aprendizaje (SENA), Análisis y Desarrollo de Software — ficha 3145556  
 **Integrantes:** María de los Ángeles Olaya García; Jhon Jairo Cortez Vargas  
-**Instructor:** José de Jesús Motta Vargas
+**Instructores:** Karol Daniela Correa Trujillo; José de Jesús Motta Vargas
 
 > **Convención de estado.** “Implementado”, “Parcial” y “Pendiente” reproducen el estado descrito en la especificación fuente y la documentación del repositorio. No equivalen por sí solos a una certificación independiente de funcionamiento. Los objetivos de calidad cuantitativos son criterios de aceptación propuestos y deben verificarse con evidencias de prueba.
 
 ## Control del documento
 | Versión | Fecha | Descripción |
 |---|---|---|
-| 1.0 | 2025 | Versión inicial del SRS. |
+| 1.0 | 2026 (día no registrado) | Versión inicial del SRS. |
 | 1.1 | 08/10/2026 | Actualización contra la documentación de web, móvil y microservicios. |
 | 1.2 | 09/10/2026 | Corrección de estructura, terminología, trazabilidad, estados y discrepancias documentales; se separan capacidades implementadas de objetivos aún por verificar. |
+| 1.3 | 05/11/2026 | Se unifican instructores y fechas; el resumen de estado pasa a 41 filas; se alinean umbrales (ADR-014), rutas `/api/v1`, arquitectura (ADR-015, 017, 018, 021) y estado de RF8.2/RF9.5 con la versión entregada. |
 
 ## 1. Introducción
 
@@ -75,6 +76,8 @@ Desarrollar un sistema de monitoreo ambiental escolar que registre y visualice t
 
 ### 2.3 Perspectiva del producto
 El repositorio documenta una arquitectura distribuida con clientes web React/Vite y móvil Expo/React Native, servicios Java con Spring Boot, API Gateway, PostgreSQL, Redis y RabbitMQ, además de contenedores Docker y herramientas de integración. Se identifican servicios de seguridad, gestión de usuarios, aulas/ambientes, sensores, monitoreo ambiental y experiencia de usuario. La disponibilidad real de cada capacidad debe confirmarse en la versión desplegada.
+
+**Actualización arquitectónica (versión 1.3).** Desde la redacción original: `ms-alert` se plegó en `ms-environment-monitoring` (ADR-015), de modo que hay seis servicios de dominio más el API Gateway; la sesión web usa cookies `httpOnly` emitidas por el BFF (ADR-017) y los servicios validan tokens RS256 mediante JWKS (ADR-018); y la ingesta admite mediciones por lote, `measuredAt` generado en el dispositivo y búfer sin conexión (ADR-021), con respuestas `403`/`410` documentadas en el contrato.
 
 **Nota de alineación:** la especificación fuente menciona HTTPS o MQTT para telemetría, mientras que la documentación arquitectónica describe ingesta HTTP y el servicio de monitoreo contiene un controlador HTTP; no se encontró evidencia suficiente en el repositorio revisado para declarar MQTT como canal operativo del MVP. Por tanto, HTTP/HTTPS es el canal base documentado y MQTT requiere confirmación antes de considerarse requisito implementado.
 
@@ -141,7 +144,7 @@ El aislamiento por institución y sede es obligatorio. La regla documentada indi
 
 ## 6. Requisitos funcionales
 
-**Prioridades:** Alta = crítica para el flujo principal o seguridad; Media = importante para el MVP; Pendiente = no debe anunciarse como capacidad disponible. Los estados siguientes proceden de la especificación fuente y documentación revisada.
+**Prioridades:** Alta = crítica para el flujo principal o seguridad; Media = importante para el MVP; Pendiente = no debe anunciarse como capacidad disponible. Los estados siguientes proceden de la especificación fuente y documentación revisada. **Revisión 1.3:** en la versión entregada, el servicio web de sensores consume `/api/v1/sensors` y `/api/v1/sensor-installations` (RF8.2: verificar que el panel ya no use datos de ejemplo); no existe `/api/v1/devices`, y el alta de dispositivos se resuelve con tokens de dispositivo en `/api/v1/device-tokens` de `ms-security` (RF9.5 sigue parcial). Los demás estados no se revalidaron.
 
 ### RF1. Autenticación y acceso
 | ID | Requisito | Estado |
@@ -169,21 +172,21 @@ El aislamiento por institución y sede es obligatorio. La regla documentada indi
 |---|---|---|
 | RF3.1 | Mostrar ambientes autorizados con su estado ambiental y acceso al detalle. | Implementado en la fuente |
 | RF3.2 | Mostrar temperatura, humedad, CO₂ y ruido con valor, unidad y estado. | Implementado en la fuente |
-| RF3.3 | Calcular puntaje de 0 a 100 y ranking de ambientes según cumplimiento de rangos. | Parcial / fuera del MVP inicial; confirmar alcance |
+| RF3.3 | Calcular puntaje de 0 a 100 y ranking de ambientes según cumplimiento de rangos. | Retirado (v1.3): la ruta `/ranking` de la web redirige al panel; no hay puntaje ni ranking en el código |
 | RF3.4 | Consultar datos actuales e históricos por día, semana, mes y año, seleccionando período y variable. | Parcial |
 | RF3.5 | Mostrar gráficos o indicadores que permitan comparar la evolución de las mediciones. | Objetivo asociado al análisis; verificar por cliente |
 
 ### RF4. Búsqueda y filtrado
 | ID | Requisito | Estado |
 |---|---|---|
-| RF4.1 | Buscar ambientes por nombre y permitir consultar, registrar o borrar historial de búsqueda si el servicio está disponible. | Parcial |
+| RF4.1 | Buscar ambientes por nombre y permitir consultar, registrar o borrar historial de búsqueda si el servicio está disponible. | Parcial; el historial de búsqueda fue retirado (changeset 005 de `ms-user-experience`) |
 | RF4.2 | Filtrar por bloque, piso, favoritos y estado ambiental. La búsqueda por variable queda pendiente en la fuente. | Parcial |
 
 ### RF5. Detalle y valoración de ambientes
 | ID | Requisito | Estado |
 |---|---|---|
 | RF5.1 | Mostrar ubicación, capacidad, tipo, calidad ambiental, métricas actuales, rangos de referencia, explicación de variables y recomendaciones básicas. | Implementado en la fuente |
-| RF5.2 | Permitir calificar un ambiente de 1 a 5 y escribir un comentario de hasta 1.000 caracteres. | Parcial: la fuente indica que falta la pantalla y moderación |
+| RF5.2 | Permitir calificar un ambiente de 1 a 5 y escribir un comentario de hasta 1.000 caracteres. | Retirado (v1.3): las calificaciones están deprecadas (changeset 005); la tabla pasó a `legacy_classroom_ratings` |
 | RF5.3 | Permitir consultar el detalle de una variable, su valor actual, estado e histórico. | Parcial |
 
 ### RF6. Alertas y notificaciones
@@ -193,7 +196,7 @@ El aislamiento por institución y sede es obligatorio. La regla documentada indi
 | RF6.2 | Listar alertas y permitir reconocerlas (`acknowledge`). | Implementado en la fuente |
 | RF6.3 | Mostrar notificaciones ordenadas por fecha, permitir abrir el elemento relacionado y marcarlo como leído por usuario. La fuente advierte que parte de la interfaz calcula avisos con valores fijos en cliente y debe consumir alertas del backend. | Parcial |
 | RF6.4 | Permitir activar/desactivar alertas, advertencias, resumen diario y sonido, según preferencias disponibles. | Implementado en la fuente |
-| RF6.5 | Enviar alertas fuera de la aplicación mediante notificación push o correo a responsables. | Pendiente |
+| RF6.5 | Enviar alertas fuera de la aplicación mediante notificación push o correo a responsables. | Parcial (v1.3): aviso push al móvil vía Expo (`/api/v1/push-tokens`); el correo no está implementado |
 
 ### RF7. Perfil, favoritos y preferencias
 | ID | Requisito | Estado |
@@ -201,7 +204,7 @@ El aislamiento por institución y sede es obligatorio. La regla documentada indi
 | RF7.1 | Permitir editar nombre, cargo, teléfono, ubicación y foto de perfil. | Implementado en la fuente |
 | RF7.2 | Permitir marcar/desmarcar ambientes favoritos y consultar la lista propia. Favoritos de variables no incluidos. | Implementado en la fuente |
 | RF7.3 | Ofrecer modo oscuro, tres opciones para daltonismo y tres tamaños de fuente. | Implementado en la fuente |
-| RF7.4 | Ofrecer español, inglés, francés y portugués. | Implementado en la fuente |
+| RF7.4 | Ofrecer español, inglés, francés y portugués. | Parcial en web (v1.3): `i18n.js` declara es/en/fr/pt, pero la web solo incluye `es.json` y `en.json`; el móvil incluye los cuatro |
 | RF7.5 | Guardar preferencias de formato de fecha, zona horaria y recordatorios; permitir almacenamiento local cuando no haya conexión, donde esté implementado. | Implementado en la fuente |
 
 ### RF8. Administración de ambientes, sensores y umbrales
@@ -226,9 +229,14 @@ El aislamiento por institución y sede es obligatorio. La regla documentada indi
 | Implementado | 26 | Recuento original; no es una auditoría independiente |
 | Parcial | 12 | Requiere cerrar brechas y aportar pruebas |
 | Pendiente | 2 | Segundo factor y notificación externa |
-| **Total reportado** | **40** | La tabla original resume subrequisitos; las filas de esta versión reorganizan y explicitan algunos requisitos compuestos. No usar el recuento como métrica de aceptación sin normalizar la matriz. |
+| Objetivo por verificar (RF3.5) | 1 | Sin estado de implementación declarado en la fuente |
+| **Total reportado** | **40** (fuente); **41** (filas de esta matriz) | La tabla original resume subrequisitos; las filas de esta versión reorganizan y explicitan algunos requisitos compuestos. No usar el recuento como métrica de aceptación sin normalizar la matriz. |
+
+**Recuento de esta matriz (v1.3), contra el código entregado:** 25 implementados, 12 parciales, 1 pendiente, 2 retirados y 1 objetivo por verificar; total 41.
 
 ## 7. Variables ambientales y umbrales
+
+**Actualización (ADR-014, enmienda del 2026-10-30).** Las tablas de las secciones 7.2 a 7.4 son **plantillas de referencia, no valores por defecto**: el administrador define los umbrales efectivos y, mientras un umbral no esté configurado, no se genera ninguna alerta a partir de la plantilla. Los rangos válidos de 7.1 no son umbrales. Una lectura fuera del rango válido se **almacena** con calidad `BAD`, no genera alerta y se excluye de las agregaciones; `SUSPECT` está reservada y ninguna regla la produce en esta entrega. Hoy el seed `010-seed-reference` aún inserta las plantillas como umbrales efectivos, y el endpoint de umbrales solo maneja el nivel `WARNING`: ambas brechas están registradas como deuda técnica.
 
 Los rangos siguientes son los valores documentados en la SRS fuente para cada tipo de ambiente. Deben centralizarse en una única configuración y verificarse con el responsable institucional y los sensores reales. No deben interpretarse como asesoría médica ni como estándares regulatorios universales.
 
@@ -284,7 +292,7 @@ Los siguientes son objetivos medibles documentados en la estrategia de calidad. 
 | RNF10 | Compatibilidad y adaptación | Navegadores modernos (Chrome, Firefox, Edge y Safari); Android/iOS según Expo SDK del proyecto; diseño adaptable desde 360×640 px hasta 1280×720 px sin pérdida de funciones principales ni desbordamiento horizontal. |
 
 ### 8.1 Endpoints críticos de referencia
-La estrategia de calidad enumera como críticos, entre otros, `POST /api/auth/register`, `POST /api/auth/login`, `GET /api/users/{id}`, `GET /api/environments/{id}`, `GET /api/monitoring/current` y `GET /api/monitoring/history`. Las rutas reales deben verificarse contra los controladores y el API Gateway desplegados; los ejemplos no constituyen un contrato OpenAPI definitivo.
+La estrategia de calidad enumera como críticos, entre otros, los siguientes endpoints, expresados con las rutas versionadas `/api/v1` de los controladores de la versión entregada: `POST /api/v1/auth/register`, `POST /api/v1/auth/login`, `POST /api/v1/auth/refresh`, `GET /api/v1/users/{id}`, `GET /api/v1/educational-environments`, `POST /api/v1/measurements` (y `/measurements/batch`), `GET /api/v1/environments/{id}/current` y `GET /api/v1/environments/{id}/measurements`. El contrato vigente está en `07-api/` de `ea-control-docs`; estos ejemplos no sustituyen el contrato OpenAPI.
 
 ## 9. Casos de uso
 
@@ -294,11 +302,11 @@ La estrategia de calidad enumera como críticos, entre otros, `POST /api/auth/re
 | CU-02 | Iniciar sesión con correo y contraseña | Usuario, Administrador, Superadministrador | RF1.1, RF1.8 |
 | CU-03 | Iniciar sesión con Google o Facebook | Usuario | RF1.4 |
 | CU-04 | Recuperar o cambiar contraseña | Usuario | RF1.6, RF1.7 |
-| CU-05 | Consultar panel y ranking de ambientes | Usuario | RF3.1–RF3.3 |
+| CU-05 | Consultar panel de ambientes (el ranking se retiró en v1.3) | Usuario | RF3.1–RF3.3 |
 | CU-06 | Buscar y filtrar ambientes | Usuario | RF4.1, RF4.2 |
 | CU-07 | Ver detalle del ambiente y sus variables | Usuario | RF5.1, RF5.3 |
 | CU-08 | Consultar análisis histórico | Usuario | RF3.4, RF9.2 |
-| CU-09 | Calificar un ambiente | Usuario | RF5.2 |
+| CU-09 | Calificar un ambiente (retirado en v1.3) | Usuario | RF5.2 |
 | CU-10 | Gestionar favoritos | Usuario | RF7.2 |
 | CU-11 | Revisar alertas y notificaciones | Usuario | RF6.1–RF6.4 |
 | CU-12 | Gestionar perfil y preferencias | Usuario | RF7.1, RF7.3–RF7.5 |
@@ -320,7 +328,7 @@ La estrategia de calidad enumera como críticos, entre otros, `POST /api/auth/re
 - Toda operación protegida requiere identidad autenticada y autorización acorde con el rol.
 - Las consultas deben limitarse al ámbito institucional y de sede autorizado.
 - Las mediciones deben incluir identificación suficiente para relacionarlas con sensor, variable y ambiente.
-- Los datos fuera del rango válido de una variable deben rechazarse o marcarse como inválidos conforme a una política explícita; no deben mezclarse silenciosamente con mediciones válidas.
+- Los datos fuera del rango válido de una variable se almacenan con calidad `BAD`, no generan alertas ni entran en las agregaciones (ADR-014); no se mezclan silenciosamente con mediciones válidas.
 - Las mediciones reintentadas no deben producir duplicados.
 - Los umbrales deben tener vigencia temporal y conservar historial de cambios.
 - Una alerta `WARNING` corresponde a desviación del rango normal dentro de la banda de advertencia; `CRITICAL` corresponde a los límites críticos definidos para el tipo de ambiente.
