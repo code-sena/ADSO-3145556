@@ -12,18 +12,19 @@ Si falta alguno, agregue la fila. Si uno está vacío o ya no se usa, indíquelo
 
 | Component / Componente | Repository / Repositorio | Status / Estado | Access for `ariel5253` / Acceso de `ariel5253` | Commit of tag `final-delivery-2026` / Commit del tag | Main version ZIP / ZIP versión main | Full export ZIP / ZIP completo |
 |---|---|---|---|---|---|---|
-| Documentation | [code-sena/sg-docs](https://github.com/code-sena/sg-docs) | Public / Público | Yes / Sí | | | |
-| Database | [code-sena/sg-db](https://github.com/code-sena/sg-db) | Public / Público | Yes / Sí | | | |
-| Main repository | [school-guardian-project/GuardianEscolar](https://github.com/school-guardian-project/GuardianEscolar) | Public / Público | **Add / Agregar** | | | |
-| Message broker | [school-guardian-project/broker-kafka](https://github.com/school-guardian-project/broker-kafka) | Public / Público | **Add / Agregar** | | | |
-| API gateway | [school-guardian-project/sg-ms-api-gateway](https://github.com/school-guardian-project/sg-ms-api-gateway) | Public / Público | **Add / Agregar** | | | |
-| Backend | [school-guardian-project/sg-ms-fleet](https://github.com/school-guardian-project/sg-ms-fleet) | Public / Público | **Add / Agregar** | | | |
-| Backend | [school-guardian-project/sg-ms-forgot-information](https://github.com/school-guardian-project/sg-ms-forgot-information) | Public / Público | **Add / Agregar** | | | |
-| Backend | [school-guardian-project/sg-ms-gps](https://github.com/school-guardian-project/sg-ms-gps) | Public / Público | **Add / Agregar** | | | |
-| Backend | [school-guardian-project/sg-ms-iam](https://github.com/school-guardian-project/sg-ms-iam) | Public / Público | **Add / Agregar** | | | |
-| Backend | [school-guardian-project/sg-ms-notification](https://github.com/school-guardian-project/sg-ms-notification) | Public / Público | **Add / Agregar** | | | |
-| Backend | [school-guardian-project/sg-ms-route](https://github.com/school-guardian-project/sg-ms-route) | Public / Público | **Add / Agregar** | | | |
-| Backend | [school-guardian-project/sg-ms-school-management](https://github.com/school-guardian-project/sg-ms-school-management) | Public / Público | **Add / Agregar** | | | |
+| Documentation | [code-sena/sg-docs](https://github.com/code-sena/sg-docs) | Public / Público | Yes — admin / Sí — admin | | | |
+| Database | [code-sena/sg-db](https://github.com/code-sena/sg-db) | Public / Público | Yes — admin / Sí — admin | | | |
+| Main repository | [school-guardian-project/GuardianEscolar](https://github.com/school-guardian-project/GuardianEscolar) | Public / Público | **Read only — add write / Solo lectura — agregar escritura** | | | |
+| Message broker | [school-guardian-project/broker-kafka](https://github.com/school-guardian-project/broker-kafka) | Public / Público | **Read only — add write / Solo lectura — agregar escritura** | | | |
+| API gateway | [school-guardian-project/sg-ms-api-gateway](https://github.com/school-guardian-project/sg-ms-api-gateway) | Public / Público | **Read only — add write / Solo lectura — agregar escritura** | | | |
+| Backend | [school-guardian-project/sg-ms-fleet](https://github.com/school-guardian-project/sg-ms-fleet) | Public / Público | **Read only — add write / Solo lectura — agregar escritura** | | | |
+| Backend | [school-guardian-project/sg-ms-forgot-information](https://github.com/school-guardian-project/sg-ms-forgot-information) | Public / Público | **Read only — add write / Solo lectura — agregar escritura** | | | |
+| Backend | [school-guardian-project/sg-ms-gps](https://github.com/school-guardian-project/sg-ms-gps) | Public / Público | **Read only — add write / Solo lectura — agregar escritura** | | | |
+| Backend | [school-guardian-project/sg-ms-iam](https://github.com/school-guardian-project/sg-ms-iam) | Public / Público | **Read only — add write / Solo lectura — agregar escritura** | | | |
+| Backend | [school-guardian-project/sg-ms-notification](https://github.com/school-guardian-project/sg-ms-notification) | Public / Público | **Read only — add write / Solo lectura — agregar escritura** | | | |
+| Backend | [school-guardian-project/sg-ms-route](https://github.com/school-guardian-project/sg-ms-route) | Public / Público | **Read only — add write / Solo lectura — agregar escritura** | | | |
+| Backend | [school-guardian-project/sg-ms-school-management](https://github.com/school-guardian-project/sg-ms-school-management) | Public / Público | **Read only — add write / Solo lectura — agregar escritura** | | | |
+| Backend | [school-guardian-project/sg-ms-user-management](https://github.com/school-guardian-project/sg-ms-user-management) | Public / Público | **Read only — add write / Solo lectura — agregar escritura** | | | |
 
 Before making a repository public, remove `.env` files and change any password, token or key that was ever committed.
 

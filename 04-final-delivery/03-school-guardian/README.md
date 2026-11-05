@@ -14,16 +14,16 @@ Final delivery of the training project / Entrega final del proyecto formativo.
 | Process / Proceso | Completion of the technologist taught stage / Finalización de la etapa lectiva del tecnólogo |
 | Research seedbed / Semillero de investigación | Developers & Geeks |
 | Delivery version / Versión entregada | `final-delivery-2026` |
-| Delivery date / Fecha de entrega | |
-| Delivered by / Entregado por | |
+| Delivery date / Fecha de entrega | 4 de noviembre de 2026 (Colombia) |
+| Delivered by / Entregado por | Juan Pablo Chala Ramírez, Sharik Dayanna Rojas Ibarra y Johan Smith Santamaria Fernández |
 
 ## Summary / Resumen
 
-- **Problem it solves / Problema que resuelve:**
-- **Target users / Usuarios:**
-- **Main features / Funciones principales:**
-- **Technology stack / Tecnologías:**
-- **Production URL / URL en producción:**
+- **Problem it solves / Problema que resuelve:** Supervisión del transporte escolar: los acudientes no tienen forma oportuna de saber si el estudiante abordó, descendió o llegó, y la institución no cuenta con un registro centralizado de rutas, vehículos y novedades.
+- **Target users / Usuarios:** Acudientes, estudiantes, conductores, administradores de colegio y superadministradores de la plataforma.
+- **Main features / Funciones principales:** Autenticación con roles; gestión de personas, familias, colegios y sedes; flota, conductores y licencias; rutas, paradas, horarios y asignaciones; registro de abordaje y descenso; alertas y notificaciones a acudientes; consulta de perfil y cambios de datos de contacto.
+- **Technology stack / Tecnologías:** Angular 21, React Native con Expo, ASP.NET Core (.NET 10), Spring Boot (Java 21), SQL Server 2022, Liquibase, Kafka, Kong y Docker; despliegue en AWS EC2 y Vercel.
+- **Production URL / URL en producción:** Cliente web: https://guardian-escolar.vercel.app — API Gateway: https://school-guardian.duckdns.org (entorno de pruebas, no productivo).
 - **Demo credentials / Credenciales de prueba:** do not write real passwords here / no escriba contraseñas reales aquí
 
 ## Team members / Integrantes
@@ -46,15 +46,15 @@ Autorización de datos: al marcar la casilla, el integrante confirma sus datos y
 
 | Folder / Carpeta | Content / Contenido | Done / Listo |
 |---|---|---|
-| [`01-requirements-specification/`](01-requirements-specification/) | Requirements specification / Especificación de requisitos | ☐ |
-| [`02-software-analysis/`](02-software-analysis/) | Software analysis / Análisis del software | ☐ |
-| [`03-technical-proposal/`](03-technical-proposal/) | Technical proposal / Propuesta técnica | ☐ |
-| [`04-software-design/`](04-software-design/) | Software design / Diseño del software | ☐ |
-| [`05-test-documentation/`](05-test-documentation/) | Test documentation / Documentación de pruebas | ☐ |
-| [`06-implementation-procedure/`](06-implementation-procedure/) | Implementation procedure / Procedimiento de implementación | ☐ |
-| [`07-improvement-actions/`](07-improvement-actions/) | Improvement actions / Acciones de mejoramiento | ☐ |
-| [`08-manuals/`](08-manuals/) | Manuals / Manuales | ☐ |
-| [`09-project-article/`](09-project-article/) | Project article / Artículo del proyecto | ☐ |
+| [`01-requirements-specification/`](01-requirements-specification/) | Requirements specification / Especificación de requisitos | ☒ |
+| [`02-software-analysis/`](02-software-analysis/) | Software analysis / Análisis del software | ☒ |
+| [`03-technical-proposal/`](03-technical-proposal/) | Technical proposal / Propuesta técnica | ☒ |
+| [`04-software-design/`](04-software-design/) | Software design / Diseño del software | ☒ |
+| [`05-test-documentation/`](05-test-documentation/) | Test documentation / Documentación de pruebas | ☒ |
+| [`06-implementation-procedure/`](06-implementation-procedure/) | Implementation procedure / Procedimiento de implementación | ☒ |
+| [`07-improvement-actions/`](07-improvement-actions/) | Improvement actions / Acciones de mejoramiento | ☒ |
+| [`08-manuals/`](08-manuals/) | Manuals / Manuales | ☒ |
+| [`09-project-article/`](09-project-article/) | Project article / Artículo del proyecto | ☒ |
 | [`10-videos/`](10-videos/) | Videos / Videos | ☐ |
 | [`code-tag/`](code-tag/) | Repository links, tags and ZIP files / Enlaces, tags y ZIP | ☐ |
 | [`team-roster.md`](team-roster.md) | Team and roles / Equipo y roles | ☐ |
