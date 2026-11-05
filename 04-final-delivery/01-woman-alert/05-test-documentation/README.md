@@ -6,7 +6,7 @@
 
 - [x] Test plan / Plan de pruebas
 - [x] Test cases / Casos de prueba
-- [x] Test results with evidence / Resultados de las pruebas con evidencia — automated test runs with screenshots in `../06-implementation-procedure/deployment-evidence.pdf` (section 7) and `clean-install-test.pdf` / ejecuciones con capturas en 06
+- [x] Test results with evidence / Resultados de las pruebas con evidencia — `test-results.pdf` (396 automated tests at tag final-delivery-2026, 0 failures, run 2026-11-05) and the screenshots in `../06-implementation-procedure/deployment-evidence.pdf` (section 7) and `clean-install-test.pdf`
 
 ## Format / Formato
 
