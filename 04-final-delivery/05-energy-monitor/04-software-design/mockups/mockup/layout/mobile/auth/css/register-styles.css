@@ -1,0 +1,142 @@
+/* =========================================
+   Registro — EnergyMonitor mobile
+   Origen: RegisterScreen.tsx/.styles.ts + RegisterForm.tsx/.styles.ts
+           + AuthBrandHeader (compartido con Login y el resto de auth)
+   ========================================= */
+
+/* AuthBrandHeader: tarjeta con degradado.
+   Se repite aquí porque este módulo usa el patrón "hoja autocontenida"
+   (como landing/ en web): mobile-shell.css y login-styles.css quedan intactos. */
+.brand-header {
+  padding: var(--space-lg);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  background: linear-gradient(
+    135deg,
+    var(--primary-dark) 0%,
+    var(--background-left) 55%,
+    var(--primary-dark) 100%
+  );
+}
+
+.brand-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+}
+
+.brand-logo { width: 64px; height: 64px; object-fit: contain; }
+
+.brand-name {
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--on-brand);
+  text-align: center;
+}
+
+.brand-subtitle {
+  font-size: 14px;
+  color: var(--on-brand);
+  opacity: 0.72;
+  text-align: center;
+  margin-top: var(--space-sm);
+}
+
+/* RegisterForm.styles.ts → form: gap md(16), width 100% */
+.register-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+/* title: lg(20) / bold / centrado */
+.register-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-primary);
+  text-align: center;
+}
+
+/* nameRow: fila con align-items flex-start y gap sm(8) */
+.name-row {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
+}
+
+/* fieldHalf: flex 1 con gap xs(4) para el mensaje de error bajo el campo */
+.field-half {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+/* error: size13 / danger, alineado a la izquierda (no lleva textAlign) */
+.field-error { font-size: 13px; color: var(--danger); }
+
+/* checkbox: 24×24 (spacing.lg), radius sm(6), borde 1px, fondo surface.
+   En mobile NO es un <input type="checkbox"> nativo: es un Pressable de 24×24
+   con el check de Ionicons de 12px (typography.size.xs) dentro cuando está marcado. */
+.checkbox {
+  width: var(--space-lg);
+  height: var(--space-lg);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.checkbox-checked { background: var(--primary); border-color: var(--primary); }
+
+/* termsRow: options → row, align-items flex-start, gap sm(8) */
+.terms-row {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
+}
+
+/* termsText: flex 1, sm(14), textPrimary */
+.terms-text {
+  flex: 1;
+  font-size: 14px;
+  color: var(--text-primary);
+}
+
+/* termsLink: bold + secondary (verde), sin subrayado — en la app no hay
+   LegalModal: el onPress solo escribe un console.log */
+.terms-link { font-weight: 600; color: var(--secondary); }
+
+/* buttonsContainer: centrada, gap sm(8), width 100% */
+.register-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  width: 100%;
+}
+
+/* divider + dividerLine + dividerText */
+.divider { display: flex; align-items: center; width: 100%; gap: var(--space-sm); }
+
+.divider-line { flex: 1; height: 1px; background: var(--border); }
+
+.divider-text { font-size: 12px; color: var(--text-secondary); }
+
+/* loginWith: sm(14) / textSecondary, sin alineación (queda a la izquierda) */
+.login-with { font-size: 14px; color: var(--text-secondary); }
+
+/* googleIcon: spacing.xl = 32 */
+.google-icon { width: var(--space-xl); height: var(--space-xl); object-fit: contain; }
+
+/* register: sm(14) / medium / centrado */
+.register { font-size: 14px; font-weight: 500; color: var(--text-primary); text-align: center; }
+
+.register-link { font-weight: 600; color: var(--secondary); }

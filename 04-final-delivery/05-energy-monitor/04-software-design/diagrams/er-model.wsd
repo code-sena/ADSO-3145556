@@ -1,0 +1,552 @@
+@startuml mer
+
+hide circle
+skinparam linetype ortho
+
+legend top
+    MER de EnergyMonitor (esquema energy_monitor, MySQL 8.4).
+    Generado de los changelogs de Liquibase de los siete servicios
+    (estado al 27/10/2026, 37 tablas).
+
+    - Cada paquete es el servicio dueño de sus tablas.
+    - <<PK>> llave primaria; <<FK>> llave foránea SQL, solo dentro
+      del mismo servicio; <<UQ>> valor único.
+    - * columna NOT NULL.
+    - Líneas punteadas: referencias entre servicios guardadas como
+      identificador (sin FOREIGN KEY), validadas por la aplicación.
+    - Tablas *_outbox: outbox transaccional de los eventos de RabbitMQ.
+    - Auditoría: created_at, updated_at y deleted_at (borrado lógico).
+endlegend
+
+package "en-monitor-security-service (8082)" {
+
+    entity person {
+        + id_person: VARCHAR(10) <<PK>>
+        --
+        * name: VARCHAR(100)
+        last_name: VARCHAR(100)
+        * created_at: TIMESTAMP
+        * updated_at: TIMESTAMP
+        deleted_at: TIMESTAMP
+    }
+
+    entity user {
+        + id_user: VARCHAR(10) <<PK>>
+        --
+        * person_id: VARCHAR(10) <<FK>> <<UQ>>
+        * password_hash: VARCHAR(255)
+        * email: VARCHAR(255) <<UQ>>
+        * email_verified: BOOLEAN
+        * registration_date: TIMESTAMP
+        * status: ENUM(ACTIVE, INACTIVE, BLOCKED)
+        * failed_login_attempts: INT
+        last_login_at: TIMESTAMP
+        * created_at: TIMESTAMP
+        * updated_at: TIMESTAMP
+        deleted_at: TIMESTAMP
+        profile_image: MEDIUMTEXT
+        google_subject: VARCHAR(255) <<UQ>>
+        terms_accepted_at: TIMESTAMP
+    }
+
+    entity user_configuration {
+        + id_configuration: VARCHAR(10) <<PK>>
+        --
+        * user_id: VARCHAR(10) <<FK>> <<UQ>>
+        * notify_by_email: BOOLEAN
+        * notify_by_push: BOOLEAN
+        color_theme: VARCHAR(50)
+        language: VARCHAR(50)
+        social_provider: VARCHAR(50)
+        * created_at: TIMESTAMP
+        * updated_at: TIMESTAMP
+        deleted_at: TIMESTAMP
+    }
+
+    entity password_reset_token {
+        + id_reset_token: VARCHAR(10) <<PK>>
+        --
+        * user_id: VARCHAR(10) <<FK>>
+        * reset_token_hash: VARCHAR(64) <<UQ>>
+        * used: BOOLEAN
+        * created_at: TIMESTAMP
+        * expiration_at: TIMESTAMP
+        * updated_at: TIMESTAMP
+        deleted_at: TIMESTAMP
+        * attempts: INT
+    }
+
+    entity user_session {
+        + id_user_session: VARCHAR(10) <<PK>>
+        --
+        * user_id: VARCHAR(10) <<FK>>
+        * revoked: BOOLEAN
+        ip_address: VARCHAR(45)
+        user_agent: VARCHAR(150)
+        * created_at: TIMESTAMP
+        * expiration_at: TIMESTAMP
+        closed_at: TIMESTAMP
+        * updated_at: TIMESTAMP
+        deleted_at: TIMESTAMP
+        revoked_at: TIMESTAMP
+        revoked_reason: ENUM(REFRESH_TOKEN_REUSE, PASSWORD_CHANGED, ADMINISTRATIVE)
+    }
+
+    entity security_configuration {
+        + id_security_configuration: VARCHAR(10) <<PK>>
+        --
+        * config_name: VARCHAR(100) <<UQ>>
+        * config_value: VARCHAR(100)
+        description: VARCHAR(255)
+        * created_at: TIMESTAMP
+        * updated_at: TIMESTAMP
+        deleted_at: TIMESTAMP
+    }
+
+    entity password_policy {
+        + id_password_policy: VARCHAR(10) <<PK>>
+        --
+        * min_length: INT
+        * max_length: INT
+        * require_uppercase: BOOLEAN
+        * require_numbers: BOOLEAN
+        * require_symbols: BOOLEAN
+        * expiration_days: INT
+        * created_at: TIMESTAMP
+        * updated_at: TIMESTAMP
+        deleted_at: TIMESTAMP
+    }
+
+    entity login_error_log {
+        + id_login_error: VARCHAR(10) <<PK>>
+        --
+        user_id: VARCHAR(10) <<FK>>
+        * error_type: ENUM(INVALID_PASSWORD, USER_NOT_FOUND, ACCOUNT_BLOCKED, ACCOUNT_INACTIVE, EMAIL_NOT_VERIFIED)
+        description: VARCHAR(500)
+        ip_address: VARCHAR(45)
+        * created_at: TIMESTAMP
+        * updated_at: TIMESTAMP
+        deleted_at: TIMESTAMP
+    }
+
+    entity system_role {
+        + id_system_role: VARCHAR(10) <<PK>>
+        --
+        * name: VARCHAR(50) <<UQ>>
+        description: VARCHAR(200)
+        * enabled: BOOLEAN
+        * created_at: TIMESTAMP
+        * updated_at: TIMESTAMP
+        deleted_at: TIMESTAMP
+    }
+
+    entity permission {
+        + id_permission: VARCHAR(10) <<PK>>
+        --
+        * code: VARCHAR(30) <<UQ>>
+        * name: VARCHAR(50)
+        description: VARCHAR(100)
+        * created_at: TIMESTAMP
+        * updated_at: TIMESTAMP
+        deleted_at: TIMESTAMP
+    }
+
+    entity user_system_role {
+        + user_id: VARCHAR(10) <<PK>> <<FK>>
+        + system_role_id: VARCHAR(10) <<PK>> <<FK>>
+        --
+        * assigned_at: TIMESTAMP
+        * created_at: TIMESTAMP
+        * updated_at: TIMESTAMP
+        deleted_at: TIMESTAMP
+    }
+
+    entity system_role_permission {
+        + system_role_id: VARCHAR(10) <<PK>> <<FK>>
+        + permission_id: VARCHAR(10) <<PK>> <<FK>>
+        --
+        * assigned_at: TIMESTAMP
+        * created_at: TIMESTAMP
+        * updated_at: TIMESTAMP
+        deleted_at: TIMESTAMP
+    }
+
+    entity audit_log {
+        + id_audit_log: VARCHAR(10) <<PK>>
+        --
+        user_id: VARCHAR(10) <<FK>>
+        * action: ENUM(CREATE, UPDATE, DELETE, LOGIN, LOGIN_FAILED, LOGOUT)
+        description: VARCHAR(255)
+        ip_address: VARCHAR(45)
+        application: VARCHAR(255)
+        * created_at: TIMESTAMP
+        * updated_at: TIMESTAMP
+        deleted_at: TIMESTAMP
+    }
+
+    entity refresh_token {
+        + id_refresh_token: VARCHAR(10) <<PK>>
+        --
+        * id_user_session: VARCHAR(10) <<FK>>
+        * family_id: VARCHAR(10)
+        parent_id: VARCHAR(10) <<FK>>
+        * token_hash: VARCHAR(64) <<UQ>>
+        * status: ENUM(ACTIVE, ROTATED, REVOKED, EXPIRED)
+        * created_at: TIMESTAMP
+        * expires_at: TIMESTAMP
+        rotated_at: TIMESTAMP
+        revoked_at: TIMESTAMP
+        revoked_reason: ENUM(REFRESH_TOKEN_REUSE, PASSWORD_CHANGED, ADMINISTRATIVE)
+        * updated_at: TIMESTAMP
+        deleted_at: TIMESTAMP
+    }
+
+    entity security_outbox {
+        + id_message: VARCHAR(10) <<PK>>
+        --
+        * message_type: VARCHAR(60)
+        payload: TEXT
+        * occurred_at: DATETIME(6)
+        expires_at: DATETIME(6)
+        published_at: DATETIME(6)
+        discarded_at: DATETIME(6)
+        * attempts: INT
+        last_error: VARCHAR(255)
+    }
+
+    entity pending_registration {
+        + id_user: VARCHAR(10) <<PK>>
+        --
+        * email: VARCHAR(255) <<UQ>>
+        * name: VARCHAR(100)
+        last_name: VARCHAR(100)
+        * password_hash: VARCHAR(255)
+        profile_image: MEDIUMTEXT
+        ip_address: VARCHAR(45)
+        * requested_at: DATETIME(6)
+        * expires_at: DATETIME(6)
+    }
+
+}
+
+package "en-monitor-device-service (8084)" {
+
+    entity appliance_type {
+        + id_appliance_type: VARCHAR(10) <<PK>>
+        --
+        * name: VARCHAR(50) <<UQ>>
+        * created_at: TIMESTAMP
+        * updated_at: TIMESTAMP
+        deleted_at: TIMESTAMP
+    }
+
+    entity device {
+        + id_device: VARCHAR(10) <<PK>>
+        --
+        * name: VARCHAR(50)
+        * appliance_type_id: VARCHAR(10) <<FK>>
+        location: VARCHAR(50)
+        description: VARCHAR(200)
+        * installation_date: TIMESTAMP
+        * device_code: VARCHAR(6) <<UQ>>
+        * api_key_hash: VARCHAR(64)
+        * created_at: TIMESTAMP
+        * updated_at: TIMESTAMP
+        deleted_at: TIMESTAMP
+    }
+
+    entity device_status_log {
+        + id_device_status: VARCHAR(10) <<PK>>
+        --
+        device_id: VARCHAR(10) <<FK>>
+        * status: ENUM(ONLINE, OFFLINE)
+        signal_strength: INT
+        * last_seen: TIMESTAMP(6)
+        * created_at: TIMESTAMP
+        * updated_at: TIMESTAMP
+        deleted_at: TIMESTAMP
+    }
+
+    entity device_home {
+        + device_id: VARCHAR(10) <<PK>> <<FK>>
+        + home_id: VARCHAR(10) <<PK>>
+        --
+        * created_at: TIMESTAMP
+        * updated_at: TIMESTAMP
+        deleted_at: TIMESTAMP
+    }
+
+    entity device_outbox {
+        + id_message: VARCHAR(10) <<PK>>
+        --
+        * message_type: VARCHAR(60)
+        * payload: TEXT
+        * occurred_at: DATETIME(6)
+        published_at: DATETIME(6)
+        discarded_at: DATETIME(6)
+        * attempts: INT
+        last_error: VARCHAR(255)
+    }
+
+}
+
+package "en-monitor-measurement-service (8085)" {
+
+    entity measurement {
+        + id_measurement: VARCHAR(10) <<PK>>
+        --
+        * device_id: VARCHAR(10)
+        * date_time: TIMESTAMP
+        * voltage: DOUBLE
+        * current: DOUBLE
+        * active_power: DOUBLE
+        * stored_energy: DOUBLE
+        * created_at: TIMESTAMP
+        * updated_at: TIMESTAMP
+        deleted_at: TIMESTAMP
+    }
+
+    entity consumption_level {
+        + id_consumption_level: VARCHAR(10) <<PK>>
+        --
+        * name: ENUM(LOW, MEDIUM, HIGH, CRITICAL) <<UQ>>
+        * description: VARCHAR(200)
+        * min_limit: DOUBLE
+        * max_limit: DOUBLE
+        * created_at: TIMESTAMP
+        * updated_at: TIMESTAMP
+        deleted_at: TIMESTAMP
+    }
+
+    entity measurement_outbox {
+        + id_message: VARCHAR(10) <<PK>>
+        --
+        * message_type: VARCHAR(60)
+        * payload: TEXT
+        * occurred_at: DATETIME(6)
+        published_at: DATETIME(6)
+        discarded_at: DATETIME(6)
+        * attempts: INT
+        last_error: VARCHAR(255)
+    }
+
+}
+
+package "en-monitor-home-service (8086)" {
+
+    entity home_type {
+        + id_home_type: VARCHAR(10) <<PK>>
+        --
+        * name: VARCHAR(50) <<UQ>>
+        * created_at: TIMESTAMP
+        * updated_at: TIMESTAMP
+        deleted_at: TIMESTAMP
+    }
+
+    entity home {
+        + id_home: VARCHAR(10) <<PK>>
+        --
+        * name: VARCHAR(50)
+        * home_type_id: VARCHAR(10) <<FK>>
+        * address: VARCHAR(200)
+        * access_code: VARCHAR(8) <<UQ>>
+        description: VARCHAR(200)
+        * creation_date: TIMESTAMP
+        * created_at: TIMESTAMP
+        * updated_at: TIMESTAMP
+        deleted_at: TIMESTAMP
+    }
+
+    entity home_thresholds {
+        + id_threshold: VARCHAR(10) <<PK>>
+        --
+        * home_id: VARCHAR(10) <<FK>> <<UQ>>
+        * daily_limit: DOUBLE
+        * monthly_limit: DOUBLE
+        * use_system_default: BOOLEAN
+        * created_at: TIMESTAMP
+        * updated_at: TIMESTAMP
+        deleted_at: TIMESTAMP
+        * limit_period: ENUM(DAILY, MONTHLY)
+    }
+
+    entity user_home {
+        + user_id: VARCHAR(10) <<PK>>
+        + home_id: VARCHAR(10) <<PK>> <<FK>>
+        --
+        * role: ENUM(OWNER, MEMBER)
+        * favorite: BOOLEAN
+        * created_at: TIMESTAMP
+        * updated_at: TIMESTAMP
+        deleted_at: TIMESTAMP
+    }
+
+    entity home_outbox {
+        + id_message: VARCHAR(10) <<PK>>
+        --
+        * message_type: VARCHAR(60)
+        * payload: TEXT
+        * occurred_at: DATETIME(6)
+        published_at: DATETIME(6)
+        discarded_at: DATETIME(6)
+        * attempts: INT
+        last_error: VARCHAR(255)
+    }
+
+}
+
+package "en-monitor-notification-service (8087)" {
+
+    entity notification {
+        + id_notification: VARCHAR(10) <<PK>>
+        --
+        * user_id: VARCHAR(10)
+        home_id: VARCHAR(10)
+        * channel: ENUM(EMAIL,PUSH,IN_APP)
+        * source_type: ENUM(ALERT,RECOMMENDATION,SECURITY,ADMINISTRATION,ACCOUNT,HOME,DEVICE)
+        source_id: VARCHAR(10)
+        * message_key: VARCHAR(100)
+        * delivery_status: ENUM(PENDING,SENT,FAILED)
+        sent_at: TIMESTAMP
+        read_at: TIMESTAMP
+        failure_reason: VARCHAR(200)
+        * created_at: TIMESTAMP
+        * updated_at: TIMESTAMP
+        deleted_at: TIMESTAMP
+        message_params: TEXT
+    }
+
+    entity notification_preference {
+        + user_id: VARCHAR(10) <<PK>>
+        --
+        * email_enabled: BOOLEAN
+        * push_enabled: BOOLEAN
+        * created_at: TIMESTAMP
+        * updated_at: TIMESTAMP
+        deleted_at: TIMESTAMP
+    }
+
+    entity push_subscription {
+        + id_push_subscription: VARCHAR(10) <<PK>>
+        --
+        * user_id: VARCHAR(10)
+        * endpoint: VARCHAR(500) <<UQ>>
+        * p256dh: VARCHAR(100)
+        * auth: VARCHAR(50)
+        * created_at: TIMESTAMP
+        * updated_at: TIMESTAMP
+        deleted_at: TIMESTAMP
+    }
+
+    entity push_device {
+        + id_push_device: VARCHAR(10) <<PK>>
+        --
+        * user_id: VARCHAR(10)
+        * token: VARCHAR(255) <<UQ>>
+        * platform: VARCHAR(10)
+        * created_at: TIMESTAMP
+        * updated_at: TIMESTAMP
+        deleted_at: TIMESTAMP
+    }
+
+}
+
+package "en-monitor-alert-service (8088)" {
+
+    entity alert {
+        + id_alert: VARCHAR(10) <<PK>>
+        --
+        * home_id: VARCHAR(10)
+        device_id: VARCHAR(10)
+        * type: ENUM(THRESHOLD, CONNECTIVITY, DEVICE, LIMIT)
+        * message_key: VARCHAR(100)
+        * date_time: TIMESTAMP
+        * alert_status: ENUM(PENDING, RESOLVED)
+        consumption_level_id: VARCHAR(10)
+        measurement_id: VARCHAR(10)
+        * created_at: TIMESTAMP
+        * updated_at: TIMESTAMP
+        deleted_at: TIMESTAMP
+    }
+
+    entity alert_outbox {
+        + id_message: VARCHAR(10) <<PK>>
+        --
+        * message_type: VARCHAR(60)
+        * payload: TEXT
+        * occurred_at: DATETIME(6)
+        published_at: DATETIME(6)
+        discarded_at: DATETIME(6)
+        * attempts: INT
+        last_error: VARCHAR(255)
+    }
+
+}
+
+package "en-monitor-recommendation-service (8089)" {
+
+    entity recommendation {
+        + id_recommendation: VARCHAR(10) <<PK>>
+        --
+        * home_id: VARCHAR(10)
+        device_id: VARCHAR(10)
+        * type: ENUM(SAVING, PEAK_HOURS, HIGH_CONSUMPTION, HISTORICAL_COMPARISON, THRESHOLD)
+        * message_key: VARCHAR(100)
+        * date_time: TIMESTAMP
+        * status: ENUM(READ, UNREAD)
+        * created_at: TIMESTAMP
+        * updated_at: TIMESTAMP
+        deleted_at: TIMESTAMP
+    }
+
+    entity recommendation_outbox {
+        + id_message: VARCHAR(10) <<PK>>
+        --
+        * message_type: VARCHAR(60)
+        * payload: TEXT
+        * occurred_at: DATETIME(6)
+        published_at: DATETIME(6)
+        discarded_at: DATETIME(6)
+        * attempts: INT
+        last_error: VARCHAR(255)
+    }
+
+}
+
+' Relaciones con FOREIGN KEY (dentro de cada servicio)
+person ||--o| user
+user ||--o| user_configuration
+user ||--o{ password_reset_token
+user ||--o{ user_session
+user ||--o{ login_error_log
+user ||--o{ user_system_role
+system_role ||--o{ user_system_role
+system_role ||--o{ system_role_permission
+permission ||--o{ system_role_permission
+user ||--o{ audit_log
+user_session ||--o{ refresh_token
+refresh_token ||--o{ refresh_token
+appliance_type ||--o{ device
+device ||--o{ device_status_log
+device ||--o{ device_home
+home_type ||--o{ home
+home ||--o| home_thresholds
+home ||--o{ user_home
+
+' Referencias entre servicios (sin FOREIGN KEY)
+user .. user_home : user_id (referencia de aplicación)
+home .. device_home : home_id (referencia de aplicación)
+device .. measurement : device_id (referencia de aplicación)
+home .. alert : home_id (referencia de aplicación)
+device .. alert : device_id (referencia de aplicación)
+measurement .. alert : measurement_id (referencia de aplicación)
+consumption_level .. alert : consumption_level_id (referencia de aplicación)
+home .. recommendation : home_id (referencia de aplicación)
+device .. recommendation : device_id (referencia de aplicación)
+user .. notification : user_id (referencia de aplicación)
+home .. notification : home_id (referencia de aplicación)
+user .. notification_preference : user_id (referencia de aplicación)
+user .. push_subscription : user_id (referencia de aplicación)
+user .. push_device : user_id (referencia de aplicación)
+
+@enduml

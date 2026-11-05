@@ -1,0 +1,123 @@
+/* =========================================
+   Verificar correo — EnergyMonitor
+   Mockup estático de /VerifyAccount
+   Tokens y componentes base en css/auth-shell.css
+   -----------------------------------------
+   Origen: VerifyEmail.jsx + VerifyAccount.module.css
+   ========================================= */
+
+/* =========================================
+   1. Contenedor centrado
+   ========================================= */
+.verify-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.verify-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+/* =========================================
+   2. Título y descripción
+   ========================================= */
+.verify-title {
+  font-size: var(--font-size-22);
+  font-weight: var(--font-weight-bold);
+  text-align: center;
+  color: var(--color-text-primary);
+}
+
+.verify-description {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  text-align: center;
+  line-height: 1.5;
+}
+
+/* =========================================
+   3. Código OTP de 6 dígitos
+   ========================================= */
+.otp-container {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 20px 0;
+  width: 100%;
+}
+
+/* OJO: en esta pantalla las casillas miden 48×52 (no 45×45 como en
+   la recuperación de contraseña); el selector .otp-container input de la
+   app tiene más especificidad que la clase .input--otp y la pisa. */
+/* Cada casilla ocupa solo su ancho; input-container es width:100% por defecto */
+.otp-container .input-container {
+  width: auto;
+}
+
+.input--otp {
+  width: 48px;
+  height: 52px;
+  text-align: center;
+  font-size: var(--font-size-18);
+  background: var(--color-background);
+  color: var(--color-text-primary);
+  border: 2px solid var(--color-secondary);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+}
+
+/* La casilla no muestra el halo azul de foco: .input-wrapper--otp:focus-within
+   lo desactiva, así que solo queda el foco nativo del input */
+.input--otp:focus {
+  outline: none;
+}
+
+/* =========================================
+   4. Mensajes y textos de apoyo
+   ========================================= */
+.helper-text {
+  font-size: var(--font-size-13);
+  text-align: center;
+  color: var(--color-text-secondary);
+}
+
+.verify-error {
+  font-size: var(--font-size-sm);
+  color: var(--color-danger);
+}
+
+/* auth:verify.resendSent → "Enviamos un nuevo código." */
+.verify-success {
+  font-size: var(--font-size-sm);
+  color: var(--color-success);
+}
+
+/* =========================================
+   5. Responsive
+   ========================================= */
+@media (max-width: 768px) {
+  .verify-container { padding-top: 40px; }
+  .otp-container { gap: 6px; }
+  /* Cada casilla ocupa solo su ancho; input-container es width:100% por defecto */
+.otp-container .input-container {
+  width: auto;
+}
+
+.input--otp { width: 42px; height: 46px; }
+}
+
+@media (max-width: 400px) {
+  .otp-container { gap: 5px; }
+  /* Cada casilla ocupa solo su ancho; input-container es width:100% por defecto */
+.otp-container .input-container {
+  width: auto;
+}
+
+.input--otp { width: 38px; height: 44px; }
+}

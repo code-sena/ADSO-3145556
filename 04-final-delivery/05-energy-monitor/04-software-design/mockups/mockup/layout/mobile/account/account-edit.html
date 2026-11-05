@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EnergyMonitor — Mi cuenta (editar nombre)</title>
+  <link rel="icon" type="image/svg+xml" href="../../../../assets/icons/favicon.svg">
+  <link rel="stylesheet" href="../css/mobile-shell.css">
+  <link rel="stylesheet" href="css/account-styles.css">
+</head>
+<body>
+
+  <p class="device-caption">EnergyMonitor · <span>/account · EditProfileModal (field = "name")</span></p>
+
+  <div class="phone">
+
+    <!-- Barra de estado (la dibuja el sistema, no la app) -->
+    <div class="status-bar">
+      <span>9:41</span>
+      <span class="status-icons">
+        <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor" aria-hidden="true"><rect x="0" y="7" width="3" height="4" rx="1"/><rect x="4.5" y="5" width="3" height="6" rx="1"/><rect x="9" y="2.5" width="3" height="8.5" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/></svg>
+        <svg width="16" height="11" viewBox="0 0 16 12" fill="currentColor" aria-hidden="true"><path d="M8 9.2 6.2 11a3.2 3.2 0 0 1 3.6 0zM8 5.4c-1.6 0-3 .6-4.1 1.7L2.5 5.7A7.6 7.6 0 0 1 8 3.4c2 0 3.9.8 5.5 2.3l-1.4 1.4A5.6 5.6 0 0 0 8 5.4zM8 .8A11.8 11.8 0 0 0 .5 3.6l1.4 1.4A9.8 9.8 0 0 1 8 2.8c2.6 0 4.9 1 6.7 2.6l1.4-1.4A11.8 11.8 0 0 0 8 .8z"/></svg>
+        <svg width="25" height="12" viewBox="0 0 25 12" fill="none" aria-hidden="true"><rect x="0.5" y="0.5" width="21" height="11" rx="3.2" stroke="currentColor" opacity=".4"/><rect x="2" y="2" width="16" height="8" rx="1.8" fill="currentColor"/><path d="M23 4v4a2.2 2.2 0 0 0 0-4z" fill="currentColor" opacity=".4"/></svg>
+      </span>
+    </div>
+
+    <div class="screen">
+
+      <!-- La AccountScreen detrás del overlay -->
+      <button class="drawer-trigger" aria-label="Abrir menú">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h18M3 12h18M3 17h18"></path></svg>
+      </button>
+
+      <nav class="header header-offset" aria-label="Miga de pan">
+        <div class="header-title-wrap">
+          <div class="breadcrumb">
+            <div class="breadcrumb-item">
+              <a href="../dashboard/dashboard.html" class="breadcrumb-link">Inicio</a>
+            </div>
+            <div class="breadcrumb-item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
+              <span class="breadcrumb-current">Mi cuenta</span>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <div class="ac-content">
+        <div class="card card-pad-md ac-card">
+          <div class="ac-avatar-wrap">
+            <span class="ac-avatar">
+              <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="var(--text-secondary)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="7.6" r="3.9"></circle><path d="M4.5 21a7.5 7.5 0 0 1 15 0"></path></svg>
+              <span class="ac-avatar-badge">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.4 8.4h3.2l1.6-2.4h7.6l1.6 2.4h3.2a1.6 1.6 0 0 1 1.6 1.6v8a1.6 1.6 0 0 1-1.6 1.6H3.4a1.6 1.6 0 0 1-1.6-1.6v-8a1.6 1.6 0 0 1 1.6-1.6Z"></path><circle cx="12" cy="13.4" r="3.6"></circle></svg>
+              </span>
+            </span>
+            <p class="ac-avatar-hint">Toca la foto para ver las opciones</p>
+          </div>
+
+          <div class="ac-divider"></div>
+
+          <div class="ac-section">
+            <h2 class="ac-section-title">Datos personales</h2>
+
+            <div class="ac-field">
+              <div class="ac-field-text">
+                <p class="ac-field-label">Nombre</p>
+                <p class="ac-field-value">Camila</p>
+              </div>
+              <a class="ac-edit-btn" href="account-edit.html" aria-label="Editar nombre">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4l10.4-10.4a2.3 2.3 0 0 0 0-3.2l-.8-.8a2.3 2.3 0 0 0-3.2 0L4 16z"></path><path d="m14.4 6.6 3 3"></path></svg>
+              </a>
+            </div>
+
+            <div class="ac-divider"></div>
+
+            <div class="ac-field">
+              <div class="ac-field-text">
+                <p class="ac-field-label">Apellido</p>
+                <p class="ac-field-value">Restrepo</p>
+              </div>
+              <a class="ac-edit-btn" href="account-edit.html" aria-label="Editar apellido">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4l10.4-10.4a2.3 2.3 0 0 0 0-3.2l-.8-.8a2.3 2.3 0 0 0-3.2 0L4 16z"></path><path d="m14.4 6.6 3 3"></path></svg>
+              </a>
+            </div>
+
+            <div class="ac-field">
+              <div class="ac-field-text">
+                <p class="ac-field-label">Correo</p>
+                <p class="ac-field-value">camila.restrepo@email.com</p>
+              </div>
+              <a class="ac-edit-btn" href="account-edit.html" aria-label="Editar correo">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4l10.4-10.4a2.3 2.3 0 0 0 0-3.2l-.8-.8a2.3 2.3 0 0 0-3.2 0L4 16z"></path><path d="m14.4 6.6 3 3"></path></svg>
+              </a>
+            </div>
+
+            <div class="ac-divider"></div>
+
+            <div class="ac-field">
+              <div class="ac-field-text">
+                <p class="ac-field-label">Contraseña</p>
+                <p class="ac-field-value">••••••••</p>
+              </div>
+              <a class="ac-edit-btn" href="account-password-modal.html" aria-label="Editar contraseña">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4l10.4-10.4a2.3 2.3 0 0 0 0-3.2l-.8-.8a2.3 2.3 0 0 0-3.2 0L4 16z"></path><path d="m14.4 6.6 3 3"></path></svg>
+              </a>
+            </div>
+          </div>
+
+          <div class="ac-divider"></div>
+
+          <div class="ac-delete-section">
+            <p class="ac-delete-question">¿Deseas eliminar tu cuenta?</p>
+            <a class="btn btn-secondary btn-medium" href="account-delete-modal.html">
+              <span class="ac-delete-btn-text">Eliminar</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================================
+         Modal (variant="default") — EditProfileModal con field = "name"
+         Mismo componente para lastName y email: solo cambian
+         titleKey / labelKey / placeholderKey (FIELD_CONFIG).
+
+         Se monta como hermano de .screen, no dentro: el <Modal> de React
+         Native vive en una capa nativa que cubre todo el teléfono, status bar
+         incluido.
+         ============================================================ -->
+    <div class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="edit-modal-title">
+      <div class="modal">
+
+        <div class="modal-header">
+          <!-- account:editField.nameTitle -->
+          <span class="modal-title" id="edit-modal-title">Editar nombre</span>
+          <button class="modal-close" aria-label="Cerrar">×</button>
+        </div>
+
+        <div class="modal-body">
+          <div class="input-container">
+            <!-- account:name -->
+            <label class="input-label" for="edit-value">Nombre</label>
+            <div class="input-wrapper">
+              <input class="input" id="edit-value" type="text" value="Camila" placeholder="Ej: Juan Esteban">
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <!-- account:deleteAccount.cancel -->
+          <a class="btn btn-secondary btn-medium" href="account.html">Cancelar</a>
+          <!-- account:editField.save -->
+          <a class="btn btn-primary btn-medium" href="account.html">Guardar</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="home-indicator"></div>
+  </div>
+</body>
+</html>

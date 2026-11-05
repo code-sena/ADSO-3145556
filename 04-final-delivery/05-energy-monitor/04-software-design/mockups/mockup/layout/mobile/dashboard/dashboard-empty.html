@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EnergyMonitor — Panel sin hogares</title>
+  <link rel="icon" type="image/svg+xml" href="../../../../assets/icons/favicon.svg">
+  <link rel="stylesheet" href="../css/mobile-shell.css">
+  <link rel="stylesheet" href="css/dashboard-styles.css">
+</head>
+<body>
+
+  <p class="device-caption">EnergyMonitor · <span>/dashboard · sin hogares</span></p>
+
+  <div class="phone">
+
+    <!-- Barra de estado: la dibuja el sistema, no la app -->
+    <div class="status-bar">
+      <span>9:41</span>
+      <span class="status-icons">
+        <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor" aria-hidden="true"><rect x="0" y="7" width="3" height="4" rx="1"/><rect x="4.5" y="5" width="3" height="6" rx="1"/><rect x="9" y="2.5" width="3" height="8.5" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/></svg>
+        <svg width="16" height="11" viewBox="0 0 16 12" fill="currentColor" aria-hidden="true"><path d="M8 9.2 6.2 11a3.2 3.2 0 0 1 3.6 0zM8 5.4c-1.6 0-3 .6-4.1 1.7L2.5 5.7A7.6 7.6 0 0 1 8 3.4c2 0 3.9.8 5.5 2.3l-1.4 1.4A5.6 5.6 0 0 0 8 5.4zM8 .8A11.8 11.8 0 0 0 .5 3.6l1.4 1.4A9.8 9.8 0 0 1 8 2.8c2.6 0 4.9 1 6.7 2.6l1.4-1.4A11.8 11.8 0 0 0 8 .8z"/></svg>
+        <svg width="25" height="12" viewBox="0 0 25 12" fill="none" aria-hidden="true"><rect x="0.5" y="0.5" width="21" height="11" rx="3.2" stroke="currentColor" opacity=".4"/><rect x="2" y="2" width="16" height="8" rx="1.8" fill="currentColor"/><path d="M23 4v4a2.2 2.2 0 0 0 0-4z" fill="currentColor" opacity=".4"/></svg>
+      </span>
+    </div>
+
+    <!-- ÁREA DE LA APP -->
+    <div class="screen">
+
+      <!-- Sidebar: el botón hamburguesa está siempre montado en las pantallas privadas -->
+      <button class="drawer-trigger" aria-label="Abrir menú de navegación">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h18M3 12h18M3 17h18"></path></svg>
+      </button>
+
+      <!-- El Header se monta siempre, también sin hogares: sus acciones abren los mismos modales -->
+      <header class="header header-with-trigger header-dashboard">
+        <div class="header-title-wrap">
+          <!-- dashboard:breadcrumb.home -->
+          <h1 class="header-title">Inicio</h1>
+        </div>
+        <div class="header-actions">
+          <button class="header-action" aria-label="Abrir menú de acciones">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg>
+          </button>
+        </div>
+      </header>
+
+      <!-- ScrollView contentContainerStyle={styles.contentEmpty} -->
+      <div class="dash-empty">
+
+        <!-- DashboardEmptyState → EmptyState variant="full" -->
+        <div class="empty-state empty-state-full dash-empty-state">
+
+          <!-- IMAGE_SIZE = spacing.xl * 8 (assets/empty_image.png) -->
+          <img class="empty-image dash-empty-image" src="../../../../assets/images/mockup-assets/empty_img.png" alt="Añade un hogar para empezar">
+
+          <!-- emptyState:title -->
+          <p class="empty-title empty-title-full">Añade un hogar para empezar</p>
+
+          <div class="empty-actions">
+            <!-- emptyState:createHome · variant secondary -->
+            <button class="btn btn-secondary btn-medium">Crear hogar</button>
+            <!-- emptyState:joinHome · variant primary -->
+            <button class="btn btn-primary btn-medium">Unirse a hogar</button>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Indicador de inicio -->
+    <div class="home-indicator"></div>
+  </div>
+</body>
+</html>

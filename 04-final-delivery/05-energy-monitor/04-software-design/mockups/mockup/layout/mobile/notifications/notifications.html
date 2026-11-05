@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EnergyMonitor — Notificaciones</title>
+  <link rel="icon" type="image/svg+xml" href="../../../../assets/icons/favicon.svg">
+  <link rel="stylesheet" href="../css/mobile-shell.css">
+  <link rel="stylesheet" href="css/notifications-styles.css">
+</head>
+<body>
+
+  <p class="device-caption">EnergyMonitor · <span>/notifications · NotificationsScreen</span></p>
+
+  <div class="phone">
+
+    <!-- Barra de estado (la dibuja el sistema, no la app) -->
+    <div class="status-bar">
+      <span>9:41</span>
+      <span class="status-icons">
+        <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor" aria-hidden="true"><rect x="0" y="7" width="3" height="4" rx="1"/><rect x="4.5" y="5" width="3" height="6" rx="1"/><rect x="9" y="2.5" width="3" height="8.5" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/></svg>
+        <svg width="16" height="11" viewBox="0 0 16 12" fill="currentColor" aria-hidden="true"><path d="M8 9.2 6.2 11a3.2 3.2 0 0 1 3.6 0zM8 5.4c-1.6 0-3 .6-4.1 1.7L2.5 5.7A7.6 7.6 0 0 1 8 3.4c2 0 3.9.8 5.5 2.3l-1.4 1.4A5.6 5.6 0 0 0 8 5.4zM8 .8A11.8 11.8 0 0 0 .5 3.6l1.4 1.4A9.8 9.8 0 0 1 8 2.8c2.6 0 4.9 1 6.7 2.6l1.4-1.4A11.8 11.8 0 0 0 8 .8z"/></svg>
+        <svg width="25" height="12" viewBox="0 0 25 12" fill="none" aria-hidden="true"><rect x="0.5" y="0.5" width="21" height="11" rx="3.2" stroke="currentColor" opacity=".4"/><rect x="2" y="2" width="16" height="8" rx="1.8" fill="currentColor"/><path d="M23 4v4a2.2 2.2 0 0 0 0-4z" fill="currentColor" opacity=".4"/></svg>
+      </span>
+    </div>
+
+    <div class="screen">
+
+      <!-- Sidebar cerrado: solo el botón hamburguesa -->
+      <button class="drawer-trigger" aria-label="Abrir menú">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h18M3 12h18M3 17h18"></path></svg>
+      </button>
+
+      <!-- Header con breadcrumb (notifications:breadcrumb.home / .current) -->
+      <nav class="header header-offset" aria-label="Miga de pan">
+        <div class="header-title-wrap">
+          <div class="breadcrumb">
+            <div class="breadcrumb-item">
+              <a href="../dashboard/dashboard.html" class="breadcrumb-link">Inicio</a>
+            </div>
+            <div class="breadcrumb-item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
+              <span class="breadcrumb-current">Notificaciones</span>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <div class="nt-content">
+
+        <!-- hero -->
+        <div class="nt-hero">
+          <!-- notifications:title -->
+          <h1 class="nt-title">Notificaciones</h1>
+          <!-- notifications:subtitle -->
+          <p class="nt-subtitle">Alertas y recomendaciones generadas a partir del consumo de tus hogares.</p>
+        </div>
+
+        <!-- panel -->
+        <section class="nt-panel">
+
+          <!-- tabsRow: en la pestaña "Todas" NO se pinta ningún botón de acción masiva -->
+          <div class="nt-tabs-row">
+            <div class="nt-tabs">
+              <!-- notifications:tabs.all — sin contador (count = 0) -->
+              <button class="nt-tab nt-tab-active" role="tab" aria-selected="true">
+                <span class="nt-tab-label">Todas</span>
+              </button>
+              <!-- notifications:tabs.alerts — contador = alertas no resueltas -->
+              <button class="nt-tab" role="tab" aria-selected="false">
+                <span class="nt-tab-label">Alertas</span>
+                <span class="nt-tab-count">3</span>
+              </button>
+              <!-- notifications:tabs.recommendations — contador = recomendaciones no leídas -->
+              <button class="nt-tab" role="tab" aria-selected="false">
+                <span class="nt-tab-label">Recomendaciones</span>
+                <span class="nt-tab-count">2</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Lista mixta ordenada por fecha (byNewest) -->
+          <ul class="nt-list">
+
+            <!-- AlertRow · threshold / critical → flash-outline · sin acción (activa + autoResolved) -->
+            <li class="nt-row">
+              <span class="nt-row-icon nt-row-icon-critical">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.2 2.5 4.5 13.4a.6.6 0 0 0 .5 1h5l-1 7.1 8.8-10.9a.6.6 0 0 0-.5-1h-5z"></path></svg>
+              </span>
+              <div class="nt-row-body">
+                <div class="nt-row-top">
+                  <!-- notifications:threshold.critical.title -->
+                  <h2 class="nt-row-title">Consumo crítico</h2>
+                  <!-- notifications:status.active -->
+                  <span class="nt-badge nt-badge-active">Activa</span>
+                </div>
+                <!-- notifications:threshold.critical.message -->
+                <p class="nt-row-message">Un dispositivo de "Casa Principal" está consumiendo a un nivel crítico.</p>
+                <div class="nt-row-meta">
+                  <span class="nt-row-meta-text">Casa Principal</span>
+                  <span class="nt-row-dot"></span>
+                  <span class="nt-row-meta-text">09 oct, 18:42</span>
+                </div>
+                <div class="nt-row-actions"></div>
+              </div>
+            </li>
+
+            <!-- RecommendationRow · peakHours · sin equipo (device = null) -->
+            <li class="nt-row">
+              <span class="nt-row-icon nt-row-icon-info">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.8a6.2 6.2 0 0 0-3.6 11.2c.5.4.8 1 .8 1.6v.4h5.6v-.4c0-.6.3-1.2.8-1.6A6.2 6.2 0 0 0 12 2.8Z"></path><path d="M9.2 18h5.6M10 21h4"></path></svg>
+              </span>
+              <div class="nt-row-body">
+                <div class="nt-row-top">
+                  <!-- notifications:recommendation.peakHours.title -->
+                  <h2 class="nt-row-title">Mueve consumo fuera de horas pico</h2>
+                  <!-- notifications:status.new -->
+                  <span class="nt-badge nt-badge-new">Nueva</span>
+                </div>
+                <!-- notifications:recommendation.peakHours.message -->
+                <p class="nt-row-message">En "Casa Principal" buena parte del consumo de la última semana fue entre las 6 y las 10 p. m. Usar la lavadora, la plancha o el horno en otro horario alivia la factura.</p>
+                <div class="nt-row-meta">
+                  <span class="nt-row-meta-text">Casa Principal</span>
+                  <span class="nt-row-dot"></span>
+                  <span class="nt-row-meta-text">09 oct, 15:10</span>
+                </div>
+                <div class="nt-row-actions">
+                  <!-- notifications:actions.markRead -->
+                  <button class="nt-row-btn">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 13 4.5 4.5L19 7"></path></svg>
+                    <span>Marcar leída</span>
+                  </button>
+                </div>
+              </div>
+            </li>
+
+            <!-- AlertRow · limit / critical → speedometer-outline · sin acción -->
+            <li class="nt-row">
+              <span class="nt-row-icon nt-row-icon-critical">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.2 17a8.8 8.8 0 1 1 15.6 0"></path><path d="M12 14.4 15.8 9.4"></path><path d="M4.6 17h2.8M16.6 17h2.8"></path></svg>
+              </span>
+              <div class="nt-row-body">
+                <div class="nt-row-top">
+                  <!-- notifications:limit.monthly.title -->
+                  <h2 class="nt-row-title">Límite mensual alcanzado</h2>
+                  <span class="nt-badge nt-badge-active">Activa</span>
+                </div>
+                <!-- notifications:limit.monthly.message -->
+                <p class="nt-row-message">"Apartamento 502" ya consumió este mes el límite mensual que configuraste.</p>
+                <div class="nt-row-meta">
+                  <span class="nt-row-meta-text">Apartamento 502</span>
+                  <span class="nt-row-dot"></span>
+                  <span class="nt-row-meta-text">08 oct, 21:05</span>
+                </div>
+                <div class="nt-row-actions"></div>
+              </div>
+            </li>
+
+            <!-- RecommendationRow · standby · con equipo ("Televisor") -->
+            <li class="nt-row">
+              <span class="nt-row-icon nt-row-icon-info">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.8a6.2 6.2 0 0 0-3.6 11.2c.5.4.8 1 .8 1.6v.4h5.6v-.4c0-.6.3-1.2.8-1.6A6.2 6.2 0 0 0 12 2.8Z"></path><path d="M9.2 18h5.6M10 21h4"></path></svg>
+              </span>
+              <div class="nt-row-body">
+                <div class="nt-row-top">
+                  <!-- notifications:recommendation.standby.title -->
+                  <h2 class="nt-row-title">Reduce el consumo en reposo</h2>
+                  <span class="nt-badge nt-badge-new">Nueva</span>
+                </div>
+                <!-- notifications:recommendation.standby.message -->
+                <p class="nt-row-message">"Televisor" de "Casa Principal" sigue consumiendo energía de madrugada. Desconéctalo o usa una regleta con interruptor cuando no lo uses.</p>
+                <div class="nt-row-meta">
+                  <span class="nt-row-meta-text">Casa Principal</span>
+                  <span class="nt-row-dot"></span>
+                  <span class="nt-row-meta-text">Televisor</span>
+                  <span class="nt-row-dot"></span>
+                  <span class="nt-row-meta-text">08 oct, 09:18</span>
+                </div>
+                <div class="nt-row-actions">
+                  <button class="nt-row-btn">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 13 4.5 4.5L19 7"></path></svg>
+                    <span>Marcar leída</span>
+                  </button>
+                </div>
+              </div>
+            </li>
+
+            <!-- AlertRow · device / info → hardware-chip-outline · única alerta "tocable" -->
+            <li class="nt-row">
+              <span class="nt-row-icon nt-row-icon-info">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6.6" y="6.6" width="10.8" height="10.8" rx="1.6"></rect><rect x="9.6" y="9.6" width="4.8" height="4.8" rx="0.8"></rect><path d="M9.6 2.8v3.8M14.4 2.8v3.8M9.6 17.4v3.8M14.4 17.4v3.8M2.8 9.6h3.8M2.8 14.4h3.8M17.4 9.6h3.8M17.4 14.4h3.8"></path></svg>
+              </span>
+              <div class="nt-row-body">
+                <div class="nt-row-top">
+                  <!-- notifications:device.linked.title -->
+                  <h2 class="nt-row-title">Nuevo dispositivo vinculado</h2>
+                  <span class="nt-badge nt-badge-active">Activa</span>
+                </div>
+                <!-- notifications:device.linked.message -->
+                <p class="nt-row-message">"Casa Principal" tiene un nuevo dispositivo conectado y ya está enviando mediciones.</p>
+                <div class="nt-row-meta">
+                  <span class="nt-row-meta-text">Casa Principal</span>
+                  <span class="nt-row-dot"></span>
+                  <span class="nt-row-meta-text">07 oct, 17:26</span>
+                </div>
+                <div class="nt-row-actions">
+                  <button class="nt-row-btn">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 13 4.5 4.5L19 7"></path></svg>
+                    <span>Marcar leída</span>
+                  </button>
+                </div>
+              </div>
+            </li>
+
+            <!-- AlertRow · connectivity · resuelta + autoResolved → pista de auto-resolución + Eliminar -->
+            <li class="nt-row nt-row-muted">
+              <span class="nt-row-icon nt-row-icon-warning">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.6 18.4h10.8a4.2 4.2 0 0 0 .6-8.3 6.4 6.4 0 0 0-8-4.9"></path><path d="M2 2l20 20"></path></svg>
+              </span>
+              <div class="nt-row-body">
+                <div class="nt-row-top">
+                  <!-- notifications:connectivity.deviceOffline.title -->
+                  <h2 class="nt-row-title">Dispositivo desconectado</h2>
+                  <!-- notifications:status.resolved -->
+                  <span class="nt-badge nt-badge-resolved">Resuelta</span>
+                </div>
+                <!-- notifications:connectivity.deviceOffline.message -->
+                <p class="nt-row-message">Un dispositivo de "Apartamento 502" dejó de reportar datos de consumo. Verifica su conexión WiFi.</p>
+                <div class="nt-row-meta">
+                  <span class="nt-row-meta-text">Apartamento 502</span>
+                  <span class="nt-row-dot"></span>
+                  <span class="nt-row-meta-text">06 oct, 20:03</span>
+                </div>
+                <!-- notifications:autoResolveHint.connectivity -->
+                <p class="nt-row-hint">Se resolverá sola cuando el dispositivo se reconecte</p>
+                <div class="nt-row-actions">
+                  <!-- notifications:actions.delete -->
+                  <button class="nt-row-btn">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6.4h16"></path><path d="M9.4 6.4V4.8a1.4 1.4 0 0 1 1.4-1.4h2.4a1.4 1.4 0 0 1 1.4 1.4v1.6"></path><path d="m6.4 6.4 1 13a1.6 1.6 0 0 0 1.6 1.5h6a1.6 1.6 0 0 0 1.6-1.5l1-13"></path><path d="M10.2 10.6v6M13.8 10.6v6"></path></svg>
+                    <span>Eliminar</span>
+                  </button>
+                </div>
+              </div>
+            </li>
+
+            <!-- RecommendationRow leída → rowMuted + badge neutro + Eliminar -->
+            <li class="nt-row nt-row-muted">
+              <span class="nt-row-icon nt-row-icon-info">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.8a6.2 6.2 0 0 0-3.6 11.2c.5.4.8 1 .8 1.6v.4h5.6v-.4c0-.6.3-1.2.8-1.6A6.2 6.2 0 0 0 12 2.8Z"></path><path d="M9.2 18h5.6M10 21h4"></path></svg>
+              </span>
+              <div class="nt-row-body">
+                <div class="nt-row-top">
+                  <!-- notifications:recommendation.aboveAverage.title -->
+                  <h2 class="nt-row-title">Tu consumo está aumentando</h2>
+                  <!-- notifications:status.read -->
+                  <span class="nt-badge nt-badge-read">Leída</span>
+                </div>
+                <!-- notifications:recommendation.aboveAverage.message -->
+                <p class="nt-row-message">"Apartamento 502" consumió esta semana bastante más que la anterior. Revisa qué cambió en el uso de tus equipos.</p>
+                <div class="nt-row-meta">
+                  <span class="nt-row-meta-text">Apartamento 502</span>
+                  <span class="nt-row-dot"></span>
+                  <span class="nt-row-meta-text">05 oct, 11:47</span>
+                </div>
+                <div class="nt-row-actions">
+                  <button class="nt-row-btn">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6.4h16"></path><path d="M9.4 6.4V4.8a1.4 1.4 0 0 1 1.4-1.4h2.4a1.4 1.4 0 0 1 1.4 1.4v1.6"></path><path d="m6.4 6.4 1 13a1.6 1.6 0 0 0 1.6 1.5h6a1.6 1.6 0 0 0 1.6-1.5l1-13"></path><path d="M10.2 10.6v6M13.8 10.6v6"></path></svg>
+                    <span>Eliminar</span>
+                  </button>
+                </div>
+              </div>
+            </li>
+
+          </ul>
+        </section>
+      </div>
+    </div>
+
+    <div class="home-indicator"></div>
+  </div>
+</body>
+</html>

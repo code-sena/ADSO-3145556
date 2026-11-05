@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EnergyMonitor - Sobre nosotros</title>
+  <meta name="description" content="Conoce la historia, la misión y el equipo detrás de EnergyMonitor.">
+  <link rel="icon" type="image/svg+xml" href="../../../../assets/icons/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap">
+  <link rel="stylesheet" href="css/about-styles.css">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <a href="index.html" class="brand">
+      <img src="../../../../assets/logos/project_logo.png" alt="EnergyMonitor Logo">
+      <span>EnergyMonitor</span>
+    </a>
+
+    <nav class="nav-center">
+      <a href="index.html#inicio">Inicio</a>
+      <a href="about.html">Sobre nosotros</a>
+      <a href="support.html">Soporte</a>
+    </nav>
+
+    <div class="nav-right">
+      <!-- Toggle de tema: muestra Moon en modo claro y Sun en modo oscuro (como Navbar.jsx) -->
+      <button class="icon-btn" type="button" aria-label="Cambiar a modo oscuro">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg>
+      </button>
+
+      <!-- Selector de idioma: Globe + bandera activa + menú desplegable -->
+      <div class="lang-wrapper">
+        <button class="icon-btn lang-btn" type="button" aria-label="Cambiar idioma" aria-haspopup="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg>
+          <img class="flag" src="../../../../assets/flags/flag-co.svg" alt="Español">
+          <svg class="chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg>
+        </button>
+
+        <ul class="lang-dropdown">
+          <li><a class="lang-option is-active" href="#" hreflang="es"><img class="flag" src="../../../../assets/flags/flag-co.svg" alt=""><span>Español</span></a></li>
+          <li><a class="lang-option" href="#" hreflang="en"><img class="flag" src="../../../../assets/flags/flag-us.svg" alt=""><span>English</span></a></li>
+          <li><a class="lang-option" href="#" hreflang="fr"><img class="flag" src="../../../../assets/flags/flag-fr.svg" alt=""><span>Français</span></a></li>
+          <li><a class="lang-option" href="#" hreflang="pt"><img class="flag" src="../../../../assets/flags/flag-br.svg" alt=""><span>Português</span></a></li>
+        </ul>
+      </div>
+
+      <a href="register.html" class="btn btn-outline">Regístrate</a>
+      <a href="login.html" class="btn btn-primary">Iniciar sesión</a>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="page-hero">
+    <h1>Estamos construyendo un futuro con <span>energía más consciente</span></h1>
+    <p>EnergyMonitor nació para que cualquier hogar pueda ver, entender y controlar su consumo eléctrico, sin complicaciones.</p>
+  </section>
+
+  <!-- NUESTRA HISTORIA -->
+  <section class="section-container">
+    <h2 class="section-title">Nuestra historia</h2>
+    <div class="story-grid">
+      <div class="story-card">
+        <div class="icon-wrap">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+        </div>
+        <h3>El problema</h3>
+        <p>Muchas personas desconocen el comportamiento real de su consumo eléctrico, lo que genera facturas más altas de lo esperado y un impacto negativo en el medio ambiente.</p>
+      </div>
+
+      <div class="story-card">
+        <div class="icon-wrap">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>
+        </div>
+        <h3>Nuestra misión</h3>
+        <p>Registrar, procesar y analizar el consumo en tiempo real, con alertas y recomendaciones personalizadas, para que cada persona decida antes de que llegue la factura.</p>
+      </div>
+
+      <div class="story-card">
+        <div class="icon-wrap">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+        </div>
+        <h3>Nuestra visión</h3>
+        <p>Un mundo donde ahorrar energía sea tan simple como abrir una app y ver exactamente qué está consumiendo de más.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- LO QUE NOS GUÍA -->
+  <section class="section-container" style="background-color: var(--bg-body);">
+    <h2 class="section-title">Lo que nos guía</h2>
+    <div class="values-grid">
+      <div class="story-card">
+        <div class="icon-wrap">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg>
+        </div>
+        <h3>Transparencia</h3>
+        <p>Mostramos los datos tal como son, sin promedios que escondan lo importante.</p>
+      </div>
+
+      <div class="story-card">
+        <div class="icon-wrap">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="10" width="18" height="10" rx="2"></rect><circle cx="12" cy="15" r="2"></circle><path d="M7 10V7a5 5 0 0 1 10 0v3"></path></svg>
+        </div>
+        <h3>Ahorro real</h3>
+        <p>Cada alerta y recomendación busca un impacto medible en tu factura.</p>
+      </div>
+
+      <div class="story-card">
+        <div class="icon-wrap">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"></path><line x1="2" y1="22" x2="22" y2="2"></line></svg>
+        </div>
+        <h3>Sostenibilidad</h3>
+        <p>Menos consumo innecesario también significa menos huella ambiental.</p>
+      </div>
+
+      <div class="story-card">
+        <div class="icon-wrap">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v2m0 14v2m9-9h-2M5 12H3m15.36-6.36-1.41 1.41M7.05 16.95l-1.41 1.41m0-12.72 1.41 1.41M16.95 16.95l1.41 1.41"></path><circle cx="12" cy="12" r="4"></circle></svg>
+        </div>
+        <h3>Simplicidad</h3>
+        <p>La energía ya es compleja; la forma de monitorearla no debería serlo.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CÓMO LO HACEMOS POSIBLE -->
+  <section class="how-section">
+    <div class="how-icon-wrap">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="15" x2="4" y2="15"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="15" x2="23" y2="15"></line></svg>
+    </div>
+    <h2>¿Cómo lo hacemos posible?</h2>
+    <p>Cada electrodoméstico se conecta a través de un sensor de corriente y un microcontrolador ESP32 instalado en el tomacorriente. Esos datos se procesan y se traducen en gráficas, alertas y recomendaciones fáciles de entender, disponibles tanto en la app móvil como en la plataforma web.</p>
+    <a href="index.html#nosotros" class="btn btn-secondary">Ver cómo funciona</a>
+  </section>
+
+  <!-- LO QUE BUSCAMOS LOGRAR -->
+  <section class="section-container" style="background-color: var(--bg-body);">
+    <h2 class="section-title">Lo que buscamos lograr</h2>
+    <div class="impact-grid">
+      <div class="impact-item">
+        <div class="icon-wrap">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 17 13.5 8.5 8.5 13.5 2 7"></polyline><polyline points="16 17 22 17 22 11"></polyline></svg>
+        </div>
+        <span class="impact-value">-20%</span>
+        <p class="impact-label">de reducción promedio en el consumo detectado a tiempo</p>
+      </div>
+
+      <div class="impact-item">
+        <div class="icon-wrap">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+        </div>
+        <span class="impact-value">100%</span>
+        <p class="impact-label">de tus dispositivos, monitoreados desde un solo lugar</p>
+      </div>
+
+      <div class="impact-item">
+        <div class="icon-wrap">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+        </div>
+        <span class="impact-value">24/7</span>
+        <p class="impact-label">de seguimiento y alertas en tiempo real</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- EQUIPO -->
+  <section class="section-container">
+    <h2 class="section-title">El equipo detrás de EnergyMonitor</h2>
+    <p class="section-subtitle">Dos personas construyeron todo el sistema: desde el sensor conectado al ESP32 hasta la app que usas hoy.</p>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="avatar-circle">JC</div>
+        <h3>Juan Esteban Cortez Parra</h3>
+        <p class="team-role">Líder del proyecto y gestor de base de datos</p>
+        <p class="team-functions">Coordina el proyecto y valida los avances, además de liderar el desarrollo de backend, APIs, la integración con la nube y las pruebas del sistema.</p>
+      </div>
+
+      <div class="team-card">
+        <div class="avatar-circle">MG</div>
+        <h3>Miguel Ángel García Artunduaga</h3>
+        <p class="team-role">Analista y diseñador UX/UI</p>
+        <p class="team-functions">Levanta y documenta los requerimientos, diseña la interfaz y los prototipos navegables, y lidera el desarrollo frontend y las pruebas de usabilidad.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="cta-section">
+    <h2>¿Listo para ver tu consumo con claridad?</h2>
+    <p>Crea tu cuenta gratis y empieza a monitorear tus dispositivos hoy mismo.</p>
+    <div class="cta-actions">
+      <a href="register.html" class="btn btn-primary">Crear cuenta →</a>
+      <a href="login.html" class="btn btn-secondary">Iniciar sesión</a>
+    </div>
+  </section>
+
+</body>
+</html>

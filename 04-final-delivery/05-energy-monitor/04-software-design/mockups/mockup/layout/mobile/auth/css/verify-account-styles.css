@@ -1,0 +1,118 @@
+/* =========================================
+   Verificar correo — EnergyMonitor mobile
+   Origen: VerifyAccountScreen.tsx/.styles.ts + VerifyAccountForm.tsx/.styles.ts
+            + AuthBrandHeader
+   ========================================= */
+
+/* AuthBrandHeader: tarjeta con degradado.
+   Se repite aquí porque este módulo usa el patrón "hoja autocontenida"
+   (como landing/ en web): mobile-shell.css y login-styles.css quedan intactos. */
+.brand-header {
+  padding: var(--space-lg);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  background: linear-gradient(
+    135deg,
+    var(--primary-dark) 0%,
+    var(--background-left) 55%,
+    var(--primary-dark) 100%
+  );
+}
+
+.brand-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+}
+
+.brand-logo { width: 64px; height: 64px; object-fit: contain; }
+
+.brand-name {
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--on-brand);
+  text-align: center;
+}
+
+.brand-subtitle {
+  font-size: 14px;
+  color: var(--on-brand);
+  opacity: 0.72;
+  text-align: center;
+  margin-top: var(--space-sm);
+}
+
+/* VerifyAccountForm.styles.ts → form: gap md(16), width 100% */
+.verify-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+/* title: lg(20) / bold / centrado */
+.verify-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-primary);
+  text-align: center;
+}
+
+/* description: sm(14) / textSecondary / centrado */
+.verify-description {
+  font-size: 14px;
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+/* notice: xs(12) / successText / centrado — "Enviamos un nuevo código." */
+.verify-notice {
+  font-size: 12px;
+  color: var(--success-text);
+  text-align: center;
+}
+
+/* error: xs(12) / dangerText / centrado.
+   OJO: aquí el error es de 12px y del color "dangerText" (#A32D2D), no de 13px
+   "danger" como en RegisterForm, RecoverPasswordForm y NewPasswordForm. */
+.verify-error {
+  font-size: 12px;
+  color: var(--danger-text);
+  text-align: center;
+}
+
+/* El input real vive dentro de la casilla: .otp-box ya aporta 45×45, borde verde
+   y el centrado; solo se neutraliza el fondo del input nativo. */
+.otp-digit {
+  width: 100%;
+  height: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  text-align: center;
+  font-family: var(--font);
+  font-size: 18px;
+  color: var(--text-primary);
+}
+
+/* resendBlock: align-items center, gap sm(8) */
+.resend-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+/* resendText: sm(14) / textSecondary */
+.resend-text { font-size: 14px; color: var(--text-secondary); }
+
+/* footer: sm(14) / medium / centrado */
+.verify-footer {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+  text-align: center;
+}
+
+.verify-footer-link { font-weight: 600; color: var(--secondary); }

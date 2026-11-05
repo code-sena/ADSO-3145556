@@ -1,0 +1,552 @@
+/* =========================================
+   Variables y Reset Global
+   ========================================= */
+:root {
+  --color-primary: #0078d7;
+  --color-primary-hover: #3399ff;
+  --color-primary-dark: #0a2540;
+
+  --color-secondary: #32cd32;
+
+  --color-success: #2ecc71;
+  --color-warning: #ffd700;
+  --color-danger: #e63946;
+  --color-info: #17a2b8;
+
+  --color-danger-soft: #fcebeb;
+  --color-danger-soft-hover: #f7c1c1;
+  --color-danger-text: #a32d2d;
+  --color-success-soft: #eaf3de;
+  --color-success-text: #3b6d11;
+  --color-warning-soft: #fff4d6;
+  --color-warning-text: #854f0b;
+  --color-info-soft: #d1ecf1;
+  --color-info-text: #0c5460;
+
+  --color-background: #f8f9fa;
+  --color-background-left: #3f6bae;
+  --color-surface: #ffffff;
+  --color-gradient: #e6f0fa;
+
+  --color-text-primary: #212529;
+  --color-text-secondary: #6c757d;
+  --color-border: #e5e7eb;
+
+  --color-primary-soft: #E8F3FF;
+
+  --font-primary: "Inter", sans-serif;
+  --font-secondary: "Poppins", sans-serif;
+
+  --font-size-11: 11px;
+  --font-size-xs: 12px;
+  --font-size-13: 13px;
+  --font-size-sm: 14px;
+  --font-size-md: 16px;
+  --font-size-18: 18px;
+  --font-size-lg: 20px;
+  --font-size-22: 22px;
+  --font-size-xl: 24px;
+  --font-size-xxl: 32px;
+  --font-size-xxxl: 60px;
+
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 600;
+
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.25);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font-primary);
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+  line-height: 1.5;
+}
+
+a { color: inherit; }
+
+/* =========================================
+   1. Shell: Sidebar + contenido principal
+   ========================================= */
+.app-shell {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 240px;
+  flex-shrink: 0;
+  background: var(--color-background-left);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 1.25rem 1rem;
+}
+
+.sidebar-top {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0 0.5rem 1.5rem;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.sidebar-toggle {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+}
+
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sidebar-brand img { height: 34px; width: auto; object-fit: contain; }
+
+.sidebar-brand span { font-weight: 700; font-size: 1rem; }
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  flex: 1;
+}
+
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.65rem 0.75rem;
+  border-radius: 8px;
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  background: none;
+  border: none;
+  width: 100%;
+  cursor: pointer;
+  text-align: left;
+}
+
+.sidebar-item:hover,
+.sidebar-item.active {
+  background: rgba(255, 255, 255, 0.12);
+  color: white;
+}
+
+.sidebar-item svg { flex-shrink: 0; }
+
+.sidebar-group-toggle { justify-content: space-between; }
+
+.sidebar-group-toggle .toggle-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.sidebar-homes {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding-left: 1.75rem;
+  margin: 0.15rem 0 0.5rem;
+}
+
+.sidebar-home {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.5rem 0.6rem;
+  border-radius: 8px;
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  font-size: 0.85rem;
+}
+
+.sidebar-home:hover,
+.sidebar-home.active {
+  background: rgba(255, 255, 255, 0.12);
+  color: white;
+}
+
+.home-avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.sidebar-profile {
+  display: flex;
+  text-decoration: none;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.75rem 0.5rem 0.25rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  margin-top: 0.5rem;
+}
+
+/* Avatar del usuario: imagen real del proyecto, como el <img class="avatar">
+   de Sidebar.jsx (fallback cuando la persona no tiene foto subida). */
+.profile-avatar {
+  width: 36px;
+  height: 36px;
+  padding: 2px;
+  border-radius: 50%;
+  background: var(--color-surface);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.profile-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  flex: 1;
+}
+
+.profile-name {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: white;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.profile-more {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.85);
+  cursor: pointer;
+  padding: 4px;
+}
+
+/* =========================================
+   2. Contenido principal: breadcrumb + tabs
+   ========================================= */
+.main-content {
+  flex: 1;
+  min-width: 0;
+  padding: 2rem 2.5rem 3rem;
+}
+
+.header-card {
+  display: flex;
+  align-items: center;
+  background: var(--color-surface);
+  border-radius: 16px;
+  padding: 1rem 1.5rem;
+  box-shadow: var(--shadow-lg);
+  margin-bottom: 1.5rem;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.95rem;
+}
+
+.breadcrumb a { text-decoration: none; color: var(--color-primary); font-weight: 500; }
+.breadcrumb a:hover { text-decoration: underline; }
+.breadcrumb-sep { color: #9ca3af; }
+.breadcrumb-current { color: var(--color-text-primary); font-weight: 600; }
+
+.tabs-row {
+  display: flex;
+  gap: 0.5rem;
+  border-bottom: 1px solid var(--color-border);
+  margin-bottom: 2rem;
+  overflow-x: auto;
+}
+
+.tab-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  text-decoration: none;
+  color: var(--color-text-secondary);
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-bottom: 2px solid transparent;
+  white-space: nowrap;
+}
+
+.tab-link:hover { color: var(--color-primary); }
+
+.tab-link.active {
+  color: var(--color-primary);
+  border-bottom-color: var(--color-primary);
+}
+
+/* =========================================
+   3. Componentes compartidos: tarjetas, botones, badges
+   ========================================= */
+.card {
+  background: var(--color-surface);
+  border-radius: 10px;
+  padding: 1.5rem;
+  box-shadow: var(--shadow-lg);
+}
+
+.card-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: 1rem;
+}
+
+.btn {
+  padding: 0.55rem 1.1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border: none;
+}
+
+.btn-primary { background: var(--color-primary); color: white; }
+.btn-primary:hover { background-color: var(--color-primary-hover); }
+
+.btn-secondary { background: var(--color-background); color: var(--color-text-primary); border: 1px solid var(--color-border); }
+.btn-secondary:hover { background-color: #e5e7eb; }
+
+.btn-danger { background: var(--color-surface); color: var(--color-danger); border: 1px solid var(--color-danger); }
+.btn-danger:hover { background-color: var(--color-danger-soft); }
+
+.btn-ghost { background: none; color: var(--color-text-secondary); border: 1px solid var(--color-border); }
+
+.badge {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.badge-primary { background: var(--color-primary-soft); color: var(--color-primary); }
+.badge-success { background: var(--color-success-soft); color: var(--color-success-text); }
+.badge-warning { background: var(--color-warning-soft); color: var(--color-warning-text); }
+.badge-danger { background: var(--color-danger-soft); color: var(--color-danger); }
+.badge-neutral { background: #f1f5f9; color: var(--color-text-secondary); }
+
+/* =========================================
+   4. Umbrales: encabezado + aviso de solo lectura
+   ========================================= */
+.thresholds-header { margin-bottom: 1.5rem; }
+
+.thresholds-header h1 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.thresholds-header p {
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+  margin-top: 0.25rem;
+}
+
+/* Aviso que SOLO ve el miembro (Thresholds.jsx → {!isOwner && …}).
+   En la app es un chip gris con candado, no una alerta ámbar. */
+.readonly-banner {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  color: var(--color-text-secondary);
+  font-size: 0.8rem;
+  padding: 0.3rem 0.6rem;
+  margin-bottom: 1.25rem;
+}
+
+/* =========================================
+   5. Umbrales: toggles y campos
+   ========================================= */
+.toggle-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--color-border);
+  gap: 1rem;
+}
+
+.toggle-row:last-of-type { border-bottom: none; }
+
+.toggle-label { font-size: 0.9rem; font-weight: 600; color: var(--color-text-primary); }
+.toggle-sub { font-size: 0.8rem; color: var(--color-text-secondary); margin-top: 0.15rem; }
+
+.switch {
+  position: relative;
+  width: 42px;
+  height: 24px;
+  border-radius: 999px;
+  background: #d1d5db;
+  flex-shrink: 0;
+}
+
+.switch.on { background: var(--color-primary); }
+
+/* El miembro ve el mismo interruptor, pero deshabilitado
+   (Thresholds.jsx → disabled={!isOwner || saving}) */
+.switch.is-disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.switch::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: white;
+  transition: left 0.15s ease;
+}
+
+.switch.on::after { left: 21px; }
+
+.thresholds-fields {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+  margin-top: 1rem;
+}
+
+.field-group { display: flex; flex-direction: column; gap: 0.4rem; }
+
+.field-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.field-input {
+  padding: 0.65rem 0.85rem;
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+  font-size: 0.95rem;
+  font-family: var(--font-primary);
+  color: var(--color-text-primary);
+}
+
+.field-input:disabled { background: var(--color-background); color: var(--color-text-secondary); }
+
+.field-hint { font-size: 0.78rem; color: var(--color-text-secondary); }
+
+.thresholds-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1.75rem;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.thresholds-note {
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+  margin-top: 1.5rem;
+  max-width: 520px;
+}
+
+/* =========================================
+   6. Media Queries (Responsividad Básica)
+   ========================================= */
+@media (max-width: 1024px) {
+  .main-content { padding: 1.5rem; }
+}
+
+@media (max-width: 768px) {
+  .app-shell { flex-direction: column; }
+
+  .sidebar {
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    padding: 0.75rem 1rem;
+  }
+
+  .sidebar-nav,
+  .sidebar-profile { display: none; }
+
+  .main-content { padding: 1.25rem; }
+
+  .thresholds-fields { grid-template-columns: 1fr; }
+}
+
+.field-input-wrap { position: relative; display: flex; }
+.field-input-wrap .field-input { width: 100%; }
+.field-unit { position: absolute; right: var(--spacing-sm); top: 50%; transform: translateY(-50%); font-size: var(--font-size-xs); color: var(--color-text-secondary); pointer-events: none; }
+
+/* Mirrors .calculatedBadge in Thresholds.module.css (not one of the shared .badge variants) */
+.calculated-badge {
+  display: inline-block;
+  width: fit-content;
+  margin-top: 2px;
+  font-size: 10px;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-secondary);
+  background-color: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+  padding: 1px 8px;
+}
+
+.periodicity-label { font-size: var(--font-size-xs); font-weight: var(--font-weight-bold); color: var(--color-primary); margin-right: var(--spacing-sm); }
+.periodicity-right { display: flex; align-items: center; }

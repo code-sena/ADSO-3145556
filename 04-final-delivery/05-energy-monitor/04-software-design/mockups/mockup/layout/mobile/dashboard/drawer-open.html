@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EnergyMonitor — Menú de navegación</title>
+  <link rel="icon" type="image/svg+xml" href="../../../../assets/icons/favicon.svg">
+  <link rel="stylesheet" href="../css/mobile-shell.css">
+  <link rel="stylesheet" href="css/dashboard-styles.css">
+  <link rel="stylesheet" href="css/drawer-styles.css">
+</head>
+<body>
+
+  <p class="device-caption">EnergyMonitor · <span>/dashboard · Sidebar abierto</span></p>
+
+  <div class="phone">
+
+    <!-- Barra de estado: la dibuja el sistema, no la app -->
+    <div class="status-bar">
+      <span>9:41</span>
+      <span class="status-icons">
+        <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor" aria-hidden="true"><rect x="0" y="7" width="3" height="4" rx="1"/><rect x="4.5" y="5" width="3" height="6" rx="1"/><rect x="9" y="2.5" width="3" height="8.5" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/></svg>
+        <svg width="16" height="11" viewBox="0 0 16 12" fill="currentColor" aria-hidden="true"><path d="M8 9.2 6.2 11a3.2 3.2 0 0 1 3.6 0zM8 5.4c-1.6 0-3 .6-4.1 1.7L2.5 5.7A7.6 7.6 0 0 1 8 3.4c2 0 3.9.8 5.5 2.3l-1.4 1.4A5.6 5.6 0 0 0 8 5.4zM8 .8A11.8 11.8 0 0 0 .5 3.6l1.4 1.4A9.8 9.8 0 0 1 8 2.8c2.6 0 4.9 1 6.7 2.6l1.4-1.4A11.8 11.8 0 0 0 8 .8z"/></svg>
+        <svg width="25" height="12" viewBox="0 0 25 12" fill="none" aria-hidden="true"><rect x="0.5" y="0.5" width="21" height="11" rx="3.2" stroke="currentColor" opacity=".4"/><rect x="2" y="2" width="16" height="8" rx="1.8" fill="currentColor"/><path d="M23 4v4a2.2 2.2 0 0 0 0-4z" fill="currentColor" opacity=".4"/></svg>
+      </span>
+    </div>
+
+    <!-- ÁREA DE LA APP -->
+    <div class="drawer-open-screen screen">
+
+      <!-- FONDO: la pantalla privada /dashboard, tal y como queda detrás del overlay.
+           Su botón hamburguesa sí se monta en el HTML, pero la app lo oculta
+           mientras el drawer está abierto ({!isOpen ? … : null}). -->
+      <button class="drawer-trigger" aria-label="Abrir menú de navegación">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h18M3 12h18M3 17h18"></path></svg>
+      </button>
+
+      <header class="header header-dashboard">
+        <div class="header-title-wrap">
+          <h1 class="header-title">Inicio</h1>
+        </div>
+        <div class="header-actions">
+          <button class="header-action" aria-label="Abrir menú de acciones">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg>
+          </button>
+        </div>
+      </header>
+
+      <div class="dash-list">
+        <article class="home-card" aria-label="Abrir hogar Casa Principal">
+          <div class="home-card-header is-owner">
+            <div class="home-card-header-text">
+              <h2 class="home-card-title">Casa Principal</h2>
+              <span class="home-card-responsible">Propietario</span>
+            </div>
+            <button class="home-card-favorite is-favorite" aria-label="Quitar favorito">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 20.4 4.7 13.1a4.7 4.7 0 0 1 6.6-6.7l.7.7.7-.7a4.7 4.7 0 0 1 6.6 6.7z"></path></svg>
+            </button>
+          </div>
+          <div class="home-card-body">
+            <p class="home-card-text"><strong class="home-card-label">Dirección: </strong>Cra. 45 # 18-32, Medellín</p>
+            <div class="home-card-description">
+              <p class="home-card-text"><strong class="home-card-label">Descripción: </strong>Casa unifamiliar de dos pisos en el barrio Los Alpes, con panel solar de 4 kWp y medición independiente por circuito. Los datos se reportan cada cinco…</p>
+              <button class="home-card-toggle">Ver más</button>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <!-- OVERLAY: styles.overlay, rgba(0, 0, 0, 0.4). Toca el fondo y cierra el drawer. -->
+      <div class="drawer-overlay"></div>
+
+      <!-- DRAWER: styles.drawer, ancho min(390 × 0.85, 300) = 300px -->
+      <aside class="drawer">
+
+        <div class="drawer-header">
+          <img class="drawer-logo" src="../../../../assets/logos/project_logo.png" alt="EnergyMonitor">
+          <span class="drawer-header-title">EnergyMonitor</span>
+        </div>
+
+        <nav class="drawer-nav">
+
+          <!-- NAV_ITEMS_TOP · sidebar:home → /dashboard (activo: coincide con la pantalla de fondo) -->
+          <a href="dashboard.html" class="drawer-item drawer-item-active">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.6 12 3.3l9 7.3V20a1 1 0 0 1-1 1h-5v-6h-4v6H4a1 1 0 0 1-1-1z"></path></svg>
+            <span class="drawer-label">Inicio</span>
+          </a>
+
+          <!-- NavHomes: desplegado (open) con la lista de hogares de useHomes() -->
+          <div>
+            <button class="drawer-item drawer-homes-toggle" aria-expanded="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.2 2.5 4.5 13.4a.6.6 0 0 0 .5 1h5l-1 7.1 8.8-10.9a.6.6 0 0 0-.5-1h-5z"></path></svg>
+              <!-- sidebar:homes -->
+              <span class="drawer-label">Hogares</span>
+              <!-- open ? chevron-up-outline : chevron-down-outline, size md (16) -->
+              <span class="drawer-chevron">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m18 16-6-6-6 6"></path></svg>
+              </span>
+            </button>
+
+            <div class="drawer-homes-list">
+              <!-- home.name.charAt(0).toUpperCase() -->
+              <a href="../home-detail/home-detail.html" class="drawer-home-item">
+                <span class="drawer-home-avatar">C</span>
+                <span class="drawer-home-name">Casa Principal</span>
+              </a>
+              <a href="../home-detail/home-detail.html" class="drawer-home-item">
+                <span class="drawer-home-avatar">A</span>
+                <span class="drawer-home-name">Apartamento 502</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- NAV_ITEMS_BOTTOM · sidebar:favorites → /favorites -->
+          <a href="../favorites/favorites.html" class="drawer-item">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.4 4.7 13.1a4.7 4.7 0 0 1 6.6-6.7l.7.7.7-.7a4.7 4.7 0 0 1 6.6 6.7z"></path></svg>
+            <span class="drawer-label">Favoritos</span>
+          </a>
+
+          <!-- sidebar:notifications · badge = pendingCount de NotificationCenterContext -->
+          <a href="../notifications/notifications.html" class="drawer-item">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 16.6V11a6 6 0 1 0-12 0v5.6L4.4 18.6h15.2z"></path><path d="M10 21.2a2.1 2.1 0 0 0 4 0"></path></svg>
+            <span class="drawer-label">Notificaciones</span>
+            <span class="drawer-badge">4</span>
+          </a>
+
+          <!-- sidebar:settings -->
+          <a href="../settings/settings.html" class="drawer-item">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3.2"></circle><path d="M19.4 14.5a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-2.9 1.2v.2a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-3-1.2l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0-1.2-2.9H3a2 2 0 1 1 0-4h.1A1.7 1.7 0 0 0 4.3 7.3l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 2.9-1.2V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 3 1.2l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0 1.2 2.9h.2a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"></path></svg>
+            <span class="drawer-label">Ajustes</span>
+          </a>
+        </nav>
+
+        <!-- Bloque de perfil con el desplegable abierto (openMenu === true) -->
+        <div class="drawer-profile">
+
+          <div class="drawer-dropdown">
+            <!-- sidebar:profile.myAccount → /account -->
+            <a href="../account/account.html" class="drawer-dropdown-item">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="7.6" r="3.9"></circle><path d="M4.5 21a7.5 7.5 0 0 1 15 0"></path></svg>
+              <span>Mi cuenta</span>
+            </a>
+            <!-- sidebar:profile.addAccount · sin onPress: no navega -->
+            <div class="drawer-dropdown-item">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg>
+              <span>Añadir cuenta</span>
+            </div>
+            <div class="drawer-divider"></div>
+            <!-- sidebar:profile.logout → signOut() + router.replace("/") -->
+            <button class="btn btn-primary btn-medium btn-full">Cerrar sesión</button>
+          </div>
+
+          <div class="drawer-profile-row">
+            <!-- user.avatarUri es null → cae al icono person-outline -->
+            <div class="drawer-avatar">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="7.6" r="3.9"></circle><path d="M4.5 21a7.5 7.5 0 0 1 15 0"></path></svg>
+            </div>
+            <!-- user.name -->
+            <span class="drawer-profile-name">Camila Restrepo</span>
+            <span class="drawer-menu-button">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="5" cy="12" r="1.5"></circle><circle cx="12" cy="12" r="1.5"></circle><circle cx="19" cy="12" r="1.5"></circle></svg>
+            </span>
+          </div>
+        </div>
+      </aside>
+
+    </div>
+
+    <!-- Indicador de inicio -->
+    <div class="home-indicator"></div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,274 @@
+/* =========================================
+   Registro — EnergyMonitor
+   Mockup estático de /register y del modal legal
+   Tokens y componentes base en css/auth-shell.css
+   -----------------------------------------
+   Origen: Register.jsx + RegisterForm.jsx + RegisterForm.module.css
+           + LegalModal.jsx + LegalModal.module.css
+   ========================================= */
+
+/* =========================================
+   1. Contenedor y scroll
+   ========================================= */
+.wrapper {
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+/* Con scroll interno y barra oculta: evita que el formulario crezca
+   más que la tarjeta en pantallas bajas */
+.scroll-content {
+  max-height: 90vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 6px;
+}
+
+.scroll-content::-webkit-scrollbar { display: none; }
+.scroll-content { scrollbar-width: none; }
+
+/* =========================================
+   2. Formulario
+   ========================================= */
+.form-title {
+  text-align: center;
+  margin-bottom: 10px;
+  color: var(--color-text-primary);
+  font-family: var(--font-primary);
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+}
+
+/* Nombre y apellido en dos columnas iguales */
+.name-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+.name-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+/* OJO: aquí el error es de 16px (--font-size-md), a diferencia del login (14px) */
+.form-error {
+  font-size: var(--font-size-md);
+  color: var(--color-danger);
+}
+
+/* =========================================
+   3. Términos y privacidad
+   ========================================= */
+.options {
+  display: flex;
+  font-size: var(--font-size-sm);
+}
+
+/* La app escala el checkbox nativo 1,5× y le da margen: queda
+   desalineado respecto al texto, igual que en la app */
+.terms-checkbox {
+  transform: scale(1.5);
+  margin: 10px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.terms {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  font-size: var(--font-size-sm);
+  line-height: 1.4;
+  cursor: pointer;
+}
+
+/* =========================================
+   4. Modal legal (LegalModal.module.css)
+   ========================================= */
+.legal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  z-index: 1000;
+}
+
+.legal-card {
+  width: 100%;
+  max-width: 720px;
+  max-height: 85vh;
+  background: #FFFFFF;
+  color: var(--color-text-primary);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ── Cabecera con las dos pestañas ──────────────────────────── */
+.legal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--color-border);
+  padding: 8px 12px;
+}
+
+.legal-tabs {
+  display: flex;
+  gap: 4px;
+}
+
+.legal-tab {
+  border: none;
+  background: transparent;
+  color: var(--color-text-secondary);
+  font-family: inherit;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  padding: 10px 16px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.legal-tab:hover { background: var(--color-background); }
+
+.legal-tab--active {
+  color: var(--color-secondary);
+  background: var(--color-background);
+}
+
+.legal-close {
+  border: none;
+  background: transparent;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  border-radius: 999px;
+  transition: background 0.15s ease;
+}
+
+.legal-close:hover { background: var(--color-background); }
+
+/* ── Cuerpo con scroll propio ───────────────────────────────── */
+.legal-body {
+  overflow-y: auto;
+  padding: 20px 28px 28px;
+}
+
+.legal-body::-webkit-scrollbar { width: 6px; }
+.legal-body::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 4px;
+}
+
+.legal-title {
+  font-size: var(--font-size-xl);
+  margin-bottom: 4px;
+  color: var(--color-text-primary);
+  font-family: var(--font-primary);
+}
+
+.legal-updated {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  margin-bottom: 16px;
+}
+
+.legal-intro {
+  font-size: var(--font-size-sm);
+  line-height: 1.6;
+  margin-bottom: 20px;
+  color: var(--color-text-primary);
+}
+
+.legal-section { margin-bottom: 18px; }
+
+.legal-section-heading {
+  font-size: 15px;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-secondary);
+  margin-bottom: 6px;
+}
+
+.legal-paragraph {
+  font-size: var(--font-size-sm);
+  line-height: 1.6;
+  color: var(--color-text-primary);
+  margin-bottom: 8px;
+}
+
+.legal-footer {
+  margin-top: 20px;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  border-top: 1px solid var(--color-border);
+  padding-top: 12px;
+}
+
+/* =========================================
+   5. Responsive
+   ========================================= */
+@media (max-width: 1024px) {
+  .wrapper { max-width: 380px; }
+  .form { gap: 12px; }
+}
+
+@media (max-width: 768px) {
+  .wrapper {
+    max-width: 100%;
+    padding: 0 16px;
+  }
+
+  .scroll-content {
+    max-height: none;
+    padding-right: 0;
+  }
+
+  .form-title { font-size: var(--font-size-lg); }
+  .form { gap: 10px; }
+  .name-row { grid-template-columns: 1fr; gap: 10px; }
+  .options { flex-direction: column; gap: 10px; }
+  .terms { font-size: var(--font-size-13); }
+  .divider span { font-size: 11px; }
+
+  /* El modal legal pasa a ser una hoja inferior (bottom sheet) */
+  .legal-overlay {
+    padding: 0;
+    align-items: flex-end;
+  }
+
+  .legal-card {
+    max-width: 100%;
+    max-height: 92vh;
+    border-radius: 16px 16px 0 0;
+  }
+
+  .legal-body { padding: 16px 18px 24px; }
+  .legal-tab { font-size: var(--font-size-13); padding: 8px 12px; }
+}
+
+@media (max-width: 480px) {
+  .form-title { font-size: var(--font-size-18); }
+  .terms { font-size: var(--font-size-xs); }
+  .register-link-p { font-size: var(--font-size-13); }
+}

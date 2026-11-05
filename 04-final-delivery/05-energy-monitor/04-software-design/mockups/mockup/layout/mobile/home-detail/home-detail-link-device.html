@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EnergyMonitor — Casa Principal · Vincular dispositivo</title>
+  <link rel="icon" type="image/svg+xml" href="../../../../assets/icons/favicon.svg">
+  <link rel="stylesheet" href="../css/mobile-shell.css">
+  <link rel="stylesheet" href="css/home-detail-styles.css">
+</head>
+<body>
+
+  <p class="device-caption">EnergyMonitor · <span>/home/[id] · DevicesTab + LinkDeviceModal</span></p>
+
+  <div class="phone">
+
+    <!-- Barra de estado (la dibuja el sistema, no la app) -->
+    <div class="status-bar">
+      <span>9:41</span>
+      <span class="status-icons">
+        <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor" aria-hidden="true"><rect x="0" y="7" width="3" height="4" rx="1"/><rect x="4.5" y="5" width="3" height="6" rx="1"/><rect x="9" y="2.5" width="3" height="8.5" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/></svg>
+        <svg width="16" height="11" viewBox="0 0 16 12" fill="currentColor" aria-hidden="true"><path d="M8 9.2 6.2 11a3.2 3.2 0 0 1 3.6 0zM8 5.4c-1.6 0-3 .6-4.1 1.7L2.5 5.7A7.6 7.6 0 0 1 8 3.4c2 0 3.9.8 5.5 2.3l-1.4 1.4A5.6 5.6 0 0 0 8 5.4zM8 .8A11.8 11.8 0 0 0 .5 3.6l1.4 1.4A9.8 9.8 0 0 1 8 2.8c2.6 0 4.9 1 6.7 2.6l1.4-1.4A11.8 11.8 0 0 0 8 .8z"/></svg>
+        <svg width="25" height="12" viewBox="0 0 25 12" fill="none" aria-hidden="true"><rect x="0.5" y="0.5" width="21" height="11" rx="3.2" stroke="currentColor" opacity=".4"/><rect x="2" y="2" width="16" height="8" rx="1.8" fill="currentColor"/><path d="M23 4v4a2.2 2.2 0 0 0 0-4z" fill="currentColor" opacity=".4"/></svg>
+      </span>
+    </div>
+
+    <div class="screen hd-screen">
+
+      <!-- HomeDetailScreen.header -->
+      <header class="header hd-header">
+        <a class="hd-back" href="../dashboard/dashboard.html" aria-label="Inicio">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"></path><path d="m12 19-7-7 7-7"></path></svg>
+        </a>
+        <div class="header-title-wrap">
+          <h1 class="header-title">Casa Principal</h1>
+        </div>
+      </header>
+
+      <!-- DevicesTab por detrás, en el mismo estado que home-detail-devices.html -->
+      <div class="hd-body">
+
+        <div class="hd-head">
+          <div class="hd-head-text">
+            <h2 class="hd-title">Dispositivos vinculados</h2>
+            <p class="hd-subtitle">3 de 4 dispositivos en línea</p>
+          </div>
+          <button class="btn btn-primary btn-small" type="button">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg>
+            <span>Vincular dispositivo</span>
+          </button>
+        </div>
+
+        <div class="card card-pad-none">
+
+          <div class="hd-device-row">
+            <div class="hd-device-icon hd-device-icon-online">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2.6" width="12" height="18.8" rx="2.2"></rect><path d="M6 10h12"></path><path d="M9 6v1.6M9 13v1.6"></path></svg>
+            </div>
+            <div class="hd-device-info">
+              <p class="hd-device-name">Nevera</p>
+              <p class="hd-device-room">Sala</p>
+            </div>
+            <div class="hd-device-meta">
+              <span class="hd-status hd-status-online">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 18.6a1.4 1.4 0 1 0 0-2.8 1.4 1.4 0 0 0 0 2.8M5.6 12.6a9 9 0 0 1 12.8 0l-1.7 1.7a6.4 6.4 0 0 0-9.4 0zM2.2 9.2a14 14 0 0 1 19.6 0l-1.7 1.7a11.4 11.4 0 0 0-16.2 0z"/></svg>
+                En línea
+              </span>
+              <span class="hd-consumption">0.12 kW</span>
+            </div>
+            <span class="hd-remove" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.4h16"></path><path d="M9.4 6.4V4.8a1.4 1.4 0 0 1 1.4-1.4h2.4a1.4 1.4 0 0 1 1.4 1.4v1.6"></path><path d="m6.4 6.4 1 13a1.6 1.6 0 0 0 1.6 1.5h6a1.6 1.6 0 0 0 1.6-1.5l1-13"></path><path d="M10.2 10.6v6M13.8 10.6v6"></path></svg>
+            </span>
+          </div>
+
+          <div class="hd-device-divider"></div>
+
+          <div class="hd-device-row">
+            <div class="hd-device-icon hd-device-icon-online">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.6" y="3.2" width="16.8" height="17.6" rx="2.2"></rect><circle cx="12" cy="14" r="4.4"></circle><path d="M7.2 7.2h.01M10 7.2h.01"></path></svg>
+            </div>
+            <div class="hd-device-info">
+              <p class="hd-device-name">Lavadora</p>
+              <p class="hd-device-room">Zona de ropas</p>
+            </div>
+            <div class="hd-device-meta">
+              <span class="hd-status hd-status-online">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 18.6a1.4 1.4 0 1 0 0-2.8 1.4 1.4 0 0 0 0 2.8M5.6 12.6a9 9 0 0 1 12.8 0l-1.7 1.7a6.4 6.4 0 0 0-9.4 0zM2.2 9.2a14 14 0 0 1 19.6 0l-1.7 1.7a11.4 11.4 0 0 0-16.2 0z"/></svg>
+                En línea
+              </span>
+              <span class="hd-consumption">0.35 kW</span>
+            </div>
+            <span class="hd-remove" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.4h16"></path><path d="M9.4 6.4V4.8a1.4 1.4 0 0 1 1.4-1.4h2.4a1.4 1.4 0 0 1 1.4 1.4v1.6"></path><path d="m6.4 6.4 1 13a1.6 1.6 0 0 0 1.6 1.5h6a1.6 1.6 0 0 0 1.6-1.5l1-13"></path><path d="M10.2 10.6v6M13.8 10.6v6"></path></svg>
+            </span>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <!-- BottomTabBar: SOLO iconos; activa = Dispositivos -->
+    <nav class="tab-bar">
+      <a class="tab-item" href="home-detail.html" aria-label="Consumo"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12h4l2.4-6.8 4.8 13.6L15.6 12H22"></path></svg></a>
+      <a class="tab-item" href="home-detail-history.html" aria-label="Historial"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.2"></circle><path d="M12 6.8V12l3.6 2.2"></path></svg></a>
+      <a class="tab-item" href="home-detail-users.html" aria-label="Usuarios"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.6"></circle><path d="M2.6 20a6.4 6.4 0 0 1 12.8 0"></path><path d="M16.4 5a3.6 3.6 0 0 1 0 7"></path><path d="M17.6 14.4A6.4 6.4 0 0 1 21.4 20"></path></svg></a>
+      <a class="tab-item tab-item-active" href="home-detail-devices.html" aria-label="Dispositivos"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8.8a15.5 15.5 0 0 1 20 0"></path><path d="M5.4 12.4a10.6 10.6 0 0 1 13.2 0"></path><path d="M8.8 16a5.6 5.6 0 0 1 6.4 0"></path><path d="M12 19.6h.01"></path></svg></a>
+      <a class="tab-item" href="home-detail-thresholds.html" aria-label="Umbrales"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h9"></path><path d="M17 7h3"></path><path d="M4 17h3"></path><path d="M11 17h9"></path><circle cx="15" cy="7" r="2.2"></circle><circle cx="9" cy="17" r="2.2"></circle></svg></a>
+      <a class="tab-item" href="home-detail-home.html" aria-label="Hogar"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.6 12 3.3l9 7.3V20a1 1 0 0 1-1 1h-5v-6h-4v6H4a1 1 0 0 1-1-1z"></path></svg></a>
+    </nav>
+
+    <!-- LinkDeviceModal abierto por encima de todo (Modal variant por defecto,
+         centrado — NO es bottom sheet en esta pantalla). -->
+    <div class="modal-overlay">
+      <div class="modal" role="dialog" aria-modal="true" aria-label="Vincular dispositivo">
+
+        <div class="modal-header">
+          <h2 class="modal-title">Vincular dispositivo</h2>
+          <a class="modal-close" href="home-detail-devices.html" aria-label="Cerrar">×</a>
+        </div>
+
+        <div class="modal-body ld-body">
+          <div class="ld-content">
+
+            <!-- bluetooth.unavailable -->
+            <div class="ld-notice">
+              <svg class="ld-notice-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.2"></circle><path d="M12 16.4v-5"></path><path d="M12 7.8h.01"></path></svg>
+              <p class="ld-notice-text">Sin Bluetooth no se puede escribir la red al módulo: queda registrado aquí, pero necesita que le pases sus credenciales desde el portal de configuración.</p>
+            </div>
+
+            <!-- code.label + code.placeholder + code.hint (campo vacío,
+                 el placeholder del i18n es «EM-204», 6 caracteres) -->
+            <div class="ld-field">
+              <div class="input-container">
+                <label class="input-label" for="deviceCode">Código del módulo</label>
+                <div class="input-wrapper">
+                  <input class="input" id="deviceCode" type="text" placeholder="EM-204" maxlength="6" autocomplete="off">
+                </div>
+              </div>
+              <div class="ld-error-slot"></div>
+              <p class="ld-hint">El código viene impreso en el módulo. También lo puedes copiar del portal de configuración.</p>
+            </div>
+
+            <!-- appliance.title -->
+            <p class="ld-block-label">¿Qué electrodoméstico vas a monitorear?</p>
+
+            <!-- applianceGrid: flexBasis 47% → 2 columnas -->
+            <div class="ld-grid">
+              <span class="ld-option ld-option-selected">
+                <span class="ld-option-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2.6" width="12" height="18.8" rx="2.2"></rect><path d="M6 10h12"></path><path d="M9 6v1.6M9 13v1.6"></path></svg></span>
+                <span class="ld-option-label">Nevera</span>
+                <svg class="ld-option-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.2"></circle><path d="m7.8 12.2 2.8 2.8 5.6-5.6"></path></svg>
+              </span>
+
+              <span class="ld-option">
+                <span class="ld-option-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.6" y="3.2" width="16.8" height="17.6" rx="2.2"></rect><circle cx="12" cy="14" r="4.4"></circle><path d="M7.2 7.2h.01M10 7.2h.01"></path></svg></span>
+                <span class="ld-option-label">Lavadora</span>
+              </span>
+
+              <span class="ld-option">
+                <span class="ld-option-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.6" y="5" width="18.8" height="12.6" rx="2.2"></rect><path d="M8 21h8M12 17.6V21"></path></svg></span>
+                <span class="ld-option-label">Televisor</span>
+              </span>
+
+              <span class="ld-option">
+                <span class="ld-option-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5.4" width="18" height="13.2" rx="2.2"></rect><path d="M3 9.6h18"></path><path d="M16.4 14h.01"></path></svg></span>
+                <span class="ld-option-label">Microondas</span>
+              </span>
+
+              <span class="ld-option">
+                <span class="ld-option-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.6" y="4.6" width="18.8" height="7" rx="2.2"></rect><path d="M7 15.4c1.4-1.6 3-1.6 4.4 0s3 1.6 4.4 0"></path><path d="M7 19.4c1.4-1.6 3-1.6 4.4 0s3 1.6 4.4 0"></path></svg></span>
+                <span class="ld-option-label">Aire acondicionado</span>
+              </span>
+
+              <span class="ld-option">
+                <span class="ld-option-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.6" y="4" width="18.8" height="12.4" rx="2"></rect><path d="M9 20.4h6M12 16.4v4"></path></svg></span>
+                <span class="ld-option-label">Computador</span>
+              </span>
+
+              <span class="ld-option">
+                <span class="ld-option-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6.4" y="2.6" width="11.2" height="18.8" rx="2.2"></rect><path d="M6.4 15h11.2"></path><path d="M9.6 6.2c1.6 1.4 3.2 1.4 4.8 0"></path></svg></span>
+                <span class="ld-option-label">Calentador de agua</span>
+              </span>
+
+              <span class="ld-option">
+                <span class="ld-option-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.4 17.6a5.6 5.6 0 1 1 5.2 0v2.8H9.4z"></path><path d="M9.8 20.4h4.4"></path></svg></span>
+                <span class="ld-option-label">Iluminación</span>
+              </span>
+
+              <span class="ld-option">
+                <span class="ld-option-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3.4v4.2M15 3.4v4.2"></path><path d="M6.6 7.6h10.8v3.2a5.4 5.4 0 0 1-10.8 0z"></path><path d="M12 16.2v4.4"></path></svg></span>
+                <span class="ld-option-label">Otro</span>
+              </span>
+            </div>
+
+            <!-- done.nameLabel + done.optional -->
+            <div class="ld-field">
+              <div class="input-container">
+                <label class="input-label" for="deviceName">Nombre del dispositivo (opcional)</label>
+                <div class="input-wrapper">
+                  <input class="input" id="deviceName" type="text" placeholder="Nevera" maxlength="50">
+                </div>
+              </div>
+            </div>
+
+            <!-- done.roomLabel + Picker de ROOM_KEYS -->
+            <div class="ld-field">
+              <span class="ld-block-label">Ubicación</span>
+              <div class="ld-picker">
+                <span>Sala</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="modal-footer ld-modal-footer">
+          <a class="btn btn-secondary btn-medium" href="home-detail-devices.html">Cancelar</a>
+          <button class="btn btn-primary btn-medium" type="button">Vincular</button>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="home-indicator"></div>
+  </div>
+</body>
+</html>

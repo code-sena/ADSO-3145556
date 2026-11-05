@@ -1,0 +1,150 @@
+/* =========================================
+   Mi cuenta — EnergyMonitor mobile
+   Origen: features/account/screens/AccountScreen/AccountScreen.tsx
+           features/account/components/AvatarSection/
+           features/account/components/ProfileField/
+           features/account/components/EditProfileModal/
+           features/account/components/ChangePasswordModal/
+           features/account/components/DeleteAccountModal/
+           components/Modal/Modal.tsx
+   ========================================= */
+
+/* El Header de esta pantalla aparta el botón del Sidebar:
+   marginLeft = spacing.md + TRIGGER_SIZE(32+8+4) + spacing.sm = 68px */
+.header-offset { margin-left: 68px; }
+
+/* ScrollView contentContainerStyle: gap md · paddingHorizontal md · paddingBottom xl */
+.ac-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  padding: 0 var(--space-md) var(--space-xl);
+}
+
+.ac-card { display: flex; flex-direction: column; gap: var(--space-md); }
+
+/* divider: StyleSheet.hairlineWidth ≈ 0.33px en iOS; se dibuja a 1px */
+.ac-divider { height: 1px; background: var(--border); }
+
+/* =========================================
+   AvatarSection  (AVATAR_SIZE = spacing.xl * 4 = 128px)
+   ========================================= */
+.ac-avatar-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-lg) 0;
+}
+
+.ac-avatar {
+  position: relative;
+  width: 128px;
+  height: 128px;
+  border-radius: 64px;
+  background: var(--background);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+/* BADGE_SIZE = spacing.xl = 32px */
+.ac-avatar-badge {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: var(--space-xl);
+  height: var(--space-xl);
+  border-radius: 16px;
+  background: var(--primary);
+  color: var(--on-brand);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ac-avatar-hint { font-size: 12px; color: var(--text-secondary); }
+
+/* =========================================
+   ProfileField  (editButton = spacing.xl + spacing.sm = 40px)
+   ========================================= */
+.ac-section { display: flex; flex-direction: column; gap: var(--space-xs); }
+
+.ac-section-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: var(--space-xs);
+}
+
+.ac-field {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md) 0;
+}
+
+.ac-field-text { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: var(--space-xs); }
+
+.ac-field-label { font-size: 12px; font-weight: 600; color: var(--text-secondary); }
+
+.ac-field-value { font-size: 14px; color: var(--text-primary); }
+
+.ac-edit-btn {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border: none;
+  border-radius: var(--radius-md);
+  background: var(--primary-soft);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* =========================================
+   Zona de eliminación de la cuenta
+   ========================================= */
+.ac-delete-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  padding-top: var(--space-xs);
+}
+
+.ac-delete-question {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+.ac-delete-btn-text { color: var(--danger); }
+
+/* =========================================
+   Modales — Specific de esta pantalla
+   El <Modal> de React Native se monta en una capa nativa por encima de toda la
+   app, así que tapa también el botón del drawer y la barra de estado. En el HTML
+   los tres overlays son hermanos de .screen (dentro de .phone, que es el
+   contenedor posicionado); solo hay que bajar el z-index del disparador.
+   ========================================= */
+.drawer-trigger { z-index: 899; }
+
+/* El × del botón de cierre es un <Text> dentro de un Pressable: en HTML el
+   navegador no le pasa la fuente del documento al <button> */
+.modal-close { font-family: var(--font); }
+
+/* DeleteAccountModal: los dos botones del footer ocupan el mismo ancho */
+.ac-modal-footer-btn { flex: 1; }
+
+.ac-modal-danger-message {
+  font-size: 14px;
+  line-height: 22px;
+  color: var(--text-secondary);
+  text-align: center;
+}

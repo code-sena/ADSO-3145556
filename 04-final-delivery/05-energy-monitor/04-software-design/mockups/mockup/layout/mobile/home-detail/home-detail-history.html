@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EnergyMonitor — Casa Principal · Historial</title>
+  <link rel="icon" type="image/svg+xml" href="../../../../assets/icons/favicon.svg">
+  <link rel="stylesheet" href="../css/mobile-shell.css">
+  <link rel="stylesheet" href="css/home-detail-styles.css">
+</head>
+<body>
+
+  <p class="device-caption">EnergyMonitor · <span>/home/[id] · ConsumptionHistoryTab</span></p>
+
+  <div class="phone">
+
+    <!-- Barra de estado (la dibuja el sistema, no la app) -->
+    <div class="status-bar">
+      <span>9:41</span>
+      <span class="status-icons">
+        <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor" aria-hidden="true"><rect x="0" y="7" width="3" height="4" rx="1"/><rect x="4.5" y="5" width="3" height="6" rx="1"/><rect x="9" y="2.5" width="3" height="8.5" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/></svg>
+        <svg width="16" height="11" viewBox="0 0 16 12" fill="currentColor" aria-hidden="true"><path d="M8 9.2 6.2 11a3.2 3.2 0 0 1 3.6 0zM8 5.4c-1.6 0-3 .6-4.1 1.7L2.5 5.7A7.6 7.6 0 0 1 8 3.4c2 0 3.9.8 5.5 2.3l-1.4 1.4A5.6 5.6 0 0 0 8 5.4zM8 .8A11.8 11.8 0 0 0 .5 3.6l1.4 1.4A9.8 9.8 0 0 1 8 2.8c2.6 0 4.9 1 6.7 2.6l1.4-1.4A11.8 11.8 0 0 0 8 .8z"/></svg>
+        <svg width="25" height="12" viewBox="0 0 25 12" fill="none" aria-hidden="true"><rect x="0.5" y="0.5" width="21" height="11" rx="3.2" stroke="currentColor" opacity=".4"/><rect x="2" y="2" width="16" height="8" rx="1.8" fill="currentColor"/><path d="M23 4v4a2.2 2.2 0 0 0 0-4z" fill="currentColor" opacity=".4"/></svg>
+      </span>
+    </div>
+
+    <div class="screen hd-screen">
+
+      <!-- HomeDetailScreen.header -->
+      <header class="header hd-header">
+        <a class="hd-back" href="../dashboard/dashboard.html" aria-label="Inicio">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"></path><path d="m12 19-7-7 7-7"></path></svg>
+        </a>
+        <div class="header-title-wrap">
+          <h1 class="header-title">Casa Principal</h1>
+        </div>
+      </header>
+
+      <!-- ConsumptionHistoryTab · contentContainerStyle -->
+      <div class="hd-body">
+
+        <!-- Filtros de periodo · history:filters.* (por defecto "month") -->
+        <div class="hd-chip-row">
+          <a class="hd-chip" href="home-detail-history.html">Día</a>
+          <a class="hd-chip" href="home-detail-history.html">Semana</a>
+          <span class="hd-chip hd-chip-active">Mes</span>
+          <a class="hd-chip" href="home-detail-history.html">Año</a>
+        </div>
+
+        <!-- history:dates.month -->
+        <p class="hd-date">Abril 01, 2026 - Abril 30, 2026</p>
+
+        <!-- Subfiltros · history:subfilters.month.* (ninguno seleccionado:
+             sin selección NO aparece el chip «Mostrar todo») -->
+        <div class="hd-chip-row">
+          <a class="hd-chip" href="home-detail-history.html">Semana 1</a>
+          <a class="hd-chip" href="home-detail-history.html">Semana 2</a>
+          <a class="hd-chip" href="home-detail-history.html">Semana 3</a>
+          <a class="hd-chip" href="home-detail-history.html">Semana 4</a>
+        </div>
+
+        <!-- Tarjeta del gráfico · history:chart.title -->
+        <div class="card card-pad-md">
+          <h2 class="hd-card-title">DISTRIBUCIÓN DE CONSUMO POR DISPOSITIVO</h2>
+
+          <!-- Leyenda de tipos vinculados, selección única. Sin selección manual
+               sigue al que más consumió: Lavadora (chipSoftActive). -->
+          <div class="hd-chip-row">
+            <a class="hd-chip" href="home-detail-history.html"><span class="hd-dot" style="background: var(--c-fridge);"></span>Nevera</a>
+            <span class="hd-chip hd-chip-soft-active"><span class="hd-dot" style="background: var(--c-washer);"></span>Lavadora</span>
+            <a class="hd-chip" href="home-detail-history.html"><span class="hd-dot" style="background: var(--c-tv);"></span>Televisor</a>
+            <a class="hd-chip" href="home-detail-history.html"><span class="hd-dot" style="background: var(--c-pc);"></span>Computador</a>
+          </div>
+
+          <!-- GRÁFICO ESQUEMÁTICO: Chart type="bar", height 300.
+               Con más de 8 cubos el ancho es n × 56 → se dibuja desplazable y
+               solo se pintan los 12 primeros días del mes. -->
+          <div class="hd-chart-frame">
+            <div class="hd-chart-axis"><span>600</span><span>400</span><span>200</span><span>0</span></div>
+            <div class="hd-chart-scroll">
+              <div class="hd-chart-canvas" style="width: 672px;">
+                <div class="hd-bars">
+                  <div class="hd-bar-col"><span class="hd-bar" style="height: 154px; background: var(--primary);"></span></div>
+                  <div class="hd-bar-col"><span class="hd-bar" style="height: 137px; background: var(--primary);"></span></div>
+                  <div class="hd-bar-col"><span class="hd-bar" style="height: 170px; background: var(--primary);"></span></div>
+                  <div class="hd-bar-col"><span class="hd-bar" style="height: 158px; background: var(--primary);"></span></div>
+                  <div class="hd-bar-col"><span class="hd-bar" style="height: 184px; background: var(--primary);"></span></div>
+                  <div class="hd-bar-col"><span class="hd-bar" style="height: 194px; background: var(--primary);"></span></div>
+                  <div class="hd-bar-col"><span class="hd-bar" style="height: 210px; background: var(--primary);"></span></div>
+                  <div class="hd-bar-col"><span class="hd-bar" style="height: 166px; background: var(--primary);"></span></div>
+                  <div class="hd-bar-col"><span class="hd-bar" style="height: 149px; background: var(--primary);"></span></div>
+                  <div class="hd-bar-col"><span class="hd-bar" style="height: 160px; background: var(--primary);"></span></div>
+                  <div class="hd-bar-col"><span class="hd-bar" style="height: 174px; background: var(--primary);"></span></div>
+                  <div class="hd-bar-col"><span class="hd-bar" style="height: 188px; background: var(--primary);"></span></div>
+                </div>
+                <div class="hd-bar-labels">
+                  <span class="hd-bar-label">01</span><span class="hd-bar-label">02</span><span class="hd-bar-label">03</span>
+                  <span class="hd-bar-label">04</span><span class="hd-bar-label">05</span><span class="hd-bar-label">06</span>
+                  <span class="hd-bar-label">07</span><span class="hd-bar-label">08</span><span class="hd-bar-label">09</span>
+                  <span class="hd-bar-label">10</span><span class="hd-bar-label">11</span><span class="hd-bar-label">12</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- stats.totalConsumption + stats.vsPrevious -->
+        <div class="card card-pad-md">
+          <p class="hd-stat-label">CONSUMO TOTAL PERIODO</p>
+          <p class="hd-stat-value">268.42 kWh</p>
+          <p class="hd-stat-sub">↑ 12% vs periodo anterior</p>
+        </div>
+
+        <!-- stats.average + stats.periodAverage -->
+        <div class="card card-pad-md">
+          <p class="hd-stat-label">PROMEDIO</p>
+          <p class="hd-stat-value">8.95 kWh</p>
+          <p class="hd-stat-sub">Promedio del periodo</p>
+        </div>
+
+        <!-- history:ranking.title -->
+        <div class="card card-pad-md">
+          <h2 class="hd-card-title">RANKING DE CONSUMO</h2>
+
+          <div class="hd-rank-header">
+            <span class="hd-rank-head-text hd-col-pos">#</span>
+            <span class="hd-rank-head-text hd-col-name">DISPOSITIVO</span>
+            <span class="hd-rank-head-text hd-col-total">TOTAL</span>
+            <span class="hd-rank-head-text hd-col-pct">%</span>
+          </div>
+
+          <div class="hd-rank-row">
+            <span class="hd-rank-cell hd-col-pos">1</span>
+            <span class="hd-rank-cell hd-col-name">Lavadora</span>
+            <span class="hd-rank-cell hd-col-total">118.40 kWh</span>
+            <div class="hd-col-pct">
+              <span class="hd-rank-cell">44.1%</span>
+              <div class="hd-track"><div class="hd-fill" style="width: 44.1%; background: var(--c-washer);"></div></div>
+            </div>
+          </div>
+
+          <div class="hd-rank-row">
+            <span class="hd-rank-cell hd-col-pos">2</span>
+            <span class="hd-rank-cell hd-col-name">Nevera</span>
+            <span class="hd-rank-cell hd-col-total">72.15 kWh</span>
+            <div class="hd-col-pct">
+              <span class="hd-rank-cell">26.9%</span>
+              <div class="hd-track"><div class="hd-fill" style="width: 26.9%; background: var(--c-fridge);"></div></div>
+            </div>
+          </div>
+
+          <div class="hd-rank-row">
+            <span class="hd-rank-cell hd-col-pos">3</span>
+            <span class="hd-rank-cell hd-col-name">Televisor</span>
+            <span class="hd-rank-cell hd-col-total">48.72 kWh</span>
+            <div class="hd-col-pct">
+              <span class="hd-rank-cell">18.2%</span>
+              <div class="hd-track"><div class="hd-fill" style="width: 18.2%; background: var(--c-tv);"></div></div>
+            </div>
+          </div>
+
+          <div class="hd-rank-row">
+            <span class="hd-rank-cell hd-col-pos">4</span>
+            <span class="hd-rank-cell hd-col-name">Computador</span>
+            <span class="hd-rank-cell hd-col-total">29.15 kWh</span>
+            <div class="hd-col-pct">
+              <span class="hd-rank-cell">10.9%</span>
+              <div class="hd-track"><div class="hd-fill" style="width: 10.9%; background: var(--c-pc);"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- stats.topConsumer -->
+        <div class="card card-pad-md">
+          <p class="hd-stat-label">MAYOR CONSUMIDOR</p>
+          <p class="hd-stat-value">Lavadora</p>
+          <p class="hd-stat-sub">118.40 kWh</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- BottomTabBar: SOLO iconos; activa = Historial -->
+    <nav class="tab-bar">
+      <a class="tab-item" href="home-detail.html" aria-label="Consumo"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12h4l2.4-6.8 4.8 13.6L15.6 12H22"></path></svg></a>
+      <a class="tab-item tab-item-active" href="home-detail-history.html" aria-label="Historial"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.2"></circle><path d="M12 6.8V12l3.6 2.2"></path></svg></a>
+      <a class="tab-item" href="home-detail-users.html" aria-label="Usuarios"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.6"></circle><path d="M2.6 20a6.4 6.4 0 0 1 12.8 0"></path><path d="M16.4 5a3.6 3.6 0 0 1 0 7"></path><path d="M17.6 14.4A6.4 6.4 0 0 1 21.4 20"></path></svg></a>
+      <a class="tab-item" href="home-detail-devices.html" aria-label="Dispositivos"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8.8a15.5 15.5 0 0 1 20 0"></path><path d="M5.4 12.4a10.6 10.6 0 0 1 13.2 0"></path><path d="M8.8 16a5.6 5.6 0 0 1 6.4 0"></path><path d="M12 19.6h.01"></path></svg></a>
+      <a class="tab-item" href="home-detail-thresholds.html" aria-label="Umbrales"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h9"></path><path d="M17 7h3"></path><path d="M4 17h3"></path><path d="M11 17h9"></path><circle cx="15" cy="7" r="2.2"></circle><circle cx="9" cy="17" r="2.2"></circle></svg></a>
+      <a class="tab-item" href="home-detail-home.html" aria-label="Hogar"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.6 12 3.3l9 7.3V20a1 1 0 0 1-1 1h-5v-6h-4v6H4a1 1 0 0 1-1-1z"></path></svg></a>
+    </nav>
+
+    <div class="home-indicator"></div>
+  </div>
+</body>
+</html>

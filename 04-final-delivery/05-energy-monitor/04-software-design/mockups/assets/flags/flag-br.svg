@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 16" width="24" height="16" role="img" aria-label="Bandera de Brasil">
+  <title>Brasil</title>
+  <rect width="24" height="16" fill="#009C3B"/>
+
+  <!-- rombo amarillo -->
+  <path d="M12,0.907 L22.96,8 L12,15.093 L1.04,8 Z" fill="#FFDF00"/>
+
+  <!-- círculo azul -->
+  <circle cx="12" cy="8" r="2.293" fill="#002776"/>
+
+  <!-- franja blanca -->
+  <path d="M8.86,6.75 A4.05 4.05 0 0 1 15.14 9.25 L16.06,8.72 A5.1 5.1 0 0 0 7.94 7.28 Z" fill="#FFFFFF"/>
+</svg>

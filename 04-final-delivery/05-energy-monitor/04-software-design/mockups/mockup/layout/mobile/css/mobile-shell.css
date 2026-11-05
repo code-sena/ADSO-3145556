@@ -1,0 +1,902 @@
+/* =========================================
+   Mobile — shell y componentes compartidos
+   EnergyMonitor · mockup estático (Expo / React Native)
+   -----------------------------------------
+   Tokens copiados de:
+     src/constants/colors.ts      (paleta energy-light, la de por defecto)
+     src/constants/spacing.ts     (4 · 8 · 16 · 24 · 32)
+     src/constants/typography.ts  (fontPrimary "System")
+     src/constants/theme.ts       (radios 6 · 10 · 16 y sombras)
+   Componentes copiados de src/components/:
+     Button · Card · Header · Breadcrumb · Input · OtpInput · Alert
+     EmptyState · ListItem · Switch · Modal · LanguageSwitcher
+     layout/Sidebar (drawer) · layout/BottomTabBar
+   ========================================= */
+
+/* =========================================
+   1. Tokens
+   ========================================= */
+:root {
+  --primary: #0078d7;
+  --primary-hover: #3399ff;
+  --primary-dark: #0a2540;
+  --primary-soft: #E8F3FF;
+
+  --secondary: #32cd32;
+
+  --success: #2ecc71;
+  --warning: #ffd700;
+  --danger: #e63946;
+  --info: #17a2b8;
+
+  --background: #f8f9fa;
+  --background-left: #3f6bae;
+  --surface: #ffffff;
+  --gradient: #e6f0fa;
+
+  --text-primary: #212529;
+  --text-secondary: #6c757d;
+  --border: #e5e7eb;
+
+  --card-soft: #e8f3ff;
+  --card-selected: #f7fbff;
+
+  --danger-soft: #FCEBEB;
+  --danger-soft-hover: #F7C1C1;
+  --danger-text: #A32D2D;
+  --success-soft: #EAF3DE;
+  --success-text: #3B6D11;
+  --warning-soft: #FFF4D6;
+  --warning-text: #854F0B;
+  --info-soft: #D1ECF1;
+  --info-text: #0C5460;
+
+  --on-brand: #FFFFFF;
+  --on-brand-muted: rgba(255, 255, 255, 0.8);
+  --on-danger: #FFFFFF;
+
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+
+  --shadow-sm: 0 0 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 0 6px rgba(0, 0, 0, 0.1);
+  --shadow-md-up: 0 -2px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 0 15px rgba(0, 0, 0, 0.25);
+
+  /* La app declara fontFamily: "System" — no hay Inter ni Poppins en mobile,
+     a diferencia de la web. De ahí la pila de fuentes del sistema. */
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, system-ui, sans-serif;
+
+  /* Marco del dispositivo (iPhone 14/15: 390 × 844 lógicos) */
+  --safe-top: 47px;
+  --safe-bottom: 34px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font);
+  background-color: #eef1f5;
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 32px 16px 48px;
+}
+
+/* =========================================
+   2. Marco del teléfono
+   ========================================= */
+.phone {
+  position: relative;
+  width: 390px;
+  height: 844px;
+  background: var(--background);
+  border-radius: 44px;
+  border: 10px solid #1c1f24;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.25);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+
+/* Barra de estado de iOS (no la dibuja la app: es del sistema) */
+.status-bar {
+  height: var(--safe-top);
+  flex-shrink: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 0 30px 6px;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  color: var(--text-primary);
+  background: transparent;
+  position: relative;
+  z-index: 10;
+}
+
+.status-bar.on-brand { color: #fff; }
+
+.status-icons { display: flex; align-items: center; gap: 5px; }
+
+/* Indicador de inicio (gesto de la barra inferior) */
+.home-indicator {
+  height: var(--safe-bottom);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  position: relative;
+  z-index: 10;
+}
+
+.home-indicator::after {
+  content: "";
+  width: 134px;
+  height: 5px;
+  border-radius: 3px;
+  background: currentColor;
+  opacity: 0.28;
+}
+
+/* Área donde vive la app */
+.screen {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: relative;
+  scrollbar-width: none;
+}
+
+.screen::-webkit-scrollbar { display: none; }
+
+.screen-pad { padding: var(--space-md); display: flex; flex-direction: column; gap: var(--space-lg); }
+
+/* Etiqueta con el nombre del mockup, fuera del teléfono */
+.device-caption {
+  font-size: 13px;
+  color: #64748b;
+  text-align: center;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+.device-caption span { color: #94a3b8; font-weight: 400; }
+
+/* =========================================
+   3. Button  (components/Button)
+   OJO: en mobile el botón NO es width:50% — es lo que ocupa su padre.
+   ========================================= */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-md);
+  font-family: var(--font);
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+  transition: filter 0.15s, opacity 0.15s;
+}
+
+.btn-small { padding: var(--space-xs) var(--space-sm); font-size: 12px; line-height: 1.3; }
+.btn-medium { padding: var(--space-sm) var(--space-md); font-size: 14px; line-height: 1.3; }
+.btn-large { padding: var(--space-md) var(--space-lg); font-size: 16px; line-height: 1.3; }
+
+.btn-primary { background: var(--primary); color: var(--on-brand); }
+.btn-secondary { background: var(--background); color: var(--text-primary); border: 1px solid var(--border); }
+.btn-ghost { background: transparent; color: var(--text-secondary); border: 1px solid var(--border); box-shadow: none; }
+.btn-danger { background: var(--background); color: var(--danger); border: 1px solid var(--danger); }
+
+.btn-full { width: 100%; }
+.btn:hover { filter: brightness(1.05); }
+.btn.is-disabled { opacity: 0.6; }
+
+/* =========================================
+   4. Card  (components/Card)
+   ========================================= */
+.card {
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+}
+
+.card-pad-none { padding: 0; }
+.card-pad-sm { padding: var(--space-sm); }
+.card-pad-md { padding: var(--space-md); }
+.card-pad-lg { padding: var(--space-lg); }
+
+.card-soft { background: var(--card-soft); border-color: transparent; }
+.card-selected { background: var(--card-selected); border-color: var(--primary); }
+
+/* =========================================
+   5. Header + Breadcrumb  (components/Header, Breadcrumb)
+   ========================================= */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-lg);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-sm) var(--space-md);
+  margin: 0 var(--space-md) var(--space-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.header-title-wrap { flex: 1; min-width: 0; }
+
+.header-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.header-actions { display: flex; align-items: center; gap: var(--space-md); }
+
+/* Botón de acción cuadrado azul del Header (32×32) */
+.header-action {
+  width: var(--space-xl);
+  height: var(--space-xl);
+  border-radius: var(--radius-lg);
+  background: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+}
+
+.breadcrumb { display: flex; align-items: center; flex-wrap: nowrap; overflow: hidden; }
+
+.breadcrumb-item { display: flex; align-items: center; gap: var(--space-xs); min-width: 0; }
+
+.breadcrumb-link {
+  color: var(--primary);
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.breadcrumb-current {
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* =========================================
+   6. Input  (components/Input)
+   ========================================= */
+.input-container { width: 100%; display: flex; flex-direction: column; gap: 6px; }
+
+.input-label { font-size: 14px; font-weight: 600; color: var(--text-primary); }
+
+.input-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  background: var(--background);
+  box-shadow: var(--shadow-sm);
+  border-radius: var(--radius-sm);
+  padding: var(--space-sm) var(--space-md);
+  border: 1px solid var(--border);
+  transition: border-color 0.15s;
+}
+
+.input-wrapper:focus-within { border-color: var(--primary-hover); }
+
+.input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: var(--font);
+  font-size: 14px;
+  color: var(--text-primary);
+}
+
+.input::placeholder { color: var(--text-secondary); }
+
+.input-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: var(--space-sm);
+  opacity: 0.6;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.input-icon:hover { opacity: 1; }
+
+/* =========================================
+   7. OtpInput  (components/OtpInput) — 45×45, borde verde
+   ========================================= */
+.otp-row {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-sm);
+  width: 100%;
+}
+
+.otp-box {
+  width: 45px;
+  height: 45px;
+  text-align: center;
+  font-size: 18px;
+  font-family: var(--font);
+  color: var(--text-primary);
+  border: 2px solid var(--secondary);
+  border-radius: var(--radius-md);
+  background: var(--background);
+  box-shadow: var(--shadow-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.otp-box.is-focused { border-color: var(--primary-hover); }
+.otp-box.is-disabled { opacity: 0.6; }
+
+/* =========================================
+   8. Alert  (components/Alert)
+   ========================================= */
+.alert {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+}
+
+.alert-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.alert-icon-success { background: var(--success-soft); }
+.alert-icon-warning { background: var(--warning-soft); }
+.alert-icon-danger { background: var(--danger-soft); }
+.alert-icon-info { background: var(--info-soft); }
+
+.alert-text { flex: 1; min-width: 0; }
+
+.alert-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.alert-message { font-size: 12px; color: var(--text-secondary); }
+
+/* =========================================
+   9. EmptyState  (components/EmptyState)
+   ========================================= */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  padding: var(--space-lg);
+  text-align: center;
+}
+
+.empty-state-full { gap: var(--space-md); padding: var(--space-lg) 0 var(--space-xl); }
+
+.empty-image { margin-bottom: var(--space-sm); max-width: 100%; }
+
+.empty-icon { opacity: 0.45; margin-bottom: var(--space-xs); color: var(--text-secondary); }
+
+.empty-title { font-size: 16px; font-weight: 600; color: var(--text-secondary); text-align: center; }
+.empty-title-full { font-size: 24px; }
+.empty-desc { font-size: 14px; color: var(--text-secondary); text-align: center; }
+.empty-actions { display: flex; gap: var(--space-sm); margin-top: var(--space-sm); }
+
+/* =========================================
+   10. ListItem  (components/ListItem)
+   ========================================= */
+.list-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-md);
+  background: var(--background);
+}
+
+.list-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--primary-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--primary);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.list-text { flex: 1; min-width: 0; }
+
+.list-title { font-size: 14px; font-weight: 600; color: var(--text-primary); }
+
+.list-subtitle { font-size: 12px; color: var(--text-secondary); }
+
+/* =========================================
+   11. Badge + Switch
+   ========================================= */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-lg);
+  font-size: 11px;
+  font-weight: 500;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.badge-success { background: var(--success-soft); color: var(--success-text); }
+.badge-warning { background: var(--warning-soft); color: var(--warning-text); }
+.badge-danger { background: var(--danger-soft); color: var(--danger-text); }
+.badge-info { background: var(--info-soft); color: var(--info-text); }
+
+/* Switch nativo de React Native: pista 51×31, pulgar 27 */
+.switch {
+  width: 51px;
+  height: 31px;
+  border-radius: 16px;
+  background: var(--border);
+  position: relative;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.switch.on { background: var(--primary); }
+
+.switch::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 27px;
+  height: 27px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s;
+}
+
+.switch.on::after { transform: translateX(20px); }
+
+/* =========================================
+   12. Modal  (components/Modal) — overlay + surface centrada
+   OJO: en mobile NO es bottom sheet: Modal.styles.ts centra con
+   alignItems/justifyContent center y padding 16.
+   ========================================= */
+.modal-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-md);
+  z-index: 900;
+}
+
+.modal {
+  width: 100%;
+  max-width: 440px;
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  max-height: 100%;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--border);
+}
+
+.modal-title { font-size: 20px; font-weight: 600; color: var(--text-primary); }
+
+.modal-close {
+  width: var(--space-xl);
+  height: var(--space-xl);
+  border-radius: var(--radius-md);
+  background: var(--background);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  color: var(--text-secondary);
+  font-size: 20px;
+  line-height: 1;
+}
+
+.modal-body { padding: var(--space-lg); display: flex; flex-direction: column; gap: var(--space-md); }
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-sm);
+  padding: var(--space-md) var(--space-lg);
+  border-top: 1px solid var(--border);
+}
+
+/* Variante de peligro: icono circular + título centrado, sin footer con borde */
+.modal-danger-head {
+  align-items: center;
+  padding: var(--space-lg) var(--space-lg) 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.modal-danger-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--danger-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--danger-text);
+}
+
+.modal-danger-title { font-size: 16px; font-weight: 600; color: var(--text-primary); text-align: center; }
+
+.modal-danger-body { padding: var(--space-md) var(--space-lg) var(--space-lg); text-align: center; }
+
+.modal-danger-footer { border-top: none; padding-top: 0; }
+
+/* =========================================
+   13. Sidebar / drawer  (components/layout/Sidebar)
+   Ancho: min(85% del ancho de pantalla, 300px) → 300px en el marco de 390px
+   ========================================= */
+.drawer-trigger {
+  position: absolute;
+  /* La app mide el offset desde el borde superior del dispositivo:
+     insets.top(47) + TRIGGER_TOP_OFFSET(1 + 8 + (40-44)/2 = 7) = 54.
+     Aquí .screen ya arranca bajo la barra de estado de 47px, así que
+     dentro de la pantalla el botón va 7px por debajo de su borde superior. */
+  top: 7px;
+  left: var(--space-md);
+  width: 44px;
+  height: 44px;                   /* xl(32) + sm(8) + xs(4) */
+  border-radius: var(--radius-md);
+  background: var(--primary);
+  color: var(--on-brand);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-md);
+  border: none;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+/* Las 5 pantallas con Sidebar (dashboard, favorites, notifications, settings y
+   account) indetan su Header con
+   marginLeft: spacing.md(16) + TRIGGER_SIZE(44) + spacing.sm(8) = 68px
+   para dejar sitio al botón flotante. */
+.header-with-trigger { margin-left: 68px; }
+
+.drawer-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 998;
+}
+
+.drawer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 300px;                   /* min(390 × 0.85, 300) = 300 */
+  background: var(--background-left);
+  padding: 63px var(--space-md) var(--space-md); /* paddingTop = insets.top + md */
+  box-shadow: var(--shadow-lg);
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+}
+
+.drawer-header { display: flex; align-items: center; gap: var(--space-sm); margin-bottom: var(--space-sm); }
+
+.drawer-logo { width: 48px; height: 48px; object-fit: contain; }
+
+.drawer-header-title { font-size: 14px; font-weight: 600; color: var(--on-brand); }
+
+.drawer-nav { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; gap: var(--space-md); }
+
+.drawer-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-md);
+  border-radius: var(--radius-lg);
+  color: var(--on-brand-muted);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.drawer-item-active { background: rgba(255, 255, 255, 0.16); color: var(--on-brand); }
+
+.drawer-label { font-size: 16px; font-weight: 500; }
+
+.drawer-badge {
+  margin-left: auto;
+  min-width: var(--space-xl);
+  height: var(--space-xl);
+  padding: 0 var(--space-xs);
+  border-radius: 16px;
+  background: var(--danger);
+  color: var(--on-danger);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.drawer-chevron { margin-left: auto; }
+
+/* Lista de hogares desplegable */
+.drawer-homes-list { display: flex; flex-direction: column; gap: var(--space-xs); margin-top: var(--space-xs); padding-left: var(--space-md); }
+
+.drawer-home-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+}
+
+.drawer-home-item-active { background: rgba(255, 255, 255, 0.16); }
+
+.drawer-home-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--on-brand);
+  flex-shrink: 0;
+}
+
+.drawer-home-name { font-size: 14px; color: var(--on-brand-muted); flex: 1; min-width: 0; }
+
+.drawer-no-homes { font-size: 14px; color: var(--on-brand-muted); padding: var(--space-sm); }
+
+.drawer-profile { margin-top: auto; position: relative; padding-bottom: var(--space-md); }
+
+.drawer-profile-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-xs);
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.08);
+  cursor: pointer;
+}
+
+.drawer-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+  color: var(--on-brand);
+}
+
+.drawer-avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+.drawer-profile-name { flex: 1; min-width: 0; font-size: 14px; font-weight: 500; color: var(--on-brand); }
+
+.drawer-menu-button { padding: var(--space-xs); color: var(--on-brand); display: flex; }
+
+/* Desplegable del perfil, abre hacia ARRIBA del bloque de perfil */
+.drawer-dropdown {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 100%;
+  margin-bottom: var(--space-sm);
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md);
+  box-shadow: var(--shadow-lg);
+  z-index: 2;
+}
+
+.drawer-dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-size: 14px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.drawer-dropdown-item:hover { background: var(--background); }
+
+.drawer-divider { height: 1px; background: var(--border); margin: var(--space-sm) 0; }
+
+/* =========================================
+   14. BottomTabBar  (components/layout/BottomTabBar)
+   Solo iconos: el componente NO dibuja la etiqueta.
+   ========================================= */
+.tab-bar {
+  display: flex;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  box-shadow: var(--shadow-md-up);
+  flex-shrink: 0;
+  padding-bottom: var(--safe-bottom);
+}
+
+.tab-item {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 0;
+  border-top: 2px solid transparent;
+  cursor: pointer;
+  color: var(--text-secondary);
+  background: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: none;
+}
+
+.tab-item-active { border-top-color: var(--primary); color: var(--primary); }
+
+/* =========================================
+   15. LanguageSwitcher  (components/LanguageSwitcher)
+   ========================================= */
+.lang-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: 999px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  align-self: center;
+}
+
+.lang-trigger-dark { background: rgba(255, 255, 255, 0.15); border-color: rgba(255, 255, 255, 0.35); }
+.lang-trigger-light { background: var(--surface); border-color: var(--border); }
+
+.lang-trigger-text { font-size: 12px; font-weight: 600; }
+.lang-text-light { color: #FFFFFF; }
+.lang-text-dark { color: var(--text-primary); }
+
+.flag {
+  border-radius: 2px;
+  display: block;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+/* Hoja modal de idiomas (centrada, con fondo translúcido) */
+.lang-backdrop {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-lg);
+  background: rgba(10, 37, 64, 0.45);
+  z-index: 950;
+}
+
+.lang-sheet {
+  width: 100%;
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xs) 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.lang-sheet-dark { background: var(--primary-dark); }
+
+.lang-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  cursor: pointer;
+}
+
+.lang-item-text { flex: 1; font-size: 14px; color: var(--text-primary); }
+
+/* =========================================
+   16. Utilidades
+   ========================================= */
+.stack { display: flex; flex-direction: column; }
+.stack-sm { gap: var(--space-sm); }
+.stack-md { gap: var(--space-md); }
+.stack-lg { gap: var(--space-lg); }
+
+.row { display: flex; align-items: center; }
+.row-between { justify-content: space-between; }
+.gap-sm { gap: var(--space-sm); }
+.gap-md { gap: var(--space-md); }
+
+.grow { flex: 1; min-width: 0; }
+.mt-sm { margin-top: var(--space-sm); }
+.mt-md { margin-top: var(--space-md); }
+.mb-md { margin-bottom: var(--space-md); }
+
+.text-secondary { color: var(--text-secondary); }
+.text-sm { font-size: 14px; }
+.text-xs { font-size: 12px; }
+.text-lg { font-size: 20px; }
+.fw-bold { font-weight: 600; }
+.fw-medium { font-weight: 500; }
+.center { text-align: center; }
+
+.scroll-spacer { height: var(--space-md); }

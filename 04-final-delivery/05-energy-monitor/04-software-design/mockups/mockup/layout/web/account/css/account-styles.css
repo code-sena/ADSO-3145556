@@ -1,0 +1,813 @@
+/* =========================================
+   Mi cuenta — EnergyMonitor
+   Mockup estático. Tokens copiados de src/styles/global.css
+   ========================================= */
+
+/* =========================================
+   1. Tokens y reset
+   ========================================= */
+:root {
+  --color-primary: #0078d7;
+  --color-primary-hover: #3399ff;
+  --color-primary-dark: #0a2540;
+
+  --color-secondary: #32cd32;
+
+  --color-success: #2ecc71;
+  --color-warning: #ffd700;
+  --color-danger: #e63946;
+  --color-info: #17a2b8;
+
+  --color-danger-soft: #fcebeb;
+  --color-danger-soft-hover: #f7c1c1;
+  --color-danger-text: #a32d2d;
+  --color-success-soft: #eaf3de;
+  --color-success-text: #3b6d11;
+  --color-warning-soft: #fff4d6;
+  --color-warning-text: #854f0b;
+  --color-info-soft: #d1ecf1;
+  --color-info-text: #0c5460;
+
+  --color-background: #f8f9fa;
+  --color-background-left: #3f6bae;
+  --color-surface: #ffffff;
+  --color-gradient: #e6f0fa;
+
+  --color-text-primary: #212529;
+  --color-text-secondary: #6c757d;
+  --color-border: #e5e7eb;
+
+  --color-primary-soft: #E8F3FF;
+
+  --font-primary: "Inter", sans-serif;
+  --font-secondary: "Poppins", sans-serif;
+
+  --font-size-11: 11px;
+  --font-size-xs: 12px;
+  --font-size-13: 13px;
+  --font-size-sm: 14px;
+  --font-size-md: 16px;
+  --font-size-18: 18px;
+  --font-size-lg: 20px;
+  --font-size-22: 22px;
+  --font-size-xl: 24px;
+  --font-size-xxl: 32px;
+  --font-size-xxxl: 60px;
+
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 600;
+
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.25);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font-primary);
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+  line-height: 1.5;
+}
+
+a { color: inherit; }
+
+/* =========================================
+   2. Shell por detrás del overlay (MainLayout)
+   Sidebar + cabecera de página, copiados verbatim de
+   home-detail/owner/css/devices-styles.css
+   ========================================= */
+.app-shell {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 240px;
+  flex-shrink: 0;
+  background: var(--color-background-left);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 1.25rem 1rem;
+}
+
+.sidebar-top {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0 0.5rem 1.5rem;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.sidebar-toggle {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+}
+
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sidebar-brand img { height: 34px; width: auto; object-fit: contain; }
+
+.sidebar-brand span { font-weight: 700; font-size: 1rem; }
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  flex: 1;
+}
+
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.65rem 0.75rem;
+  border-radius: 8px;
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  background: none;
+  border: none;
+  width: 100%;
+  cursor: pointer;
+  text-align: left;
+}
+
+.sidebar-item:hover,
+.sidebar-item.active {
+  background: rgba(255, 255, 255, 0.12);
+  color: white;
+}
+
+.sidebar-item svg { flex-shrink: 0; }
+
+.sidebar-group-toggle { justify-content: space-between; }
+
+.sidebar-group-toggle .toggle-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.sidebar-homes {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding-left: 1.75rem;
+  margin: 0.15rem 0 0.5rem;
+}
+
+.sidebar-home {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.5rem 0.6rem;
+  border-radius: 8px;
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  font-size: 0.85rem;
+}
+
+.sidebar-home:hover,
+.sidebar-home.active {
+  background: rgba(255, 255, 255, 0.12);
+  color: white;
+}
+
+.home-avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+/* El bloque de perfil es el disparador de "Mi cuenta" (Sidebar.jsx → <Account/>) */
+.sidebar-profile {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.75rem 0.5rem 0.25rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  margin-top: 0.5rem;
+  text-decoration: none;
+}
+
+/* Avatar del usuario: imagen real del proyecto, como el <img class="avatar">
+   de Sidebar.jsx (fallback cuando la persona no tiene foto subida). */
+.profile-avatar {
+  width: 36px;
+  height: 36px;
+  padding: 2px;
+  border-radius: 50%;
+  background: var(--color-surface);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.profile-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  flex: 1;
+}
+
+.profile-name {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: white;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.profile-more {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.85);
+  cursor: pointer;
+  padding: 4px;
+}
+
+.main-content {
+  flex: 1;
+  min-width: 0;
+  padding: 16px 0;
+}
+
+/* Cabecera blanca con breadcrumb (design/components/Header) */
+.page-header {
+  display: flex;
+  align-items: center;
+  min-height: 60px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: 0 16px;
+  margin: 0 16px 20px 16px;
+  width: calc(100% - 32px);
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--font-size-sm);
+  flex-wrap: wrap;
+}
+
+.breadcrumb a {
+  color: var(--color-primary);
+  font-weight: var(--font-weight-medium);
+  text-decoration: none;
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+}
+
+.breadcrumb a:hover { background: rgba(0, 0, 0, 0.06); text-decoration: underline; }
+
+.breadcrumb-current {
+  color: var(--color-text-secondary);
+  font-weight: var(--font-weight-bold);
+  padding: 4px 8px;
+}
+
+/* Contenido de la pantalla que queda detrás: solo bloques neutros,
+   el overlay de "Mi cuenta" lo tapa y lo oscurece por completo. */
+.shell-placeholder {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  padding: 0 16px;
+}
+
+.shell-placeholder-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  height: 160px;
+}
+
+/* =========================================
+   3. Design system: Card, Button, Input
+   ========================================= */
+.card {
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background-color: var(--color-surface);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-lg);
+  box-shadow: var(--shadow-lg);
+  transition: all 0.2s ease;
+}
+
+/* El Card de la app flota 2px al hacer hover; se mantiene también dentro
+   de los overlays, igual que en Card.module.css. */
+.card:hover { transform: translateY(-2px); }
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* OJO: en la app el botón base tiene width: 50% (Button.module.css) */
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 50%;
+  font-family: var(--font-primary);
+  font-weight: var(--font-weight-medium);
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+  box-shadow: var(--shadow-md);
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.btn-medium { height: 40px; padding: var(--spacing-sm) var(--spacing-md); font-size: var(--font-size-sm); }
+.btn-primary { background-color: var(--color-primary); color: #fff; border: none; }
+.btn-secondary { background-color: var(--color-background); color: var(--color-text-primary); border: 1px solid var(--color-border); }
+.btn:hover { filter: brightness(1.05); }
+.btn:active { transform: scale(0.98); }
+.btn.is-disabled { opacity: 0.6; cursor: not-allowed; }
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+}
+
+.input-label {
+  display: block;
+  font-family: var(--font-primary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+}
+
+.input-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--color-background);
+  box-shadow: var(--shadow-sm);
+  border-radius: var(--radius-sm);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: 1px solid var(--color-border);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.input-wrapper:focus-within {
+  border-color: var(--color-primary-hover);
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
+}
+
+.input {
+  border: none;
+  outline: none;
+  width: 100%;
+  background: transparent;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
+  font-family: var(--font-primary);
+}
+
+.input::placeholder { opacity: 0.6; }
+
+.input-icon {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  opacity: 0.6;
+  display: flex;
+  flex-shrink: 0;
+  transition: opacity 0.2s;
+}
+
+.input-icon:hover { opacity: 1; }
+
+/* =========================================
+   4. Overlay de "Mi cuenta" (Account.module.css .page)
+   ========================================= */
+.account-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background: rgba(0, 0, 0, 0.45);
+  overflow-y: auto;
+  box-sizing: border-box;
+  padding: var(--spacing-xl);
+}
+
+.account-wrapper {
+  width: 100%;
+  max-width: 520px;
+  margin: auto;
+}
+
+/* Contenido interno de la Card */
+.account-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-lg);
+  width: 100%;
+}
+
+.account-title {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  text-align: center;
+  margin: 0;
+  width: 100%;
+}
+
+/* Botón "x" de cerrar (arriba a la derecha) */
+.close-row {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.close-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-secondary);
+  font-size: 18px;
+  line-height: 1;
+  flex-shrink: 0;
+  transition: background 0.15s, color 0.15s;
+}
+
+.close-btn:hover {
+  background: var(--color-background);
+  color: var(--color-danger);
+}
+
+/* Avatar circular con la silueta de VscAccount */
+.avatar-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.avatar-container {
+  display: flex;
+  height: 100px;
+  width: 100px;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xs);
+  cursor: pointer;
+  overflow: hidden;
+  border: 2px solid var(--color-text-secondary);
+  padding: var(--spacing-sm);
+  border-radius: 50%;
+  transition: background 0.15s;
+}
+
+.avatar-container:hover { background: var(--color-gradient); }
+
+/* El ícono se pinta con font-size: 5em (80px con el 16px del body);
+   a 1440px pasa a 84px y en móvil a 4em (64px). */
+.avatar-icon {
+  width: 80px;
+  height: 80px;
+  color: var(--color-text-secondary);
+  transition: color 0.15s;
+}
+
+.avatar-container:hover .avatar-icon { color: var(--color-primary); }
+
+/* Menú desplegable de la foto */
+.avatar-dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  min-width: 160px;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  list-style: none;
+  padding: var(--spacing-xs) 0;
+}
+
+.avatar-dropdown li {
+  padding: var(--spacing-sm) var(--spacing-md);
+  font-family: var(--font-primary);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.avatar-dropdown li:hover { background-color: var(--color-border); }
+
+.avatar-dropdown .is-danger { color: var(--color-danger); }
+
+.avatar-dropdown .is-danger:hover { background-color: #fdecea; }
+
+/* =========================================
+   5. Formulario de datos del perfil
+   ========================================= */
+.account-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  width: 100%;
+}
+
+.account-row {
+  display: grid;
+  grid-template-columns: 110px 1fr auto;
+  align-items: center;
+  gap: var(--spacing-md);
+  background-color: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: var(--spacing-sm) var(--spacing-md);
+  transition: border-color 0.15s;
+}
+
+.account-row:hover { border-color: var(--color-primary); }
+
+.field-label {
+  font-family: var(--font-primary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+}
+
+.field-value {
+  font-family: var(--font-primary);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Input de edición (blanco, a diferencia del fondo de la fila) */
+.account-input {
+  font-family: var(--font-primary);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 6px var(--spacing-sm);
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.account-input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+/* Botón lápiz: 40×40 fijos, pisa el width: 50% del .btn base */
+.btn-edit {
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.edit-actions {
+  display: flex;
+  gap: var(--spacing-sm);
+  justify-content: center;
+  width: 100%;
+}
+
+.edit-actions .btn { flex: 1; }
+
+.msg-ok,
+.msg-error {
+  font-size: var(--font-size-sm);
+  margin: 0;
+  text-align: center;
+}
+
+.msg-ok { color: var(--color-success-text); }
+
+.msg-error { color: var(--color-danger); }
+
+/* =========================================
+   6. Sección "¿Deseas eliminar tu cuenta?"
+   ========================================= */
+.delete-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding-top: var(--spacing-sm);
+  border-top: 1px solid var(--color-border);
+  width: 100%;
+}
+
+.delete-question {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-secondary);
+  text-align: center;
+  margin: 0;
+}
+
+.btn-delete {
+  width: 150px;
+  color: var(--color-danger);
+}
+
+/* =========================================
+   7. Modales hijos (Modal.module.css): overlay 1100
+   ========================================= */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.45);
+  padding: var(--spacing-xl);
+  box-sizing: border-box;
+}
+
+.modal-box {
+  width: 100%;
+  max-width: 420px;
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  width: 100%;
+}
+
+.modal-title {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  text-align: center;
+  margin: 0;
+}
+
+.modal-message {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  text-align: center;
+  margin: 0;
+}
+
+.modal-actions {
+  display: flex;
+  gap: var(--spacing-sm);
+  justify-content: center;
+}
+
+.modal-actions .btn { flex: 1; }
+
+.modal-error {
+  font-size: var(--font-size-sm);
+  color: var(--color-danger);
+}
+
+/* "Sí, eliminar": Button variant="primary" con backgroundColor en línea */
+.btn-confirm-danger { background-color: var(--color-danger); }
+
+/* =========================================
+   8. Media queries (Account.module.css)
+   ========================================= */
+@media (max-width: 1023px) {
+  .main-content { padding: 1.5rem; }
+
+  .shell-placeholder { padding: 0; }
+
+  .page-header { margin: 0 0 1.5rem; width: 100%; }
+}
+
+/* < 768px: el overlay se abre como bottom sheet */
+@media (max-width: 767px) {
+  .account-overlay { padding: 0; align-items: flex-end; }
+
+  .account-wrapper {
+    max-width: 100%;
+    margin: 0;
+    max-height: 90dvh;
+    overflow-y: auto;
+  }
+
+  .account-title { font-size: var(--font-size-lg); }
+  .avatar-container { height: 80px; width: 80px; }
+  .avatar-icon { width: 64px; height: 64px; }
+
+  /* Filas apiladas: label y value en columna, botón a la derecha */
+  .account-row {
+    grid-template-columns: 1fr auto;
+    grid-template-areas: "label edit" "value edit";
+    gap: var(--spacing-xs) var(--spacing-sm);
+  }
+
+  .field-label { grid-area: label; }
+  .field-value { grid-area: value; white-space: normal; }
+
+  /* La app no declara grid-area en .input al apilar las filas */
+  .account-input { grid-area: value; }
+
+  .account-row > .btn-edit {
+    grid-area: edit;
+    align-self: center;
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .account-row { grid-template-columns: 110px 1fr auto; }
+}
+
+@media (min-width: 1024px) {
+  .account-row { grid-template-columns: 120px 1fr auto; }
+}
+
+@media (min-width: 1440px) {
+  .account-title { font-size: var(--font-size-xl); }
+  .avatar-icon { width: 84px; height: 84px; }
+}

@@ -1,0 +1,239 @@
+/* =========================================
+   Notificaciones — EnergyMonitor mobile
+   Origen: features/notifications/screens/NotificationsScreen/NotificationsScreen.tsx
+           features/notifications/components/NotificationRow/NotificationRow.tsx
+           (ambos con sus .styles.ts)
+   ========================================= */
+
+/* El Header de esta pantalla aparta el botón del Sidebar:
+   marginLeft = spacing.md + TRIGGER_SIZE(32+8+4) + spacing.sm = 68px */
+.header-offset { margin-left: 68px; }
+
+/* ScrollView contentContainerStyle: paddingHorizontal md · paddingBottom xl */
+.nt-content { padding: 0 var(--space-md) var(--space-xl); }
+
+/* hero */
+.nt-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-lg) var(--space-lg) var(--space-md);
+}
+
+.nt-title {
+  font-size: 24px;                      /* typography.size.xl */
+  font-weight: 600;
+  color: var(--text-primary);
+  text-align: center;
+}
+
+.nt-subtitle {
+  max-width: 640px;
+  font-size: 14px;                      /* typography.size.sm */
+  line-height: 22px;                    /* typography.size.size22 */
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+/* panel: minHeight = spacing.xl * 12 + spacing.md = 400px */
+.nt-panel {
+  min-height: 400px;
+  padding: var(--space-md);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+}
+
+/* tabsRow: borde inferior 1px + paddingBottom sm */
+.nt-tabs-row {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  padding-bottom: var(--space-sm);
+  border-bottom: 1px solid var(--border);
+}
+
+.nt-tabs { display: flex; gap: var(--space-xs); }
+
+.nt-tab {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  padding: var(--space-sm);
+  border: none;
+  border-radius: var(--radius-md);
+  background: none;
+  font-family: var(--font);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.nt-tab-active { background: var(--primary-soft); }
+
+.nt-tab-label {
+  flex-shrink: 1;
+  text-align: center;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.nt-tab-active .nt-tab-label { font-weight: 600; color: var(--primary); }
+
+.nt-tab-count {
+  flex-shrink: 0;
+  min-width: var(--space-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-xs) / 2 var(--space-xs);
+  border-radius: var(--radius-md);
+  background: var(--primary);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--on-brand);
+}
+
+/* Estado alterno documentado en el README, no dibujado en ningún archivo:
+   markAllButton solo se pinta en las pestañas "alerts" / "recommendations". */
+.nt-bulk {
+  align-self: flex-end;
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-xs) var(--space-sm);
+  border: none;
+  background: none;
+  font-family: var(--font);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--primary);
+  cursor: pointer;
+}
+
+/* El color de esta etiqueta lo fija la acción: `danger` para los botones de
+   borrar, `primary` para "Marcar todas como leídas". */
+
+/* list: paddingTop sm */
+.nt-list { padding-top: var(--space-sm); }
+
+/* =========================================
+   NotificationRow — AlertRow / RecommendationRow
+   ========================================= */
+.nt-row {
+  display: flex;
+  gap: var(--space-sm);
+  padding: var(--space-md);
+  border-bottom: 1px solid var(--border);
+}
+
+/* rowMuted: opacity 0.72 — alertas resueltas y recomendaciones leídas */
+.nt-row-muted { opacity: 0.72; }
+
+/* ICON_SIZE = spacing.xl + spacing.md = 48px */
+.nt-row-icon {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nt-row-icon-critical { background: var(--danger-soft); color: var(--danger); }
+.nt-row-icon-warning { background: var(--warning-soft); color: var(--warning-text); }
+.nt-row-icon-info { background: var(--info-soft); color: var(--info-text); }
+
+.nt-row-body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: var(--space-xs); }
+
+.nt-row-top { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--space-sm); }
+
+.nt-row-title {
+  flex: 1;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* badge: 12px bold, paddingVertical 2 · paddingHorizontal 8, radius 10 */
+.nt-badge {
+  flex-shrink: 0;
+  padding: 2px var(--space-sm);
+  border-radius: var(--radius-md);
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.nt-badge-active { background: var(--danger-soft); color: var(--danger-text); }
+.nt-badge-resolved { background: var(--success-soft); color: var(--success-text); }
+.nt-badge-new { background: var(--info-soft); color: var(--info-text); }
+.nt-badge-read { background: var(--background); color: var(--text-secondary); }
+
+.nt-row-message { font-size: 14px; color: var(--text-secondary); }
+
+/* meta: DOT_SIZE = spacing.xs / 2 = 2px */
+.nt-row-meta { display: flex; align-items: center; gap: var(--space-xs); }
+
+.nt-row-meta-text { font-size: 12px; color: var(--text-secondary); }
+
+.nt-row-dot {
+  width: 2px;
+  height: 2px;
+  flex-shrink: 0;
+  border-radius: 1px;
+  background: var(--border);
+}
+
+/* hint: "Se resolverá sola cuando…" — solo en las alertas resueltas automáticamente */
+.nt-row-hint {
+  font-size: 12px;
+  font-style: italic;
+  color: var(--text-secondary);
+  margin-top: var(--space-xs);
+}
+
+/* actions: el <View> se monta siempre, aunque no haya ningún botón */
+.nt-row-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-top: var(--space-sm);
+}
+
+.nt-row-btn {
+  align-self: flex-start;
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  margin-top: var(--space-xs);
+  padding: var(--space-xs) var(--space-sm);
+  border: none;
+  border-radius: var(--radius-md);
+  background: var(--primary-soft);
+  font-family: var(--font);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--primary);
+  cursor: pointer;
+}
+
+.nt-row-btn-danger { color: var(--danger); }
+
+/* Estado alterno documentado en el README, no dibujado en ningún archivo:
+   EmptyState con el icono `notifications-outline` a size.xxl + spacing.sm = 40px
+   en colors.border, y su título/descripción por pestaña. */
+.nt-empty-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-xl) 0;
+  color: var(--border);
+}

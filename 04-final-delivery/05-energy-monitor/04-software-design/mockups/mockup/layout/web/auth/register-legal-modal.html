@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EnergyMonitor - Registro (términos y privacidad)</title>
+  <meta name="description" content="Modal de términos de uso y política de privacidad del registro.">
+  <!-- Favicon (versión vector del logo del proyecto) -->
+  <link rel="icon" type="image/svg+xml" href="../../../../assets/icons/favicon.svg">
+  <!-- Tipografías de la app: Inter (UI) + Poppins (titulares) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap">
+  <!-- Shell compartido (AuthLayout + Card + Button + Input) -->
+  <link rel="stylesheet" href="css/auth-shell.css">
+  <link rel="stylesheet" href="css/register-styles.css">
+</head>
+<body>
+
+  <!-- =========================================
+       PANEL IZQUIERDO (AuthLayout)
+       ========================================= -->
+  <div class="auth-container">
+
+    <div class="auth-left">
+
+      <svg class="auth-decor" viewBox="0 0 500 700" preserveAspectRatio="xMaxYMid meet" aria-hidden="true">
+        <circle cx="520" cy="350" r="180" fill="none" style="stroke: var(--color-primary)" stroke-width="1" opacity="0.20"></circle>
+        <circle cx="520" cy="350" r="260" fill="none" style="stroke: var(--color-primary)" stroke-width="1" opacity="0.14"></circle>
+        <circle cx="520" cy="350" r="350" fill="none" style="stroke: var(--color-primary)" stroke-width="1" opacity="0.09"></circle>
+        <circle cx="520" cy="350" r="450" fill="none" style="stroke: var(--color-primary)" stroke-width="1" opacity="0.05"></circle>
+        <circle cx="80" cy="-10" r="130" fill="none" style="stroke: var(--color-secondary)" stroke-width="1" opacity="0.12"></circle>
+        <circle cx="80" cy="-10" r="85" fill="none" style="stroke: var(--color-secondary)" stroke-width="1" opacity="0.08"></circle>
+      </svg>
+
+      <div class="auth-brand">
+        <div class="auth-brand-backdrop">
+          <img src="../../../../assets/logos/project_logo.png" alt="" aria-hidden="true">
+          <span class="auth-brand-name">EnergyMonitor</span>
+        </div>
+      </div>
+
+      <div class="auth-left-middle">
+        <h1 class="auth-headline">
+          <span class="auth-headline-main">Monitorea tu<br>energía en<br></span>
+          <span class="auth-headline-accent">tiempo real.</span>
+        </h1>
+
+        <p class="auth-subtext">Controla el consumo energético de tus proyectos, configura alertas y toma decisiones basadas en datos precisos.</p>
+
+        <div class="auth-pills">
+          <span class="auth-pill auth-pill-blue">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+            Análisis en tiempo real
+          </span>
+          <span class="auth-pill auth-pill-green">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+            Alertas automáticas
+          </span>
+          <span class="auth-pill auth-pill-ghost">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+            Gestión por proyectos
+          </span>
+        </div>
+      </div>
+
+      <p class="auth-copyright">© 2025 EnergyMonitor. Todos los derechos reservados.</p>
+    </div>
+
+    <!-- =========================================
+         PANEL DERECHO — formulario
+         ========================================= -->
+    <div class="auth-right">
+
+      <a href="../landing/index.html" class="auth-back" aria-label="Volver">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 19-7-7 7-7"></path><path d="M19 12H5"></path></svg>
+      </a>
+
+      <div class="wrapper">
+        <div class="card">
+          <div class="card-content">
+
+            <div class="scroll-content">
+
+              <!-- auth:register.title -->
+              <h2 class="form-title">Registro</h2>
+
+              <!-- mode="onChange": en la app los errores aparecen mientras se escribe -->
+              <form class="form">
+
+                <!-- Nombre y apellido en dos columnas -->
+                <div class="name-row">
+                  <div class="name-cell">
+                    <div class="input-container">
+                      <label class="input-label" for="name">Nombre</label>
+                      <div class="input-wrapper">
+                        <input class="input" id="name" name="name" type="text" placeholder="*"
+                               spellcheck="false" autocorrect="off" autocapitalize="off">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="name-cell">
+                    <div class="input-container">
+                      <label class="input-label" for="lastName">Apellido</label>
+                      <div class="input-wrapper">
+                        <input class="input" id="lastName" name="lastName" type="text" placeholder="*"
+                               spellcheck="false" autocorrect="off" autocapitalize="off">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Correo electrónico -->
+                <div class="input-container">
+                  <label class="input-label" for="email">Correo electrónico</label>
+                  <div class="input-wrapper">
+                    <input class="input" id="email" name="email" type="email" placeholder="*"
+                           spellcheck="false" autocorrect="off" autocapitalize="off">
+                  </div>
+                </div>
+
+                <!-- Contraseña: un toggle de ojo propio -->
+                <div class="input-container">
+                  <label class="input-label" for="password">Contraseña</label>
+                  <div class="input-wrapper">
+                    <input class="input" id="password" type="password" placeholder="*">
+                    <span class="input-icon">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                    </span>
+                  </div>
+                </div>
+
+                <!-- Repetir contraseña: toggle independiente del anterior -->
+                <div class="input-container">
+                  <label class="input-label" for="repeatPassword">Repetir contraseña</label>
+                  <div class="input-wrapper">
+                    <input class="input" id="repeatPassword" type="password" placeholder="*">
+                    <span class="input-icon">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                    </span>
+                  </div>
+                </div>
+
+                <!-- Términos y privacidad: cada enlace abre el modal legal -->
+                <div class="options">
+                  <input type="checkbox" class="terms-checkbox" name="terms" id="terms" checked>
+                  <label class="terms" for="terms">
+                    <p>
+                      Estoy de acuerdo con los
+                      <a href="register-legal-modal.html" class="register-link">Términos de uso</a>
+                      y la
+                      <a href="register-legal-modal.html" class="register-link">Política de privacidad</a>
+                    </p>
+                  </label>
+                </div>
+
+                <div class="buttons-container">
+                  <button class="button button-medium button-primary" type="submit">Registrarse</button>
+
+                  <div class="divider"><span>O</span></div>
+                  <p>Registrarse usando:</p>
+
+                  <button class="button button-medium button-secondary" type="button">
+                    <img class="button__icon" src="../../../../assets/images/mockup-assets/google_icon.png" alt="">
+                    <span>Google</span>
+                  </button>
+                </div>
+
+                <p class="register-link-p">
+                  ¿Ya tienes una cuenta? <a href="login.html" class="register-link">Inicia sesión</a>
+                </p>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- =========================================
+       MODAL LEGAL (LegalModal.jsx)
+       Se abre desde el enlace "Términos de uso" del formulario.
+       Pestaña activa: Términos de Uso (legalModal:terms).
+       ========================================= -->
+  <div class="legal-overlay" role="dialog" aria-modal="true" aria-label="Términos de Uso">
+    <div class="legal-card">
+
+      <div class="legal-header">
+        <div class="legal-tabs">
+          <button class="legal-tab legal-tab--active" type="button">Términos de Uso</button>
+          <button class="legal-tab" type="button">Política de Privacidad</button>
+        </div>
+        <button class="legal-close" type="button" aria-label="Cerrar">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+        </button>
+      </div>
+
+      <div class="legal-body">
+        <h2 class="legal-title">Términos de Uso</h2>
+        <p class="legal-updated">Última actualización: julio de 2026</p>
+
+        <p class="legal-intro">Estos Términos de Uso regulan el acceso y uso de EnergyMonitor, una aplicación desarrollada como proyecto académico del programa Tecnólogo en Análisis y Desarrollo de Software (ADSO) del SENA. Al crear una cuenta y marcar la casilla de aceptación, usted declara haber leído, entendido y aceptado en su totalidad el presente documento.</p>
+
+        <section class="legal-section">
+          <h3 class="legal-section-heading">1. Aceptación de los términos</h3>
+          <p class="legal-paragraph">El uso de EnergyMonitor implica la aceptación plena de estos Términos de Uso. Si no está de acuerdo con alguna de las disposiciones aquí contenidas, deberá abstenerse de registrarse o de utilizar la plataforma.</p>
+        </section>
+
+        <section class="legal-section">
+          <h3 class="legal-section-heading">2. Descripción del servicio</h3>
+          <p class="legal-paragraph">EnergyMonitor es una aplicación web que permite el monitoreo del consumo de energía eléctrica en el hogar, mediante dispositivos de medición basados en microcontroladores ESP32 y sensores de corriente instalados en los tomacorrientes. La plataforma muestra el consumo por electrodoméstico, historiales, alertas y estadísticas de uso.</p>
+          <p class="legal-paragraph">EnergyMonitor es un proyecto de carácter académico. Aunque busca ofrecer una experiencia funcional y confiable, no se garantiza disponibilidad ininterrumpida del servicio ni precisión absoluta de las mediciones, dado que estas dependen del correcto funcionamiento del hardware instalado por el usuario.</p>
+        </section>
+
+        <section class="legal-section">
+          <h3 class="legal-section-heading">3. Registro y cuenta de usuario</h3>
+          <p class="legal-paragraph">Para usar la aplicación, el usuario debe crear una cuenta suministrando información veraz, completa y actualizada. El usuario es responsable de la confidencialidad de sus credenciales y de toda actividad que se realice desde su cuenta.</p>
+          <p class="legal-paragraph">EnergyMonitor podrá suspender o eliminar cuentas que suministren información falsa, que se usen para fines distintos a los previstos, o que comprometan la seguridad de la plataforma.</p>
+        </section>
+
+        <section class="legal-section">
+          <h3 class="legal-section-heading">4. Uso adecuado del hardware asociado</h3>
+          <p class="legal-paragraph">Los dispositivos de medición (ESP32 + sensor de corriente) deben instalarse siguiendo las instrucciones proporcionadas en el asistente de emparejamiento de la aplicación. El usuario es el único responsable de la instalación eléctrica de dichos dispositivos y debe contar con las precauciones necesarias para evitar riesgos eléctricos. EnergyMonitor no se hace responsable por daños derivados de una instalación indebida del hardware.</p>
+        </section>
+
+        <section class="legal-section">
+          <h3 class="legal-section-heading">5. Propiedad intelectual</h3>
+          <p class="legal-paragraph">El código fuente, el diseño visual, la documentación técnica y los contenidos de EnergyMonitor son propiedad de sus desarrolladores y se comparten con fines académicos en el marco del programa ADSO del SENA. Queda prohibida su reproducción o explotación comercial sin autorización previa y expresa de los autores.</p>
+        </section>
+
+        <section class="legal-section">
+          <h3 class="legal-section-heading">6. Derechos del consumidor</h3>
+          <p class="legal-paragraph">De conformidad con la Ley 1480 de 2011 (Estatuto del Consumidor) y la Ley 2439 de 2024, el usuario tiene derecho a recibir información veraz, clara y suficiente sobre el funcionamiento del servicio, así como a formular quejas y reclamos sobre el mismo. Al tratarse de un proyecto académico sin fines comerciales, no aplican las disposiciones sobre reversión de pagos ni comercio electrónico transaccional, salvo que la aplicación llegue a ofrecer servicios pagos en el futuro, caso en el cual estos términos serán actualizados.</p>
+        </section>
+
+        <section class="legal-section">
+          <h3 class="legal-section-heading">7. Limitación de responsabilidad</h3>
+          <p class="legal-paragraph">EnergyMonitor se ofrece "tal cual" (as is). Los desarrolladores no garantizan que el servicio esté libre de errores ni que las mediciones de consumo reflejen con exactitud absoluta el gasto energético real. El usuario asume los riesgos derivados del uso de la información suministrada por la plataforma para la toma de decisiones sobre su consumo eléctrico.</p>
+        </section>
+
+        <section class="legal-section">
+          <h3 class="legal-section-heading">8. Modificaciones a los términos</h3>
+          <p class="legal-paragraph">Estos Términos de Uso podrán ser modificados en cualquier momento. Los cambios sustanciales serán informados a los usuarios a través de la aplicación. El uso continuado del servicio después de dichas modificaciones constituye la aceptación de los nuevos términos.</p>
+        </section>
+
+        <section class="legal-section">
+          <h3 class="legal-section-heading">9. Ley aplicable y jurisdicción</h3>
+          <p class="legal-paragraph">Estos Términos se rigen por las leyes de la República de Colombia. Cualquier controversia derivada de su interpretación o aplicación se someterá a las autoridades judiciales competentes de Colombia.</p>
+        </section>
+
+        <section class="legal-section">
+          <h3 class="legal-section-heading">10. Contacto</h3>
+          <p class="legal-paragraph">Para consultas relacionadas con estos Términos de Uso, el usuario puede comunicarse con el equipo desarrollador de EnergyMonitor a través de los canales dispuestos en la sección "Acerca de" de la aplicación.</p>
+        </section>
+
+        <p class="legal-footer">Este documento fue elaborado con base en la normativa colombiana vigente en materia de protección al consumidor y comercio electrónico, y se presenta con fines académicos como parte del proyecto EnergyMonitor.</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

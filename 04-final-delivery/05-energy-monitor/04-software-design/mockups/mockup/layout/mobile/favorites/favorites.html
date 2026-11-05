@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EnergyMonitor — Favoritos</title>
+  <link rel="icon" type="image/svg+xml" href="../../../../assets/icons/favicon.svg">
+  <link rel="stylesheet" href="../css/mobile-shell.css">
+  <link rel="stylesheet" href="../dashboard/css/dashboard-styles.css">
+  <link rel="stylesheet" href="css/favorites-styles.css">
+</head>
+<body>
+
+  <p class="device-caption">EnergyMonitor · <span>/favorites · FavoritesScreen</span></p>
+
+  <div class="phone">
+
+    <!-- Barra de estado: la dibuja el sistema, no la app -->
+    <div class="status-bar">
+      <span>9:41</span>
+      <span class="status-icons">
+        <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor" aria-hidden="true"><rect x="0" y="7" width="3" height="4" rx="1"/><rect x="4.5" y="5" width="3" height="6" rx="1"/><rect x="9" y="2.5" width="3" height="8.5" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/></svg>
+        <svg width="16" height="11" viewBox="0 0 16 12" fill="currentColor" aria-hidden="true"><path d="M8 9.2 6.2 11a3.2 3.2 0 0 1 3.6 0zM8 5.4c-1.6 0-3 .6-4.1 1.7L2.5 5.7A7.6 7.6 0 0 1 8 3.4c2 0 3.9.8 5.5 2.3l-1.4 1.4A5.6 5.6 0 0 0 8 5.4zM8 .8A11.8 11.8 0 0 0 .5 3.6l1.4 1.4A9.8 9.8 0 0 1 8 2.8c2.6 0 4.9 1 6.7 2.6l1.4-1.4A11.8 11.8 0 0 0 8 .8z"/></svg>
+        <svg width="25" height="12" viewBox="0 0 25 12" fill="none" aria-hidden="true"><rect x="0.5" y="0.5" width="21" height="11" rx="3.2" stroke="currentColor" opacity=".4"/><rect x="2" y="2" width="16" height="8" rx="1.8" fill="currentColor"/><path d="M23 4v4a2.2 2.2 0 0 0 0-4z" fill="currentColor" opacity=".4"/></svg>
+      </span>
+    </div>
+
+    <!-- ÁREA DE LA APP -->
+    <div class="screen">
+
+      <!-- Sidebar: el botón hamburguesa está siempre montado en las pantallas privadas -->
+      <button class="drawer-trigger" aria-label="Abrir menú de navegación">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h18M3 12h18M3 17h18"></path></svg>
+      </button>
+
+      <!-- Header con breadcrumb (no lleva acción: FavoritesScreen no pasa children) -->
+      <header class="header header-with-trigger header-favorites">
+        <div class="header-title-wrap">
+          <nav class="breadcrumb" aria-label="Ruta de navegación">
+            <span class="breadcrumb-item">
+              <!-- favorites.breadcrumb.home → router.push("/dashboard") -->
+              <a class="breadcrumb-link" href="../dashboard/dashboard.html">Inicio</a>
+              <!-- <Breadcrumb separator> · Ionicons chevron-forward size 16 -->
+              <svg class="breadcrumb-sep" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
+            </span>
+            <span class="breadcrumb-item">
+              <!-- favorites.breadcrumb.current -->
+              <span class="breadcrumb-current">Favoritos</span>
+            </span>
+          </nav>
+        </div>
+        <div class="header-actions"></div>
+      </header>
+
+      <!-- ScrollView contentContainerStyle={styles.content} -->
+      <div class="fav-content">
+
+        <div class="fav-hero">
+          <!-- favorites:title -->
+          <h1 class="fav-title">Favoritos</h1>
+          <!-- favorites:subtitle -->
+          <p class="fav-subtitle">Tus hogares marcados como favoritos aparecen aquí para que los encuentres de forma rápida.</p>
+        </div>
+
+        <div class="fav-card">
+          <!-- favoriteHomes = homes.filter(home => home.favorite) · styles.grid -->
+          <div class="fav-grid">
+
+            <!-- HomeCard OWNER · favorito -->
+            <div class="fav-grid-item">
+              <article class="home-card" aria-label="Abrir hogar Casa Principal">
+                <div class="home-card-header is-owner">
+                  <div class="home-card-header-text">
+                    <h2 class="home-card-title">Casa Principal</h2>
+                    <!-- homeCard:owner -->
+                    <span class="home-card-responsible">Propietario</span>
+                  </div>
+                  <button class="home-card-favorite is-favorite" aria-label="Quitar favorito">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 20.4 4.7 13.1a4.7 4.7 0 0 1 6.6-6.7l.7.7.7-.7a4.7 4.7 0 0 1 6.6 6.7z"></path></svg>
+                  </button>
+                </div>
+                <div class="home-card-body">
+                  <p class="home-card-text"><strong class="home-card-label">Dirección: </strong>Cra. 45 # 18-32, Medellín</p>
+                  <div class="home-card-description">
+                    <p class="home-card-text"><strong class="home-card-label">Descripción: </strong>Casa unifamiliar de dos pisos en el barrio Los Alpes, con panel solar de 4 kWp y medición independiente por circuito. Los datos se reportan cada cinco…</p>
+                    <!-- homeCard:showMore -->
+                    <button class="home-card-toggle">Ver más</button>
+                  </div>
+                </div>
+              </article>
+            </div>
+
+            <!-- HomeCard OWNER · favorito -->
+            <div class="fav-grid-item">
+              <article class="home-card" aria-label="Abrir hogar Apartamento 502">
+                <div class="home-card-header is-owner">
+                  <div class="home-card-header-text">
+                    <h2 class="home-card-title">Apartamento 502</h2>
+                    <span class="home-card-responsible">Propietario</span>
+                  </div>
+                  <button class="home-card-favorite is-favorite" aria-label="Quitar favorito">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 20.4 4.7 13.1a4.7 4.7 0 0 1 6.6-6.7l.7.7.7-.7a4.7 4.7 0 0 1 6.6 6.7z"></path></svg>
+                  </button>
+                </div>
+                <div class="home-card-body">
+                  <p class="home-card-text"><strong class="home-card-label">Dirección: </strong>Calle 10 # 52-30, Bogotá</p>
+                  <div class="home-card-description">
+                    <p class="home-card-text"><strong class="home-card-label">Descripción: </strong>Apartamento en el piso 5 de un edificio residencial, medido con un módulo por circuito.</p>
+                  </div>
+                </div>
+              </article>
+            </div>
+
+            <!-- HomeCard MEMBER · cabecera --secondary · favorito -->
+            <div class="fav-grid-item">
+              <article class="home-card" aria-label="Abrir hogar Casa de campo">
+                <div class="home-card-header is-member">
+                  <div class="home-card-header-text">
+                    <h2 class="home-card-title">Casa de campo</h2>
+                    <!-- homeCard:member -->
+                    <span class="home-card-responsible">Miembro</span>
+                  </div>
+                  <button class="home-card-favorite is-favorite" aria-label="Quitar favorito">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 20.4 4.7 13.1a4.7 4.7 0 0 1 6.6-6.7l.7.7.7-.7a4.7 4.7 0 0 1 6.6 6.7z"></path></svg>
+                  </button>
+                </div>
+                <div class="home-card-body">
+                  <p class="home-card-text"><strong class="home-card-label">Dirección: </strong>Vereda El Retiro, Envigado</p>
+                  <div class="home-card-description">
+                    <p class="home-card-text"><strong class="home-card-label">Descripción: </strong>Finca de descanso familiar a la que tengo acceso como miembro invitado.</p>
+                  </div>
+                </div>
+              </article>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Indicador de inicio -->
+    <div class="home-indicator"></div>
+  </div>
+</body>
+</html>
