@@ -76,11 +76,11 @@ Autorización de datos: al marcar la casilla, el integrante confirma sus datos y
 
 ## Large files on Google Drive / Archivos pesados en Google Drive
 
-Only files too heavy for GitHub go here, such as demo videos. Everything else stays in this folder.
+Only files too heavy for GitHub go here, such as demo videos. Everything else stays in this folder. Team documentation Drive: https://drive.google.com/drive/folders/1-KaNpaK2u1xDDY7uql6NWY9BkRNcM8KP
 
 Aquí solo van archivos demasiado pesados para GitHub, como videos de demostración. Todo lo demás vive en esta carpeta.
 
 | File / Archivo | Size / Tamaño | Link / Enlace |
 |---|---|---|
-| Advertising pitch video / Video pitch publicitario | Pending / Pendiente | Pending link / Enlace pendiente |
-| Short usage tutorial video / Video tutorial corto de uso | Pending / Pendiente | Pending link / Enlace pendiente |
+| Advertising pitch video / Video pitch publicitario | Pending / Pendiente | [Team Drive, folder `videos` / Drive del equipo, carpeta `videos`](https://drive.google.com/drive/folders/1-KaNpaK2u1xDDY7uql6NWY9BkRNcM8KP) (uploading / en carga) |
+| Short usage tutorial video / Video tutorial corto de uso | Pending / Pendiente | [Team Drive, folder `videos` / Drive del equipo, carpeta `videos`](https://drive.google.com/drive/folders/1-KaNpaK2u1xDDY7uql6NWY9BkRNcM8KP) (uploading / en carga) |
