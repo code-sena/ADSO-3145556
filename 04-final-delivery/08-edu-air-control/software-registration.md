@@ -63,13 +63,13 @@ Authors are the instructors and the apprentices listed in `team-roster.md`. Each
 | Field / Campo | Value / Valor |
 |---|---|
 | Title / Título de la obra | EduAirControl |
-| Year of creation / Año de creación | |
+| Year of creation / Año de creación | 2026 |
 | Country of origin / País de origen | Colombia |
 | Version registered / Versión a registrar | `final-delivery-2026` |
-| Short description of its functions / Breve descripción de sus funciones | |
-| What sets it apart from similar software / Qué la diferencia de obras similares |  |
-| Programming languages / Lenguajes | |
-| Type: web, mobile, desktop, device / Tipo: web, móvil, escritorio, dispositivo | |
+| Short description of its functions / Breve descripción de sus funciones | Environmental monitoring platform for educational spaces: receives measurements of temperature, humidity, CO₂ and noise from IoT sensors, stores them, shows current and historical values on web and mobile, and raises alerts by thresholds defined by the administrator. Includes user, institution, campus, environment and sensor management with role-based access. / Plataforma de monitoreo ambiental para espacios educativos: recibe mediciones de temperatura, humedad, CO₂ y ruido desde sensores IoT, las almacena, muestra valores actuales e históricos en web y móvil y genera alertas por umbrales definidos por el administrador. Incluye gestión de usuarios, instituciones, sedes, ambientes y sensores con acceso por roles. |
+| What sets it apart from similar software / Qué la diferencia de obras similares | Built for schools with low-cost ESP32 sensors configured over Bluetooth from the mobile app; per-institution data separation; administrator-defined thresholds per environment type; accessibility options (dark mode, colour-blindness themes) and several interface languages. / Pensada para colegios con sensores ESP32 de bajo costo configurados por Bluetooth desde la app móvil; separación de datos por institución; umbrales definidos por el administrador según el tipo de ambiente; opciones de accesibilidad (modo oscuro, temas para daltonismo) y varios idiomas de interfaz. |
+| Programming languages / Lenguajes | Java 17, JavaScript (JSX), TypeScript (tests), C++ (ESP32 firmware), SQL, YAML |
+| Type: web, mobile, desktop, device / Tipo: web, móvil, escritorio, dispositivo | Web, mobile and device (IoT firmware) / Web, móvil y dispositivo (firmware IoT) |
 
 ## 6. Declarations / Declaraciones (art. 4 y art. 5, num. 5 y 6)
 
@@ -103,7 +103,33 @@ Relacione código, librerías, modelos, imágenes o datos que el equipo no creó
 
 | Component / Componente | Author or source / Autor o fuente | License / Licencia | Where it is used / Dónde se usa |
 |---|---|---|---|
-| | | | |
+| Spring Boot, Spring Cloud Gateway, Spring Security, Spring Data JPA | VMware / Spring project | Apache-2.0 | Backend microservices and API gateway |
+| jjwt (JSON Web Token) | Les Hazlewood and contributors | Apache-2.0 | JWT signing and validation in `ms-security` |
+| springdoc-openapi | springdoc contributors | Apache-2.0 | OpenAPI documentation of the services |
+| Lombok | Project Lombok | MIT | Boilerplate reduction in Java |
+| Liquibase | Liquibase | Apache-2.0 | Database migrations |
+| Micrometer, Prometheus | Micrometer / Prometheus authors | Apache-2.0 | Service metrics |
+| PostgreSQL, JDBC driver | PostgreSQL Global Development Group | PostgreSQL License / BSD-2-Clause | Databases of every service |
+| H2 Database | H2 Group | MPL-2.0 / EPL-1.0 | Tests of four services |
+| Testcontainers | Testcontainers contributors | MIT | Integration tests |
+| Redis | Redis | BSD-3-Clause (7.x) | Rate limiting and token blacklist |
+| RabbitMQ | Broadcom / VMware | MPL-2.0 | Events between services |
+| React, React DOM, React Router | Meta and contributors | MIT | Web client |
+| Vite | Vite contributors | MIT | Web build tool |
+| react-hook-form, zod, i18next, react-i18next, Recharts, lucide-react, react-icons | respective authors | MIT / ISC (icon sets of react-icons have their own licenses) | Web forms, validation, translations, charts and icons |
+| Expo, React Native, React Navigation, expo-notifications | Expo / Meta / contributors | MIT | Mobile client |
+| react-native-ble-plx | Polidea | Apache-2.0 | Bluetooth provisioning of devices |
+| react-native-gifted-charts, react-native-svg, Reanimated, Gesture Handler | respective authors | MIT | Mobile charts and animation |
+| Arduino core for ESP32, PlatformIO | Espressif / PlatformIO | LGPL-2.1 / Apache-2.0 | ESP32 firmware build |
+| ArduinoJson | Benoît Blanchon | MIT | JSON in firmware |
+| DHT sensor library | Adafruit | MIT | Temperature and humidity sensor |
+| Docker, Docker Compose | Docker Inc. | Apache-2.0 | Containers and deployment |
+| Jenkins | Jenkins project | MIT | CI/CD |
+| Grafana | Grafana Labs | AGPL-3.0 | Dashboards |
+| Caddy | Caddy authors | Apache-2.0 | HTTPS reverse proxy |
+| Mailpit | Ralph Slooten | MIT | Local mail testing |
+
+The licenses above are the ones these projects usually publish. Check each one against the version used before submitting. / Las licencias son las que estos proyectos suelen publicar; verifíquelas contra la versión usada antes de entregar.
 
 ## 9. Private data / Datos privados
 

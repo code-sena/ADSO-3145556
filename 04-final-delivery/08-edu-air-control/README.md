@@ -19,11 +19,11 @@ Final delivery of the training project / Entrega final del proyecto formativo.
 
 ## Summary / Resumen
 
-- **Problem it solves / Problema que resuelve:**
-- **Target users / Usuarios:**
-- **Main features / Funciones principales:**
-- **Technology stack / Tecnologías:**
-- **Production URL / URL en producción:**
+- **Problem it solves / Problema que resuelve:** schools rarely measure CO₂, temperature, humidity and noise continuously, so staff cannot detect or act on poor conditions in classrooms. / Las instituciones casi nunca miden de forma continua CO₂, temperatura, humedad y ruido, y no pueden detectar ni actuar ante malas condiciones en las aulas.
+- **Target users / Usuarios:** school staff and administrators, teachers and students of educational institutions; super administrators who manage institutions. / Personal y administradores de instituciones educativas, docentes y estudiantes; superadministradores que gestionan instituciones.
+- **Main features / Funciones principales:** ingestion of sensor measurements; current and historical views; alerts by configurable thresholds with push notifications to mobile; role-based access; management of institutions, campuses, environments and sensors; BLE provisioning of ESP32 devices from the mobile app; web and mobile clients with dark mode and colour-blindness themes. / Ingesta de mediciones de sensores; consulta actual e histórica; alertas por umbrales configurables con notificaciones push al móvil; acceso por roles; gestión de instituciones, sedes, ambientes y sensores; configuración BLE de dispositivos ESP32 desde la app móvil; clientes web y móvil con modo oscuro y temas para daltonismo.
+- **Technology stack / Tecnologías:** Java 17 and Spring Boot microservices behind Spring Cloud Gateway; PostgreSQL, Redis and RabbitMQ; Liquibase; React and Vite (web); Expo and React Native (mobile); ESP32 firmware (C++/PlatformIO); Docker Compose, Jenkins, Prometheus and Grafana. / Microservicios Java 17 con Spring Boot detrás de Spring Cloud Gateway; PostgreSQL, Redis y RabbitMQ; Liquibase; React y Vite (web); Expo y React Native (móvil); firmware ESP32 (C++/PlatformIO); Docker Compose, Jenkins, Prometheus y Grafana.
+- **Production URL / URL en producción:** https://eduaircontrol.tech
 - **Demo credentials / Credenciales de prueba:** do not write real passwords here / no escriba contraseñas reales aquí
 
 ## Team members / Integrantes
