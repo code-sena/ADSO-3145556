@@ -2,8 +2,8 @@
 
 Generado el 28/10/2026 desde una base PostgreSQL 16 temporal con todas las migraciones Liquibase de la rama main aplicadas (v1.0.0 a v1.6.0, changeset 25): 35 tablas, 42 relaciones, en cinco esquemas.
 
-- Script de creación: [alerta_mujer_schema.sql](alerta_mujer_schema.sql)
-- Diccionario de datos: [diccionario_de_datos.xlsx](diccionario_de_datos.xlsx)
+- Script de creación: [database-schema.sql](database-schema.sql)
+- Diccionario de datos: [data-dictionary.xlsx](data-dictionary.xlsx)
 - Imágenes (SVG y PNG): `er-model-complete` y una por esquema (`er-model-<esquema>`).
 - En cada diagrama de esquema, las tablas de otros esquemas aparecen solo con su llave para mostrar la relación.
 - notification.tracking_link.alert_id no tiene llave foránea a propósito: ese esquema no depende de otro módulo.
