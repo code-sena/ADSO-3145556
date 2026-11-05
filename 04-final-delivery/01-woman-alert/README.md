@@ -60,17 +60,17 @@ Autorización de datos: al marcar la casilla, el integrante confirma sus datos y
 
 | Folder / Carpeta | Content / Contenido | Done / Listo |
 |---|---|---|
-| [`01-requirements-specification/`](01-requirements-specification/) | Requirements specification / Especificación de requisitos | ☐ |
-| [`02-software-analysis/`](02-software-analysis/) | Software analysis / Análisis del software | ☐ |
-| [`03-technical-proposal/`](03-technical-proposal/) | Technical proposal / Propuesta técnica | ☐ |
-| [`04-software-design/`](04-software-design/) | Software design / Diseño del software | ☐ |
-| [`05-test-documentation/`](05-test-documentation/) | Test documentation / Documentación de pruebas | ☐ |
-| [`06-implementation-procedure/`](06-implementation-procedure/) | Implementation procedure / Procedimiento de implementación | ☐ |
-| [`07-improvement-actions/`](07-improvement-actions/) | Improvement actions / Acciones de mejoramiento | ☐ |
-| [`08-manuals/`](08-manuals/) | Manuals / Manuales | ☐ |
-| [`09-project-article/`](09-project-article/) | Project article / Artículo del proyecto | ☐ |
+| [`01-requirements-specification/`](01-requirements-specification/) | Requirements specification / Especificación de requisitos | ☑ |
+| [`02-software-analysis/`](02-software-analysis/) | Software analysis / Análisis del software | ☑ |
+| [`03-technical-proposal/`](03-technical-proposal/) | Technical proposal / Propuesta técnica | ☑ |
+| [`04-software-design/`](04-software-design/) | Software design / Diseño del software | ☑ |
+| [`05-test-documentation/`](05-test-documentation/) | Test documentation / Documentación de pruebas | ☑ |
+| [`06-implementation-procedure/`](06-implementation-procedure/) | Implementation procedure / Procedimiento de implementación | ☑ |
+| [`07-improvement-actions/`](07-improvement-actions/) | Improvement actions / Acciones de mejoramiento | ☑ |
+| [`08-manuals/`](08-manuals/) | Manuals / Manuales | ☑ |
+| [`09-project-article/`](09-project-article/) | Project article / Artículo del proyecto | ☑ |
 | [`10-videos/`](10-videos/) | Videos / Videos | ☐ |
-| [`code-tag/`](code-tag/) | Repository links, tags and ZIP files / Enlaces, tags y ZIP | ☐ |
+| [`code-tag/`](code-tag/) | Repository links, tags and ZIP files / Enlaces, tags y ZIP | ☑ |
 | [`team-roster.md`](team-roster.md) | Team and roles / Equipo y roles | ☐ |
 | [`software-registration.md`](software-registration.md) | Software registration data / Datos para registro de software | ☐ |
 

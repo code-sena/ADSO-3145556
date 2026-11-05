@@ -91,9 +91,9 @@ At least one is required. Attach all three. / Se exige al menos uno. Adjunte los
 
 | Element / Elemento | Where it is / Dónde está | Ready / Listo |
 |---|---|---|
-| Computer program / Programa de computador | ZIP files `final-delivery-2026` listed in `code-tag/README.md` / ZIP relacionados en `code-tag/README.md` | ☐ |
-| Program description / Descripción de programa | `02-software-analysis/` and `04-software-design/` | ☐ |
-| Auxiliary material / Material auxiliar | `08-manuals/` | ☐ |
+| Computer program / Programa de computador | ZIP files `final-delivery-2026` listed in `code-tag/README.md` / ZIP relacionados en `code-tag/README.md` | ☒ |
+| Program description / Descripción de programa | `02-software-analysis/` and `04-software-design/` | ☒ |
+| Auxiliary material / Material auxiliar | `08-manuals/` | ☒ |
 
 ## 8. Third-party components / Componentes de terceros
 

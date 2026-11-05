@@ -4,9 +4,9 @@
 
 ## Required content / Contenido requerido
 
-- [ ] Test plan / Plan de pruebas
-- [ ] Test cases / Casos de prueba
-- [ ] Test results with evidence / Resultados de las pruebas con evidencia
+- [x] Test plan / Plan de pruebas
+- [x] Test cases / Casos de prueba
+- [x] Test results with evidence / Resultados de las pruebas con evidencia — automated test runs with screenshots in `../06-implementation-procedure/deployment-evidence.pdf` (section 7) and `clean-install-test.pdf` / ejecuciones con capturas en 06
 
 ## Format / Formato
 
