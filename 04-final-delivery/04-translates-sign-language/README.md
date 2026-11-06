@@ -35,12 +35,14 @@ Final delivery of the training project / Entrega final del proyecto formativo.
 | Full name / Nombre completo | Doc. type / Tipo | Doc. number / Número | Ficha | GitHub user / Usuario | Role / Rol | Verified and authorized / Verificado y autorizado |
 |---|---|---|---|---|---|---|
 | JUAN MAURICIO SUAZA SOLORZANO | CC | 1076907287 | 3145556 | mauro-1508 | Tech lead, Scrum Master and analyst-developer (lexicon and recognition backend, coordination) / Líder técnico, Scrum Master y analista-desarrollador (backend lexicon y recognition, coordinación) | ☑ |
-| LUIS ALEJANDRO DUARTE ALDANA | CC | 1069402330 | 3145556 | tadeo77789 | Analyst-developer (interfaces and programming) / Analista-desarrollador (interfaces y programación) | ☐ |
-| JUAN CAMILO FIERRO ESQUIVEL | CC | 1080292691 | 3145556 | fierroesquiveljuancamilo-svg | Analyst-developer (product documentation and programming) / Analista-desarrollador (documentación de producto y programación) | ☐ |
+| LUIS ALEJANDRO DUARTE ALDANA | CC | 1069402330 | 3145556 | tadeo77789 | Analyst-developer (interfaces and programming) / Analista-desarrollador (interfaces y programación) | ☑ |
+| JUAN CAMILO FIERRO ESQUIVEL | CC | 1080292691 | 3145556 | fierroesquiveljuancamilo-svg | Analyst-developer (product documentation and programming) / Analista-desarrollador (documentación de producto y programación) | ☑ |
 
 Data use authorization: by checking the box, the member confirms their data and authorizes publishing their name, document number and ficha in this public repository, for the software registration process (Ley 1581 de 2012). Anyone who does not authorize it tells the instructor before delivering.
 
 Autorización de datos: al marcar la casilla, el integrante confirma sus datos y autoriza publicar su nombre, número de documento y ficha en este repositorio público, para el trámite de registro de software (Ley 1581 de 2012). Quien no lo autorice se lo informa al instructor antes de entregar.
+
+Each member gave the authorization from their own GitHub account / Cada integrante dio la autorización desde su propia cuenta de GitHub: JUAN MAURICIO SUAZA SOLORZANO (`mauro-1508`, applicant / solicitante, in the delivery commits / en los commits de la entrega); LUIS ALEJANDRO DUARTE ALDANA ([`tadeo77789`, comment / comentario](https://github.com/code-sena/ADSO-3145556/pull/11#issuecomment-6690880268)); JUAN CAMILO FIERRO ESQUIVEL ([`fierroesquiveljuancamilo-svg`, comment / comentario](https://github.com/code-sena/ADSO-3145556/pull/11#issuecomment-6688295067)).
 
 ## Delivery contents / Contenido de la entrega
 
