@@ -184,7 +184,7 @@ We propose four steps, in this order:
 
 ## Appendix. Data and Reproduction
 
-**Code.** Repository `andresguti17/ProyectoFaceAttendEDU` (GitHub). The figures in Table II come from the review of October 27, 2026. We did not record with certainty the exact commit of that run. Commit `478785d1` exists in the repository and was the one consulted at the close of the review, but the `tmp/integration` branch no longer exists locally, and the active branch changed afterward (`develop`, commit `bb5f0fb7` at the time of this verification). Before submitting, it is advisable to repeat the tests on the commit that is cited.
+**Code.** Repository `Jonas7891/ProyectoFaceAttendEDU` (GitHub). The figures in Table II come from the review of October 27, 2026. We did not record with certainty the exact commit of that run. Commit `478785d1` exists in the repository and was the one consulted at the close of the review, but the `tmp/integration` branch no longer exists locally, and the active branch changed afterward (`develop`, commit `bb5f0fb7` at the time of this verification). Before submitting, it is advisable to repeat the tests on the commit that is cited.
 
 **Test reproduction (guidance):**
 

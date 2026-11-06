@@ -116,7 +116,7 @@ Relacione código, librerías, modelos, imágenes o datos que el equipo no creó
 | Kong Gateway OSS | Kong Inc. | Apache 2.0 | API Gateway |
 | PostgreSQL | PostgreSQL Global Development Group | PostgreSQL License | Relational database |
 | MongoDB | MongoDB Inc. | SSPL (server software, used as an external service) / SSPL (servidor, usado como servicio externo) | Biometric embeddings |
-| Redis 7 | Redis contributors | BSD-3-Clause up to 7.2, RSALv2/SSPLv1 from 7.4: to verify against the pinned `redis:7-alpine` image / BSD-3-Clause hasta 7.2, RSALv2/SSPLv1 desde 7.4: por verificar con la imagen fijada `redis:7-alpine` | Gateway cache |
+| Redis 7 | Redis contributors | RSALv2 / SSPLv1 (7.4 series: `redis:7-alpine` pinned on 2026-10-30) / RSALv2 / SSPLv1 (serie 7.4: `redis:7-alpine` fijada el 2026-10-30) | Gateway cache |
 | Apache Kafka | Apache Software Foundation | Apache 2.0 | Messaging between services |
 | Liquibase 4.29 | Liquibase | Apache 2.0 | Database migrations (run as a container) |
 | Caddy | Caddy contributors | Apache 2.0 | Reverse proxy / TLS |
