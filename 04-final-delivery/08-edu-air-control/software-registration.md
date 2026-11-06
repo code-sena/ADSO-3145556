@@ -40,20 +40,19 @@ Authors are the instructors and the apprentices listed in `team-roster.md`. Each
 | ANDRES MORENO COLLAZOS | | Kept privately / En custodia | | Instructor: see `team-roster.md` / ver `team-roster.md` |
 | JHON JAIRO CORTEZ VARGAS | CC | 1079174793 | 3145556 | |
 | MARIA DE LOS ANGELES OLAYA GARCIA | CC | 1076505160 | 3145556 | |
-| KENETH SANTIAGO RUBIANO SILVA | CC | 1075796019 | 3145556 | |
 
 ## 3. Producer / Productor (art. 5, num. 3)
 
 | Field / Campo | Value / Valor |
 |---|---|
-| Producer name / Nombre del productor | Supporting and cross-cutting instructors / Instructores de apoyo y transversales: JESUS ARIEL GONZALEZ BONILLA, CARLOS FABIAN MARTINEZ MORA, CARLOS JULIO CADENA SARASTY, JAVIER HUMBERTO PINTO DIAZ, KAROL DANIELA CORREA TRUJILLO, JOSE DE JESUS MOTTA VARGAS, FERNELLY CARVAJAL SILVA, EDDIER YAIR LIBERATO CUENCA, JHON WILLIAN CORREDOR ARAUJO, ANDRES MORENO COLLAZOS. Project apprentices / Aprendices del equipo: JHON JAIRO CORTEZ VARGAS, MARIA DE LOS ANGELES OLAYA GARCIA, KENETH SANTIAGO RUBIANO SILVA. |
+| Producer name / Nombre del productor | Supporting and cross-cutting instructors / Instructores de apoyo y transversales: JESUS ARIEL GONZALEZ BONILLA, CARLOS FABIAN MARTINEZ MORA, CARLOS JULIO CADENA SARASTY, JAVIER HUMBERTO PINTO DIAZ, KAROL DANIELA CORREA TRUJILLO, JOSE DE JESUS MOTTA VARGAS, FERNELLY CARVAJAL SILVA, EDDIER YAIR LIBERATO CUENCA, JHON WILLIAN CORREDOR ARAUJO, ANDRES MORENO COLLAZOS. Project apprentices / Aprendices del equipo: JHON JAIRO CORTEZ VARGAS, MARIA DE LOS ANGELES OLAYA GARCIA. |
 | ID document or NIT / Identificación o NIT | Apprentices: section 2. Instructors: kept privately by the lead instructor. / Aprendices: sección 2. Instructores: en custodia del instructor líder. |
 
 ## 4. Rights holder / Titular de los derechos patrimoniales
 
 | Field / Campo | Value / Valor |
 |---|---|
-| Rights holder / Titular | Supporting and cross-cutting instructors / Instructores de apoyo y transversales: JESUS ARIEL GONZALEZ BONILLA, CARLOS FABIAN MARTINEZ MORA, CARLOS JULIO CADENA SARASTY, JAVIER HUMBERTO PINTO DIAZ, KAROL DANIELA CORREA TRUJILLO, JOSE DE JESUS MOTTA VARGAS, FERNELLY CARVAJAL SILVA, EDDIER YAIR LIBERATO CUENCA, JHON WILLIAN CORREDOR ARAUJO, ANDRES MORENO COLLAZOS. Project apprentices / Aprendices del equipo: JHON JAIRO CORTEZ VARGAS, MARIA DE LOS ANGELES OLAYA GARCIA, KENETH SANTIAGO RUBIANO SILVA. |
+| Rights holder / Titular | Supporting and cross-cutting instructors / Instructores de apoyo y transversales: JESUS ARIEL GONZALEZ BONILLA, CARLOS FABIAN MARTINEZ MORA, CARLOS JULIO CADENA SARASTY, JAVIER HUMBERTO PINTO DIAZ, KAROL DANIELA CORREA TRUJILLO, JOSE DE JESUS MOTTA VARGAS, FERNELLY CARVAJAL SILVA, EDDIER YAIR LIBERATO CUENCA, JHON WILLIAN CORREDOR ARAUJO, ANDRES MORENO COLLAZOS. Project apprentices / Aprendices del equipo: JHON JAIRO CORTEZ VARGAS, MARIA DE LOS ANGELES OLAYA GARCIA. |
 | ID document or NIT / Identificación o NIT | Apprentices: section 2. Instructors: kept privately by the lead instructor. / Aprendices: sección 2. Instructores: en custodia del instructor líder. |
 | How rights were acquired / Cómo adquirió los derechos, si no es el autor | Not applicable: the rights holders are the authors / No aplica: los titulares son los autores |
 | Document that proves it / Documento que lo prueba | Not applicable / No aplica |

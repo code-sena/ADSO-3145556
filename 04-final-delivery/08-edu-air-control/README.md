@@ -36,7 +36,6 @@ Final delivery of the training project / Entrega final del proyecto formativo.
 |---|---|---|---|---|---|---|
 | JHON JAIRO CORTEZ VARGAS | CC | 1079174793 | 3145556 | Jhon-Cortez | | ☐ |
 | MARIA DE LOS ANGELES OLAYA GARCIA | CC | 1076505160 | 3145556 | mariaolaya17 | | ☐ |
-| KENETH SANTIAGO RUBIANO SILVA | CC | 1075796019 | 3145556 | kensarusi | | ☐ |
 
 Data use authorization: by checking the box, the member confirms their data and authorizes publishing their name, document number and ficha in this public repository, for the software registration process (Ley 1581 de 2012). Anyone who does not authorize it tells the instructor before delivering.
 

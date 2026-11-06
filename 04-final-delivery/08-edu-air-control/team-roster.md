@@ -29,4 +29,3 @@ Los aprendices completan su rol, por ejemplo backend, frontend, base de datos, Q
 |---|---|---|---|---|---|---|
 | JHON JAIRO CORTEZ VARGAS | CC | 1079174793 | 3145556 | Jhon-Cortez | | Yes / Sí |
 | MARIA DE LOS ANGELES OLAYA GARCIA | CC | 1076505160 | 3145556 | mariaolaya17 | | Yes / Sí |
-| KENETH SANTIAGO RUBIANO SILVA | CC | 1075796019 | 3145556 | kensarusi | | Yes / Sí |
