@@ -1,0 +1,64 @@
+sequenceDiagram
+    autonumber
+    actor C as Cliente
+    actor A as Administrador
+    participant GW as API Gateway
+    participant IAM as iam
+    participant BOOK as booking-reservation
+    participant FLEET as fleet-maintenance
+    participant PAY as payment-billing
+
+    Note over C,PAY: Reserva con pago por transferencia bancaria (SEQ-03 + SEQ-04)
+
+    rect rgb(238,244,255)
+    Note right of C: 1 - Crear la reserva
+    C->>GW: POST /reservations
+    GW->>IAM: Validar JWT (REST)
+    IAM-->>GW: Claims válidos
+    GW->>BOOK: POST /reservations
+    BOOK->>FLEET: GET /vehicles/:id/availability
+    FLEET-->>BOOK: Disponibilidad
+    BOOK->>BOOK: Reservation.status = PENDING_PAYMENT
+    BOOK--)A: ReservationCreated -> notifica al administrador
+    end
+
+    rect rgb(238,255,238)
+    Note right of C: 2 - Cargar el comprobante de transferencia
+    C->>GW: POST /payments (comprobante)
+    GW->>IAM: Validar JWT
+    IAM-->>GW: Claims válidos
+    GW->>PAY: POST /payments
+    PAY->>BOOK: GET /reservations/:id (validar monto)
+    BOOK-->>PAY: total_amount
+    PAY->>PAY: Payment.status = PENDING_REVIEW
+    PAY--)BOOK: PaymentReceiptUploaded
+    BOOK->>BOOK: Reservation.status = PENDING_REVIEW
+    PAY--)A: Notificación "comprobante por revisar"
+    end
+
+    rect rgb(255,248,238)
+    Note right of A: 3 - Revisión del comprobante (administrador)
+    alt Aprobado
+        A->>GW: PATCH /payments/:id/approve
+        GW->>PAY: PATCH /payments/:id/approve
+        PAY->>PAY: Payment.status = APPROVED
+        PAY--)BOOK: PaymentCompleted
+        PAY->>PAY: InvoiceGenerated (factura)
+        BOOK->>BOOK: Reservation.status = CONFIRMED
+        BOOK--)C: Notificación "pago aprobado"
+    else Rechazado - reintento permitido
+        A->>GW: PATCH /payments/:id/reject (RETRY_ALLOWED)
+        GW->>PAY: PATCH /payments/:id/reject
+        PAY->>PAY: Payment.status = REJECTED
+        PAY--)BOOK: PaymentRejected
+        BOOK->>BOOK: Reservation.status = PENDING_PAYMENT
+        BOOK--)C: Notificación "rechazado, puede reintentar"
+    else Rechazado - cancelar reserva
+        A->>GW: PATCH /payments/:id/reject (RESERVATION_CANCELLED)
+        GW->>PAY: PATCH /payments/:id/reject
+        PAY->>PAY: Payment.status = REJECTED
+        PAY--)BOOK: PaymentRejected
+        BOOK->>BOOK: Reservation.status = CANCELLED
+        BOOK--)C: Notificación "reserva cancelada"
+    end
+    end

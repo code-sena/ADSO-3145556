@@ -1,0 +1,12 @@
+stateDiagram-v2
+    direction LR
+    [*] --> PENDING_PAYMENT : Reserva creada
+    PENDING_PAYMENT --> PENDING_REVIEW : Comprobante subido (PaymentReceiptUploaded)
+    PENDING_PAYMENT --> CANCELLED : 24 h sin pago aprobado (INV-015)
+    PENDING_REVIEW --> CONFIRMED : Pago aprobado (PaymentCompleted)
+    PENDING_REVIEW --> PENDING_PAYMENT : Rechazado - reintento permitido (INV-016)
+    PENDING_REVIEW --> CANCELLED : Rechazado - se cancela (INV-016)
+    CONFIRMED --> COMPLETED : Alquiler finalizado (RentalCompleted)
+    CONFIRMED --> CANCELLED : Cancelación con 3 días o más de antelación (INV-004)
+    COMPLETED --> [*]
+    CANCELLED --> [*]

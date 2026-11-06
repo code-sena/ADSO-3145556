@@ -1,0 +1,59 @@
+graph TD
+    subgraph PUB["Público - sin sesión"]
+        HOME["/ - Home<br/>contenido + buscador"]
+        CAT["/vehicles - Catálogo"]
+        DET["/vehicles/:id - Detalle de vehículo"]
+        LOGIN["/auth/login"]
+        REG["/auth/register"]
+        FORGOT["/auth/forgot-password"]
+    end
+
+    subgraph AUTH["Autenticado - cualquier rol"]
+        PROF["/profile - Perfil"]
+        RESV["/reservations - Mis reservas"]
+        WIZ["/reservations/new - Asistente de reserva"]
+        RDET["/reservations/:id - Detalle de reserva"]
+        PAYUP["/reservations/:id/payment - Subir comprobante"]
+        NOTIF["/notifications"]
+    end
+
+    subgraph ADM["Rol ADMIN"]
+        FLEET["/admin/fleet - Panel de flota"]
+        FNEW["/admin/fleet/new - Registrar vehículo"]
+        FEDIT["/admin/fleet/:id/edit - Editar vehículo"]
+        BRANCH["/admin/branches - Sucursales"]
+        ARESV["/admin/reservations - Panel de reservas"]
+        INS["/admin/insurance-types - Tipos de seguro"]
+        TRACK["/admin/tracking/:rentalId - Seguimiento"]
+    end
+
+    subgraph SADM["Rol SUPER_ADMIN"]
+        USERS["/admin/users - Usuarios y roles"]
+        BANK["/admin/bank-accounts - Cuentas bancarias"]
+    end
+
+    HOME --> CAT
+    CAT --> DET
+    DET --> WIZ
+    DET --> LOGIN
+    HOME --> LOGIN
+    LOGIN --> REG
+    LOGIN --> FORGOT
+    LOGIN --> PROF
+    PROF --> NOTIF
+    PROF --> RESV
+    RESV --> WIZ
+    RESV --> RDET
+    WIZ --> PAYUP
+    PAYUP --> RDET
+    RDET --> PAYUP
+    LOGIN --> FLEET
+    FLEET --> FNEW
+    FLEET --> FEDIT
+    LOGIN --> BRANCH
+    LOGIN --> ARESV
+    LOGIN --> INS
+    ARESV --> RDET
+    RDET --> TRACK
+    LOGIN --> USERS
+    LOGIN --> BANK

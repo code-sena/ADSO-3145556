@@ -1,0 +1,7 @@
+stateDiagram-v2
+    direction LR
+    [*] --> PENDING_REVIEW : Comprobante subido
+    PENDING_REVIEW --> APPROVED : Aprobado por el administrador
+    PENDING_REVIEW --> REJECTED : Rechazado (rejection_reason)
+    APPROVED --> [*]
+    REJECTED --> [*]
