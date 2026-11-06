@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cursos — Mockup</title>
+<style>
+  :root{
+    --sidebar-bg:#ffffff;
+    --sidebar-active:#2563eb;
+    --sidebar-active-bg:#dbe6fd;
+    --border:#e8eaed;
+    --bg:#f7f8fa;
+    --card-bg:#ffffff;
+    --text-main:#111827;
+    --text-muted:#6b7280;
+    --blue:#2563eb;
+    --green:#16a34a;
+    --orange:#d97706;
+    --red:#dc2626;
+    --purple:#7c3aed;
+    --teal:#0d9488;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:var(--bg);
+    color:var(--text-main);
+    display:flex;
+    min-height:100vh;
+  }
+
+  /* ---------- SIDEBAR ---------- */
+  .sidebar{
+    width:262px;
+    min-width:262px;
+    background:var(--sidebar-bg);
+    border-right:1px solid var(--border);
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    padding:20px 14px;
+    position:relative;
+  }
+  .sidebar-top{display:flex;flex-direction:column;gap:22px;}
+  .user-box{padding:6px 10px 18px 10px;border-bottom:1px solid var(--border);}
+  .user-name{font-weight:700;font-size:15px;color:var(--text-main);}
+  .user-role{font-size:12.5px;color:#9ca3af;margin-top:2px;}
+
+  nav.menu{display:flex;flex-direction:column;gap:4px;}
+  .menu-item{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:10px 12px;
+    border-radius:8px;
+    font-size:14.5px;
+    font-weight:600;
+    color:#374151;
+    cursor:pointer;
+    text-decoration:none;
+  }
+  .menu-item .left{display:flex;align-items:center;gap:10px;}
+  .menu-item svg{width:18px;height:18px;flex-shrink:0;color:#6b7280;}
+  .menu-item.active{
+    background:var(--sidebar-active-bg);
+    color:var(--sidebar-active);
+  }
+  .menu-item.active svg{color:var(--sidebar-active);}
+  .menu-item .chev{width:14px;height:14px;opacity:.6;}
+
+  .collapse-btn{
+    position:absolute;
+    top:150px;
+    right:-13px;
+    width:26px;height:26px;
+    border-radius:50%;
+    background:#fff;
+    border:1px solid var(--border);
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 1px 3px rgba(0,0,0,.08);
+  }
+  .collapse-btn svg{width:14px;height:14px;color:#6b7280;}
+
+  .logout{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:10px 12px;
+    color:#dc2626;
+    font-weight:600;
+    font-size:14.5px;
+    cursor:pointer;
+  }
+  .logout svg{width:18px;height:18px;}
+
+  /* ---------- MAIN ---------- */
+  .main{
+    flex:1;
+    padding:28px 40px 60px 40px;
+    max-width:1720px;
+  }
+
+  .search-box{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    background:var(--card-bg);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:13px 18px;
+    max-width:440px;
+    margin-bottom:20px;
+  }
+  .search-box svg{width:17px;height:17px;color:#9ca3af;flex-shrink:0;}
+  .search-box input{
+    border:none;
+    outline:none;
+    font-size:14.5px;
+    width:100%;
+    color:var(--text-main);
+    background:transparent;
+  }
+  .search-box input::placeholder{color:#9ca3af;}
+
+  /* ---------- SUMMARY STAT STRIP ---------- */
+  .summary-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:16px;
+    margin-bottom:24px;
+  }
+  .summary-card{
+    background:var(--card-bg);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:16px 20px;
+    text-align:center;
+  }
+  .summary-label{
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:.05em;
+    text-transform:uppercase;
+    color:#9ca3af;
+    margin-bottom:8px;
+  }
+  .summary-value{
+    font-size:19px;
+    font-weight:800;
+    color:var(--text-main);
+  }
+  .summary-value.blue{color:var(--blue);}
+  .summary-value.green{color:var(--green);}
+  .summary-value.purple{color:var(--purple);}
+  .summary-value.orange{color:var(--orange);}
+
+  /* ---------- COURSE CARDS ---------- */
+  .course-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:16px;
+  }
+  .course-card{
+    background:var(--card-bg);
+    border:1px solid var(--border);
+    border-radius:14px;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+  }
+  .top-bar-strip{height:5px;width:100%;}
+  .strip-purple{background:#7c3aed;}
+  .strip-green{background:#16a34a;}
+  .strip-orange{background:#f59e0b;}
+  .strip-violet{background:#8b5cf6;}
+  .strip-red{background:#ef4444;}
+  .strip-teal{background:#14b8a6;}
+
+  .course-body{padding:18px 22px 16px 22px;flex:1;}
+  .course-head-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:12px;
+  }
+  .course-code{
+    font-size:13px;
+    font-weight:800;
+  }
+  .code-purple{color:#7c3aed;}
+  .code-green{color:#16a34a;}
+  .code-orange{color:#d97706;}
+  .code-violet{color:#8b5cf6;}
+  .code-red{color:#dc2626;}
+  .code-teal{color:#0d9488;}
+
+  .badge-activo{
+    background:#dbe6fd;
+    color:#2563eb;
+    font-size:12px;
+    font-weight:700;
+    padding:4px 12px;
+    border-radius:999px;
+  }
+
+  .course-title{
+    font-weight:700;
+    font-size:15.5px;
+    color:var(--text-main);
+    margin-bottom:6px;
+    line-height:1.3;
+  }
+  .course-teacher{
+    font-size:13.5px;
+    color:#4b5563;
+    margin-bottom:14px;
+  }
+
+  .meta-row{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-size:13px;
+    color:#6b7280;
+    margin-bottom:8px;
+  }
+  .meta-row svg{width:14px;height:14px;flex-shrink:0;color:#9ca3af;}
+
+  .attendance-label-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-size:13px;
+    color:#4b5563;
+    margin-top:14px;
+    margin-bottom:8px;
+  }
+  .attendance-label-row span.value{font-weight:700;}
+  .val-green{color:var(--green);}
+  .val-orange{color:var(--orange);}
+  .val-red{color:var(--red);}
+
+  .attendance-track{
+    height:6px;
+    border-radius:999px;
+    background:#eef0f2;
+    overflow:hidden;
+  }
+  .attendance-fill{height:100%;border-radius:999px;}
+  .fill-green{background:var(--green);}
+  .fill-orange{background:#f59e0b;}
+  .fill-red{background:#ef4444;}
+
+  .course-footer{
+    display:flex;
+    border-top:1px solid var(--border);
+  }
+  .footer-btn{
+    flex:1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    padding:13px 0;
+    font-size:13.5px;
+    font-weight:600;
+    color:#374151;
+    cursor:pointer;
+  }
+  .footer-btn:first-child{border-right:1px solid var(--border);}
+  .footer-btn svg{width:15px;height:15px;color:#6b7280;}
+  .footer-btn.link{color:var(--blue);}
+  .footer-btn.link svg{color:var(--blue);}
+</style>
+</head>
+<body>
+
+  <!-- ================= SIDEBAR ================= -->
+  <aside class="sidebar">
+    <div class="sidebar-top">
+      <div class="user-box">
+        <div class="user-name">Admin. General</div>
+        <div class="user-role">admin</div>
+      </div>
+
+      <nav class="menu">
+        <a class="menu-item" href="#">
+          <span class="left">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/></svg>
+            Inicio
+          </span>
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+        </a>
+        <a class="menu-item" href="#">
+          <span class="left">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="7" r="4"/><path d="M2 21v-2a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v2"/><path d="M17 11a4 4 0 1 0 0-8"/><path d="M23 21v-2a4.5 4.5 0 0 0-3-4.2"/></svg>
+            Usuarios
+          </span>
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+        </a>
+        <a class="menu-item active" href="#">
+          <span class="left">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4h6a4 4 0 0 1 4 4v12a3 3 0 0 0-3-3H2z"/><path d="M22 4h-6a4 4 0 0 0-4 4v12a3 3 0 0 1 3-3h7z"/></svg>
+            Cursos
+          </span>
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+        </a>
+        <a class="menu-item" href="#">
+          <span class="left">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9.5"/></svg>
+            Ambientes
+          </span>
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+        </a>
+        <a class="menu-item" href="#">
+          <span class="left">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><rect x="7" y="12" width="3" height="6"/><rect x="12" y="8" width="3" height="10"/><rect x="17" y="5" width="3" height="13"/></svg>
+            Reportes
+          </span>
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+        </a>
+        <a class="menu-item" href="#">
+          <span class="left">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.6V21a2 2 0 1 1-4 0v-.2a1.7 1.7 0 0 0-1-1.5 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.2a1.7 1.7 0 0 0 1.5-1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.2a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.2a1.7 1.7 0 0 0-1.5 1z"/></svg>
+            Configuración
+          </span>
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+        </a>
+      </nav>
+
+      <div class="collapse-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 6l-6 6 6 6"/></svg>
+      </div>
+    </div>
+
+    <div class="logout">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/></svg>
+      Cerrar sesión
+    </div>
+  </aside>
+
+  <!-- ================= MAIN ================= -->
+  <main class="main">
+
+    <div class="search-box">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+      <input type="text" placeholder="Buscar curso o código...">
+    </div>
+
+    <div class="summary-grid">
+      <div class="summary-card">
+        <div class="summary-label">Total cursos</div>
+        <div class="summary-value">6</div>
+      </div>
+      <div class="summary-card">
+        <div class="summary-label">Estudiantes</div>
+        <div class="summary-value blue">172</div>
+      </div>
+      <div class="summary-card">
+        <div class="summary-label">Asistencia prom.</div>
+        <div class="summary-value green">86%</div>
+      </div>
+      <div class="summary-card">
+        <div class="summary-label">Con alerta</div>
+        <div class="summary-value orange">2</div>
+      </div>
+    </div>
+
+    <div class="course-grid">
+
+      <!-- Curso 1 -->
+      <div class="course-card">
+        <div class="top-bar-strip strip-purple"></div>
+        <div class="course-body">
+          <div class="course-head-row">
+            <span class="course-code code-purple">2240001</span>
+            <span class="badge-activo">Activo</span>
+          </div>
+          <div class="course-title">Tecnología en Análisis y Desarrollo de Software</div>
+          <div class="course-teacher">Dr. Felipe Torres</div>
+          <div class="meta-row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="7" r="4"/><path d="M2 21v-2a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v2"/><path d="M17 11a4 4 0 1 0 0-8"/><path d="M23 21v-2a4.5 4.5 0 0 0-3-4.2"/></svg>
+            35 estudiantes
+          </div>
+          <div class="meta-row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+            —
+          </div>
+          <div class="meta-row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+            —
+          </div>
+          <div class="attendance-label-row">
+            <span>Asistencia promedio</span>
+            <span class="value val-green">93.2%</span>
+          </div>
+          <div class="attendance-track"><div class="attendance-fill fill-green" style="width:93.2%;"></div></div>
+        </div>
+        <div class="course-footer">
+          <div class="footer-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><rect x="7" y="12" width="3" height="6"/><rect x="12" y="8" width="3" height="10"/><rect x="17" y="5" width="3" height="13"/></svg>
+            Reportes
+          </div>
+          <div class="footer-btn link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="7" r="4"/><path d="M2 21v-2a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v2"/><path d="M17 11a4 4 0 1 0 0-8"/><path d="M23 21v-2a4.5 4.5 0 0 0-3-4.2"/></svg>
+            Estudiantes
+          </div>
+        </div>
+      </div>
+
+      <!-- Curso 2 -->
+      <div class="course-card">
+        <div class="top-bar-strip strip-green"></div>
+        <div class="course-body">
+          <div class="course-head-row">
+            <span class="course-code code-green">2240002</span>
+            <span class="badge-activo">Activo</span>
+          </div>
+          <div class="course-title">Tecnología en Gestión de Redes</div>
+          <div class="course-teacher">Dra. Patricia Soto</div>
+          <div class="meta-row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="7" r="4"/><path d="M2 21v-2a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v2"/><path d="M17 11a4 4 0 1 0 0-8"/><path d="M23 21v-2a4.5 4.5 0 0 0-3-4.2"/></svg>
+            30 estudiantes
+          </div>
+          <div class="meta-row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+            —
+          </div>
+          <div class="meta-row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+            —
+          </div>
+          <div class="attendance-label-row">
+            <span>Asistencia promedio</span>
+            <span class="value val-green">95.8%</span>
+          </div>
+          <div class="attendance-track"><div class="attendance-fill fill-green" style="width:95.8%;"></div></div>
+        </div>
+        <div class="course-footer">
+          <div class="footer-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><rect x="7" y="12" width="3" height="6"/><rect x="12" y="8" width="3" height="10"/><rect x="17" y="5" width="3" height="13"/></svg>
+            Reportes
+          </div>
+          <div class="footer-btn link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="7" r="4"/><path d="M2 21v-2a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v2"/><path d="M17 11a4 4 0 1 0 0-8"/><path d="M23 21v-2a4.5 4.5 0 0 0-3-4.2"/></svg>
+            Estudiantes
+          </div>
+        </div>
+      </div>
+
+      <!-- Curso 3 -->
+      <div class="course-card">
+        <div class="top-bar-strip strip-orange"></div>
+        <div class="course-body">
+          <div class="course-head-row">
+            <span class="course-code code-orange">2240003</span>
+            <span class="badge-activo">Activo</span>
+          </div>
+          <div class="course-title">Tecnología en Electrónica</div>
+          <div class="course-teacher">Dr. Mauricio Reyes</div>
+          <div class="meta-row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="7" r="4"/><path d="M2 21v-2a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v2"/><path d="M17 11a4 4 0 1 0 0-8"/><path d="M23 21v-2a4.5 4.5 0 0 0-3-4.2"/></svg>
+            28 estudiantes
+          </div>
+          <div class="meta-row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+            —
+          </div>
+          <div class="meta-row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+            —
+          </div>
+          <div class="attendance-label-row">
+            <span>Asistencia promedio</span>
+            <span class="value val-orange">78.5%</span>
+          </div>
+          <div class="attendance-track"><div class="attendance-fill fill-orange" style="width:78.5%;"></div></div>
+        </div>
+        <div class="course-footer">
+          <div class="footer-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><rect x="7" y="12" width="3" height="6"/><rect x="12" y="8" width="3" height="10"/><rect x="17" y="5" width="3" height="13"/></svg>
+            Reportes
+          </div>
+          <div class="footer-btn link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="7" r="4"/><path d="M2 21v-2a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v2"/><path d="M17 11a4 4 0 1 0 0-8"/><path d="M23 21v-2a4.5 4.5 0 0 0-3-4.2"/></svg>
+            Estudiantes
+          </div>
+        </div>
+      </div>
+
+      <!-- Curso 4 -->
+      <div class="course-card">
+        <div class="top-bar-strip strip-violet"></div>
+        <div class="course-body">
+          <div class="course-head-row">
+            <span class="course-code code-violet">2240004</span>
+            <span class="badge-activo">Activo</span>
+          </div>
+          <div class="course-title">Tecnología en Programación de Software</div>
+          <div class="course-teacher">Ing. Sandra Varela</div>
+          <div class="meta-row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="7" r="4"/><path d="M2 21v-2a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v2"/><path d="M17 11a4 4 0 1 0 0-8"/><path d="M23 21v-2a4.5 4.5 0 0 0-3-4.2"/></svg>
+            32 estudiantes
+          </div>
+          <div class="meta-row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+            —
+          </div>
+          <div class="meta-row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+            —
+          </div>
+          <div class="attendance-label-row">
+            <span>Asistencia promedio</span>
+            <span class="value val-green">87.3%</span>
+          </div>
+          <div class="attendance-track"><div class="attendance-fill fill-green" style="width:87.3%;"></div></div>
+        </div>
+        <div class="course-footer">
+          <div class="footer-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><rect x="7" y="12" width="3" height="6"/><rect x="12" y="8" width="3" height="10"/><rect x="17" y="5" width="3" height="13"/></svg>
+            Reportes
+          </div>
+          <div class="footer-btn link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="7" r="4"/><path d="M2 21v-2a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v2"/><path d="M17 11a4 4 0 1 0 0-8"/><path d="M23 21v-2a4.5 4.5 0 0 0-3-4.2"/></svg>
+            Estudiantes
+          </div>
+        </div>
+      </div>
+
+      <!-- Curso 5 -->
+      <div class="course-card">
+        <div class="top-bar-strip strip-red"></div>
+        <div class="course-body">
+          <div class="course-head-row">
+            <span class="course-code code-red">2240005</span>
+            <span class="badge-activo">Activo</span>
+          </div>
+          <div class="course-title">Tecnología en Bases de Datos</div>
+          <div class="course-teacher">Dr. Hugo Méndez</div>
+          <div class="meta-row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="7" r="4"/><path d="M2 21v-2a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v2"/><path d="M17 11a4 4 0 1 0 0-8"/><path d="M23 21v-2a4.5 4.5 0 0 0-3-4.2"/></svg>
+            25 estudiantes
+          </div>
+          <div class="meta-row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+            —
+          </div>
+          <div class="meta-row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+            —
+          </div>
+          <div class="attendance-label-row">
+            <span>Asistencia promedio</span>
+            <span class="value val-green">91.2%</span>
+          </div>
+          <div class="attendance-track"><div class="attendance-fill fill-green" style="width:91.2%;"></div></div>
+        </div>
+        <div class="course-footer">
+          <div class="footer-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><rect x="7" y="12" width="3" height="6"/><rect x="12" y="8" width="3" height="10"/><rect x="17" y="5" width="3" height="13"/></svg>
+            Reportes
+          </div>
+          <div class="footer-btn link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="7" r="4"/><path d="M2 21v-2a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v2"/><path d="M17 11a4 4 0 1 0 0-8"/><path d="M23 21v-2a4.5 4.5 0 0 0-3-4.2"/></svg>
+            Estudiantes
+          </div>
+        </div>
+      </div>
+
+      <!-- Curso 6 -->
+      <div class="course-card">
+        <div class="top-bar-strip strip-teal"></div>
+        <div class="course-body">
+          <div class="course-head-row">
+            <span class="course-code code-teal">2240006</span>
+            <span class="badge-activo">Activo</span>
+          </div>
+          <div class="course-title">Tecnología en Diseño Gráfico</div>
+          <div class="course-teacher">Prof. Fernando Castro</div>
+          <div class="meta-row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="7" r="4"/><path d="M2 21v-2a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v2"/><path d="M17 11a4 4 0 1 0 0-8"/><path d="M23 21v-2a4.5 4.5 0 0 0-3-4.2"/></svg>
+            22 estudiantes
+          </div>
+          <div class="meta-row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+            —
+          </div>
+          <div class="meta-row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+            —
+          </div>
+          <div class="attendance-label-row">
+            <span>Asistencia promedio</span>
+            <span class="value val-red">72.8%</span>
+          </div>
+          <div class="attendance-track"><div class="attendance-fill fill-red" style="width:72.8%;"></div></div>
+        </div>
+        <div class="course-footer">
+          <div class="footer-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><rect x="7" y="12" width="3" height="6"/><rect x="12" y="8" width="3" height="10"/><rect x="17" y="5" width="3" height="13"/></svg>
+            Reportes
+          </div>
+          <div class="footer-btn link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="7" r="4"/><path d="M2 21v-2a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v2"/><path d="M17 11a4 4 0 1 0 0-8"/><path d="M23 21v-2a4.5 4.5 0 0 0-3-4.2"/></svg>
+            Estudiantes
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+</body>
+</html>

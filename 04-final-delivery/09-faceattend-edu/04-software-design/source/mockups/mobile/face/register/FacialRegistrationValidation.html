@@ -1,0 +1,112 @@
+<!DOCTYPE html><html lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+<title>Registro de rostro - Revisión</title>
+<!-- Tailwind CSS v3 -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            appBlue: '#0d7cdb',
+            appBlueHover: '#0a6abf',
+            darkBlue: '#0e294b',
+            textGray: '#5b6b79',
+            cameraBg: '#8c857f',
+          },
+          fontFamily: {
+            sans: ['system-ui', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', 'Helvetica', 'Arial', 'sans-serif'],
+          },
+          borderRadius: {
+            '3xl': '28px',
+            '4xl': '36px',
+          }
+        }
+      }
+    }
+  </script>
+<!-- Typography & Layout Styles -->
+<style data-purpose="base-typography">
+    body {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      touch-action: manipulation;
+    }
+  </style>
+<!-- Custom Element Styles -->
+<style data-purpose="camera-preview-styling">
+    /* Camera preview styling matching the clean aesthetic from registration screen */
+    .preview-box {
+      background-color: #8c857f;
+      aspect-ratio: 1 / 1.33;
+      box-shadow: 0 4px 20px -4px rgba(0, 0, 0, 0.08);
+    }
+  </style>
+</head>
+<body class="bg-slate-100 flex justify-center items-center min-h-screen p-0 sm:p-4 text-slate-800 antialiased selection:bg-blue-100">
+<!-- BEGIN: MobileDeviceContainer -->
+<main class="w-full max-w-[430px] min-h-screen bg-white shadow-xl flex flex-col justify-between px-6 pt-10 pb-8 sm:rounded-[40px] sm:min-h-[880px] sm:h-auto overflow-hidden" data-purpose="screen-wrapper">
+<!-- Top Content Area -->
+<div class="w-full flex flex-col items-center">
+<!-- BEGIN: HeaderSection -->
+<header class="w-full flex items-center justify-between gap-2 mb-6" data-purpose="app-header">
+<!-- Title -->
+<h1 class="text-[26px] leading-tight font-extrabold text-[#0e294b] tracking-tight">
+          Registro de rostro
+        </h1>
+<!-- Brand Circular Logo Container -->
+<div class="flex-shrink-0 flex items-center justify-end" data-purpose="logo-container">
+<img alt="Logo de autenticación biométrica" class="w-[100px] h-[100px] object-contain drop-shadow-sm transition-transform duration-300 hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5-LJJ0zQfUjLfLhhX0F3inci5iT9jGozswgdwdUvW3pT4nZaZjSOsDy_6u1XZckOVb8m4TYWi_grjJmSDvaKbKkoW3d8pyaFcNUeXP_-QhbXX_-maRf_qTeCtvjpjOgR3G0Sdn-GYONuafecdewUZVHkN2LRof71FsFjj1y7iR95Hf1SUtFudfMHCviPosqACpB1OAvXBqtVlIA5iMQ9CdoD8H8LLlNbSLysUl3grv1M-tLxEOXmvNDKMSmbOjIS2Yw">
+</div>
+</header>
+<!-- END: HeaderSection -->
+<!-- BEGIN: InstructionSection -->
+<div class="w-full text-center px-2 mb-6" data-purpose="instructions">
+<p class="text-[#596979] text-[15px] font-medium leading-relaxed max-w-[340px] mx-auto">
+          Revisa la fotografía. Si estás conforme guárdala; de lo contrario, vuelve a tomarla.
+        </p>
+</div>
+<!-- END: InstructionSection -->
+<!-- BEGIN: PhotoPreviewSection -->
+<!-- Clean, uniform neutral background matching the capture screen aesthetic without light glare -->
+<section class="w-full relative flex items-center justify-center" data-purpose="photo-preview-container">
+<div class="w-full preview-box rounded-[32px] overflow-hidden flex items-center justify-center relative">
+<!-- Neutral clean camera capture preview layer -->
+<div aria-label="Fotografía capturada" class="absolute inset-0 bg-[#8c857f] flex items-center justify-center">
+<!-- Subtle silhouette guide to indicate facial framing -->
+<div class="w-[74%] h-[82%] rounded-[50%] border-2 border-white/20 pointer-events-none"></div>
+</div>
+</div>
+</section>
+<!-- END: PhotoPreviewSection -->
+</div>
+<!-- BEGIN: ActionButtonsGroup -->
+<footer class="w-full flex flex-col gap-3.5 pt-6 mt-4" data-purpose="action-buttons">
+<!-- Primary Save Button -->
+<button class="w-full h-14 bg-[#0d7cdb] hover:bg-[#0b6ec4] active:scale-[0.98] text-white font-bold text-[17px] tracking-wide rounded-2xl shadow-sm transition-all duration-150 flex items-center justify-center focus:outline-none focus:ring-4 focus:ring-blue-300/50" data-purpose="save-button" id="btn-guardar-rostro" type="button">
+        Guardar rostro
+      </button>
+<!-- Secondary Retake Button -->
+<button class="w-full h-14 bg-white hover:bg-blue-50/50 active:scale-[0.98] text-[#0d7cdb] font-bold text-[17px] tracking-wide border-2 border-[#0d7cdb] rounded-2xl shadow-sm transition-all duration-150 flex items-center justify-center focus:outline-none focus:ring-4 focus:ring-blue-200" data-purpose="retake-button" id="btn-volver-tomar" type="button">
+        Volver a tomar
+      </button>
+</footer>
+<!-- END: ActionButtonsGroup -->
+</main>
+<!-- END: MobileDeviceContainer -->
+<!-- Interactive Feedback Script -->
+<script data-purpose="interaction-handlers">
+    document.getElementById('btn-guardar-rostro')?.addEventListener('click', () => {
+      // Event hook for saving biometric facial data
+      console.log('Guardar rostro presionado');
+    });
+
+    document.getElementById('btn-volver-tomar')?.addEventListener('click', () => {
+      // Event hook for retaking the photo
+      console.log('Volver a tomar presionado');
+    });
+  </script>
+
+
+</body></html>

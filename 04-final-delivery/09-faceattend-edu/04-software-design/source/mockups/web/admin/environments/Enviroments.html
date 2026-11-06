@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ambientes — Mockup</title>
+<style>
+  :root{
+    --sidebar-bg:#ffffff;
+    --sidebar-active:#2563eb;
+    --sidebar-active-bg:#dbe6fd;
+    --border:#e8eaed;
+    --bg:#f7f8fa;
+    --card-bg:#ffffff;
+    --text-main:#111827;
+    --text-muted:#6b7280;
+    --blue:#2563eb;
+    --green:#16a34a;
+    --orange:#d97706;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:var(--bg);
+    color:var(--text-main);
+    display:flex;
+    min-height:100vh;
+  }
+
+  /* ---------- SIDEBAR ---------- */
+  .sidebar{
+    width:262px;
+    min-width:262px;
+    background:var(--sidebar-bg);
+    border-right:1px solid var(--border);
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    padding:20px 14px;
+    position:relative;
+  }
+  .sidebar-top{display:flex;flex-direction:column;gap:22px;}
+  .user-box{padding:6px 10px 18px 10px;border-bottom:1px solid var(--border);}
+  .user-name{font-weight:700;font-size:15px;color:var(--text-main);}
+  .user-role{font-size:12.5px;color:#9ca3af;margin-top:2px;}
+
+  nav.menu{display:flex;flex-direction:column;gap:4px;}
+  .menu-item{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:10px 12px;
+    border-radius:8px;
+    font-size:14.5px;
+    font-weight:600;
+    color:#374151;
+    cursor:pointer;
+    text-decoration:none;
+  }
+  .menu-item .left{display:flex;align-items:center;gap:10px;}
+  .menu-item svg{width:18px;height:18px;flex-shrink:0;color:#6b7280;}
+  .menu-item.active{
+    background:var(--sidebar-active-bg);
+    color:var(--sidebar-active);
+  }
+  .menu-item.active svg{color:var(--sidebar-active);}
+  .menu-item .chev{width:14px;height:14px;opacity:.6;}
+
+  .collapse-btn{
+    position:absolute;
+    top:150px;
+    right:-13px;
+    width:26px;height:26px;
+    border-radius:50%;
+    background:#fff;
+    border:1px solid var(--border);
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 1px 3px rgba(0,0,0,.08);
+  }
+  .collapse-btn svg{width:14px;height:14px;color:#6b7280;}
+
+  .logout{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:10px 12px;
+    color:#dc2626;
+    font-weight:600;
+    font-size:14.5px;
+    cursor:pointer;
+  }
+  .logout svg{width:18px;height:18px;}
+
+  /* ---------- MAIN ---------- */
+  .main{
+    flex:1;
+    padding:28px 40px 60px 40px;
+    max-width:1720px;
+  }
+
+  /* ---------- SUMMARY STAT STRIP ---------- */
+  .summary-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:16px;
+    margin-bottom:20px;
+  }
+  .summary-card{
+    background:var(--card-bg);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:18px 20px;
+    text-align:center;
+  }
+  .summary-label{
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:.05em;
+    text-transform:uppercase;
+    color:#9ca3af;
+    margin-bottom:10px;
+  }
+  .summary-value{
+    font-size:24px;
+    font-weight:800;
+    color:var(--text-main);
+  }
+  .summary-value.blue{color:var(--blue);}
+  .summary-value.green{color:var(--green);}
+  .summary-value.orange{color:var(--orange);}
+
+  .search-box{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    background:var(--card-bg);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:13px 18px;
+    margin-bottom:20px;
+  }
+  .search-box svg{width:17px;height:17px;color:#9ca3af;flex-shrink:0;}
+  .search-box input{
+    border:none;
+    outline:none;
+    font-size:14.5px;
+    width:100%;
+    color:var(--text-main);
+    background:transparent;
+  }
+  .search-box input::placeholder{color:#9ca3af;}
+
+  /* ---------- ENVIRONMENT CARDS ---------- */
+  .env-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:16px;
+    margin-bottom:16px;
+  }
+  .env-grid.full{grid-template-columns:1fr;}
+
+  .env-card{
+    background:var(--card-bg);
+    border:1px solid var(--border);
+    border-radius:14px;
+    overflow:hidden;
+  }
+  .env-top-strip{height:5px;background:var(--blue);}
+  .env-body{padding:20px 22px 22px 22px;}
+
+  .env-head-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:10px;
+  }
+  .env-title{
+    font-weight:800;
+    font-size:19px;
+    color:var(--blue);
+  }
+  .env-capacity{
+    display:flex;
+    align-items:center;
+    gap:5px;
+    background:#f3f4f6;
+    color:#4b5563;
+    font-size:12.5px;
+    font-weight:700;
+    padding:5px 10px;
+    border-radius:8px;
+    flex-shrink:0;
+  }
+  .env-capacity svg{width:14px;height:14px;color:#6b7280;}
+
+  .env-desc{
+    font-size:13.5px;
+    color:#4b5563;
+    line-height:1.5;
+    margin-bottom:18px;
+  }
+
+  .env-divider{
+    border:none;
+    border-top:1px solid var(--border);
+    margin:0 0 14px 0;
+  }
+
+  .env-schedules-label{
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:.04em;
+    text-transform:uppercase;
+    color:#9ca3af;
+    margin-bottom:12px;
+  }
+
+  .schedule-item{
+    display:flex;
+    gap:10px;
+    margin-bottom:12px;
+  }
+  .schedule-item:last-child{margin-bottom:0;}
+  .schedule-dot{
+    width:6px;height:6px;
+    border-radius:50%;
+    background:var(--blue);
+    margin-top:7px;
+    flex-shrink:0;
+  }
+  .schedule-course{
+    font-weight:700;
+    font-size:14px;
+    color:var(--text-main);
+    margin-bottom:2px;
+  }
+  .schedule-meta{
+    font-size:12.5px;
+    color:var(--text-muted);
+  }
+</style>
+</head>
+<body>
+
+  <!-- ================= SIDEBAR ================= -->
+  <aside class="sidebar">
+    <div class="sidebar-top">
+      <div class="user-box">
+        <div class="user-name">Admin. General</div>
+        <div class="user-role">admin</div>
+      </div>
+
+      <nav class="menu">
+        <a class="menu-item" href="#">
+          <span class="left">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/></svg>
+            Inicio
+          </span>
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+        </a>
+        <a class="menu-item" href="#">
+          <span class="left">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="7" r="4"/><path d="M2 21v-2a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v2"/><path d="M17 11a4 4 0 1 0 0-8"/><path d="M23 21v-2a4.5 4.5 0 0 0-3-4.2"/></svg>
+            Usuarios
+          </span>
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+        </a>
+        <a class="menu-item" href="#">
+          <span class="left">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4h6a4 4 0 0 1 4 4v12a3 3 0 0 0-3-3H2z"/><path d="M22 4h-6a4 4 0 0 0-4 4v12a3 3 0 0 1 3-3h7z"/></svg>
+            Cursos
+          </span>
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+        </a>
+        <a class="menu-item active" href="#">
+          <span class="left">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9.5"/></svg>
+            Ambientes
+          </span>
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+        </a>
+        <a class="menu-item" href="#">
+          <span class="left">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><rect x="7" y="12" width="3" height="6"/><rect x="12" y="8" width="3" height="10"/><rect x="17" y="5" width="3" height="13"/></svg>
+            Reportes
+          </span>
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+        </a>
+        <a class="menu-item" href="#">
+          <span class="left">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.6V21a2 2 0 1 1-4 0v-.2a1.7 1.7 0 0 0-1-1.5 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.2a1.7 1.7 0 0 0 1.5-1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.2a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.2a1.7 1.7 0 0 0-1.5 1z"/></svg>
+            Configuración
+          </span>
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+        </a>
+      </nav>
+
+      <div class="collapse-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 6l-6 6 6 6"/></svg>
+      </div>
+    </div>
+
+    <div class="logout">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/></svg>
+      Cerrar sesión
+    </div>
+  </aside>
+
+  <!-- ================= MAIN ================= -->
+  <main class="main">
+
+    <div class="summary-grid">
+      <div class="summary-card">
+        <div class="summary-label">Total ambientes</div>
+        <div class="summary-value">4</div>
+      </div>
+      <div class="summary-card">
+        <div class="summary-label">Total horarios</div>
+        <div class="summary-value green">5</div>
+      </div>
+      <div class="summary-card">
+        <div class="summary-label">Sin horarios</div>
+        <div class="summary-value orange">0</div>
+      </div>
+    </div>
+
+    <div class="search-box">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+      <input type="text" placeholder="Buscar por ambiente, ficha o instructor...">
+    </div>
+
+    <div class="env-grid">
+
+      <!-- Ambiente 301 -->
+      <div class="env-card">
+        <div class="env-top-strip"></div>
+        <div class="env-body">
+          <div class="env-head-row">
+            <span class="env-title">301</span>
+            <span class="env-capacity">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="7" r="4"/><path d="M2 21v-2a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v2"/><path d="M17 11a4 4 0 1 0 0-8"/><path d="M23 21v-2a4.5 4.5 0 0 0-3-4.2"/></svg>
+              40
+            </span>
+          </div>
+          <div class="env-desc">Bloque A, piso 3 — Aula de teoría con capacidad para 40 estudiantes. Dotada de videobeam y aire acondicionado.</div>
+          <hr class="env-divider">
+          <div class="env-schedules-label">Horarios asignados (2)</div>
+          <div class="schedule-item">
+            <div class="schedule-dot"></div>
+            <div>
+              <div class="schedule-course">2240001 — Algoritmos y Estructuras de Datos</div>
+              <div class="schedule-meta">Dr. Felipe Torres • 08:00–10:00 • Lun, Mié</div>
+            </div>
+          </div>
+          <div class="schedule-item">
+            <div class="schedule-dot"></div>
+            <div>
+              <div class="schedule-course">2240006 — Bases de Datos</div>
+              <div class="schedule-meta">Dr. Hugo Méndez • 14:00–18:00 • Vie</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ambiente 105 -->
+      <div class="env-card">
+        <div class="env-top-strip"></div>
+        <div class="env-body">
+          <div class="env-head-row">
+            <span class="env-title">105</span>
+            <span class="env-capacity">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="7" r="4"/><path d="M2 21v-2a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v2"/><path d="M17 11a4 4 0 1 0 0-8"/><path d="M23 21v-2a4.5 4.5 0 0 0-3-4.2"/></svg>
+              35
+            </span>
+          </div>
+          <div class="env-desc">Bloque B, piso 1 — Aula de matemáticas con tablero de vidrio y sistema de audio.</div>
+          <hr class="env-divider">
+          <div class="env-schedules-label">Horarios asignados (1)</div>
+          <div class="schedule-item">
+            <div class="schedule-dot"></div>
+            <div>
+              <div class="schedule-course">2240002 — Cálculo Diferencial</div>
+              <div class="schedule-meta">Dra. Patricia Soto • 10:00–12:00 • Mar, Jue</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ambiente Lab. Física -->
+      <div class="env-card">
+        <div class="env-top-strip"></div>
+        <div class="env-body">
+          <div class="env-head-row">
+            <span class="env-title">Lab. Física</span>
+            <span class="env-capacity">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="7" r="4"/><path d="M2 21v-2a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v2"/><path d="M17 11a4 4 0 1 0 0-8"/><path d="M23 21v-2a4.5 4.5 0 0 0-3-4.2"/></svg>
+              20
+            </span>
+          </div>
+          <div class="env-desc">Bloque C, piso 1 — Laboratorio de física con equipos de medición. Requiere bata de laboratorio.</div>
+          <hr class="env-divider">
+          <div class="env-schedules-label">Horarios asignados (1)</div>
+          <div class="schedule-item">
+            <div class="schedule-dot"></div>
+            <div>
+              <div class="schedule-course">2240003 — Física I</div>
+              <div class="schedule-meta">Dr. Mauricio Reyes • 07:00–08:00 • Lun, Mié, Vie</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="env-grid full">
+      <!-- Ambiente Lab. Computación -->
+      <div class="env-card">
+        <div class="env-top-strip"></div>
+        <div class="env-body">
+          <div class="env-head-row">
+            <span class="env-title">Lab. Computación</span>
+            <span class="env-capacity">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="7" r="4"/><path d="M2 21v-2a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v2"/><path d="M17 11a4 4 0 1 0 0-8"/><path d="M23 21v-2a4.5 4.5 0 0 0-3-4.2"/></svg>
+              30
+            </span>
+          </div>
+          <div class="env-desc">Bloque A, piso 2 — Laboratorio de cómputo con 30 equipos. Acceso con carné estudiantil.</div>
+          <hr class="env-divider">
+          <div class="env-schedules-label">Horarios asignados (1)</div>
+          <div class="schedule-item">
+            <div class="schedule-dot"></div>
+            <div>
+              <div class="schedule-course">2240004 — Programación Orientada a Objetos</div>
+              <div class="schedule-meta">Ing. Sandra Varela • 14:00–16:00 • Mar, Jue</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+</body>
+</html>

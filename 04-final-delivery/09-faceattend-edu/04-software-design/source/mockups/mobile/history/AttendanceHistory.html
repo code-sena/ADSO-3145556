@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FaceAttendEDU - Attendance History</title>
+    <style>
+        :root {
+            --color-primary: #2196F3;
+            --color-bg-page: #F8FAFC;
+            --color-bg-card: #FFFFFF;
+            --color-text-primary: #0F172A;
+            --color-text-secondary: #64748B;
+            --color-success: #10B981;
+            --color-error: #EF4444;
+            --space-md: 16px;
+            --space-lg: 24px;
+            --radius-lg: 12px;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+        }
+        body {
+            font-family: sans-serif;
+            background-color: #cbd5e1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .mobile-viewport {
+            width: 375px;
+            height: 812px;
+            background-color: var(--color-bg-page);
+            border-radius: 40px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+            border: 8px solid #334155;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            padding: 40px var(--space-lg) var(--space-md);
+            background-color: var(--color-bg-card);
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .header h1 {
+            font-size: 22px;
+            color: var(--color-text-primary);
+            margin: 0;
+        }
+        .content {
+            padding: var(--space-lg);
+            flex: 1;
+            overflow-y: auto;
+        }
+        .filter-bar {
+            display: flex;
+            gap: 10px;
+            margin-bottom: var(--space-lg);
+        }
+        .filter-chip {
+            padding: 6px 12px;
+            background: #e2e8f0;
+            border-radius: 20px;
+            font-size: 12px;
+            color: var(--color-text-secondary);
+            cursor: pointer;
+        }
+        .filter-chip.active {
+            background: var(--color-primary);
+            color: white;
+        }
+        .attendance-item {
+            background: var(--color-bg-card);
+            padding: var(--space-md);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            margin-bottom: var(--space-md);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 4px solid var(--color-primary);
+        }
+        .attendance-item.absent {
+            border-left-color: var(--color-error);
+        }
+        .attendance-item.present {
+            border-left-color: var(--color-success);
+        }
+        .info h4 {
+            margin: 0;
+            font-size: 16px;
+            color: var(--color-text-primary);
+        }
+        .info p {
+            margin: 4px 0 0 0;
+            font-size: 13px;
+            color: var(--color-text-secondary);
+        }
+        .status {
+            font-weight: bold;
+            font-size: 12px;
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+        .status.present {
+            color: var(--color-success);
+            background: #d1fae5;
+        }
+        .status.absent {
+            color: var(--color-error);
+            background: #fee2e2;
+        }
+        .footer {
+            padding: var(--space-lg);
+            background-color: var(--color-bg-card);
+            border-top: 1px solid #e2e8f0;
+        }
+        .btn-primary {
+            background-color: var(--color-primary);
+            color: white;
+            text-align: center;
+            padding: 14px;
+            border-radius: var(--radius-lg);
+            text-decoration: none;
+            display: block;
+            font-weight: bold;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="mobile-viewport">
+        <div class="header">
+            <h1>Historial de Asistencia</h1>
+        </div>
+        <div class="content">
+            <div class="filter-bar">
+                <div class="filter-chip active">Todos</div>
+                <div class="filter-chip">Presentes</div>
+                <div class="filter-chip">Ausentes</div>
+            </div>
+
+            <div class="attendance-item present">
+                <div class="info">
+                    <h4>Matemáticas I</h4>
+                    <p>12 Oct 2023 • 08:00 AM</p>
+                </div>
+                <div class="status present">Presente</div>
+            </div>
+
+            <div class="attendance-item absent">
+                <div class="info">
+                    <h4>Física General</h4>
+                    <p>11 Oct 2023 • 10:00 AM</p>
+                </div>
+                <div class="status absent">Ausente</div>
+            </div>
+
+            <div class="attendance-item present">
+                <div class="info">
+                    <h4>Programación I</h4>
+                    <p>10 Oct 2023 • 02:00 PM</p>
+                </div>
+                <div class="status present">Presente</div>
+            </div>
+
+            <div class="attendance-item present">
+                <div class="info">
+                    <h4>Química Orgánica</h4>
+                    <p>09 Oct 2023 • 08:00 AM</p>
+                </div>
+                <div class="status present">Presente</div>
+            </div>
+        </div>
+        <div class="footer">
+            <a href="#" class="btn-primary">Volver al Inicio</a>
+        </div>
+    </div>
+</body>
+</html>

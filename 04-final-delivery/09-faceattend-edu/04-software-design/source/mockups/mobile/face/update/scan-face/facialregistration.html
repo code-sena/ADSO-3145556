@@ -1,0 +1,51 @@
+<!DOCTYPE html><html lang="es" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+<title>Registro Facial</title>
+<!-- Tailwind CSS v3 -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&amp;display=swap" rel="stylesheet">
+<!-- Custom Styles for Precise Camera Overlay -->
+<style data-purpose="custom-styling">
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      user-select: none;
+      -webkit-user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+    
+    /* Background tone mimicking natural indoor camera feed */
+    .camera-background {
+      background: radial-gradient(circle at 50% 38%, #a09c95 0%, #8c8880 60%, #7d7972 100%);
+    }
+
+    /* Subdued title drop shadow for high contrast over light camera feeds */
+    .title-shadow {
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    }
+    
+    /* Shutter button ring gap */
+    .shutter-outer-ring {
+      box-shadow: 0 0 0 3.5px #ffffff, inset 0 0 0 3px transparent;
+    }
+  </style>
+</head>
+<body class="bg-neutral-900 min-h-screen w-full flex justify-center items-center text-white m-0 p-0 overflow-x-hidden">
+<!-- BEGIN: TopBar -->
+<!-- Top navigation bar containing close button, screen title, and camera flip action -->
+<div class="camera-background w-full max-w-[390px] h-[844px] relative overflow-hidden flex flex-col justify-between items-center shadow-2xl min-h-[844px]" style="width: 390px; height: 889px; min-height: 889px; max-height: 889px;"><header class="w-full pt-10 px-5 flex items-center justify-between z-20" data-purpose="top-navigation"><button aria-label="Cerrar" class="w-12 h-12 rounded-full bg-[#1e1d1b]/70 backdrop-blur-md flex items-center justify-center text-white/95 active:scale-95 transition-transform" type="button"><svg class="w-5 h-5 stroke-[2.7]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"></path></svg></button><h1 class="text-[21px] font-bold tracking-tight text-white title-shadow select-none">Registro Facial</h1><button aria-label="Cambiar cámara" class="w-12 h-12 rounded-full bg-[#1e1d1b]/70 backdrop-blur-md flex items-center justify-center active:scale-95 transition-transform" type="button"><svg class="w-6 h-6 text-[#72b4ee]" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewBox="0 0 24 24"><path d="M21 2v6h-6"></path><path d="M3 12a9 9 0 0 1 15-6.7L21 8"></path><path d="M3 22v-6h6"></path><path d="M21 12a9 9 0 0 1-15 6.7L3 16"></path></svg></button></header><main class="w-full flex-1 flex flex-col items-center justify-center relative px-6 mt-1 mb-2" data-purpose="face-viewfinder"><div class="relative w-full max-w-[320px] aspect-[1/1.38] flex items-center justify-center"><svg class="w-full h-full overflow-visible" fill="none" viewBox="0 0 320 440" xmlns="http://www.w3.org/2000/svg"><ellipse cx="160" cy="220" rx="148" ry="206" stroke="rgba(255, 255, 255, 0.9)" stroke-width="3"></ellipse><ellipse cx="160" cy="220" rx="133" ry="191" stroke="rgba(255, 255, 255, 0.72)" stroke-dasharray="7 6" stroke-width="2"></ellipse></svg></div><div class="mt-6 z-10" data-purpose="instruction-badge"><div class="bg-[#242120]/80 backdrop-blur-md px-6 py-2.5 rounded-full shadow-lg border border-white/5"><p class="text-[15px] font-semibold text-white/95 text-center tracking-tight">Posiciona tu rostro en el óvalo</p></div></div></main><footer class="w-full pb-14 pt-2 flex items-center justify-center z-20" data-purpose="camera-controls"><button aria-label="Capturar fotografía" class="w-[78px] h-[78px] rounded-full p-[4px] border-[3.5px] border-white flex items-center justify-center active:scale-90 transition-all duration-150 focus:outline-none" type="button"><span class="w-full h-full bg-white rounded-full block shadow-sm"></span></button></footer></div>
+<!-- END: TopBar -->
+<!-- BEGIN: ViewfinderArea -->
+<!-- Middle viewfinder container including face guidance oval frame and feedback badge -->
+
+<!-- END: ViewfinderArea -->
+<!-- BEGIN: BottomControls -->
+<!-- Shutter capture button trigger -->
+
+<!-- END: BottomControls -->
+
+
+</body></html>

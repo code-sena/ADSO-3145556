@@ -1,0 +1,238 @@
+<!DOCTYPE html><html lang="es" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Panel de Administración</title>
+<!-- Tailwind CSS v3 -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            appBackground: '#f3f4f6',
+            brandBlue: '#38bdf8',
+            accentPink: '#e11d64',
+            accentBlue: '#2563eb',
+            accentOrange: '#f59e0b',
+            successGreen: '#22c55e',
+          },
+          fontFamily: {
+            sans: ['-apple-system', 'BlinkMacSystemFont', '"SF Pro Text"', '"SF Pro Display"', 'Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+<!-- Custom Styles for Mobile Device Preview & Micro-adjustments -->
+<style data-purpose="layout-adjustments">
+    /* Custom scrollbar hiding for clean native mobile feeling */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="bg-slate-200 min-h-screen flex justify-center items-start antialiased text-slate-800 font-sans p-0 sm:py-6">
+<!-- BEGIN: MobileDeviceContainer -->
+<!-- Constrained container replicating iOS mobile device viewport -->
+<div class="relative w-full max-w-[420px] bg-[#f4f5f7] min-h-screen sm:min-h-[920px] sm:max-h-[920px] sm:rounded-[44px] shadow-2xl overflow-y-auto no-scrollbar flex flex-col justify-between">
+<!-- BEGIN: MainContentScrollableArea -->
+<main class="w-full px-5 pt-8 pb-32 flex-1 flex flex-col gap-6" data-purpose="dashboard-main-content">
+<!-- BEGIN: NavigationPills -->
+<!-- Top section tabs -->
+<nav aria-label="Navegación principal" class="flex items-center gap-2.5 justify-center w-full">
+<button class="px-6 py-2.5 rounded-full bg-[#46b6fe] text-white text-sm font-semibold shadow-sm focus:outline-none" data-purpose="tab-active" type="button">
+          Inicio
+        </button>
+<button class="px-5 py-2.5 rounded-full bg-[#dbe0e6] text-slate-700 text-sm font-medium hover:bg-gray-300 transition-colors focus:outline-none" data-purpose="tab-inactive" type="button">
+          Novedades
+        </button>
+<button class="px-5 py-2.5 rounded-full bg-[#dbe0e6] text-slate-700 text-sm font-medium hover:bg-gray-300 transition-colors focus:outline-none" data-purpose="tab-inactive" type="button">
+          Asistencia
+        </button>
+</nav>
+<!-- END: NavigationPills -->
+<!-- BEGIN: UserGreeting -->
+<!-- Header greeting and current date -->
+<header class="flex flex-col gap-0.5 mt-1" data-purpose="user-greeting">
+<span class="text-sm font-medium text-slate-500 tracking-tight">Buen día</span>
+<h1 class="text-2xl font-black text-slate-900 tracking-tight leading-tight">Administrador</h1>
+<p class="text-xs font-normal text-slate-500 mt-0.5">martes, 15 de septiembre de 2026</p>
+</header>
+<!-- END: UserGreeting -->
+<!-- BEGIN: AttendanceCard -->
+<!-- Attendance summary progress card -->
+<section class="bg-white rounded-2xl p-4 shadow-[0_2px_8px_rgba(0,0,0,0.04)] border border-slate-100" data-purpose="attendance-summary-card">
+<div class="flex items-center justify-between mb-3">
+<h2 class="text-base font-bold text-slate-900 tracking-tight">Asistencia Hoy</h2>
+<span class="text-xl font-bold text-[#20a758]">84%</span>
+</div>
+<!-- Progress Bar (84%) -->
+<div aria-valuemax="100" aria-valuemin="0" aria-valuenow="84" class="w-full bg-slate-200 h-2 rounded-full overflow-hidden mb-3" role="progressbar">
+<div class="bg-[#20a758] h-full rounded-full transition-all duration-500" style="width: 84%"></div>
+</div>
+<p class="text-xs text-center text-slate-500 font-medium tracking-normal">
+          38 de 45 profesores presentes
+        </p>
+</section>
+<!-- END: AttendanceCard -->
+<!-- BEGIN: QuickActions -->
+<!-- Quick actions grid -->
+<section class="flex flex-col gap-3" data-purpose="quick-actions-section">
+<h2 class="text-lg font-bold text-slate-900 tracking-tight">Acciones Rápidas</h2>
+<div class="grid grid-cols-2 gap-3.5">
+<!-- Action Card 1: Users -->
+<article class="bg-white rounded-2xl p-4 shadow-[0_2px_8px_rgba(0,0,0,0.04)] border border-slate-100 flex flex-col items-center text-center justify-start min-h-[168px]">
+<div aria-hidden="true" class="w-12 h-12 rounded-full bg-[#e32064] mb-3 shrink-0 shadow-sm"></div>
+<h3 class="text-[13.5px] font-bold text-slate-900 leading-tight mb-1">Gestión de Usuarios</h3>
+<p class="text-[11px] leading-tight text-slate-500">Ingresa o Elimina usuarios de tu colegio.</p>
+</article>
+<!-- Action Card 2: Rooms/Environments -->
+<article class="bg-white rounded-2xl p-4 shadow-[0_2px_8px_rgba(0,0,0,0.04)] border border-slate-100 flex flex-col items-center text-center justify-start min-h-[168px]">
+<div aria-hidden="true" class="w-12 h-12 rounded-full bg-[#1e58e6] mb-3 shrink-0 shadow-sm"></div>
+<h3 class="text-[13.5px] font-bold text-slate-900 leading-tight mb-1">Gestión de Ambientes</h3>
+<p class="text-[11px] leading-tight text-slate-500">Agregar, editar o Eliminar Ambientes</p>
+</article>
+<!-- Action Card 3: Reports -->
+<article class="bg-white rounded-2xl p-4 shadow-[0_2px_8px_rgba(0,0,0,0.04)] border border-slate-100 flex flex-col items-center text-center justify-start min-h-[168px]">
+<div aria-hidden="true" class="w-12 h-12 rounded-full bg-[#f68f11] mb-3 shrink-0 shadow-sm"></div>
+<h3 class="text-[13.5px] font-bold text-slate-900 leading-tight mb-1">Reportes</h3>
+<p class="text-[11px] leading-tight text-slate-500">Generar reportes de asistencia</p>
+</article>
+</div>
+</section>
+<!-- END: QuickActions -->
+<!-- BEGIN: RecentAttendance -->
+<!-- List of recent teacher check-ins -->
+<section class="flex flex-col gap-3" data-purpose="recent-attendances-section">
+<div class="flex items-center justify-between">
+<h2 class="text-lg font-bold text-slate-900 tracking-tight">Asistencias Recientes</h2>
+<a class="text-xs font-semibold text-[#0ea5e9] hover:underline" href="#">Ver todos</a>
+</div>
+<div class="flex flex-col gap-2.5">
+<!-- Person 1 -->
+<article class="bg-white rounded-2xl px-4 py-3 shadow-[0_2px_8px_rgba(0,0,0,0.04)] border border-slate-100 flex items-center justify-between">
+<div class="flex flex-col">
+<span class="text-[14px] font-bold text-slate-900 leading-tight">Ana Martínez</span>
+<span class="text-xs text-slate-400 font-medium">08:15 AM</span>
+</div>
+<span class="px-3.5 py-1 rounded-full bg-[#dcfce7] text-[#16a34a] text-xs font-medium">
+              Presente
+            </span>
+</article>
+<!-- Person 2 -->
+<article class="bg-white rounded-2xl px-4 py-3 shadow-[0_2px_8px_rgba(0,0,0,0.04)] border border-slate-100 flex items-center justify-between">
+<div class="flex flex-col">
+<span class="text-[14px] font-bold text-slate-900 leading-tight">Luis Fernández</span>
+<span class="text-xs text-slate-400 font-medium">08:22 AM</span>
+</div>
+<span class="px-3.5 py-1 rounded-full bg-[#dcfce7] text-[#16a34a] text-xs font-medium">
+              Presente
+            </span>
+</article>
+<!-- Person 3 -->
+<article class="bg-white rounded-2xl px-4 py-3 shadow-[0_2px_8px_rgba(0,0,0,0.04)] border border-slate-100 flex items-center justify-between">
+<div class="flex flex-col">
+<span class="text-[14px] font-bold text-slate-900 leading-tight">Carmen López</span>
+<span class="text-xs text-slate-400 font-medium">08:30 AM</span>
+</div>
+<span class="px-3.5 py-1 rounded-full bg-[#dcfce7] text-[#16a34a] text-xs font-medium">
+              Presente
+            </span>
+</article>
+<!-- Person 4: Late status -->
+<article class="bg-white rounded-2xl px-4 py-3 shadow-[0_2px_8px_rgba(0,0,0,0.04)] border border-slate-100 flex items-center justify-between">
+<div class="flex flex-col">
+<span class="text-[14px] font-bold text-slate-900 leading-tight">Roberto Díaz</span>
+<span class="text-xs text-slate-400 font-medium">08:45 AM</span>
+</div>
+<span class="px-3.5 py-1 rounded-full bg-[#ffedd5] text-[#ea580c] text-xs font-medium">
+              Tarde
+            </span>
+</article>
+</div>
+</section>
+<!-- END: RecentAttendance -->
+<!-- BEGIN: RecentNews -->
+<!-- List of recent system updates and announcements -->
+<section class="flex flex-col gap-3" data-purpose="recent-news-section">
+<h2 class="text-lg font-bold text-slate-900 tracking-tight">Novedades Recientes</h2>
+<div class="flex flex-col gap-2.5">
+<!-- Notification 1: Green icon -->
+<article class="bg-white rounded-2xl p-4 shadow-[0_2px_8px_rgba(0,0,0,0.04)] border border-slate-100 flex items-start gap-3.5">
+<div aria-hidden="true" class="w-11 h-11 rounded-full bg-[#27a844] shrink-0"></div>
+<div class="flex flex-col">
+<h3 class="text-[13.5px] font-bold text-slate-900 leading-tight">Nuevo profesor registrado</h3>
+<p class="text-[11.5px] text-slate-500 mt-0.5 leading-snug">María González se ha registrado exitosamente</p>
+<span class="text-[11px] text-slate-400 mt-1 font-normal">hace 5 minutos</span>
+</div>
+</article>
+<!-- Notification 2: Orange icon -->
+<article class="bg-white rounded-2xl p-4 shadow-[0_2px_8px_rgba(0,0,0,0.04)] border border-slate-100 flex items-start gap-3.5">
+<div aria-hidden="true" class="w-11 h-11 rounded-full bg-[#f59e0b] shrink-0"></div>
+<div class="flex flex-col">
+<h3 class="text-[13.5px] font-bold text-slate-900 leading-tight">Tardanza detectada</h3>
+<p class="text-[11.5px] text-slate-500 mt-0.5 leading-snug">Carlos Ruiz registró entrada 15 minutos tarde</p>
+<span class="text-[11px] text-slate-400 mt-1 font-normal">hace 30 minutos</span>
+</div>
+</article>
+<!-- Notification 3: Blue icon -->
+<article class="bg-white rounded-2xl p-4 shadow-[0_2px_8px_rgba(0,0,0,0.04)] border border-slate-100 flex items-start gap-3.5">
+<div aria-hidden="true" class="w-11 h-11 rounded-full bg-[#2290f8] shrink-0"></div>
+<div class="flex flex-col">
+<h3 class="text-[13.5px] font-bold text-slate-900 leading-tight">Reconocimiento facial mejorado</h3>
+<p class="text-[11.5px] text-slate-500 mt-0.5 leading-snug">El sistema ha actualizado sus algoritmos</p>
+<span class="text-[11px] text-slate-400 mt-1 font-normal">hace 2 horas</span>
+</div>
+</article>
+</div>
+</section>
+<!-- END: RecentNews -->
+</main>
+<!-- END: MainContentScrollableArea -->
+<!-- BEGIN: FloatingBottomNavBar -->
+<!-- Fixed floating bottom navigation bar mimicking iOS rounded island design -->
+<div class="sticky sm:sticky bottom-4 inset-x-0 px-4 w-full z-30 pointer-events-auto" data-purpose="floating-bottom-navigation-container">
+<nav class="bg-[#ebedf0] bg-opacity-95 backdrop-blur-md rounded-3xl py-3 px-8 flex items-center justify-between shadow-[0_10px_25px_rgba(0,0,0,0.1)] border border-white/60">
+<!-- Settings Button -->
+<button aria-label="Ajustes" class="text-slate-800 hover:text-slate-900 transition-colors p-1 focus:outline-none" type="button">
+<svg class="w-7 h-7 stroke-[2]" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+<circle cx="12" cy="12" r="3"></circle>
+<path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+</svg>
+</button>
+<!-- Face ID / Scanner Button (Center) -->
+<button aria-label="Escanear reconocimiento facial" class="text-slate-900 p-1 hover:scale-105 transition-transform focus:outline-none" type="button">
+<svg class="w-8 h-8 stroke-[2.2]" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+<!-- Facial scanner framing corners -->
+<path d="M4 8V6a2 2 0 0 1 2-2h2"></path>
+<path d="M16 4h2a2 2 0 0 1 2 2v2"></path>
+<path d="M20 16v2a2 2 0 0 1-2 2h-2"></path>
+<path d="M8 20H6a2 2 0 0 1-2-2v-2"></path>
+<!-- Face inner outline: head and shoulders -->
+<circle cx="12" cy="11" r="3"></circle>
+<path d="M8.5 17a4 4 0 0 1 7 0"></path>
+</svg>
+</button>
+<!-- Profile / Account Button -->
+<button aria-label="Perfil" class="text-slate-800 hover:text-slate-900 transition-colors p-1 focus:outline-none" type="button">
+<svg class="w-7 h-7 stroke-[2]" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+<circle cx="12" cy="7" r="4"></circle>
+</svg>
+</button>
+</nav>
+</div>
+<!-- END: FloatingBottomNavBar -->
+</div>
+<!-- END: MobileDeviceContainer -->
+
+
+
+
+
+
+</body></html>

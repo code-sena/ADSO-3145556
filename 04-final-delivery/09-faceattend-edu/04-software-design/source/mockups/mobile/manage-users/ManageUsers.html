@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FaceAttendEDU - Manage Users</title>
+    <style>
+        :root {
+            --color-primary: #2196F3;
+            --color-bg-page: #F8FAFC;
+            --color-bg-card: #FFFFFF;
+            --color-text-primary: #0F172A;
+            --color-text-secondary: #64748B;
+            --color-error: #EF4444;
+            --space-md: 16px;
+            --space-lg: 24px;
+            --radius-lg: 12px;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+        }
+        body {
+            font-family: sans-serif;
+            background-color: #cbd5e1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .mobile-viewport {
+            width: 375px;
+            height: 812px;
+            background-color: var(--color-bg-page);
+            border-radius: 40px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+            border: 8px solid #334155;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            padding: 40px var(--space-lg) var(--space-md);
+            background-color: var(--color-bg-card);
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .header h1 {
+            font-size: 22px;
+            color: var(--color-text-primary);
+            margin: 0;
+        }
+        .content {
+            padding: var(--space-lg);
+            flex: 1;
+            overflow-y: auto;
+        }
+        .tabs {
+            display: flex;
+            background: #e2e8f0;
+            padding: 4px;
+            border-radius: 8px;
+            margin-bottom: var(--space-lg);
+        }
+        .tab {
+            flex: 1;
+            text-align: center;
+            padding: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 6px;
+            color: var(--color-text-secondary);
+        }
+        .tab.active {
+            background: white;
+            color: var(--color-primary);
+            font-weight: bold;
+            box-shadow: var(--shadow-sm);
+        }
+        .user-item {
+            background: var(--color-bg-card);
+            padding: var(--space-md);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            margin-bottom: var(--space-md);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .user-info h4 {
+            margin: 0;
+            font-size: 16px;
+            color: var(--color-text-primary);
+        }
+        .user-info p {
+            margin: 4px 0 0 0;
+            font-size: 13px;
+            color: var(--color-text-secondary);
+        }
+        .user-actions {
+            display: flex;
+            gap: 8px;
+        }
+        .btn-small {
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            cursor: pointer;
+            border: none;
+            font-weight: bold;
+        }
+        .btn-edit { background: #e2e8f0; color: var(--color-text-primary); }
+        .btn-delete { background: #fee2e2; color: var(--color-error); }
+        .footer {
+            padding: var(--space-lg);
+            background-color: var(--color-bg-card);
+            border-top: 1px solid #e2e8f0;
+        }
+        .btn-primary {
+            background-color: var(--color-primary);
+            color: white;
+            text-align: center;
+            padding: 14px;
+            border-radius: var(--radius-lg);
+            text-decoration: none;
+            display: block;
+            font-weight: bold;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="mobile-viewport">
+        <div class="header">
+            <h1>Gestionar Usuarios</h1>
+        </div>
+        <div class="content">
+            <div class="tabs">
+                <div class="tab active">Estudiantes</div>
+                <div class="tab">Profesores</div>
+            </div>
+            <button class="btn-primary" style="margin-bottom: var(--space-lg); width: 100%;">+ Agregar Estudiante</button>
+
+            <div class="user-item">
+                <div class="user-info">
+                    <h4>Ana García</h4>
+                    <p>Matemáticas I • ana@email.com</p>
+                </div>
+                <div class="user-actions">
+                    <button class="btn-small btn-edit">Editar</button>
+                    <button class="btn-small btn-delete">Borrar</button>
+                </div>
+            </div>
+            <div class="user-item">
+                <div class="user-info">
+                    <h4>Carlos Ruiz</h4>
+                    <p>Física General • carlos@email.com</p>
+                </div>
+                <div class="user-actions">
+                    <button class="btn-small btn-edit">Editar</button>
+                    <button class="btn-small btn-delete">Borrar</button>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <a href="#" class="btn-primary">Volver</a>
+        </div>
+    </div>
+</body>
+</html>

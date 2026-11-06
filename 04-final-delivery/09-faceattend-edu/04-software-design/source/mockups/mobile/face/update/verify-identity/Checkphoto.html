@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Revisar foto</title>
+<!-- Tailwind CSS CDN with forms and container-queries -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts: Inter -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<style data-purpose="typography">
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+  </style>
+<style data-purpose="custom-layout">
+    /* Subtle camera texture simulation */
+    .viewfinder-bg {
+      background-color: #b5b3ac;
+      background-image: radial-gradient(#bebcb5 0.75px, transparent 0.75px), radial-gradient(#a3a19b 0.75px, #b5b3ac 0.75px);
+      background-size: 30px 30px;
+      background-position: 0 0, 15px 15px;
+    }
+  </style>
+</head>
+<body class="bg-stone-900 min-h-screen flex items-center justify-center p-0 m-0 antialiased selection:bg-none">
+<!-- BEGIN: MobileDeviceFrame -->
+<main class="w-[390px] h-[889px] max-w-[390px] min-h-[889px] relative overflow-hidden flex flex-col justify-between viewfinder-bg select-none shadow-2xl">
+<!-- BEGIN: TopBar -->
+<header class="relative w-full pt-10 px-5 flex items-center justify-center z-10" data-purpose="app-header">
+<!-- Close button on top-left -->
+<button aria-label="Cerrar" class="absolute left-5 w-11 h-11 rounded-full bg-black/45 active:bg-black/60 transition-colors flex items-center justify-center text-white backdrop-blur-sm cursor-pointer border-none outline-none focus:ring-2 focus:ring-white/40" type="button">
+<svg class="w-5 h-5 stroke-[2.5]" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+<!-- Centered Header Title -->
+<h1 class="text-[21px] font-bold text-white tracking-normal drop-shadow-[0_1px_3px_rgba(0,0,0,0.35)]">
+        Revisar foto
+      </h1>
+</header>
+<!-- END: TopBar -->
+<!-- Central Viewfinder Space (Preserved Preview Area) -->
+<section aria-hidden="true" class="flex-1 w-full" data-purpose="camera-preview-area"></section>
+<!-- BEGIN: BottomConfirmationSheet -->
+<section class="w-full bg-[#525251] rounded-t-[32px] pt-6 pb-9 px-5 flex flex-col items-center shadow-[0_-8px_30px_rgba(0,0,0,0.25)] z-20" data-purpose="bottom-sheet-dialog">
+<!-- Dialog Title -->
+<h2 class="text-[20px] font-bold text-white text-center leading-snug tracking-tight mb-2">
+        ¿La foto se ve bien?
+      </h2>
+<!-- Dialog Guidance / Subtitle -->
+<p class="text-[13.5px] text-[#e0e0df] font-normal text-center leading-relaxed max-w-[275px] mb-7">
+        Asegúrate de que tu rostro esté claro, bien iluminado y centrado.
+      </p>
+<!-- Action Buttons Container -->
+<div class="w-full flex items-center justify-between gap-3 px-1">
+<!-- Retake Button -->
+<button class="flex-1 h-[54px] rounded-2xl bg-[#666563] active:bg-[#5a5957] text-white text-[15px] font-semibold flex items-center justify-center gap-2 border border-white/10 shadow-sm transition-transform active:scale-[0.98]" type="button">
+<!-- Counter-clockwise reload arrow -->
+<svg class="w-[18px] h-[18px] stroke-[2.4]" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span>Repetir</span>
+</button>
+<!-- Use Photo Button -->
+<button class="flex-1 h-[54px] rounded-2xl bg-[#0095ff] active:bg-[#0082e0] text-white text-[15px] font-semibold flex items-center justify-center gap-2 shadow-sm transition-transform active:scale-[0.98]" type="button">
+<!-- Checkmark icon -->
+<svg class="w-[19px] h-[19px] stroke-[3]" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span>Usar foto</span>
+</button>
+</div>
+</section>
+<!-- END: BottomConfirmationSheet -->
+</main>
+<!-- END: MobileDeviceFrame -->
+</body></html>

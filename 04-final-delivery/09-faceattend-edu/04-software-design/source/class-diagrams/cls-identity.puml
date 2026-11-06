@@ -1,0 +1,113 @@
+@startuml cls-identity
+title Class Diagram — Identity
+
+skinparam classAttributeIconSize 0
+hide circle
+
+enum AuthenticationType <<enumeration>> {
+  Local
+  Windows
+  External
+}
+
+enum SessionStatus <<enumeration>> {
+  Active
+  Closed
+}
+
+class Credentials <<value object>> {
+  +identifier: String
+  +password: String
+}
+
+class Person {
+  +personId: UUID
+  +documentType: String
+  +documentNumber: String
+  +name: String
+  +lastName: String
+  +email: String
+  +phone: String
+  +bloodType: String
+  +birthDate: Date
+  +status: Boolean
+  +activate()
+  +deactivate()
+}
+
+class AppUser {
+  +userId: UUID
+  +personId: UUID
+  +username: String
+  +passwordHash: String
+  +authenticationType: AuthenticationType
+  +status: Boolean
+  +lastAccess: DateTime
+  +authenticate(credentials: Credentials): UserSession
+  +activate()
+  +deactivate()
+}
+
+class UserSession {
+  +sessionId: UUID
+  +userId: UUID
+  +startDate: DateTime
+  +endDate: DateTime
+  +sourceIp: String
+  +sessionStatus: SessionStatus
+  +close()
+  +refresh(): UserSession
+}
+
+class PasswordPolicy {
+  +policyId: Int
+  +minLength: Int
+  +maxLength: Int
+  +requiresUppercase: Boolean
+  +requiresNumbers: Boolean
+  +requiresSymbols: Boolean
+  +expirationDays: Int
+}
+
+Person "1" -- "0..1" AppUser : app_user.person_id FK\nUNIQUE
+AppUser "1" -- "0..*" UserSession : user_session.user_id FK
+AppUser ..> Credentials : authenticate() consumes
+AppUser --> AuthenticationType
+UserSession --> SessionStatus
+
+note right of Person
+  RN-01/RN-02: a Person may exist without an
+  active AppUser, but an AppUser cannot exist
+  without a Person. RN-03: cannot be deleted
+  with active records. No school_id — identity
+  is school-agnostic.
+end note
+
+note right of AppUser
+  RN-04/RN-06: must authenticate before use;
+  admins may deactivate without deleting
+  history. person_id is UNIQUE — one account
+  per person. Roles live in the Authorization
+  context (see cls-authorization.puml) —
+  AppUser has no direct reference to Role here.
+end note
+
+note right of UserSession
+  sessionId is the opaque bearer token (never
+  a JWT). refresh() rotates it: closes this row
+  and returns a new UserSession — single use.
+end note
+
+note as N1
+  PasswordPolicy has no relation drawn: it is a
+  global singleton the recovery/reset flow reads,
+  not something any entity here references by FK.
+  All classes also carry the standard audit block
+  (created_at/updated_at/deleted_at/created_by/
+  updated_by/deleted_by/row_version) — omitted
+  here for readability. See AGENTS.md §2.2 and
+  06-data/domains/01-identity.md for the
+  column-level ER view.
+end note
+
+@enduml

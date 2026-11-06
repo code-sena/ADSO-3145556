@@ -1,0 +1,218 @@
+<!DOCTYPE html><html lang="es" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+<title>Inicio de Sesión</title>
+<!-- Tailwind CSS v3 with forms plugin -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              blue: '#0e83e2',
+              lightBlue: '#32a2ff',
+              dark: '#0e1726',
+              link: '#117cc8',
+              errorRed: '#df4747'
+            }
+          },
+          fontFamily: {
+            sans: ['-apple-system', 'BlinkMacSystemFont', '"SF Pro Text"', '"SF Pro Display"', 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+<!-- Custom Styles for iOS look and logo details -->
+<style data-purpose="custom-enhancements">
+    /* Custom checkbox styling for crisp iOS appearance */
+    .custom-checkbox {
+      border: 1.5px solid #0284c7;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .custom-checkbox:checked {
+      background-color: #0284c7;
+      border-color: #0284c7;
+    }
+
+    /* iOS smooth scrolling and tap highlight reset */
+    * {
+      -webkit-tap-highlight-color: transparent;
+    }
+  </style>
+</head>
+<body class="bg-white font-sans antialiased text-gray-900 min-h-screen flex justify-center items-stretch sm:items-center sm:bg-slate-100">
+<!-- BEGIN: MobileDeviceContainer -->
+<div class="w-full max-w-md bg-white min-h-screen sm:min-h-[844px] sm:max-h-[880px] sm:rounded-[40px] sm:shadow-2xl relative flex flex-col justify-between px-7 pt-4 pb-8 overflow-hidden">
+<!-- Top content block -->
+<div class="flex flex-col flex-1 justify-center">
+<!-- BEGIN: BrandLogo -->
+<img alt="Logo" class="w-36 h-36 sm:w-40 sm:h-40 mx-auto mb-6 object-contain block rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9gzJiBF6HN5D5bWjR2Z7FOtUtPfT0TIrLXCCZl21352i4Y-uPdax3wSmKbeZ0ETN3E_6wknm8VntUxdSClpn6uAxuY6v4E137HP2Q4Ox8HUvI6R4PbnoD1ub2ijY2z1_Ndx2Ncl2tNoc-zWuJtisgasihHk2XW7bLK69obFmEolYGnpcIQUw3HGwfitIci0PsMH9sU_C6T-KK0MHVs4RkViMJ1SInAI6wjF23SnJNPhI0ODdU9CZnUFYezaK10G6dHw">
+<!-- END: BrandLogo -->
+<!-- BEGIN: LoginForm -->
+<main class="w-full" data-purpose="login-form-section">
+<!-- Main title -->
+<h1 class="text-2xl font-bold text-gray-900 tracking-tight mb-5">
+          Inicio de Sesión
+        </h1>
+<form class="space-y-4" id="loginForm" method="POST" novalidate="">
+<!-- Email Input Group -->
+<div data-purpose="email-field-group">
+<label class="block text-base font-bold text-gray-900 mb-1.5" for="email">
+              Correo Electrónico
+            </label>
+<input class="w-full px-3.5 py-2.5 text-base text-gray-800 placeholder-gray-400 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0e83e2] focus:border-transparent transition" id="email" name="email" placeholder="ejemplo@correo.com" type="email">
+</div>
+<!-- Password Input Group -->
+<div data-purpose="password-field-group">
+<label class="block text-base font-bold text-gray-900 mb-1.5" for="password">
+              Contraseña
+            </label>
+<input class="w-full px-3.5 py-2.5 text-base text-gray-800 placeholder-gray-400 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0e83e2] focus:border-transparent transition" id="password" name="password" placeholder="Ingrese su contraseña" type="password">
+</div>
+<!-- Forgot Password Link (Hidden initially, visible after 3 failed attempts) -->
+<div class="hidden text-right -mt-1 pt-0.5" data-purpose="forgot-password-link" id="forgotPasswordContainer">
+<a class="text-sm font-semibold text-[#0e83e2] hover:underline underline-offset-2 transition-colors" href="#forgot">
+    ¿Olvidaste tu contraseña?
+  </a>
+</div>
+<!-- Terms Checkbox Group -->
+<div class="pt-1 pb-2" data-purpose="terms-and-conditions-agreement">
+<label class="flex items-center space-x-2.5 cursor-pointer">
+<input class="w-5 h-5 custom-checkbox text-[#0284c7] focus:ring-0 focus:ring-offset-0" id="terms" name="terms" type="checkbox">
+<span class="text-sm sm:text-[15px] font-medium text-[#117cc8] hover:underline underline-offset-2">
+                Aceptación de términos y condiciones.
+              </span>
+</label>
+</div>
+<!-- Submit Action Button -->
+<div class="pt-1" data-purpose="form-submit-action">
+<button class="w-full py-3.5 px-4 bg-[#0e83e2] hover:bg-[#0b72c7] active:bg-[#0964b0] text-white font-semibold text-base rounded-xl transition duration-150 ease-in-out shadow-sm text-center" id="submitBtn" type="submit">
+              Inicio de Sesión
+            </button>
+</div>
+</form>
+</main>
+<!-- END: LoginForm -->
+</div>
+<!-- BEGIN: FooterLinks -->
+<footer class="mt-8 mb-2 text-center" data-purpose="account-registration-helper">
+<a class="text-sm sm:text-base font-medium text-gray-600 hover:text-gray-900 transition-colors" href="#register">
+        ¿No tiene cuenta registrada?
+      </a>
+</footer>
+<!-- END: FooterLinks -->
+<!-- BEGIN: ErrorModal (login.errorTitle) -->
+<div aria-modal="true" class="hidden fixed inset-0 z-50 flex items-center justify-center p-6 bg-black/40 backdrop-blur-sm transition-opacity duration-200" id="errorModal" role="dialog">
+<div class="w-full max-w-xs bg-white rounded-3xl overflow-hidden shadow-2xl transform transition-all duration-200 border border-gray-100">
+<!-- Red Header matching screenshot -->
+<div class="bg-[#df4747] text-white py-4 px-6 text-center">
+<h2 class="text-base font-bold tracking-normal">login.errorTitle</h2>
+</div>
+<!-- White Content Body -->
+<div class="px-5 pt-7 pb-6 text-center bg-white">
+<p class="text-base text-gray-800 font-medium">Credenciales inválidas</p>
+<div class="border-t border-gray-100 mt-6 pt-5">
+<button class="w-full py-3 px-6 bg-[#df4747] hover:bg-[#cb3d3d] active:bg-[#b83535] text-white font-bold rounded-xl text-base shadow-sm transition" id="closeErrorModalBtn" type="button">
+          OK
+        </button>
+</div>
+</div>
+</div>
+</div>
+<!-- END: ErrorModal -->
+<!-- BEGIN: SuccessModal -->
+<div aria-modal="true" class="hidden fixed inset-0 z-50 flex items-center justify-center p-6 bg-black/40 backdrop-blur-sm transition-opacity duration-200" id="successModal" role="dialog">
+<div class="w-full max-w-xs bg-white rounded-3xl overflow-hidden shadow-2xl transform transition-all duration-200 border border-gray-100">
+<!-- Blue Header matching button style -->
+<div class="bg-[#0e83e2] text-white py-4 px-6 text-center">
+<h2 class="text-base font-bold tracking-normal">Acceso concedido</h2>
+</div>
+<!-- White Content Body -->
+<div class="px-5 pt-7 pb-6 text-center bg-white">
+<p class="text-base text-gray-800 font-medium">Acceso concedido</p>
+<div class="border-t border-gray-100 mt-6 pt-5">
+<button class="w-full py-3 px-6 bg-[#0e83e2] hover:bg-[#0b72c7] active:bg-[#0964b0] text-white font-bold rounded-xl text-base shadow-sm transition" id="closeSuccessModalBtn" type="button">
+          OK
+        </button>
+</div>
+</div>
+</div>
+</div>
+<!-- END: SuccessModal -->
+</div>
+<!-- END: MobileDeviceContainer -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    let failedAttempts = 0;
+
+    const loginForm = document.getElementById('loginForm');
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
+    const termsCheckbox = document.getElementById('terms');
+    const errorModal = document.getElementById('errorModal');
+    const successModal = document.getElementById('successModal');
+    const closeErrorModalBtn = document.getElementById('closeErrorModalBtn');
+    const closeSuccessModalBtn = document.getElementById('closeSuccessModalBtn');
+    const forgotPasswordContainer = document.getElementById('forgotPasswordContainer');
+
+    function openModal(modal) {
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeModal(modal) {
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    closeErrorModalBtn.addEventListener('click', function () {
+      closeModal(errorModal);
+    });
+
+    closeSuccessModalBtn.addEventListener('click', function () {
+      closeModal(successModal);
+    });
+
+    errorModal.addEventListener('click', function (e) {
+      if (e.target === errorModal) {
+        closeModal(errorModal);
+      }
+    });
+
+    successModal.addEventListener('click', function (e) {
+      if (e.target === successModal) {
+        closeModal(successModal);
+      }
+    });
+
+    loginForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const email = emailInput.value.trim().toLowerCase();
+      const password = passwordInput.value.trim();
+      const termsAccepted = termsCheckbox.checked;
+
+      const isEmailValid = (email === 'student@example.com');
+      const isPasswordValid = (password === '123456');
+
+      if (isEmailValid && isPasswordValid && termsAccepted) {
+        // Datos correctos -> Mostrar Modal de Éxito
+        openModal(successModal);
+      } else {
+        // Datos incorrectos -> Incrementar fallos y mostrar Modal de Error
+        failedAttempts++;
+        if (failedAttempts >= 3) {
+          forgotPasswordContainer.classList.remove('hidden');
+        }
+        openModal(errorModal);
+      }
+    });
+  });
+</script>
+
+
+</body></html>

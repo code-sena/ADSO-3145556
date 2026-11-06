@@ -1,0 +1,100 @@
+@startuml cls-scheduling
+title Class Diagram — Scheduling
+
+skinparam classAttributeIconSize 0
+hide circle
+
+class School <<external — academic>> {
+}
+class Cohort <<external — academic>> {
+}
+class Course <<external — academic>> {
+}
+class AcademicActor <<external — academic>> {
+}
+
+enum SessionStatus <<enumeration>> {
+  Open
+  Closed
+  Cancelled
+}
+
+class Environment {
+  +environmentId: Int
+  +schoolId: Int
+  +code: String
+  +name: String
+  +capacity: Int
+  +status: Boolean
+}
+
+class ScheduleBlock {
+  +scheduleBlockId: Long
+  +cohortId: Long
+  +courseId: Int
+  +environmentId: Int
+  +instructorActorId: Long
+  +dayOfWeek: Int
+  +startsAt: Time
+  +endsAt: Time
+  +create()
+}
+
+class ClassSession {
+  +classSessionId: Long
+  +scheduleBlockId: Long
+  +sessionDate: Date
+  +openedBy: Long
+  +openedAt: DateTime
+  +closedBy: Long
+  +closedAt: DateTime
+  +sessionStatus: SessionStatus
+  +open()
+  +close(closedBy)
+  +cancel()
+}
+
+Environment "1" -- "0..*" ScheduleBlock : schedule_block.environment_id FK
+ScheduleBlock "1" -- "0..*" ClassSession : class_session.schedule_block_id FK
+ClassSession --> SessionStatus
+
+Environment ..> School : environment.school_id\n(cross-context, no FK)
+ScheduleBlock ..> Cohort : schedule_block.cohort_id\n(cross-context, no FK)
+ScheduleBlock ..> Course : schedule_block.course_id\n(cross-context, no FK)
+ScheduleBlock ..> AcademicActor : schedule_block.instructor_actor_id\n(cross-context, no FK)
+ClassSession ..> AcademicActor : opened_by / closed_by\n(cross-context, no FK)
+
+note left of ScheduleBlock
+  RN-18/RN-20: starts_at < ends_at (chk_block_time).
+  The DB unique constraints only catch an identical
+  starts_at; real interval overlap (touching ranges
+  are fine, e.g. 10:00 end / 10:00 start) is checked
+  in application code by ScheduleBlockOverlapGuard
+  before every create/update — one query for the
+  environment, one for the instructor. Neither
+  cohort_id, course_id nor instructor_actor_id is
+  ever verified against Academic before saving —
+  see 09-microservices/communication-patterns.md §3.
+end note
+
+note right of ClassSession
+  RN-22: one attendance per actor per session,
+  enforced in attendance (uq_attendance_session_actor).
+  RN-23 (intended): the session should be Open
+  when attendance is recorded -- ms-attendance
+  never checks this session's status at all, so
+  it is not enforced (corrected 2026-10-12 against
+  FULL/). open() can never succeed in practice —
+  see ST-01 in diagram-index.md.
+end note
+
+note as N1
+  All classes also carry the standard audit block
+  (created_at/updated_at/deleted_at/created_by/
+  updated_by/deleted_by/row_version) — omitted
+  here for readability. See AGENTS.md §2.2 and
+  06-data/domains/04-scheduling.md for the
+  column-level ER view.
+end note
+
+@enduml

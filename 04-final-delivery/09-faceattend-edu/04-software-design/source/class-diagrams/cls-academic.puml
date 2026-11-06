@@ -1,0 +1,147 @@
+@startuml cls-academic
+title Class Diagram — Academic
+
+skinparam classAttributeIconSize 0
+hide circle
+
+class Person <<external — identity>> {
+}
+
+enum EnrollmentStatus <<enumeration>> {
+  Active
+  Withdrawn
+  Completed
+}
+
+class School {
+  +schoolId: Int
+  +code: String
+  +name: String
+  +cityId: String
+  +address: String
+  +phone: String
+  +email: String
+  +status: Boolean
+}
+
+class Program {
+  +programId: Int
+  +schoolId: Int
+  +code: String
+  +name: String
+  +status: Boolean
+}
+
+class AcademicPeriod {
+  +academicPeriodId: Int
+  +schoolId: Int
+  +name: String
+  +startsOn: Date
+  +endsOn: Date
+  +isActive: Boolean
+}
+
+class Cohort {
+  +cohortId: Long
+  +programId: Int
+  +academicPeriodId: Int
+  +code: String
+  +status: Boolean
+  +register()
+  +activate()
+  +finish()
+}
+
+class Course {
+  +courseId: Int
+  +programId: Int
+  +code: String
+  +name: String
+  +creditHours: Int
+  +status: Boolean
+}
+
+class AcademicActorType {
+  +actorTypeId: Int
+  +code: String
+  +name: String
+}
+
+class AcademicActor {
+  +academicActorId: Long
+  +personId: UUID
+  +actorTypeId: Int
+  +schoolId: Int
+  +actorCode: String
+  +startedOn: Date
+  +endedOn: Date
+  +status: Boolean
+}
+
+class Enrollment {
+  +enrollmentId: Long
+  +academicActorId: Long
+  +cohortId: Long
+  +enrolledOn: Date
+  +enrollmentStatus: EnrollmentStatus
+  +enroll()
+  +withdraw()
+  +complete()
+}
+
+School "1" -- "0..*" Program : program.school_id FK
+School "1" -- "0..*" AcademicPeriod : academic_period.school_id FK
+Program "1" -- "0..*" Cohort : cohort.program_id FK
+AcademicPeriod "1" -- "0..*" Cohort : cohort.academic_period_id FK
+Program "1" -- "0..*" Course : course.program_id FK
+AcademicActorType "1" -- "0..*" AcademicActor : academic_actor.actor_type_id FK
+School "1" -- "0..*" AcademicActor : academic_actor.school_id FK
+AcademicActor "1" -- "0..*" Enrollment : enrollment.academic_actor_id FK
+Cohort "1" -- "0..*" Enrollment : enrollment.cohort_id FK
+Enrollment --> EnrollmentStatus
+
+AcademicActor ..> Person : person_id\n(cross-context, no FK)
+
+note right of School
+  RN-11: all academic data belongs to a School
+  (multi-tenant root). city_id comes from the
+  external countriesnow.space catalog, no FK —
+  identity.city is deprecated.
+end note
+
+note right of Program
+  RN-12: a Program may be added only if it does
+  not already exist in the same School
+  (uq_program_code_school).
+end note
+
+note left of Cohort
+  RN-14: must have a valid instructor before
+  attendance recording begins — enforced via a
+  ScheduleBlock in the Scheduling context (see
+  cls-scheduling.puml), not drawn here. code is
+  globally unique.
+end note
+
+note right of AcademicActor
+  Unified Student/Instructor representation.
+  RN-16: must reference a valid Person.
+  uq_actor_person_type_school prevents
+  duplicates.
+end note
+
+note bottom of Enrollment
+  uq_enrollment_actor_cohort: one enrollment
+  per actor per cohort.
+end note
+
+note as N1
+  All classes also carry the standard audit block
+  (created_at/updated_at/deleted_at/created_by/
+  updated_by/deleted_by/row_version) — omitted
+  here for readability. See AGENTS.md §2.2 and
+  06-data/domains/03-academic.md for the
+  column-level ER view.
+end note
+
+@enduml

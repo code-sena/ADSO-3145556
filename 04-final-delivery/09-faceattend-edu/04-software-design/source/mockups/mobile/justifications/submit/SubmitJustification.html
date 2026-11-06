@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FaceAttendEDU - Submit Justification</title>
+    <style>
+        :root {
+            --color-primary: #2196F3;
+            --color-bg-page: #F8FAFC;
+            --color-bg-card: #FFFFFF;
+            --color-text-primary: #0F172A;
+            --color-text-secondary: #64748B;
+            --space-md: 16px;
+            --space-lg: 24px;
+            --radius-lg: 12px;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+        }
+        body {
+            font-family: sans-serif;
+            background-color: #cbd5e1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .mobile-viewport {
+            width: 375px;
+            height: 812px;
+            background-color: var(--color-bg-page);
+            border-radius: 40px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+            border: 8px solid #334155;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            padding: 40px var(--space-lg) var(--space-md);
+            background-color: var(--color-bg-card);
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .header h1 {
+            font-size: 22px;
+            color: var(--color-text-primary);
+            margin: 0;
+        }
+        .content {
+            padding: var(--space-lg);
+            flex: 1;
+            overflow-y: auto;
+        }
+        .form-group {
+            margin-bottom: var(--space-lg);
+        }
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        .input-field {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: var(--radius-lg);
+            box-sizing: border-box;
+            font-size: 16px;
+            color: var(--color-text-primary);
+        }
+        .textarea-field {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: var(--radius-lg);
+            box-sizing: border-box;
+            font-size: 16px;
+            min-height: 100px;
+            resize: none;
+        }
+        .footer {
+            padding: var(--space-lg);
+            background-color: var(--color-bg-card);
+            border-top: 1px solid #e2e8f0;
+        }
+        .btn-primary {
+            background-color: var(--color-primary);
+            color: white;
+            text-align: center;
+            padding: 14px;
+            border-radius: var(--radius-lg);
+            text-decoration: none;
+            display: block;
+            font-weight: bold;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="mobile-viewport">
+        <div class="header">
+            <h1>Enviar Justificación</h1>
+        </div>
+        <div class="content">
+            <div class="form-group">
+                <label>Fecha de Inasistencia</label>
+                <input type="date" class="input-field">
+            </div>
+            <div class="form-group">
+                <label>Tipo de Justificación</label>
+                <select class="input-field">
+                    <option>Médica</option>
+                    <option>Familiar</option>
+                    <option>Personal</option>
+                    <option>Otros</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Motivo Detallado</label>
+                <textarea class="textarea-field" placeholder="Explique el motivo de su inasistencia..."></textarea>
+            </div>
+            <div class="form-group">
+                <label>Adjuntar Comprobante (Opcional)</label>
+                <input type="file" class="input-field">
+            </div>
+        </div>
+        <div class="footer">
+            <button class="btn-primary">Guardar Justificación</button>
+        </div>
+    </div>
+</body>
+</html>
