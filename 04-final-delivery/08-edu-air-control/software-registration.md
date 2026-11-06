@@ -17,8 +17,8 @@ Llene todos los campos vacíos. Sigue el Decreto 1360 de 1989.
 
 | Field / Campo | Value / Valor |
 |---|---|
-| Full name / Nombre |  |
-| ID document / Identificación | |
+| Full name / Nombre | To be defined with the lead instructor / Por definir con el instructor líder |
+| ID document / Identificación | Provided privately by the applicant / Lo entrega el solicitante por canal privado |
 | Acts on own behalf or as representative / Actúa en nombre propio o como representante | ☐ Own behalf / Nombre propio ☐ Representative / Representante |
 | Proof of representation / Prueba de representación, si aplica | |
 
@@ -90,9 +90,9 @@ At least one is required. Attach all three. / Se exige al menos uno. Adjunte los
 
 | Element / Elemento | Where it is / Dónde está | Ready / Listo |
 |---|---|---|
-| Computer program / Programa de computador | ZIP files `final-delivery-2026` listed in `code-tag/README.md` / ZIP relacionados en `code-tag/README.md` | ☐ |
-| Program description / Descripción de programa | `02-software-analysis/` and `04-software-design/` | ☐ |
-| Auxiliary material / Material auxiliar | `08-manuals/` | ☐ |
+| Computer program / Programa de computador | ZIP files `final-delivery-2026` listed in `code-tag/README.md` / ZIP relacionados en `code-tag/README.md` | ☑ |
+| Program description / Descripción de programa | `02-software-analysis/` and `04-software-design/` | ☑ |
+| Auxiliary material / Material auxiliar | `08-manuals/` | ☑ |
 
 ## 8. Third-party components / Componentes de terceros
 
