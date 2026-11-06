@@ -4,7 +4,7 @@
 
 ## Required content / Contenido requerido
 
-- [ ] Final article of the project / Artículo final del proyecto
+- [x] Final article of the project / Artículo final del proyecto
 
 ## Format / Formato
 
@@ -12,3 +12,11 @@
 - English file names, without spaces or accents: `requirements-specification.pdf`. / Nombres de archivo en inglés, sin espacios ni tildes.
 - Files over 50 MB go to Drive and are listed in the project `README.md`. / Los archivos de más de 50 MB van a Drive y se relacionan en el `README.md` del proyecto.
 - Do not add passwords, tokens, keys or real user data. / No incluya contraseñas, tokens, llaves ni datos reales de usuarios.
+
+## Files / Archivos
+
+| File / Archivo | Content / Contenido |
+|---|---|
+| [`project-article.pdf`](project-article.pdf) | Project article / Artículo del proyecto |
+
+Editable source: the Markdown files in `source/es/`, taken from the documentation repository [TheJhampierBoy/TuEvento-Docs](https://github.com/TheJhampierBoy/TuEvento-Docs) (`es/`; English version in `en/`). / Fuente editable: los archivos Markdown de `source/es/`, tomados del repositorio de documentación (`es/`; versión en inglés en `en/`).

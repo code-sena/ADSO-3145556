@@ -5,7 +5,7 @@ Two videos are required. / Se requieren dos videos.
 | Video | Duration / Duración | Link / Enlace | Done / Listo |
 |---|---|---|---|
 | Advertising pitch / Pitch publicitario | 1 to 2 minutes / 1 a 2 minutos | | ☐ |
-| Short usage tutorial / Tutorial corto de uso | 3 to 5 minutes / 3 a 5 minutos | | ☐ |
+| Short usage tutorial / Tutorial corto de uso | 3 to 5 minutes / 3 a 5 minutos | [`tuevento-usage-tutorial.mp4`](https://drive.google.com/file/d/1JQwpBJMLQlUPd2DGHQo5i_C7UzpmvF-B/view?usp=sharing) | ☑ |
 
 ## 1. Advertising pitch / Pitch publicitario
 
@@ -20,10 +20,10 @@ Sells the product to someone who does not know it. / Presenta el producto a algu
 
 Shows how the system is used, on the real system. / Muestra cómo se usa el sistema, sobre el sistema real.
 
-- [ ] Sign-in and main roles / Ingreso y roles principales
-- [ ] The main flow, step by step / El flujo principal, paso a paso
-- [ ] The result the user gets / El resultado que obtiene el usuario
-- [ ] Voice or captions that explain each step / Voz o subtítulos que expliquen cada paso
+- [x] Sign-in and main roles / Ingreso y roles principales
+- [x] The main flow, step by step / El flujo principal, paso a paso
+- [x] The result the user gets / El resultado que obtiene el usuario
+- [x] Voice or captions that explain each step / Voz o subtítulos que expliquen cada paso
 
 ## Rules / Reglas
 
