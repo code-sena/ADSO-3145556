@@ -35,8 +35,8 @@ Final delivery of the training project / Entrega final del proyecto formativo.
 | Full name / Nombre completo | Doc. type / Tipo | Doc. number / Número | Ficha | GitHub user / Usuario | Role / Rol | Verified and authorized / Verificado y autorizado |
 |---|---|---|---|---|---|---|
 | JUAN PABLO CHALA RAMIREZ | CC | 1080292891 | 3145556 | Juan-Chala-123 | Fullstack, DevOps, Documentation | ☒ |
-| SHARIK DAYANNA ROJAS IBARRA | CC | 1081155289 | 3145556 | sharikrojas56 | Fullstack | ☒ |
-| JOHAN SMITH SANTAMARIA FERNANDEZ | CC | 1031652982 | 3145556 | Smithzz24 | Fullstack | ☒ |
+| SHARIK DAYANNA ROJAS IBARRA | CC | 1081155289 | 3145556 | sharikrojas56 | Fullstack, Documentation | ☒ |
+| JOHAN SMITH SANTAMARIA FERNANDEZ | CC | 1031652982 | 3145556 | Smithzz24 | Fullstack, Documentation | ☒ |
 
 ### Roles del proyecto / Project roles
 
@@ -44,7 +44,7 @@ Final delivery of the training project / Entrega final del proyecto formativo.
 |---|---|---|
 | Fullstack / Desarrollo fullstack | Juan Pablo Chala Ramírez, Sharik Dayanna Rojas Ibarra, Johan Smith Santamaría Fernández | Juan-Chala-123, sharikrojas56, Smithzz24 |
 | DevOps / Operaciones y despliegue | Juan Pablo Chala Ramírez | Juan-Chala-123 |
-| Documentation / Documentación | Juan Pablo Chala Ramírez | Juan-Chala-123 |
+| Documentation / Documentación | Juan Pablo Chala Ramírez, Sharik Dayanna Rojas Ibarra, Johan Smith Santamaría Fernández | Juan-Chala-123, sharikrojas56, Smithzz24 |
 
 Data use authorization: by checking the box, the member confirms their data and authorizes publishing their name, document number and ficha in this public repository, for the software registration process (Ley 1581 de 2012). Anyone who does not authorize it tells the instructor before delivering.
 
