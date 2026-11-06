@@ -4,9 +4,20 @@
 
 ## Required content / Contenido requerido
 
-- [ ] Technical manual / Manual técnico
-- [ ] Installation manual / Manual de instalación
-- [ ] End-user manual / Manual de usuario final
+- [x] Technical manual / Manual técnico
+- [x] Installation manual / Manual de instalación
+- [x] End-user manual / Manual de usuario final
+
+## Files / Archivos
+
+| File / Archivo | Content / Contenido |
+|---|---|
+| [`technical-manual.pdf`](technical-manual.pdf) | Technical manual / Manual técnico |
+| [`installation-manual.pdf`](installation-manual.pdf) | Installation manual / Manual de instalación |
+| [`user-manual.pdf`](user-manual.pdf) | End-user manual / Manual de usuario final |
+| [`administrator-manual.pdf`](administrator-manual.pdf) | Administrator manual (extra) / Manual del administrador (adicional) |
+
+Editable sources are in [`source/`](source/). / Las fuentes editables están en [`source/`](source/).
 
 ## Format / Formato
 
