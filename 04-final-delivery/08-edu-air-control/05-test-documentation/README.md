@@ -18,4 +18,4 @@
 ## Delivered content / Contenido entregado
 
 - [`test-plan-and-evidence/`](test-plan-and-evidence/): test plan, cases, results and audit. / Plan, casos, resultados y auditoría de pruebas.
-- [`annexes/`](annexes/): annexes, including a source code snapshot the tests come from. The up-to-date code is in the repositories listed in [`code-tag/README.md`](../code-tag/README.md). / Anexos, incluida una copia del código fuente de donde salen las pruebas; el código vigente está en los repositorios de `code-tag`.
+- The source code the tests run against is not copied here: it lives in the repositories listed in [`code-tag/README.md`](../code-tag/README.md), at tag `final-delivery-2026`. / El código sobre el que corren las pruebas no se copia aquí: está en los repositorios de [`code-tag/README.md`](../code-tag/README.md), en el tag `final-delivery-2026`.
