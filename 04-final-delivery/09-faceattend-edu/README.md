@@ -34,9 +34,9 @@ Final delivery of the training project / Entrega final del proyecto formativo.
 
 | Full name / Nombre completo | Doc. type / Tipo | Doc. number / Número | Ficha | GitHub user / Usuario | Role / Rol | Verified and authorized / Verificado y autorizado |
 |---|---|---|---|---|---|---|
-| JONATTAN STEVEN RIZO SOLANO | CC | 1077228536 | 3145556 | Jonas7891 | Hardware, developer / Hardware, desarrollo | ☐ |
-| DIEGO ANDRES GUTIERREZ NUÑEZ | CC | 1077228601 | 3145556 | andresguti17 | Administrator, developer, AI / Administración, desarrollo, IA | ☐ |
-| JUAN DAVID ARBOLEDA PERDOMO | CC | 1077229270 | 3145556 | juanArvol | Analyst, database / Análisis, base de datos | ☐ |
+| JONATTAN STEVEN RIZO SOLANO | CC | 1077228536 | 3145556 | Jonas7891 | Full-stack developer / Desarrollador full-stack | ☑ |
+| DIEGO ANDRES GUTIERREZ NUÑEZ | CC | 1077228601 | 3145556 | andresguti17 | Full-stack developer / Desarrollador full-stack | ☑ |
+| JUAN DAVID ARBOLEDA PERDOMO | CC | 1077229270 | 3145556 | juanArvol | Full-stack developer / Desarrollador full-stack | ☑ |
 
 Data use authorization: by checking the box, the member confirms their data and authorizes publishing their name, document number and ficha in this public repository, for the software registration process (Ley 1581 de 2012). Anyone who does not authorize it tells the instructor before delivering.
 
