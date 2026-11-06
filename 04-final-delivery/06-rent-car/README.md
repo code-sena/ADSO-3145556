@@ -34,9 +34,9 @@ Final delivery of the training project / Entrega final del proyecto formativo.
 
 | Full name / Nombre completo | Doc. type / Tipo | Doc. number / Número | Ficha | GitHub user / Usuario | Role / Rol | Verified and authorized / Verificado y autorizado |
 |---|---|---|---|---|---|---|
-| THIAGO FABIAN ROJAS GUEVARA | CC | 1079177558 | 3145556 | thiagxrg | | ☐ |
-| NICOLE DAYANA RAMIREZ VARGAS | CC | 1075795034 | 3145556 | nicolerv18 | | ☐ |
-| DAVID SANTIAGO EREZ RODRIGUEZ | TI | 1075599136 | 3145556 | david-erez | | ☐ |
+| THIAGO FABIAN ROJAS GUEVARA | CC | 1079177558 | 3145556 | thiagxrg | Full Stack | ☑ |
+| NICOLE DAYANA RAMIREZ VARGAS | CC | 1075795034 | 3145556 | nicolerv18 | Full Stack | ☑ |
+| DAVID SANTIAGO EREZ RODRIGUEZ | TI | 1075599136 | 3145556 | david-erez | Full Stack | ☑ |
 
 Data use authorization: by checking the box, the member confirms their data and authorizes publishing their name, document number and ficha in this public repository, for the software registration process (Ley 1581 de 2012). Anyone who does not authorize it tells the instructor before delivering.
 
