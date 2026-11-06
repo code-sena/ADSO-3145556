@@ -13,3 +13,8 @@
 - English file names, without spaces or accents: `requirements-specification.pdf`. / Nombres de archivo en inglés, sin espacios ni tildes.
 - Files over 50 MB go to Drive and are listed in the project `README.md`. / Los archivos de más de 50 MB van a Drive y se relacionan en el `README.md` del proyecto.
 - Do not add passwords, tokens, keys or real user data. / No incluya contraseñas, tokens, llaves ni datos reales de usuarios.
+
+## Delivered content / Contenido entregado
+
+- [`implementation/`](implementation/): installation and implementation procedure (PDF and Markdown, Spanish and English). / Procedimiento de instalación e implementación.
+- Docker Compose stack, Jenkins pipelines and deployment scripts live in the infrastructure repository, tagged `final-delivery-2026`: [EduAirControl/ea-control-infra](https://github.com/EduAirControl/ea-control-infra). / El stack Docker Compose, los pipelines de Jenkins y los scripts de despliegue están en el repositorio de infraestructura.

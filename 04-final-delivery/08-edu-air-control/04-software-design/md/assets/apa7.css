@@ -1,0 +1,397 @@
+/* APA 7th edition — Paged Media stylesheet for WeasyPrint */
+
+@page {
+  size: Letter;
+  margin: 1in;
+
+  @top-right {
+    content: counter(page);
+    font-family: "Liberation Serif", "Times New Roman", serif;
+    font-size: 12pt;
+    vertical-align: middle;
+    text-align: right;
+  }
+}
+
+@page :first {
+  /* student paper: page number still appears on page 1, no running head */
+}
+
+html {
+  font-size: 12pt;
+}
+
+body {
+  font-family: "Liberation Serif", "Times New Roman", Times, serif;
+  font-size: 12pt;
+  line-height: 2;
+  text-align: left;
+  margin: 0;
+  padding: 0;
+}
+
+/* ---------- Paragraphs ---------- */
+
+p {
+  margin: 0;
+  text-indent: 0.5in;
+  text-align: left;
+  orphans: 2;
+  widows: 2;
+}
+
+p.no-indent,
+.portada p,
+.resumen p,
+.abstract-page p,
+.referencias li,
+figure p,
+.figura p {
+  text-indent: 0;
+}
+
+/* ---------- Headings (APA 7 levels 1-4) ---------- */
+
+h1 {
+  font-size: 12pt;
+  font-weight: bold;
+  text-align: center;
+  margin: 0;
+  text-indent: 0;
+  break-after: avoid;
+  line-height: 2;
+}
+
+h2 {
+  font-size: 12pt;
+  font-weight: bold;
+  text-align: left;
+  margin: 0;
+  text-indent: 0;
+  break-after: avoid;
+  line-height: 2;
+}
+
+h3 {
+  font-size: 12pt;
+  font-weight: bold;
+  font-style: italic;
+  text-align: left;
+  margin: 0;
+  text-indent: 0;
+  break-after: avoid;
+  line-height: 2;
+}
+
+h4 {
+  font-size: 12pt;
+  font-weight: bold;
+  font-style: italic;
+  text-align: left;
+  margin: 0 0 0 0.5in;
+  text-indent: 0;
+  break-after: avoid;
+  line-height: 2;
+}
+
+/* heading lookalikes written as paragraphs (kept out of the TOC) */
+.h1-look {
+  font-weight: bold;
+  text-align: center;
+  text-indent: 0;
+  margin: 0;
+}
+
+.paper-title {
+  font-weight: bold;
+  text-align: center;
+  text-indent: 0;
+  margin: 0 0 0.5em 0;
+}
+
+/* ---------- Title page (student paper) ---------- */
+
+.portada {
+  text-align: center;
+  break-after: page;
+  padding-top: 1in;
+}
+
+.portada p {
+  text-align: center;
+  text-indent: 0;
+  margin: 0;
+  line-height: 2;
+}
+
+.portada .pt {
+  font-weight: bold;
+  margin-bottom: 1em; /* one double-spaced blank line after the title */
+}
+
+/* ---------- Abstract / Resumen page ---------- */
+
+.resumen {
+  break-after: page;
+}
+
+.resumen p {
+  text-indent: 0;
+  text-align: left;
+}
+
+.resumen p.palabras-clave {
+  margin-top: 1em;
+}
+
+.paper-title-first {
+  font-weight: bold;
+  text-align: center;
+  text-indent: 0;
+  margin: 0 0 0.5em 0;
+}
+
+/* ---------- Table of contents ---------- */
+
+.indice {
+  break-after: page;
+}
+
+.indice .toc {
+  text-indent: 0;
+}
+
+.toc ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.toc ul ul {
+  padding-left: 0.35in;
+}
+
+.toc li {
+  text-indent: 0;
+  line-height: 1.6;
+}
+
+.toc a {
+  color: black;
+  text-decoration: none;
+}
+
+.toc-pg {
+  float: right;
+}
+
+.toc > ul > li {
+  margin-top: 0.35em;
+}
+
+/* ---------- Lists ---------- */
+
+ul, ol {
+  margin: 0;
+  padding-left: 0.5in;
+}
+
+li {
+  text-indent: 0;
+  line-height: 2;
+}
+
+li p {
+  text-indent: 0;
+}
+
+/* ---------- Tables (APA: horizontal rules only) ---------- */
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 0.3em 0 0.6em 0;
+  font-size: 11pt;
+  line-height: 1.35;
+  border-top: 1.5pt solid #000;
+  border-bottom: 1.5pt solid #000;
+  break-inside: auto;
+}
+
+thead {
+  display: table-header-group;
+}
+
+tr {
+  break-inside: avoid;
+}
+
+th {
+  font-weight: bold;
+  text-align: left;
+  border: none;
+  border-bottom: 1pt solid #000;
+  padding: 4pt 6pt;
+  vertical-align: bottom;
+  line-height: 1.35;
+}
+
+td {
+  border: none;
+  padding: 4pt 6pt;
+  vertical-align: top;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+th {
+  overflow-wrap: anywhere;
+}
+
+.tabla-num {
+  font-weight: bold;
+  text-align: left;
+  text-indent: 0;
+  margin: 0;
+  break-after: avoid;
+}
+
+.tabla-title {
+  font-style: italic;
+  text-align: left;
+  text-indent: 0;
+  margin: 0;
+  break-after: avoid;
+}
+
+/* ---------- Figures (APA: number bold above, italic title, image, note) ---------- */
+
+.figura {
+  break-inside: avoid;
+  text-indent: 0;
+  margin: 0.4em 0 0.8em 0;
+}
+
+.figura p {
+  text-indent: 0;
+  text-align: left;
+  margin: 0;
+}
+
+.figura .fig-num {
+  font-weight: bold;
+}
+
+.figura .fig-tit {
+  font-style: italic;
+  margin-bottom: 0.5em;
+}
+
+.figura .fig-img {
+  text-align: center;
+  margin: 0.5em 0;
+}
+
+.figura img {
+  max-width: 6.4in;
+  width: 100%;
+  height: auto;
+}
+
+.figura .fig-nota {
+  text-align: left;
+}
+
+/* ---------- Code / pseudocode ---------- */
+
+pre {
+  font-family: "Liberation Mono", "Courier New", monospace;
+  font-size: 10.5pt;
+  line-height: 1.35;
+  background-color: #f7f7f7;
+  border: 0.75pt solid #999;
+  border-left: 3pt solid #333;
+  padding: 8pt 10pt;
+  margin: 0.5em 0 0.8em 0;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  text-indent: 0;
+  break-inside: avoid;
+}
+
+code {
+  font-family: "Liberation Mono", "Courier New", monospace;
+  font-size: 10.5pt;
+}
+
+pre code {
+  font-size: inherit;
+}
+
+/* ---------- References (hanging indent, double-spaced) ---------- */
+
+.referencias {
+  break-before: page;
+}
+
+.referencias h1 {
+  margin-bottom: 0;
+}
+
+.referencias ul {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 0;
+}
+
+.referencias li {
+  line-height: 2;
+  text-indent: -0.5in;
+  padding-left: 0.5in;
+  margin: 0;
+  orphans: 2;
+  widows: 2;
+}
+
+/* ---------- Block quotes ---------- */
+
+blockquote {
+  margin: 0 0 0 0.5in;
+  padding-left: 0.15in;
+  border-left: 1.5pt solid #333;
+  text-indent: 0;
+}
+
+blockquote p {
+  text-indent: 0;
+}
+
+/* ---------- Misc ---------- */
+
+.page-break {
+  break-after: page;
+  height: 0;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}
+
+strong,
+b {
+  font-weight: bold;
+}
+
+em,
+i {
+  font-style: italic;
+}
+
+hr {
+  border: none;
+  border-top: 1pt solid #000;
+  margin: 0.6em 0;
+}
