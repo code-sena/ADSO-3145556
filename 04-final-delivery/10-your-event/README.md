@@ -82,4 +82,4 @@ Aquí solo van archivos demasiado pesados para GitHub, como videos de demostraci
 | File / Archivo | Size / Tamaño | Link / Enlace |
 |---|---|---|
 | `tuevento-usage-tutorial.mp4` — usage tutorial / tutorial de uso | 20.2 MB | [Google Drive](https://drive.google.com/file/d/1JQwpBJMLQlUPd2DGHQo5i_C7UzpmvF-B/view?usp=sharing) |
-| `tuevento-advertising-pitch.mp4` — advertising pitch / pitch publicitario | | [Google Drive](https://drive.google.com/file/d/1muZgLYzA7VaPwu_vAFrtiOllNIjjoIlN/view?usp=sharing) |
+| `tuevento-advertising-pitch.mp4` — advertising pitch / pitch publicitario | 25.6 MB | [Google Drive](https://drive.google.com/file/d/1muZgLYzA7VaPwu_vAFrtiOllNIjjoIlN/view?usp=sharing) |
