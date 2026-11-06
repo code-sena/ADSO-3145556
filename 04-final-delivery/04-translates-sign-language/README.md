@@ -55,7 +55,7 @@ Autorización de datos: al marcar la casilla, el integrante confirma sus datos y
 | [`07-improvement-actions/`](07-improvement-actions/) | Improvement actions / Acciones de mejoramiento | ☑ |
 | [`08-manuals/`](08-manuals/) | Manuals / Manuales | ☑ |
 | [`09-project-article/`](09-project-article/) | Project article / Artículo del proyecto | ☑ |
-| [`10-videos/`](10-videos/) | Videos / Videos | ☐ |
+| [`10-videos/`](10-videos/) | Videos / Videos | ☑ |
 | [`code-tag/`](code-tag/) | Repository links, tags and ZIP files / Enlaces, tags y ZIP | ☐ |
 | [`team-roster.md`](team-roster.md) | Team and roles / Equipo y roles | ☐ |
 | [`software-registration.md`](software-registration.md) | Software registration data / Datos para registro de software | ☐ |
@@ -68,4 +68,5 @@ Aquí solo van archivos demasiado pesados para GitHub, como videos de demostraci
 
 | File / Archivo | Size / Tamaño | Link / Enlace |
 |---|---|---|
-| | | |
+| `Traduce_señas_pitch.mp4` | 17.0 MB | [Google Drive](https://drive.google.com/file/d/1d0ICdnzrIn2V2BSZ0yNUOGjvSDuRgLZ1/view?usp=sharing) |
+| `Traduce_señas_Tutorial.mp4` | 26.9 MB | [Google Drive](https://drive.google.com/file/d/1rKvoF2k2tP0xoC65_oN2lKgVH2vJKK7J/view?usp=sharing) |
