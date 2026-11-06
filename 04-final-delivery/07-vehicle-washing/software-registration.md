@@ -78,7 +78,7 @@ Authors are the instructors and the apprentices listed in `team-roster.md`. Each
 | Origin / Origen | ☒ Original ☐ Derived work / Obra derivada |
 | If derived, base work / Si es derivada, obra de base | Not applicable / No aplica |
 | Type of work / Clase de obra | ☐ Individual ☒ In collaboration / En colaboración ☐ Collective / Colectiva ☐ Anonymous / Anónima ☐ Pseudonymous / Seudónima ☐ Posthumous / Póstuma |
-| Publication / Publicación | ☐ Unpublished / Inédita ☐ Published / Publicada |
+| Publication / Publicación | ☐ Unpublished / Inédita ☒ Published / Publicada |
 | If published, date and place / Si está publicada, fecha y lugar | The source code is in public GitHub repositories (listed in `code-tag/README.md`) and the system runs on Azure at https://lavarapidovehicular.northcentralus.cloudapp.azure.com. The Centro decides the final declaration. / El código está en repositorios públicos de GitHub (relacionados en `code-tag/README.md`) y el sistema corre en Azure en esa URL. El Centro define la declaración final. |
 
 Software is treated as unpublished unless the rights holder states otherwise (art. 4). A public repository may count as publication: the team records it here, and the Centro decides the final declaration.
@@ -91,9 +91,9 @@ At least one is required. Attach all three. / Se exige al menos uno. Adjunte los
 
 | Element / Elemento | Where it is / Dónde está | Ready / Listo |
 |---|---|---|
-| Computer program / Programa de computador | ZIP files `final-delivery-2026` listed in `code-tag/README.md` / ZIP relacionados en `code-tag/README.md` | ☐ |
-| Program description / Descripción de programa | `02-software-analysis/` and `04-software-design/` | ☐ |
-| Auxiliary material / Material auxiliar | `08-manuals/` | ☐ |
+| Computer program / Programa de computador | ZIP files `final-delivery-2026` listed in `code-tag/README.md` / ZIP relacionados en `code-tag/README.md` | ☑ |
+| Program description / Descripción de programa | `02-software-analysis/` and `04-software-design/` | ☑ |
+| Auxiliary material / Material auxiliar | `08-manuals/` | ☑ |
 
 ## 8. Third-party components / Componentes de terceros
 
