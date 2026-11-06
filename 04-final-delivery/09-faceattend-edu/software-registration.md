@@ -17,10 +17,10 @@ Llene todos los campos vacíos. Sigue el Decreto 1360 de 1989.
 
 | Field / Campo | Value / Valor |
 |---|---|
-| Full name / Nombre |  |
-| ID document / Identificación | |
-| Acts on own behalf or as representative / Actúa en nombre propio o como representante | ☐ Own behalf / Nombre propio ☐ Representative / Representante |
-| Proof of representation / Prueba de representación, si aplica | |
+| Full name / Nombre | DIEGO ANDRES GUTIERREZ NUÑEZ |
+| ID document / Identificación | CC 1077228601 |
+| Acts on own behalf or as representative / Actúa en nombre propio o como representante | ☐ Own behalf / Nombre propio ☑ Representative / Representante: of the co-holders in section 4 / de los cotitulares de la sección 4 |
+| Proof of representation / Prueba de representación, si aplica | Written authorization signed by the other co-holders (sections 2 and 4), to be attached when filing / Autorización escrita firmada por los demás cotitulares (secciones 2 y 4), que se adjunta al radicar |
 
 ## 2. Authors / Autores (art. 5, num. 2)
 
@@ -75,11 +75,11 @@ Authors are the instructors and the apprentices listed in `team-roster.md`. Each
 
 | Declaration / Declaración | Option / Opción |
 |---|---|
-| Origin / Origen | ☐ Original ☐ Derived work / Obra derivada |
-| If derived, base work / Si es derivada, obra de base | |
-| Type of work / Clase de obra | ☐ Individual ☐ In collaboration / En colaboración ☐ Collective / Colectiva ☐ Anonymous / Anónima ☐ Pseudonymous / Seudónima ☐ Posthumous / Póstuma |
-| Publication / Publicación | ☐ Unpublished / Inédita ☐ Published / Publicada |
-| If published, date and place / Si está publicada, fecha y lugar | |
+| Origin / Origen | ☑ Original ☐ Derived work / Obra derivada |
+| If derived, base work / Si es derivada, obra de base | Not applicable: third-party components are only used, see section 8 / No aplica: los componentes de terceros solo se usan, ver sección 8 |
+| Type of work / Clase de obra | ☐ Individual ☑ In collaboration / En colaboración ☐ Collective / Colectiva ☐ Anonymous / Anónima ☐ Pseudonymous / Seudónima ☐ Posthumous / Póstuma |
+| Publication / Publicación | ☐ Unpublished / Inédita ☑ Published / Publicada |
+| If published, date and place / Si está publicada, fecha y lugar | 2026-03-11, public GitHub repository / repositorio público en GitHub: [Jonas7891/ProyectoFaceAttendEDU](https://github.com/Jonas7891/ProyectoFaceAttendEDU) |
 
 Software is treated as unpublished unless the rights holder states otherwise (art. 4). A public repository may count as publication: the team records it here, and the Centro decides the final declaration.
 
@@ -91,7 +91,7 @@ At least one is required. Attach all three. / Se exige al menos uno. Adjunte los
 
 | Element / Elemento | Where it is / Dónde está | Ready / Listo |
 |---|---|---|
-| Computer program / Programa de computador | ZIP files `final-delivery-2026` listed in `code-tag/README.md` / ZIP relacionados en `code-tag/README.md` | ☐ |
+| Computer program / Programa de computador | ZIP files `final-delivery-2026` listed in `code-tag/README.md` / ZIP relacionados en `code-tag/README.md` | ☑ |
 | Program description / Descripción de programa | `02-software-analysis/` and `04-software-design/` | ☑ |
 | Auxiliary material / Material auxiliar | `08-manuals/` | ☑ |
 
@@ -110,7 +110,7 @@ Relacione código, librerías, modelos, imágenes o datos que el equipo no creó
 | `face_recognition` | Adam Geitgey | MIT | Biometric service 06 (face encoding) |
 | dlib (HOG detector) | Davis King | Boost Software License 1.0 | Biometric service 06 (face detection) |
 | dlib models `dlib_face_recognition_resnet_model_v1`, `shape_predictor_5_face_landmarks` | Davis King | Public domain / Dominio público | Biometric service 06 (face template, alignment) |
-| dlib model `shape_predictor_68_face_landmarks` (trained on iBUG 300-W) | Davis King / iBUG (Imperial College London) | Non-commercial use only / Solo uso no comercial | Biometric service 06 (liveness check only). Accepted for non-commercial institutional use; legal confirmation pending, see `docs/LICENCIAS_MODELOS_BIOMETRICOS.md` in the repository / Aceptado para uso institucional no comercial; confirmación jurídica pendiente |
+| dlib model `shape_predictor_68_face_landmarks` (trained on iBUG 300-W) | Davis King / iBUG (Imperial College London) | Non-commercial use only / Solo uso no comercial | Biometric service 06 (liveness check only). Used by SENA for non-commercial educational purposes, within the license; see `docs/LICENCIAS_MODELOS_BIOMETRICOS.md` in the repository / Usado por el SENA con fines educativos no comerciales, dentro de la licencia |
 | React, React Native, React Native Web, React Navigation | Meta; Necolas; React Navigation contributors | MIT | Web and Mobile apps |
 | Expo SDK (`expo-*` packages) | Expo | MIT | Web and Mobile apps |
 | Kong Gateway OSS | Kong Inc. | Apache 2.0 | API Gateway |
@@ -125,7 +125,7 @@ Relacione código, librerías, modelos, imágenes o datos que el equipo no creó
 | nginx (`nginx-unprivileged` image / imagen `nginx-unprivileged`) | F5 / nginx | BSD-2-Clause | Web app container / Contenedor de la app Web |
 | MinIO | MinIO Inc. | AGPLv3 | Supporting document storage / Almacenamiento de soportes |
 | countriesnow.space | countriesnow.space | Public API, terms not stated / API pública, sin términos claros | School sign-up: cities / Alta de sede: ciudades |
-| Icons in `Mobile/src/assets/images` / Iconos en `Mobile/src/assets/images` | To verify: source not documented / Por verificar: fuente sin documentar | To verify / Por verificar | Mobile / Móvil |
+| Icons in `Mobile/src/assets/images` (except `logoFaceAttend.png`) / Iconos en `Mobile/src/assets/images` (salvo `logoFaceAttend.png`) | Flaticon (Freepik and other authors / Freepik y otros autores) | Flaticon free license: attribution required / Licencia gratuita de Flaticon: exige atribución | Mobile / Móvil |
 
 The full list of dependencies and exact versions is in each service's `pom.xml`, `package.json` and `pyproject.toml`. / La lista completa de dependencias y versiones está en el `pom.xml`, `package.json` y `pyproject.toml` de cada servicio.
 
@@ -140,4 +140,4 @@ The full list of dependencies and exact versions is in each service's `pom.xml`,
 - [ ] The information is true and the names match the official ID documents. / La información es veraz y los nombres coinciden con los documentos de identidad.
 - [ ] The listed authors are the people who created the software. / Los autores relacionados son quienes crearon el software.
 - [ ] Third-party components are declared. / Los componentes de terceros están declarados.
-- [ ] No passwords, tokens or keys are included. / No se incluyen contraseñas, tokens ni llaves.
+- [x] No passwords, tokens or keys are included. / No se incluyen contraseñas, tokens ni llaves.
