@@ -19,11 +19,11 @@ Final delivery of the training project / Entrega final del proyecto formativo.
 
 ## Summary / Resumen
 
-- **Problem it solves / Problema que resuelve:**
-- **Target users / Usuarios:**
-- **Main features / Funciones principales:**
-- **Technology stack / Tecnologías:**
-- **Production URL / URL en producción:**
+- **Problem it solves / Problema que resuelve:** Manages the full vehicle rental cycle (availability, reservations, payment verification, fleet maintenance and real-time GPS tracking) that a car rental business today runs through spreadsheets, WhatsApp and manual paperwork / Gestiona el ciclo completo de alquiler de vehículos (disponibilidad, reservas, verificación de pagos, mantenimiento de flota y rastreo GPS en tiempo real) que hoy un negocio de renta de vehículos maneja con hojas de cálculo, WhatsApp y trámites manuales.
+- **Target users / Usuarios:** Rental company customers (web and mobile) and company staff (branch administrators and a super-admin) / Clientes de la empresa de renta (web y móvil) y personal de la empresa (administradores de sucursal y super-administrador).
+- **Main features / Funciones principales:** Vehicle search and reservation, bank-transfer receipt upload and admin approval, insurance plan selection, fleet and maintenance management, GPS vehicle tracking and route history, real-time notifications (SSE + mobile push), role-based access control.
+- **Technology stack / Tecnologías:** Backend: Java 21, Spring Boot 4.1, hexagonal architecture, SQL Server, Liquibase. Web frontend: React 19, Vite, React Router. Mobile: React Native (Expo). Infrastructure: Docker, Nginx (reverse proxy / TLS termination), deployed on a Hostinger VPS.
+- **Production URL / URL en producción:** https://rentamovil.tech
 - **Demo credentials / Credenciales de prueba:** do not write real passwords here / no escriba contraseñas reales aquí
 
 ## Team members / Integrantes
@@ -46,16 +46,16 @@ Autorización de datos: al marcar la casilla, el integrante confirma sus datos y
 
 | Folder / Carpeta | Content / Contenido | Done / Listo |
 |---|---|---|
-| [`01-requirements-specification/`](01-requirements-specification/) | Requirements specification / Especificación de requisitos | ☐ |
-| [`02-software-analysis/`](02-software-analysis/) | Software analysis / Análisis del software | ☐ |
-| [`03-technical-proposal/`](03-technical-proposal/) | Technical proposal / Propuesta técnica | ☐ |
-| [`04-software-design/`](04-software-design/) | Software design / Diseño del software | ☐ |
-| [`05-test-documentation/`](05-test-documentation/) | Test documentation / Documentación de pruebas | ☐ |
-| [`06-implementation-procedure/`](06-implementation-procedure/) | Implementation procedure / Procedimiento de implementación | ☐ |
-| [`07-improvement-actions/`](07-improvement-actions/) | Improvement actions / Acciones de mejoramiento | ☐ |
-| [`08-manuals/`](08-manuals/) | Manuals / Manuales | ☐ |
-| [`09-project-article/`](09-project-article/) | Project article / Artículo del proyecto | ☐ |
-| [`10-videos/`](10-videos/) | Videos / Videos | ☐ |
+| [`01-requirements-specification/`](01-requirements-specification/) | Requirements specification / Especificación de requisitos | ☑ |
+| [`02-software-analysis/`](02-software-analysis/) | Software analysis / Análisis del software | ☑ |
+| [`03-technical-proposal/`](03-technical-proposal/) | Technical proposal / Propuesta técnica | ☑ |
+| [`04-software-design/`](04-software-design/) | Software design / Diseño del software | ☑ |
+| [`05-test-documentation/`](05-test-documentation/) | Test documentation / Documentación de pruebas | ☑ |
+| [`06-implementation-procedure/`](06-implementation-procedure/) | Implementation procedure / Procedimiento de implementación | ☑ |
+| [`07-improvement-actions/`](07-improvement-actions/) | Improvement actions / Acciones de mejoramiento | ☑ |
+| [`08-manuals/`](08-manuals/) | Manuals / Manuales | ☑ |
+| [`09-project-article/`](09-project-article/) | Project article / Artículo del proyecto | ☑ |
+| [`10-videos/`](10-videos/) | Videos / Videos | ☑ |
 | [`code-tag/`](code-tag/) | Repository links, tags and ZIP files / Enlaces, tags y ZIP | ☐ |
 | [`team-roster.md`](team-roster.md) | Team and roles / Equipo y roles | ☐ |
 | [`software-registration.md`](software-registration.md) | Software registration data / Datos para registro de software | ☐ |
@@ -68,4 +68,5 @@ Aquí solo van archivos demasiado pesados para GitHub, como videos de demostraci
 
 | File / Archivo | Size / Tamaño | Link / Enlace |
 |---|---|---|
-| | | |
+| PitchPublicitarioRentaMovil.mp4 | 55.1 MB | [Drive](https://drive.google.com/drive/folders/1XP2bsdhCTNIW0OEt3mlF1VdsdS0a8G2x?usp=sharing) |
+| TutorialUso.mp4 | 119.2 MB | [Drive](https://drive.google.com/drive/folders/1XP2bsdhCTNIW0OEt3mlF1VdsdS0a8G2x?usp=sharing) |

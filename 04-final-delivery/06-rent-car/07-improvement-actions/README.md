@@ -4,9 +4,9 @@
 
 ## Required content / Contenido requerido
 
-- [ ] Corrective actions / Acciones correctivas
-- [ ] Preventive actions / Acciones preventivas
-- [ ] Software improvement actions / Acciones de mejoramiento del software
+- [x] Corrective actions / Acciones correctivas
+- [x] Preventive actions / Acciones preventivas
+- [x] Software improvement actions / Acciones de mejoramiento del software
 
 ## Format / Formato
 

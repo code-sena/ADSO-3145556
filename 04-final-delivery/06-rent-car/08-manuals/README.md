@@ -4,9 +4,9 @@
 
 ## Required content / Contenido requerido
 
-- [ ] Technical manual / Manual técnico
-- [ ] Installation manual / Manual de instalación
-- [ ] End-user manual / Manual de usuario final
+- [x] Technical manual / Manual técnico
+- [x] Installation manual / Manual de instalación
+- [x] End-user manual / Manual de usuario final
 
 ## Format / Formato
 

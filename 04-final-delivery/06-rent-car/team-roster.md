@@ -27,6 +27,6 @@ Los aprendices completan su rol, por ejemplo backend, frontend, base de datos, Q
 
 | Full name / Nombre completo | Doc. type / Tipo | Doc. number / Número | Ficha | GitHub user / Usuario | Role in the project / Rol en el proyecto | Author / Autor |
 |---|---|---|---|---|---|---|
-| THIAGO FABIAN ROJAS GUEVARA | CC | 1079177558 | 3145556 | thiagxrg | | Yes / Sí |
-| NICOLE DAYANA RAMIREZ VARGAS | CC | 1075795034 | 3145556 | nicolerv18 | | Yes / Sí |
-| DAVID SANTIAGO EREZ RODRIGUEZ | TI | 1075599136 | 3145556 | david-erez | | Yes / Sí |
+| THIAGO FABIAN ROJAS GUEVARA | CC | 1079177558 | 3145556 | thiagxrg | Full Stack | Yes / Sí |
+| NICOLE DAYANA RAMIREZ VARGAS | CC | 1075795034 | 3145556 | nicolerv18 | Full Stack | Yes / Sí |
+| DAVID SANTIAGO EREZ RODRIGUEZ | TI | 1075599136 | 3145556 | david-erez | Full Stack | Yes / Sí |

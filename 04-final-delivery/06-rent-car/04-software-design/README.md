@@ -4,10 +4,10 @@
 
 ## Required content / Contenido requerido
 
-- [ ] Graphical interfaces: mockups or prototype / Interfaces gráficas: mockups o prototipo
-- [ ] Architectural model / Modelo arquitectónico
-- [ ] Design patterns applied, with where they are used / Patrones de diseño aplicados, indicando dónde se usan
-- [ ] Data model: conceptual, logical and physical / Modelo de datos: conceptual, lógico y físico
+- [x] Graphical interfaces: mockups or prototype / Interfaces gráficas: mockups o prototipo
+- [x] Architectural model / Modelo arquitectónico
+- [x] Design patterns applied, with where they are used / Patrones de diseño aplicados, indicando dónde se usan
+- [x] Data model: conceptual, logical and physical / Modelo de datos: conceptual, lógico y físico
 
 ## Format / Formato
 
