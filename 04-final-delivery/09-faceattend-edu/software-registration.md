@@ -38,9 +38,9 @@ Authors are the instructors and the apprentices listed in `team-roster.md`. Each
 | EDDIER YAIR LIBERATO CUENCA | | Kept privately / En custodia | | Instructor: see `team-roster.md` / ver `team-roster.md` |
 | JHON WILLIAN CORREDOR ARAUJO | | Kept privately / En custodia | | Instructor: see `team-roster.md` / ver `team-roster.md` |
 | ANDRES MORENO COLLAZOS | | Kept privately / En custodia | | Instructor: see `team-roster.md` / ver `team-roster.md` |
-| JONATTAN STEVEN RIZO SOLANO | CC | 1077228536 | 3145556 | Hardware, developer / Hardware, desarrollo |
-| DIEGO ANDRES GUTIERREZ NUÑEZ | CC | 1077228601 | 3145556 | Administrator, developer, AI / Administración, desarrollo, IA |
-| JUAN DAVID ARBOLEDA PERDOMO | CC | 1077229270 | 3145556 | Analyst, database / Análisis, base de datos |
+| JONATTAN STEVEN RIZO SOLANO | CC | 1077228536 | 3145556 | Full-stack developer: Mobile app, attendance, authorization and biometric services, shared libraries, quality service and production deployment / Desarrollador full-stack: app Mobile, servicios de asistencia, autorización y biometría, librerías compartidas, servicio de calidad y despliegue a producción |
+| DIEGO ANDRES GUTIERREZ NUÑEZ | CC | 1077228601 | 3145556 | Full-stack developer: Web app, identity, academic, scheduling, configuration and notification services, database migrations (Liquibase), API Gateway and CI/CD / Desarrollador full-stack: app Web, servicios de identidad, académico, horarios, configuración y notificaciones, migraciones de base de datos (Liquibase), API Gateway y CI/CD |
+| JUAN DAVID ARBOLEDA PERDOMO | CC | 1077229270 | 3145556 | Full-stack developer: user interface of the Web and Mobile apps (components, screens and design) / Desarrollador full-stack: interfaz de usuario de las apps Web y Mobile (componentes, pantallas y diseño) |
 
 ## 3. Producer / Productor (art. 5, num. 3)
 
@@ -66,10 +66,10 @@ Authors are the instructors and the apprentices listed in `team-roster.md`. Each
 | Year of creation / Año de creación | 2026 |
 | Country of origin / País de origen | Colombia |
 | Version registered / Versión a registrar | `final-delivery-2026` |
-| Short description of its functions / Breve descripción de sus funciones | Attendance management platform for educational institutions, with facial and fingerprint recognition. It manages schools, programs, cohorts, schedules, class sessions, justifications, reports and alerts, with role-based access. / Plataforma de gestión de asistencia para instituciones educativas, con reconocimiento facial y dactilar. Gestiona sedes, programas, fichas, horarios, sesiones de clase, justificaciones, reportes y alertas, con acceso por roles. |
-| What sets it apart from similar software / Qué la diferencia de obras similares | Facial attendance is one option inside a complete academic system, not an isolated module: it connects identity, roles per school, schedules, justifications and alerts. / La asistencia facial es una opción dentro de un sistema académico completo y no un módulo aislado: conecta identidad, roles por sede, horarios, justificaciones y alertas. |
-| Programming languages / Lenguajes | Java, TypeScript, JavaScript, Python |
-| Type: web, mobile, desktop, device / Tipo: web, móvil, escritorio, dispositivo | Web and mobile / Web y móvil |
+| Short description of its functions / Breve descripción de sus funciones | Attendance management platform for educational institutions based on biometric recognition (face and fingerprint): registration of people, academic programs, schedules and class sessions, attendance taking with facial verification and liveness check, absence justifications, notifications and a quality module (ISO 25010). Backend of 9 microservices behind an API Gateway, plus a Web app and a Mobile app. / Plataforma de gestión de asistencia mediante reconocimiento biométrico (rostro y huella) para instituciones educativas: registro de personas, programas académicos, horarios y sesiones de clase, toma de asistencia con verificación facial y prueba de vida, justificaciones, notificaciones y un módulo de calidad (ISO 25010). Backend de 9 microservicios detrás de un API Gateway, más una app Web y una app Mobile. |
+| What sets it apart from similar software / Qué la diferencia de obras similares | Biometric attendance with liveness check; biometric data encrypted at rest (AES-256-GCM) and designed for Ley 1581 de 2012 (personal data protection); multi-campus isolation (each campus only sees its own data); polyglot microservice architecture (Java, TypeScript, Python); built-in quality module for ISO 25010, ISO 29110 and ISTQB evaluations. / Asistencia biométrica con prueba de vida; datos biométricos cifrados en reposo (AES-256-GCM) y diseñados según la Ley 1581 de 2012 (protección de datos personales); aislamiento por sede (cada sede solo ve sus datos); arquitectura de microservicios políglota (Java, TypeScript, Python); módulo de calidad integrado para evaluaciones ISO 25010, ISO 29110 e ISTQB. |
+| Programming languages / Lenguajes | Java 21, TypeScript, JavaScript, Python 3.12, SQL (PostgreSQL / Liquibase), YAML (Docker Compose, Kong, GitHub Actions) |
+| Type: web, mobile, desktop, device / Tipo: web, móvil, escritorio, dispositivo | Web and mobile (Expo / React Native), with backend services (REST API) / Web y móvil (Expo / React Native), con servicios backend (API REST) |
 
 ## 6. Declarations / Declaraciones (art. 4 y art. 5, num. 5 y 6)
 
@@ -103,22 +103,31 @@ Relacione código, librerías, modelos, imágenes o datos que el equipo no creó
 
 | Component / Componente | Author or source / Autor o fuente | License / Licencia | Where it is used / Dónde se usa |
 |---|---|---|---|
-| Spring Boot, Spring Security, Spring Data, spring-kafka | VMware / Broadcom, Apache | Apache-2.0 | Java services / Servicios Java |
-| liquibase-core 5.0.3 | Liquibase | FSL-1.1-ALv2 | Java services / Servicios Java |
-| Fastify, Node.js packages | Fastify, npm authors / autores de npm | MIT, ISC, Apache-2.0, BSD | TypeScript services / Servicios TypeScript |
-| Expo, React Native and npm packages | Expo, Meta, npm authors / autores de npm | MIT, ISC, Apache-2.0, BSD and others / y otras | Web and mobile / Web y móvil |
-| xlsx 0.18.5 | SheetJS | Apache-2.0 | Web |
-| FastAPI, Starlette, Pydantic, Uvicorn, NumPy, Pillow | Their authors / Sus autores | MIT, BSD, Apache-2.0, HPND | ms-biometric |
-| opencv-python-headless | OpenCV (bundles FFmpeg / empaqueta FFmpeg) | Apache-2.0, LGPL-2.1 | ms-biometric |
-| face-recognition, dlib | Adam Geitgey, Davis King | MIT, Boost-1.0 | ms-biometric |
-| face_recognition_models, dlib 68-point model / modelo de 68 puntos | Adam Geitgey, dlib (iBUG 300-W dataset) | To verify: the dataset may restrict commercial use / Por verificar: el dataset puede restringir el uso comercial | ms-biometric |
-| @digitalpersona JS SDK | HID Global | MIT (the agent and reader drivers are proprietary / el agente y los controladores son propietarios) | Web, fingerprint / Web, huella |
-| PostgreSQL 17, Apache Kafka, Kong 3.6, Caddy, nginx | Their projects / Sus proyectos | PostgreSQL, Apache-2.0, BSD-2 | Infrastructure / Infraestructura |
-| MongoDB 7 | MongoDB Inc. | SSPLv1 | Biometric embeddings / Embeddings biométricos |
-| Redis 7 | Redis Ltd. | To verify by version: BSD-3 or RSALv2/SSPLv1 / Por verificar según versión | Gateway rate limiting / Límite de tasa del gateway |
+| Spring Boot (and Spring libraries) | VMware / Broadcom (Spring project) | Apache 2.0 | Java services 01, 02, 04, 05 |
+| Fastify, `pg` (node-postgres), Axios | Fastify team; Brian Carlson and contributors; Axios contributors | MIT | TypeScript services 03, 07, 08, 09; apps |
+| FastAPI, Starlette, Pydantic, Uvicorn | Sebastián Ramírez and contributors; Encode; Pydantic team | MIT / BSD-3-Clause | Biometric service 06 |
+| OpenCV (`opencv-python-headless`), NumPy, Pillow | OpenCV; NumPy; Pillow contributors | Apache 2.0 / BSD-3-Clause / HPND | Biometric service 06 |
+| `face_recognition` | Adam Geitgey | MIT | Biometric service 06 (face encoding) |
+| dlib (HOG detector) | Davis King | Boost Software License 1.0 | Biometric service 06 (face detection) |
+| dlib models `dlib_face_recognition_resnet_model_v1`, `shape_predictor_5_face_landmarks` | Davis King | Public domain / Dominio público | Biometric service 06 (face template, alignment) |
+| dlib model `shape_predictor_68_face_landmarks` (trained on iBUG 300-W) | Davis King / iBUG (Imperial College London) | Non-commercial use only / Solo uso no comercial | Biometric service 06 (liveness check only). Accepted for non-commercial institutional use; legal confirmation pending, see `docs/LICENCIAS_MODELOS_BIOMETRICOS.md` in the repository / Aceptado para uso institucional no comercial; confirmación jurídica pendiente |
+| React, React Native, React Native Web, React Navigation | Meta; Necolas; React Navigation contributors | MIT | Web and Mobile apps |
+| Expo SDK (`expo-*` packages) | Expo | MIT | Web and Mobile apps |
+| Kong Gateway OSS | Kong Inc. | Apache 2.0 | API Gateway |
+| PostgreSQL | PostgreSQL Global Development Group | PostgreSQL License | Relational database |
+| MongoDB | MongoDB Inc. | SSPL (server software, used as an external service) / SSPL (servidor, usado como servicio externo) | Biometric embeddings |
+| Redis 7 | Redis contributors | BSD-3-Clause up to 7.2, RSALv2/SSPLv1 from 7.4: to verify against the pinned `redis:7-alpine` image / BSD-3-Clause hasta 7.2, RSALv2/SSPLv1 desde 7.4: por verificar con la imagen fijada `redis:7-alpine` | Gateway cache |
+| Apache Kafka | Apache Software Foundation | Apache 2.0 | Messaging between services |
+| Liquibase 4.29 | Liquibase | Apache 2.0 | Database migrations (run as a container) |
+| Caddy | Caddy contributors | Apache 2.0 | Reverse proxy / TLS |
+| `@digitalpersona/websdk`, `@digitalpersona/fingerprint` | HID Global | MIT (the agent and reader drivers are proprietary / el agente y los controladores son propietarios) | Web, fingerprint / Web, huella |
+| FFmpeg (bundled in `opencv-python-headless` / empaquetado en `opencv-python-headless`) | FFmpeg project | LGPL-2.1 | Biometric service 06 |
+| nginx (`nginx-unprivileged` image / imagen `nginx-unprivileged`) | F5 / nginx | BSD-2-Clause | Web app container / Contenedor de la app Web |
 | MinIO | MinIO Inc. | AGPLv3 | Supporting document storage / Almacenamiento de soportes |
 | countriesnow.space | countriesnow.space | Public API, terms not stated / API pública, sin términos claros | School sign-up: cities / Alta de sede: ciudades |
 | Icons in `Mobile/src/assets/images` / Iconos en `Mobile/src/assets/images` | To verify: source not documented / Por verificar: fuente sin documentar | To verify / Por verificar | Mobile / Móvil |
+
+The full list of dependencies and exact versions is in each service's `pom.xml`, `package.json` and `pyproject.toml`. / La lista completa de dependencias y versiones está en el `pom.xml`, `package.json` y `pyproject.toml` de cada servicio.
 
 ## 9. Private data / Datos privados
 
