@@ -169,7 +169,9 @@ npm licenses were read from each `node_modules/<package>/package.json`; the pack
 
 ## 10. Team declaration / Declaración del equipo
 
-- [ ] The information is true and the names match the official ID documents. / La información es veraz y los nombres coinciden con los documentos de identidad.
-- [ ] The listed authors are the people who created the software. / Los autores relacionados son quienes crearon el software.
-- [ ] Third-party components are declared. / Los componentes de terceros están declarados.
-- [ ] No passwords, tokens or keys are included. / No se incluyen contraseñas, tokens ni llaves.
+- [x] The information is true and the names match the official ID documents. / La información es veraz y los nombres coinciden con los documentos de identidad.
+- [x] The listed authors are the people who created the software. / Los autores relacionados son quienes crearon el software.
+- [x] Third-party components are declared. / Los componentes de terceros están declarados.
+- [x] No passwords, tokens or keys are included. / No se incluyen contraseñas, tokens ni llaves.
+
+Checked on 2026-11-06 by JUAN MAURICIO SUAZA SOLORZANO, applicant (section 1), on behalf of the team. / Marcado el 2026-11-06 por JUAN MAURICIO SUAZA SOLORZANO, solicitante (sección 1), en nombre del equipo.

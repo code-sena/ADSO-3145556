@@ -34,7 +34,7 @@ Final delivery of the training project / Entrega final del proyecto formativo.
 
 | Full name / Nombre completo | Doc. type / Tipo | Doc. number / Número | Ficha | GitHub user / Usuario | Role / Rol | Verified and authorized / Verificado y autorizado |
 |---|---|---|---|---|---|---|
-| JUAN MAURICIO SUAZA SOLORZANO | CC | 1076907287 | 3145556 | mauro-1508 | Tech lead, Scrum Master and analyst-developer (lexicon and recognition backend, coordination) / Líder técnico, Scrum Master y analista-desarrollador (backend lexicon y recognition, coordinación) | ☐ |
+| JUAN MAURICIO SUAZA SOLORZANO | CC | 1076907287 | 3145556 | mauro-1508 | Tech lead, Scrum Master and analyst-developer (lexicon and recognition backend, coordination) / Líder técnico, Scrum Master y analista-desarrollador (backend lexicon y recognition, coordinación) | ☑ |
 | LUIS ALEJANDRO DUARTE ALDANA | CC | 1069402330 | 3145556 | tadeo77789 | Analyst-developer (interfaces and programming) / Analista-desarrollador (interfaces y programación) | ☐ |
 | JUAN CAMILO FIERRO ESQUIVEL | CC | 1080292691 | 3145556 | fierroesquiveljuancamilo-svg | Analyst-developer (product documentation and programming) / Analista-desarrollador (documentación de producto y programación) | ☐ |
 
