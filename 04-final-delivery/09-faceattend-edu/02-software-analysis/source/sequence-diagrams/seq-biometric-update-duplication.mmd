@@ -1,0 +1,58 @@
+sequenceDiagram
+    autonumber
+    actor S as Student
+    actor R as Reviewer (instructor/admin)
+    participant GW as Kong :8080
+    participant ID as ms-identity :8081
+    participant AZ as ms-authorization :8082
+    participant CFG as ms-configuration :8087
+    participant PG as PostgreSQL schema configuration
+    participant BIO as ms-biometric :8086
+    participant M as MongoDB biometric_update_cases
+
+    Note over CFG,M: Verified 2026-10 against FULL — these are two fully independent implementations of the update-request feature, not a canonical store plus a mirror. Nothing in the code calls between ms-configuration and ms-biometric here — endpoint-matrix.md calling the biometric side a thin proxy of the canonical case is wrong
+
+    rect rgb(238, 245, 238)
+    Note over S,PG: 1. Path A — the documented "canonical" route
+    S->>GW: POST /api/v1/biometric-update-cases {personId, biometricType, fingerNumber?, reason}
+    GW->>ID: edge pre-function: GET /api/v1/sessions/{sessionId}
+    ID-->>GW: 200 Active
+    GW->>CFG: forward
+    CFG->>ID: own guard: GET /api/v1/sessions/{sessionId}
+    ID-->>CFG: Active, userId
+    CFG->>AZ: GET /api/v1/auth/evaluate?permission=biometric.case:request
+    AZ-->>CFG: allowed
+    CFG->>CFG: resolveCaseScope — personId must be the caller's own unless they hold biometric.case:review
+    alt biometricType = FINGERPRINT and fingerNumber missing
+        CFG-->>S: 400 fingerNumber required for FINGERPRINT
+    else valid
+        CFG->>PG: INSERT biometric_update_case (updateStatus=Pending, requestedBy mandatory)
+        CFG-->>S: 201 {caseId, updateStatus: Pending}
+    end
+    R->>GW: PATCH /api/v1/biometric-update-cases/{caseId}/review {updateStatus}
+    GW->>CFG: forward (same guard chain, permission biometric.case:review)
+    CFG->>PG: UPDATE (no ordering guard — see ST-03)
+    CFG-->>R: 200 {updateStatus}
+    end
+
+    rect rgb(255, 246, 236)
+    Note over S,M: 2. Path B — a second, independent implementation, same base path prefix
+    S->>GW: POST /api/v1/biometric/update-request {person_id, biometric_type, reason}
+    Note right of S: No fingerNumber field exists here at all — a FINGERPRINT case can be created with nothing to check it against
+    GW->>ID: edge pre-function: GET /api/v1/sessions/{sessionId}
+    ID-->>GW: 200 Active
+    GW->>BIO: forward
+    BIO->>ID: own guard: GET /api/v1/sessions/{sessionId}
+    ID-->>BIO: Active
+    BIO->>AZ: GET /api/v1/auth/evaluate?permission=biometric.case:request
+    AZ-->>BIO: allowed
+    Note right of BIO: No person-scope check like CFG's resolveCaseScope — any caller holding biometric.case:request may list or create for any person_id
+    BIO->>M: insert document {request_id, person_id, status: Pending} — no requestedBy field anywhere in this entity
+    BIO-->>S: 201 {request_id, status: Pending}
+    R->>GW: PATCH /api/v1/biometric/update-request/{request_id}/review {status}
+    GW->>BIO: forward (own guard, permission biometric.case:review)
+    BIO->>M: update (no ordering guard either — same transitions as ST-03)
+    BIO-->>R: 200 {status}
+    end
+
+    Note over CFG,M: The gap: a case filed through Path A is invisible to GET /api/v1/biometric/update-requests/{personId} (Path B), and a case filed through Path B is invisible to GET /api/v1/biometric-update-cases (Path A). A reviewer working from either endpoint sees only half of the real queue, and nothing detects or reconciles the split — see state-biometric-update.mmd for the per-store transition details

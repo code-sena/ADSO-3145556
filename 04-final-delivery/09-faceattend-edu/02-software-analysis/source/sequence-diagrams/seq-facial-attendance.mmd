@@ -1,0 +1,79 @@
+sequenceDiagram
+    autonumber
+    actor S as Student (Mobile / Web)
+    participant CL as Client app (face-api.js)
+    participant GW as Kong :8080
+    participant ID as ms-identity :8081
+    participant AZ as ms-authorization :8082
+    participant BIO as ms-biometric :8086
+    participant M as MongoDB faceattend_biometric
+    participant ATT as ms-attendance :8085
+    participant PG as PostgreSQL schema attendance
+    participant K as Kafka topic attendance-events
+
+    Note over GW: Kong's global pre-function validates the opaque sessionId against identity on every non-public route (401/503 at the edge), plus cors + rate-limiting — no jwt plugin. ms-biometric (06) also re-validates on its own: every /api/v1/biometric/facial/* route requires session + permission attendance.record:write (see SEQ-02)
+
+    rect rgb(238, 245, 238)
+    Note over CL,M: 1. Enrollment (once per student)
+    S->>CL: open "register face" screen
+    CL->>CL: face-api.js detects the face and computes the descriptor locally
+    CL->>GW: POST /api/v1/biometric/facial/enroll {person_id, encoding}
+    GW->>ID: edge pre-function: GET /api/v1/sessions/{sessionId}
+    ID-->>GW: 200 Active
+    GW->>BIO: forward
+    BIO->>ID: GET /api/v1/sessions/{sessionId} (its own guard re-validates)
+    ID-->>BIO: Active
+    BIO->>AZ: GET /api/v1/auth/evaluate?permission=attendance.record:write
+    AZ-->>BIO: allowed
+    BIO->>M: upsert active template and deactivate the previous one
+    M-->>BIO: ok
+    BIO-->>CL: 201 Created
+    end
+
+    rect rgb(240, 245, 255)
+    Note over CL,M: 2. Identify 1:N — read-only precondition, outside the write transaction (ADR-004)
+    S->>CL: press "take attendance"
+    CL->>CL: compute the descriptor locally (the photo is never uploaded)
+    CL->>GW: POST /api/v1/biometric/facial/identify {encoding}
+    GW->>ID: edge pre-function: GET /api/v1/sessions/{sessionId}
+    ID-->>GW: 200 Active
+    GW->>BIO: forward
+    BIO->>ID: GET /api/v1/sessions/{sessionId} + GET /auth/evaluate (same guard as enroll)
+    ID-->>BIO: Active, allowed
+    BIO->>M: list active templates (cap identify_scan_limit = 10000)
+    M-->>BIO: templates
+    BIO->>BIO: cosine similarity of every template against the capture
+    BIO->>M: insert biometric_match_logs (threshold 0.85, retention 90 days)
+    alt best score >= threshold
+        BIO-->>CL: 200 {person_id, score}
+    else below threshold
+        BIO-->>CL: 404 NO_MATCH
+        CL-->>S: face not recognized — retry (nothing is written)
+    end
+    end
+
+    rect rgb(255, 246, 236)
+    Note over GW,PG: 3. Attendance write — one local ACID transaction (ADR-004)
+    CL->>GW: POST /api/v1/attendance-records {class_session_id, academic_actor_id, attendance_status, capture_method, match_score}
+    GW->>ID: edge pre-function: GET /api/v1/sessions/{sessionId}
+    ID-->>GW: 200 Active
+    GW->>ATT: forward with Authorization Bearer sessionId
+    ATT->>ID: AuthTokenFilter re-validates: GET /sessions/{id} + GET /users/{id}/roles + evaluate
+    ID-->>ATT: Active session, roles, allowed (see SEQ-02)
+    ATT->>ATT: @Transactional begins
+    ATT->>ATT: pre-check findByClassSessionIdAndAcademicActorId
+    ATT->>PG: INSERT attendance_record
+    Note over ATT,K: publish() runs inside @Transactional right after save: kafkaTemplate.send is async and failures are only logged — no outbox, no DLQ (AT-006)
+    ATT->>K: send attendance-events {attendanceRecordId, status}
+    PG-->>ATT: commit — uq_attendance_session_actor makes this atomic
+    alt row already exists for that session and actor
+        PG-->>ATT: unique violation
+        ATT-->>CL: 409 DuplicateEntityException
+    else new row
+        ATT-->>CL: 201 Created
+    end
+    end
+
+    Note over CL: Verified 2026-10: endpoints.js declares facialIdentify and AttendanceService.create has no call site — the backend is ready but neither client wires capture to the attendance write yet
+    Note over K: No Kafka consumer exists anywhere in the back-end (producers only) — attendance-events is published but not consumed — no service raises notification.alert automatically (alerts are only created via ms-notification POST /api/v1/alerts)
+    Note over ATT: ADR-004 describes an in-process event bus — the implemented mechanism is the Kafka topic attendance-events

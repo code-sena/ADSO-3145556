@@ -1,0 +1,62 @@
+sequenceDiagram
+    autonumber
+    actor S as Student (Mobile)
+    actor R as Reviewer (instructor/admin)
+    participant GW as Kong :8080
+    participant ATT as ms-attendance :8085
+    participant K as Kafka topic justification-events
+
+    Note over GW: Kong's global pre-function validates the opaque sessionId against identity on every non-public route (401/503 at the edge) — see SEQ-02. ms-attendance also re-validates via AuthTokenFilter (Java service)
+
+    rect rgb(238, 245, 238)
+    Note over S,ATT: 1. Submit — Add Justify screen (Mobile) / SubmitJustificationModal (Web)
+    S->>GW: GET /api/v1/attendance-records?academicActorId=...
+    GW->>ATT: forward
+    ATT-->>S: records (pick the Absent/Late one)
+    S->>GW: GET /api/v1/justification-types
+    GW->>ATT: forward
+    ATT-->>S: types with requires_attachment flag
+    S->>S: reason + date + file — Web requires a file only when requires_attachment = true, Mobile requires a file unconditionally on every submission, regardless of the flag
+    S->>GW: POST /api/v1/justifications {attendanceRecordId, justificationTypeId, reason}
+    GW->>ATT: forward
+    Note right of S: Both clients build this call from a richer local object (attachment, submittedAt, reviewStatus included) — ms-attendance's create(attendanceRecordId, justificationTypeId, reason) destructures only these three, so the extra fields are silently dropped here, not lost client-side
+    ATT->>ATT: validate required fields — duplicate check (1 justification per attendance_record)
+    ATT->>ATT: touchCreated -> reviewStatus = Pending, submittedAt = now
+    ATT->>K: publish justification-events (best-effort, failures only logged)
+    ATT-->>S: 201 {justificationId, reviewStatus: Pending}
+    end
+
+    rect rgb(255, 246, 236)
+    Note over S,ATT: 2. Attachment — metadata row is real, the file behind it is not (verified 2026-10-12 against FULL/)
+    S->>GW: POST /api/v1/supporting-documents {justificationId, fileName, storageUri, mimeType, sizeBytes} — sent only when a file was selected, right after step 1 succeeds
+    GW->>ATT: forward
+    ATT->>ATT: validate() + touchCreated -> save, no byte content anywhere in the request
+    ATT->>K: publish document-events (best-effort)
+    ATT-->>S: 201 {supportingDocumentId}
+    Note right of S: storageUri is fabricated client-side, a path built from the current year, month and a random uuid — no multipart upload, no MinIO or S3 SDK call exists anywhere, ADR-009 was never implemented. The row exists, but the file it names was never transmitted
+    end
+
+    rect rgb(240, 245, 255)
+    Note over R,ATT: 3. Review — PATCH /justifications/{id}/review (corrected 2026-10-12 against FULL/)
+    R->>GW: GET /api/v1/justifications?reviewStatus=Pending
+    GW->>ATT: forward
+    ATT-->>R: pending queue
+    R->>GW: PATCH /api/v1/justifications/{id}/review {reviewStatus: Approved|Rejected, reviewedBy, resolutionNotes}
+    GW->>ATT: forward
+    ATT->>ATT: reviewStatus=Pending as a target is rejected -- Cannot review to Pending
+    ATT->>ATT: current reviewStatus must already be Pending, or 400 -- a resolved justification cannot be reviewed again
+    alt target is Approved and the type requires an attachment
+        ATT->>ATT: look up any SupportingDocument row for this justification
+        alt no row exists
+            ATT-->>R: 400 requires at least one supporting document
+        else a row exists -- its storageUri may point at nothing real, see step 2
+            ATT->>ATT: reviewedBy, reviewedAt, resolutionNotes, touchUpdated -> save
+            ATT-->>R: 200 {reviewStatus: Approved}
+        end
+    else target is Rejected, or Approved with no attachment required
+        ATT->>ATT: reviewedBy, reviewedAt, resolutionNotes, touchUpdated -> save
+        ATT-->>R: 200 {reviewStatus}
+    end
+    end
+
+    Note over ATT: No event is published on review (only create publishes), and attendance_record.attendance_status is never set to Justified — approval does not cascade to attendance

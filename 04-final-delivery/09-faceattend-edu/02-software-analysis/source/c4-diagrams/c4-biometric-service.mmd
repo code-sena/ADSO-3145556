@@ -1,0 +1,67 @@
+C4Component
+    title Component Diagram — ms-biometric :8086 (FastAPI, flatter than the Java hexagon)
+
+    Person(client, "Web / Mobile client", "Reaches the service through Kong carrying the opaque sessionId")
+
+    Container_Boundary(driving, "Driving adapters (inbound, infrastructure/web)") {
+        Component(facialCtrl, "FacialRouter", "FastAPI APIRouter /api/v1/biometric/facial", "enroll, enroll-image, verify, identify, identify-image, liveness-challenge/step, get, history, delete. Router-level dependency requires permission attendance.record:write on every route")
+        Component(fingerprintCtrl, "FingerprintRouter", "FastAPI APIRouter /api/v1/biometric/fingerprint", "enroll, verify, identify, get, delete, per finger. Same router-level permission guard as facial")
+        Component(summaryCtrl, "SummaryRouter", "FastAPI APIRouter", "GET /api/v1/biometric/{person_id}/summary -> {has_face, has_fingerprint}, reads both repositories")
+        Component(updateCtrl, "UpdateRouter", "FastAPI APIRouter /api/v1/biometric/update-request", "Independent biometric-update-case workflow — NOT a proxy of the configuration one, see SEQ-04")
+        Component(wsCtrl, "WsRouter", "FastAPI WebSocket /api/v1/biometric/ws", "Real-time channel: dispatches identify/enroll frames and broadcasts attendance.event to other connected clients. Fully built, idempotent, but no frontend client ever opens it — see SEQ-06")
+        Component(guard, "require_permission / authenticate_websocket", "FastAPI dependency", "Re-validates the bearer sessionId against identity, evaluates a permission against authorization — same contract as the Java AuthTokenFilter, independently implemented (see 07-api/authentication.md §1)")
+    }
+
+    Container_Boundary(domain, "Domain layer (dataclasses + ports)") {
+        Component(facialEntity, "FacialEmbedding / FingerprintEmbedding", "dataclass", "Encoding vector, model/template version, isActive — built directly inside the router handlers")
+        Component(matchLogEntity, "BiometricMatchLog", "dataclass", "Every verify/identify attempt, matched or not, with score and threshold")
+        Component(caseEntity, "BiometricUpdateCase", "dataclass", "The independent update-case entity — no requestedBy field, no fingerNumber validation (see cls-biometric.puml)")
+        Component(outPorts, "Repository ports", "ABC interfaces", "BiometricRepositoryPort, MatchLogRepositoryPort, UpdateCaseRepositoryPort")
+        Component(deadPort, "EnrollFacialUseCase", "ABC interface, unused", "Declared under domain/ports/in_ but no implementation and no caller exists — routers call the repository ports directly, skipping this port entirely")
+    }
+
+    Container_Boundary(driven, "Driven adapters (outbound, infrastructure/persistence)") {
+        Component(mongoEmbedding, "MongoEmbeddingRepository", "Motor (async MongoDB)", "Backs both facial and fingerprint repositories, parameterized by BiometricType")
+        Component(mongoMatchLog, "MongoMatchLogRepository", "Motor", "Appends to biometric_match_logs, 90-day retention")
+        Component(mongoUpdateCase, "MongoUpdateCaseRepository", "Motor", "Backs the independent update-request workflow — own collection biometric_update_cases")
+        Component(deadStore, "EmbeddingStore (memory_store.py)", "in-memory dict, unused", "Written as a Mongo-parity fallback but never imported by main.py or dependencies.py — dead code. main.py's own docstring says MongoDB only, no in-memory fallback")
+    }
+
+    ContainerDb(mongo, "MongoDB 7", "faceattend_biometric", "facial_embedding, fingerprint_embedding, biometric_match_logs, biometric_update_cases")
+
+    Container_Ext(kong, "Kong :8080", "Gateway", "Routes /api/v1/biometric/* here. Its edge pre-function already validated the bearer sessionId before forwarding")
+    Container_Ext(identity, "ms-identity :8081", "Session store", "GET /api/v1/sessions/{id} — called again by this service's own guard")
+    Container_Ext(authorization, "ms-authorization :8082", "RBAC", "GET /api/v1/auth/evaluate with attendance.record:write, biometric.case:request, biometric.case:review")
+
+    Rel(client, kong, "API calls", "HTTPS / REST")
+    Rel(kong, facialCtrl, "Routes /facial/*", "HTTP / REST")
+    Rel(kong, fingerprintCtrl, "Routes /fingerprint/*", "HTTP / REST")
+    Rel(kong, summaryCtrl, "Routes /{person_id}/summary", "HTTP / REST")
+    Rel(kong, updateCtrl, "Routes /update-request*", "HTTP / REST")
+    Rel(client, wsCtrl, "WS /ws (token as query param — browsers cannot set WS headers)", "WebSocket")
+
+    Rel(guard, identity, "GET /api/v1/sessions/{id}", "HTTP")
+    Rel(guard, authorization, "GET /api/v1/auth/evaluate", "HTTP")
+    Rel(facialCtrl, guard, "Chains only when the session is Active and the permission is allowed")
+    Rel(fingerprintCtrl, guard, "Chains only when the session is Active and the permission is allowed")
+    Rel(summaryCtrl, guard, "Chains only when the session is Active and the permission is allowed")
+    Rel(updateCtrl, guard, "Chains only when the session is Active and the permission is allowed")
+    Rel(wsCtrl, guard, "authenticate_websocket on connect — closes with a WS 4401/4403/4503 code instead of an HTTP status")
+
+    Rel(facialCtrl, facialEntity, "Builds directly from the request body")
+    Rel(fingerprintCtrl, facialEntity, "Builds directly from the request body")
+    Rel(facialCtrl, outPorts, "Calls")
+    Rel(fingerprintCtrl, outPorts, "Calls")
+    Rel(summaryCtrl, outPorts, "Calls")
+    Rel(updateCtrl, caseEntity, "Builds directly from the request body")
+    Rel(updateCtrl, outPorts, "Calls")
+    Rel(facialCtrl, matchLogEntity, "Records every verify/identify attempt")
+
+    Rel(outPorts, mongoEmbedding, "Implemented by")
+    Rel(outPorts, mongoMatchLog, "Implemented by")
+    Rel(outPorts, mongoUpdateCase, "Implemented by")
+    Rel(mongoEmbedding, mongo, "Reads / writes", "Motor / MongoDB")
+    Rel(mongoMatchLog, mongo, "Appends", "Motor / MongoDB")
+    Rel(mongoUpdateCase, mongo, "Reads / writes", "Motor / MongoDB")
+
+    Rel(wsCtrl, mongo, "Same repositories as the REST routers, via get_*_repository_ws dependency variants", "Motor / MongoDB")

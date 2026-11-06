@@ -1,0 +1,67 @@
+flowchart TD
+    title["Activity Diagram — Justification Submission and Review<br/>Solid = real today · Dotted = intended per RN-32..36, not wired (see SEQ-03, ST-02). Verified 2026-10-12 against FULL/"]
+    style title fill:#ffffff,stroke:#ffffff
+
+    start(["Student has an Absent/Late attendance_record"])
+
+    subgraph Student["Student (Mobile or Web)"]
+        s1["Open Add Justify screen (Mobile) / SubmitJustificationModal (Web)"]
+        s2["Pick the Absent/Late record\nGET /attendance-records"]
+        s3["Select a justification_type\nGET /justification-types"]
+        s4{"Is a file required before submit?"}
+        s5["Pick a local file"]
+        s6["Write reason, submit\nPOST /justifications"]
+        s7{"Was a file picked?"}
+        s8["POST /supporting-documents\nfileName, mimeType, sizeBytes, storageUri"]
+    end
+
+    subgraph System["System (ms-attendance)"]
+        sys1{"Already has a justification\nfor this attendance_record?\nRN-32"}
+        stop1(["409 DuplicateEntityException"])
+        sys2["Create Justification\nreviewStatus = Pending\nsubmittedAt = now"]
+        sys3[("publish justification-events\nbest-effort, no consumer exists")]
+        sys5["Save SupportingDocument row\nstoreUri saved as-is, no file content in the request"]
+        sys6[["No upload step exists anywhere:\nno multipart, no MinIO/S3 SDK call\nADR-009 was never implemented"]]
+        sys4{"Approving? Type requires\nan attachment? RN-33"}
+        stop4(["400: requires at least one\nsupporting document"])
+    end
+
+    subgraph Reviewer["Reviewer (instructor / admin)"]
+        r1["Open Pending queue\nGET /justifications?reviewStatus=Pending"]
+        r2{"Review decision\nPATCH /justifications/id/review\n(rejected if the justification is\nnot Pending anymore, or if the\ntarget itself is Pending)"}
+        r3["reviewStatus = Approved"]
+        r4["reviewStatus = Rejected"]
+    end
+
+    subgraph Outcome["Intended outcome — RN-36"]
+        o1["attendance_record.attendance_status = Justified"]
+    end
+
+    stop2(["Stays Rejected — no further action"])
+    stop3(["Stays Approved — attendance_status is NOT touched"])
+
+    start --> s1 --> s2 --> s3 --> s4
+    s4 -- "Web: only if requires_attachment = true" --> s5
+    s4 -- "Mobile: always, regardless of the flag" --> s5
+    s4 -- "Web, type does not require it" --> s6
+    s5 --> s6
+    s6 --> sys1
+    sys1 -- "yes" --> stop1
+    sys1 -- "no" --> sys2
+    sys2 --> sys3 --> s7
+    s7 -- "yes" --> s8
+    s7 -- "no" --> r1
+    s8 --> sys5
+    sys5 -. "the file itself" .-> sys6
+    sys5 --> r1
+    r1 --> r2
+    r2 -- "Approve" --> sys4
+    r2 -- "Reject" --> r4
+    sys4 -- "yes, and no SupportingDocument row exists" --> stop4
+    sys4 -- "no, or a row exists -- even one whose file was never uploaded" --> r3
+    r3 -. "does not happen: no event is published\non review, nothing sets attendance_status" .-> o1
+    r3 --> stop3
+    r4 --> stop2
+
+    classDef gap stroke:#c0392b,stroke-dasharray: 4 3,color:#c0392b
+    class sys6,o1 gap

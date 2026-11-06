@@ -1,0 +1,60 @@
+sequenceDiagram
+    autonumber
+    actor C1 as Client A (kiosk / dashboard)
+    actor C2 as Client B (another connected kiosk / dashboard)
+    participant WS as ms-biometric :8086 /api/v1/biometric/ws
+    participant ID as ms-identity :8081
+    participant AZ as ms-authorization :8082
+    participant IDEMP as IdempotencyCache (in-process, 2000 entries, 5 min TTL)
+    participant MGR as ConnectionManager (in-process, this instance only)
+    participant M as MongoDB faceattend_biometric
+
+    Note over WS: Not routed through Kong's edge pre-function the same way as REST — a WebSocket handshake carries the token as a query parameter, since browsers cannot set custom headers on a WS upgrade request
+
+    rect rgb(238, 245, 238)
+    Note over C1,AZ: 1. Connect — both clients open the socket independently
+    C1->>WS: WS connect with token as query param
+    WS->>WS: accept() the handshake first, so a rejection can still carry a close code and reason
+    WS->>ID: GET sessions by id
+    ID-->>WS: Active
+    WS->>AZ: evaluate permission attendance.record:write
+    AZ-->>WS: allowed
+    WS->>MGR: register this connection
+    C2->>WS: WS connect, same auth steps
+    WS->>MGR: register this connection too
+    end
+
+    rect rgb(240, 245, 255)
+    Note over C1,M: 2. Client A sends a facial identify frame, direction CHECK_IN, with a client_message_id
+    C1->>WS: facial.identify frame, client_message_id abc-1
+    WS->>IDEMP: look up abc-1
+    IDEMP-->>WS: miss
+    WS->>WS: validate the payload
+    WS->>M: same repository call the REST POST facial identify makes
+    M-->>WS: best match and score
+    WS->>IDEMP: store the ack under abc-1 — replayed verbatim if abc-1 is ever resent
+    WS-->>C1: facial.identify.ack, client_message_id abc-1, result person_id and score
+    WS->>MGR: broadcast an attendance.event (CHECK_IN, person_id, score), excluding C1
+    MGR-->>C2: attendance.event — C1 never receives its own broadcast
+    end
+
+    rect rgb(255, 246, 236)
+    Note over C1,WS: 3. Reconnect after a dropped ack — idempotent replay
+    C1--xWS: connection drops after the server processed abc-2 but before the ack arrived
+    C1->>WS: WS reconnect, same auth steps
+    C1->>WS: resend facial.enroll frame, same client_message_id abc-2
+    WS->>IDEMP: look up abc-2
+    IDEMP-->>WS: hit — the stored ack from the first attempt
+    WS-->>C1: replays the cached ack — enroll() is NOT re-run, so the template version is not bumped twice
+    end
+
+    rect rgb(245, 240, 255)
+    Note over C1,WS: 4. Error and ping
+    C1->>WS: fingerprint.verify frame with an invalid payload
+    WS-->>C1: error frame, code BadRequest, same client_message_id
+    C1->>WS: ping frame
+    WS-->>C1: pong frame
+    end
+
+    Note over C1,M: Verified 2026-10: this endpoint mirrors the full REST facial/fingerprint enroll-verify-identify surface over a stateful WebSocket, with idempotent replay and multi-client broadcast fan-out (a CHECK_IN/CHECK_OUT direction on every frame) — a real, fully built entry/exit feature for RF 3.1. No client in front-end/Mobile or front-end/Web ever opens this socket — it is reachable and correct, but entirely unused.
+    Note over MGR: Fan-out is scoped to this one process's in-memory connection set — with more than one ms-biometric replica, clients connected to different instances never see each other's events (a documented limitation in connection_manager.py, not a bug introduced here)

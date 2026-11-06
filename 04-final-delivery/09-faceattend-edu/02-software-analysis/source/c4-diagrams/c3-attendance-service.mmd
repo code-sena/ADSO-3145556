@@ -1,0 +1,71 @@
+C4Component
+    title Component Diagram — ms-attendance :8085 (hexagonal ports & adapters)
+
+    Person(client, "Web / Mobile client", "Reaches the service through Kong carrying the opaque sessionId")
+
+    Container_Boundary(driving, "Driving adapters (inbound, infrastructure.web)") {
+        Component(attendanceCtrl, "AttendanceRecordController", "Spring MVC", "POST /api/v1/attendance-records and /bulk, GET / PUT / DELETE /{id}")
+        Component(justificationCtrl, "JustificationController", "Spring MVC", "GET /{id}, PATCH /{id}/review, DELETE /{id}")
+        Component(typeCtrl, "JustificationTypeController", "Spring MVC", "GET /{id}, PUT /{id}, DELETE /{id} over the per-school catalogue")
+        Component(docCtrl, "SupportingDocumentController", "Spring MVC", "GET /{id}, DELETE /{id} for justification attachments")
+        Component(relationsCtrl, "AttendanceRelationsController", "Spring MVC", "4 read-only joins — class-sessions/{id}/attendance, academic-actors/{id}/attendance, attendance/{id}/justification, justifications/{id}/documents")
+        Component(healthCtrl, "HealthController + QualityHealthController", "Spring MVC", "/health and /health/quality (ISO 9001 metrics snapshot)")
+        Component(filter, "AuthTokenFilter", "Jakarta filter", "Re-validates the bearer sessionId against identity (defense in depth — Kong already checked it at the edge), loads roles and evaluates the permission from authorization, then sets X-User-Id / X-User-Roles. The required permission is derived from method + path, not from annotations")
+        Component(advice, "GlobalExceptionHandler", "@RestControllerAdvice", "Maps domain exceptions to 400 / 404 / 409")
+        Component(webMap, "DTOs and web mappers", "records + mappers", "Request and response translation at the edge, 11 DTOs / 4 mappers")
+    }
+
+    Container_Boundary(application, "Application layer (21 use cases)") {
+        Component(useCases, "Use case implementations", "Spring @Service", "Create / Record / Bulk / Update / Delete / List / Get attendance records, Create / Review / List / Delete justifications, justification-type CRUD, supporting-document CRUD")
+        Component(tx, "@Transactional boundary", "Spring", "One local ACID transaction per write: validate, duplicate check against (class_session_id, academic_actor_id), save, then publish (ADR-004)")
+    }
+
+    Container_Boundary(domain, "Domain layer (pure Java, no Spring web imports)") {
+        Component(models, "4 aggregates", "POJOs", "AttendanceRecord, Justification, JustificationType, SupportingDocument with closed status enums and their rules")
+        Component(inPorts, "21 inbound ports", "interfaces", "domain/port/in/*UseCase — the use case contract the driving adapters call")
+        Component(outPorts, "4 outbound ports", "interfaces", "AttendanceRecordRepository, JustificationRepository, JustificationTypeRepository, SupportingDocumentRepository")
+        Component(domainEx, "Domain exceptions", "POJOs", "ValidationException, EntityNotFoundException, DuplicateEntityException, DomainException")
+    }
+
+    Container_Boundary(driven, "Driven adapters (outbound, infrastructure)") {
+        Component(persistence, "4 persistence adapters", "JPA / Hibernate", "Adapter -> mapper -> JPA entity -> Spring Data repository, schema attendance")
+        Component(publisher, "DomainEventPublisher", "Kafka producer", "kafkaTemplate.send, failures are only logged — no outbox and no DLQ (AT-006)")
+        Component(qualityAudit, "QualityAuditInterceptor", "HandlerInterceptor", "Declared as a @Component but never registered (no WebMvcConfigurer.addInterceptors), so preHandle never runs and /health/quality reports an empty snapshot")
+    }
+
+    ContainerDb(postgres, "PostgreSQL 17", "schema attendance", "attendance_record, justification, justification_type, supporting_document plus the audit block. Liquibase disabled inside the service — migrations live in database/05-ms-attendance-db")
+    ContainerDb(kafka, "Kafka 3.x (KRaft)", "topics", "attendance-events, justification-events, justification-type-events, document-events — produced only, no consumer exists")
+
+    Container_Ext(kong, "Kong :8080", "Gateway", "Routes /api/v1/attendance-records, /justifications, /justification-types, /supporting-documents plus the 4 nested read paths. Its edge pre-function already validated the bearer sessionId before forwarding")
+    Container_Ext(identity, "ms-identity :8081", "Session store", "GET /api/v1/sessions/{id} — every authenticated call")
+    Container_Ext(authorization, "ms-authorization :8082", "RBAC", "GET /users/{id}/roles and GET /auth/evaluate with attendance.record:read | write and attendance.justification:approve")
+
+    Rel(client, kong, "API calls", "HTTPS / REST")
+    Rel(kong, attendanceCtrl, "Routes attendance-records and nested reads", "HTTP / REST")
+    Rel(kong, justificationCtrl, "Routes justifications", "HTTP / REST")
+    Rel(kong, typeCtrl, "Routes justification-types", "HTTP / REST")
+    Rel(kong, docCtrl, "Routes supporting-documents", "HTTP / REST")
+
+    Rel(filter, identity, "GET /api/v1/sessions/{id}", "HTTP")
+    Rel(filter, authorization, "GET /users/{id}/roles + GET /auth/evaluate", "HTTP")
+    Rel(filter, attendanceCtrl, "Chains only when the session is Active and the permission is allowed")
+
+    Rel(attendanceCtrl, webMap, "Deserializes and maps")
+    Rel(justificationCtrl, webMap, "Deserializes and maps")
+    Rel(attendanceCtrl, inPorts, "Calls")
+    Rel(justificationCtrl, inPorts, "Calls")
+    Rel(typeCtrl, inPorts, "Calls")
+    Rel(docCtrl, inPorts, "Calls")
+    Rel(relationsCtrl, inPorts, "Read-only joins")
+    Rel(healthCtrl, qualityAudit, "Reads the metrics snapshot")
+
+    Rel(inPorts, useCases, "Implemented by")
+    Rel(useCases, tx, "Runs inside")
+    Rel(useCases, models, "Operates on")
+    Rel(useCases, domainEx, "Throws")
+    Rel(useCases, outPorts, "Requires (port)")
+
+    Rel(outPorts, persistence, "Implemented by")
+    Rel(persistence, postgres, "Reads / writes", "JDBC / SQL")
+    Rel(tx, publisher, "Publishes after save", "KafkaTemplate")
+    Rel(publisher, kafka, "attendance-events, justification-events, justification-type-events, document-events", "Async producer")

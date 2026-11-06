@@ -4,8 +4,16 @@
 
 ## Required content / Contenido requerido
 
-- [ ] Software analysis document / Documento de análisis del software
-- [ ] Dynamic views: use cases, sequence, activity or state diagrams / Vistas dinámicas: casos de uso, secuencia, actividades o estados
+- [x] Software analysis document / Documento de análisis del software
+- [x] Dynamic views: use cases, sequence, activity or state diagrams / Vistas dinámicas: casos de uso, secuencia, actividades o estados
+
+## Files / Archivos
+
+| File / Archivo | Content / Contenido |
+|---|---|
+| [`software-analysis.pdf`](software-analysis.pdf) | Analysis, sequence and activity diagrams, C4, data and role flows / Análisis, diagramas de secuencia y actividades, C4, flujos de datos y roles |
+
+Editable sources are in [`source/`](source/). / Las fuentes editables están en [`source/`](source/).
 
 ## Format / Formato
 
