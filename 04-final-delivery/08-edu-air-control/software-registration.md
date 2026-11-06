@@ -17,10 +17,10 @@ Llene todos los campos vacíos. Sigue el Decreto 1360 de 1989.
 
 | Field / Campo | Value / Valor |
 |---|---|
-| Full name / Nombre | To be defined with the lead instructor / Por definir con el instructor líder |
-| ID document / Identificación | Provided privately by the applicant / Lo entrega el solicitante por canal privado |
-| Acts on own behalf or as representative / Actúa en nombre propio o como representante | ☐ Own behalf / Nombre propio ☐ Representative / Representante |
-| Proof of representation / Prueba de representación, si aplica | |
+| Full name / Nombre | JHON JAIRO CORTEZ VARGAS (one applicant per group, as the instructor indicated / un solicitante por grupo, según indicó el instructor) |
+| ID document / Identificación | CC 1079174793 |
+| Acts on own behalf or as representative / Actúa en nombre propio o como representante | ☐ Own behalf / Nombre propio ☑ Representative / Representante |
+| Proof of representation / Prueba de representación, si aplica | Written authorization of the co-author MARIA DE LOS ANGELES OLAYA GARCIA, delivered through the private channel; the instructor confirms whether the instructors need one too / Autorización escrita de la coautora MARIA DE LOS ANGELES OLAYA GARCIA, entregada por canal privado; el instructor confirma si los instructores también la necesitan |
 
 ## 2. Authors / Autores (art. 5, num. 2)
 
