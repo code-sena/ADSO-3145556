@@ -4,9 +4,9 @@
 
 ## Required content / Contenido requerido
 
-- [ ] Requirements specification report / Informe de especificación de requisitos
-- [ ] Functional and non-functional requirements / Requisitos funcionales y no funcionales
-- [ ] User stories and prioritized backlog, if used / Historias de usuario y backlog priorizado, si se usaron
+- [x] Requirements specification report / Informe de especificación de requisitos → requirements-specification-es.pdf
+- [x] Functional and non-functional requirements / Requisitos funcionales y no funcionales → requirements-specification-es.pdf: requisitos funcionales (41 RF) y no funcionales
+- [x] User stories and prioritized backlog, if used / Historias de usuario y backlog priorizado, si se usaron → requirements-specification-es.pdf: historias de usuario y priorización
 
 ## Format / Formato
 

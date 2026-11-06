@@ -4,9 +4,9 @@
 
 ## Required content / Contenido requerido
 
-- [ ] Test plan / Plan de pruebas
-- [ ] Test cases / Casos de prueba
-- [ ] Test results with evidence / Resultados de las pruebas con evidencia
+- [x] Test plan / Plan de pruebas → test-documentation-es.pdf: plan de pruebas
+- [x] Test cases / Casos de prueba → test-documentation-es.pdf: casos de prueba
+- [x] Test results with evidence / Resultados de las pruebas con evidencia → test-documentation-es.pdf: resultados y evidencia de las ejecuciones
 
 ## Format / Formato
 

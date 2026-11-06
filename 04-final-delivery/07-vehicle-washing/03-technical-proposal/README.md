@@ -4,8 +4,8 @@
 
 ## Required content / Contenido requerido
 
-- [ ] Software technical proposal / Propuesta técnica del software
-- [ ] Selected technologies and why / Tecnologías seleccionadas y su justificación
+- [x] Software technical proposal / Propuesta técnica del software → technical-proposal-es.pdf
+- [x] Selected technologies and why / Tecnologías seleccionadas y su justificación → technical-proposal-es.pdf: tecnologías, alternativas consideradas y justificación
 
 ## Format / Formato
 
