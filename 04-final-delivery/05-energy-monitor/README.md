@@ -34,8 +34,8 @@ Final delivery of the training project / Entrega final del proyecto formativo.
 
 | Full name / Nombre completo | Doc. type / Tipo | Doc. number / Número | Ficha | GitHub user / Usuario | Role / Rol | Verified and authorized / Verificado y autorizado |
 |---|---|---|---|---|---|---|
-| JUAN ESTEBAN CORTES PARRA | CC | 1079605497 | 3145556 | Juan-Cortes2045 | Project leader (Project Manager), Scrum Master, system data owner and developer / Líder del proyecto (Project Manager), Scrum Master, responsable de los datos del sistema y desarrollador | ☑ |
-| MIGUEL ANGEL GARCIA ARTUNDUAGA | CC | 1075241131 | 3145556 | angelgarcia0 | Analyst, QA and developer / Analista, QA y desarrollador | ☑ |
+| JUAN ESTEBAN CORTES PARRA | CC | 1079605497 | 3145556 | Juan-Cortes2045 | Project leader (Project Manager), Scrum Master, system data owner and developer / Líder del proyecto (Project Manager), Scrum Master, responsable de los datos del sistema y desarrollador | ✅ |
+| MIGUEL ANGEL GARCIA ARTUNDUAGA | CC | 1075241131 | 3145556 | angelgarcia0 | Analyst, QA and developer / Analista, QA y desarrollador | ✅ |
 
 Data use authorization: by checking the box, the member confirms their data and authorizes publishing their name, document number and ficha in this public repository, for the software registration process (Ley 1581 de 2012). Anyone who does not authorize it tells the instructor before delivering.
 
@@ -106,7 +106,7 @@ Librerías de código abierto e imágenes de Docker, las librerías del firmware
 | [`07-improvement-actions/`](07-improvement-actions/) | Improvement actions / Acciones de mejoramiento | ☑ |
 | [`08-manuals/`](08-manuals/) | Manuals / Manuales | ☑ |
 | [`09-project-article/`](09-project-article/) | Project article / Artículo del proyecto | ☑ |
-| [`10-videos/`](10-videos/) | Videos / Videos | ☐ |
+| [`10-videos/`](10-videos/) | Videos / Videos | ☑ |
 | [`code-tag/`](code-tag/) | Repository links, tags and ZIP files / Enlaces, tags y ZIP | ☐ |
 | [`team-roster.md`](team-roster.md) | Team and roles / Equipo y roles | ☐ |
 | [`software-registration.md`](software-registration.md) | Software registration data / Datos para registro de software | ☐ |
