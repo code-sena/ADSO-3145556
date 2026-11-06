@@ -38,8 +38,8 @@ Authors are the instructors and the apprentices listed in `team-roster.md`. Each
 | EDDIER YAIR LIBERATO CUENCA | | Kept privately / En custodia | | Instructor: see `team-roster.md` / ver `team-roster.md` |
 | JHON WILLIAN CORREDOR ARAUJO | | Kept privately / En custodia | | Instructor: see `team-roster.md` / ver `team-roster.md` |
 | ANDRES MORENO COLLAZOS | | Kept privately / En custodia | | Instructor: see `team-roster.md` / ver `team-roster.md` |
-| JHON JAIRO CORTEZ VARGAS | CC | 1079174793 | 3145556 | |
-| MARIA DE LOS ANGELES OLAYA GARCIA | CC | 1076505160 | 3145556 | |
+| JHON JAIRO CORTEZ VARGAS | CC | 1079174793 | 3145556 | Team leadership and planning; backend microservices and API gateway; infrastructure, CI/CD and deployment; ESP32 device firmware; architecture documentation. / Liderazgo y planeación del equipo; microservicios backend y API gateway; infraestructura, CI/CD y despliegue; firmware del dispositivo ESP32; documentación de arquitectura. |
+| MARIA DE LOS ANGELES OLAYA GARCIA | CC | 1076505160 | 3145556 | Web and mobile frontend; `ms-user-management` and part of the monitoring service; requirements and architecture documentation (SRS, ADR). / Frontend web y móvil; `ms-user-management` y parte del servicio de monitoreo; documentación de requisitos y arquitectura (SRS, ADR). |
 
 ## 3. Producer / Productor (art. 5, num. 3)
 

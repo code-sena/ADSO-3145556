@@ -27,5 +27,5 @@ Los aprendices completan su rol, por ejemplo backend, frontend, base de datos, Q
 
 | Full name / Nombre completo | Doc. type / Tipo | Doc. number / Número | Ficha | GitHub user / Usuario | Role in the project / Rol en el proyecto | Author / Autor |
 |---|---|---|---|---|---|---|
-| JHON JAIRO CORTEZ VARGAS | CC | 1079174793 | 3145556 | Jhon-Cortez | | Yes / Sí |
-| MARIA DE LOS ANGELES OLAYA GARCIA | CC | 1076505160 | 3145556 | mariaolaya17 | | Yes / Sí |
+| JHON JAIRO CORTEZ VARGAS | CC | 1079174793 | 3145556 | Jhon-Cortez | Team leader / Líder del equipo; Backend developer / Desarrollador backend; DevOps (infrastructure and deployment / infraestructura y despliegue) | Yes / Sí |
+| MARIA DE LOS ANGELES OLAYA GARCIA | CC | 1076505160 | 3145556 | mariaolaya17 | Frontend developer / Desarrolladora frontend; Backend developer / Desarrolladora backend; Analyst and technical writer / Analista y documentadora técnica | Yes / Sí |
