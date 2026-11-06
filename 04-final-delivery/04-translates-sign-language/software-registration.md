@@ -75,11 +75,11 @@ Authors are the instructors and the apprentices listed in `team-roster.md`. Each
 
 | Declaration / Declaración | Option / Opción |
 |---|---|
-| Origin / Origen | ☐ Original ☐ Derived work / Obra derivada |
-| If derived, base work / Si es derivada, obra de base | |
-| Type of work / Clase de obra | ☐ Individual ☐ In collaboration / En colaboración ☐ Collective / Colectiva ☐ Anonymous / Anónima ☐ Pseudonymous / Seudónima ☐ Posthumous / Póstuma |
-| Publication / Publicación | ☐ Unpublished / Inédita ☐ Published / Publicada |
-| If published, date and place / Si está publicada, fecha y lugar | |
+| Origin / Origen | ☑ Original ☐ Derived work / Obra derivada |
+| If derived, base work / Si es derivada, obra de base | Not applicable: third-party components are declared in section 8 / No aplica: los componentes de terceros se declaran en la sección 8 |
+| Type of work / Clase de obra | ☐ Individual ☑ In collaboration / En colaboración ☐ Collective / Colectiva ☐ Anonymous / Anónima ☐ Pseudonymous / Seudónima ☐ Posthumous / Póstuma |
+| Publication / Publicación | ☐ Unpublished / Inédita ☑ Published / Publicada |
+| If published, date and place / Si está publicada, fecha y lugar | Colombia, on the Internet: public GitHub repositories listed in `code-tag/README.md` (public as of 2026-11-04) and the production site https://traducesenas.tech. The Centro defines the final declaration (art. 4). / Colombia, en Internet: repositorios públicos de GitHub listados en `code-tag/README.md` (públicos al 2026-11-04) y el sitio de producción https://traducesenas.tech. El Centro define la declaración final (art. 4). |
 
 Software is treated as unpublished unless the rights holder states otherwise (art. 4). A public repository may count as publication: the team records it here, and the Centro decides the final declaration.
 
@@ -91,9 +91,9 @@ At least one is required. Attach all three. / Se exige al menos uno. Adjunte los
 
 | Element / Elemento | Where it is / Dónde está | Ready / Listo |
 |---|---|---|
-| Computer program / Programa de computador | ZIP files `final-delivery-2026` of each repository, listed in `code-tag/README.md` and attached to the `final-delivery` Release / ZIP de cada repositorio, relacionados en `code-tag/README.md` y adjuntos al Release `final-delivery`; source code also in the repositories of that table / código fuente también en los repositorios de esa tabla; `code-tag/code-artifacts-es.pdf`, `code-tag/code-artifacts-en.pdf` | ☐ |
-| Program description / Descripción de programa | `02-software-analysis/software-analysis-es.pdf`, `-en.pdf` and `04-software-design/software-design-es.pdf`, `-en.pdf` (also `.docx` / también `.docx`) | ☐ |
-| Auxiliary material / Material auxiliar | `08-manuals/`: `technical-manual`, `installation-manual`, `user-manual` (`-es`, `-en`; PDF and `.docx` / PDF y `.docx`) | ☐ |
+| Computer program / Programa de computador | ZIP files `final-delivery-2026` of each repository, listed in `code-tag/README.md` and attached to the `final-delivery` Release / ZIP de cada repositorio, relacionados en `code-tag/README.md` y adjuntos al Release `final-delivery`; source code also in the repositories of that table / código fuente también en los repositorios de esa tabla; `code-tag/code-artifacts-es.pdf`, `code-tag/code-artifacts-en.pdf` | ☑ |
+| Program description / Descripción de programa | `02-software-analysis/software-analysis-es.pdf`, `-en.pdf` and `04-software-design/software-design-es.pdf`, `-en.pdf` (also `.docx` / también `.docx`) | ☑ |
+| Auxiliary material / Material auxiliar | `08-manuals/`: `technical-manual`, `installation-manual`, `user-manual` (`-es`, `-en`; PDF and `.docx` / PDF y `.docx`) | ☑ |
 
 ## 8. Third-party components / Componentes de terceros
 
@@ -150,11 +150,11 @@ Relacione código, librerías, modelos, imágenes o datos que el equipo no creó
 | Modelos 3D `.glb` y miniaturas del alfabeto | Juan Mauricio Suaza Solórzano, del equipo. Modelados en Blender y exportados con Khronos glTF Blender I/O, según sus metadatos. Los scripts `modelado/` que cita el README de lexicon no están en `main` | Obra del equipo, se registra con el software | `src/assets/alfabeto/` de frontendTS y `services/lexicon-service/public/lexicon/alfabeto/` de backendTS |
 | `alfabeto.png`, `historial.png`, `login.png`, `traduccion-real.png` | Generadas con IA de OpenAI (GPT-4o o gpt-image), según sus metadatos C2PA. Responsables: Juan Mauricio Suaza Solórzano y Luis Alejandro Duarte Aldana | Términos de uso de OpenAI, que asignan el resultado a quien lo genera. Al ser generadas con IA, pueden no tener protección propia de derecho de autor | `src/assets/images/` de frontendTS |
 | `comunicate-sinbarreras.png` | Generada con IA de Google, según sus metadatos C2PA ("Created by Google Generative AI"). Responsables: Juan Mauricio Suaza Solórzano y Luis Alejandro Duarte Aldana | Términos de uso de la IA generativa de Google. Al ser generada con IA, puede no tener protección propia de derecho de autor | `src/assets/images/` de frontendTS |
-| Fotos `slide1.jpg`, `slide2.jpg`, `slide3.jpg`, `testimonial.jpg`, `camera_placeholder.jpg` | Responsables: Juan Mauricio Suaza Solórzano y Luis Alejandro Duarte Aldana. Origen de cada foto: Por confirmar. El "Copyright" de `testimonial.jpg` es el del perfil de color sRGB (Hewlett-Packard, 1998), no el de la foto | Por confirmar | `src/assets/images/` de frontendTS, página de inicio y traducción |
+| Fotos `slide1.jpg`, `slide2.jpg`, `slide3.jpg`, `testimonial.jpg`, `camera_placeholder.jpg` | Generadas con IA; no traen metadatos de la herramienta usada. Responsables: Juan Mauricio Suaza Solórzano y Luis Alejandro Duarte Aldana. El "Copyright" de `testimonial.jpg` es el del perfil de color sRGB (Hewlett-Packard, 1998), no el de la imagen | Términos de uso de la herramienta de IA. Al ser generadas con IA, pueden no tener protección propia de derecho de autor | `src/assets/images/` de frontendTS, página de inicio y traducción |
 | Logos `facebook.png` y `gmail.png` | Marcas de Meta y Google, tomadas de una búsqueda en Google | Marcas registradas de sus dueños, sin licencia de uso propia; se usan solo para identificar el botón de inicio de sesión de cada proveedor | frontendTS, botones de inicio de sesión |
 | Iconos y logos `app-icon`, `adaptive-icon`, `icono-senas`, `splash-logo`, `favicon`, `public/icons` | Logo de TraduceSeñas: Juan Mauricio Suaza Solórzano. Iconos: Luis Alejandro Duarte Aldana. Ambos del equipo | Obra del equipo, se registra con el software | frontendTS, identidad de la aplicación |
 | **Documentation and infrastructure / Documentación e infraestructura** |  |  |  |
-| Prototipos: React, ReactDOM, Babel, Lucide y fuente Nunito Sans | Copias en `docs/12-ux-ui/mockup/layout/_shared/` de traduce-senas-evidencias. Fuente de la copia: Por confirmar | React y ReactDOM: MIT. Babel: MIT. Lucide: ISC. Nunito Sans: SIL Open Font License 1.1 | Prototipos de interfaz, no la aplicación |
+| Prototipos: React y ReactDOM 18.3.1, Babel standalone 7.29.0, Lucide 1.46.0 y fuente Nunito Sans; runtime de exportación de Claude Design (`support.js`, `image-slot.js`) | Copias en `docs/12-ux-ui/mockup/layout/_shared/` de traduce-senas-evidencias. Las librerías se descargaron de unpkg.com, según `build-from-export.ps1`; Nunito Sans es de Google Fonts; el runtime viene del export de Claude Design (Anthropic) | React y ReactDOM: MIT. Babel: MIT. Lucide: ISC. Nunito Sans: SIL Open Font License 1.1. Runtime de Claude Design: términos de uso de Anthropic | Prototipos de interfaz, no la aplicación |
 | Base documental `docs/` | Jesus Ariel Gonzalez Bonilla, según `docs/LICENSE` | MIT | traduce-senas-evidencias |
 | Imágenes Docker: `node`, `postgres`, `mongo`, `rabbitmq`, `caddy`, `nginxinc/nginx-unprivileged`; Portainer CE | Docker Hub y sus proyectos | Node.js: MIT. PostgreSQL: PostgreSQL License. MongoDB Community: SSPL 1.0. RabbitMQ: MPL 2.0. Caddy: Apache-2.0. NGINX: BSD-2-Clause. Portainer CE: zlib | Despliegue; no hacen parte del código entregado |
 | Servicios externos: Google y Facebook (inicio de sesión), Gmail SMTP (correo), Let's Encrypt (certificados), Hostinger (VPS) | Sus proveedores | Términos de servicio de cada proveedor; no se incluye código de ellos | Producción |
