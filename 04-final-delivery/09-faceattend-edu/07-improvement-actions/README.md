@@ -4,9 +4,17 @@
 
 ## Required content / Contenido requerido
 
-- [ ] Corrective actions / Acciones correctivas
-- [ ] Preventive actions / Acciones preventivas
-- [ ] Software improvement actions / Acciones de mejoramiento del software
+- [x] Corrective actions / Acciones correctivas
+- [x] Preventive actions / Acciones preventivas
+- [x] Software improvement actions / Acciones de mejoramiento del software
+
+## Files / Archivos
+
+| File / Archivo | Content / Contenido |
+|---|---|
+| [`improvement-actions.pdf`](improvement-actions.pdf) | Corrective, preventive and improvement actions / Acciones correctivas, preventivas y de mejoramiento |
+
+Editable sources are in [`source/`](source/). / Las fuentes editables están en [`source/`](source/).
 
 ## Format / Formato
 

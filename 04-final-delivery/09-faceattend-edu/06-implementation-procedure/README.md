@@ -4,8 +4,16 @@
 
 ## Required content / Contenido requerido
 
-- [ ] Implementation procedure, with environments and steps / Procedimiento de implementación, con ambientes y pasos
-- [ ] Deployment evidence and production URL, if deployed / Evidencia de despliegue y URL de producción, si se desplegó
+- [x] Implementation procedure, with environments and steps / Procedimiento de implementación, con ambientes y pasos
+- [x] Deployment evidence and production URL, if deployed / Evidencia de despliegue y URL de producción, si se desplegó
+
+## Files / Archivos
+
+| File / Archivo | Content / Contenido |
+|---|---|
+| [`implementation-procedure.pdf`](implementation-procedure.pdf) | Procedure, deployment evidence and production URL / Procedimiento, evidencia de despliegue y URL de producción |
+
+Editable sources are in [`source/`](source/). / Las fuentes editables están en [`source/`](source/).
 
 ## Format / Formato
 
