@@ -130,6 +130,18 @@ Relacione código, librerías, modelos, imágenes o datos que el equipo no creó
 
 The licenses above are the ones these projects usually publish. Check each one against the version used before submitting. / Las licencias son las que estos proyectos suelen publicar; verifíquelas contra la versión usada antes de entregar.
 
+### Images and graphic assets / Imágenes y recursos gráficos
+
+| File / Archivo | Origin / Origen | Where it is used / Dónde se usa |
+|---|---|---|
+| `EduAirControlLogo.png` (web and mobile) | Generated with an AI tool; tool name to be confirmed by the team / Generada con una herramienta de IA; el equipo debe confirmar cuál | Product logo / Logo del producto |
+| `hero.png`, `fondo-terms.png`, `l-fondo.png`, `background-principal.png` (web) | Generated with an AI tool; tool name to be confirmed by the team / Generadas con una herramienta de IA; el equipo debe confirmar cuál | Backgrounds and landing images / Fondos e imágenes de portada |
+| `icon.png`, `adaptive-icon.png`, `favicon.png`, `splash-icon.png` (mobile) | Derived from the logo; to be confirmed / Derivadas del logo; por confirmar | App icons and splash screen / Iconos y pantalla de inicio de la app |
+| `google-icon.png`, `facebook-icon.png` | Brand logos of Google and Meta, third-party trademarks / Logos de marca de Google y Meta, marcas de terceros | Social sign-in buttons / Botones de inicio de sesión social |
+| `react.svg`, `vite.svg` | Vite project template (MIT) / Plantilla de Vite (MIT) | Template leftovers / Restos de la plantilla |
+
+The images above were not drawn by the team: they were generated with AI, so the team does not claim authorship of them as original graphic works. Any further legal treatment is decided by the instructor and the Centro. / Las imágenes anteriores no las dibujó el equipo: se generaron con IA, por lo que el equipo no reclama su autoría como obras gráficas originales. El tratamiento legal lo definen el instructor y el Centro.
+
 ## 9. Private data / Datos privados
 
 **Do not write this data in this repository.** Registration also asks for address, nationality, phone and email. Each member gives them to the instructor through the private channel the instructor indicates.
