@@ -68,8 +68,8 @@ Autorización de datos: al marcar la casilla, el integrante confirma sus datos y
 | [`07-improvement-actions/`](07-improvement-actions/) | Improvement actions / Acciones de mejoramiento | ☑ |
 | [`08-manuals/`](08-manuals/) | Manuals / Manuales | ☑ |
 | [`09-project-article/`](09-project-article/) | Project article / Artículo del proyecto | ☑ |
-| [`10-videos/`](10-videos/) | Videos / Videos | ☐ |
-| [`code-tag/`](code-tag/) | Repository links, tags and ZIP files / Enlaces, tags y ZIP | ☐ |
+| [`10-videos/`](10-videos/) | Videos / Videos | ☑ |
+| [`code-tag/`](code-tag/) | Repository links, tags and ZIP files / Enlaces, tags y ZIP | ☑ |
 | [`team-roster.md`](team-roster.md) | Team and roles / Equipo y roles | ☑ |
 | [`software-registration.md`](software-registration.md) | Software registration data / Datos para registro de software | ☑ |
 
@@ -82,3 +82,4 @@ Aquí solo van archivos demasiado pesados para GitHub, como videos de demostraci
 | File / Archivo | Size / Tamaño | Link / Enlace |
 |---|---|---|
 | `tuevento-usage-tutorial.mp4` — usage tutorial / tutorial de uso | 20.2 MB | [Google Drive](https://drive.google.com/file/d/1JQwpBJMLQlUPd2DGHQo5i_C7UzpmvF-B/view?usp=sharing) |
+| `tuevento-advertising-pitch.mp4` — advertising pitch / pitch publicitario | | [Google Drive](https://drive.google.com/file/d/1muZgLYzA7VaPwu_vAFrtiOllNIjjoIlN/view?usp=sharing) |

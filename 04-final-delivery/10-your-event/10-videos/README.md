@@ -4,17 +4,17 @@ Two videos are required. / Se requieren dos videos.
 
 | Video | Duration / Duración | Link / Enlace | Done / Listo |
 |---|---|---|---|
-| Advertising pitch / Pitch publicitario | 1 to 2 minutes / 1 a 2 minutos | | ☐ |
+| Advertising pitch / Pitch publicitario | 1 to 2 minutes / 1 a 2 minutos | [`tuevento-advertising-pitch.mp4`](https://drive.google.com/file/d/1muZgLYzA7VaPwu_vAFrtiOllNIjjoIlN/view?usp=sharing) | ☑ |
 | Short usage tutorial / Tutorial corto de uso | 3 to 5 minutes / 3 a 5 minutos | [`tuevento-usage-tutorial.mp4`](https://drive.google.com/file/d/1JQwpBJMLQlUPd2DGHQo5i_C7UzpmvF-B/view?usp=sharing) | ☑ |
 
 ## 1. Advertising pitch / Pitch publicitario
 
 Sells the product to someone who does not know it. / Presenta el producto a alguien que no lo conoce.
 
-- [ ] Problem it solves / Problema que resuelve
-- [ ] Who it is for / Para quién es
-- [ ] The solution and what sets it apart / La solución y qué la diferencia
-- [ ] Clear closing message / Mensaje final claro
+- [x] Problem it solves / Problema que resuelve
+- [x] Who it is for / Para quién es
+- [x] The solution and what sets it apart / La solución y qué la diferencia
+- [x] Clear closing message / Mensaje final claro
 
 ## 2. Short usage tutorial / Tutorial corto de uso
 
