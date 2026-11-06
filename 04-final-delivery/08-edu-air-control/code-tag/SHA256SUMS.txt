@@ -1,1 +1,21 @@
 # sha256  file / archivo
+774f7d9b96e00e39b933f74d06b4d4703c6dffaeabcd512bb51165e678cdcec8  ea-control-api-gateway-final-delivery-2026-main.zip
+d9f1bd1bd448a5ce84c728ad8f252cf97cda7b009b57b79c4b13d5ea51c0343c  ea-control-api-gateway-full-export.zip
+7d7852f9d693c8955a1576c5366a5a03c6f0cf539d93a6c645523cdeb2ab91e3  ea-control-docs-final-delivery-2026-main.zip
+2ab857caf231bd453d4750c4c7d227bdbf0d0bc6ca6b9bb27db53c715255149b  ea-control-docs-full-export.zip
+263c3e0a85305ebe26256f5726b460e1a62975868b5d3c26499d29feba9cfcaf  ea-control-frontend-final-delivery-2026-main.zip
+d9809628f168ec5a376f59ff7911d0a7f6c5989b6b6c8811f47e532a1d05d713  ea-control-frontend-full-export.zip
+4777c2f8ac4555f0760fb56b2bd6f5671710522074d808799911dc6fcab179cf  ea-control-infra-final-delivery-2026-main.zip
+8df506db174b02f6c95680f5d94c0f5efd4997f58c87496fcfcd3cc17780084f  ea-control-infra-full-export.zip
+3e530690d225dacb2a702d70c31bec89bbe156a833025a2adb4f5e80f265ba26  ea-control-ms-classroom-management-final-delivery-2026-main.zip
+10f890c6f3679d1da2036caf6f76f338b34e6699a8956c1248c89c45847b96c1  ea-control-ms-classroom-management-full-export.zip
+14c59781b33005eaf0514330e0a30cc0c8680353822e411bbc02eeb4febe470e  ea-control-ms-security-final-delivery-2026-main.zip
+bf1c9ee83bfe7c5e018b491c46ce3ad16ebef7bc4fe961aeae08b0c9637c33a8  ea-control-ms-security-full-export.zip
+63714b8979d74bb0412eb27fc1c3ca3ddef23dbca79c168b97c41ca2dea0b0c5  ea-control-ms-sensor-management-final-delivery-2026-main.zip
+3d0c1908335cce2af6d2912b95ed21f44ff89d827995fdb57ce1107d6840849c  ea-control-ms-sensor-management-full-export.zip
+e5640f5724abfcd543bb2b062ab64ed6ad80de20b0b7939e1d6afc7e297f32ce  ea-control-ms-user-experience-final-delivery-2026-main.zip
+6a76a947e9f028f6113980357d9e8f48ed46491882de390c77dd44ce9eb7b7a1  ea-control-ms-user-experience-full-export.zip
+c90484876b675e442fed35c3eb55de81fa40617e6a6b94bffb63b6e3743d1e51  ea-control-ms-user-management-final-delivery-2026-main.zip
+5bdf11e93eedf6007729731b52d0f0a3ea9e9995c82a34207ba66378e4b82725  ea-control-ms-user-management-full-export.zip
+069791b152281a0bdc413d299301bea92dfa92d4c66e2d114cb9f7e055ce9bb4  ms-environment-monitoring-final-delivery-2026-main.zip
+17811d2d852d2a97495e8692be70f112f7b286c0806874761907c14fae39581f  ms-environment-monitoring-full-export.zip
