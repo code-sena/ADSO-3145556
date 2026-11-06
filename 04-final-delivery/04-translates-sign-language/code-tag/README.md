@@ -13,10 +13,10 @@ Si falta alguno, agregue la fila. Si uno está vacío o ya no se usa, indíquelo
 | Component / Componente | Repository / Repositorio | Status / Estado | Access for `ariel5253` / Acceso de `ariel5253` | Commit of tag `final-delivery-2026` / Commit del tag | Main version ZIP / ZIP versión main | Full export ZIP / ZIP completo |
 |---|---|---|---|---|---|---|
 | Documentation | [code-sena/trans-sl-docs](https://github.com/code-sena/trans-sl-docs) | **PRIVATE: make it public / PRIVADO: hacerlo público** | Yes / Sí | | | |
-| Backend | [mauro-1508/backendTS](https://github.com/mauro-1508/backendTS) | Public / Público | **Add / Agregar** | `d1822ed` | `backendTS-final-delivery-2026-main.zip` | `backendTS-full-export.zip` |
-| Documentation | [mauro-1508/traduce-senas-evidencias](https://github.com/mauro-1508/traduce-senas-evidencias) | Public / Público | **Add / Agregar** | `53be03e` | `traduce-senas-evidencias-final-delivery-2026-main.zip` | `traduce-senas-evidencias-full-export.zip` |
-| Web frontend | [tadeo77789/frontendTS](https://github.com/tadeo77789/frontendTS) | Public / Público | **Add / Agregar** | `a5e231d` | `frontendTS-final-delivery-2026-main.zip` | `frontendTS-full-export.zip` |
-| Landing / download page | [tadeo77789/traducesenas-download](https://github.com/tadeo77789/traducesenas-download) | Public / Público | **Add / Agregar** | `80edb6e` | `traducesenas-download-final-delivery-2026-main.zip` | `traducesenas-download-full-export.zip` |
+| Backend | [mauro-1508/backendTS](https://github.com/mauro-1508/backendTS) | Public / Público | Invited, pending acceptance / Invitado, pendiente de aceptar | `d1822ed` | [`backendTS-final-delivery-2026-main.zip`](https://github.com/mauro-1508/ADSO-3145556/releases/download/final-delivery/backendTS-final-delivery-2026-main.zip) | [`backendTS-full-export.zip`](https://github.com/mauro-1508/ADSO-3145556/releases/download/final-delivery/backendTS-full-export.zip) |
+| Documentation | [mauro-1508/traduce-senas-evidencias](https://github.com/mauro-1508/traduce-senas-evidencias) | Public / Público | Invited, pending acceptance / Invitado, pendiente de aceptar | `53be03e` | [`traduce-senas-evidencias-final-delivery-2026-main.zip`](https://github.com/mauro-1508/ADSO-3145556/releases/download/final-delivery/traduce-senas-evidencias-final-delivery-2026-main.zip) | [`traduce-senas-evidencias-full-export.zip`](https://github.com/mauro-1508/ADSO-3145556/releases/download/final-delivery/traduce-senas-evidencias-full-export.zip) |
+| Web frontend | [tadeo77789/frontendTS](https://github.com/tadeo77789/frontendTS) | Public / Público | **Add / Agregar** | `a5e231d` | [`frontendTS-final-delivery-2026-main.zip`](https://github.com/mauro-1508/ADSO-3145556/releases/download/final-delivery/frontendTS-final-delivery-2026-main.zip) | [`frontendTS-full-export.zip`](https://github.com/mauro-1508/ADSO-3145556/releases/download/final-delivery/frontendTS-full-export.zip) |
+| Landing / download page | [tadeo77789/traducesenas-download](https://github.com/tadeo77789/traducesenas-download) | Public / Público | **Add / Agregar** | `80edb6e` | [`traducesenas-download-final-delivery-2026-main.zip`](https://github.com/mauro-1508/ADSO-3145556/releases/download/final-delivery/traducesenas-download-final-delivery-2026-main.zip) | [`traducesenas-download-full-export.zip`](https://github.com/mauro-1508/ADSO-3145556/releases/download/final-delivery/traducesenas-download-full-export.zip) |
 
 La copia pública de la documentación de `code-sena/trans-sl-docs` está en [`traduce-senas-evidencias/docs`](https://github.com/mauro-1508/traduce-senas-evidencias/tree/main/docs). / The public copy of that documentation is in that folder.
 
@@ -37,9 +37,9 @@ La cuenta del instructor, `ariel5253`, necesita acceso de escritura en cada repo
 
 ## Where the ZIP files live / Dónde quedan los ZIP
 
-The ZIP files do not go in this folder. They are attached to a GitHub Release in the fork of the person who delivers, named `final-delivery`, and linked in the table above.
+The ZIP files do not go in this folder. They are attached to a GitHub Release in the fork of the person who delivers, named `final-delivery`, and linked in the table above: [Release `final-delivery`](https://github.com/mauro-1508/ADSO-3145556/releases/tag/final-delivery).
 
-Los ZIP no van en esta carpeta. Se adjuntan a un Release de GitHub llamado `final-delivery` en el fork de quien entrega, y se enlazan en la tabla de arriba.
+Los ZIP no van en esta carpeta. Se adjuntan a un Release de GitHub llamado `final-delivery` en el fork de quien entrega, y se enlazan en la tabla de arriba: [Release `final-delivery`](https://github.com/mauro-1508/ADSO-3145556/releases/tag/final-delivery).
 
 ## Integrity / Integridad
 
