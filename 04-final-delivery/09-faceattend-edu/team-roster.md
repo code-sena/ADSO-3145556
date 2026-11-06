@@ -27,6 +27,6 @@ Los aprendices completan su rol, por ejemplo backend, frontend, base de datos, Q
 
 | Full name / Nombre completo | Doc. type / Tipo | Doc. number / Número | Ficha | GitHub user / Usuario | Role in the project / Rol en el proyecto | Author / Autor |
 |---|---|---|---|---|---|---|
-| JONATTAN STEVEN RIZO SOLANO | CC | 1077228536 | 3145556 | Jonas7891 | | Yes / Sí |
-| DIEGO ANDRES GUTIERREZ NUÑEZ | CC | 1077228601 | 3145556 | andresguti17 | | Yes / Sí |
-| JUAN DAVID ARBOLEDA PERDOMO | CC | 1077229270 | 3145556 | juanArvol | | Yes / Sí |
+| JONATTAN STEVEN RIZO SOLANO | CC | 1077228536 | 3145556 | Jonas7891 | Hardware, developer / Hardware, desarrollo | Yes / Sí |
+| DIEGO ANDRES GUTIERREZ NUÑEZ | CC | 1077228601 | 3145556 | andresguti17 | Administrator, developer, AI / Administración, desarrollo, IA | Yes / Sí |
+| JUAN DAVID ARBOLEDA PERDOMO | CC | 1077229270 | 3145556 | juanArvol | Analyst, database / Análisis, base de datos | Yes / Sí |

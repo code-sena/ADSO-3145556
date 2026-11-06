@@ -38,9 +38,9 @@ Authors are the instructors and the apprentices listed in `team-roster.md`. Each
 | EDDIER YAIR LIBERATO CUENCA | | Kept privately / En custodia | | Instructor: see `team-roster.md` / ver `team-roster.md` |
 | JHON WILLIAN CORREDOR ARAUJO | | Kept privately / En custodia | | Instructor: see `team-roster.md` / ver `team-roster.md` |
 | ANDRES MORENO COLLAZOS | | Kept privately / En custodia | | Instructor: see `team-roster.md` / ver `team-roster.md` |
-| JONATTAN STEVEN RIZO SOLANO | CC | 1077228536 | 3145556 | |
-| DIEGO ANDRES GUTIERREZ NUÑEZ | CC | 1077228601 | 3145556 | |
-| JUAN DAVID ARBOLEDA PERDOMO | CC | 1077229270 | 3145556 | |
+| JONATTAN STEVEN RIZO SOLANO | CC | 1077228536 | 3145556 | Hardware, developer / Hardware, desarrollo |
+| DIEGO ANDRES GUTIERREZ NUÑEZ | CC | 1077228601 | 3145556 | Administrator, developer, AI / Administración, desarrollo, IA |
+| JUAN DAVID ARBOLEDA PERDOMO | CC | 1077229270 | 3145556 | Analyst, database / Análisis, base de datos |
 
 ## 3. Producer / Productor (art. 5, num. 3)
 
@@ -63,13 +63,13 @@ Authors are the instructors and the apprentices listed in `team-roster.md`. Each
 | Field / Campo | Value / Valor |
 |---|---|
 | Title / Título de la obra | FaceAttend EDU |
-| Year of creation / Año de creación | |
+| Year of creation / Año de creación | 2026 |
 | Country of origin / País de origen | Colombia |
 | Version registered / Versión a registrar | `final-delivery-2026` |
-| Short description of its functions / Breve descripción de sus funciones | |
-| What sets it apart from similar software / Qué la diferencia de obras similares |  |
-| Programming languages / Lenguajes | |
-| Type: web, mobile, desktop, device / Tipo: web, móvil, escritorio, dispositivo | |
+| Short description of its functions / Breve descripción de sus funciones | Attendance management platform for educational institutions, with facial and fingerprint recognition. It manages schools, programs, cohorts, schedules, class sessions, justifications, reports and alerts, with role-based access. / Plataforma de gestión de asistencia para instituciones educativas, con reconocimiento facial y dactilar. Gestiona sedes, programas, fichas, horarios, sesiones de clase, justificaciones, reportes y alertas, con acceso por roles. |
+| What sets it apart from similar software / Qué la diferencia de obras similares | Facial attendance is one option inside a complete academic system, not an isolated module: it connects identity, roles per school, schedules, justifications and alerts. / La asistencia facial es una opción dentro de un sistema académico completo y no un módulo aislado: conecta identidad, roles por sede, horarios, justificaciones y alertas. |
+| Programming languages / Lenguajes | Java, TypeScript, JavaScript, Python |
+| Type: web, mobile, desktop, device / Tipo: web, móvil, escritorio, dispositivo | Web and mobile / Web y móvil |
 
 ## 6. Declarations / Declaraciones (art. 4 y art. 5, num. 5 y 6)
 
@@ -92,8 +92,8 @@ At least one is required. Attach all three. / Se exige al menos uno. Adjunte los
 | Element / Elemento | Where it is / Dónde está | Ready / Listo |
 |---|---|---|
 | Computer program / Programa de computador | ZIP files `final-delivery-2026` listed in `code-tag/README.md` / ZIP relacionados en `code-tag/README.md` | ☐ |
-| Program description / Descripción de programa | `02-software-analysis/` and `04-software-design/` | ☐ |
-| Auxiliary material / Material auxiliar | `08-manuals/` | ☐ |
+| Program description / Descripción de programa | `02-software-analysis/` and `04-software-design/` | ☑ |
+| Auxiliary material / Material auxiliar | `08-manuals/` | ☑ |
 
 ## 8. Third-party components / Componentes de terceros
 
@@ -103,7 +103,22 @@ Relacione código, librerías, modelos, imágenes o datos que el equipo no creó
 
 | Component / Componente | Author or source / Autor o fuente | License / Licencia | Where it is used / Dónde se usa |
 |---|---|---|---|
-| | | | |
+| Spring Boot, Spring Security, Spring Data, spring-kafka | VMware / Broadcom, Apache | Apache-2.0 | Java services / Servicios Java |
+| liquibase-core 5.0.3 | Liquibase | FSL-1.1-ALv2 | Java services / Servicios Java |
+| Fastify, Node.js packages | Fastify, npm authors / autores de npm | MIT, ISC, Apache-2.0, BSD | TypeScript services / Servicios TypeScript |
+| Expo, React Native and npm packages | Expo, Meta, npm authors / autores de npm | MIT, ISC, Apache-2.0, BSD and others / y otras | Web and mobile / Web y móvil |
+| xlsx 0.18.5 | SheetJS | Apache-2.0 | Web |
+| FastAPI, Starlette, Pydantic, Uvicorn, NumPy, Pillow | Their authors / Sus autores | MIT, BSD, Apache-2.0, HPND | ms-biometric |
+| opencv-python-headless | OpenCV (bundles FFmpeg / empaqueta FFmpeg) | Apache-2.0, LGPL-2.1 | ms-biometric |
+| face-recognition, dlib | Adam Geitgey, Davis King | MIT, Boost-1.0 | ms-biometric |
+| face_recognition_models, dlib 68-point model / modelo de 68 puntos | Adam Geitgey, dlib (iBUG 300-W dataset) | To verify: the dataset may restrict commercial use / Por verificar: el dataset puede restringir el uso comercial | ms-biometric |
+| @digitalpersona JS SDK | HID Global | MIT (the agent and reader drivers are proprietary / el agente y los controladores son propietarios) | Web, fingerprint / Web, huella |
+| PostgreSQL 17, Apache Kafka, Kong 3.6, Caddy, nginx | Their projects / Sus proyectos | PostgreSQL, Apache-2.0, BSD-2 | Infrastructure / Infraestructura |
+| MongoDB 7 | MongoDB Inc. | SSPLv1 | Biometric embeddings / Embeddings biométricos |
+| Redis 7 | Redis Ltd. | To verify by version: BSD-3 or RSALv2/SSPLv1 / Por verificar según versión | Gateway rate limiting / Límite de tasa del gateway |
+| MinIO | MinIO Inc. | AGPLv3 | Supporting document storage / Almacenamiento de soportes |
+| countriesnow.space | countriesnow.space | Public API, terms not stated / API pública, sin términos claros | School sign-up: cities / Alta de sede: ciudades |
+| Icons in `Mobile/src/assets/images` / Iconos en `Mobile/src/assets/images` | To verify: source not documented / Por verificar: fuente sin documentar | To verify / Por verificar | Mobile / Móvil |
 
 ## 9. Private data / Datos privados
 
