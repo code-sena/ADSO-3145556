@@ -4,7 +4,7 @@
 
 ## Required content / Contenido requerido
 
-- [ ] Implementation procedure, with environments and steps / Procedimiento de implementación, con ambientes y pasos
+- [x] Implementation procedure, with environments and steps / Procedimiento de implementación, con ambientes y pasos
 - [ ] Deployment evidence and production URL, if deployed / Evidencia de despliegue y URL de producción, si se desplegó
 
 ## Format / Formato

@@ -4,8 +4,8 @@
 
 ## Required content / Contenido requerido
 
-- [ ] Test plan / Plan de pruebas
-- [ ] Test cases / Casos de prueba
+- [x] Test plan / Plan de pruebas
+- [x] Test cases / Casos de prueba
 - [ ] Test results with evidence / Resultados de las pruebas con evidencia
 
 ## Format / Formato

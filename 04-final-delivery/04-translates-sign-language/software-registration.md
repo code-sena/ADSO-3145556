@@ -63,13 +63,13 @@ Authors are the instructors and the apprentices listed in `team-roster.md`. Each
 | Field / Campo | Value / Valor |
 |---|---|
 | Title / Título de la obra | TraduceSeñas |
-| Year of creation / Año de creación | |
+| Year of creation / Año de creación | 2026 (first commits / primeros commits: backendTS 2026-04-03, frontendTS 2026-09-03, traduce-senas-evidencias 2026-10-15, traducesenas-download 2026-10-19) |
 | Country of origin / País de origen | Colombia |
 | Version registered / Versión a registrar | `final-delivery-2026` |
-| Short description of its functions / Breve descripción de sus funciones | |
-| What sets it apart from similar software / Qué la diferencia de obras similares |  |
-| Programming languages / Lenguajes | |
-| Type: web, mobile, desktop, device / Tipo: web, móvil, escritorio, dispositivo | |
+| Short description of its functions / Breve descripción de sus funciones | Recognizes Colombian Sign Language with the device camera and shows it as text and speech. It also keeps a translation history, teaches the alphabet with 3D models, and offers accounts with roles, profile, daily challenges and medals, notifications, and usage statistics and sign templates for administrators. / Reconoce Lengua de Señas Colombiana con la cámara del dispositivo y la muestra como texto y voz. También guarda el historial de traducciones, enseña el alfabeto con modelos 3D y ofrece cuentas con roles, perfil, retos diarios y medallas, notificaciones, y estadísticas de uso y plantillas de señas para administradores. |
+| What sets it apart from similar software / Qué la diferencia de obras similares | It targets LSC specifically, with the team's own word model trained on LSC-54. Recognition runs on the user's device, so video does not leave it and the server needs no GPU. It works from a common phone or browser without an interpreter present, and warns when a sign is not recognized instead of guessing. / Está hecha para la LSC, con un modelo propio de palabras entrenado con LSC-54. El reconocimiento corre en el dispositivo del usuario: el video no sale de él y el servidor no necesita GPU. Funciona desde un teléfono común o un navegador, sin intérprete presente, y avisa cuando no reconoce una seña en lugar de adivinar. |
+| Programming languages / Lenguajes | TypeScript, JavaScript, SQL, Python (model training / entrenamiento del modelo), HTML |
+| Type: web, mobile, desktop, device / Tipo: web, móvil, escritorio, dispositivo | Web and mobile (Android APK), with a microservices backend / Web y móvil (APK de Android), con backend de microservicios |
 
 ## 6. Declarations / Declaraciones (art. 4 y art. 5, num. 5 y 6)
 
@@ -91,9 +91,9 @@ At least one is required. Attach all three. / Se exige al menos uno. Adjunte los
 
 | Element / Elemento | Where it is / Dónde está | Ready / Listo |
 |---|---|---|
-| Computer program / Programa de computador | ZIP files `final-delivery-2026` listed in `code-tag/README.md` / ZIP relacionados en `code-tag/README.md` | ☐ |
-| Program description / Descripción de programa | `02-software-analysis/` and `04-software-design/` | ☐ |
-| Auxiliary material / Material auxiliar | `08-manuals/` | ☐ |
+| Computer program / Programa de computador | ZIP files `final-delivery-2026` of each repository, listed in `code-tag/README.md` and attached to the `final-delivery` Release / ZIP de cada repositorio, relacionados en `code-tag/README.md` y adjuntos al Release `final-delivery`; source code also in the repositories of that table / código fuente también en los repositorios de esa tabla; `code-tag/code-artifacts-es.pdf`, `code-tag/code-artifacts-en.pdf` | ☐ |
+| Program description / Descripción de programa | `02-software-analysis/software-analysis-es.pdf`, `-en.pdf` and `04-software-design/software-design-es.pdf`, `-en.pdf` (also `.docx` / también `.docx`) | ☐ |
+| Auxiliary material / Material auxiliar | `08-manuals/`: `technical-manual`, `installation-manual`, `user-manual` (`-es`, `-en`; PDF and `.docx` / PDF y `.docx`) | ☐ |
 
 ## 8. Third-party components / Componentes de terceros
 
@@ -103,7 +103,63 @@ Relacione código, librerías, modelos, imágenes o datos que el equipo no creó
 
 | Component / Componente | Author or source / Autor o fuente | License / Licencia | Where it is used / Dónde se usa |
 |---|---|---|---|
-| | | | |
+| **Frontend: runtime dependencies / dependencias de ejecución** |  |  |  |
+| Expo SDK: `expo`, `@expo/metro-runtime`, `expo-asset`, `expo-auth-session`, `expo-camera`, `expo-crypto`, `expo-file-system`, `expo-font`, `expo-image-picker`, `expo-linear-gradient`, `expo-notifications`, `expo-secure-store`, `expo-speech`, `expo-splash-screen`, `expo-status-bar`, `expo-web-browser` | 650 Industries (Expo), github.com/expo/expo | MIT | frontendTS, cliente web y Android |
+| `@expo/vector-icons` | Brent Vatne, github.com/expo/vector-icons | MIT | frontendTS, iconos |
+| `react`, `react-dom` | github.com/facebook/react | MIT | frontendTS, interfaz |
+| `react-native` | github.com/react/react-native | MIT | frontendTS, interfaz |
+| `react-native-web` | Nicolas Gallagher, github.com/necolas/react-native-web | MIT | frontendTS, versión web |
+| `@react-navigation/native`, `@react-navigation/native-stack`, `@react-navigation/bottom-tabs` | github.com/react-navigation/react-navigation | MIT | frontendTS, navegación |
+| `react-native-gesture-handler`, `react-native-reanimated`, `react-native-screens`, `react-native-worklets` | Software Mansion, github.com/software-mansion | MIT | frontendTS, gestos, animación y pantallas |
+| `react-native-safe-area-context`, `react-native-svg`, `react-native-webview`, `@react-native-async-storage/async-storage` | AppAndFlow; react-native-community; Jamon Holmgren; Krzysztof Borowy (repositorios de cada paquete) | MIT | frontendTS, interfaz, WebView del APK y almacenamiento local |
+| `@mediapipe/tasks-vision` 0.10.14 | Google (MediaPipe) | Apache-2.0 | frontendTS, puntos de mano y pose; también se carga por jsDelivr |
+| `@tensorflow/tfjs` | github.com/tensorflow/tfjs | Apache-2.0 | frontendTS, ejecución del modelo de palabras |
+| `axios` | Matt Zabriskie, github.com/axios/axios | MIT | frontendTS, cliente HTTP |
+| `sweetalert2` | Limon Monte, github.com/sweetalert2/sweetalert2 | MIT | frontendTS, alertas |
+| `jpeg-js` | Eugene Ware, github.com/eugeneware/jpeg-js | BSD-3-Clause | frontendTS, decodificación de imágenes |
+| **Frontend: development dependencies / dependencias de desarrollo** |  |  |  |
+| `@babel/core`, `babel-plugin-module-resolver`, `babel-preset-expo` | Babel Team; Tommy Leunen; Expo | MIT | frontendTS, compilación |
+| `jest`, `jest-expo`, `@react-native/jest-preset`, `@testing-library/react-native`, `test-renderer` | Jest; Expo; React Native; Callstack; Maciej Jastrzebski | MIT | frontendTS, pruebas |
+| `@types/jest`, `@types/react` | DefinitelyTyped | MIT | frontendTS, tipos |
+| `typescript` 6.0 | Microsoft | Apache-2.0 | frontendTS, lenguaje |
+| `@playwright/test` | Microsoft | Apache-2.0 | frontendTS, pruebas de extremo a extremo |
+| **Backend: runtime dependencies / dependencias de ejecución** |  |  |  |
+| `express` | TJ Holowaychuk, github.com/expressjs/express | MIT | Todos los servicios |
+| `dotenv` | github.com/motdotla/dotenv | BSD-2-Clause | Todos los servicios |
+| `pg` | Brian Carlson, github.com/brianc/node-postgres | MIT | `packages/shared` y servicios con PostgreSQL |
+| `amqplib` | Michael Bridgen, github.com/amqp-node/amqplib | MIT | `packages/shared`, RabbitMQ |
+| `jsonwebtoken` | Auth0, github.com/auth0/node-jsonwebtoken | MIT | `packages/shared`, JWT |
+| `cors`, `express-rate-limit`, `http-proxy-middleware` | Troy Goode; Nathan Friedly; Steven Chim | MIT | `api-gateway` |
+| `bcrypt` | Nick Campbell, github.com/kelektiv/node.bcrypt.js | MIT | `iam-service` |
+| `zod` | Colin McDonnell, github.com/colinhacks/zod | MIT | `iam-service` |
+| `google-auth-library` | Google, github.com/googleapis/google-cloud-node | Apache-2.0 | `iam-service`, inicio de sesión con Google |
+| `nodemailer` | Andris Reinman, github.com/nodemailer/nodemailer | MIT-0 | `iam-service`, `profile-service`, correo |
+| `mongodb` | MongoDB, github.com/mongodb/node-mongodb-native | Apache-2.0 | `recognition-service`, muestras |
+| **Backend: development dependencies / dependencias de desarrollo** |  |  |  |
+| `typescript` 5.x | Microsoft | Apache-2.0 | Raíz, `packages/shared` y servicios |
+| `ts-node`, `nodemon`, `concurrently` | Blake Embrey; Remy Sharp; Kimmo Brunfeldt | MIT | Raíz y servicios, desarrollo local |
+| `stream-json` | Eugene Lazutkin, github.com/uhop/stream-json | BSD-3-Clause | `recognition-service`, scripts de entrenamiento |
+| `@types/node`, `@types/express`, `@types/pg`, `@types/amqplib`, `@types/jsonwebtoken`, `@types/cors`, `@types/bcrypt`, `@types/nodemailer`, `@types/stream-json` | DefinitelyTyped | MIT | Raíz, `packages/shared` y servicios, tipos |
+| **Models and data / Modelos y datos** |  |  |  |
+| Modelos MediaPipe `hand_landmarker.task`, `pose_landmarker_lite.task`, `gesture_recognizer.task` | Google, storage.googleapis.com/mediapipe-models | Por confirmar | frontendTS: se descargan al abrir la cámara, no se incluyen en el repositorio |
+| Conjunto de datos LSC-54 | Mora-Zarate, Garzón-Castro y Castellanos Rivillas (2025), *Data in Brief*, doi:10.1016/j.dib.2025.112145 | CC BY-NC 4.0, uso no comercial, según `training/README.md` de backendTS, `LICENSE` de frontendTS y el manual técnico | Entrenamiento del modelo propio en `public/models/lsc/` y plantillas de señas. Los datos crudos no se versionan |
+| Conjunto de datos LSC50 | Figshare, archivo 50118645, según `colab_extract_lsc50.ipynb`. Autor: Por confirmar | Por confirmar | `recognition-service/training/extraction`, fuente opcional de `build_dataset.py`. Uso en el modelo final: Por confirmar |
+| Bibliotecas Python de entrenamiento: MediaPipe, TensorFlow/Keras, OpenCV, NumPy, Matplotlib, Requests; Google Colab | Sus respectivos proyectos. No hay `requirements.txt` en el repositorio | Por confirmar | `recognition-service/training/extraction`, fuera de producción |
+| **3D, images and visual resources / 3D, imágenes y recursos visuales** |  |  |  |
+| Three.js 0.128.0 y 0.160.0 | mrdoob, por jsDelivr | MIT, leída en el `package.json` publicado en jsDelivr | frontendTS, visor del alfabeto 3D (`letterViewerHtml.ts`, `model_viewer.html`) |
+| Modelos 3D `.glb` y miniaturas del alfabeto | Exportados con Khronos glTF Blender I/O, según sus metadatos. Los scripts `modelado/` que cita el README de lexicon no están en `main`. Autor: Por confirmar | Por confirmar | `src/assets/alfabeto/` de frontendTS y `services/lexicon-service/public/lexicon/alfabeto/` de backendTS |
+| `alfabeto.png`, `historial.png`, `login.png`, `traduccion-real.png` | Metadatos C2PA que indican OpenAI (GPT-4o o gpt-image). Autor humano: Por confirmar | Por confirmar | `src/assets/images/` de frontendTS |
+| `comunicate-sinbarreras.png` | Metadatos C2PA que mencionan a Google. Origen: Por confirmar | Por confirmar | `src/assets/images/` de frontendTS |
+| Fotos `slide1.jpg`, `slide2.jpg`, `slide3.jpg`, `testimonial.jpg`, `camera_placeholder.jpg` | Por confirmar. `testimonial.jpg` trae la palabra Copyright en sus metadatos | Por confirmar | `src/assets/images/` de frontendTS, página de inicio y traducción |
+| Logos `facebook.png` y `gmail.png` | Marcas de Meta y Google. Fuente del archivo: Por confirmar | Por confirmar | frontendTS, botones de inicio de sesión |
+| Iconos y logos `app-icon`, `adaptive-icon`, `icono-senas`, `splash-logo`, `favicon`, `public/icons` | Por confirmar | Por confirmar | frontendTS, identidad de la aplicación |
+| **Documentation and infrastructure / Documentación e infraestructura** |  |  |  |
+| Prototipos: React, ReactDOM, Babel, Lucide y fuente Nunito Sans | Copias en `docs/12-ux-ui/mockup/layout/_shared/` de traduce-senas-evidencias. Fuente de la copia: Por confirmar | Por confirmar | Prototipos de interfaz, no la aplicación |
+| Base documental `docs/` | Jesus Ariel Gonzalez Bonilla, según `docs/LICENSE` | MIT | traduce-senas-evidencias |
+| Imágenes Docker: `node`, `postgres`, `mongo`, `rabbitmq`, `caddy`, `nginxinc/nginx-unprivileged`; Portainer CE | Docker Hub y sus proyectos | Por confirmar | Despliegue; no hacen parte del código entregado |
+| Servicios externos: Google y Facebook (inicio de sesión), Gmail SMTP (correo), Let's Encrypt (certificados), Hostinger (VPS) | Sus proveedores | Términos del proveedor: Por confirmar | Producción |
+
+npm licenses were read from each `node_modules/<package>/package.json`; the package list comes from `package.json` on `origin/main` of backendTS (root, `packages/shared`, six services) and frontendTS. / Las licencias npm se leyeron de `node_modules/<paquete>/package.json`; la lista sale de los `package.json` de `origin/main`. `@traduce/shared` es del equipo y no se relaciona.
 
 ## 9. Private data / Datos privados
 
