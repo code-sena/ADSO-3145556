@@ -134,9 +134,9 @@ The licenses above are the ones these projects usually publish. Check each one a
 
 | File / Archivo | Origin / Origen | Where it is used / Dónde se usa |
 |---|---|---|
-| `EduAirControlLogo.png` (web and mobile) | Generated with an AI tool; tool name to be confirmed by the team / Generada con una herramienta de IA; el equipo debe confirmar cuál | Product logo / Logo del producto |
+| `EduAirControlLogo.png` (web and mobile) | Generated with ChatGPT (OpenAI) / Generada con ChatGPT (OpenAI) | Product logo / Logo del producto |
 | `hero.png`, `fondo-terms.png`, `l-fondo.png`, `background-principal.png` (web) | Generated with an AI tool; tool name to be confirmed by the team / Generadas con una herramienta de IA; el equipo debe confirmar cuál | Backgrounds and landing images / Fondos e imágenes de portada |
-| `icon.png`, `adaptive-icon.png`, `favicon.png`, `splash-icon.png` (mobile) | Derived from the logo; to be confirmed / Derivadas del logo; por confirmar | App icons and splash screen / Iconos y pantalla de inicio de la app |
+| `icon.png`, `adaptive-icon.png`, `favicon.png`, `splash-icon.png` (mobile) | Derived from the logo (generated with ChatGPT) / Derivadas del logo (generado con ChatGPT) | App icons and splash screen / Iconos y pantalla de inicio de la app |
 | `google-icon.png`, `facebook-icon.png` | Brand logos of Google and Meta, third-party trademarks / Logos de marca de Google y Meta, marcas de terceros | Social sign-in buttons / Botones de inicio de sesión social |
 | `react.svg`, `vite.svg` | Vite project template (MIT) / Plantilla de Vite (MIT) | Template leftovers / Restos de la plantilla |
 
