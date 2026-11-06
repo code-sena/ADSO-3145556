@@ -58,7 +58,7 @@ Autorización de datos: al marcar la casilla, el integrante confirma sus datos y
 | [`10-videos/`](10-videos/) | Videos / Videos | ☑ |
 | [`code-tag/`](code-tag/) | Repository links, tags and ZIP files / Enlaces, tags y ZIP | ☐ |
 | [`team-roster.md`](team-roster.md) | Team and roles / Equipo y roles | ☐ |
-| [`software-registration.md`](software-registration.md) | Software registration data / Datos para registro de software | ☐ |
+| [`software-registration.md`](software-registration.md) | Software registration data / Datos para registro de software | ☑ |
 
 ## Large files on Google Drive / Archivos pesados en Google Drive
 
