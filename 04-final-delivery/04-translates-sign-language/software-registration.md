@@ -17,10 +17,10 @@ Llene todos los campos vacíos. Sigue el Decreto 1360 de 1989.
 
 | Field / Campo | Value / Valor |
 |---|---|
-| Full name / Nombre |  |
-| ID document / Identificación | |
-| Acts on own behalf or as representative / Actúa en nombre propio o como representante | ☐ Own behalf / Nombre propio ☐ Representative / Representante |
-| Proof of representation / Prueba de representación, si aplica | |
+| Full name / Nombre | JUAN MAURICIO SUAZA SOLORZANO (one applicant per group, the member who delivers / un solicitante por grupo, el integrante que entrega) |
+| ID document / Identificación | CC 1076907287 |
+| Acts on own behalf or as representative / Actúa en nombre propio o como representante | ☐ Own behalf / Nombre propio ☑ Representative / Representante: of the co-holders in section 4 / de los cotitulares de la sección 4 |
+| Proof of representation / Prueba de representación, si aplica | Designated by the team as the member responsible for the delivery. The written authorization of the other co-holders is attached when filing, through the private channel the instructor indicates. / Designado por el equipo como integrante responsable de la entrega. La autorización escrita de los demás cotitulares se adjunta al radicar, por el canal privado que indique el instructor. |
 
 ## 2. Authors / Autores (art. 5, num. 2)
 
