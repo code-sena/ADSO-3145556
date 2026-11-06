@@ -61,7 +61,7 @@
 
 - Logs de k6: `load-tests/results/*.log`
 - JSON de métricas: `load-tests/results/*.json`
-- Capturas de Grafana (CPU, RAM, JVM): `Evidencias/07_carga/`
+- Capturas de Grafana (CPU, RAM, JVM): `evidence/07_load-tests/`
 - Captura de `docker stats` durante la prueba.
 
 ---

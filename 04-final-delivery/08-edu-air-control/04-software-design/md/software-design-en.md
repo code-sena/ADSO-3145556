@@ -159,7 +159,7 @@ EduAirControl adopts a **microservices style with an API Gateway and event-drive
 
 In the context view, the actors are the registered user, the administrator and the ESP32 devices. Web and mobile clients access exclusively through the API Gateway; IoT devices send measurements over HTTP with a per-device key (`X-API-Key`).
 
-{{figura: diagramas/exports/01-components-EN.svg|EduAirControl system components.*Clients, API Gateway, the six microservices and infrastructure components (PostgreSQL, RabbitMQ, Redis).*}}
+{{figura: diagrams/exports/01-components-EN.svg|EduAirControl system components.*Clients, API Gateway, the six microservices and infrastructure components (PostgreSQL, RabbitMQ, Redis).*}}
 
 ## 3.3 Service catalog
 
@@ -179,7 +179,7 @@ In the context view, the actors are the registered user, the administrator and t
 
 Synchronous communication uses REST over HTTP through the gateway, which propagates user identity via internal headers (`X-User-Id`, `X-User-Role`, `X-Institution-Id`, `X-Correlation-Id`). Asynchronous communication uses RabbitMQ with two topic exchanges: `eduaircontrol.environmental-data` (measurements) and `eduaircontrol.sensor` (installations). The publishing pattern is the transactional outbox and consumption uses an idempotent inbox (`ON CONFLICT DO NOTHING`), yielding at-least-once delivery without effective duplicates.
 
-{{figura: diagramas/exports/02-deployment-EN.svg|Deployment diagram of the `infra/docker-compose.yml` stack.*One PostgreSQL instance per service, shared RabbitMQ and Redis.*}}
+{{figura: diagrams/exports/02-deployment-EN.svg|Deployment diagram of the `infra/docker-compose.yml` stack.*One PostgreSQL instance per service, shared RabbitMQ and Redis.*}}
 
 ## 3.5 Security
 
@@ -189,7 +189,7 @@ Security is designed in layers: the gateway validates signature, expiration and 
 
 Each service follows the hexagonal architecture (ports and adapters, ADR-009): the domain defines the models and the ports (`port/in` for use cases, `port/out` for repositories and event publishing), the application layer implements the use cases and infrastructure provides the adapters (REST controllers, JPA persistence, messaging and security). The domain does not depend on Spring or JPA.
 
-{{figura: diagramas/exports/04-service-packages-EN.svg|Hexagonal structure of `ms-environment-monitoring`.}}
+{{figura: diagrams/exports/04-service-packages-EN.svg|Hexagonal structure of `ms-environment-monitoring`.}}
 
 {{salto}}
 
@@ -229,7 +229,7 @@ Each service follows the hexagonal architecture (ports and adapters, ADR-009): t
 
 ## 4.3 Pattern traceability in the package structure
 
-{{figura: diagramas/exports/04-service-packages-EN.svg|Traceability of the hexagonal pattern in a service's package structure.}}
+{{figura: diagrams/exports/04-service-packages-EN.svg|Traceability of the hexagonal pattern in a service's package structure.}}
 
 Each primary adapter (controller) translates HTTP into a use case; each secondary adapter (persistence, messaging) implements a domain output port. This separation allows testing the domain without infrastructure and swapping adapters (for example, the event publisher) without touching business logic.
 
@@ -254,7 +254,7 @@ The data model is organized by PostgreSQL schema, one per microservice. The appl
 | `user_management` | ms-user-management | `user_profiles` |
 | `user_experience` | ms-user-experience | `user_preferences`, `favorites`, `classroom_ratings`, `searches`, `notification_state` |
 
-{{figura: diagramas/exports/03-er-model-EN.svg|Global entity-relationship model (main entities per schema).}}
+{{figura: diagrams/exports/03-er-model-EN.svg|Global entity-relationship model (main entities per schema).}}
 
 ## 5.3 Business rules of the model
 

@@ -159,7 +159,7 @@ EduAirControl adopta un estilo de **microservicios con API Gateway y comunicaci�
 
 En la vista de contexto, los actores son el usuario registrado, el administrador y los dispositivos ESP32. Los clientes web y móviles acceden exclusivamente a través del API Gateway; los dispositivos IoT envían mediciones por HTTP con clave por dispositivo (`X-API-Key`).
 
-{{figura: diagramas/exports/01-componentes-ES.svg|Componentes del sistema EduAirControl.*Clientes, API Gateway, los seis microservicios y los componentes de infraestructura (PostgreSQL, RabbitMQ, Redis).*}}
+{{figura: diagrams/exports/01-components-ES.svg|Componentes del sistema EduAirControl.*Clientes, API Gateway, los seis microservicios y los componentes de infraestructura (PostgreSQL, RabbitMQ, Redis).*}}
 
 ## 3.3 Catálogo de servicios
 
@@ -179,7 +179,7 @@ En la vista de contexto, los actores son el usuario registrado, el administrador
 
 La comunicación sincrónica usa REST sobre HTTP a través del gateway, que propaga la identidad del usuario mediante cabeceras internas (`X-User-Id`, `X-User-Role`, `X-Institution-Id`, `X-Correlation-Id`). La comunicación asincrónica usa RabbitMQ con dos intercambios *topic*: `eduaircontrol.environmental-data` (mediciones) y `eduaircontrol.sensor` (instalaciones). El patrón de publicación es el outbox transaccional y el de consumo es el inbox idempotente (`ON CONFLICT DO NOTHING`), lo que garantiza al-menos-una-vez sin duplicados efectivos.
 
-{{figura: diagramas/exports/02-despliegue-ES.svg|Diagrama de despliegue del stack `infra/docker-compose.yml`.*Una instancia de PostgreSQL por servicio, RabbitMQ y Redis compartidos.*}}
+{{figura: diagrams/exports/02-deployment-ES.svg|Diagrama de despliegue del stack `infra/docker-compose.yml`.*Una instancia de PostgreSQL por servicio, RabbitMQ y Redis compartidos.*}}
 
 ## 3.5 Seguridad
 
@@ -189,7 +189,7 @@ La seguridad se diseña en capas: el gateway valida firma, expiración y lista n
 
 Cada servicio sigue la arquitectura hexagonal (puertos y adaptadores, ADR-009): el dominio define los modelos y los puertos (`port/in` para casos de uso, `port/out` para repositorios y publicación de eventos), la capa de aplicación implementa los casos de uso y la infraestructura aporta los adaptadores (controladores REST, persistencia JPA, mensajería y seguridad). El dominio no depende de Spring ni de JPA.
 
-{{figura: diagramas/exports/04-paquetes-servicio-ES.svg|Estructura hexagonal de `ms-environment-monitoring`.}}
+{{figura: diagrams/exports/04-service-packages-ES.svg|Estructura hexagonal de `ms-environment-monitoring`.}}
 
 {{salto}}
 
@@ -229,7 +229,7 @@ Cada servicio sigue la arquitectura hexagonal (puertos y adaptadores, ADR-009): 
 
 ## 4.3 Trazabilidad de patrones en la estructura de paquetes
 
-{{figura: diagramas/exports/04-paquetes-servicio-ES.svg|Trazabilidad del patrón hexagonal en la estructura de paquetes de un servicio.}}
+{{figura: diagrams/exports/04-service-packages-ES.svg|Trazabilidad del patrón hexagonal en la estructura de paquetes de un servicio.}}
 
 Cada adaptador primario (controlador) traduce HTTP a un caso de uso; cada adaptador secundario (persistencia, mensajería) implementa un puerto de salida del dominio. Esta separación permite probar el dominio sin infraestructura y sustituir adaptadores (por ejemplo, el publicador de eventos) sin tocar la lógica de negocio.
 
@@ -254,7 +254,7 @@ El modelo de datos se organiza por esquema PostgreSQL, uno por microservicio. Lo
 | `user_management` | ms-user-management | `user_profiles` |
 | `user_experience` | ms-user-experience | `user_preferences`, `favorites`, `classroom_ratings`, `searches`, `notification_state` |
 
-{{figura: diagramas/exports/03-modelo-er-ES.svg|Modelo entidad-relación global (entidades principales por esquema).}}
+{{figura: diagrams/exports/03-er-model-ES.svg|Modelo entidad-relación global (entidades principales por esquema).}}
 
 ## 5.3 Reglas de negocio del modelo
 

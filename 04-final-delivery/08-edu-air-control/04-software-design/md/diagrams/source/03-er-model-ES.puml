@@ -1,4 +1,4 @@
-@startuml 03-modelo-er-ES
+@startuml 03-er-model-ES
 title Figura — Modelo entidad-relación global (entidades principales por esquema)
 skinparam backgroundColor #FFFFFF
 skinparam defaultFontName Inter

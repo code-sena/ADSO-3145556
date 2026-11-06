@@ -1,6 +1,6 @@
 # Evidencias de pruebas — EduAirControl
 
-Esta carpeta contiene las evidencias de ejecución del `Plan_Pruebas.pdf`.
+Esta carpeta contiene las evidencias de ejecución del `test-plan.pdf`.
 
 ## Organización
 

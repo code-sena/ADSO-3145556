@@ -45,7 +45,7 @@
 
 > This HU can only be closed when it meets the team's full DoD.
 
-> See: [`00-governance/definition-of-done.md`](../00-governance/definition-of-done.md)
+> See: [`00-governance/definition-of-done.md`](https://github.com/code-sena/ea-control-docs/blob/main/00-governance/definition-of-done.md)
 
 **Additional checks specific to this HU (if applicable):**
 

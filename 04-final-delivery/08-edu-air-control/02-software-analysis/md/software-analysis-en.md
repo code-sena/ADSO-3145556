@@ -264,7 +264,7 @@ Diagram 1 (Figure 1) shows the main actors of the system and the `CU-xx` use cas
 
 **Figure 1.** *Use case diagram of the EduAirControl system*
 
-![Use case diagram of the EduAirControl system](diagramas/exports/en/01-use-cases.svg)
+![Use case diagram of the EduAirControl system](diagrams/exports/en/01-use-cases.svg)
 
 *Note.* Elaborated from the CU-01–CU-17 catalog of Deliverable 02 and the RF requirements of Section 5.
 
@@ -391,7 +391,7 @@ Diagram 2 (Figure 2) describes the complete authentication flow, including rate 
 
 **Figure 2.** *User authentication sequence*
 
-![User authentication sequence](diagramas/exports/en/02-seq-login.svg)
+![User authentication sequence](diagrams/exports/en/02-seq-login.svg)
 
 *Note.* Elaborated from CU-02 and RF1.1 (Deliverable 02), HU-IAM-002, and RNF4.
 
@@ -403,7 +403,7 @@ Diagram 3 (Figure 3) describes the dashboard query: JWT validation at the edge, 
 
 **Figure 3.** *Environmental dashboard query sequence*
 
-![Environmental dashboard query sequence](diagramas/exports/en/03-seq-dashboard.svg)
+![Environmental dashboard query sequence](diagrams/exports/en/03-seq-dashboard.svg)
 
 *Note.* Elaborated from CU-05 and CU-08, RF3.1, RF3.4, and RF9.3 (Deliverable 02), HU-ANA-005, and RNF1.
 
@@ -413,7 +413,7 @@ Diagram 4 (Figure 4) describes the environmental data path: HTTP ingestion with 
 
 **Figure 4.** *Environmental measurement ingestion sequence*
 
-![Environmental measurement ingestion sequence](diagramas/exports/en/04-seq-ingest.svg)
+![Environmental measurement ingestion sequence](diagrams/exports/en/04-seq-ingest.svg)
 
 *Note.* Elaborated from CU-17 and RF9.1 (Deliverable 02), HU-SENS-002, HU-MON-001, and ADR-004 and ADR-007.
 
@@ -425,7 +425,7 @@ Diagram 5 (Figure 5) models the static structure of the domain according to the 
 
 **Figure 5.** *Class diagram of the EduAirControl domain model*
 
-![Class diagram of the EduAirControl domain model](diagramas/exports/05-diagrama-clases.svg)
+![Class diagram of the EduAirControl domain model](diagrams/exports/05-class-diagram.svg)
 
 *Note.* Elaborated from the project domain documentation and the entity-relationship model of Deliverable 06.
 

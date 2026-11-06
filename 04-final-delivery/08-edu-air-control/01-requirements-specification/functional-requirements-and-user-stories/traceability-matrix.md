@@ -67,7 +67,7 @@ If there is code without an HU: possible gold-plating or bug introduced without 
 
 > Maps every domain entity in `02-domain/entities-and-rules.md` to its
 > canonical table in `06-data/domain/`. Full detail:
-> [`06-data/normalization-assessment.md`](../06-data/normalization-assessment.md)
+> [`06-data/normalization-assessment.md`](https://github.com/code-sena/ea-control-docs/blob/main/06-data/normalization-assessment.md)
 
 | Entity | Domain context | Canonical table | Owning service | Documented |
 | ------ | -------------- | --------------- | -------------- | ---------- |

@@ -1,4 +1,4 @@
-@startuml 04-paquetes-servicio-ES
+@startuml 04-service-packages-ES
 title Figura — Estructura hexagonal de un microservicio (ejemplo: ms-environment-monitoring)
 skinparam backgroundColor #FFFFFF
 skinparam defaultFontName Inter

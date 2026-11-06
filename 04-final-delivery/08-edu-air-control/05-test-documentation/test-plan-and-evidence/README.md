@@ -7,12 +7,12 @@ Carpeta de pruebas de EduAirControl. Reemplaza a los antiguos `07_testing/` y
 
 | Archivo | Qué es |
 |---------|--------|
-| `md/Plan_Pruebas.md` · `pdf/Plan_Pruebas.pdf` | Plan de pruebas: alcance, casos (50), nomenclatura y §15 de evidencias |
-| `md/07_Informe_Pruebas_Unitarias_ES.md` · `pdf/…_ES.pdf` | Informe de pruebas unitarias (español) |
-| `md/07_Unit_Tests_Report_EN.md` · `pdf/…_EN.pdf` | Unit tests report (English) |
-| `Inventario_Pruebas_Automatizadas.csv` | Un fila por método de prueba: servicio, clase, tipo, Docker y resultado |
-| `ejecutar_pruebas.ps1` | Script que ejecuta las suites (PowerShell) |
-| `Evidencias/` | Plantilla y reglas para las evidencias de ejecución manual (Plan §15) |
+| `md/test-plan.md` · `pdf/test-plan.pdf` | Plan de pruebas: alcance, casos (50), nomenclatura y §15 de evidencias |
+| `md/unit-tests-report-es.md` · `pdf/…_ES.pdf` | Informe de pruebas unitarias (español) |
+| `md/unit-tests-report-en.md` · `pdf/…_EN.pdf` | Unit tests report (English) |
+| `automated-tests-inventory.csv` | Un fila por método de prueba: servicio, clase, tipo, Docker y resultado |
+| `run-tests.ps1` | Script que ejecuta las suites (PowerShell) |
+| `evidence/` | Plantilla y reglas para las evidencias de ejecución manual (Plan §15) |
 
 ## Última corrida automatizada
 
@@ -38,4 +38,4 @@ Reparto por tipo: **136 unitarias · 100 de rebanada · 6 con simulacros · 85 T
 `<caso>_<resultado>_<fecha>_<consecutivo>.<ext>`, p. ej. `SEC-003_PASS_2026-10-09_01.png`.
 
 Reglas: ocultar contraseñas, tokens, API keys y correos personales; un caso no ejecutado
-nunca se marca `PASS`. Detalle en `Evidencias/README.md`.
+nunca se marca `PASS`. Detalle en `evidence/README.md`.

@@ -16,7 +16,7 @@
 
 Este plan define las pruebas necesarias para verificar que EduAirControl cumple sus funciones de gestión, monitoreo y control de ambientes educativos mediante IoT. Se validan el frontend web, la aplicación móvil, el API Gateway, los microservicios, la persistencia en PostgreSQL, Redis, RabbitMQ, la seguridad, los servicios de integración y el prototipo con ESP32.
 
-El plan también establece los criterios para documentar resultados y organizar las capturas, videos, logs y reportes en la carpeta `07_Pruebas/Evidencias/`.
+El plan también establece los criterios para documentar resultados y organizar las capturas, videos, logs y reportes en la carpeta `07_Pruebas/evidence/`.
 
 ## 2. Alcance
 
@@ -163,7 +163,7 @@ Cobertura funcional existente:
 | User Management | Servicio y controlador de perfil |
 | User Experience | Controlador, backfill y contexto PostgreSQL |
 
-El detalle método a método está en `../Inventario_Pruebas_Automatizadas.csv` (327 en `PASS`, 12 en `OBSOLETE`) y el análisis en `07_Informe_Pruebas_Unitarias_ES.md` / `07_Unit_Tests_Report_EN.md`. El resultado de cada `verify` debe conservarse en la evidencia de la ejecución. Si una prueba es deshabilitada, debe registrarse la razón y la fecha de corrección prevista.
+El detalle método a método está en `../automated-tests-inventory.csv` (327 en `PASS`, 12 en `OBSOLETE`) y el análisis en `unit-tests-report-es.md` / `unit-tests-report-en.md`. El resultado de cada `verify` debe conservarse en la evidencia de la ejecución. Si una prueba es deshabilitada, debe registrarse la razón y la fecha de corrección prevista.
 
 ## 9. Matriz de casos funcionales
 
@@ -398,19 +398,19 @@ La carpeta debe conservar una estructura por ejecución:
 ```text
 07_Pruebas/
 ├── README.md                              # índice de esta carpeta
-├── Inventario_Pruebas_Automatizadas.csv   # 327 pruebas PASS · 12 OBSOLETE (corrida 2026-10-13)
-├── ejecutar_pruebas.ps1
+├── automated-tests-inventory.csv   # 327 pruebas PASS · 12 OBSOLETE (corrida 2026-10-13)
+├── run-tests.ps1
 ├── md/
-│   ├── Plan_Pruebas.md
-│   ├── 07_Informe_Pruebas_Unitarias_ES.md
-│   └── 07_Unit_Tests_Report_EN.md
+│   ├── test-plan.md
+│   ├── unit-tests-report-es.md
+│   └── unit-tests-report-en.md
 ├── pdf/
-│   ├── Plan_Pruebas.pdf
-│   ├── 07_Informe_Pruebas_Unitarias_ES.pdf
-│   └── 07_Unit_Tests_Report_EN.pdf
-└── Evidencias/
+│   ├── test-plan.pdf
+│   ├── unit-tests-report-es.pdf
+│   └── unit-tests-report-en.pdf
+└── evidence/
     ├── README.md
-    ├── Plantilla_Evidencia.md
+    ├── evidence-template.md
     └── YYYY-MM-DD_<ambiente>_<version>/
         ├── 00_Reporte_Ejecucion.md
         ├── 01_Ambiente/

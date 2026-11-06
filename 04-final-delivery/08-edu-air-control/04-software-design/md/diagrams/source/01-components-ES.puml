@@ -1,4 +1,4 @@
-@startuml 01-componentes-ES
+@startuml 01-components-ES
 title Figura — Componentes del sistema EduAirControl
 skinparam backgroundColor #FFFFFF
 skinparam componentStyle rectangle

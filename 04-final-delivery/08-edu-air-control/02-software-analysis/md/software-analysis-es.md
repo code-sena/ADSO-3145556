@@ -264,7 +264,7 @@ El Diagrama 1 (Figura 1) muestra los actores principales del sistema y los casos
 
 **Figura 1.** *Diagrama de casos de uso del sistema EduAirControl*
 
-![Diagrama de casos de uso del sistema EduAirControl](diagramas/exports/es/01-casos-uso.svg)
+![Diagrama de casos de uso del sistema EduAirControl](diagrams/exports/es/01-use-cases.svg)
 
 *Nota.* Elaboración propia a partir del catálogo CU-01–CU-17 del Entregable 02 y de los requisitos RF de la Sección 5.
 
@@ -391,7 +391,7 @@ El Diagrama 2 (Figura 2) describe el flujo de autenticación completo, incluyend
 
 **Figura 2.** *Secuencia de autenticación de usuario*
 
-![Secuencia de autenticación de usuario](diagramas/exports/es/02-seq-login.svg)
+![Secuencia de autenticación de usuario](diagrams/exports/es/02-seq-login.svg)
 
 *Nota.* Elaboración propia a partir de CU-02 y RF1.1 (Entregable 02), HU-IAM-002 y RNF4.
 
@@ -403,7 +403,7 @@ El Diagrama 3 (Figura 3) describe la consulta del dashboard: validación de JWT 
 
 **Figura 3.** *Secuencia de consulta del dashboard ambiental*
 
-![Secuencia de consulta del dashboard ambiental](diagramas/exports/es/03-seq-dashboard.svg)
+![Secuencia de consulta del dashboard ambiental](diagrams/exports/es/03-seq-dashboard.svg)
 
 *Nota.* Elaboración propia a partir de CU-05 y CU-08, RF3.1, RF3.4 y RF9.3 (Entregable 02), HU-ANA-005 y RNF1.
 
@@ -413,7 +413,7 @@ El Diagrama 4 (Figura 4) describe la ruta de datos ambientales: ingesta HTTP con
 
 **Figura 4.** *Secuencia de ingesta de mediciones ambientales*
 
-![Secuencia de ingesta de mediciones ambientales](diagramas/exports/es/04-seq-ingesta.svg)
+![Secuencia de ingesta de mediciones ambientales](diagrams/exports/es/04-seq-ingest.svg)
 
 *Nota.* Elaboración propia a partir de CU-17 y RF9.1 (Entregable 02), HU-SENS-002, HU-MON-001 y los ADR-004 y ADR-007.
 
@@ -425,7 +425,7 @@ El Diagrama 5 (Figura 5) modela la estructura estática del dominio según el mo
 
 **Figura 5.** *Diagrama de clases del modelo de dominio de EduAirControl*
 
-![Diagrama de clases del modelo de dominio de EduAirControl](diagramas/exports/05-diagrama-clases.svg)
+![Diagrama de clases del modelo de dominio de EduAirControl](diagrams/exports/05-class-diagram.svg)
 
 *Nota.* Elaboración propia a partir de la documentación de dominio del proyecto y del modelo entidad-relación del Entregable 06.
 

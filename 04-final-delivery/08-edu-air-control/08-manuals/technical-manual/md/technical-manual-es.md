@@ -83,7 +83,7 @@ EduAirControl está organizado como una solución cliente-servidor. El frontend 
 
 ## 5. Arquitectura
 
-![captura de pantalla](../images/image-6.png)
+![captura de pantalla](image-6.png)
 
 EduAirControl está implementado como una arquitectura de microservicios con Spring Boot. Cada servicio es un proyecto independiente con su propia base de datos (un esquema dedicado según ADR-003) y sigue una arquitectura hexagonal (ADR-009). Los servicios son: api-gateway (puerto 8080), ms-security (8081), ms-classroom-management (3002), ms-environment-monitoring (3003), ms-sensor-management (3004) y ms-user-management (3007). El api-gateway actúa como BFF (Backend for Frontend) con OAuth2/OIDC (ADR-017).
 
@@ -207,7 +207,7 @@ The web frontend uses React Router, HTTP services, forms, Zod/React Hook Form va
 
 ## 12. Hardware and IoT Integration
 
-![captura de pantalla](../images/image-7.png)
+![captura de pantalla](image-7.png)
 
 | **Componente** | **Documented function / connection** |
 | --- | --- |

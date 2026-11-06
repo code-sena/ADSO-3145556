@@ -1,4 +1,4 @@
-@startuml 02-despliegue-ES
+@startuml 02-deployment-ES
 title Figura — Despliegue (infra/docker-compose.yml)
 skinparam backgroundColor #FFFFFF
 skinparam defaultFontName Inter

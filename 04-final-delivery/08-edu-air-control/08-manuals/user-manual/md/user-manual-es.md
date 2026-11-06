@@ -99,11 +99,11 @@ EduAirControl allows the user to:
 
 When you open the system's address, the welcome page is displayed. It introduces EduAirControl and offers the links to log in or register.
 
-![captura de pantalla](../images/image-13.png)
-![captura de pantalla](../images/image-14.png)
-![captura de pantalla](../images/image-15.png)
-![captura de pantalla](../images/image-16.png)
-![captura de pantalla](../images/image-17.png)
+![captura de pantalla](image-13.png)
+![captura de pantalla](image-14.png)
+![captura de pantalla](image-15.png)
+![captura de pantalla](image-16.png)
+![captura de pantalla](image-17.png)
 
 ### 6.2 Usuario Registration
 
@@ -123,7 +123,7 @@ When you open the system's address, the welcome page is displayed. It introduces
 5. Click the register button.
 6. Verify the confirmation message shown by the system.
 
-![captura de pantalla](../images/image-18.png)
+![captura de pantalla](image-18.png)
 
 ### 6.3 Log In
 
@@ -141,7 +141,7 @@ When you open the system's address, the welcome page is displayed. It introduces
 3. Enter the email and password.
 4. Click the **Log in** button.
 
-![captura de pantalla](../images/image-19.png)
+![captura de pantalla](image-19.png)
 
 ## 7. Main Menu
 
@@ -158,7 +158,7 @@ Once inside, the menu lets you navigate between the sections of the system:
 | Log out | Safe exit from the system. |
 | Accessibility | Button to change the font size, the color blindness mode and the light or dark theme. |
 
-![captura de pantalla](../images/image-20.png)
+![captura de pantalla](image-20.png)
 
 ## 8. System Modules
 
@@ -179,8 +179,8 @@ Once inside, the menu lets you navigate between the sections of the system:
 4. [COMPLETE: use filters, date ranges or environment selection, if they exist].
 5. Identify abnormal values that may require attention.
 
-![captura de pantalla](../images/image-21.png)
-![captura de pantalla](../images/image-22.png)
+![captura de pantalla](image-21.png)
+![captura de pantalla](image-22.png)
 
 ### 8.2 Environments
 
@@ -199,8 +199,8 @@ Once inside, the menu lets you navigate between the sections of the system:
 4. Click an environment to see its details and measurements.
 5. To save it as a favorite, click the favorite icon [heart icon].
 
-![captura de pantalla](../images/image-23.png)
-![captura de pantalla](../images/image-24.png)
+![captura de pantalla](image-23.png)
+![captura de pantalla](image-24.png)
 
 ### 8.3 Favorites
 
@@ -218,7 +218,7 @@ Once inside, the menu lets you navigate between the sections of the system:
 3. Verify that the environment appears in the list.
 4. To remove it, unmark the favorite icon [Heart].
 
-![captura de pantalla](../images/image-25.png)
+![captura de pantalla](image-25.png)
 
 ### 8.4 Notifications
 
@@ -235,7 +235,7 @@ Once inside, the menu lets you navigate between the sections of the system:
 2. Click the **Notifications** button in the main menu.
 3. Review the three types of notices: Alerts, Warnings and Daily summary.
 
-![captura de pantalla](../images/image-26.png)
+![captura de pantalla](image-26.png)
 
 | **Tipo** | **Descripción** |
 | --- | --- |
@@ -258,14 +258,14 @@ Once inside, the menu lets you navigate between the sections of the system:
 2. Review the data shown: name, email, position and phone.
 3. Editar data/photos and save.
 
-![captura de pantalla](../images/image-27.png)
+![captura de pantalla](image-27.png)
 
 ### 8.6 Settings
 
 This section gathers the account's personalization and security options. It is accessed from Menu > Settings.
 
-![captura de pantalla](../images/image-28.png)
-![captura de pantalla](../images/image-29.png)
+![captura de pantalla](image-28.png)
+![captura de pantalla](image-29.png)
 
 | **Option** | **What it allows** | **How to use it** |
 | --- | --- | --- |
@@ -288,7 +288,7 @@ This section gathers the account's personalization and security options. It is a
 4. Click **Guardar** or **Update**.
 5. Confirm that the system shows the success message.
 
-![captura de pantalla](../images/image-30.png)
+![captura de pantalla](image-30.png)
 
 #### 8.6.2 Delete Account
 
@@ -299,7 +299,7 @@ This section gathers the account's personalization and security options. It is a
 3. Confirm the action (password and requested confirmation).
 4. Verify that the system logs you out and does not allow you to log in again with that account.
 
-![captura de pantalla](../images/image-31.png)
+![captura de pantalla](image-31.png)
 
 #### 8.6.3 Reminders
 
@@ -317,7 +317,7 @@ Permite turn the system reminders on or off using a switch. The notices generate
 
 They arrive via (screen and email on web, and via phone notification on mobile).
 
-![captura de pantalla](../images/image-32.png)
+![captura de pantalla](image-32.png)
 
 ## 9. Accessibility
 
@@ -338,7 +338,7 @@ They arrive via (screen and email on web, and via phone notification on mobile).
 5. To change the theme, select Light mode or Dark mode.
 6. Verify that the interface updates with the chosen option.
 
-![captura de pantalla](../images/image-33.png)
+![captura de pantalla](image-33.png)
 
 ## 10. Messages and Validations
 
@@ -360,7 +360,7 @@ Replace the texts in the "Message" column with the exact messages shown by EduAi
 
 It is recommended to always log out when finished, especially on shared computers.
 
-![captura de pantalla](../images/image-34.png)
+![captura de pantalla](image-34.png)
 
 ## 12. Frequently Asked Questions
 
@@ -393,10 +393,10 @@ It is recommended to always log out when finished, especially on shared computer
 
 Space for additional screenshots, test evidence or complementary information about the system.
 
-![captura de pantalla](../images/image-35.png)
-![captura de pantalla](../images/image-36.png)
-![captura de pantalla](../images/image-37.png)
-![captura de pantalla](../images/image-38.png)
+![captura de pantalla](image-35.png)
+![captura de pantalla](image-36.png)
+![captura de pantalla](image-37.png)
+![captura de pantalla](image-38.png)
 
 ---
 
