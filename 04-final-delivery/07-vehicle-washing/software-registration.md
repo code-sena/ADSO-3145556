@@ -136,7 +136,7 @@ Relacione código, librerías, modelos, imágenes o datos que el equipo no creó
 
 ## 10. Team declaration / Declaración del equipo
 
-- [ ] The information is true and the names match the official ID documents. / La información es veraz y los nombres coinciden con los documentos de identidad.
-- [ ] The listed authors are the people who created the software. / Los autores relacionados son quienes crearon el software.
-- [ ] Third-party components are declared. / Los componentes de terceros están declarados.
-- [ ] No passwords, tokens or keys are included. / No se incluyen contraseñas, tokens ni llaves.
+- [x] The information is true and the names match the official ID documents. / La información es veraz y los nombres coinciden con los documentos de identidad.
+- [x] The listed authors are the people who created the software. / Los autores relacionados son quienes crearon el software.
+- [x] Third-party components are declared. / Los componentes de terceros están declarados.
+- [x] No passwords, tokens or keys are included. / No se incluyen contraseñas, tokens ni llaves.
