@@ -74,11 +74,11 @@ Authors are the instructors and the apprentices listed in `team-roster.md`. Each
 
 | Declaration / Declaración | Option / Opción |
 |---|---|
-| Origin / Origen | ☐ Original ☐ Derived work / Obra derivada |
-| If derived, base work / Si es derivada, obra de base | |
-| Type of work / Clase de obra | ☐ Individual ☐ In collaboration / En colaboración ☐ Collective / Colectiva ☐ Anonymous / Anónima ☐ Pseudonymous / Seudónima ☐ Posthumous / Póstuma |
-| Publication / Publicación | ☐ Unpublished / Inédita ☐ Published / Publicada |
-| If published, date and place / Si está publicada, fecha y lugar | |
+| Origin / Origen | ☑ Original ☐ Derived work / Obra derivada |
+| If derived, base work / Si es derivada, obra de base | Not applicable / No aplica |
+| Type of work / Clase de obra | ☐ Individual ☑ In collaboration / En colaboración ☐ Collective / Colectiva ☐ Anonymous / Anónima ☐ Pseudonymous / Seudónima ☐ Posthumous / Póstuma |
+| Publication / Publicación | ☐ Unpublished / Inédita ☑ Published / Publicada |
+| If published, date and place / Si está publicada, fecha y lugar | Public GitHub repositories since October 2026, Colombia. The Centro confirms the final declaration / Repositorios públicos en GitHub desde octubre de 2026, Colombia. El Centro confirma la declaración final |
 
 Software is treated as unpublished unless the rights holder states otherwise (art. 4). A public repository may count as publication: the team records it here, and the Centro decides the final declaration.
 
@@ -102,33 +102,36 @@ Relacione código, librerías, modelos, imágenes o datos que el equipo no creó
 
 | Component / Componente | Author or source / Autor o fuente | License / Licencia | Where it is used / Dónde se usa |
 |---|---|---|---|
-| Spring Boot, Spring Cloud Gateway, Spring Security, Spring Data JPA | VMware / Spring project | Apache-2.0 | Backend microservices and API gateway |
-| jjwt (JSON Web Token) | Les Hazlewood and contributors | Apache-2.0 | JWT signing and validation in `ms-security` |
+| Spring Boot 4.0.5, Spring Cloud Gateway, Spring Security, Spring Data JPA | VMware / Spring project | Apache-2.0 | Backend microservices and API gateway |
+| jjwt 0.11.5 (JSON Web Token) | Les Hazlewood and contributors | Apache-2.0 | JWT signing and validation in `ms-security` |
 | springdoc-openapi | springdoc contributors | Apache-2.0 | OpenAPI documentation of the services |
 | Lombok | Project Lombok | MIT | Boilerplate reduction in Java |
-| Liquibase | Liquibase | Apache-2.0 | Database migrations |
+| Liquibase 5.0.2 | Liquibase | FSL-1.1-ALv2 (Functional Source License, converts to Apache-2.0 after two years) | Database migrations |
 | Micrometer, Prometheus | Micrometer / Prometheus authors | Apache-2.0 | Service metrics |
 | PostgreSQL, JDBC driver | PostgreSQL Global Development Group | PostgreSQL License / BSD-2-Clause | Databases of every service |
 | H2 Database | H2 Group | MPL-2.0 / EPL-1.0 | Tests of four services |
 | Testcontainers | Testcontainers contributors | MIT | Integration tests |
-| Redis | Redis | BSD-3-Clause (7.x) | Rate limiting and token blacklist |
-| RabbitMQ | Broadcom / VMware | MPL-2.0 | Events between services |
+| Redis 7.4 (image `redis:7`) | Redis Ltd. | RSALv2 / SSPLv1 (BSD-3-Clause only up to 7.2); used as a service, not redistributed in the repositories | Rate limiting and token blacklist |
+| RabbitMQ 3.13 | Broadcom / VMware | MPL-2.0 | Events between services |
 | React, React DOM, React Router | Meta and contributors | MIT | Web client |
 | Vite | Vite contributors | MIT | Web build tool |
 | react-hook-form, zod, i18next, react-i18next, Recharts, lucide-react, react-icons | respective authors | MIT / ISC (icon sets of react-icons have their own licenses) | Web forms, validation, translations, charts and icons |
 | Expo, React Native, React Navigation, expo-notifications | Expo / Meta / contributors | MIT | Mobile client |
-| react-native-ble-plx | Polidea | Apache-2.0 | Bluetooth provisioning of devices |
+| react-native-ble-plx 3.5 | Polidea | MIT | Bluetooth provisioning of devices |
 | react-native-gifted-charts, react-native-svg, Reanimated, Gesture Handler | respective authors | MIT | Mobile charts and animation |
 | Arduino core for ESP32, PlatformIO | Espressif / PlatformIO | LGPL-2.1 / Apache-2.0 | ESP32 firmware build |
 | ArduinoJson | Benoît Blanchon | MIT | JSON in firmware |
 | DHT sensor library | Adafruit | MIT | Temperature and humidity sensor |
 | Docker, Docker Compose | Docker Inc. | Apache-2.0 | Containers and deployment |
 | Jenkins | Jenkins project | MIT | CI/CD |
-| Grafana | Grafana Labs | AGPL-3.0 | Dashboards |
+| Grafana 10.4 | Grafana Labs | AGPL-3.0 | Dashboards |
+| Prometheus 3.15, OpenTelemetry Collector | Prometheus / OpenTelemetry authors | Apache-2.0 | Metrics and telemetry collection |
+| Portainer CE | Portainer.io | zlib | Container administration on the VPS |
+| nginx 1.31 | F5 / nginx authors | BSD-2-Clause | Serves the web client |
 | Caddy | Caddy authors | Apache-2.0 | HTTPS reverse proxy |
 | Mailpit | Ralph Slooten | MIT | Local mail testing |
 
-The licenses above are the ones these projects usually publish. Check each one against the version used before submitting. / Las licencias son las que estos proyectos suelen publicar; verifíquelas contra la versión usada antes de entregar.
+Licenses were checked on 2026-11-05 against the versions actually used: npm packages from `package-lock.json`, Java libraries from their Maven Central POM files at the version managed by Spring Boot 4.0.5, and the container images from the versions running in production. Libraries are declared as dependencies and are not copied into the repositories. / Las licencias se comprobaron el 2026-11-05 contra las versiones realmente usadas: paquetes npm desde `package-lock.json`, librerías Java desde su POM en Maven Central en la versión que gestiona Spring Boot 4.0.5, e imágenes de contenedor desde las versiones que corren en producción. Las librerías se declaran como dependencias y no se copian en los repositorios.
 
 ### Images and graphic assets / Imágenes y recursos gráficos
 
