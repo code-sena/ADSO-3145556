@@ -6,19 +6,18 @@ Every original working repository of the project must be listed here and must be
 
 Todos los repositorios originales de trabajo del proyecto deben estar aquí y deben ser **públicos**. El instructor contrasta lo entregado contra estos repositorios, así que deben seguir públicos y con todo su historial hasta terminar la revisión.
 
-If one is missing, add a row. If one is empty or no longer used, write that in the commit column. The visibility shown was checked on 2026-11-04.
+If one is missing, add a row. If one is empty or no longer used, write that in the commit column. The visibility shown was checked on 2026-11-04; `trans-sl-docs` was made public on 2026-11-07.
 
-Si falta alguno, agregue la fila. Si uno está vacío o ya no se usa, indíquelo en la columna del commit. La visibilidad indicada se revisó el 2026-11-04.
+Si falta alguno, agregue la fila. Si uno está vacío o ya no se usa, indíquelo en la columna del commit. La visibilidad indicada se revisó el 2026-11-04; `trans-sl-docs` se hizo público el 2026-11-07.
 
 | Component / Componente | Repository / Repositorio | Status / Estado | Access for `ariel5253` / Acceso de `ariel5253` | Commit of tag `final-delivery-2026` / Commit del tag | Main version ZIP / ZIP versión main | Full export ZIP / ZIP completo |
 |---|---|---|---|---|---|---|
-| Documentation | [code-sena/trans-sl-docs](https://github.com/code-sena/trans-sl-docs) | Private, owned by the `code-sena` organization; public copy in `traduce-senas-evidencias/docs` / Privado, de la organización `code-sena`; copia pública en `traduce-senas-evidencias/docs` | Yes / Sí | | | |
+| Documentation | [code-sena/trans-sl-docs](https://github.com/code-sena/trans-sl-docs) | Public / Público | Yes / Sí | `81cee1d` | [`trans-sl-docs-final-delivery-2026-main.zip`](https://github.com/mauro-1508/ADSO-3145556/releases/download/final-delivery/trans-sl-docs-final-delivery-2026-main.zip) | [`trans-sl-docs-full-export.zip`](https://github.com/mauro-1508/ADSO-3145556/releases/download/final-delivery/trans-sl-docs-full-export.zip) |
 | Backend | [mauro-1508/backendTS](https://github.com/mauro-1508/backendTS) | Public / Público | Invited, pending acceptance / Invitado, pendiente de aceptar | `d1822ed` | [`backendTS-final-delivery-2026-main.zip`](https://github.com/mauro-1508/ADSO-3145556/releases/download/final-delivery/backendTS-final-delivery-2026-main.zip) | [`backendTS-full-export.zip`](https://github.com/mauro-1508/ADSO-3145556/releases/download/final-delivery/backendTS-full-export.zip) |
 | Documentation | [mauro-1508/traduce-senas-evidencias](https://github.com/mauro-1508/traduce-senas-evidencias) | Public / Público | Invited, pending acceptance / Invitado, pendiente de aceptar | `53be03e` | [`traduce-senas-evidencias-final-delivery-2026-main.zip`](https://github.com/mauro-1508/ADSO-3145556/releases/download/final-delivery/traduce-senas-evidencias-final-delivery-2026-main.zip) | [`traduce-senas-evidencias-full-export.zip`](https://github.com/mauro-1508/ADSO-3145556/releases/download/final-delivery/traduce-senas-evidencias-full-export.zip) |
 | Web frontend | [tadeo77789/frontendTS](https://github.com/tadeo77789/frontendTS) | Public / Público | **Add / Agregar** | `a5e231d` | [`frontendTS-final-delivery-2026-main.zip`](https://github.com/mauro-1508/ADSO-3145556/releases/download/final-delivery/frontendTS-final-delivery-2026-main.zip) | [`frontendTS-full-export.zip`](https://github.com/mauro-1508/ADSO-3145556/releases/download/final-delivery/frontendTS-full-export.zip) |
 | Landing / download page | [tadeo77789/traducesenas-download](https://github.com/tadeo77789/traducesenas-download) | Public / Público | **Add / Agregar** | `80edb6e` | [`traducesenas-download-final-delivery-2026-main.zip`](https://github.com/mauro-1508/ADSO-3145556/releases/download/final-delivery/traducesenas-download-final-delivery-2026-main.zip) | [`traducesenas-download-full-export.zip`](https://github.com/mauro-1508/ADSO-3145556/releases/download/final-delivery/traducesenas-download-full-export.zip) |
 
-La copia pública de la documentación de `code-sena/trans-sl-docs` está en [`traduce-senas-evidencias/docs`](https://github.com/mauro-1508/traduce-senas-evidencias/tree/main/docs). / The public copy of that documentation is in that folder.
 
 Before making a repository public, remove `.env` files and change any password, token or key that was ever committed.
 

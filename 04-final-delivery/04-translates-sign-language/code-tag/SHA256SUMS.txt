@@ -7,3 +7,5 @@ d71d2d91134876af10ffe92a91be401e8be99f0fd62dcb178203aa109ce926f6  frontendTS-ful
 7ca4b4d009b993013eff0e69f7f1b12fc1c1b6696e045a80de88d09b9d0954ad  backendTS-full-export.zip
 84387aa42e7a278c4a70083e1bdb4d25c8a28bd08af2c5fc21acfcba0c9d563c  traduce-senas-evidencias-final-delivery-2026-main.zip
 26398f02c6c4aa6823159127d56eb1d0fd41c7f1d251e941e0e14c595ed9c8cb  traduce-senas-evidencias-full-export.zip
+5ba1702d4b49b7452058a07160263c97433de489fecdd465002320f24a35faa2  trans-sl-docs-final-delivery-2026-main.zip
+9c804ee77dcd04b87178e019c3444f43a25adfc24369805211d84567044a0246  trans-sl-docs-full-export.zip
