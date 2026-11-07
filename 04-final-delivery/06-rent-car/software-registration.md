@@ -38,9 +38,9 @@ Authors are the instructors and the apprentices listed in `team-roster.md`. Each
 | EDDIER YAIR LIBERATO CUENCA | | Kept privately / En custodia | | Instructor: see `team-roster.md` / ver `team-roster.md` |
 | JHON WILLIAN CORREDOR ARAUJO | | Kept privately / En custodia | | Instructor: see `team-roster.md` / ver `team-roster.md` |
 | ANDRES MORENO COLLAZOS | | Kept privately / En custodia | | Instructor: see `team-roster.md` / ver `team-roster.md` |
-| THIAGO FABIAN ROJAS GUEVARA | CC | 1079177558 | 3145556 | |
-| NICOLE DAYANA RAMIREZ VARGAS | CC | 1075795034 | 3145556 | |
-| DAVID SANTIAGO EREZ RODRIGUEZ | TI | 1075599136 | 3145556 | |
+| THIAGO FABIAN ROJAS GUEVARA | CC | 1079177558 | 3145556 | Full Stack: analysis, backend, frontend and mobile development / Full Stack: análisis, desarrollo backend, frontend y móvil |
+| NICOLE DAYANA RAMIREZ VARGAS | CC | 1075795034 | 3145556 | Full Stack: analysis, backend, frontend and mobile development / Full Stack: análisis, desarrollo backend, frontend y móvil |
+| DAVID SANTIAGO EREZ RODRIGUEZ | TI | 1075599136 | 3145556 | Full Stack: analysis, backend, frontend and mobile development / Full Stack: análisis, desarrollo backend, frontend y móvil |
 
 ## 3. Producer / Productor (art. 5, num. 3)
 
