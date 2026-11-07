@@ -65,10 +65,10 @@
 | **Nombre del sistema** | School Guardian (Guardian Escolar) |
 | **Release Tag / Versión** | `1.0.0` |
 | **Fecha de build** | `2026-10-16` |
-| **Repositorio Backend** | `school-guardian/backend` (rama `develop`) |
-| **Repositorio Base de Datos** | `school-guardian/database` (Liquibase) |
-| **Frontend Web** | `scholl-guardian-project/dvlp-front/dvlp-web` (Angular) |
-| **Aplicación Móvil** | `scholl-guardian-project/dvlp-front/dvlp-movil/guardian-escolar` (React Native / Expo) |
+| **Repositorios Backend** | Repositorios independientes `sg-ms-*`, `broker-kafka` y `sg-ms-api-gateway`; consultar [`code-tag/README.md`](../code-tag/README.md) |
+| **Repositorio Base de Datos** | `code-sena/sg-db` (Liquibase) |
+| **Frontend Web** | `school-guardian-project/GuardianEscolar/dvlp-front/dvlp-web` (Angular) |
+| **Aplicación Móvil** | `school-guardian-project/GuardianEscolar/dvlp-front/dvlp-movil/guardian-escolar` (React Native / Expo) |
 | **Autor del despliegue** | Juan Chala |
 
 ### 1.1.2 Fecha, hora y ventana operativa programada
@@ -147,9 +147,9 @@
 |---|---|---|---|---|
 | 1 | Panel de administración | Portainer CE 2.45 (LTS) | `docker-compose.portainer.yml` | EC2 → `portainer:9000` |
 | 2 | Reverse proxy / TLS | Caddy 2 | `deploy/Caddyfile.gateway` | EC2 → `caddy` (80/443) |
-| 3 | API Gateway | Kong (DB-less) | `ms-api-gateway/kong/kong.yml` | EC2 → `kong:8000` |
+| 3 | API Gateway | Kong (DB-less) | `sg-ms-api-gateway/kong/kong.yml` | EC2 → `kong:8000` |
 | 4 | Backend API | C# .NET + Java Spring Boot | `docker-compose.yml` | EC2 → `ms-*` |
-| 5 | Persistencia | SQL Server (RDS) | `database/*` (Liquibase) | AWS RDS `:1433` |
+| 5 | Persistencia | SQL Server (RDS) | `sg-db/*` (Liquibase) | AWS RDS `:1433` |
 | 6 | Frontend Web | Angular SPA | `dvlp-web` | Vercel |
 | 7 | App Móvil | React Native / Expo | `guardian-escolar` | EAS Build (APK/IPA) |
 
@@ -190,7 +190,7 @@
 - **Host:** `<HOST_BASE_DATOS>:1433`.
 - **Base de datos:** `school-guardian`; usuario `<USUARIO>`.
 - **Esquemas:** `Iam`, `UserManagement`, `School`, `Fleet`, `Route`, `Notification`, `Gps`, `Geographic`.
-- **Migraciones:** **Liquibase** (la plantilla menciona Flyway/EF Core; en este proyecto se usa Liquibase 4.29 sobre el repo `database/`).
+- **Migraciones:** **Liquibase** (la plantilla menciona Flyway/EF Core; en este proyecto se usa Liquibase 4.29 sobre el repositorio `code-sena/sg-db`).
 - **RDS no es accesible desde internet**: solo desde la instancia EC2 (Security Group).
 
 ## 2.2 Diagrama de Arquitectura de Red e Infraestructura
@@ -331,7 +331,7 @@ Antes de cada cambio de configuración se crean copias con sufijo `.bak-*`:
 
 | Archivo | Respaldo |
 |---|---|
-| `ms-api-gateway/kong/kong.yml` | `kong.yml.bak-pre-user-v1`, `kong.yml.bak-pre-notif`, `kong.yml.bak-pre-ip`, `kong.yml.bak-pre-eip` |
+| `sg-ms-api-gateway/kong/kong.yml` | `kong.yml.bak-pre-user-v1`, `kong.yml.bak-pre-notif`, `kong.yml.bak-pre-ip`, `kong.yml.bak-pre-eip` |
 | `deploy/Caddyfile.gateway` | `Caddyfile.gateway.bak-pre-ip`, `Caddyfile.gateway.bak-pre-eip`, `Caddyfile.gateway.bak-pre-portainer` |
 
 ## 3.3 Gestión de Variables de Entorno y Secretos
@@ -402,12 +402,12 @@ ssh -i <RUTA_LOCAL> admin@<IP> \
 
 ### 4.2.1 Ejecución de scripts DDL/DML o migraciones (Liquibase)
 
-Las migraciones viven en el repo **`database/`** (Liquibase 4.29), con un módulo por servicio (`ms-iam-db`, `ms-user-management-db`, `ms-school-db`, `ms-fleet-db`, `ms-route-db`, `ms-notification-db`, `ms-geographic-db`, `ms-gps-db`).
+Las migraciones viven en el repositorio **`code-sena/sg-db`** (Liquibase 4.29), con un módulo por servicio (`ms-iam-db`, `ms-user-management-db`, `ms-school-db`, `ms-fleet-db`, `ms-route-db`, `ms-notification-db`, `ms-geographic-db`, `ms-gps-db`).
 
 - **Contra SQL Server local (dev):**
 
 ```bash
-cd database
+cd sg-db
 docker compose up liquibase-iam liquibase-school liquibase-fleet liquibase-gps liquibase-geographic liquibase-notification liquibase-user-management
 ```
 
@@ -513,7 +513,7 @@ docker logs --tail 40 caddy | grep -i "certificate obtained"
 # certificate obtained successfully  identifier=portainer.<HOST>
 ```
 
-3. (Opcional) Ajustar orígenes CORS en `ms-api-gateway/kong/kong.yml` y recargar:
+3. (Opcional) Ajustar orígenes CORS en `sg-ms-api-gateway/kong/kong.yml` y recargar:
 
 ```bash
 docker restart kong

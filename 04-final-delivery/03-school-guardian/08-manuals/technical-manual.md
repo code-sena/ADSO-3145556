@@ -8,7 +8,7 @@
 **Fecha de revisión:** 27 de octubre de 2026 (versión inicial: 10 de octubre)
 **Estado del software documentado:** en desarrollo (arquitectura implementada; funcionalidad parcial)
 
-> **Nota metodológica.** Este manual se elaboró a partir de la lectura directa del código y los artefactos reales de los repositorios del proyecto (`backend/`, `database/` y `scholl-guardian-project/`). Se documenta aquí **lo que el código hace realmente** y se señalan de forma explícita los hallazgos de consistencia detectados. Cuando un dato no pudo verificarse en el repositorio, se indica como **no verificable** en lugar de suponerse. Las rutas de archivo citadas actúan como evidencia.
+> **Nota metodológica.** Este manual se elaboró a partir de la lectura directa del código y los artefactos reales de los repositorios independientes del proyecto: `sg-ms-*`, `sg-ms-api-gateway`, `broker-kafka`, `sg-db` y `GuardianEscolar`. Se documenta aquí **lo que el código hace realmente** y se señalan de forma explícita los hallazgos de consistencia detectados. Cuando un dato no pudo verificarse en el repositorio, se indica como **no verificable** en lugar de suponerse. Las rutas de archivo citadas actúan como evidencia.
 
 ---
 
@@ -19,7 +19,7 @@
 | 1.0 | 10-oct-2026 | Versión inicial del manual técnico (Parte A). Elaborada a partir del análisis directo del código fuente del proyecto. | Equipo del proyecto |
 | 1.1 | 27-oct-2026 | Corrección documental acotada de inventario, JWT/autorización, Kong, Kafka y gRPC contra repositorios locales; no certifica despliegue ni auditoría integral. | Revisión técnica |
 
-> **Corte de evidencia (27-oct-2026).** Se contrastaron los repositorios principales `sg-ms-*` y `kafka` de la carpeta `Proyecto`, no las copias divergentes de `schoo-guardian/backend`. Las rutas antiguas `backend/ms-*` de este manual se conservan como referencias históricas; para esta revisión corresponden a `sg-ms-*`, y `gps-backend` corresponde a `sg-ms-gps`. Se cuentan **ocho backend (seis .NET y dos Java) más Kong**; Kafka y SQL Server no son servicios de negocio. Versiones de manifiesto y código/configuración no prueban imágenes activas, tablas instaladas ni entrega de mensajes. No se leyeron secretos ni se consultó producción.
+> **Corte de evidencia (27-oct-2026).** Se contrastaron los repositorios reales `sg-ms-*`, `broker-kafka`, `sg-db` y `GuardianEscolar`, no copias locales divergentes. Las rutas de código que se indican a continuación usan el nombre del repositorio remoto correspondiente. Se cuentan **ocho backend (seis .NET y dos Java) más Kong**; Kafka y SQL Server no son servicios de negocio. Versiones de manifiesto y código/configuración no prueban imágenes activas, tablas instaladas ni entrega de mensajes. No se leyeron secretos ni se consultó producción.
 
 ---
 
@@ -106,9 +106,10 @@ El manual describe **cómo está construido y cómo se opera** el sistema: su ar
 
 Las referencias bibliográficas y normativas se listan en la sección 10. La fuente primaria de verificación de este manual es el código fuente y los artefactos reales del proyecto; no se apoya en documentos auxiliares:
 
-- **Backend:** `backend/` (microservicios .NET 10 y Java 21, API Gateway Kong y configuración de Kafka).
-- **Base de datos:** `database/` (modelo `db-school-guardian.dbml` y changelogs de migración Liquibase).
-- **Frontend:** `scholl-guardian-project/` (aplicación web Angular, aplicativo móvil React Native/Expo y servicio de ingesta GPS).
+- **Backend:** repositorios `sg-ms-*`, `sg-ms-api-gateway` y `broker-kafka` (microservicios .NET 10 y Java 21, gateway Kong y mensajería Kafka).
+- **Base de datos:** `code-sena/sg-db` (modelo `db-school-guardian.dbml` y changelogs de migración Liquibase).
+- **Frontend:** `school-guardian-project/GuardianEscolar` (aplicación web Angular y aplicativo móvil React Native/Expo).
+- **GPS:** `school-guardian-project/sg-ms-gps` (servicio independiente de ingesta y consulta).
 
 ### 1.5 Control de versiones
 
@@ -196,28 +197,28 @@ flowchart LR
 | Componente | Lenguaje / Runtime | Framework y versiones clave | Evidencia |
 |---|---|---|---|
 | ms-fleet, ms-notification, ms-route, ms-school-management, ms-user-management, sg-ms-forgot-information | C# / .NET `net10.0` | ASP.NET Core; EF Core; Kafka/gRPC/JwtBearer según el proyecto (no todos usan todos los paquetes) | `sg-ms-*/src/*/*.csproj` |
-| ms-iam | Java 21 | Spring Boot 4.1.1; Spring Data JPA; Spring Security; Spring Kafka; jjwt 0.12.5; springdoc-openapi 3.0.0; scalar-webmvc 0.6.63 | `backend/ms-iam/pom.xml` |
+| ms-iam | Java 21 | Spring Boot 4.1.1; Spring Data JPA; Spring Security; Spring Kafka; jjwt 0.12.5; springdoc-openapi 3.0.0; scalar-webmvc 0.6.63 | `sg-ms-iam/pom.xml` |
 | sg-ms-gps | Java 21 | Spring Boot 4.1.1; Spring Web MVC; dependencias JPA/JDBC no prueban persistencia | `sg-ms-gps/pom.xml:8–23` |
-| API Gateway | — | Kong 3.9 (DB-less, config declarativa) | `backend/ms-api-gateway/docker-compose.yml` |
-| Mensajería | — | Apache Kafka 4.1.0 en modo KRaft | `backend/kafka/docker-compose.yml` |
-| Base de datos | — | Microsoft SQL Server 2022 | `docker-compose.yaml` |
+| API Gateway | — | Kong 3.9 (DB-less, config declarativa) | `sg-ms-api-gateway/docker-compose.yml` |
+| Mensajería | — | Apache Kafka 4.1.0 en modo KRaft | `broker-kafka/docker-compose.yml` |
+| Base de datos | — | Microsoft SQL Server 2022 | `sg-db/docker-compose.yaml` |
 
 **Frontend.**
 
 | Componente | Tecnología | Versiones clave | Evidencia |
 |---|---|---|---|
-| Web | Angular (SPA + SSR) | Angular 21.2.9; Angular Material 21.2.3; Angular CDK 21.2.3; RxJS 7.8.2; TypeScript 5.9.x; NGX-Translate 17.0.0; Leaflet 1.9.4; Express 5.2.1 | `scholl-guardian-project/dvlp-front/dvlp-web/package.json` |
-| Móvil | React Native + Expo | Expo 57.0.27; React 19.2.3; React Native 0.86.3; React Navigation 7; react-native-maps 1.27.2; i18next 26 | `scholl-guardian-project/dvlp-front/dvlp-movil/guardian-escolar/package.json` |
+| Web | Angular (SPA + SSR) | Angular 21.2.9; Angular Material 21.2.3; Angular CDK 21.2.3; RxJS 7.8.2; TypeScript 5.9.x; NGX-Translate 17.0.0; Leaflet 1.9.4; Express 5.2.1 | `GuardianEscolar/dvlp-front/dvlp-web/package.json` |
+| Móvil | React Native + Expo | Expo 57.0.27; React 19.2.3; React Native 0.86.3; React Navigation 7; react-native-maps 1.27.2; i18next 26 | `GuardianEscolar/dvlp-front/dvlp-movil/guardian-escolar/package.json` |
 | Pruebas web | Vitest 4.1.0 sobre builder `@ngx-env/builder:unit-test` (jsdom) | — | `package.json`, `angular.json` |
 
 **Contenedores e infraestructura.**
 
 | Elemento | Imagen / versión | Evidencia |
 |---|---|---|
-| Runtime .NET | `mcr.microsoft.com/dotnet/aspnet:10.0` | `backend/*/src/*/Dockerfile` |
+| Runtime .NET | `mcr.microsoft.com/dotnet/aspnet:10.0` | `sg-ms-*/src/*/Dockerfile` |
 | SDK .NET (build) | `mcr.microsoft.com/dotnet/sdk:10.0` | ídem |
-| Runtime Java (build) | `maven:3.9-eclipse-temurin-21` → `eclipse-temurin:21-jre` | `backend/ms-iam/Dockerfile` |
-| Node (build web) | `node:20-alpine`; producción `nginx:alpine` | `dvlp-front/dvlp-web/{Dockerfile,dev.Dockerfile}` |
+| Runtime Java (build) | `maven:3.9-eclipse-temurin-21` → `eclipse-temurin:21-jre` | `sg-ms-iam/Dockerfile` |
+| Node (build web) | `node:20-alpine`; producción `nginx:alpine` | `GuardianEscolar/dvlp-front/dvlp-web/{Dockerfile,dev.Dockerfile}` |
 | Red Docker compartida | `sg-services-network` (externa) | composes de cada servicio |
 
 ### 2.4 Resumen de la arquitectura (diagrama general)
@@ -273,7 +274,7 @@ El sistema combina tres decisiones estructurales:
    - **Aplicación** (`Application`): casos de uso que orquestan el dominio.
    - **Infraestructura** (`Infrastructure`): adaptadores de entrada (controladores REST, gRPC, consumidores Kafka) y de salida (persistencia, clientes HTTP, productores Kafka).
 
-   La estructura de carpetas lo evidencia en todos los servicios (por ejemplo, `backend/ms-user-management/src/ms-user-management.Api/{Domain,Application,Infrastructure}` y, en Java, `backend/ms-iam/src/main/java/com/school_guardian/ms_iam/{domain,application,infrastructure}`). La **justificación** es la testabilidad del núcleo de negocio, el desacoplamiento de la tecnología y la posibilidad de cambiar un adaptador (por ejemplo, de motor de base de datos o de broker) sin tocar el dominio.
+   La estructura de carpetas lo evidencia en todos los servicios (por ejemplo, `sg-ms-user-management/src/ms-user-management.Api/{Domain,Application,Infrastructure}` y, en Java, `sg-ms-iam/src/main/java/com/school_guardian/ms_iam/{domain,application,infrastructure}`). La **justificación** es la testabilidad del núcleo de negocio, el desacoplamiento de la tecnología y la posibilidad de cambiar un adaptador (por ejemplo, de motor de base de datos o de broker) sin tocar el dominio.
 
 2. **Arquitectura orientada a eventos (event-driven) para la integración asíncrona.** Los eventos de creación de personas y de abordaje viajan por **Kafka**, desacoplando productores y consumidores y permitiendo que las notificaciones no bloqueen la operación principal.
 
@@ -312,7 +313,7 @@ flowchart LR
         FOR["ms-forgot-information (.NET) REST /api/v1/{password,email,phone}"]
     end
     subgraph Tracking
-        GPS["gps-backend (Java) TCP :8842 + REST /api/gps"]
+        GPS["sg-ms-gps (Java) TCP :8842 + REST /api/gps"]
     end
     KONG --> IAM & UMU & SCH & FLT & ROU & NOT & FOR & GPS
     UMU -->|gRPC| SCH
@@ -454,7 +455,7 @@ sequenceDiagram
 ```mermaid
 sequenceDiagram
     participant Dev as Rastreador GPS
-    participant GPS as gps-backend (TCP :8842)
+    participant GPS as sg-ms-gps (TCP :8842)
     participant K as Kong (ruta declarada)
     participant Cli as Web/Móvil
     Dev->>GPS: trama binaria (login 0x01 / heartbeat 0x13 / ubicación 0x31)
@@ -473,7 +474,7 @@ sequenceDiagram
 | **Dependency Injection** | .NET (`ServiceCollectionExtensions`) y Java (Spring) | `Infrastructure/DependencyInjection/ServiceCollectionExtensions.cs`; `@Service`, `@Repository` |
 | **Repository** | Acceso a datos detrás de interfaces de puerto | `IBusRepository`, `IPersonRepository`, repositorios Spring Data |
 | **DTO + Mapper (AutoMapper)** | Traducción dominio↔API | `Application/Mapper`, `AddAutoMapper` en `Program.cs` |
-| **API Gateway** | Enrutamiento, CORS, rate limiting | `backend/ms-api-gateway/kong/kong.yml` |
+| **API Gateway** | Enrutamiento, CORS, rate limiting | `sg-ms-api-gateway/kong/kong.yml` |
 | **Publish/Subscribe (eventos)** | Integración vía Kafka | `KafkaEventPublisher`, consumidores `*.Consumer` |
 | **gRPC (RPC síncrono)** | Comunicación entre servicios internos | `SchoolManagementGrpcClient`, `RouteGrpcService`, `FamilyGrpcService` |
 | **Strategy** | Estrategias de búsqueda | `PlateSearchStrategy`, `NameSearchStrategy` (ms-fleet/ms-user-management) |
@@ -840,7 +841,7 @@ A continuación se documentan las tablas principales con sus campos, tipos y res
 
 ### 4.3 Índices, vistas, procedimientos almacenados y triggers
 
-Se verificaron los *changelogs* de Liquibase de cada módulo (`database/ms-*-db/`). La conclusión es explícita:
+Se verificaron los *changelogs* de Liquibase de cada módulo (`sg-db/ms-*-db/`). La conclusión es explícita:
 
 - **Vistas:** no existen. Los changelogs `05-view` de todos los módulos contienen `databaseChangeLog: []`.
 - **Funciones:** no existen. Changelogs `06-functions` vacíos.
@@ -857,7 +858,7 @@ El repositorio **no incluye** scripts de respaldo ni política de retención doc
 
 - **Respaldo completo diario** de la base `school-guardian` (SQL Server `BACKUP DATABASE`).
 - **Respaldos diferenciales** cada 6 horas y **respaldos de log** cada 15 minutos en modo de recuperación completa (reduce el RPO a menos de 15 minutos).
-- **Persistencia del volumen** de datos SQL Server mediante volumen Docker dedicado (el `docker-compose.yaml` de `database/` usa un volumen para los datos).
+- **Persistencia del volumen** de datos SQL Server mediante volumen Docker dedicado (el `docker-compose.yaml` de `sg-db/` usa un volumen para los datos).
 - **Validación de restauración** periódica en un entorno aislado.
 - **Recuperación ante desastres:** el SRS (RNF-08) fija objetivos de **RTO/RPO** por escenario (servicio < 2 min / 0; BD primaria < 5 min / < 1 s; zona de disponibilidad < 15 min / < 5 min; región < 4 h / < 1 h). *Nota:* estos objetivos provienen del requisito, no de una configuración verificada en el repositorio.
 
@@ -867,44 +868,45 @@ El repositorio **no incluye** scripts de respaldo ni política de retención doc
 
 ### 5.1 Repositorios y estrategia de ramas
 
-El proyecto **no vive en un único repositorio**: el código se distribuye en repositorios git independientes (`backend`, `database`, `scholl-guardian-project`, entre otros). El proyecto usa **Conventional Commits** y ramas por propósito: `main` (estable), `dev` (integración), `feat/*`, `fix/*`, `chore/*`, `hotfix/*`.
+El proyecto **no vive en un único repositorio**: el código se distribuye en repositorios Git independientes, entre ellos `sg-ms-*`, `sg-ms-api-gateway`, `broker-kafka`, `code-sena/sg-db` y `GuardianEscolar`. El proyecto usa **Conventional Commits** y ramas por propósito: `main` (estable), `dev` (integración), `feat/*`, `fix/*`, `chore/*`, `hotfix/*`.
 
 | Área | Contenido | Rama observada |
 |---|---|---|
 | Documentación | Entregables bilingües y este manual | `main` |
 | Base de datos | DBML, changelogs Liquibase y compose de SQL Server | trabajo sobre una única rama (`database`) |
 | Backend | 8 microservicios, Kafka y gateway | ramas por microservicio/feature |
-| Frontend | Web, móvil y gps-backend | ramas por feature (p. ej. `fix/legal-page-shared-imports`) |
+| Frontend | Web y móvil | ramas por feature (p. ej. `fix/legal-page-shared-imports`) |
+| GPS | Servicio de ingesta y consulta de ubicaciones | repositorio independiente `sg-ms-gps` |
 
 ### 5.2 Árbol de carpetas y paquetes
 
-**Backend (por servicio):**
+**Repositorios de servicios backend:**
 
 ```
-backend/
-├── ms-api-gateway/           # Kong (config declarativa kong/kong.yml, docker-compose.yml)
-├── ms-iam/                   # Java 21 + Spring Boot 4.1.1 (hexagonal)
+sg-ms-api-gateway/            # Kong (config declarativa kong/kong.yml, docker-compose.yml)
+sg-ms-iam/                    # Java 21 + Spring Boot 4.1.1 (hexagonal)
 │   ├── pom.xml
 │   ├── Dockerfile
 │   └── src/main/java/com/school_guardian/ms_iam/
 │       ├── domain/{model,port/{in,out},event,exception}
 │       ├── application/{dto,usecase}
 │       └── infrastructure/{config,messaging,persistence,security,web}
-├── ms-user-management/       # .NET 10
-├── ms-school-management/     # .NET 10 (+ servidor gRPC)
-├── ms-fleet/                 # .NET 10
-├── ms-route/                 # .NET 10 (+ servidor gRPC)
-├── ms-notification/          # .NET 10 (consumidor Kafka + push Expo)
-├── sg-ms-forgot-information/ # .NET 10 (OTP por correo/SMS)
-└── kafka/                    # Broker + init/create-topics.sh + topics.conf
+sg-ms-user-management/        # .NET 10
+sg-ms-school-management/      # .NET 10 (+ servidor gRPC)
+sg-ms-fleet/                  # .NET 10
+sg-ms-route/                  # .NET 10 (+ servidor gRPC)
+sg-ms-notification/           # .NET 10 (consumidor Kafka + push Expo)
+sg-ms-forgot-information/     # .NET 10 (OTP por correo/SMS)
+sg-ms-gps/                    # Java 21 + Spring Boot (TCP + REST /api/gps)
+broker-kafka/                 # Broker + init/create-topics.sh + topics.conf
 ```
 
 Cada servicio .NET repite el layout estándar descrito en la sección 3.3.
 
-**Base de datos (`database/`):**
+**Base de datos (`code-sena/sg-db/`):**
 
 ```
-database/
+sg-db/
 ├── db-school-guardian.dbml       # Modelo canónico (34 tablas, 9 esquemas)
 ├── docker-compose.yaml           # SQL Server 2022 + contenedores Liquibase
 ├── .env / .env.example
@@ -920,18 +922,19 @@ database/
 └── ms-audit-db/                  # VACÍA (servicio eliminado)
 ```
 
-**Frontend (`scholl-guardian-project/`):**
+**Frontend (`school-guardian-project/GuardianEscolar/`):**
 
 ```
-scholl-guardian-project/
+GuardianEscolar/
 ├── dvlp-front/
 │   ├── dvlp-web/                 # Angular 21 (src/app/{core,features,shared})
 │   └── dvlp-movil/guardian-escolar/  # React Native + Expo
-├── gps-backend/gps-backend/      # Java 21 + Spring Boot (TCP + REST /api/gps)
 ├── scripts/verify-api.sh         # Smoke test frontend→Kong→microservicios
 ├── docs/                         # Material de gestión/análisis
 └── docker-compose.yml            # Solo frontend web
 ```
+
+El servicio GPS está en el repositorio independiente `sg-ms-gps`.
 
 **Frontend web (Angular), estructura de `src/app/`:**
 
@@ -962,7 +965,7 @@ src/app/
 | Rutas internas Kong | Prefijo por servicio (`/user`, `/fleet`, `/school-management`, `/route`, `/notification`) | `kong.yml` |
 | Entidades/BD | PascalCase en tablas y columnas; esquemas por servicio | `db-school-guardian.dbml` |
 | .NET | C# con `PascalCase` para tipos/métodos; puertos con prefijo `I` (`IBusRepository`) | `Domain/Ports` |
-| Java | Paquete base `com.school_guardian.ms_iam`; `camelCase` en métodos; Spring stereotypes | `ms-iam/src/main` |
+| Java | Paquete base `com.school_guardian.ms_iam`; `camelCase` en métodos; Spring stereotypes | `sg-ms-iam/src/main` |
 | Angular | Componentes standalone; alias de rutas `@core/*`, `@features/*`, `@shared/*` | `tsconfig.json` |
 | Commits | Conventional Commits (`feat:`, `fix:`, `chore:`) | historial de los repositorios |
 | Documentación | `kebab-case.md`, IDs estables (`RF`, `RNF`, `HU`, `UC`…) | repositorios del proyecto |
@@ -1078,7 +1081,7 @@ Esta sección describe cada servicio: su responsabilidad, los casos de uso y cla
 - **Dependencias:** EF Core, HttpClient, Twilio, SMTP.
 - **Reglas de negocio:** los códigos OTP se validan con *pepper* (`OTP_HASH_PEPPER`); límite de 10 req/min por IP y un limitador interno por perfil; los flujos de teléfono responden `503` si Twilio no está configurado; validación *fail-fast* de SMTP/clave interna fuera de `Development`.
 
-### 6.8 gps-backend (ingesta GPS)
+### 6.8 sg-ms-gps (ingesta GPS)
 
 - **Responsabilidad:** recibir tramas binarias de rastreadores GPS por **TCP** y exponer la última posición por REST.
 - **Componentes clave:** `GpsTcpServer` (puerto TCP **8842**), `GpsFrameDecoder`, `GpsPacketRouter`, handlers por protocolo (`0x01` login, `0x13` heartbeat, `0x31` ubicación, `0x32` alarma, `0x50` LBS, `0x80` comando, `79 79` legacy), `GpsLocationService`/`GpsDeviceService` en memoria, `GpsAckService` (ACK con CRC-16).
@@ -1201,7 +1204,7 @@ La puerta de entrada pública es **Kong** en `http://<host>:8000`. Kong enruta p
 | POST | `/api/v1/phone/change/request` · `/verify` · `/verification/request` · `/verification/resend` · `/verification/check` | Flujo de cambio de teléfono. |
 | GET | `/health` | Salud del servicio. |
 
-**gps-backend.**
+**sg-ms-gps.**
 
 | Método | Ruta | Descripción |
 |---|---|---|
@@ -1316,7 +1319,7 @@ El backend adopta un esquema REST convencional; los errores de aplicación se ex
 
 | Integración | Protocolo / Formato | Credenciales | Notas |
 |---|---|---|---|
-| Rastreadores GPS → gps-backend | TCP binario (protocolo propietario, tramas con CRC-16) | — | Puertos `0x01` login, `0x13` heartbeat, `0x31` ubicación, `0x32` alarma, `0x50` LBS, `0x80` comando, `79 79` legacy. |
+| Rastreadores GPS → sg-ms-gps | TCP binario (protocolo propietario, tramas con CRC-16) | — | Puertos `0x01` login, `0x13` heartbeat, `0x31` ubicación, `0x32` alarma, `0x50` LBS, `0x80` comando, `79 79` legacy. |
 | Servicios ↔ Kafka | TCP Kafka (KRaft) | — | Tópicos de dominio (sección 7.5). |
 | ms-user-management → ms-school-management | gRPC (HTTP/2) | — | `http://ms-school-management:5001`. |
 | ms-fleet → ms-iam | gRPC | `x-internal-api-key` | `usermanagement.v1.ProfileService`: existencia y nombre. |
@@ -1348,7 +1351,7 @@ El backend adopta un esquema REST convencional; los errores de aplicación se ex
 | `student.scanned` | ms-notification | ms-notification | Dispara la notificación de abordaje. |
 | `incident.reported` | ms-notification | ms-notification | Intento de push de incidente a destinatarios resueltos. |
 
-Los **nueve** tópicos están declarados en `kafka/init/topics.conf:6–20`, con 1 partición y replicación 1; declaración no prueba creación en un broker activo. .NET serializa con `System.Text.Json` (PascalCase, enums numéricos por defecto); IAM asigna explícitamente nombres PascalCase con `JsonProperty`.
+Los **nueve** tópicos están declarados en `broker-kafka/init/topics.conf:6–20`, con 1 partición y replicación 1; declaración no prueba creación en un broker activo. .NET serializa con `System.Text.Json` (PascalCase, enums numéricos por defecto); IAM asigna explícitamente nombres PascalCase con `JsonProperty`.
 
 | Payload real | Campos |
 |---|---|
@@ -1377,10 +1380,10 @@ Los **nueve** tópicos están declarados en `kafka/init/topics.conf:6–20`, con
 | `appsettings.json` / `appsettings.Development.json` | Servicios .NET | Configuración (cadenas de conexión, JWT, URLs internas, Kestrel). |
 | `.env` / `.env.example` | Cada servicio y la BD | Variables de entorno (se inyectan al contenedor). |
 | `docker-compose.yml` / `docker-compose.yaml` | Cada servicio, Kafka y BD | Definición de contenedores, puertos, redes y variables. |
-| `application.properties` | ms-iam y gps-backend | Configuración Spring (datasource, JPA, JWT, Kafka). |
+| `application.properties` | ms-iam y sg-ms-gps | Configuración Spring (datasource, JPA, JWT, Kafka). |
 | `launchSettings.json` | Servicios .NET (algunos) | Perfiles de ejecución local y puertos de desarrollo. |
 | `kong/kong.yml` | ms-api-gateway | Config declarativa DB-less de Kong (servicios, rutas, plugins). |
-| `kafka/init/topics.conf` + `create-topics.sh` | Kafka | Creación de tópicos al iniciar. |
+| `broker-kafka/init/topics.conf` + `create-topics.sh` | Kafka | Creación de tópicos al iniciar. |
 | `.env`, `environment.ts`, `angular.json` | Web Angular | URL de API y configuración de build. |
 | `.env`, `app.json`, `eas.json` | Móvil Expo | URL de API, permisos y perfiles EAS. |
 

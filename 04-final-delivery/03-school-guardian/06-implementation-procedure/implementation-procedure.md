@@ -29,7 +29,7 @@ Neiva, 6 de octubre de 2026
 
 > **Advertencia.** Este documento cubre el entorno de desarrollo y el ambiente desplegado en AWS EC2. Los secretos se configuran en archivos `.env` locales ignorados por Git; nunca se deben copiar a este documento, a capturas, al historial de Git ni a mensajes de error. La arquitectura, los requisitos y el estado funcional se detallan en el [Diseño de software de Guardian Escolar](../04-software-design/software-design.md); aquí se documentan los pasos de ejecución para no duplicar esa descripción.
 
-> **Convención de rutas.** Las rutas de código se expresan relativas a la raíz del proyecto (`school-guardian/`), que contiene `backend/`, `database/` y `docs/`.
+> **Convención de rutas.** Las rutas se expresan relativas a una carpeta local que contiene clones independientes con los mismos nombres que sus repositorios remotos. La lista completa de repositorios está en [`code-tag/README.md`](../code-tag/README.md).
 
 
 ## Información general
@@ -63,8 +63,8 @@ La carpeta de trabajo actual contiene los proyectos en directorios independiente
 
 ```text
 Proyecto\
-├── database\
-├── kafka\
+├── sg-db\
+├── broker-kafka\
 ├── sg-ms-api-gateway\
 ├── sg-ms-iam\
 ├── sg-ms-user-management\
@@ -73,6 +73,7 @@ Proyecto\
 ├── sg-ms-route\
 ├── sg-ms-notification\
 ├── sg-ms-forgot-information\
+├── sg-ms-gps\
 └── GuardianEscolar\
     └── dvlp-front\
         ├── dvlp-web\
@@ -81,13 +82,17 @@ Proyecto\
 
 En cada repositorio, usar la rama/tag acordada por el equipo. Antes de desplegar, comparar la revisión del gateway con los paths de cada servicio y comprobar que comparten los contratos API esperados.
 
-Las rutas absolutas de los comandos de este procedimiento corresponden a la estación donde se preparó el documento. En otra máquina, se deben reemplazar por la ubicación local de `Proyecto`.
+Definir la ubicación local elegida para esa carpeta antes de ejecutar los comandos:
+
+```powershell
+$projectRoot = "C:\ruta\elegida\Proyecto"
+```
 
 ## Configuración del entorno
 
 ### Archivos `.env`
 
-1. En cada componente que provea `.env.example`, copiarlo al archivo `.env` de esa misma carpeta. Hay plantillas en IAM (`backend/ms-iam/.env.example`), usuarios (`backend/ms-user-management/.env.example`), colegios (`backend/ms-school-management/.env.example`), flota (`backend/ms-fleet/.env.example`), rutas (`backend/ms-route/.env.example`), notificaciones (`backend/ms-notification/.env.example`), recuperación (`backend/sg-ms-forgot-information/.env.example`) y `dvlp-front/dvlp-movil/guardian-escolar/.env.example` (repositorio del cliente móvil). En este checkout no hay `.env.example` para la base de datos: prepara el archivo local según las variables descritas en el paso 4.
+1. En cada componente que provea `.env.example`, copiarlo al archivo `.env` de esa misma carpeta. Hay plantillas en IAM (`sg-ms-iam/.env.example`), usuarios (`sg-ms-user-management/.env.example`), colegios (`sg-ms-school-management/.env.example`), flota (`sg-ms-fleet/.env.example`), rutas (`sg-ms-route/.env.example`), notificaciones (`sg-ms-notification/.env.example`), recuperación (`sg-ms-forgot-information/.env.example`) y `GuardianEscolar/dvlp-front/dvlp-movil/guardian-escolar/.env.example` (repositorio del cliente móvil). En este checkout no hay `.env.example` para la base de datos: prepara el archivo local según las variables descritas en el paso 4.
    Desde el directorio del componente, crear el archivo sin sobrescribir una configuración existente:
 
    ```powershell
@@ -105,9 +110,9 @@ No publicar valores de conexión, contraseñas, JWT secrets, API keys, OTP peppe
 
 ## Preparación de la base de datos
 
-La configuración inspeccionada usa **Microsoft SQL Server 2022**, no PostgreSQL. Los esquemas y migraciones están bajo `database/docker-compose.yaml`; Liquibase aplica los changelogs por dominio.
+La configuración inspeccionada usa **Microsoft SQL Server 2022**, no PostgreSQL. Los esquemas y migraciones están bajo `sg-db/docker-compose.yaml`; Liquibase aplica los changelogs por dominio.
 
-1. Verificar que el archivo `.env` exista en `database` y contenga los valores requeridos, sin imprimirlos en terminales compartidos.
+1. Verificar que el archivo `.env` exista en `sg-db` y contenga los valores requeridos, sin imprimirlos en terminales compartidos.
 2. Asegurarse de que existe la red Docker externa. Si aún no está creada:
 
    ```powershell
@@ -116,10 +121,10 @@ La configuración inspeccionada usa **Microsoft SQL Server 2022**, no PostgreSQL
    docker network create sg-services-network
    ```
 
-3. Iniciar SQL Server y los servicios de inicialización/migración desde la carpeta `database`:
+3. Iniciar SQL Server y los servicios de inicialización/migración desde el repositorio `sg-db`:
 
    ```powershell
-   Set-Location C:\Users\Admin\Desktop\Proyecto\database
+   Set-Location "$projectRoot\sg-db"
    docker compose up -d
    ```
 
@@ -142,28 +147,28 @@ El Compose de base de datos define dependencias entre migraciones. Si un changes
 Los servicios se comunican por nombre de contenedor sobre `sg-services-network`; para tráfico interno usan normalmente el puerto 8080. La entrada HTTP del gateway se publica en el puerto 8000. Para cada servicio, abrir PowerShell y ejecutar desde el directorio correspondiente:
 
 ```powershell
-Set-Location C:\Users\Admin\Desktop\Proyecto\sg-ms-iam
+Set-Location "$projectRoot\sg-ms-iam"
 docker compose up -d --build
 ```
 
-Repetir desde `sg-ms-user-management`, `sg-ms-school-management`, `sg-ms-fleet`, `sg-ms-route` y `sg-ms-notification`, siempre después de confirmar que SQL Server y sus migraciones están listos. Iniciar `sg-ms-forgot-information` después de IAM, ya que utiliza sus endpoints internos.
+Repetir desde los repositorios `sg-ms-user-management`, `sg-ms-school-management`, `sg-ms-fleet`, `sg-ms-route` y `sg-ms-notification`, siempre después de confirmar que SQL Server y sus migraciones están listos. Iniciar `sg-ms-forgot-information` después de IAM, ya que utiliza sus endpoints internos.
 
 ```powershell
-Set-Location C:\Users\Admin\Desktop\Proyecto\sg-ms-forgot-information
+Set-Location "$projectRoot\sg-ms-forgot-information"
 docker compose up -d --build
 ```
 
-Kafka se inicia desde su propio repositorio si el flujo del componente requiere eventos:
+Kafka se inicia desde el repositorio `broker-kafka` si el flujo del componente requiere eventos:
 
 ```powershell
-Set-Location C:\Users\Admin\Desktop\Proyecto\kafka
+Set-Location "$projectRoot\broker-kafka"
 docker compose up -d
 ```
 
-El gateway se inicia desde `sg-ms-api-gateway` después de que los upstreams necesarios tengan nombre DNS en la red:
+El gateway se inicia desde el repositorio `sg-ms-api-gateway` después de que los upstreams necesarios tengan nombre DNS en la red:
 
 ```powershell
-Set-Location C:\Users\Admin\Desktop\Proyecto\sg-ms-api-gateway
+Set-Location "$projectRoot\sg-ms-api-gateway"
 docker compose up -d
 ```
 
@@ -196,7 +201,7 @@ Nombres concretos de contenedores pueden cambiar según la versión del Compose.
 El frontend se encuentra en `GuardianEscolar/dvlp-front/dvlp-web`. Su `package.json` declara npm, Angular 21 y scripts `start`, `build` y `test`.
 
 ```powershell
-Set-Location C:\Users\Admin\Desktop\Proyecto\GuardianEscolar\dvlp-front\dvlp-web
+Set-Location "$projectRoot\GuardianEscolar\dvlp-front\dvlp-web"
 npm ci
 npm start
 ```
@@ -212,10 +217,10 @@ El Compose de `GuardianEscolar` publica la web de desarrollo en el puerto 4200. 
 
 ## Instalación de la aplicación móvil
 
-El proyecto móvil está en el repositorio del cliente, bajo la ruta `dvlp-front/dvlp-movil/guardian-escolar`.
+El proyecto móvil está en el repositorio `GuardianEscolar`, bajo la ruta `GuardianEscolar/dvlp-front/dvlp-movil/guardian-escolar`.
 
 ```powershell
-Set-Location C:\Users\Admin\Desktop\Proyecto\GuardianEscolar\dvlp-front\dvlp-movil\guardian-escolar
+Set-Location "$projectRoot\GuardianEscolar\dvlp-front\dvlp-movil\guardian-escolar"
 npm ci
 npm start
 ```
@@ -261,7 +266,7 @@ docker ps -a
 Invoke-RestMethod http://localhost:8091/health
 ```
 
-El endpoint `/health` está definido en `backend/sg-ms-forgot-information/README.md`. Para otros servicios, consultar su README/OpenAPI y no suponer que todos exponen la misma ruta de salud.
+El endpoint `/health` está definido en `sg-ms-forgot-information/README.md`. Para otros servicios, consultar su README/OpenAPI y no suponer que todos exponen la misma ruta de salud.
 
 ### Comprobación de API y aplicación
 
@@ -270,7 +275,7 @@ El endpoint `/health` está definido en `backend/sg-ms-forgot-information/README
 3. Enviar una solicitud de inicio de sesión únicamente con una cuenta de prueba autorizada. El endpoint del IAM se configura bajo `/api/v1/auth`; no registrar contraseñas ni tokens.
 4. Validar comportamiento de permisos con cuentas de roles distintos y recursos de prueba. Verificar respuestas tanto desde la API como desde la interfaz.
 5. Probar CRUD solo sobre registros de desarrollo y comprobar su persistencia en el esquema correspondiente.
-6. Para recuperación, seguir las pruebas seguras de `backend/sg-ms-forgot-information/TESTING.md`; los pasos que cambian una contraseña real requieren autorización expresa.
+6. Para recuperación, seguir las pruebas seguras de `sg-ms-forgot-information/TESTING.md`; los pasos que cambian una contraseña real requieren autorización expresa.
 7. Para cada prueba anotar fecha, commit/tag, comandos, servicio, resultado y evidencia saneada.
 
 La presencia de una pantalla no sustituye una prueba de permisos de backend. La visualización GPS solo puede marcarse aprobada si existe proveedor o simulador autorizado, ingestión, persistencia/consulta y actualización visible comprobadas de extremo a extremo.
@@ -383,4 +388,4 @@ La lista exacta de nombres y obligatoriedad es la de cada [plantilla de entorno]
 
 ### Repositorios y documentación técnica
 
-Los servicios están separados en `sg-ms-*`, la base en `database`, el gateway en `sg-ms-api-gateway`, el broker en `kafka` y los clientes en `GuardianEscolar/dvlp-front`. Para el catálogo de capacidades, roles, arquitectura y datos, consultar [Diseño de software de Guardian Escolar](../04-software-design/software-design.md); para antecedentes y referencias, consultar [Artículo colaborativo](../09-project-article/project-article.md).
+Los servicios están en los repositorios independientes `sg-ms-*`, `sg-ms-api-gateway`, `sg-ms-gps`, `code-sena/sg-db`, `school-guardian-project/broker-kafka` y `school-guardian-project/GuardianEscolar`. Para el catálogo de capacidades, roles, arquitectura y datos, consultar [Diseño de software de Guardian Escolar](../04-software-design/software-design.md); para antecedentes y referencias, consultar [Artículo colaborativo](../09-project-article/project-article.md).

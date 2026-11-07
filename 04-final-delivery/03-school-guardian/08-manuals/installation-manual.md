@@ -14,7 +14,7 @@
 |---|---|---|---|
 | 1.0 | 10-oct-2026 | Versión inicial del manual de instalación (Parte B). Elaborada a partir del análisis directo del código fuente y de los artefactos de despliegue del proyecto. | Equipo del proyecto |
 
-> **Nota metodológica.** Este manual se elaboró a partir de la lectura directa del código y de los artefactos reales del proyecto (`backend/`, `database/` y `scholl-guardian-project/`): archivos `docker-compose`, `Dockerfile`, `.env.example`, `kong.yml`, changelogs de migración Liquibase y scripts de verificación. Cuando un dato no pudo verificarse en el repositorio, se indica como **no definido en el repositorio** en lugar de suponerse. Las rutas de archivo citadas actúan como evidencia.
+> **Nota metodológica.** Este manual se elaboró a partir de la lectura directa del código y de los artefactos reales de los repositorios independientes del proyecto: `sg-ms-*`, `broker-kafka`, `sg-db` y `GuardianEscolar`. Cuando un dato no pudo verificarse en el repositorio, se indica como **no definido en el repositorio** en lugar de suponerse. Las rutas de archivo citadas actúan como evidencia.
 
 ---
 
@@ -52,7 +52,7 @@ flowchart LR
         FI[ms-forgot-information .NET 10]
         KAFKA[(Kafka 4.1.0 KRaft :9092)]
         DB[(SQL Server 2022 :1433)]
-        GPS[gps-backend Java 21 :8080]
+        GPS[sg-ms-gps Java 21 :8080]
     end
 
     WEB --> KONG
@@ -95,14 +95,14 @@ El proyecto **no publica una única versión de producto**; cada artefacto decla
 | Componente | Tecnología / versión | Evidencia |
 |---|---|---|
 | Microservicios de negocio (.NET) | .NET **10** (`net10.0`) | `TargetFramework` en cada `.csproj` |
-| ms-iam | **Java 21** + Spring Boot **4.1.1** (Maven) | `backend/ms-iam/pom.xml` |
-| gps-backend | **Java 21** + Spring Boot | `gps-backend/pom.xml` |
-| Base de datos | Microsoft **SQL Server 2022** (`2022-latest`) | `docker-compose.yaml` |
-| Migraciones | **Liquibase 4.29** | `docker-compose.yaml` |
-| Mensajería | Apache **Kafka 4.1.0** (KRaft) | `backend/kafka/docker-compose.yml` |
-| API Gateway | **Kong 3.9** (modo DB-less) | `backend/ms-api-gateway/docker-compose.yml` |
-| Frontend web | **Angular 21** (`@angular/core ^21.2.9`) sobre **Node 20** (`node:20-alpine`), npm 10.9.1 | `dvlp-front/dvlp-web/package.json`, `Dockerfile` |
-| Aplicativo móvil | **Expo ~57** / **React Native 0.86.3** / React 19.2.3 | `dvlp-front/dvlp-movil/guardian-escolar/package.json` |
+| sg-ms-iam | **Java 21** + Spring Boot **4.1.1** (Maven) | `sg-ms-iam/pom.xml` |
+| sg-ms-gps | **Java 21** + Spring Boot | `sg-ms-gps/pom.xml` |
+| Base de datos | Microsoft **SQL Server 2022** (`2022-latest`) | `sg-db/docker-compose.yaml` |
+| Migraciones | **Liquibase 4.29** | `sg-db/docker-compose.yaml` |
+| Mensajería | Apache **Kafka 4.1.0** (KRaft) | `broker-kafka/docker-compose.yml` |
+| API Gateway | **Kong 3.9** (modo DB-less) | `sg-ms-api-gateway/docker-compose.yml` |
+| Frontend web | **Angular 21** (`@angular/core ^21.2.9`) sobre **Node 20** (`node:20-alpine`), npm 10.9.1 | `GuardianEscolar/dvlp-front/dvlp-web/package.json`, `GuardianEscolar/dvlp-front/dvlp-web/Dockerfile` |
+| Aplicativo móvil | **Expo ~57** / **React Native 0.86.3** / React 19.2.3 | `GuardianEscolar/dvlp-front/dvlp-movil/guardian-escolar/package.json` |
 | Túnel (opcional) | — | `docker-compose.yml` (frontend) |
 
 > **Nota.** `ms-iam` declara la versión `0.0.1-SNAPSHOT` en su `pom.xml`; el frontend web declara `0.0.0` y el móvil `1.0.0`. Estas versiones son internas de cada artefacto y no representan una versión única del producto.
@@ -162,7 +162,7 @@ Estas versiones son las declaradas en los artefactos del repositorio (`node:20-a
 | ms-school-management (gRPC) | asignado por Docker | `5001` | gRPC h2c interno |
 | Resto de microservicios | asignado por Docker | `8080` | Se consumen vía Kong |
 | Frontend web (dev) | `4200` | `4200` | Servidor de desarrollo Angular |
-| gps-backend | `8080` | `8080` | Ingesta GPS (proceso Java fuera de Compose) |
+| sg-ms-gps | `8080` | `8080` | Ingesta GPS (proceso Java fuera de Compose) |
 
 > **Nota de exposición.** Para un entorno productivo, solo deben publicarse los puertos de **Kong** (`8000`/`8443`) y del **frontend** a través de un proxy inverso. Los puertos `1433` (SQL Server) y `9092` (Kafka) **no** deberían exponerse fuera del host.
 
@@ -188,7 +188,7 @@ Estas versiones son las declaradas en los artefactos del repositorio (`node:20-a
 - **Docker + Docker Compose v2** para construir imágenes y levantar el stack.
 - **Node.js 20 + npm 10.9.1** para el frontend web y el móvil.
 - **.NET SDK 10.0** para compilar y ejecutar las pruebas (con **NUnit**) de los microservicios .NET.
-- **JDK 21 + Maven 3.9** para `ms-iam`; el servicio `gps-backend` incluye el *wrapper* `./mvnw`.
+- **JDK 21 + Maven 3.9** para `sg-ms-iam`; el servicio `sg-ms-gps` incluye el *wrapper* `./mvnw`.
 - **Expo CLI** (vía `npx expo`) para el aplicativo móvil.
 
 ---
@@ -200,27 +200,21 @@ Estas versiones son las declaradas en los artefactos del repositorio (`node:20-a
 El proyecto **no se distribuye como un paquete binario**: se instala a partir del código fuente y de las imágenes que se construyen localmente. La estructura relevante para la instalación es:
 
 ```
-backend/
-├── ms-api-gateway/          # Kong (docker-compose.yml + kong/kong.yml)
-├── kafka/                   # Broker Kafka + init/ (create-topics.sh, topics.conf)
-├── ms-iam/                  # Java 21 + Spring Boot (Dockerfile, docker-compose.yml, .env.example)
-├── ms-user-management/      # .NET 10 (Dockerfile, docker-compose.yml, .env.example)
-├── ms-school-management/    # .NET 10 (REST + gRPC h2c :5001)
-├── ms-fleet/                # .NET 10
-├── ms-route/                # .NET 10
-├── ms-notification/         # .NET 10 (puerto host 8081)
-└── sg-ms-forgot-information/# .NET 10 (SMTP + Twilio + OTP)
-database/
-├── docker-compose.yaml      # SQL Server 2022 + contenedores Liquibase + init
-├── .env.example             # variables de conexión
-├── db-school-guardian.dbml  # modelo de datos (DBML)
-└── ms-*-db/                 # changelogs Liquibase por servicio
-scholl-guardian-project/
-├── docker-compose.yml       # frontend web
-├── dvlp-front/dvlp-web/     # Angular (Dockerfile, dev.Dockerfile, nginx.conf, .env)
-├── dvlp-front/dvlp-movil/   # Expo / React Native (app.json, eas.json, .env.example)
-├── gps-backend/gps-backend/ # Java 21 (application.properties)
-└── scripts/verify-api.sh    # verificación de rutas vía Kong
+├── sg-ms-api-gateway/         # Kong (docker-compose.yml + kong/kong.yml)
+├── broker-kafka/              # Broker Kafka + init/ (create-topics.sh, topics.conf)
+├── sg-ms-iam/                 # Java 21 + Spring Boot
+├── sg-ms-user-management/     # .NET 10
+├── sg-ms-school-management/   # .NET 10 (REST + gRPC h2c :5001)
+├── sg-ms-fleet/               # .NET 10
+├── sg-ms-route/               # .NET 10
+├── sg-ms-notification/        # .NET 10
+├── sg-ms-forgot-information/  # .NET 10 (SMTP + Twilio + OTP)
+├── sg-ms-gps/                 # Java 21 (ingesta GPS)
+├── sg-db/                     # SQL Server 2022 + Liquibase
+└── GuardianEscolar/           # Frontend web y móvil
+    ├── dvlp-front/dvlp-web/   # Angular
+    ├── dvlp-front/dvlp-movil/ # Expo / React Native
+    └── scripts/verify-api.sh  # verificación de rutas vía Kong
 ```
 
 ### 3.2 Ubicación de descarga / repositorio
@@ -239,7 +233,8 @@ Cada componente es un **repositorio Git independiente**:
 | `sg-ms-notification` | `https://github.com/school-guardian-project/sg-ms-notification.git` | Notificaciones |
 | `sg-ms-forgot-information` | `https://github.com/school-guardian-project/sg-ms-forgot-information.git` | Recuperación de contraseña / correo / celular |
 | `sg-db` | `https://github.com/code-sena/sg-db.git` | Modelo y migraciones de base de datos |
-| `GuardianEscolar` | `https://github.com/school-guardian-project/GuardianEscolar.git` | Frontend web, móvil y `gps-backend` |
+| `sg-ms-gps` | `https://github.com/school-guardian-project/sg-ms-gps.git` | Ingesta y consulta de ubicaciones GPS |
+| `GuardianEscolar` | `https://github.com/school-guardian-project/GuardianEscolar.git` | Frontend web y móvil |
 
 ### 3.3 Verificación de integridad (hash / checksum)
 
@@ -291,26 +286,25 @@ Registrar los SHAs y digests obtenidos permite reproducir exactamente la misma i
 - El proyecto se compone de **varios repositorios**. Se recomienda una carpeta raíz de trabajo y clonarlos en subcarpetas consistentes con las rutas de este manual:
 
   ```bash
-  mkdir -p <RUTA_PROYECTO>/backend <RUTA_PROYECTO>/database
-  mkdir -p <RUTA_PROYECTO>/scholl-guardian-project
+  mkdir -p <RUTA_PROYECTO>
   ```
 
 - Dentro de los contenedores, los servicios se ejecutan con **usuarios no privilegiados** cuando la imagen base lo define (por ejemplo, las imágenes .NET usan `USER $APP_UID`). No es necesario crear usuarios del sistema en el host.
-- Los **scripts** (`backend/kafka/init/create-topics.sh`, `scholl-guardian-project/scripts/verify-api.sh`) deben conservar el permiso de ejecución:
+- Los **scripts** (`broker-kafka/init/create-topics.sh`, `GuardianEscolar/scripts/verify-api.sh`) deben conservar el permiso de ejecución:
 
   ```bash
-  chmod +x backend/kafka/init/create-topics.sh
-  chmod +x scholl-guardian-project/scripts/verify-api.sh
+  chmod +x broker-kafka/init/create-topics.sh
+  chmod +x GuardianEscolar/scripts/verify-api.sh
   ```
 
 ### 4.3 Preparación de la base de datos
 
-La base de datos **no se crea manualmente**: el `docker-compose.yaml` de `database/` levanta SQL Server 2022 y un contenedor de inicialización (`sqlserver-init`) que **crea la base** `school-guardian` si no existe, antes de ejecutar las migraciones Liquibase.
+La base de datos **no se crea manualmente**: el `docker-compose.yaml` del repositorio `sg-db/` levanta SQL Server 2022 y un contenedor de inicialización (`sqlserver-init`) que **crea la base** `school-guardian` si no existe, antes de ejecutar las migraciones Liquibase.
 
 1. Crear el archivo de entorno a partir del ejemplo y **definir valores propios** (no usar los de ejemplo en producción):
 
    ```bash
-   cd <RUTA_PROYECTO>/database
+   cd <RUTA_PROYECTO>/sg-db
    cp .env.example .env
    # Editar .env: MSSQL_DATABASE, MSSQL_USER, MSSQL_SA_PASSWORD
    ```
@@ -359,21 +353,19 @@ flowchart TD
 ### 5.1 Clonación de repositorios
 
 ```bash
-mkdir -p <RUTA_PROYECTO>/backend && cd <RUTA_PROYECTO>/backend
-
-git clone https://github.com/school-guardian-project/sg-ms-api-gateway.git ms-api-gateway
-git clone https://github.com/school-guardian-project/broker-kafka.git kafka
-git clone https://github.com/school-guardian-project/sg-ms-iam.git ms-iam
-git clone https://github.com/school-guardian-project/sg-ms-user-management.git ms-user-management
-git clone https://github.com/school-guardian-project/sg-ms-school-management.git ms-school-management
-git clone https://github.com/school-guardian-project/sg-ms-fleet.git ms-fleet
-git clone https://github.com/school-guardian-project/sg-ms-route.git ms-route
-git clone https://github.com/school-guardian-project/sg-ms-notification.git ms-notification
-git clone https://github.com/school-guardian-project/sg-ms-forgot-information.git sg-ms-forgot-information
-
 cd <RUTA_PROYECTO>
-git clone https://github.com/code-sena/sg-db.git database
-git clone https://github.com/school-guardian-project/GuardianEscolar.git scholl-guardian-project
+git clone https://github.com/school-guardian-project/sg-ms-api-gateway.git
+git clone https://github.com/school-guardian-project/broker-kafka.git
+git clone https://github.com/school-guardian-project/sg-ms-iam.git
+git clone https://github.com/school-guardian-project/sg-ms-user-management.git
+git clone https://github.com/school-guardian-project/sg-ms-school-management.git
+git clone https://github.com/school-guardian-project/sg-ms-fleet.git
+git clone https://github.com/school-guardian-project/sg-ms-route.git
+git clone https://github.com/school-guardian-project/sg-ms-notification.git
+git clone https://github.com/school-guardian-project/sg-ms-forgot-information.git
+git clone https://github.com/school-guardian-project/sg-ms-gps.git
+git clone https://github.com/code-sena/sg-db.git
+git clone https://github.com/school-guardian-project/GuardianEscolar.git
 ```
 
 ### 5.2 Creación de la red Docker
@@ -389,7 +381,7 @@ docker network ls | grep sg-services-network
 ### 5.3 Base de datos y migraciones
 
 ```bash
-cd <RUTA_PROYECTO>/database
+cd <RUTA_PROYECTO>/sg-db
 cp .env.example .env      # solo la primera vez; editar los valores
 docker compose up -d
 ```
@@ -413,7 +405,7 @@ docker compose logs liquibase-route
 ### 5.4 Mensajería (Kafka)
 
 ```bash
-cd <RUTA_PROYECTO>/backend/kafka
+cd <RUTA_PROYECTO>/broker-kafka
 docker compose up -d
 ```
 
@@ -441,12 +433,12 @@ Cada servicio se despliega con su propio `docker-compose.yml`. **Preparar el `.e
 **a) `ms-school-management`** (expone REST `:8080` y gRPC h2c `:5001`; es consumido por `ms-iam` y `ms-user-management`):
 
 ```bash
-cd <RUTA_PROYECTO>/backend/ms-school-management
+cd <RUTA_PROYECTO>/sg-ms-school-management
 cp .env.example .env      # completar ConnectionStrings__DefaultConnection, Kafka, Kestrel, Grpc
 docker compose up -d --build
 ```
 
-Variables reales (ver `ms-school-management/.env`):
+Variables reales (ver `sg-ms-school-management/.env`):
 
 | Variable | Descripción |
 |---|---|
@@ -459,7 +451,7 @@ Variables reales (ver `ms-school-management/.env`):
 **b) `ms-iam`** (Java 21; autenticación JWT):
 
 ```bash
-cd <RUTA_PROYECTO>/backend/ms-iam
+cd <RUTA_PROYECTO>/sg-ms-iam
 cp .env.example .env      # completar MSSQL_*, KAFKA_BOOTSTRAP_SERVERS, JWT_SECRET, APP_INTERNAL_API_KEY
 docker compose up -d --build
 ```
@@ -467,8 +459,8 @@ docker compose up -d --build
 **c) Resto de microservicios .NET** (mismo patrón `--build`):
 
 ```bash
-for svc in ms-user-management ms-fleet ms-route ms-notification sg-ms-forgot-information; do
-  ( cd <RUTA_PROYECTO>/backend/$svc && cp -n .env.example .env 2>/dev/null; docker compose up -d --build )
+for svc in sg-ms-user-management sg-ms-fleet sg-ms-route sg-ms-notification sg-ms-forgot-information; do
+  ( cd <RUTA_PROYECTO>/$svc && cp -n .env.example .env 2>/dev/null; docker compose up -d --build )
 done
 ```
 
@@ -476,23 +468,23 @@ Variables relevantes por servicio (según los `.env` reales):
 
 | Servicio | Variables principales |
 |---|---|
-| `ms-user-management` | `ConnectionStrings__DefaultConnection`, `Kafka__BootstrapServers`, `SchoolManagement__GrpcAddress` |
-| `ms-fleet` | `ConnectionStrings__DefaultConnection`, `Kafka__BootstrapServers` |
-| `ms-route` | `ConnectionStrings__DefaultConnection`, `Kafka__BootstrapServers`, `ASPNETCORE_Kestrel__Endpoints__Http__*` |
-| `ms-notification` | `ConnectionStrings__DefaultConnection`, `Kafka__BootstrapServers`, `Services__UserManagement__BaseUrl`, `Services__Route__BaseUrl` |
+| `sg-ms-user-management` | `ConnectionStrings__DefaultConnection`, `Kafka__BootstrapServers`, `SchoolManagement__GrpcAddress` |
+| `sg-ms-fleet` | `ConnectionStrings__DefaultConnection`, `Kafka__BootstrapServers` |
+| `sg-ms-route` | `ConnectionStrings__DefaultConnection`, `Kafka__BootstrapServers`, `ASPNETCORE_Kestrel__Endpoints__Http__*` |
+| `sg-ms-notification` | `ConnectionStrings__DefaultConnection`, `Kafka__BootstrapServers`, `Services__UserManagement__BaseUrl`, `Services__Route__BaseUrl` |
 | `sg-ms-forgot-information` | `ConnectionStrings__DefaultConnection`, `INTERNAL_API_KEY`, `OTP_HASH_PEPPER`, `SMTP_*`, `TWILIO_*` |
 
 **Ejecución de pruebas (NUnit).** Los servicios .NET incluyen un servicio de pruebas en el perfil `tests`:
 
 ```bash
-cd <RUTA_PROYECTO>/backend/ms-route
+cd <RUTA_PROYECTO>/sg-ms-route
 docker compose run --rm ms-route.tests     # ejecuta `dotnet test` (NUnit)
 ```
 
 ### 5.6 API Gateway (Kong)
 
 ```bash
-cd <RUTA_PROYECTO>/backend/ms-api-gateway
+cd <RUTA_PROYECTO>/sg-ms-api-gateway
 docker compose up -d
 ```
 
@@ -503,7 +495,7 @@ Kong arranca en **modo DB-less** con la configuración declarativa `kong/kong.ym
 ### 5.7 Frontend web (Angular)
 
 ```bash
-cd <RUTA_PROYECTO>/scholl-guardian-project
+cd <RUTA_PROYECTO>/GuardianEscolar
 # El archivo dvlp-front/dvlp-web/.env debe apuntar a Kong:
 #   API_URL=http://localhost:8000
 #   API_FORGOT_INFORMATION_URL=http://localhost:8000
@@ -520,7 +512,7 @@ docker compose up -d --build frontend-web
 Requiere Node 20 y la CLI de Expo. No se conteneriza en el repositorio.
 
 ```bash
-cd <RUTA_PROYECTO>/scholl-guardian-project/dvlp-front/dvlp-movil/guardian-escolar
+cd <RUTA_PROYECTO>/GuardianEscolar/dvlp-front/dvlp-movil/guardian-escolar
 cp .env.example .env      # ajustar valores
 npm install
 npm run start             # o: npm run start:lan
@@ -537,25 +529,25 @@ Variables reales (`.env.example`):
 
 La compilación/entrega móvil se gestiona con **EAS** (`eas.json` define los perfiles `development`, `preview` y `production`).
 
-### 5.9 Servicio GPS (`gps-backend`)
+### 5.9 Servicio GPS (`sg-ms-gps`)
 
 Es un servicio Java 21 independiente que **no** usa Compose. Su persistencia está **en memoria** y la autoconfiguración de base de datos está **desactivada**:
 
 ```bash
-cd <RUTA_PROYECTO>/scholl-guardian-project/gps-backend/gps-backend
+cd <RUTA_PROYECTO>/sg-ms-gps
 ./mvnw spring-boot:run
 # Expone HTTP en el puerto 8080
 ```
 
-> **Hallazgo.** Por diseño, `gps-backend` no persiste en base de datos (`spring.autoconfigure.exclude` desactiva DataSource y JPA). Su estado se pierde al reiniciar.
+> **Hallazgo.** Por diseño, `sg-ms-gps` no persiste en base de datos (`spring.autoconfigure.exclude` desactiva DataSource y JPA). Su estado se pierde al reiniciar.
 
 ### 5.10 Resumen del orden de arranque
 
 | # | Paso | Comando base |
 |---|---|---|
 | 1 | Red Docker | `docker network create sg-services-network` |
-| 2 | Base de datos + migraciones | `docker compose up -d` en `database/` |
-| 3 | Kafka + topics | `docker compose up -d` en `backend/kafka` |
+| 2 | Base de datos + migraciones | `docker compose up -d` en `sg-db/` |
+| 3 | Kafka + topics | `docker compose up -d` en `broker-kafka/` |
 | 4 | ms-school-management | `docker compose up -d --build` |
 | 5 | ms-iam | `docker compose up -d --build` |
 | 6 | Resto de microservicios .NET | `docker compose up -d --build` |
@@ -644,7 +636,7 @@ docker network inspect sg-services-network --format '{{range .Containers}}{{.Nam
 El repositorio incluye un script de verificación real que prueba las rutas del frontend a través de Kong:
 
 ```bash
-cd <RUTA_PROYECTO>/scholl-guardian-project
+cd <RUTA_PROYECTO>/GuardianEscolar
 API_URL=http://localhost:8000 ./scripts/verify-api.sh
 ```
 
@@ -705,7 +697,7 @@ Respuesta esperada (valores abreviados):
 1. **Actualizar el código** de cada repositorio implicado:
 
    ```bash
-   for r in <RUTA_PROYECTO>/backend/* <RUTA_PROYECTO>/database <RUTA_PROYECTO>/scholl-guardian-project; do
+   for r in <RUTA_PROYECTO>/sg-ms-* <RUTA_PROYECTO>/broker-kafka <RUTA_PROYECTO>/sg-db <RUTA_PROYECTO>/GuardianEscolar; do
      git -C "$r" pull --ff-only
    done
    ```
@@ -714,21 +706,21 @@ Respuesta esperada (valores abreviados):
 3. **Reconstruir y recrear los servicios** afectados:
 
    ```bash
-   cd <RUTA_PROYECTO>/backend/<servicio>
+   cd <RUTA_PROYECTO>/<repositorio-del-servicio>
    docker compose up -d --build
    ```
 
-4. **Aplicar migraciones nuevas:** volver a ejecutar los contenedores Liquibase de `database/`; Liquibase aplica **solo** los *changesets* nuevos y registra el historial:
+4. **Aplicar migraciones nuevas:** volver a ejecutar los contenedores Liquibase de `sg-db/`; Liquibase aplica **solo** los *changesets* nuevos y registra el historial:
 
    ```bash
-   cd <RUTA_PROYECTO>/database
+   cd <RUTA_PROYECTO>/sg-db
    docker compose up -d
    docker compose logs -f liquibase-iam liquibase-route
    ```
 
 5. **Verificar** con `verify-api.sh` (sección 7.2).
 
-> **Compatibilidad.** Los cambios de esquema deben respetar el orden de dependencias de clave foránea ya codificado en `docker-compose.yaml` (Geographic/Gps/Settings → School → Iam → Fleet → Route → UserManagement → Notification).
+> **Compatibilidad.** Los cambios de esquema deben respetar el orden de dependencias de clave foránea ya codificado en `sg-db/docker-compose.yaml` (Geographic/Gps/Settings → School → Iam → Fleet → Route → UserManagement → Notification).
 
 ### 8.2 Migración de datos
 
