@@ -14,7 +14,7 @@ Final delivery of the training project / Entrega final del proyecto formativo.
 | Process / Proceso | Completion of the technologist taught stage / Finalización de la etapa lectiva del tecnólogo |
 | Research seedbed / Semillero de investigación | Developers & Geeks |
 | Delivery version / Versión entregada | `final-delivery-2026` |
-| Delivery date / Fecha de entrega | 2026-11-06 |
+| Delivery date / Fecha de entrega | 2026-11-06. Code and test cut: 2026-11-04; on 2026-11-05 only the `LICENSE` file was added to backendTS and traduce-senas-evidencias / Corte del código y las pruebas: 2026-11-04; el 2026-11-05 solo se agregó el archivo `LICENSE` en backendTS y traduce-senas-evidencias |
 | Delivered by / Entregado por | JUAN MAURICIO SUAZA SOLORZANO |
 
 ## Summary / Resumen
