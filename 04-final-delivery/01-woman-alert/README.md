@@ -49,8 +49,8 @@ Final delivery of the training project / Entrega final del proyecto formativo.
 | Full name / Nombre completo | Doc. type / Tipo | Doc. number / Número | Ficha | GitHub user / Usuario | Role / Rol | Verified and authorized / Verificado y autorizado |
 |---|---|---|---|---|---|---|
 | MICHAEL STIVEN SANCHEZ CASTAÑEDA | CC | 1023375158 | 3145556 | menticio | Team lead and integrator: backend (hexagonal microservices), database, DevOps, mobile (native Kotlin module) and web / Líder e integrador: backend (microservicios hexagonales), base de datos, DevOps, móvil (módulo nativo Kotlin) y web | ☒ |
-| JUSTIN DANIELA BAHAMON BALOCO | CC | 1015407712 | 3145556 | JustinDanielaBahamon | Mobile and web frontend, UI/UX and initial database design; repository owner / Frontend móvil y web, UI/UX y diseño inicial de la base de datos; dueña de los repositorios | ☐ |
-| JOSE SEBASTIAN SUAREZ CUMACO | CC | 1077721136 | 3145556 | JoseSebastianSuarezCumaco | Web and mobile frontend (authentication, zones, active alert, map), mobile internationalization and documentation / Frontend web y móvil (autenticación, zonas, alerta activa, mapa), internacionalización móvil y documentación | ☐ |
+| JUSTIN DANIELA BAHAMON BALOCO | CC | 1015407712 | 3145556 | JustinDanielaBahamon | Mobile and web frontend, UI/UX and initial database design; repository owner / Frontend móvil y web, UI/UX y diseño inicial de la base de datos; dueña de los repositorios | ☒ |
+| JOSE SEBASTIAN SUAREZ CUMACO | CC | 1077721136 | 3145556 | JoseSebastianSuarezCumaco | Web and mobile frontend (authentication, zones, active alert, map), mobile internationalization and documentation / Frontend web y móvil (autenticación, zonas, alerta activa, mapa), internacionalización móvil y documentación | ☒ |
 
 Data use authorization: by checking the box, the member confirms their data and authorizes publishing their name, document number and ficha in this public repository, for the software registration process (Ley 1581 de 2012). Anyone who does not authorize it tells the instructor before delivering.
 
