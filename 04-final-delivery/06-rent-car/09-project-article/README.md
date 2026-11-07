@@ -4,7 +4,7 @@
 
 ## Required content / Contenido requerido
 
-- [ ] Final article of the project / Artículo final del proyecto
+- [x] Final article of the project / Artículo final del proyecto
 
 ## Format / Formato
 
