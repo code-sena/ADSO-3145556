@@ -4,9 +4,9 @@
 
 ## Required content / Contenido requerido
 
-- [ ] Requirements specification report / Informe de especificación de requisitos
-- [ ] Functional and non-functional requirements / Requisitos funcionales y no funcionales
-- [ ] User stories and prioritized backlog, if used / Historias de usuario y backlog priorizado, si se usaron
+- [x] Requirements specification report / Informe de especificación de requisitos
+- [x] Functional and non-functional requirements / Requisitos funcionales y no funcionales
+- [x] User stories and prioritized backlog, if used / Historias de usuario y backlog priorizado, si se usaron — user stories in `../02-software-analysis/`; prioritized backlog in wal-docs `03-product/` / historias de usuario en 02; backlog priorizado en wal-docs
 
 ## Format / Formato
 

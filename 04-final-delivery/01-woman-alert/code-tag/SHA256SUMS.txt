@@ -1,1 +1,9 @@
 # sha256  file / archivo
+144dd2ff7efc5cb818a5a5c6e6d0ae2c570eddd03e92a9b6326f9ee9e15c6971  AlertaMujer-final-delivery-2026-main.zip
+de6c7e03a2f83d7e96053d4024f753e9cfebf0cc8bbbadb901e59b1010d600b3  AlertaMujer-full-export.zip
+c4d0fc251780d99ed786b207e789ee909db2ab703eccf711e80ae008c2bf491e  Backend-ALERTA-MUJER-final-delivery-2026-main.zip
+c328d3b327fa0cda5e557f9ce587d1e31b05977add4f0ae0c5bbc71be16203a4  Backend-ALERTA-MUJER-full-export.zip
+78304c8af801946aa8a8a1abcc9b0b3b99bfd9e423f0a646167ea62c137dea6c  Frond-end-Web-final-delivery-2026-main.zip
+7a409dd2fba19a0ca668081c58ec24ae8f657cff38cf3e29cd9d71c2e447f652  Frond-end-Web-full-export.zip
+4fbf29a68e40cd3cd6ae4b46ce15f2995980ff9e4d16b88ea1f407614e3268b3  wal-docs-final-delivery-2026-main.zip
+85092324282d9b67b8ee4104ee37192778cf1a09df1e0680c781349df1389d1b  wal-docs-full-export.zip

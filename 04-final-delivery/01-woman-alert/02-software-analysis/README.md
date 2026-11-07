@@ -4,8 +4,8 @@
 
 ## Required content / Contenido requerido
 
-- [ ] Software analysis document / Documento de análisis del software
-- [ ] Dynamic views: use cases, sequence, activity or state diagrams / Vistas dinámicas: casos de uso, secuencia, actividades o estados
+- [x] Software analysis document / Documento de análisis del software
+- [x] Dynamic views: use cases, sequence, activity or state diagrams / Vistas dinámicas: casos de uso, secuencia, actividades o estados
 
 ## Format / Formato
 

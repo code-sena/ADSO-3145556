@@ -6,16 +6,16 @@ Every original working repository of the project must be listed here and must be
 
 Todos los repositorios originales de trabajo del proyecto deben estar aquí y deben ser **públicos**. El instructor contrasta lo entregado contra estos repositorios, así que deben seguir públicos y con todo su historial hasta terminar la revisión.
 
-If one is missing, add a row. If one is empty or no longer used, write that in the commit column. The visibility shown was checked on 2026-11-04.
+If one is missing, add a row. If one is empty or no longer used, write that in the commit column. The visibility shown was checked on 2026-11-07.
 
-Si falta alguno, agregue la fila. Si uno está vacío o ya no se usa, indíquelo en la columna del commit. La visibilidad indicada se revisó el 2026-11-04.
+Si falta alguno, agregue la fila. Si uno está vacío o ya no se usa, indíquelo en la columna del commit. La visibilidad indicada se revisó el 2026-11-07.
 
 | Component / Componente | Repository / Repositorio | Status / Estado | Access for `ariel5253` / Acceso de `ariel5253` | Commit of tag `final-delivery-2026` / Commit del tag | Main version ZIP / ZIP versión main | Full export ZIP / ZIP completo |
 |---|---|---|---|---|---|---|
-| Documentation | [code-sena/wal-docs](https://github.com/code-sena/wal-docs) | **PRIVATE: make it public / PRIVADO: hacerlo público** | Yes / Sí | | | |
-| Main repository | [JustinDanielaBahamon/AlertaMujer](https://github.com/JustinDanielaBahamon/AlertaMujer) | Public / Público | **Add / Agregar** | | | |
-| Backend | [JustinDanielaBahamon/Backend-ALERTA-MUJER](https://github.com/JustinDanielaBahamon/Backend-ALERTA-MUJER) | Public / Público | **Add / Agregar** | | | |
-| Web frontend | [JustinDanielaBahamon/Frond-end-Web](https://github.com/JustinDanielaBahamon/Frond-end-Web) | Public / Público | **Add / Agregar** | | | |
+| Documentation | [code-sena/wal-docs](https://github.com/code-sena/wal-docs) | Public / Público | Yes / Sí | [`f9a5f578`](https://github.com/code-sena/wal-docs/commit/f9a5f5789ab545a1fdc6b4dbeeff63e3dad76480) | [wal-docs-final-delivery-2026-main.zip](https://github.com/menticio/Maicol-Sanchez-ADSO-3145556/releases/download/final-delivery/wal-docs-final-delivery-2026-main.zip) | [wal-docs-full-export.zip](https://github.com/menticio/Maicol-Sanchez-ADSO-3145556/releases/download/final-delivery/wal-docs-full-export.zip) |
+| Mobile app (main repository) / App móvil (repositorio principal) | [JustinDanielaBahamon/AlertaMujer](https://github.com/JustinDanielaBahamon/AlertaMujer) | Public / Público | Invited, write (2026-11-04) / Invitado, escritura (2026-11-04) | [`1f7cf16f`](https://github.com/JustinDanielaBahamon/AlertaMujer/commit/1f7cf16f7004c305e09b8733a8f9f9a2492a70bb) | [AlertaMujer-final-delivery-2026-main.zip](https://github.com/menticio/Maicol-Sanchez-ADSO-3145556/releases/download/final-delivery/AlertaMujer-final-delivery-2026-main.zip) | [AlertaMujer-full-export.zip](https://github.com/menticio/Maicol-Sanchez-ADSO-3145556/releases/download/final-delivery/AlertaMujer-full-export.zip) |
+| Backend | [JustinDanielaBahamon/Backend-ALERTA-MUJER](https://github.com/JustinDanielaBahamon/Backend-ALERTA-MUJER) | Public / Público | Invited, write (2026-11-04) / Invitado, escritura (2026-11-04) | [`b7cdb06e`](https://github.com/JustinDanielaBahamon/Backend-ALERTA-MUJER/commit/b7cdb06ee68042248a097b5768f5ca4f1d9e7c7a) | [Backend-ALERTA-MUJER-final-delivery-2026-main.zip](https://github.com/menticio/Maicol-Sanchez-ADSO-3145556/releases/download/final-delivery/Backend-ALERTA-MUJER-final-delivery-2026-main.zip) | [Backend-ALERTA-MUJER-full-export.zip](https://github.com/menticio/Maicol-Sanchez-ADSO-3145556/releases/download/final-delivery/Backend-ALERTA-MUJER-full-export.zip) |
+| Web frontend | [JustinDanielaBahamon/Frond-end-Web](https://github.com/JustinDanielaBahamon/Frond-end-Web) | Public / Público | Invited, write (2026-11-04) / Invitado, escritura (2026-11-04) | [`377d7867`](https://github.com/JustinDanielaBahamon/Frond-end-Web/commit/377d7867db6b3f8eed034f1ac47292e849565cf6) | [Frond-end-Web-final-delivery-2026-main.zip](https://github.com/menticio/Maicol-Sanchez-ADSO-3145556/releases/download/final-delivery/Frond-end-Web-final-delivery-2026-main.zip) | [Frond-end-Web-full-export.zip](https://github.com/menticio/Maicol-Sanchez-ADSO-3145556/releases/download/final-delivery/Frond-end-Web-full-export.zip) |
 
 Before making a repository public, remove `.env` files and change any password, token or key that was ever committed.
 
