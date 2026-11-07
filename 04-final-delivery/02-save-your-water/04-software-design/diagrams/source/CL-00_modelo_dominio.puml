@@ -1,0 +1,56 @@
+@startuml CL-00_modelo_dominio
+!include _estilo.iuml
+title CL-00 · Modelo de dominio general (vista conceptual entre microservicios)
+hide empty members
+skinparam linetype ortho
+
+skinparam linetype polyline
+package "ms-iam" {
+  class Usuario
+  class Rol
+}
+package "ms-places" {
+  class Lugar
+  class Ubicacion as "Ubicación\n(país, departamento, municipio)"
+  class Tarifa
+  class Consejo
+  class Miembro as "Miembro del lugar\n(dueño / colaborador)"
+  class EnlaceInvitado as "Enlace de invitado"
+}
+package "ms-device" {
+  class Medidor
+}
+package "ms-consumption" {
+  class Lectura
+  class Meta as "Meta mensual"
+  class Recibo
+  class Reporte
+}
+package "ms-valve" {
+  class Valvula as "Válvula"
+  class Orden as "Orden de válvula"
+  class Regla as "Regla de cierre automático"
+}
+package "ms-notification" {
+  class Notificacion as "Notificación"
+  class Preferencia as "Preferencia de canal"
+}
+Usuario "1..*" -- "1..*" Rol
+Usuario "1" -- "0..*" Miembro
+Lugar "1" *-- "1..*" Miembro
+Lugar "1" *-- "0..*" EnlaceInvitado
+Lugar --> Ubicacion
+Lugar "1" *-- "0..*" Tarifa
+Usuario "0..*" -- "0..*" Consejo : favoritos
+Lugar "1" -- "0..1" Medidor : vinculado
+Medidor "1" -- "0..*" Lectura : envía
+Lugar "1" -- "0..*" Lectura
+Lugar "1" -- "0..*" Meta
+Lugar "1" -- "0..*" Recibo
+Lugar "1" -- "0..*" Reporte
+Lugar "1" -- "1" Valvula
+Valvula "1" *-- "0..*" Orden
+Valvula "1" -- "0..1" Regla
+Usuario "1" -- "0..*" Notificacion
+Usuario "1" -- "1..*" Preferencia
+@enduml

@@ -1,0 +1,41 @@
+@startuml AC-02_cierre_manual
+!include _estilo.iuml
+title AC-02 · Actividad: cierre manual de la válvula (HU-020)
+
+|Dueño|
+start
+:Pulsar "Cerrar agua";
+|Sistema|
+:Mostrar advertencia: el lugar\nquedará sin agua;
+|Dueño|
+if (¿Confirma?) then (no)
+  stop
+endif
+|Sistema|
+:Enviar código de confirmación\nal correo (vigencia 5 min);
+|Dueño|
+:Escribir el código;
+|Sistema|
+if (¿Código válido?) then (no)
+  :Informar intentos restantes;
+  stop
+endif
+if (¿Medidor conectado y sin\notra orden en curso?) then (no)
+  :Informar por qué no se puede;
+  stop
+endif
+:Crear orden CLOSE (SENT)\ny enviarla por MQTT;
+|Medidor|
+:Activar el relé;
+:Reportar el nuevo estado;
+|Sistema|
+if (¿Confirmación antes de 30 s?) then (sí)
+  :Orden ACK_SUCCESS;\nVálvula = CLOSED;
+  :Registrar usuario, fecha y hora;
+  :Notificar "Válvula cerrada" (crítica);
+else (no)
+  :Orden ACK_TIMEOUT;
+  :Informar el fallo;\nel estado no cambia;
+endif
+stop
+@enduml

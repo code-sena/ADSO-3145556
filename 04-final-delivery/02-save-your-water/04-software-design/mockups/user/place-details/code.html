@@ -1,0 +1,442 @@
+<!DOCTYPE html><html class="light" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Casa Principal - Detalles del Lugar | Cuida Tu Agua</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Theme Configuration -->
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "tertiary-fixed": "#a7edff",
+            "background": "#f8f9ff",
+            "inverse-surface": "#213145",
+            "surface-canvas": "#F8FBFD",
+            "status-success": "#10B981",
+            "on-tertiary-fixed": "#001f25",
+            "on-primary-fixed": "#001e2c",
+            "surface-container-low": "#eff4ff",
+            "on-tertiary": "#ffffff",
+            "tertiary-container": "#008094",
+            "status-warning": "#F59E0B",
+            "secondary": "#315ca9",
+            "primary-fixed-dim": "#77d1ff",
+            "on-secondary-fixed": "#001a42",
+            "surface-container": "#e5eeff",
+            "surface-bright": "#f8f9ff",
+            "error-container": "#ffdad6",
+            "error": "#ba1a1a",
+            "surface-tint": "#006688",
+            "on-background": "#0b1c30",
+            "outline-variant": "#bdc8d0",
+            "on-primary": "#ffffff",
+            "primary": "#006385",
+            "on-tertiary-fixed-variant": "#004e5b",
+            "on-error": "#ffffff",
+            "status-danger": "#EF4444",
+            "surface-container-highest": "#d3e4fe",
+            "tertiary": "#006575",
+            "surface-container-high": "#dce9ff",
+            "surface-subtle": "#F2F2F2",
+            "inverse-on-surface": "#eaf1ff",
+            "primary-fixed": "#c2e8ff",
+            "primary-container": "#007ea7",
+            "surface-dim": "#cbdbf5",
+            "on-secondary-container": "#033e8a",
+            "on-tertiary-container": "#f8fdff",
+            "secondary-container": "#86adff",
+            "surface": "#f8f9ff",
+            "inverse-primary": "#77d1ff",
+            "surface-container-lowest": "#ffffff",
+            "on-secondary": "#ffffff",
+            "on-error-container": "#93000a",
+            "surface-card": "#FFFFFF",
+            "on-primary-fixed-variant": "#004d68",
+            "secondary-fixed-dim": "#aec6ff",
+            "on-secondary-fixed-variant": "#0f4490",
+            "on-surface": "#0b1c30",
+            "tertiary-fixed-dim": "#58d6f1",
+            "secondary-fixed": "#d8e2ff",
+            "on-surface-variant": "#3e484f",
+            "border-subtle": "#E2E8F0",
+            "surface-variant": "#d3e4fe",
+            "on-primary-container": "#fbfcff",
+            "outline": "#6e787f"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "margin": "2.5rem",
+            "space-md": "1rem",
+            "space-lg": "1.5rem",
+            "space-sm": "0.75rem",
+            "gutter": "2rem",
+            "space-xl": "3rem",
+            "space-xs": "0.5rem"
+          },
+          "fontFamily": {
+            "caption": ["Manrope"],
+            "display-hero": ["Manrope"],
+            "headline-lg": ["Manrope"],
+            "body-md": ["Manrope"],
+            "telemetry-md": ["IBM Plex Mono"],
+            "telemetry-sm": ["IBM Plex Mono"],
+            "headline-md": ["Manrope"],
+            "body-lg": ["Manrope"],
+            "headline-sm": ["Manrope"],
+            "telemetry-lg": ["IBM Plex Mono"],
+            "body-bold": ["Manrope"]
+          },
+          "fontSize": {
+            "caption": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+            "display-hero": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+            "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.015em", "fontWeight": "700" }],
+            "body-md": ["14px", { "lineHeight": "22px", "fontWeight": "400" }],
+            "telemetry-md": ["16px", { "lineHeight": "24px", "fontWeight": "500" }],
+            "telemetry-sm": ["12px", { "lineHeight": "18px", "letterSpacing": "0.04em", "fontWeight": "400" }],
+            "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "body-lg": ["16px", { "lineHeight": "26px", "fontWeight": "400" }],
+            "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+            "telemetry-lg": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "body-bold": ["14px", { "lineHeight": "22px", "fontWeight": "600" }]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-family: 'Material Symbols Outlined';
+      font-weight: normal;
+      font-style: normal;
+      font-size: 20px;
+      line-height: 1;
+      letter-spacing: normal;
+      text-transform: none;
+      display: inline-block;
+      white-space: nowrap;
+      word-wrap: normal;
+      direction: ltr;
+      -webkit-font-smoothing: antialiased;
+    }
+    .custom-shadow-lvl1 {
+      box-shadow: 0 1px 3px 0 rgba(2, 62, 138, 0.04), 0 1px 2px -1px rgba(2, 62, 138, 0.04);
+    }
+    .custom-shadow-lvl2 {
+      box-shadow: 0 10px 25px -5px rgba(2, 62, 138, 0.06), 0 8px 10px -6px rgba(2, 62, 138, 0.04);
+    }
+  </style>
+</head>
+<body class="bg-surface-canvas text-on-surface antialiased min-h-screen flex flex-col font-body-md selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- TOP APP BAR (Shared Component JSON Anchored) -->
+<header class="bg-surface-card dark:bg-inverse-surface border-b border-border-subtle dark:border-outline-variant shadow-sm docked full-width top-0 sticky z-40">
+<div class="w-full h-16 max-w-[1600px] mx-auto px-margin flex items-center justify-between">
+<!-- Brand Logo & Context -->
+<div class="flex items-center gap-space-xl">
+<a class="text-headline-sm font-headline-sm font-bold text-primary dark:text-inverse-primary flex items-center gap-space-xs cursor-pointer active:scale-95 transition-transform duration-100" href="#">
+<img src="https://lh3.googleusercontent.com/aida/AEtjO1XAcgthymaBhgC79CLgZ-JHDDgjQOYchvRT0V2DWvR8itykSJq8TomWpRo9f6a8jWciEUzK1Qy-E0bIvaij8pnV2XJqwi93Mp2b7sn0_8_KFrbXPdEdlYthqXTckR7007DKMAH0Uxrtd2HgvCd1qqmUrbQ5VhN0kqprCaFCkPDRmavj_qJSN5AYhRHwtqobOqKuDaGs4Lr5VnecwnnZvrGjDWxLEnVN9wCEr60XV50AogOIu_oG---Dma8" alt="Cuida Tu Agua" class="w-7 h-7 object-contain inline-block">
+<span class="">Cuida Tu Agua</span>
+</a>
+<!-- Desktop Navigation Links -->
+<nav class="hidden md:flex items-center space-x-1 h-16">
+<!-- Active link: Lugares (contextually this is Place Details) -->
+<a class="text-primary dark:text-inverse-primary font-body-bold border-b-2 border-primary dark:border-inverse-primary h-full flex items-center px-space-sm transition-colors duration-150" href="#">
+            Lugares
+          </a>
+<a class="text-on-surface-variant dark:text-outline-variant font-body-md h-full flex items-center px-space-sm hover:text-primary dark:hover:text-inverse-primary hover:bg-surface-container-low dark:hover:bg-surface-variant transition-colors duration-150" href="#">
+            Dispositivos
+          </a>
+<a class="text-on-surface-variant dark:text-outline-variant font-body-md h-full flex items-center px-space-sm hover:text-primary dark:hover:text-inverse-primary hover:bg-surface-container-low dark:hover:bg-surface-variant transition-colors duration-150" href="#">
+            Alertas
+          </a>
+<a class="text-on-surface-variant dark:text-outline-variant font-body-md h-full flex items-center px-space-sm hover:text-primary dark:hover:text-inverse-primary hover:bg-surface-container-low dark:hover:bg-surface-variant transition-colors duration-150" href="#">
+            Configuración
+          </a>
+</nav>
+</div>
+<!-- Trailing Cluster -->
+<div class="flex items-center gap-space-sm">
+<button class="h-10 px-4 rounded-lg bg-primary hover:bg-on-secondary-container text-on-primary font-body-bold text-body-md flex items-center gap-space-xs transition-colors duration-150 cursor-pointer active:scale-95" type="button">
+<span class="material-symbols-outlined text-lg">add</span>
+<span class="">Nuevo Lugar</span>
+</button>
+<div class="h-6 w-px bg-border-subtle mx-1 hidden sm:block"></div>
+<button class="p-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-150 cursor-pointer" title="Notificaciones" type="button">
+<span class="material-symbols-outlined text-xl">notifications</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-150 cursor-pointer" title="Ayuda" type="button">
+<span class="material-symbols-outlined text-xl">help_outline</span>
+</button>
+<!-- Admin Profile Avatar -->
+<div class="ml-2 pl-2 border-l border-border-subtle flex items-center gap-space-xs">
+<img alt="Foto de perfil del usuario administrador" class="w-9 h-9 rounded-full object-cover ring-2 ring-primary-fixed" data-alt="A clean professional studio portrait of an environmental systems administrator wearing minimal modern technical attire against a soft neutral pale blue architectural studio background with high-key balanced lighting and crystal clear focus." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAlPHsUUqG5kst7ht1bXFVSajaVNVTjcUjL_FNdQeuC_zUp4g-6bRiy6IEGsaNcIPtgZ_2v2CurX-Yik3ewiY8Ar4xP5iYOZBMaoLOMWB3SlX29-HANWOkzFPTm1U3VC2YO4uEqe0LPDOmWoPE3m5rRgKhsF8PAy20APevqWYeEX4VL5EPO5txaagHJv5BuUFgxVrP4UTAIfS7qf9xgTHgYbA5ZcIRfvZ-at563YBTW7ogsj4pJU6ZO">
+</div>
+</div>
+</div>
+</header>
+<!-- MAIN CANVAS -->
+<main class="flex-grow w-full max-w-[1600px] mx-auto px-margin py-space-lg flex flex-col">
+<div class="max-w-[1000px] mx-auto">
+<!-- HEADER DE NAVEGACIÓN -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+<div class="flex items-center gap-4">
+<!-- Botón [◀ Volver] hacia la lista -->
+<a class="inline-flex items-center gap-1 px-3 py-2 rounded-lg bg-surface-card border border-border-subtle text-primary font-body-bold text-body-md hover:bg-surface-container-low hover:border-primary-container transition-all duration-150 custom-shadow-lvl1 active:scale-95 group" href="#">
+<span class="material-symbols-outlined text-lg transition-transform group-hover:-translate-x-0.5">arrow_back</span>
+<span class="">Volver</span>
+</a>
+<!-- Título 'Casa Principal' -->
+<h1 class="text-headline-md font-headline-md font-bold text-on-surface tracking-tight">
+Casa Principal
+</h1>
+</div>
+<!-- Acciones a la derecha: Editar y Eliminar -->
+<div class="flex items-center gap-space-sm">
+<!-- Botón [✏️ Editar] -->
+<button class="h-10 px-4 rounded-lg bg-surface-card border-[1.5px] border-border-subtle text-secondary hover:bg-surface-canvas hover:border-secondary transition-colors duration-150 flex items-center gap-2 font-body-bold text-body-md custom-shadow-lvl1 active:scale-95 cursor-pointer" type="button">
+<span class="material-symbols-outlined text-lg text-secondary">edit</span>
+<span class="">Editar</span>
+</button>
+<!-- Botón [🗑️ Eliminar] -->
+<button class="h-10 px-4 rounded-lg bg-surface-card border-[1.5px] border-error text-error hover:bg-error-container/30 hover:border-error transition-colors duration-150 flex items-center gap-2 font-body-bold text-body-md custom-shadow-lvl1 active:scale-95 cursor-pointer" type="button">
+<span class="material-symbols-outlined text-lg text-error">delete</span>
+<span class="">Eliminar</span>
+</button>
+</div>
+</div>
+<!-- LAYOUT 2 COLUMNAS (60% / 40%, gap-6 equilibrado) -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-stretch">
+<!-- COLUMNA IZQUIERDA (60% -> 7 de 12 col en md:grid) -->
+<section class="md:col-span-7 bg-surface-card border border-border-subtle rounded-xl p-6 custom-shadow-lvl1 transition-shadow hover:shadow-md flex flex-col justify-between">
+<div>
+<!-- Header de Card -->
+<div class="flex items-center justify-between mb-4 pb-2 border-b border-border-subtle/60">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">home_pin</span>
+<h2 class="text-caption font-telemetry-sm uppercase tracking-wider text-outline font-semibold">
+Información del Lugar
+</h2>
+</div>
+<span class="text-caption font-telemetry-sm text-status-success bg-status-success/10 px-2 py-0.5 rounded-full font-medium">
+Activo
+</span>
+</div>
+<!-- Atributos del Lugar -->
+<div class="space-y-3.5">
+<div>
+<p class="text-caption font-caption text-outline mb-0.5">Nombre</p>
+<p class="text-lg font-headline-sm font-semibold text-on-surface">Casa Principal</p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-0.5">
+<div>
+<p class="text-caption font-caption text-outline mb-0.5">Tipo</p>
+<div class="flex items-center gap-1.5 text-body-md font-body-md text-on-surface">
+<span class="material-symbols-outlined text-secondary text-base">home</span>
+<span class="">Residencial</span>
+</div>
+</div>
+<div>
+<p class="text-caption font-caption text-outline mb-0.5">Ciudad</p>
+<div class="flex items-center gap-1.5 text-body-md font-body-md text-on-surface">
+<span class="material-symbols-outlined text-secondary text-base">location_city</span>
+<span class="">Bogotá, Colombia</span>
+</div>
+</div>
+</div>
+<div>
+<p class="text-caption font-caption text-outline mb-0.5">Dirección</p>
+<div class="flex items-center gap-1.5 text-body-md font-body-md text-on-surface">
+<span class="material-symbols-outlined text-secondary text-base">signpost</span>
+<span class="">Calle 10 #5-42, Apto 301</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Notas del Sitio -->
+<div class="mt-4 pt-3 border-t border-border-subtle/80">
+<p class="text-caption font-caption text-outline mb-1.5">Notas del Sitio</p>
+<p class="text-body-md font-body-md italic text-on-surface-variant bg-surface-canvas p-3 rounded-lg border border-border-subtle/80">
+"Lugar con jardín trasero y sistema de riego por goteo."
+</p>
+</div>
+</section>
+<!-- COLUMNA DERECHA (40% -> 5 de 12 col en md:grid) -->
+<section class="md:col-span-5 bg-surface-card border border-border-subtle rounded-xl p-6 custom-shadow-lvl1 transition-shadow hover:shadow-md flex flex-col justify-between">
+<div>
+<!-- Header de Card -->
+<div class="flex items-center justify-between mb-4 pb-2 border-b border-border-subtle/60">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">sensors</span>
+<h2 class="text-caption font-telemetry-sm uppercase tracking-wider text-outline font-semibold">
+Dispositivo Vinculado
+</h2>
+</div>
+<!-- Badge: 🟢 En línea -->
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-caption font-body-bold text-status-success bg-status-success/10 border border-status-success/20">
+<span class="w-2 h-2 rounded-full bg-status-success animate-pulse"></span>
+En línea
+</span>
+</div>
+<!-- Datos Técnicos del Hardware IoT -->
+<div class="space-y-3">
+<!-- ID del Dispositivo -->
+<div>
+<p class="text-caption font-caption text-outline mb-0.5">Identificador de Hardware</p>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-lg">power</span>
+<p class="text-lg font-headline-sm font-semibold text-on-surface">
+ESP32-<span class="font-telemetry-md font-medium text-primary">12345</span>
+</p>
+</div>
+</div>
+<!-- Última Sincronía -->
+<div>
+<p class="text-caption font-caption text-outline mb-0.5">Última sincronía</p>
+<div class="flex items-center gap-1.5 text-caption font-caption text-on-surface">
+<span class="material-symbols-outlined text-base text-outline">sync</span>
+<span class="">hace <span class="font-telemetry-sm font-medium text-on-surface">30 segundos</span></span>
+</div>
+</div>
+<!-- Firmware -->
+<div>
+<p class="text-caption font-caption text-outline mb-1">Firmware</p>
+<div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-surface-canvas rounded border border-border-subtle font-telemetry-sm text-secondary">
+<span class="material-symbols-outlined text-xs">memory</span>
+<span class="">v2.1.4-prod</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Separador y Acciones -->
+<div class="mt-5 pt-4 border-t border-border-subtle flex flex-col gap-2.5">
+<!-- Botón [Reinstalar] -->
+<button class="w-full h-10 rounded-lg bg-surface-card border-[1.5px] border-border-subtle text-secondary hover:bg-surface-container-low hover:border-secondary transition-colors duration-150 font-body-bold text-body-md flex items-center justify-center gap-2 custom-shadow-lvl1 active:scale-95 cursor-pointer" type="button">
+<span class="material-symbols-outlined text-lg">restart_alt</span>
+<span class="">Reinstalar</span>
+</button>
+<!-- Botón [Desvincular] -->
+<button class="w-full h-10 rounded-lg bg-surface-card border-[1.5px] border-error/50 text-error hover:bg-error-container/30 hover:border-error transition-colors duration-150 font-body-bold text-body-md flex items-center justify-center gap-2 custom-shadow-lvl1 active:scale-95 cursor-pointer" type="button">
+<span class="material-symbols-outlined text-lg">link_off</span>
+<span class="">Desvincular</span>
+</button>
+</div>
+</section>
+</div>
+<!-- CARD CONSUMO HOY (Preview) debajo del grid a 100% de los 1000px -->
+<section class="w-full mt-6 bg-surface-card border border-border-subtle rounded-xl p-6 custom-shadow-lvl1 transition-shadow hover:shadow-md">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+<!-- Metadatos de Consumo -->
+<div class="space-y-2">
+<!-- Título: 'CONSUMO HOY' -->
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-base">speed</span>
+<h3 class="text-body-md font-telemetry-md font-medium text-outline uppercase tracking-wider">
+Consumo Hoy
+</h3>
+</div>
+<div class="flex items-baseline gap-4 flex-wrap">
+<!-- Valor destacado: '123.45 L' -->
+<span class="text-headline-lg font-telemetry-lg font-bold text-primary-container tracking-tight">
+123.45 <span class="text-xl font-headline-md font-semibold text-secondary">L</span>
+</span>
+<!-- Indicador: '↓ 12% vs ayer' -->
+<span class="inline-flex items-center gap-1 text-body-md font-body-md font-medium text-status-success bg-status-success/10 px-2.5 py-1 rounded-full border border-status-success/20">
+<span class="material-symbols-outlined text-base">arrow_downward</span>
+<span class="">12% vs ayer</span>
+</span>
+</div>
+<p class="text-caption font-telemetry-sm text-outline">
+Medición en tiempo real desde sensor volumétrico de flujo
+</p>
+</div>
+<!-- Sparkline Mini Chart Visual Horario (300px x 60px) -->
+<div class="flex flex-col items-start lg:items-end gap-2">
+<div class="p-2 bg-surface-canvas rounded-lg border border-border-subtle inline-block">
+<!-- SVG Sparkline de ondas de agua y consumo -->
+<svg aria-label="Gráfica de consumo por horas" class="overflow-visible" fill="none" height="60" viewBox="0 0 300 60" width="300" xmlns="http://www.w3.org/2000/svg">
+<!-- Sombra de gradiente de agua -->
+<defs>
+<linearGradient gradientUnits="userSpaceOnUse" id="waterFlowGradient" x1="0" x2="0" y1="0" y2="60">
+<stop offset="0%" stop-color="#0096C7" stop-opacity="0.32"></stop>
+<stop offset="100%" stop-color="#48CAE4" stop-opacity="0.0"></stop>
+</linearGradient>
+</defs>
+<!-- Área sombreada bajo la curva -->
+<path d="M 0 48 Q 25 36, 50 42 T 100 24 T 150 32 T 200 16 T 250 28 T 300 14 L 300 60 L 0 60 Z" fill="url(#waterFlowGradient)"></path>
+<!-- Línea de flujo hidráulico -->
+<path d="M 0 48 Q 25 36, 50 42 T 100 24 T 150 32 T 200 16 T 250 28 T 300 14" fill="none" stroke="#0096C7" stroke-linecap="round" stroke-width="2.5"></path>
+<!-- Puntos clave del sparkline -->
+<circle cx="100" cy="24" fill="#0096C7" r="3.5" stroke="#FFFFFF" stroke-width="1.5"></circle>
+<circle cx="200" cy="16" fill="#0096C7" r="3.5" stroke="#FFFFFF" stroke-width="1.5"></circle>
+<circle cx="300" cy="14" fill="#023E8A" r="4" stroke="#FFFFFF" stroke-width="2"></circle>
+</svg>
+</div>
+<div class="w-[300px] flex justify-between text-caption font-telemetry-sm text-outline-variant px-1">
+<span class="">00:00</span>
+<span class="">06:00</span>
+<span class="">12:00</span>
+<span class="">18:00</span>
+<span class="">Ahora</span>
+</div>
+</div>
+<!-- Enlace Interactivo 'Ver gráficas completas →' -->
+<div class="lg:border-l lg:border-border-subtle lg:pl-6 flex items-center">
+<a class="inline-flex items-center gap-1.5 text-body-md font-body-bold text-primary-container hover:text-on-secondary-container hover:translate-x-1 transition-all duration-150 cursor-pointer" href="#">
+<span class="">Ver gráficas completas</span>
+<span class="material-symbols-outlined text-lg">arrow_forward</span>
+</a>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- WEB FOOTER (Shared Component JSON Anchored) -->
+<footer class="bg-surface-canvas dark:bg-surface-dim border-t border-border-subtle dark:border-outline-variant docked full-width bottom mt-auto">
+<div class="w-full max-w-[1600px] mx-auto px-margin py-space-lg flex flex-col md:flex-row items-center justify-between gap-space-md">
+<!-- Brand & Copyright -->
+<div class="flex flex-col sm:flex-row items-center gap-3 text-center sm:text-left">
+<span class="text-headline-sm font-headline-sm font-bold text-primary dark:text-inverse-primary flex items-center gap-1">
+<img src="https://lh3.googleusercontent.com/aida/AEtjO1XAcgthymaBhgC79CLgZ-JHDDgjQOYchvRT0V2DWvR8itykSJq8TomWpRo9f6a8jWciEUzK1Qy-E0bIvaij8pnV2XJqwi93Mp2b7sn0_8_KFrbXPdEdlYthqXTckR7007DKMAH0Uxrtd2HgvCd1qqmUrbQ5VhN0kqprCaFCkPDRmavj_qJSN5AYhRHwtqobOqKuDaGs4Lr5VnecwnnZvrGjDWxLEnVN9wCEr60XV50AogOIu_oG---Dma8" alt="Cuida Tu Agua" class="w-7 h-7 object-contain inline-block">
+          Cuida Tu Agua
+        </span>
+<span class="hidden sm:inline text-outline-variant">|</span>
+<p class="text-caption font-caption text-on-surface-variant dark:text-outline-variant">
+          © 2024 Cuida Tu Agua. Sistema de Monitoreo de Recursos Hídricos e IoT. Todos los derechos reservados.
+        </p>
+</div>
+<!-- Footer Navigation Links -->
+<div class="flex items-center gap-6">
+<a class="text-on-surface-variant dark:text-outline-variant font-body-md hover:text-primary dark:hover:text-inverse-primary transition-colors duration-150 cursor-pointer" href="#">
+          Soporte Técnico
+        </a>
+<a class="text-on-surface-variant dark:text-outline-variant font-body-md hover:text-primary dark:hover:text-inverse-primary transition-colors duration-150 cursor-pointer" href="#">
+          Documentación API
+        </a>
+<a class="text-on-surface-variant dark:text-outline-variant font-body-md hover:text-primary dark:hover:text-inverse-primary transition-colors duration-150 cursor-pointer" href="#">
+          Privacidad
+        </a>
+<a class="text-on-surface-variant dark:text-outline-variant font-body-md hover:text-primary dark:hover:text-inverse-primary transition-colors duration-150 cursor-pointer" href="#">
+          Términos
+        </a>
+</div>
+</div>
+</footer>
+
+
+
+
+</body></html>

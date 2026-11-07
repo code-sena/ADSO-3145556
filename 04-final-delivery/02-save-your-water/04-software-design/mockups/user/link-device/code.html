@@ -1,0 +1,419 @@
+<!DOCTYPE html><html class="light" lang="es" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Vincular Dispositivo - Cuida Tu Agua</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "tertiary-fixed": "#a7edff",
+            "background": "#f8f9ff",
+            "inverse-surface": "#213145",
+            "surface-canvas": "#F8FBFD",
+            "status-success": "#10B981",
+            "on-tertiary-fixed": "#001f25",
+            "on-primary-fixed": "#001e2c",
+            "surface-container-low": "#eff4ff",
+            "on-tertiary": "#ffffff",
+            "tertiary-container": "#008094",
+            "status-warning": "#F59E0B",
+            "secondary": "#315ca9",
+            "primary-fixed-dim": "#77d1ff",
+            "on-secondary-fixed": "#001a42",
+            "surface-container": "#e5eeff",
+            "surface-bright": "#f8f9ff",
+            "error-container": "#ffdad6",
+            "error": "#ba1a1a",
+            "surface-tint": "#006688",
+            "on-background": "#0b1c30",
+            "outline-variant": "#bdc8d0",
+            "on-primary": "#ffffff",
+            "primary": "#006385",
+            "on-tertiary-fixed-variant": "#004e5b",
+            "on-error": "#ffffff",
+            "status-danger": "#EF4444",
+            "surface-container-highest": "#d3e4fe",
+            "tertiary": "#006575",
+            "surface-container-high": "#dce9ff",
+            "surface-subtle": "#F2F2F2",
+            "inverse-on-surface": "#eaf1ff",
+            "primary-fixed": "#c2e8ff",
+            "primary-container": "#007ea7",
+            "surface-dim": "#cbdbf5",
+            "on-secondary-container": "#033e8a",
+            "on-tertiary-container": "#f8fdff",
+            "secondary-container": "#86adff",
+            "surface": "#f8f9ff",
+            "inverse-primary": "#77d1ff",
+            "surface-container-lowest": "#ffffff",
+            "on-secondary": "#ffffff",
+            "on-error-container": "#93000a",
+            "surface-card": "#FFFFFF",
+            "on-primary-fixed-variant": "#004d68",
+            "secondary-fixed-dim": "#aec6ff",
+            "on-secondary-fixed-variant": "#0f4490",
+            "on-surface": "#0b1c30",
+            "tertiary-fixed-dim": "#58d6f1",
+            "secondary-fixed": "#d8e2ff",
+            "on-surface-variant": "#3e484f",
+            "border-subtle": "#E2E8F0",
+            "surface-variant": "#d3e4fe",
+            "on-primary-container": "#fbfcff",
+            "outline": "#6e787f"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "margin": "2.5rem",
+            "space-md": "1rem",
+            "space-lg": "1.5rem",
+            "space-sm": "0.75rem",
+            "gutter": "2rem",
+            "space-xl": "3rem",
+            "space-xs": "0.5rem"
+          },
+          "fontFamily": {
+            "caption": ["Manrope"],
+            "display-hero": ["Manrope"],
+            "headline-lg": ["Manrope"],
+            "body-md": ["Manrope"],
+            "telemetry-md": ["IBM Plex Mono"],
+            "telemetry-sm": ["IBM Plex Mono"],
+            "headline-md": ["Manrope"],
+            "body-lg": ["Manrope"],
+            "headline-sm": ["Manrope"],
+            "telemetry-lg": ["IBM Plex Mono"],
+            "body-bold": ["Manrope"]
+          },
+          "fontSize": {
+            "caption": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+            "display-hero": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+            "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.015em", "fontWeight": "700" }],
+            "body-md": ["14px", { "lineHeight": "22px", "fontWeight": "400" }],
+            "telemetry-md": ["16px", { "lineHeight": "24px", "fontWeight": "500" }],
+            "telemetry-sm": ["12px", { "lineHeight": "18px", "letterSpacing": "0.04em", "fontWeight": "400" }],
+            "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "body-lg": ["16px", { "lineHeight": "26px", "fontWeight": "400" }],
+            "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+            "telemetry-lg": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "body-bold": ["14px", { "lineHeight": "22px", "fontWeight": "600" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    .custom-shadow {
+      box-shadow: 0 1px 3px 0 rgba(2, 62, 138, 0.04), 0 1px 2px -1px rgba(2, 62, 138, 0.04);
+    }
+    .scan-guide {
+      position: relative;
+    }
+    .scan-guide::before {
+      content: '';
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      width: 16px;
+      height: 16px;
+      border-top: 2.5px solid #0096C7;
+      border-left: 2.5px solid #0096C7;
+      border-top-left-radius: 4px;
+    }
+    .scan-guide::after {
+      content: '';
+      position: absolute;
+      bottom: 12px;
+      right: 12px;
+      width: 16px;
+      height: 16px;
+      border-bottom: 2.5px solid #0096C7;
+      border-right: 2.5px solid #0096C7;
+      border-bottom-right-radius: 4px;
+    }
+    .corner-tr {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 16px;
+      height: 16px;
+      border-top: 2.5px solid #0096C7;
+      border-right: 2.5px solid #0096C7;
+      border-top-right-radius: 4px;
+    }
+    .corner-bl {
+      position: absolute;
+      bottom: 12px;
+      left: 12px;
+      width: 16px;
+      height: 16px;
+      border-bottom: 2.5px solid #0096C7;
+      border-left: 2.5px solid #0096C7;
+      border-bottom-left-radius: 4px;
+    }
+    @keyframes scanline {
+      0% { transform: translateY(0); opacity: 0; }
+      50% { opacity: 0.9; }
+      100% { transform: translateY(140px); opacity: 0; }
+    }
+    .scan-laser {
+      animation: scanline 2.6s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body class="bg-surface-canvas text-on-surface font-body-md antialiased min-h-screen flex flex-col justify-between selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- ==================== SHARED HEADER (TopNavBar) ==================== -->
+<header class="bg-surface-card dark:bg-inverse-surface border-b border-border-subtle dark:border-outline-variant shadow-sm sticky top-0 z-50">
+<div class="w-full h-16 max-w-[1600px] mx-auto px-margin flex items-center justify-between">
+<!-- Brand Logo / Product Name -->
+<div class="flex items-center gap-space-md">
+<a class="text-headline-sm font-headline-sm font-bold text-primary dark:text-inverse-primary flex items-center gap-space-xs transition-transform duration-100 active:scale-95" href="#">
+<img src="https://lh3.googleusercontent.com/aida/AEtjO1XAcgthymaBhgC79CLgZ-JHDDgjQOYchvRT0V2DWvR8itykSJq8TomWpRo9f6a8jWciEUzK1Qy-E0bIvaij8pnV2XJqwi93Mp2b7sn0_8_KFrbXPdEdlYthqXTckR7007DKMAH0Uxrtd2HgvCd1qqmUrbQ5VhN0kqprCaFCkPDRmavj_qJSN5AYhRHwtqobOqKuDaGs4Lr5VnecwnnZvrGjDWxLEnVN9wCEr60XV50AogOIu_oG---Dma8" alt="Cuida Tu Agua" class="w-7 h-7 object-contain inline-block shrink-0">
+<span class="">Cuida Tu Agua</span>
+</a>
+</div>
+<!-- Navigation Links -->
+<nav class="hidden md:flex items-center h-full gap-2">
+<a class="text-on-surface-variant dark:text-outline-variant font-body-md h-full flex items-center px-space-sm hover:text-primary dark:hover:text-inverse-primary hover:bg-surface-container-low dark:hover:bg-surface-variant transition-colors duration-150 cursor-pointer" href="#">
+          Lugares
+        </a>
+<a class="text-primary dark:text-inverse-primary font-body-bold border-b-2 border-primary dark:border-inverse-primary h-full flex items-center px-space-sm hover:text-primary dark:hover:text-inverse-primary hover:bg-surface-container-low dark:hover:bg-surface-variant transition-colors duration-150 cursor-pointer" href="#">
+          Dispositivos
+        </a>
+<a class="text-on-surface-variant dark:text-outline-variant font-body-md h-full flex items-center px-space-sm hover:text-primary dark:hover:text-inverse-primary hover:bg-surface-container-low dark:hover:bg-surface-variant transition-colors duration-150 cursor-pointer" href="#">
+          Alertas
+        </a>
+<a class="text-on-surface-variant dark:text-outline-variant font-body-md h-full flex items-center px-space-sm hover:text-primary dark:hover:text-inverse-primary hover:bg-surface-container-low dark:hover:bg-surface-variant transition-colors duration-150 cursor-pointer" href="#">
+          Configuración
+        </a>
+</nav>
+<!-- Trailing Action Cluster -->
+<div class="flex items-center gap-space-sm">
+<button class="hidden sm:inline-flex items-center gap-1.5 h-10 px-4 rounded-lg bg-primary text-on-primary font-body-bold text-body-md hover:bg-primary-container transition-all duration-150 cursor-pointer active:scale-95 shadow-sm" type="button">
+<span class="material-symbols-outlined text-[18px]">add</span>
+          Nuevo Lugar
+        </button>
+<div class="flex items-center gap-1 border-l border-border-subtle pl-2">
+<button aria-label="Notificaciones" class="p-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors cursor-pointer active:scale-95" type="button">
+<span class="material-symbols-outlined text-[22px]">notifications</span>
+</button>
+<button aria-label="Ayuda" class="p-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors cursor-pointer active:scale-95" type="button">
+<span class="material-symbols-outlined text-[22px]">help_outline</span>
+</button>
+</div>
+<div class="flex items-center ml-1">
+<div class="w-9 h-9 rounded-full bg-surface-container-high border border-border-subtle flex items-center justify-center text-primary font-body-bold text-caption cursor-pointer overflow-hidden ring-2 ring-transparent hover:ring-primary/20 transition-all" title="Foto de perfil del usuario administrador">
+<span class="material-symbols-outlined text-xl text-primary">account_circle</span>
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- ==================== MAIN WORKSPACE ==================== -->
+<main class="flex-1 w-full max-w-[1600px] mx-auto px-margin py-8 flex flex-col">
+<!-- SUBHEADER / RETROCESO & TÍTULO -->
+<div class="flex items-center gap-space-md mb-8 max-w-[960px] mx-auto">
+<a class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-border-subtle bg-surface-card text-on-surface-variant hover:text-primary hover:border-primary/40 hover:bg-surface-canvas transition-all font-body-bold text-body-md shadow-sm active:scale-95" href="#">
+<span class="material-symbols-outlined text-[18px]">arrow_back</span>
+<span class="">Volver</span>
+</a>
+<h1 class="font-headline-md text-headline-md font-bold text-on-surface tracking-tight">
+        Vincular Dispositivo
+      </h1>
+</div>
+<!-- STEP INDICATOR (Max-width 720px Centered) -->
+<section aria-label="Progreso de vinculación" class="max-w-[720px] mx-auto mb-8 px-2">
+<div class="relative flex items-center justify-between">
+<!-- Línea conectora base y avance -->
+<div class="absolute left-8 right-8 top-1/2 -translate-y-1/2 h-[3px] bg-slate-200 -z-0">
+<!-- 50% de progreso entre Paso 1 y Paso 2 -->
+<div class="h-full bg-status-success w-1/2 transition-all duration-500"></div>
+</div>
+<!-- Paso 1: Lugar creado -->
+<div class="relative z-10 flex flex-col items-center group cursor-default">
+<div class="w-9 h-9 rounded-full bg-status-success text-on-primary flex items-center justify-center shadow-sm ring-4 ring-surface-canvas">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<span class="mt-2 text-caption font-caption font-semibold text-status-success whitespace-nowrap">
+            Lugar creado
+          </span>
+</div>
+<!-- Paso 2: Vincular dispositivo (ACTUAL) -->
+<div class="relative z-10 flex flex-col items-center group cursor-default">
+<div class="w-9 h-9 rounded-full bg-primary text-on-primary flex items-center justify-center ring-4 ring-primary/20 shadow-md">
+<span class="w-2.5 h-2.5 rounded-full bg-white"></span>
+</div>
+<span class="mt-2 text-caption font-caption font-bold text-primary whitespace-nowrap">
+            Vincular dispositivo
+          </span>
+</div>
+<!-- Paso 3: Completado (PENDIENTE) -->
+<div class="relative z-10 flex flex-col items-center group cursor-default">
+<div class="w-9 h-9 rounded-full bg-surface-card border-2 border-slate-300 text-outline flex items-center justify-center ring-4 ring-surface-canvas">
+<span class="w-2.5 h-2.5 rounded-full bg-slate-300"></span>
+</div>
+<span class="mt-2 text-caption font-caption text-outline-variant whitespace-nowrap">
+            Completado
+          </span>
+</div>
+</div>
+</section>
+<!-- MAIN CONTENT CONTAINER (Wider max-w-[960px] Balanced Desktop 2-Column Grid) -->
+<div class="max-w-[960px] mx-auto space-y-6">
+<!-- MAIN SETUP CARD (2 Columns on Desktop) -->
+<section class="bg-surface-card border border-border-subtle rounded-xl p-8 custom-shadow transition-shadow hover:shadow-md">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+<!-- Columna 1: Escaneo QR -->
+<div class="flex flex-col items-center justify-between p-6 bg-[#F8FAFC] rounded-xl border border-[#CBD5E1]/60">
+<div class="text-center">
+<span class="inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-wider text-primary bg-primary/10 px-2.5 py-1 rounded-full mb-2">
+<span class="material-symbols-outlined text-[15px]">qr_code_scanner</span> Opción Recomendada
+</span>
+<h2 class="font-headline-sm text-[17px] leading-6 font-semibold text-[#1E293B]">
+                Escanear código QR
+              </h2>
+<p class="mt-1 font-body-md text-[13px] text-[#64748B]">
+                Apunta la cámara al código en tu ESP32
+              </p>
+</div>
+<div class="my-5 flex justify-center">
+<div aria-label="Presiona para escanear código QR" class="scan-guide relative w-[180px] h-[180px] rounded-xl bg-white border-2 border-dashed border-[#CBD5E1] flex flex-col items-center justify-center p-4 text-center cursor-pointer hover:border-primary hover:bg-surface-container-low/40 transition-all duration-200 group focus:outline-none focus:ring-2 focus:ring-primary/40 active:scale-[0.98] shadow-sm" role="button" tabindex="0">
+<span class="corner-tr"></span>
+<span class="corner-bl"></span>
+<div class="scan-laser absolute top-5 left-5 right-5 h-[2px] bg-primary/70 rounded-full blur-[0.5px]"></div>
+<div class="w-12 h-12 rounded-lg bg-surface-card border border-border-subtle flex items-center justify-center text-primary group-hover:scale-105 transition-transform duration-200 shadow-sm">
+<span class="material-symbols-outlined text-[32px]">qr_code_scanner</span>
+</div>
+<p class="mt-2.5 text-[12px] leading-snug font-body-md text-[#64748B] group-hover:text-primary transition-colors">
+                  Click para abrir visor de cámara
+                </p>
+</div>
+</div>
+<div class="w-full flex items-center justify-center gap-2 text-caption text-[#94A3B8]">
+<span class="material-symbols-outlined text-[16px]">lock</span>
+<span class="">Conexión cifrada directa al nodo</span>
+</div>
+</div>
+<!-- Columna 2: Ingreso Manual -->
+<div class="flex flex-col justify-between p-6 bg-white rounded-xl border border-border-subtle">
+<div>
+<div class="flex items-center justify-between mb-2">
+<span class="inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-wider text-outline bg-surface-container-low px-2.5 py-1 rounded-full">
+<span class="material-symbols-outlined text-[15px]">keyboard</span> Alternativa Manual
+</span>
+<span class="font-telemetry-sm text-[11px] text-outline-variant uppercase">ESP32-WROOM</span>
+</div>
+<h2 class="font-headline-sm text-[17px] leading-6 font-semibold text-[#1E293B]">
+                Ingreso manual del Device ID
+              </h2>
+<p class="mt-1 font-body-md text-[13px] text-[#64748B]">
+                Ingresa el identificador único grabado en la placa
+              </p>
+</div>
+<form class="space-y-4 my-auto pt-4" onsubmit="event.preventDefault();">
+<div class="space-y-1.5">
+<label class="block font-telemetry-sm text-[12px] font-medium tracking-[0.04em] text-[#64748B]" for="device-id-input">
+                  DEVICE ID (12 CARACTERES)
+                </label>
+<div class="relative">
+<input class="w-full h-12 px-4 rounded-lg bg-surface-card border border-[#CBD5E1] font-telemetry-md text-telemetry-md font-semibold tracking-widest uppercase text-on-surface focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-none" id="device-id-input" maxlength="12" placeholder="A1B2C3D4E5F6" type="text" value="A1B2C3D4E5F6">
+<div class="absolute right-3.5 top-1/2 -translate-y-1/2 text-outline flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-lg">memory</span>
+</div>
+</div>
+<p class="text-[11px] leading-tight font-caption text-[#94A3B8]">
+                  Alfanumérico de 12 dígitos impreso en el reverso del ESP32
+                </p>
+</div>
+<button class="w-full h-12 rounded-lg bg-primary text-on-primary font-body-bold text-body-md tracking-wide hover:bg-primary-container active:scale-[0.99] transition-all shadow-sm flex items-center justify-center gap-2 cursor-pointer mt-2" type="submit">
+<span class="material-symbols-outlined text-[20px]">sensors</span>
+<span class="">Vincular Dispositivo</span>
+</button>
+</form>
+<div class="pt-2 border-t border-border-subtle flex items-center justify-between text-caption text-[#64748B]">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px] text-primary">wifi</span> Red: 2.4 GHz requerida
+</span>
+<a href="#" class="text-primary hover:underline font-medium">¿Dónde encuentro mi ID?</a>
+</div>
+</div>
+</div>
+</section>
+<!-- SUCCESS MESSAGE CARD (Full-width integrated desktop banner) -->
+<section class="bg-[#ECFDF5] border border-[#A7F3D0] rounded-xl p-6 shadow-sm transition-transform hover:-translate-y-0.5">
+<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+<div class="flex items-start sm:items-center gap-3.5">
+<div class="w-10 h-10 rounded-full bg-[#10B981]/15 text-[#065F46] flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-[17px] leading-tight font-bold text-[#065F46]">
+              ¡Dispositivo vinculado con éxito!
+            </h3>
+<p class="mt-0.5 font-body-md text-[14px] text-[#047857]">
+              El nodo <span class="font-telemetry-md font-semibold text-[#065F46]">ESP32-12345</span> ahora transmite lecturas de flujo a <span class="font-semibold text-[#065F46]">Casa Principal</span> en tiempo real.
+            </p>
+</div>
+</div>
+<a class="h-12 px-6 rounded-lg bg-primary text-on-primary font-body-bold text-body-md tracking-wide hover:bg-primary-container active:scale-[0.99] transition-all shadow-sm flex items-center justify-center gap-2 whitespace-nowrap flex-shrink-0" href="#">
+<span class="">Ir al Dashboard</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</a>
+</div>
+</section>
+</div>
+</main>
+<!-- ==================== SHARED FOOTER ==================== -->
+<footer class="bg-surface-canvas dark:bg-surface-dim border-t border-border-subtle dark:border-outline-variant mt-auto">
+<div class="w-full max-w-[1600px] mx-auto px-margin py-space-lg flex flex-col md:flex-row items-center justify-between gap-space-md">
+<!-- Brand & Copyright -->
+<div class="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 text-center sm:text-left">
+<span class="text-headline-sm font-headline-sm font-bold text-primary dark:text-inverse-primary inline-flex items-center gap-2"><img src="https://lh3.googleusercontent.com/aida/AEtjO1XAcgthymaBhgC79CLgZ-JHDDgjQOYchvRT0V2DWvR8itykSJq8TomWpRo9f6a8jWciEUzK1Qy-E0bIvaij8pnV2XJqwi93Mp2b7sn0_8_KFrbXPdEdlYthqXTckR7007DKMAH0Uxrtd2HgvCd1qqmUrbQ5VhN0kqprCaFCkPDRmavj_qJSN5AYhRHwtqobOqKuDaGs4Lr5VnecwnnZvrGjDWxLEnVN9wCEr60XV50AogOIu_oG---Dma8" alt="Cuida Tu Agua" class="w-7 h-7 object-contain inline-block shrink-0"><span class="">Cuida Tu Agua</span></span>
+<span class="hidden sm:inline text-border-subtle">|</span>
+<p class="text-caption font-caption text-on-surface-variant dark:text-outline-variant">
+          © 2024 Cuida Tu Agua. Sistema de Monitoreo de Recursos Hídricos e IoT. Todos los derechos reservados.
+        </p>
+</div>
+<!-- Navigation Links -->
+<nav class="flex items-center gap-space-md">
+<a class="text-on-surface-variant dark:text-outline-variant font-body-md hover:text-primary dark:hover:text-inverse-primary transition-colors duration-150 cursor-pointer" href="#">
+          Soporte Técnico
+        </a>
+<a class="text-on-surface-variant dark:text-outline-variant font-body-md hover:text-primary dark:hover:text-inverse-primary transition-colors duration-150 cursor-pointer" href="#">
+          Documentación API
+        </a>
+<a class="text-on-surface-variant dark:text-outline-variant font-body-md hover:text-primary dark:hover:text-inverse-primary transition-colors duration-150 cursor-pointer" href="#">
+          Privacidad
+        </a>
+<a class="text-on-surface-variant dark:text-outline-variant font-body-md hover:text-primary dark:hover:text-inverse-primary transition-colors duration-150 cursor-pointer" href="#">
+          Términos
+        </a>
+</nav>
+</div>
+</footer>
+
+
+
+
+</body></html>

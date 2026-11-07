@@ -1,0 +1,33 @@
+@startuml NV-02_navegacion_admin
+!include _estilo.iuml
+title NV-02 · Mapa de navegación del panel web de administración
+left to right direction
+skinparam nodesep 25
+skinparam ranksep 60
+skinparam rectangle {
+  BackgroundColor #FFFFFF
+  BorderColor #000000
+}
+rectangle "Iniciar sesión\n(cuenta con rol ADMIN)" as LOGIN
+package "Menú lateral" {
+  rectangle "Resumen\n(métricas de plataforma)" as RES
+  rectangle "Usuarios\n(búsqueda, filtro, páginas)" as USR
+  rectangle "Medidores" as MED
+  rectangle "Recomendaciones\n(consejos de ahorro)" as REC
+}
+rectangle "Diálogo «Bloquear usuario»\n(motivo)" as BLK
+rectangle "Detalle del medidor" as DMED
+rectangle "Alta de fábrica" as ALTA
+rectangle "Credenciales generadas\n(serial, token, código)" as CRED
+rectangle "Diálogo «Nueva / editar\nrecomendación»" as NREC
+
+LOGIN --> RES
+RES --> USR
+RES --> MED
+RES --> REC
+USR --> BLK
+MED --> DMED
+MED --> ALTA
+ALTA --> CRED
+REC --> NREC
+@enduml

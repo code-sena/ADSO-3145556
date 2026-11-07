@@ -4,8 +4,18 @@
 
 ## Required content / Contenido requerido
 
-- [ ] Software analysis document / Documento de análisis del software
-- [ ] Dynamic views: use cases, sequence, activity or state diagrams / Vistas dinámicas: casos de uso, secuencia, actividades o estados
+- [x] Software analysis document / Documento de análisis del software
+- [x] Dynamic views: use cases, sequence, activity or state diagrams / Vistas dinámicas: casos de uso, secuencia, actividades o estados
+
+## Files / Archivos
+
+| File / Archivo | Content / Contenido |
+|---|---|
+| [`software-analysis.pdf`](software-analysis.pdf) | Software analysis document v1.0 / Documento de análisis del software v1.0 |
+| [`diagrams/exports/`](diagrams/exports/) | Dynamic views as PNG: use cases (CU), activities (AC), sequence (SQ) and states (ST) / Vistas dinámicas en PNG: casos de uso (CU), actividades (AC), secuencia (SQ) y estados (ST) |
+| [`diagrams/source/`](diagrams/source/) | Editable PlantUML sources (`.puml`) / Fuentes editables en PlantUML (`.puml`) |
+
+The documents are delivered in PDF; the diagrams include their editable PlantUML source. / Los documentos se entregan en PDF; los diagramas incluyen su fuente editable en PlantUML.
 
 ## Format / Formato
 

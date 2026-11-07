@@ -1,0 +1,41 @@
+@startuml SQ-02_sesion
+!include _estilo.iuml
+title SQ-02 · Inicio de sesión, uso del token y cierre de sesión (HU-003, HU-006)
+autonumber "<b>00"
+skinparam responseMessageBelowArrow true
+
+actor "Usuario" as U
+participant "App" as APP
+participant "ms-iam" as IAM
+database "SQL Server" as DB
+database "Redis\n(lista de revocación)" as R
+participant "Microservicio\n(.NET)" as MS
+U -> APP : Correo y contraseña
+APP -> IAM : POST /api/auth/login
+IAM -> DB : Buscar usuario y LoginAttempts\nde los últimos 15 min
+alt 5 intentos fallidos
+  IAM --> APP : 423 auth.account_locked (Retry-After)
+else bloqueado por un administrador / sin verificar
+  IAM --> APP : 403 auth.account_blocked / auth.account_not_verified
+else contraseña incorrecta
+  IAM -> DB : LoginAttempt(success = false)
+  IAM --> APP : 401 auth.wrong_password { remainingAttempts }
+else contraseña correcta
+  IAM -> DB : LoginAttempt(success = true)\n+ RefreshToken (hash, 7 días)
+  IAM --> APP : 200 { accessToken JWT RS256 (1 h), refreshToken, user, roles }
+end
+== Llamadas a cualquier microservicio ==
+APP -> MS : GET ... Authorization: Bearer <JWT>
+MS -> MS : Validar firma con la clave pública\n(kid iam-key-1, issuer)
+MS -> R : ¿jti revocado?
+MS --> APP : 200 / 401
+== Renovar ==
+APP -> IAM : POST /api/auth/refresh { refreshToken }
+IAM -> DB : Rotar refresh token
+IAM --> APP : 200 nuevo par de tokens
+== Cerrar sesión ==
+APP -> IAM : POST /api/auth/logout
+IAM -> DB : Revocar refresh token
+IAM -> R : Agregar jti del access token\n(hasta que venza)
+IAM --> APP : 204
+@enduml

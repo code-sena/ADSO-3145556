@@ -1,0 +1,46 @@
+@startuml ER-04_monitoring
+!include _estilo.iuml
+title ER-04 · Modelo físico del schema monitoring (ms-consumption)
+hide circle
+skinparam linetype ortho
+skinparam nodesep 40
+skinparam ranksep 60
+top to bottom direction
+entity "monitoring.readings" as monitoring_readings {
+  * id : uniqueidentifier <<PK>>
+  --
+  * device_id : uniqueidentifier <<FK>>
+  * place_id : uniqueidentifier <<FK>>
+  * flow_rate_lph : decimal(18,3)
+  * volume_liters : decimal(18,3)
+  * cumulative_liters : decimal(18,3)
+  * recorded_at : datetime2
+  * received_at : datetime2
+}
+entity "monitoring.consumption_hourly" as monitoring_consumption_hourly {
+  * id : uniqueidentifier <<PK>>
+  --
+  * place_id : uniqueidentifier <<FK>>
+  * hour_start : datetime2
+  * total_liters : decimal(18,3)
+  * reading_count : int
+  * created_at : datetime2
+  * updated_at : datetime2
+}
+entity "devices.devices" as devices_devices <<otro servicio>> {
+  * id : uniqueidentifier <<PK>>
+}
+entity "places.places" as places_places <<otro servicio>> {
+  * id : uniqueidentifier <<PK>>
+}
+devices_devices ..o{ monitoring_readings : device_id
+places_places ..o{ monitoring_readings : place_id
+places_places ..o{ monitoring_consumption_hourly : place_id
+legend bottom right
+  |= Notación |= Significado |
+  | ● | columna obligatoria (NOT NULL) |
+  | PK / FK / UK | llave primaria / foránea / única |
+  | línea continua | llave foránea dentro del schema |
+  | línea punteada | referencia lógica a otro servicio (sin FK física) |
+endlegend
+@enduml

@@ -1,0 +1,45 @@
+@startuml CU-02_lugares_dispositivo
+!include _estilo.iuml
+title CU-02 · Lugares y dispositivo IoT (E2, E3)
+left to right direction
+
+actor "Usuario base" as UB
+actor "Dueño" as DU
+actor "Medidor IoT\n(ESP32)" as IOT <<sistema>>
+DU -|> UB
+rectangle "E2 · Gestión de lugares" {
+  usecase "Crear un lugar\n(HU-009)" as L1
+  usecase "Listar y cambiar\nentre lugares (HU-010)" as L2
+  usecase "Editar un lugar\n(HU-011)" as L3
+  usecase "Eliminar un lugar\n(HU-011)" as L4
+  usecase "Seleccionar país, moneda\ny ubicación (HU-053)" as L5
+  usecase "Seleccionar unidad\nde medida (HU-055)" as L6
+}
+rectangle "E3 · Vinculación del dispositivo IoT" {
+  usecase "Vincular medidor con serial\ny código de emparejamiento\n(HU-012)" as D1
+  usecase "Configurar el WiFi\ndel medidor" as D1b
+  usecase "Ver estado del medidor\n(HU-013)" as D2
+  usecase "Desvincular medidor\n(HU-014)" as D3
+  usecase "Reportar latido\n(heartbeat)" as D4
+}
+UB --> L1
+UB --> L2
+DU --> L3
+DU --> L4
+DU --> D1
+DU --> D2
+DU --> D3
+L1 ..> L5 : <<include>>
+L1 ..> L6 : <<include>>
+D1b ..> D1 : <<extend>>
+IOT --> D4
+D2 ..> D4 : <<use>>
+note right of L4
+  No se puede eliminar un lugar
+  con un medidor vinculado.
+end note
+note right of D1
+  5 intentos fallidos bloquean
+  el emparejamiento 15 minutos.
+end note
+@enduml

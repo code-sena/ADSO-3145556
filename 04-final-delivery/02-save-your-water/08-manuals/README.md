@@ -4,9 +4,20 @@
 
 ## Required content / Contenido requerido
 
-- [ ] Technical manual / Manual técnico
-- [ ] Installation manual / Manual de instalación
-- [ ] End-user manual / Manual de usuario final
+- [x] Technical manual / Manual técnico
+- [x] Installation manual / Manual de instalación
+- [x] End-user manual / Manual de usuario final
+
+## Files / Archivos
+
+| File / Archivo | Content / Contenido |
+|---|---|
+| [`technical-manual.pdf`](technical-manual.pdf) | Technical manual / Manual técnico |
+| [`installation-manual.pdf`](installation-manual.pdf) | Installation manual / Manual de instalación |
+| [`user-manual.pdf`](user-manual.pdf) | End-user manual / Manual de usuario final |
+| [`administrator-manual.pdf`](administrator-manual.pdf) | Administrator manual (additional) / Manual de administrador (adicional) |
+
+The documents are delivered in PDF; the diagrams include their editable PlantUML source. / Los documentos se entregan en PDF; los diagramas incluyen su fuente editable en PlantUML.
 
 ## Format / Formato
 

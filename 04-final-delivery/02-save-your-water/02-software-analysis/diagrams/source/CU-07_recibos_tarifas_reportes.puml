@@ -1,0 +1,42 @@
+@startuml CU-07_recibos_tarifas_reportes
+!include _estilo.iuml
+title CU-07 · Recibos, tarifas y reportes (E11, E12, E13, E15)
+left to right direction
+
+actor "Dueño" as DU
+actor "Temporizador\ndel sistema" as TMP <<sistema>>
+rectangle "E11 · Recibos del acueducto" {
+  usecase "Registrar un recibo\n(HU-048)" as R1
+  usecase "Ver historial de\nrecibos (HU-049)" as R2
+  usecase "Comparar recibo\ncontra sensor (HU-050)" as R3
+  usecase "Alertar recibo\ndesalineado (HU-051)" as R4
+  usecase "Recordar pago\ndel recibo (HU-052)" as R5
+}
+rectangle "E12 / E15 · Tarifas" {
+  usecase "Ingresar tarifa\nmanualmente (HU-054)" as T1
+  usecase "Usar catálogo de tarifas\nde Colombia por estrato\n(HU-066)" as T2
+  usecase "Ver consumo en\ndinero (HU-056)" as T3
+  usecase "Calcular costo con\ntarifa precargada\n(HU-069)" as T4
+}
+rectangle "E13 · Reportes descargables" {
+  usecase "Generar reporte\npor período (HU-057)" as P1
+  usecase "Exportar reporte\na PDF (HU-058)" as P2
+}
+DU --> R1
+DU --> R2
+DU --> R3
+DU --> T1
+DU --> T2
+DU --> T3
+DU --> P1
+R1 ..> R3 : <<include>>
+R4 ..> R3 : <<extend>>
+TMP --> R5
+T3 ..> T4 : <<include>>
+T4 ..> T2 : <<use>>
+P2 ..> P1 : <<extend>>
+note bottom of T1
+  El historial de tarifas nunca se reescribe:
+  cada cambio crea una nueva vigencia.
+end note
+@enduml

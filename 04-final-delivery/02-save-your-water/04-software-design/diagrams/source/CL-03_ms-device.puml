@@ -1,0 +1,75 @@
+@startuml CL-03_ms-device
+!include _estilo.iuml
+title CL-03 · Clases de dominio — ms-device (medidores IoT)
+hide empty members
+skinparam linetype ortho
+
+package "ms-device · schema devices" {
+  class Device <<aggregate root>> {
+    + id : Guid
+    + serialNumber : string  // SW-ESP32-NNNNNN
+    + authTokenHash : string
+    + authTokenLastUsedAt : DateTime?
+    + authTokenRevokedAt : DateTime?
+    + pairingCodeHash : string
+    + pairingFailedAttempts : int
+    + pairingLockedUntil : DateTime?
+    + placeId : Guid?
+    + linkedBy : Guid?
+    + linkedAt : DateTime?
+    + status : DeviceStatus
+    + lastReportAt : DateTime?
+    + firmwareVersion : string?
+    + inactivityThresholdMinutes : int  // 10
+    + RecordHeartbeat(token, fw, now) : HeartbeatOutcome
+    + StatusAt(now) : DeviceStatus
+    + EnsurePairingNotLocked(now)
+    + PairingCodeMatches(code) : bool
+    + RegisterFailedPairing(policy, now)
+    + LinkTo(placeId, userId, now) : DeviceLink
+    + Unlink(userId, now) : Guid
+  }
+  class DeviceLink {
+    + id : Guid
+    + deviceId : Guid
+    + placeId : Guid
+    + linkedBy : Guid
+    + linkedAt : DateTime
+    + unlinkedAt : DateTime?
+    + unlinkedBy : Guid?
+  }
+  enum DeviceStatus {
+    NeverReported
+    Connected
+    Disconnected
+  }
+  enum HeartbeatOutcome {
+    Accepted
+    UnknownDevice
+    InvalidToken
+    Revoked
+  }
+  class PairingPolicy <<value object>> {
+    + maxFailedAttempts = 5
+    + lockDuration = 15 min
+  }
+  class DeviceEvent <<integration event>> {
+    + type : string
+    + deviceId : Guid
+    + placeId : Guid
+    + occurredAt : DateTime
+    + data : object
+  }
+  note right of DeviceEvent
+    device.linked · device.unlinked
+    device.reading.received
+    device.valve.reported
+    (exchange sywater.events)
+  end note
+}
+Device "1" *-- "0..*" DeviceLink : historial >
+Device --> DeviceStatus
+Device ..> HeartbeatOutcome
+Device ..> PairingPolicy
+Device ..> DeviceEvent : publica
+@enduml

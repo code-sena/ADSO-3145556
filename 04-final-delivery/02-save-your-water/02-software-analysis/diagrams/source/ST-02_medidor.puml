@@ -1,0 +1,29 @@
+@startuml ST-02_medidor
+!include _estilo.iuml
+title ST-02 · Estados del medidor IoT
+[*] --> Libre : alta de fábrica\n(serial + token + código)
+state "Libre (sin lugar)" as Libre {
+  state "Nunca ha reportado" as L1 : NEVER_REPORTED
+  state "Conectado" as L2 : CONNECTED
+  state "Desconectado" as L3 : DISCONNECTED
+  [*] --> L1
+  L1 --> L2 : primer heartbeat
+  L2 --> L3 : 10 min sin reportes
+  L3 --> L2 : nuevo reporte
+}
+state "Emparejamiento bloqueado" as EB : 15 min sin poder vincular
+Libre --> EB : 5 códigos de\nemparejamiento incorrectos
+EB --> Libre : vence el bloqueo
+Libre --> Vinculado : el Dueño lo vincula\n(serial + código, HU-012)
+state "Vinculado a un lugar" as Vinculado {
+  state "Conectado" as V1 : CONNECTED
+  state "Desconectado" as V2 : DISCONNECTED
+  [*] --> V1
+  V1 --> V2 : 10 min sin reportes\n/ alerta HU-032
+  V2 --> V1 : nuevo reporte
+}
+Vinculado --> Libre : el Dueño lo desvincula (HU-014)\no se elimina la cuenta (HU-008)
+state "Dado de baja" as BAJA : REVOKED · el servidor ignora sus mensajes
+Libre --> BAJA : el administrador lo retira
+BAJA --> Libre : credenciales nuevas
+@enduml

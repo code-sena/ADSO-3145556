@@ -1,0 +1,37 @@
+@startuml SQ-07_cierre_automatico
+!include _estilo.iuml
+title SQ-07 · Cierre automático por fuga con confirmación y reapertura (HU-035, HU-036, HU-037)
+autonumber "<b>00"
+skinparam responseMessageBelowArrow true
+
+actor "Dueño" as U
+participant "App" as APP
+participant "ms-valve" as VAL
+participant "ms-notification" as NOT
+participant "ms-device" as DEV
+participant "ESP32" as ESP
+== Configuración previa (HU-035) ==
+U -> APP : Activar "Cerrar automáticamente si hay fuga"
+APP -> VAL : PUT /api/places/{id}/valve/auto-shutoff { enabled: true }
+VAL --> APP : 200 (la regla viene desactivada por defecto)
+== Fuga detectada (HU-036) ==
+VAL -> VAL : AutoShutoffRequest PENDING
+VAL -> NOT : Pedir confirmación al Dueño (Crítica)
+NOT --> U : "Posible fuga: ¿cerrar la válvula?"
+U -> APP : Abre la alerta
+alt el Dueño confirma
+  APP -> VAL : POST /api/places/{id}/valve/auto-shutoff/{requestId}/confirm
+  VAL -> VAL : ValveCommand(CLOSE, origin AUTO_LEAK)
+  VAL -> DEV : valve-commands → MQTT valve/set
+  DEV -> ESP : Cerrar
+  ESP --> DEV : valve/state CLOSED
+  DEV --> VAL : device.valve.reported → ACK_SUCCESS
+  VAL -> NOT : "Válvula cerrada por fuga" (Crítica)
+else el Dueño rechaza o no responde a tiempo
+  VAL -> VAL : REJECTED / EXPIRED — la válvula no se toca
+end
+== Reapertura (HU-037) ==
+U -> APP : "Abrir agua"
+APP -> VAL : POST /api/places/{id}/valve/open
+note right of VAL : Siempre manual: el sistema nunca\nreabre la válvula por su cuenta.
+@enduml

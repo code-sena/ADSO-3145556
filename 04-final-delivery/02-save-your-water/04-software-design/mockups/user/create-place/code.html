@@ -1,0 +1,322 @@
+<!DOCTYPE html><html class="light" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Crear Nuevo Lugar | Cuida Tu Agua</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "tertiary-fixed": "#a7edff",
+            "background": "#f8f9ff",
+            "inverse-surface": "#213145",
+            "surface-canvas": "#F8FBFD",
+            "status-success": "#10B981",
+            "on-tertiary-fixed": "#001f25",
+            "on-primary-fixed": "#001e2c",
+            "surface-container-low": "#eff4ff",
+            "on-tertiary": "#ffffff",
+            "tertiary-container": "#008094",
+            "status-warning": "#F59E0B",
+            "secondary": "#315ca9",
+            "primary-fixed-dim": "#77d1ff",
+            "on-secondary-fixed": "#001a42",
+            "surface-container": "#e5eeff",
+            "surface-bright": "#f8f9ff",
+            "error-container": "#ffdad6",
+            "error": "#ba1a1a",
+            "surface-tint": "#006688",
+            "on-background": "#0b1c30",
+            "outline-variant": "#bdc8d0",
+            "on-primary": "#ffffff",
+            "primary": "#006385",
+            "on-tertiary-fixed-variant": "#004e5b",
+            "on-error": "#ffffff",
+            "status-danger": "#EF4444",
+            "surface-container-highest": "#d3e4fe",
+            "tertiary": "#006575",
+            "surface-container-high": "#dce9ff",
+            "surface-subtle": "#F2F2F2",
+            "inverse-on-surface": "#eaf1ff",
+            "primary-fixed": "#c2e8ff",
+            "primary-container": "#007ea7",
+            "surface-dim": "#cbdbf5",
+            "on-secondary-container": "#033e8a",
+            "on-tertiary-container": "#f8fdff",
+            "secondary-container": "#86adff",
+            "surface": "#f8f9ff",
+            "inverse-primary": "#77d1ff",
+            "surface-container-lowest": "#ffffff",
+            "on-secondary": "#ffffff",
+            "on-error-container": "#93000a",
+            "surface-card": "#FFFFFF",
+            "on-primary-fixed-variant": "#004d68",
+            "secondary-fixed-dim": "#aec6ff",
+            "on-secondary-fixed-variant": "#0f4490",
+            "on-surface": "#0b1c30",
+            "tertiary-fixed-dim": "#58d6f1",
+            "secondary-fixed": "#d8e2ff",
+            "on-surface-variant": "#3e484f",
+            "border-subtle": "#E2E8F0",
+            "surface-variant": "#d3e4fe",
+            "on-primary-container": "#fbfcff",
+            "outline": "#6e787f"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "margin": "2.5rem",
+            "space-md": "1rem",
+            "space-lg": "1.5rem",
+            "space-sm": "0.75rem",
+            "gutter": "2rem",
+            "space-xl": "3rem",
+            "space-xs": "0.5rem"
+          },
+          "fontFamily": {
+            "caption": ["Manrope"],
+            "display-hero": ["Manrope"],
+            "headline-lg": ["Manrope"],
+            "body-md": ["Manrope"],
+            "telemetry-md": ["IBM Plex Mono"],
+            "telemetry-sm": ["IBM Plex Mono"],
+            "headline-md": ["Manrope"],
+            "body-lg": ["Manrope"],
+            "headline-sm": ["Manrope"],
+            "telemetry-lg": ["IBM Plex Mono"],
+            "body-bold": ["Manrope"]
+          },
+          "fontSize": {
+            "caption": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+            "display-hero": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+            "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.015em", "fontWeight": "700" }],
+            "body-md": ["14px", { "lineHeight": "22px", "fontWeight": "400" }],
+            "telemetry-md": ["16px", { "lineHeight": "24px", "fontWeight": "500" }],
+            "telemetry-sm": ["12px", { "lineHeight": "18px", "letterSpacing": "0.04em", "fontWeight": "400" }],
+            "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "body-lg": ["16px", { "lineHeight": "26px", "fontWeight": "400" }],
+            "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+            "telemetry-lg": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "body-bold": ["14px", { "lineHeight": "22px", "fontWeight": "600" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    .custom-shadow {
+      box-shadow: 0 1px 3px 0 rgba(2, 62, 138, 0.04), 0 1px 2px -1px rgba(2, 62, 138, 0.04);
+    }
+  </style>
+</head>
+<body class="bg-surface-canvas text-on-surface antialiased min-h-screen flex flex-col justify-between selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- ================= TOP NAV BAR (Shared Component) ================= -->
+<header class="bg-surface-card dark:bg-inverse-surface border-b border-border-subtle dark:border-outline-variant shadow-sm w-full sticky top-0 z-40">
+<div class="w-full h-16 max-w-[1600px] mx-auto px-margin flex items-center justify-between">
+<!-- Brand Logo & Global Nav -->
+<div class="flex items-center gap-space-xl h-full">
+<a class="text-headline-sm font-headline-sm font-bold text-primary dark:text-inverse-primary flex items-center gap-space-xs cursor-pointer" href="#">
+<img src="https://lh3.googleusercontent.com/aida/AEtjO1XAcgthymaBhgC79CLgZ-JHDDgjQOYchvRT0V2DWvR8itykSJq8TomWpRo9f6a8jWciEUzK1Qy-E0bIvaij8pnV2XJqwi93Mp2b7sn0_8_KFrbXPdEdlYthqXTckR7007DKMAH0Uxrtd2HgvCd1qqmUrbQ5VhN0kqprCaFCkPDRmavj_qJSN5AYhRHwtqobOqKuDaGs4Lr5VnecwnnZvrGjDWxLEnVN9wCEr60XV50AogOIu_oG---Dma8" alt="Cuida Tu Agua" class="w-7 h-7 object-contain inline-block">
+<span class="">Cuida Tu Agua</span>
+</a>
+<!-- Desktop Navigation Links -->
+<nav aria-label="Navegación principal" class="hidden md:flex items-center h-full gap-space-xs">
+<!-- Active: Lugares -->
+<a class="text-primary dark:text-inverse-primary font-body-bold border-b-2 border-primary dark:border-inverse-primary h-full flex items-center px-space-sm hover:text-primary dark:hover:text-inverse-primary transition-colors duration-150" href="#">
+            Lugares
+          </a>
+<a class="text-on-surface-variant dark:text-outline-variant font-body-md h-full flex items-center px-space-sm hover:text-primary dark:hover:text-inverse-primary hover:bg-surface-container-low dark:hover:bg-surface-variant transition-colors duration-150" href="#">
+            Dispositivos
+          </a>
+<a class="text-on-surface-variant dark:text-outline-variant font-body-md h-full flex items-center px-space-sm hover:text-primary dark:hover:text-inverse-primary hover:bg-surface-container-low dark:hover:bg-surface-variant transition-colors duration-150" href="#">
+            Alertas
+          </a>
+<a class="text-on-surface-variant dark:text-outline-variant font-body-md h-full flex items-center px-space-sm hover:text-primary dark:hover:text-inverse-primary hover:bg-surface-container-low dark:hover:bg-surface-variant transition-colors duration-150" href="#">
+            Configuración
+          </a>
+</nav>
+</div>
+<!-- Trailing Icon Actions & User Profile -->
+<div class="flex items-center gap-space-md">
+<button aria-label="Notificaciones" class="text-on-surface-variant hover:text-primary dark:hover:text-inverse-primary p-2 rounded-lg hover:bg-surface-container-low transition-colors duration-150 cursor-pointer" type="button">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button aria-label="Ayuda" class="text-on-surface-variant hover:text-primary dark:hover:text-inverse-primary p-2 rounded-lg hover:bg-surface-container-low transition-colors duration-150 cursor-pointer" type="button">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+</button>
+<div class="h-6 w-px bg-border-subtle mx-1"></div>
+<div class="flex items-center gap-3 pl-1">
+<div class="w-9 h-9 rounded-full bg-primary-container/20 border border-primary-container/40 flex items-center justify-center text-primary font-body-bold text-body-md overflow-hidden ring-1 ring-primary/20">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+</div>
+<div class="hidden lg:flex flex-col text-left">
+<span class="text-body-bold text-on-surface leading-tight">Admin Hídrico</span>
+<span class="text-caption text-outline font-telemetry-sm">Operador Central</span>
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- ================= MAIN CONTENT (Create Place Form) ================= -->
+<main class="flex-1 flex flex-col w-full max-w-[1600px] mx-auto px-margin pt-10 pb-12">
+<!-- Header de Navegación -->
+<div class="max-w-4xl mx-auto mb-8">
+<div class="flex items-center gap-4">
+<a class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-border-subtle bg-surface-card text-on-surface-variant font-body-md hover:bg-surface-container-low hover:text-primary transition-colors cursor-pointer group" href="#">
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors text-body-md" data-icon="arrow_back">arrow_back</span>
+<span class="font-body-md text-body-md">Volver</span>
+</a>
+<h1 class="text-headline-md font-headline-md font-bold text-on-surface tracking-tight">
+          Crear Nuevo Lugar
+        </h1>
+</div>
+<p class="text-body-md font-body-md text-outline mt-1.5 pl-1">
+        Define la locación física donde se desplegarán sensores y medidores de caudal.
+      </p>
+</div>
+<!-- FORM CONTAINER Ampliado y Armónico (max-w-4xl, diseño espacioso de dos columnas y tarjetas interactivas) -->
+<section class="max-w-4xl mx-auto bg-surface-card rounded-xl border border-border-subtle p-8 md:p-10 custom-shadow">
+<form class="space-y-6" id="create-place-form" novalidate="" onsubmit="event.preventDefault();">
+<!-- Fila 1: Nombre y Tipo de Lugar en grid coordinado -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- 1. Campo 'Nombre del Lugar' -->
+<div class="flex flex-col justify-between">
+<label class="block font-telemetry-md text-telemetry-sm font-medium text-[#64748B] uppercase tracking-wider mb-2" for="place-name">
+            Nombre del Lugar
+          </label>
+<div class="relative flex-grow flex items-center">
+<input class="w-full h-12 px-4 rounded-lg border border-[#CBD5E1] bg-surface-card font-body-md text-body-md text-on-surface placeholder:text-outline-variant focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-none" id="place-name" name="placeName" placeholder="Ej: Casa de Campo o Sede Norte" required="" type="text">
+</div>
+</div>
+<!-- 2. Selección de 'Tipo de Lugar' en formato de tarjetas seleccionables -->
+<div>
+<label class="block font-telemetry-md text-telemetry-sm font-medium text-[#64748B] uppercase tracking-wider mb-2">
+            Tipo de Lugar
+          </label>
+<div class="grid grid-cols-2 gap-3">
+<!-- Opción: Residencial -->
+<label class="relative flex items-center gap-3 p-3 rounded-lg border border-primary bg-surface-container-low/40 cursor-pointer transition-all hover:border-primary">
+<input checked="" class="w-4 h-4 text-primary border-[#CBD5E1] focus:ring-primary/20 focus:ring-2 cursor-pointer" name="placeType" type="radio" value="Residencial">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]" data-icon="home">home</span>
+<span class="font-body-bold text-body-md text-on-surface">Residencial</span>
+</div>
+</label>
+<!-- Opción: Comercial -->
+<label class="relative flex items-center gap-3 p-3 rounded-lg border border-[#CBD5E1] bg-surface-card hover:bg-surface-container-low cursor-pointer transition-all hover:border-outline-variant">
+<input class="w-4 h-4 text-primary border-[#CBD5E1] focus:ring-primary/20 focus:ring-2 cursor-pointer" name="placeType" type="radio" value="Comercial">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-outline text-[20px]" data-icon="storefront">storefront</span>
+<span class="font-body-md text-body-md text-on-surface">Comercial</span>
+</div>
+</label>
+</div>
+</div>
+</div>
+<!-- Fila 2: Grid de 2 columnas para Dirección y Ciudad con espacio holgado -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Columna Izquierda: Dirección -->
+<div>
+<label class="block font-telemetry-md text-telemetry-sm font-medium text-[#64748B] uppercase tracking-wider mb-2" for="place-address">
+              Dirección
+            </label>
+<input class="w-full h-12 px-4 rounded-lg border border-[#CBD5E1] bg-surface-card font-body-md text-body-md text-on-surface placeholder:text-outline-variant focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-none" id="place-address" name="placeAddress" placeholder="Calle 10 #5-42" type="text">
+</div>
+<!-- Columna Derecha: Ciudad -->
+<div>
+<label class="block font-telemetry-md text-telemetry-sm font-medium text-[#64748B] uppercase tracking-wider mb-2" for="place-city">
+              Ciudad
+            </label>
+<input class="w-full h-12 px-4 rounded-lg border border-[#CBD5E1] bg-surface-card font-body-md text-body-md text-on-surface placeholder:text-outline-variant focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-none" id="place-city" name="placeCity" placeholder="Bogotá, Colombia" type="text">
+</div>
+</div>
+<!-- Fila 3: Campo 'Notas (Opcional)' -->
+<div>
+<label class="block font-telemetry-md text-telemetry-sm font-medium text-[#64748B] uppercase tracking-wider mb-2" for="place-notes">
+            Notas (Opcional)
+          </label>
+<textarea class="w-full h-[110px] p-3 md:px-4 md:py-3 rounded-lg border border-[#CBD5E1] bg-surface-card font-body-md text-body-md text-on-surface placeholder:text-outline-variant focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-none resize-none" id="place-notes" maxlength="500" name="placeNotes" oninput="document.getElementById('char-count').textContent = `${this.value.length}/500`" placeholder="Agregar observaciones sobre válvulas, piso, jardín..." rows="3"></textarea>
+<!-- Contador de Caracteres -->
+<div class="flex justify-end mt-1">
+<span class="font-telemetry-sm text-telemetry-sm text-outline" id="char-count">
+              0/500
+            </span>
+</div>
+</div>
+<!-- Fila 4: Botones de Acción centrados y equilibrados a la derecha / dos columnas -->
+<div class="pt-4 border-t border-border-subtle flex flex-col-reverse sm:flex-row items-center justify-end gap-4">
+<!-- Botón [Cancelar] -->
+<button class="w-full sm:w-auto px-8 h-12 rounded-lg border border-[#CBD5E1] bg-surface-card font-body-bold text-body-bold text-[#334155] hover:bg-surface-container-low hover:border-outline-variant active:scale-[0.98] transition-all flex items-center justify-center cursor-pointer" type="button">
+            Cancelar
+          </button>
+<!-- Botón [Crear Lugar] -->
+<button class="w-full sm:w-auto px-8 h-12 rounded-lg bg-[#0096C7] hover:bg-primary-container active:bg-[#023E8A] font-body-bold text-body-bold text-white shadow-sm hover:shadow active:scale-[0.98] transition-all flex items-center justify-center gap-2 cursor-pointer" type="submit">
+<span class="material-symbols-outlined text-white text-body-md" data-icon="add_circle">add_circle</span>
+<span class="">Crear Lugar</span>
+</button>
+</div>
+</form>
+</section>
+<!-- Contextual Information Card / Operational Assurance alineado a max-w-4xl -->
+<div class="max-w-4xl mx-auto mt-6 p-4 rounded-lg bg-surface-container-low/60 border border-border-subtle flex items-start gap-3.5">
+<span class="material-symbols-outlined text-primary mt-0.5" data-icon="info">info</span>
+<div class="text-body-md">
+<p class="text-body-bold font-body-bold text-on-surface">Asignación Inmediata de Sensores</p>
+<p class="text-caption font-caption text-outline mt-0.5">Una vez creado el lugar, podrás vincular medidores ultrasónicos de flujo y configurar umbrales de alerta de fugas en tiempo real.</p>
+</div>
+</div>
+</main>
+<!-- Espaciador 100px previo al footer -->
+
+<!-- ================= FOOTER (Shared Component) ================= -->
+<footer class="bg-surface-canvas dark:bg-surface-dim border-t border-border-subtle dark:border-outline-variant w-full mt-auto">
+<div class="w-full max-w-[1600px] mx-auto px-margin py-space-lg flex flex-col md:flex-row items-center justify-between gap-space-md">
+<!-- Copyright text -->
+<div class="flex items-center gap-2 mb-2 md:mb-0"><img src="https://lh3.googleusercontent.com/aida/AEtjO1XAcgthymaBhgC79CLgZ-JHDDgjQOYchvRT0V2DWvR8itykSJq8TomWpRo9f6a8jWciEUzK1Qy-E0bIvaij8pnV2XJqwi93Mp2b7sn0_8_KFrbXPdEdlYthqXTckR7007DKMAH0Uxrtd2HgvCd1qqmUrbQ5VhN0kqprCaFCkPDRmavj_qJSN5AYhRHwtqobOqKuDaGs4Lr5VnecwnnZvrGjDWxLEnVN9wCEr60XV50AogOIu_oG---Dma8" alt="Cuida Tu Agua" class="w-6 h-6 object-contain inline-block"><span class="font-headline-sm font-bold text-primary dark:text-inverse-primary text-body-bold">Cuida Tu Agua</span></div><p class="text-caption font-caption text-on-surface-variant dark:text-outline-variant text-center md:text-left">
+        © 2024 Cuida Tu Agua. Sistema de Monitoreo de Recursos Hídricos e IoT. Todos los derechos reservados.
+      </p>
+<!-- Navigation & Documentation Links -->
+<div class="flex items-center flex-wrap justify-center gap-space-md text-caption font-caption">
+<a class="text-on-surface-variant dark:text-outline-variant font-body-md hover:text-primary dark:hover:text-inverse-primary transition-colors duration-150 cursor-pointer" href="#">
+          Soporte Técnico
+        </a>
+<span class="text-border-subtle">•</span>
+<a class="text-on-surface-variant dark:text-outline-variant font-body-md hover:text-primary dark:hover:text-inverse-primary transition-colors duration-150 cursor-pointer" href="#">
+          Documentación API
+        </a>
+<span class="text-border-subtle">•</span>
+<a class="text-on-surface-variant dark:text-outline-variant font-body-md hover:text-primary dark:hover:text-inverse-primary transition-colors duration-150 cursor-pointer" href="#">
+          Privacidad
+        </a>
+<span class="text-border-subtle">•</span>
+<a class="text-on-surface-variant dark:text-outline-variant font-body-md hover:text-primary dark:hover:text-inverse-primary transition-colors duration-150 cursor-pointer" href="#">
+          Términos
+        </a>
+</div>
+</div>
+</footer>
+
+
+
+
+</body></html>

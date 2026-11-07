@@ -1,0 +1,16 @@
+@startuml ST-03_orden_valvula
+!include _estilo.iuml
+title ST-03 · Estados de una orden de válvula
+
+[*] --> Enviada : el Dueño (o la regla de fuga\nconfirmada) crea la orden
+Enviada : SENT
+Enviada --> Confirmada : el medidor reporta el estado\nesperado (mismo commandId)
+Confirmada : ACK_SUCCESS
+Enviada --> SinRespuesta : pasan 30 s sin reporte
+SinRespuesta : ACK_TIMEOUT
+Enviada --> Fallida : error al publicar\nla orden por MQTT
+Fallida : FAILED
+Confirmada --> [*]
+SinRespuesta --> [*]
+Fallida --> [*]
+@enduml

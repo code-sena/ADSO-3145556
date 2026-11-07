@@ -1,0 +1,26 @@
+@startuml SQ-09_recibo
+!include _estilo.iuml
+title SQ-09 · Registrar un recibo y compararlo con el sensor (HU-048, HU-050, HU-051)
+autonumber "<b>00"
+skinparam responseMessageBelowArrow true
+
+actor "Dueño" as U
+participant "App" as APP
+participant "ms-consumption" as CON
+queue "RabbitMQ" as MQ
+participant "ms-notification" as NOT
+U -> APP : Período, m³ facturados, valor y fecha límite
+APP -> CON : POST /api/places/{id}/bills
+CON -> CON : Validar período (sin traslapes)
+CON -> CON : Sumar m³ medidos por el sensor\nen el mismo período
+CON -> CON : Bill.CompareWith(medido)\n→ diferencia %
+CON --> APP : 201 { bill, comparison }
+alt diferencia mayor al umbral
+  CON -> MQ : consumption.bill.misaligned
+  MQ -> NOT : "Recibo desalineado" (Importante)
+end
+== Recordatorio de pago (HU-052) ==
+CON -> CON : Tarea diaria: recibos sin pagar\ncon fecha límite próxima
+CON -> MQ : consumption.bill.payment_due
+MQ -> NOT : "Recuerda pagar el recibo" (Importante)
+@enduml

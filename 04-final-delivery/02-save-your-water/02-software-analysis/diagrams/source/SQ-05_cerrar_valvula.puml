@@ -1,0 +1,47 @@
+@startuml SQ-05_cerrar_valvula
+!include _estilo.iuml
+title SQ-05 · Cerrar la válvula con código de confirmación (HU-020, HU-033)
+autonumber "<b>00"
+skinparam responseMessageBelowArrow true
+
+actor "Dueño" as U
+participant "App" as APP
+participant "ms-iam" as IAM
+participant "Servidor SMTP" as MAIL
+participant "ms-valve" as VAL
+participant "ms-device" as DEV
+queue "Mosquitto" as BRK
+participant "ESP32" as ESP
+queue "RabbitMQ" as MQ
+participant "ms-notification" as NOT
+U -> APP : "Cerrar agua" (advertencia: el lugar quedará sin agua)
+APP -> IAM : POST /api/users/me/action-codes { action: CLOSE_VALVE }
+IAM -> MAIL : Código de 6 dígitos (vence en 5 min)
+IAM --> APP : 201 { maskedEmail, expiresAt }
+U -> APP : Escribe el código
+APP -> VAL : POST /api/places/{id}/valve/close { code }
+VAL -> IAM : POST /api/users/me/action-codes/verify
+IAM --> VAL : 200 válido (o 400 con intentos restantes)
+VAL -> VAL : Validar: Dueño del lugar, sin orden en curso,\nmedidor conectado, válvula no cerrada
+VAL -> VAL : ValveCommand.Manual(CLOSE) → SENT\n(timeout 30 s)
+VAL -> DEV : POST /api/places/{id}/device/valve-commands (X-Internal-Key)
+DEV -> BRK : sywater/devices/{serial}/valve/set\n{ commandId, action: CLOSE }
+VAL --> APP : 202 { commandId, status: SENT }
+BRK -> ESP : orden
+ESP -> ESP : Activar relé y guardar estado
+ESP -> BRK : valve/state { commandId, state: CLOSED }
+BRK -> DEV : reporte
+DEV -> MQ : device.valve.reported
+MQ -> VAL : Acknowledge → ACK_SUCCESS\nPlaceValve.state = CLOSED
+MQ -> NOT : "Válvula cerrada" (Crítica)
+NOT -> NOT : Despachar según preferencias\n(App + Push + Correo + SMS)
+loop hasta confirmar o 30 s
+  APP -> VAL : GET /api/places/{id}/valve/commands/{commandId}
+end
+alt sin respuesta en 30 s
+  VAL -> VAL : TimeOutIfExpired() → ACK_TIMEOUT
+  APP --> U : "El medidor no respondió; la válvula no cambió"
+else confirmada
+  APP --> U : "Válvula cerrada"
+end
+@enduml

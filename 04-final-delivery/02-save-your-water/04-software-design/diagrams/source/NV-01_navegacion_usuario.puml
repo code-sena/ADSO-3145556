@@ -1,0 +1,65 @@
+@startuml NV-01_navegacion_usuario
+!include _estilo.iuml
+title NV-01 · Mapa de navegación de la aplicación de usuario (móvil y web)
+left to right direction
+skinparam nodesep 25
+skinparam ranksep 55
+skinparam rectangle {
+  BackgroundColor #FFFFFF
+  BorderColor #000000
+}
+
+package "Acceso (sin sesión)" {
+  rectangle "Iniciar sesión" as LOGIN
+  rectangle "Registro" as REG
+  rectangle "Verificar correo" as VER
+  rectangle "Recuperar contraseña" as REC
+  rectangle "Restablecer contraseña" as RES
+}
+package "Lugares" {
+  rectangle "Mis lugares\n(lista o vacío)" as PL
+  rectangle "Registrar lugar" as NPL
+  rectangle "Editar lugar" as EPL
+}
+package "Lugar seleccionado" {
+  rectangle "Panel del lugar\n(consumo, caudal, válvula)" as PAN
+  rectangle "Diálogo «Cerrar agua»\n(código por correo)" as CLOSE
+  rectangle "Historial de la válvula" as HIST
+  rectangle "Medidor\n(conectado / desconectado)" as MED
+  rectangle "Vincular medidor\n(serial + código o QR)" as VIN
+  rectangle "WiFi del medidor" as WIFI
+}
+package "Menú de la cuenta" {
+  rectangle "Notificaciones" as NOTI
+  rectangle "Preferencias de alertas" as PREF
+  rectangle "Consejos favoritos (web)" as FAV
+  rectangle "Mi perfil" as PERF
+  rectangle "Cambiar contraseña" as PWD
+  rectangle "Eliminar cuenta" as DEL
+}
+
+LOGIN --> REG
+REG --> VER
+VER --> LOGIN
+LOGIN --> REC
+REC --> RES
+RES --> LOGIN
+LOGIN --> PL : sesión iniciada
+PL --> NPL
+PL --> EPL
+PL --> PAN
+PAN --> CLOSE
+PAN --> HIST
+EPL --> MED
+PAN --> MED : sin medidor
+MED --> VIN
+VIN --> WIFI
+PL --> NOTI : menú
+NOTI --> PREF
+NOTI --> PAN : tocar una alerta
+PL --> FAV : menú
+PL --> PERF : menú
+PERF --> PWD
+PERF --> DEL
+DEL --> LOGIN : cuenta eliminada
+@enduml

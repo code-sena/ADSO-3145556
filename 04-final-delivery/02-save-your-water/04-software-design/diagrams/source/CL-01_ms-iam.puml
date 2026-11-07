@@ -1,0 +1,136 @@
+@startuml CL-01_ms-iam
+!include _estilo.iuml
+title CL-01 · Clases de dominio — ms-iam (cuentas, sesiones y roles)
+hide empty members
+skinparam linetype ortho
+
+package "ms-iam · schema security" {
+  class User <<aggregate root>> {
+    - id : UUID
+    - firstName : String
+    - lastName : String
+    - email : Email
+    - phone : PhoneNumber
+    - avatarUrl : String
+    - emailVerified : boolean
+    - accountLockedUntil : Instant
+    - blockedAt : Instant
+    - blockedBy : UUID
+    - deletedAt : Instant
+    - createdAt : Instant
+    - updatedAt : Instant
+    + ensureCanAttemptLogin(now)
+    + verifyEmail(now)
+    + updateProfile(firstName, lastName, phone, now)
+    + changeAvatar(url, now)
+    + lockUntil(until, now)
+    + block(adminId, now) : boolean
+    + unblock(now) : boolean
+    + delete(now)
+    + status() : AccountStatus
+    + hasRole(role) : boolean
+  }
+  class Email <<value object>> {
+    + value : String
+  }
+  class PhoneNumber <<value object>> {
+    + value : String
+  }
+  enum Role {
+    USER
+    ADMIN
+  }
+  enum AccountStatus {
+    ACTIVE
+    UNVERIFIED
+    BLOCKED
+    DELETED
+  }
+  class UserCredential {
+    - userId : UUID
+    - passwordHash : String  // BCrypt
+    - provider : AuthProvider
+    - providerSubject : String
+  }
+  enum AuthProvider {
+    PASSWORD
+    GOOGLE
+  }
+  class PasswordPolicy <<domain service>> {
+    + MIN_LENGTH = 8
+    + MAX_LENGTH = 128
+    + check(password) : unmetRules
+  }
+  class LockoutPolicy <<value object>> {
+    + maxAttempts = 5
+    + duration = 15 min
+    + remainingAttempts(failures) : int
+  }
+  class EmailVerification {
+    - userId : UUID
+    - codeHash : String
+    - expiresAt : Instant  // 24 h
+    - failedAttempts : int
+    - usedAt : Instant
+  }
+  class PasswordReset {
+    - userId : UUID
+    - codeHash : String
+    - expiresAt : Instant  // 15 min
+    - failedAttempts : int
+    - usedAt : Instant
+  }
+  class ActionCode {
+    - userId : UUID
+    - action : String  // CLOSE_VALVE
+    - tokenHash : String
+    - expiresAt : Instant  // 5 min
+    - failedAttempts : int
+    - usedAt : Instant
+  }
+  class RefreshToken {
+    - userId : UUID
+    - tokenHash : String
+    - expiresAt : Instant  // 7 días
+    - revokedAt : Instant
+  }
+  class LoginAttempt {
+    - email : String
+    - success : boolean
+    - ipAddress : String
+    - createdAt : Instant
+  }
+  class ActivityLog {
+    - userId : UUID
+    - action : String
+    - entityType : String
+    - entityId : String
+    - metadata : JSON
+    - ipAddress : String
+    - createdAt : Instant
+  }
+}
+User *-- Email
+User *-- PhoneNumber
+User "1" -- "1..*" Role : roles >
+User ..> AccountStatus
+User "1" *-- "1..*" UserCredential
+UserCredential --> AuthProvider
+User "1" -- "0..*" EmailVerification
+User "1" -- "0..*" PasswordReset
+User "1" -- "0..*" ActionCode
+User "1" -- "0..*" RefreshToken
+User "1" -- "0..*" ActivityLog
+User ..> PasswordPolicy : valida
+User ..> LockoutPolicy : aplica
+note right of Role
+  Dueño y Colaborador son roles
+  POR LUGAR (ms-places · PlaceMember).
+  El Invitado no tiene cuenta.
+end note
+note bottom of RefreshToken
+  Access token JWT RS256 de 1 h.
+  Al cerrar sesión o bloquear, el token
+  pasa a la lista de revocación (Redis).
+end note
+@enduml

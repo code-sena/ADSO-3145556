@@ -1,0 +1,36 @@
+@startuml SQ-03_vincular_medidor
+!include _estilo.iuml
+title SQ-03 · Vincular un medidor a un lugar (HU-012)
+autonumber "<b>00"
+skinparam responseMessageBelowArrow true
+
+actor "Dueño" as U
+participant "App" as APP
+participant "ms-device" as DEV
+participant "ms-places" as PL
+database "SQL Server\ndevices" as DB
+queue "RabbitMQ\nsywater.events" as MQ
+participant "ms-valve" as VAL
+participant "ms-notification" as NOT
+U -> APP : Serial + código de emparejamiento\n(etiqueta o QR)
+APP -> DEV : POST /api/places/{placeId}/device
+DEV -> PL : GET /api/places/{placeId} (Bearer del usuario)
+PL --> DEV : lugar del usuario (o 404)
+DEV -> DB : Buscar Device por serial
+alt emparejamiento bloqueado (5 fallos → 15 min)
+  DEV --> APP : 423 device.pairing_locked
+else código incorrecto
+  DEV -> DB : RegisterFailedPairing()
+  DEV --> APP : 400 device.pairing_failed
+else medidor sin conexión
+  DEV --> APP : 409 device.offline
+else el lugar ya tiene medidor / medidor ya vinculado
+  DEV --> APP : 409 place.already_has_device / device.already_linked
+else datos correctos
+  DEV -> DB : Device.LinkTo(placeId) + DeviceLink
+  DEV -> MQ : device.linked { deviceId, placeId, serial, userId }
+  DEV --> APP : 201 dispositivo vinculado
+  MQ -> VAL : device.linked → crear PlaceValve (UNKNOWN)
+  MQ -> NOT : device.linked → notificación informativa
+end
+@enduml

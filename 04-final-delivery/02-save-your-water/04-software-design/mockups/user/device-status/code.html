@@ -1,0 +1,396 @@
+<!DOCTYPE html><html class="light" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Estado del Dispositivo - Cuida Tu Agua</title>
+<!-- Fonts: Manrope & IBM Plex Mono -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS v3 with Plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "tertiary-fixed": "#a7edff",
+            "background": "#f8f9ff",
+            "inverse-surface": "#213145",
+            "surface-canvas": "#F8FBFD",
+            "status-success": "#10B981",
+            "on-tertiary-fixed": "#001f25",
+            "on-primary-fixed": "#001e2c",
+            "surface-container-low": "#eff4ff",
+            "on-tertiary": "#ffffff",
+            "tertiary-container": "#008094",
+            "status-warning": "#F59E0B",
+            "secondary": "#315ca9",
+            "primary-fixed-dim": "#77d1ff",
+            "on-secondary-fixed": "#001a42",
+            "surface-container": "#e5eeff",
+            "surface-bright": "#f8f9ff",
+            "error-container": "#ffdad6",
+            "error": "#ba1a1a",
+            "surface-tint": "#006688",
+            "on-background": "#0b1c30",
+            "outline-variant": "#bdc8d0",
+            "on-primary": "#ffffff",
+            "primary": "#006385",
+            "on-tertiary-fixed-variant": "#004e5b",
+            "on-error": "#ffffff",
+            "status-danger": "#EF4444",
+            "surface-container-highest": "#d3e4fe",
+            "tertiary": "#006575",
+            "surface-container-high": "#dce9ff",
+            "surface-subtle": "#F2F2F2",
+            "inverse-on-surface": "#eaf1ff",
+            "primary-fixed": "#c2e8ff",
+            "primary-container": "#007ea7",
+            "surface-dim": "#cbdbf5",
+            "on-secondary-container": "#033e8a",
+            "on-tertiary-container": "#f8fdff",
+            "secondary-container": "#86adff",
+            "surface": "#f8f9ff",
+            "inverse-primary": "#77d1ff",
+            "surface-container-lowest": "#ffffff",
+            "on-secondary": "#ffffff",
+            "on-error-container": "#93000a",
+            "surface-card": "#FFFFFF",
+            "on-primary-fixed-variant": "#004d68",
+            "secondary-fixed-dim": "#aec6ff",
+            "on-secondary-fixed-variant": "#0f4490",
+            "on-surface": "#0b1c30",
+            "tertiary-fixed-dim": "#58d6f1",
+            "secondary-fixed": "#d8e2ff",
+            "on-surface-variant": "#3e484f",
+            "border-subtle": "#E2E8F0",
+            "surface-variant": "#d3e4fe",
+            "on-primary-container": "#fbfcff",
+            "outline": "#6e787f"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "margin": "2.5rem",
+            "space-md": "1rem",
+            "space-lg": "1.5rem",
+            "space-sm": "0.75rem",
+            "gutter": "2rem",
+            "space-xl": "3rem",
+            "space-xs": "0.5rem"
+          },
+          "fontFamily": {
+            "caption": ["Manrope"],
+            "display-hero": ["Manrope"],
+            "headline-lg": ["Manrope"],
+            "body-md": ["Manrope"],
+            "telemetry-md": ["IBM Plex Mono"],
+            "telemetry-sm": ["IBM Plex Mono"],
+            "headline-md": ["Manrope"],
+            "body-lg": ["Manrope"],
+            "headline-sm": ["Manrope"],
+            "telemetry-lg": ["IBM Plex Mono"],
+            "body-bold": ["Manrope"]
+          },
+          "fontSize": {
+            "caption": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+            "display-hero": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+            "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.015em", "fontWeight": "700" }],
+            "body-md": ["14px", { "lineHeight": "22px", "fontWeight": "400" }],
+            "telemetry-md": ["16px", { "lineHeight": "24px", "fontWeight": "500" }],
+            "telemetry-sm": ["12px", { "lineHeight": "18px", "letterSpacing": "0.04em", "fontWeight": "400" }],
+            "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "body-lg": ["16px", { "lineHeight": "26px", "fontWeight": "400" }],
+            "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+            "telemetry-lg": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "body-bold": ["14px", { "lineHeight": "22px", "fontWeight": "600" }]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    .custom-card-shadow {
+      box-shadow: 0 1px 3px 0 rgba(2, 62, 138, 0.04), 0 1px 2px -1px rgba(2, 62, 138, 0.04);
+    }
+    .custom-modal-shadow {
+      box-shadow: 0 10px 25px -5px rgba(2, 62, 138, 0.06), 0 8px 10px -6px rgba(2, 62, 138, 0.04);
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+    .pulse-live {
+      animation: pulse-dot 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+  </style>
+</head>
+<body class="bg-surface-canvas text-on-surface antialiased min-h-screen flex flex-col justify-between selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- ================= TOP NAVIGATION BAR (Shared Component JSON) ================= -->
+<header class="bg-surface-card dark:bg-inverse-surface border-b border-border-subtle dark:border-outline-variant shadow-sm w-full sticky top-0 z-50">
+<div class="w-full h-16 max-w-[1600px] mx-auto px-margin flex items-center justify-between">
+<!-- Brand Logo Lockup -->
+<div class="flex items-center gap-space-md">
+<a class="text-headline-sm font-headline-sm font-bold text-primary dark:text-inverse-primary flex items-center gap-space-xs cursor-pointer active:scale-95 transition-transform duration-100" href="#">
+<img src="https://lh3.googleusercontent.com/aida/AEtjO1XAcgthymaBhgC79CLgZ-JHDDgjQOYchvRT0V2DWvR8itykSJq8TomWpRo9f6a8jWciEUzK1Qy-E0bIvaij8pnV2XJqwi93Mp2b7sn0_8_KFrbXPdEdlYthqXTckR7007DKMAH0Uxrtd2HgvCd1qqmUrbQ5VhN0kqprCaFCkPDRmavj_qJSN5AYhRHwtqobOqKuDaGs4Lr5VnecwnnZvrGjDWxLEnVN9wCEr60XV50AogOIu_oG---Dma8" alt="Cuida Tu Agua" class="w-7 h-7 object-contain inline-block shrink-0">
+<span class="">Cuida Tu Agua</span>
+</a>
+</div>
+<!-- Navigation Links -->
+<nav class="hidden md:flex items-center h-full gap-space-xs">
+<!-- Inactive: Lugares -->
+<a class="text-on-surface-variant dark:text-outline-variant font-body-md h-full flex items-center px-space-sm hover:text-primary dark:hover:text-inverse-primary hover:bg-surface-container-low dark:hover:bg-surface-variant transition-colors duration-150 cursor-pointer" href="#">
+          Lugares
+        </a>
+<!-- Active: Dispositivos (Mapped to current screen) -->
+<a class="text-primary dark:text-inverse-primary font-body-bold border-b-2 border-primary dark:border-inverse-primary h-full flex items-center px-space-sm cursor-pointer" href="#">
+          Dispositivos
+        </a>
+<!-- Inactive: Alertas -->
+<a class="text-on-surface-variant dark:text-outline-variant font-body-md h-full flex items-center px-space-sm hover:text-primary dark:hover:text-inverse-primary hover:bg-surface-container-low dark:hover:bg-surface-variant transition-colors duration-150 cursor-pointer" href="#">
+          Alertas
+        </a>
+<!-- Inactive: Configuración -->
+<a class="text-on-surface-variant dark:text-outline-variant font-body-md h-full flex items-center px-space-sm hover:text-primary dark:hover:text-inverse-primary hover:bg-surface-container-low dark:hover:bg-surface-variant transition-colors duration-150 cursor-pointer" href="#">
+          Configuración
+        </a>
+</nav>
+<!-- Right Action Cluster -->
+<div class="flex items-center gap-space-sm">
+<button class="px-space-md py-2 h-10 rounded-lg bg-primary text-on-primary font-body-bold text-body-md hover:bg-primary-container transition-colors duration-150 active:scale-95 flex items-center gap-1.5 shadow-sm">
+<span class="material-symbols-outlined text-[20px]">add</span>
+<span class="">Nuevo Lugar</span>
+</button>
+<div class="h-6 w-px bg-border-subtle mx-1"></div>
+<button aria-label="Notificaciones" class="p-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-[22px]">notifications</span>
+</button>
+<button aria-label="Ayuda" class="p-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-[22px]">help_outline</span>
+</button>
+<!-- User Profile Avatar -->
+<div class="w-9 h-9 rounded-full bg-primary-fixed flex items-center justify-center text-primary font-body-bold text-caption border border-primary-fixed-dim ml-1" title="Foto de perfil del usuario administrador">
+          AD
+        </div>
+</div>
+</div>
+</header>
+<!-- ================= CANVAS WRAPPER ================= -->
+<main class="flex-1 w-full max-w-[1600px] mx-auto px-margin py-space-xl flex flex-col">
+<!-- SUB-HEADER DE NAVEGACIÓN Y ACCIONES -->
+<div class="w-full max-w-[800px] mx-auto flex items-center justify-between">
+<!-- Left: Back link and Title -->
+<div class="flex items-center gap-space-md">
+<a class="inline-flex items-center gap-1 text-on-surface-variant hover:text-primary text-body-bold font-body-bold transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px] transition-transform group-hover:-translate-x-1">arrow_back</span>
+<span class="">Casa Principal</span>
+</a>
+<div class="h-5 w-px bg-border-subtle"></div>
+<h1 class="text-headline-md font-headline-md text-on-surface">Estado del Dispositivo</h1>
+</div>
+<!-- Right: Secondary Refresh Button (44px height) -->
+<button class="h-[44px] px-space-md rounded-lg bg-surface-card border border-border-subtle hover:bg-surface-container-low hover:border-primary-fixed text-primary font-body-bold text-body-md flex items-center gap-2 transition-all duration-150 custom-card-shadow active:scale-95" id="refreshBtn" onclick="simulateRefresh()">
+<span class="material-symbols-outlined text-[20px] text-primary transition-transform" id="refreshIcon">sync</span>
+<span class="">Actualizar estado</span>
+</button>
+</div>
+<!-- Espaciador 32px -->
+<div class="h-8"></div>
+<!-- ================= MAIN CONTENT (Centrado, Max-width 800px) ================= -->
+<div class="w-full max-w-[800px] mx-auto flex flex-col">
+<!-- 1. DEVICE INFO CARD -->
+<section class="bg-surface-card border border-border-subtle rounded-xl p-[28px] custom-card-shadow">
+<div class="flex items-start justify-between flex-wrap gap-4">
+<div class="flex items-center gap-space-md">
+<!-- Icono de sensor/microcontrolador IoT (48x48px, color #0096C7, fondo circular azul suave) -->
+<div class="w-12 h-12 rounded-full bg-[#E0F2FE] flex items-center justify-center flex-shrink-0 text-[#0096C7] border border-[#BAE6FD]">
+<span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">developer_board</span>
+</div>
+<div>
+<!-- Nombre & Serial -->
+<div class="flex items-baseline gap-2">
+<h2 class="text-headline-sm font-headline-sm text-on-surface">Sensor Ultrasónico</h2>
+<span class="font-telemetry-md text-telemetry-md font-bold text-primary px-2 py-0.5 rounded bg-surface-container-low border border-border-subtle">ESP32-12345</span>
+</div>
+<!-- Subtexto -->
+<p class="font-telemetry-sm text-[13px] text-[#64748B] mt-1 flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-outline">home_pin</span>
+<span class="">Asignado a: <strong class="text-on-surface font-medium">Casa Principal</strong></span>
+<span class="text-outline-variant">·</span>
+<span class="">MAC: <span class="font-semibold text-on-surface">24:6F:28:A1:B2:C3</span></span>
+</p>
+</div>
+</div>
+<!-- Badge de estado: CONECTADO -->
+<div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#DEF7EC] border border-[#84E1BC] text-[#03543F]">
+<span class="w-2.5 h-2.5 rounded-full bg-[#10B981] pulse-live"></span>
+<span class="font-body-bold text-[16px] tracking-wide font-bold">CONECTADO</span>
+</div>
+</div>
+</section>
+<!-- Espaciador 32px -->
+<div class="h-8"></div>
+<!-- 2. STATS GRID (4 COLUMNAS, gap 16px) -->
+<section class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<!-- Stat 1: Última Sincronía -->
+<div class="bg-[#F1F5F9] p-4 rounded-[10px] border border-border-subtle flex flex-col justify-between hover:border-primary-fixed-dim transition-colors">
+<span class="font-caption text-caption text-[#64748B] font-medium">Última Sincronía</span>
+<div class="mt-2 flex items-baseline gap-1">
+<span class="font-telemetry-md text-[16px] font-bold text-[#0F172A]" id="syncTimestamp">hace 30s</span>
+</div>
+</div>
+<!-- Stat 2: Fuerza de Señal -->
+<div class="bg-[#F1F5F9] p-4 rounded-[10px] border border-border-subtle flex flex-col justify-between hover:border-primary-fixed-dim transition-colors">
+<span class="font-caption text-caption text-[#64748B] font-medium">Fuerza de Señal</span>
+<div class="mt-2 flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px] text-[#0096C7]">wifi</span>
+<span class="font-body-bold text-[15px] font-semibold text-[#0096C7]">Excelente</span>
+<span class="font-telemetry-sm text-[11px] text-[#64748B]">(-58 dBm)</span>
+</div>
+</div>
+<!-- Stat 3: Firmware -->
+<div class="bg-[#F1F5F9] p-4 rounded-[10px] border border-border-subtle flex flex-col justify-between hover:border-primary-fixed-dim transition-colors">
+<span class="font-caption text-caption text-[#64748B] font-medium">Firmware</span>
+<div class="mt-2">
+<span class="font-telemetry-sm text-[14px] font-bold text-[#0F172A] tracking-tight">v2.1.4-prod</span>
+</div>
+</div>
+<!-- Stat 4: Última Lectura -->
+<div class="bg-[#F1F5F9] p-4 rounded-[10px] border border-border-subtle flex flex-col justify-between hover:border-primary-fixed-dim transition-colors">
+<span class="font-caption text-caption text-[#64748B] font-medium">Última Lectura</span>
+<div class="mt-2 flex items-baseline gap-1">
+<span class="font-telemetry-lg text-[18px] font-bold text-[#0096C7]">123.45</span>
+<span class="font-telemetry-sm text-[12px] font-semibold text-[#0096C7]">L</span>
+</div>
+</div>
+</section>
+<!-- Espaciador 32px -->
+<div class="h-8"></div>
+<!-- 3. INFO BOX (Educativo e informativo) -->
+<section class="bg-[#E0F2FE]/30 border-l-4 border-[#0096C7] p-[18px] px-5 rounded-r-lg rounded-l-sm flex items-start gap-3.5 border-y border-r border-[#BAE6FD]/40">
+<span class="material-symbols-outlined text-[#0369A1] text-[22px] flex-shrink-0 mt-0.5">info</span>
+<p class="font-body-md text-[14px] text-[#0369A1] leading-[1.5]">
+          El dispositivo se sincroniza cada minuto cuando hay consumo de agua activo. Si no hay flujo registrado en la red, sincroniza automáticamente cada 10 minutos para optimizar consumo energético y ancho de banda.
+        </p>
+</section>
+<!-- Espaciador 32px -->
+<div class="h-8"></div>
+<!-- 4. ACTION BUTTONS (Grid 2 columnas, 48px alto cada uno) -->
+<section class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<!-- Reinstalar firmware -->
+<button class="h-[48px] px-5 rounded-lg bg-surface-card border border-[#CBD5E1] text-[#334155] font-body-bold hover:bg-[#F8FAFC] hover:border-outline hover:text-on-surface transition-all flex items-center justify-center gap-2 custom-card-shadow active:scale-[0.98]" onclick="simulateFirmwareReinstall()">
+<span class="material-symbols-outlined text-[20px] text-[#475569]">restart_alt</span>
+<span class="">Reinstalar firmware</span>
+</button>
+<!-- Desvincular dispositivo trigger -->
+<button class="h-[48px] px-5 rounded-lg bg-[#FFF5F5] border border-[#FCA5A5] text-[#DC2626] font-body-bold hover:bg-[#FEE2E2] hover:border-[#EF4444] transition-all flex items-center justify-center gap-2 active:scale-[0.98]" id="triggerUnlinkBtn" onclick="toggleUnlinkDialog()">
+<span class="material-symbols-outlined text-[20px]">link_off</span>
+<span class="">Desvincular dispositivo</span>
+</button>
+</section>
+<!-- Espaciador 24px -->
+<div class="h-6"></div>
+<!-- 5. CONFIRMATION DIALOG (Desvincular) -->
+<section class="bg-surface-card border border-border-subtle rounded-[10px] p-5 custom-modal-shadow border-l-4 border-l-[#DC2626] transition-all duration-200" id="unlinkDialog">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-[#DC2626] text-[22px] mt-0.5">warning</span>
+<div>
+<h3 class="font-body-bold text-[14px] text-on-surface font-semibold">¿Desvincular dispositivo?</h3>
+<p class="font-body-md text-caption text-on-surface-variant mt-0.5">
+                El historial de consumo acumulado se conservará en el perfil del lugar.
+              </p>
+</div>
+</div>
+<div class="flex items-center gap-3 justify-end flex-shrink-0">
+<button class="h-[40px] px-4 rounded-lg bg-surface-card border border-border-subtle hover:bg-surface-container-low text-on-surface-variant font-body-bold text-body-md transition-colors" onclick="toggleUnlinkDialog()">
+              Cancelar
+            </button>
+<button class="h-[40px] px-4 rounded-lg bg-[#DC2626] hover:bg-[#B91C1C] text-white font-body-bold text-body-md transition-colors flex items-center gap-1.5 shadow-sm active:scale-95" onclick="executeUnlink()">
+<span class="material-symbols-outlined text-[18px]">check</span>
+<span class="">Sí, desvincular</span>
+</button>
+</div>
+</div>
+</section>
+</div>
+<!-- Espaciador 100px -->
+<div class="h-[100px]"></div>
+</main>
+<!-- ================= WEB FOOTER (Shared Component JSON) ================= -->
+<footer class="bg-surface-canvas dark:bg-surface-dim border-t border-border-subtle dark:border-outline-variant w-full mt-auto">
+<div class="w-full max-w-[1600px] mx-auto px-margin py-space-lg flex flex-col md:flex-row items-center justify-between gap-space-md">
+<!-- Brand & Copyright -->
+<div class="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 text-center sm:text-left">
+<div class="flex items-center gap-2"><img src="https://lh3.googleusercontent.com/aida/AEtjO1XAcgthymaBhgC79CLgZ-JHDDgjQOYchvRT0V2DWvR8itykSJq8TomWpRo9f6a8jWciEUzK1Qy-E0bIvaij8pnV2XJqwi93Mp2b7sn0_8_KFrbXPdEdlYthqXTckR7007DKMAH0Uxrtd2HgvCd1qqmUrbQ5VhN0kqprCaFCkPDRmavj_qJSN5AYhRHwtqobOqKuDaGs4Lr5VnecwnnZvrGjDWxLEnVN9wCEr60XV50AogOIu_oG---Dma8" alt="Cuida Tu Agua" class="w-7 h-7 object-contain inline-block shrink-0"><span class="text-headline-sm font-headline-sm font-bold text-primary dark:text-inverse-primary">Cuida Tu Agua</span></div>
+<span class="hidden sm:inline text-outline-variant">|</span>
+<p class="text-caption font-caption text-on-surface-variant dark:text-outline-variant">
+          © 2024 Cuida Tu Agua. Sistema de Monitoreo de Recursos Hídricos e IoT. Todos los derechos reservados.
+        </p>
+</div>
+<!-- Links -->
+<nav class="flex items-center gap-space-lg">
+<a class="text-on-surface-variant dark:text-outline-variant font-body-md hover:text-primary dark:hover:text-inverse-primary transition-colors duration-150" href="#">
+          Soporte Técnico
+        </a>
+<a class="text-on-surface-variant dark:text-outline-variant font-body-md hover:text-primary dark:hover:text-inverse-primary transition-colors duration-150" href="#">
+          Documentación API
+        </a>
+<a class="text-on-surface-variant dark:text-outline-variant font-body-md hover:text-primary dark:hover:text-inverse-primary transition-colors duration-150" href="#">
+          Privacidad
+        </a>
+<a class="text-on-surface-variant dark:text-outline-variant font-body-md hover:text-primary dark:hover:text-inverse-primary transition-colors duration-150" href="#">
+          Términos
+        </a>
+</nav>
+</div>
+</footer>
+<!-- Micro-Interactions Script -->
+<script>
+    function simulateRefresh() {
+      const icon = document.getElementById('refreshIcon');
+      const timestamp = document.getElementById('syncTimestamp');
+      
+      icon.classList.add('animate-spin');
+      
+      setTimeout(() => {
+        icon.classList.remove('animate-spin');
+        timestamp.textContent = 'hace 1s';
+      }, 750);
+    }
+
+    function toggleUnlinkDialog() {
+      const dialog = document.getElementById('unlinkDialog');
+      if (dialog.classList.contains('hidden')) {
+        dialog.classList.remove('hidden');
+      } else {
+        dialog.classList.add('hidden');
+      }
+    }
+
+    function executeUnlink() {
+      alert('Dispositivo desvinculado con éxito. Redirigiendo a Casa Principal...');
+      window.location.href = '#';
+    }
+
+    function simulateFirmwareReinstall() {
+      alert('Iniciando descarga e instalación del firmware oficial v2.1.4-prod en ESP32-12345...');
+    }
+  </script>
+
+
+</body></html>

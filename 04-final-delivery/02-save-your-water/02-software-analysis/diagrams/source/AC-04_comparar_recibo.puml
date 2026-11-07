@@ -1,0 +1,28 @@
+@startuml AC-04_comparar_recibo
+!include _estilo.iuml
+title AC-04 · Actividad: registrar y comparar un recibo contra el sensor (HU-048 a HU-051)
+
+|Dueño|
+start
+:Ingresar período, m³ facturados,\nvalor a pagar y fecha límite;
+|Sistema|
+if (¿Datos válidos y período\nsin traslape?) then (no)
+  :Mostrar el error;
+  stop
+endif
+:Guardar el recibo;
+:Sumar los m³ medidos por el\nsensor en el mismo período;
+if (¿Hay lecturas del período?) then (no)
+  :Guardar sin comparación\n("Sin datos del sensor");
+  stop
+endif
+:Calcular la diferencia porcentual;
+if (¿Diferencia > umbral?) then (sí)
+  :Marcar "desalineado";
+  :Alerta importante\n"Recibo desalineado";
+else (no)
+  :Marcar "coincide";
+endif
+:Mostrar la comparación\nen el historial de recibos;
+stop
+@enduml

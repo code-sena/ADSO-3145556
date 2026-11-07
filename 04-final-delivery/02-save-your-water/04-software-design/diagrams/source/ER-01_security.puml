@@ -1,0 +1,128 @@
+@startuml ER-01_security
+!include _estilo.iuml
+title ER-01 · Modelo físico del schema security (ms-iam)
+hide circle
+skinparam linetype ortho
+skinparam nodesep 40
+skinparam ranksep 60
+top to bottom direction
+entity "security.users" as security_users {
+  * id : uniqueidentifier <<PK>>
+  --
+  * first_name : nvarchar(100)
+  * last_name : nvarchar(100)
+  * email : nvarchar(320) <<UK>>
+    phone : nvarchar(20) <<UK>>
+  * phone_verified : bit
+    avatar_url : nvarchar(500)
+  * email_verified : bit
+    account_locked_until : datetime2
+    blocked_at : datetime2
+    blocked_by : uniqueidentifier
+    deleted_at : datetime2
+  * created_at : datetime2
+  * updated_at : datetime2
+}
+entity "security.roles" as security_roles {
+  * id : bigint <<PK>>
+  --
+  * code : nvarchar(30)
+    description : nvarchar(255)
+  * created_at : datetime2
+}
+entity "security.user_roles" as security_user_roles {
+  * user_id : uniqueidentifier <<PK,FK>>
+  * role_id : bigint <<PK,FK>>
+  --
+  * assigned_at : datetime2
+    assigned_by : uniqueidentifier
+}
+entity "security.user_credentials" as security_user_credentials {
+  * id : bigint <<PK>>
+  --
+  * user_id : uniqueidentifier <<FK>>
+  * credential_type : nvarchar(10)
+    password_hash : nvarchar(256)
+    google_id : nvarchar(256)
+  * created_at : datetime2
+}
+entity "security.refresh_tokens" as security_refresh_tokens {
+  * id : bigint <<PK>>
+  --
+  * user_id : uniqueidentifier <<FK>>
+  * token_hash : nvarchar(256) <<UK>>
+    device_info : nvarchar(500)
+  * expires_at : datetime2
+    revoked_at : datetime2
+  * created_at : datetime2
+}
+entity "security.email_verifications" as security_email_verifications {
+  * id : bigint <<PK>>
+  --
+  * user_id : uniqueidentifier <<FK>>
+  * token_hash : nvarchar(256)
+  * expires_at : datetime2
+    verified_at : datetime2
+  * failed_attempts : int
+  * created_at : datetime2
+}
+entity "security.password_resets" as security_password_resets {
+  * id : bigint <<PK>>
+  --
+  * user_id : uniqueidentifier <<FK>>
+  * token_hash : nvarchar(256)
+  * channel : nvarchar(10)
+  * expires_at : datetime2
+    used_at : datetime2
+  * failed_attempts : int
+  * created_at : datetime2
+}
+entity "security.action_codes" as security_action_codes {
+  * id : bigint <<PK>>
+  --
+  * user_id : uniqueidentifier <<FK>>
+  * action : nvarchar(30)
+  * token_hash : nvarchar(256)
+  * expires_at : datetime2
+    used_at : datetime2
+  * failed_attempts : int
+  * created_at : datetime2
+}
+entity "security.login_attempts" as security_login_attempts {
+  * id : bigint <<PK>>
+  --
+    user_id : uniqueidentifier <<FK>>
+  * email : nvarchar(320)
+  * ip_address : nvarchar(45)
+  * success : bit
+    failure_reason : nvarchar(50)
+  * attempted_at : datetime2
+}
+entity "security.activity_log" as security_activity_log {
+  * id : bigint <<PK>>
+  --
+  * user_id : uniqueidentifier <<FK>>
+  * action : nvarchar(50)
+    entity_type : nvarchar(50)
+    entity_id : nvarchar(100)
+    metadata : nvarchar(4000)
+    ip_address : nvarchar(45)
+  * created_at : datetime2
+}
+security_users ||--o{ security_user_roles : user_id
+security_roles ||--o{ security_user_roles : role_id
+security_users ||--o{ security_user_credentials : user_id
+security_users ||--o{ security_refresh_tokens : user_id
+security_users ||--o{ security_email_verifications : user_id
+security_users ||--o{ security_password_resets : user_id
+security_users ||--o{ security_action_codes : user_id
+security_users |o--o{ security_login_attempts : user_id
+security_users ||--o{ security_activity_log : user_id
+legend bottom right
+  |= Notación |= Significado |
+  | ● | columna obligatoria (NOT NULL) |
+  | PK / FK / UK | llave primaria / foránea / única |
+  | línea continua | llave foránea dentro del schema |
+  | línea punteada | referencia lógica a otro servicio (sin FK física) |
+endlegend
+@enduml

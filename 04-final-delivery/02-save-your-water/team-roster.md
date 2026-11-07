@@ -27,6 +27,6 @@ Los aprendices completan su rol, por ejemplo backend, frontend, base de datos, Q
 
 | Full name / Nombre completo | Doc. type / Tipo | Doc. number / Número | Ficha | GitHub user / Usuario | Role in the project / Rol en el proyecto | Author / Autor |
 |---|---|---|---|---|---|---|
-| JUAN MANUEL GOMEZ SUAREZ | CC | 1029882097 | 3145556 | Juan90658 | | Yes / Sí |
-| JUAN ESTEBAN OME ESQUIVEL | CC | 1150184432 | 3145556 | Esteban1807 | | Yes / Sí |
-| DIEGO ALEJANDRO ALVARADO CASTAÑO | CC | 1076906609 | 3145556 | DIEGO-ALVARADO07 | | Yes / Sí |
+| JUAN MANUEL GOMEZ SUAREZ | CC | 1029882097 | 3145556 | Juan90658 | Full stack developer / Desarrollador full stack | Yes / Sí |
+| JUAN ESTEBAN OME ESQUIVEL | CC | 1150184432 | 3145556 | Esteban1807 | Scrum leader and full stack developer / Líder Scrum y desarrollador full stack | Yes / Sí |
+| DIEGO ALEJANDRO ALVARADO CASTAÑO | CC | 1076906609 | 3145556 | DIEGO-ALVARADO07 | Full stack developer / Desarrollador full stack | Yes / Sí |

@@ -1,0 +1,32 @@
+@startuml CU-03_consumo_metas
+!include _estilo.iuml
+title CU-03 · Consumo y metas (E4, E6, HU-038)
+left to right direction
+
+actor "Dueño" as DU
+actor "Colaborador" as CO
+actor "Medidor IoT\n(ESP32)" as IOT <<sistema>>
+rectangle "E4 · Monitoreo de consumo" {
+  usecase "Ver consumo en\ntiempo real (HU-015)" as C1
+  usecase "Seleccionar período\ndía / semana / mes\n(HU-016)" as C2
+  usecase "Ver gráfica de\nconsumo (HU-017)" as C3
+  usecase "Ver caudal en\ntiempo real (HU-018)" as C4
+  usecase "Exportar datos\na Excel / CSV (HU-038)" as C5
+  usecase "Enviar lecturas\nde caudal" as C6
+}
+rectangle "E6 · Metas de consumo" {
+  usecase "Definir meta\nmensual (HU-023)" as M1
+  usecase "Ver avance frente\na la meta (HU-024)" as M2
+}
+DU --> C1
+DU --> C5
+DU --> M1
+DU --> M2
+CO --> C1
+CO --> M2
+C1 ..> C2 : <<include>>
+C1 ..> C3 : <<include>>
+C4 ..> C1 : <<extend>>
+IOT --> C6
+C1 ..> C6 : <<use>>
+@enduml

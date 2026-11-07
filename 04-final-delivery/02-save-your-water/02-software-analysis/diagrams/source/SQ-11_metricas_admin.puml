@@ -1,0 +1,27 @@
+@startuml SQ-11_metricas_admin
+!include _estilo.iuml
+title SQ-11 · Métricas de plataforma para el administrador (HU-062)
+autonumber "<b>00"
+skinparam responseMessageBelowArrow true
+
+actor "Administrador" as A
+participant "App web" as APP
+participant "ms-iam" as IAM
+participant "ms-places" as PL
+participant "ms-device" as DEV
+A -> APP : Abre "Resumen"
+APP -> IAM : GET /api/admin/metrics (rol ADMIN)
+IAM -> IAM : Conteo de usuarios\n(total, activos, bloqueados, sin verificar)
+par
+  IAM -> PL : GET /internal/metrics (X-Internal-Key)
+  PL --> IAM : { total, active, inactive }
+else
+  IAM -> DEV : GET /internal/metrics (X-Internal-Key)
+  DEV --> IAM : { total, active, inactive, linked }
+end
+alt un servicio no responde
+  IAM -> IAM : Sección = null y nombre en "unavailable"
+end
+IAM --> APP : 200 PlatformMetricsView
+APP --> A : Indicadores (los servicios caídos\nse muestran como "No disponible")
+@enduml

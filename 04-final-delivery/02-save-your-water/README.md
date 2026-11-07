@@ -14,17 +14,17 @@ Final delivery of the training project / Entrega final del proyecto formativo.
 | Process / Proceso | Completion of the technologist taught stage / Finalización de la etapa lectiva del tecnólogo |
 | Research seedbed / Semillero de investigación | Developers & Geeks |
 | Delivery version / Versión entregada | `final-delivery-2026` |
-| Delivery date / Fecha de entrega | |
-| Delivered by / Entregado por | |
+| Delivery date / Fecha de entrega | 2026-11-05 |
+| Delivered by / Entregado por | Juan Esteban Ome Esquivel ([Esteban1807](https://github.com/Esteban1807)) |
 
 ## Summary / Resumen
 
-- **Problem it solves / Problema que resuelve:**
-- **Target users / Usuarios:**
-- **Main features / Funciones principales:**
-- **Technology stack / Tecnologías:**
-- **Production URL / URL en producción:**
-- **Demo credentials / Credenciales de prueba:** do not write real passwords here / no escriba contraseñas reales aquí
+- **Problem it solves / Problema que resuelve:** households and businesses only learn how much water they used when the bill arrives, so they cannot detect abnormal consumption in time or cut the water supply remotely. / Los hogares y negocios solo saben cuánta agua consumieron cuando llega el recibo, así que no detectan a tiempo un consumo anormal ni pueden cortar el suministro a distancia.
+- **Target users / Usuarios:** households and businesses in Colombia and Ecuador. Roles: owner, collaborator, guest (read-only link) and administrator. / Hogares y negocios de Colombia y Ecuador. Roles: dueño, colaborador, invitado (enlace de solo lectura) y administrador.
+- **Main features / Funciones principales:** sign-up and sign-in with e-mail or Google; places management; ESP32 meter setup and linking; real-time consumption by day, week and month; remote valve control confirmed with an e-mail code; e-mail and WhatsApp notifications; administration panel. / Registro e inicio de sesión con correo o Google; gestión de lugares; configuración y vinculación del medidor ESP32; consumo en tiempo real por día, semana y mes; control remoto de la válvula confirmado con código por correo; notificaciones por correo y WhatsApp; panel de administración.
+- **Technology stack / Tecnologías:** Java 21 and Spring Boot (ms-iam, API gateway), .NET (ms-places, ms-devices, ms-consumption, ms-valve, ms-notifications), React Native with Expo (web and mobile), SQL Server with Liquibase, RabbitMQ, MQTT (Mosquitto), Redis, ESP32 with MicroPython and YF-S201 flow sensor, Docker, GitHub Container Registry, Jenkins, Hostinger VPS.
+- **Production URL / URL en producción:** https://sy-water.tech
+- **Demo credentials / Credenciales de prueba:** delivered to the instructor through a private channel / se entregan al instructor por canal privado
 
 ## Team members / Integrantes
 
@@ -34,9 +34,9 @@ Final delivery of the training project / Entrega final del proyecto formativo.
 
 | Full name / Nombre completo | Doc. type / Tipo | Doc. number / Número | Ficha | GitHub user / Usuario | Role / Rol | Verified and authorized / Verificado y autorizado |
 |---|---|---|---|---|---|---|
-| JUAN MANUEL GOMEZ SUAREZ | CC | 1029882097 | 3145556 | Juan90658 | | ☐ |
-| JUAN ESTEBAN OME ESQUIVEL | CC | 1150184432 | 3145556 | Esteban1807 | | ☐ |
-| DIEGO ALEJANDRO ALVARADO CASTAÑO | CC | 1076906609 | 3145556 | DIEGO-ALVARADO07 | | ☐ |
+| JUAN MANUEL GOMEZ SUAREZ | CC | 1029882097 | 3145556 | Juan90658 | Full stack developer / Desarrollador full stack | ☑ |
+| JUAN ESTEBAN OME ESQUIVEL | CC | 1150184432 | 3145556 | Esteban1807 | Scrum leader and full stack developer / Líder Scrum y desarrollador full stack | ☑ |
+| DIEGO ALEJANDRO ALVARADO CASTAÑO | CC | 1076906609 | 3145556 | DIEGO-ALVARADO07 | Full stack developer / Desarrollador full stack | ☑ |
 
 Data use authorization: by checking the box, the member confirms their data and authorizes publishing their name, document number and ficha in this public repository, for the software registration process (Ley 1581 de 2012). Anyone who does not authorize it tells the instructor before delivering.
 
@@ -46,19 +46,19 @@ Autorización de datos: al marcar la casilla, el integrante confirma sus datos y
 
 | Folder / Carpeta | Content / Contenido | Done / Listo |
 |---|---|---|
-| [`01-requirements-specification/`](01-requirements-specification/) | Requirements specification / Especificación de requisitos | ☐ |
-| [`02-software-analysis/`](02-software-analysis/) | Software analysis / Análisis del software | ☐ |
-| [`03-technical-proposal/`](03-technical-proposal/) | Technical proposal / Propuesta técnica | ☐ |
-| [`04-software-design/`](04-software-design/) | Software design / Diseño del software | ☐ |
-| [`05-test-documentation/`](05-test-documentation/) | Test documentation / Documentación de pruebas | ☐ |
-| [`06-implementation-procedure/`](06-implementation-procedure/) | Implementation procedure / Procedimiento de implementación | ☐ |
-| [`07-improvement-actions/`](07-improvement-actions/) | Improvement actions / Acciones de mejoramiento | ☐ |
-| [`08-manuals/`](08-manuals/) | Manuals / Manuales | ☐ |
-| [`09-project-article/`](09-project-article/) | Project article / Artículo del proyecto | ☐ |
-| [`10-videos/`](10-videos/) | Videos / Videos | ☐ |
-| [`code-tag/`](code-tag/) | Repository links, tags and ZIP files / Enlaces, tags y ZIP | ☐ |
-| [`team-roster.md`](team-roster.md) | Team and roles / Equipo y roles | ☐ |
-| [`software-registration.md`](software-registration.md) | Software registration data / Datos para registro de software | ☐ |
+| [`01-requirements-specification/`](01-requirements-specification/) | Requirements specification / Especificación de requisitos | ☑ |
+| [`02-software-analysis/`](02-software-analysis/) | Software analysis / Análisis del software | ☑ |
+| [`03-technical-proposal/`](03-technical-proposal/) | Technical proposal / Propuesta técnica | ☑ |
+| [`04-software-design/`](04-software-design/) | Software design / Diseño del software | ☑ |
+| [`05-test-documentation/`](05-test-documentation/) | Test documentation / Documentación de pruebas | ☑ |
+| [`06-implementation-procedure/`](06-implementation-procedure/) | Implementation procedure / Procedimiento de implementación | ☑ |
+| [`07-improvement-actions/`](07-improvement-actions/) | Improvement actions / Acciones de mejoramiento | ☑ |
+| [`08-manuals/`](08-manuals/) | Manuals / Manuales | ☑ |
+| [`09-project-article/`](09-project-article/) | Project article / Artículo del proyecto | ☑ |
+| [`10-videos/`](10-videos/) | Videos / Videos | ☑ |
+| [`code-tag/`](code-tag/) | Repository links, tags and ZIP files / Enlaces, tags y ZIP | ☑ |
+| [`team-roster.md`](team-roster.md) | Team and roles / Equipo y roles | ☑ |
+| [`software-registration.md`](software-registration.md) | Software registration data / Datos para registro de software | ☑ |
 
 ## Large files on Google Drive / Archivos pesados en Google Drive
 
@@ -68,4 +68,4 @@ Aquí solo van archivos demasiado pesados para GitHub, como videos de demostraci
 
 | File / Archivo | Size / Tamaño | Link / Enlace |
 |---|---|---|
-| | | |
+| Folder `VIDEOS` / Carpeta `VIDEOS`: advertising pitch and usage tutorial / pitch publicitario y tutorial de uso | Tutorial: 8.6 MB | [Google Drive](https://drive.google.com/drive/folders/1DiDKHoKEo71ZRrifORG3H_6Y2-i1MUzX?usp=sharing) |

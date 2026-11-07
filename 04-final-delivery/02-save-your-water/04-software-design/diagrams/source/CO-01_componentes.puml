@@ -1,0 +1,72 @@
+@startuml CO-01_componentes
+!include _estilo.iuml
+title CO-01 · Diagrama de componentes (vista por capas)
+top to bottom direction
+skinparam nodesep 35
+skinparam ranksep 75
+skinparam ArrowThickness 1.6
+
+package "Clientes" as CLI {
+  [App móvil\n(React Native / Expo)] as MOB
+  [App web\nusuario + administrador] as WEB
+}
+
+package "Dispositivo IoT" as IOT {
+  [Firmware ESP32\n(MicroPython)] as FW
+  queue "Mosquitto\n(broker MQTT)" as BRK
+}
+
+interface "API REST\nHTTPS · JSON · JWT RS256" as REST
+
+package "Microservicios (arquitectura hexagonal)" as BE {
+  [ms-iam\n:3001] as IAM
+  [ms-notification\n:3006] as NOT
+  [ms-places\n:3002] as PL
+  [ms-consumption\n:3004] as CON
+  [ms-valve\n:3005] as VAL
+  [ms-device\n:3003] as DEV
+}
+
+package "Servicios externos" as EXT {
+  [SMTP · Expo Push\nSMS/WhatsApp · Google] as EXTS
+}
+package "Infraestructura" as INF {
+  database "SQL Server\n(un schema\npor servicio)" as SQL
+  database "Redis\n(tokens revocados)" as RED
+  queue "RabbitMQ\n(sywater.events)" as MQ
+}
+
+' Orden horizontal dentro de cada capa
+MOB -[hidden]right- WEB
+IAM -[hidden]right- NOT
+NOT -[hidden]right- PL
+PL -[hidden]right- CON
+CON -[hidden]right- VAL
+VAL -[hidden]right- DEV
+SQL -[hidden]right- RED
+RED -[hidden]right- MQ
+
+' Capa 1 → 2
+MOB -[plain]-> REST
+WEB -[plain]-> REST
+REST -[plain]-> BE : REST
+
+FW -[bold]-> BRK : MQTT
+BRK -[bold]-> DEV : MQTT
+
+' Capa 2 → 3
+BE -[dotted]-> RED
+BE -[dotted]-> SQL : SQL
+BE -[dashed]-> MQ : eventos AMQP\n(detalle en CO-02)
+BE -[dashed,thickness=3]-> EXTS : correo · push · SMS · Google\n(ms-iam y ms-notification)
+MQ -[hidden]right- EXTS
+
+legend bottom right
+  |= Línea |= Conexión |
+  | continua | REST (clientes → servicios) |
+  | gruesa | MQTT (medidor ↔ ms-device) |
+  | discontinua | AMQP · eventos |
+  | punteada | Persistencia |
+  | discontinua gruesa | Servicios externos |
+endlegend
+@enduml

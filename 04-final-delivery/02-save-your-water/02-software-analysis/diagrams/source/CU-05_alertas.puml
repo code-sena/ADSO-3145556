@@ -1,0 +1,51 @@
+@startuml CU-05_alertas
+!include _estilo.iuml
+title CU-05 · Alertas y notificaciones (E7)
+left to right direction
+
+actor "Dueño" as DU
+actor "Colaborador" as CO
+actor "Temporizador\ndel sistema" as TMP <<sistema>>
+actor "Expo Push" as PUSH <<sistema>>
+actor "Servidor de correo" as MAIL <<sistema>>
+actor "Proveedor\nSMS / WhatsApp" as SMS <<sistema>>
+rectangle "E7 · Alertas y notificaciones" {
+  usecase "Ver centro de\nnotificaciones (HU-025)" as N1
+  usecase "Marcar como leídas" as N1b
+  usecase "Configurar preferencias\npor nivel y canal (HU-034)" as N2
+  usecase "Enviar notificación\npush (HU-026)" as N3
+  usecase "Enviar notificación\npor correo (HU-027)" as N4
+  usecase "Enviar WhatsApp / SMS\n(HU-028)" as N5
+  usecase "Alertar fuga\nsospechosa (HU-029)" as A1
+  usecase "Alertar meta\nsuperada (HU-030)" as A2
+  usecase "Alertar cerca de\nla meta, 80% (HU-031)" as A3
+  usecase "Alertar sensor\ndesconectado (HU-032)" as A4
+  usecase "Alertar válvula\ncerrada (HU-033)" as A5
+  usecase "Despachar alerta\nsegún nivel y preferencias" as D
+}
+DU --> N1
+DU --> N2
+CO --> N1
+N1b ..> N1 : <<extend>>
+TMP --> A1
+TMP --> A2
+TMP --> A3
+TMP --> A4
+A1 ..> D : <<include>>
+A2 ..> D : <<include>>
+A3 ..> D : <<include>>
+A4 ..> D : <<include>>
+A5 ..> D : <<include>>
+D ..> N3 : <<extend>>
+D ..> N4 : <<extend>>
+D ..> N5 : <<extend>>
+N3 --> PUSH
+N4 --> MAIL
+N5 --> SMS
+note right of D
+  Crítica: App + Push + Correo + SMS/WhatsApp
+  Importante: App + Push
+  Informativa: solo App
+  (las críticas nunca pierden el canal App)
+end note
+@enduml

@@ -1,0 +1,48 @@
+@startuml CU-04_valvula
+!include _estilo.iuml
+title CU-04 · Válvula y cierre automático (E5, E8)
+left to right direction
+
+actor "Dueño" as DU
+actor "Colaborador" as CO
+actor "Medidor IoT\n(ESP32)" as IOT <<sistema>>
+actor "Temporizador\ndel sistema" as TMP <<sistema>>
+rectangle "E5 · Control manual de la válvula" {
+  usecase "Ver estado de\nla válvula (HU-019)" as V1
+  usecase "Cerrar la válvula\nmanualmente (HU-020)" as V2
+  usecase "Confirmar con código\nenviado por correo" as V2c
+  usecase "Abrir la válvula\n(HU-021)" as V3
+  usecase "Ver historial de\nacciones (HU-022)" as V4
+  usecase "Ejecutar orden y\nreportar estado" as V5
+}
+rectangle "E8 · Cierre automático" {
+  usecase "Configurar regla de\ncierre automático\n(HU-035)" as A1
+  usecase "Cerrar por fuga con\nconfirmación (HU-036)" as A2
+  usecase "Reabrir tras cierre\nautomático (HU-037)" as A3
+}
+DU --> V1
+DU --> V2
+DU --> V3
+DU --> V4
+DU --> A1
+DU --> A2
+DU --> A3
+CO --> V1
+CO --> V4
+V2 ..> V2c : <<include>>
+V2 ..> V5 : <<include>>
+V3 ..> V5 : <<include>>
+V5 <-- IOT
+TMP --> A2
+A3 ..> V3 : <<include>>
+note bottom of A2
+  Nunca se cierra sin confirmación del Dueño.
+  La regla viene desactivada y la reapertura
+  siempre es manual.
+end note
+note bottom of V2
+  Solo el Dueño (o el colaborador con permiso).
+  Si el medidor no responde en 30 s,
+  la orden falla y el estado no cambia.
+end note
+@enduml

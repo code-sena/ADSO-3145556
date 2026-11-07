@@ -4,8 +4,16 @@
 
 ## Required content / Contenido requerido
 
-- [ ] Software technical proposal / Propuesta técnica del software
-- [ ] Selected technologies and why / Tecnologías seleccionadas y su justificación
+- [x] Software technical proposal / Propuesta técnica del software
+- [x] Selected technologies and why / Tecnologías seleccionadas y su justificación
+
+## Files / Archivos
+
+| File / Archivo | Content / Contenido |
+|---|---|
+| [`technical-proposal.pdf`](technical-proposal.pdf) | Technical proposal v1.0, with the selected technologies and why / Propuesta técnica v1.0, con las tecnologías seleccionadas y su justificación |
+
+The documents are delivered in PDF; the diagrams include their editable PlantUML source. / Los documentos se entregan en PDF; los diagramas incluyen su fuente editable en PlantUML.
 
 ## Format / Formato
 

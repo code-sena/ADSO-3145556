@@ -1,0 +1,36 @@
+@startuml SQ-08_colaborador
+!include _estilo.iuml
+title SQ-08 · Invitar, aceptar y revocar un colaborador (HU-042 a HU-046)
+autonumber "<b>00"
+skinparam responseMessageBelowArrow true
+
+actor "Dueño" as O
+actor "Invitado\nregistrado" as C
+participant "App" as APP
+participant "ms-places" as PL
+participant "ms-notification" as NOT
+participant "Servidor SMTP" as MAIL
+participant "ms-valve" as VAL
+O -> APP : Correo del invitado + permisos
+APP -> PL : POST /api/places/{id}/invitations { email, permissions[] }
+PL -> PL : Invitation (token, vence en 7 días)
+PL -> NOT : Enviar invitación
+NOT -> MAIL : Correo con enlace de aceptación
+PL --> APP : 201
+C -> APP : Abre el enlace (inicia sesión o se registra)
+APP -> PL : POST /api/invitations/{token}/accept
+PL -> PL : PlaceMember(COLLABORATOR, permisos)
+PL --> APP : 200 lugar compartido
+C -> APP : Intenta cerrar la válvula
+APP -> VAL : POST /api/places/{id}/valve/close
+VAL -> PL : ¿Permiso OperateValve?
+alt tiene el permiso
+  VAL --> APP : 202 (sigue SQ-05)
+else no lo tiene
+  VAL --> APP : 403 place.permission_denied
+end
+O -> APP : Revocar acceso
+APP -> PL : DELETE /api/places/{id}/members/{userId}
+PL -> PL : PlaceMember.revokedAt = ahora
+PL --> APP : 204 (deja de recibir alertas del lugar)
+@enduml

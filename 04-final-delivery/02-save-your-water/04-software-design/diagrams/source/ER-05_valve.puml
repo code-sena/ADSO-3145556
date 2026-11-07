@@ -1,0 +1,57 @@
+@startuml ER-05_valve
+!include _estilo.iuml
+title ER-05 · Modelo físico del schema valve (ms-valve)
+hide circle
+skinparam linetype ortho
+skinparam nodesep 40
+skinparam ranksep 60
+top to bottom direction
+entity "valve.valve_states" as valve_valve_states {
+  * id : uniqueidentifier <<PK>>
+  --
+  * place_id : uniqueidentifier <<FK,UK>>
+  * device_id : uniqueidentifier <<FK,UK>>
+  * state : nvarchar(10)
+    last_confirmed_at : datetime2
+  * created_at : datetime2
+  * updated_at : datetime2
+}
+entity "valve.valve_commands" as valve_valve_commands {
+  * id : uniqueidentifier <<PK>>
+  --
+  * place_id : uniqueidentifier <<FK>>
+  * device_id : uniqueidentifier <<FK>>
+  * action : nvarchar(10)
+  * origin : nvarchar(15)
+  * status : nvarchar(15)
+    requested_by : uniqueidentifier <<FK>>
+    requested_by_name : nvarchar(max)
+  * confirmed_with_code : bit
+  * created_at : datetime2
+    sent_at : datetime2
+  * timeout_at : datetime2
+    acknowledged_at : datetime2
+    failure_reason : nvarchar(500)
+}
+entity "devices.devices" as devices_devices <<otro servicio>> {
+  * id : uniqueidentifier <<PK>>
+}
+entity "places.places" as places_places <<otro servicio>> {
+  * id : uniqueidentifier <<PK>>
+}
+entity "security.users" as security_users <<otro servicio>> {
+  * id : uniqueidentifier <<PK>>
+}
+places_places ..o| valve_valve_states : place_id
+devices_devices ..o| valve_valve_states : device_id
+places_places ..o{ valve_valve_commands : place_id
+devices_devices ..o{ valve_valve_commands : device_id
+security_users ..o{ valve_valve_commands : requested_by
+legend bottom right
+  |= Notación |= Significado |
+  | ● | columna obligatoria (NOT NULL) |
+  | PK / FK / UK | llave primaria / foránea / única |
+  | línea continua | llave foránea dentro del schema |
+  | línea punteada | referencia lógica a otro servicio (sin FK física) |
+endlegend
+@enduml

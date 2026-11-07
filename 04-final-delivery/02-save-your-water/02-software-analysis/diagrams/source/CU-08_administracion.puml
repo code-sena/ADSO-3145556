@@ -1,0 +1,38 @@
+@startuml CU-08_administracion
+!include _estilo.iuml
+title CU-08 · Administración y consejos de ahorro (E14)
+left to right direction
+
+actor "Administrador" as AD
+actor "Dueño" as DU
+rectangle "E14 · Admin Panel" {
+  usecase "Ver lista de usuarios\n(búsqueda, filtro, páginas)\n(HU-059)" as A1
+  usecase "Bloquear / desbloquear\nusuario (HU-060)" as A2
+  usecase "Ver lista de\ndispositivos (HU-061)" as A3
+  usecase "Ver métricas de\nplataforma (HU-062)" as A4
+  usecase "Crear recomendación\nde ahorro (HU-063)" as A5
+  usecase "Editar o desactivar\nrecomendación (HU-064)" as A6
+  usecase "Ver consejos de\nahorro (HU-065)" as A7
+  usecase "Guardar consejo\nen favoritos" as A8
+}
+AD --> A1
+AD --> A2
+AD --> A3
+AD --> A4
+AD --> A5
+AD --> A6
+DU --> A7
+A2 ..> A1 : <<extend>>
+A8 ..> A7 : <<extend>>
+note right of A2
+  Al bloquear se cierran todas
+  las sesiones del usuario y queda
+  registrado quién, cuándo y por qué.
+  Un administrador no puede bloquearse.
+end note
+note right of A7
+  El usuario ve consejos activos al azar
+  según el tipo de su lugar
+  (residencial o comercial).
+end note
+@enduml
