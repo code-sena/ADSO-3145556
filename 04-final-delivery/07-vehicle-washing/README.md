@@ -34,9 +34,9 @@ Final delivery of the training project / Entrega final del proyecto formativo.
 
 | Full name / Nombre completo | Doc. type / Tipo | Doc. number / Número | Ficha | GitHub user / Usuario | Role / Rol | Verified and authorized / Verificado y autorizado |
 |---|---|---|---|---|---|---|
-| BRAYAN ESTIVEN PATIÑO CABRERA | CC | 1079177274 | 3145556 | BrayanCABRERA123 | Full stack developer / Desarrollador full stack | ☐ |
-| JUAN CAMILO GUILOMBO OSORIO | CC | 1075795184 | 3145556 | camiloguilombo12 | Full stack developer / Desarrollador full stack | ☐ |
-| MERARI URBANO QUINTERO | CC | 1077227809 | 3145556 | merari0322 | Full stack developer / Desarrollador full stack | ☐ |
+| BRAYAN ESTIVEN PATIÑO CABRERA | CC | 1079177274 | 3145556 | BrayanCABRERA123 | Full stack developer / Desarrollador full stack | ☑ |
+| JUAN CAMILO GUILOMBO OSORIO | CC | 1075795184 | 3145556 | camiloguilombo12 | Full stack developer / Desarrollador full stack | ☑ |
+| MERARI URBANO QUINTERO | CC | 1077227809 | 3145556 | merari0322 | Full stack developer / Desarrollador full stack | ☑ |
 
 Data use authorization: by checking the box, the member confirms their data and authorizes publishing their name, document number and ficha in this public repository, for the software registration process (Ley 1581 de 2012). Anyone who does not authorize it tells the instructor before delivering.
 
