@@ -19,7 +19,7 @@
 | 1.0 | 10-oct-2026 | Versión inicial del manual técnico (Parte A). Elaborada a partir del análisis directo del código fuente del proyecto. | Equipo del proyecto |
 | 1.1 | 27-oct-2026 | Corrección documental acotada de inventario, JWT/autorización, Kong, Kafka y gRPC contra repositorios locales; no certifica despliegue ni auditoría integral. | Revisión técnica |
 
-> **Corte de evidencia (27-oct-2026).** Se contrastaron los repositorios principales `sg-ms-*` y `kafka` de la carpeta `Proyecto`, no las copias divergentes de `schoo-guardian/backend`. Las rutas antiguas `backend/ms-*` de este manual se conservan como referencias históricas; para esta revisión corresponden a `sg-ms-*`, y `gps-backend` corresponde a `sg-ms-gps`. Se cuentan **ocho backend (seis .NET y dos Java) más Kong**; Kafka y SQL Server no son servicios de negocio. `ms-configuration` y `ms-exceptional` quedan como antecedentes, no componentes actuales verificados. Versiones de manifiesto y código/configuración no prueban imágenes activas, tablas instaladas ni entrega de mensajes. No se leyeron secretos ni se consultó producción.
+> **Corte de evidencia (27-oct-2026).** Se contrastaron los repositorios principales `sg-ms-*` y `kafka` de la carpeta `Proyecto`, no las copias divergentes de `schoo-guardian/backend`. Las rutas antiguas `backend/ms-*` de este manual se conservan como referencias históricas; para esta revisión corresponden a `sg-ms-*`, y `gps-backend` corresponde a `sg-ms-gps`. Se cuentan **ocho backend (seis .NET y dos Java) más Kong**; Kafka y SQL Server no son servicios de negocio. Versiones de manifiesto y código/configuración no prueban imágenes activas, tablas instaladas ni entrega de mensajes. No se leyeron secretos ni se consultó producción.
 
 ---
 
@@ -374,7 +374,7 @@ flowchart TB
 | **sg-ms-gps** | Tracking | `Gps` (modelo; servicio en memoria) | 8080 / TCP 8842 | Ingesta de tramas GPS y consulta de posiciones |
 | **ms-api-gateway** | Borde | — | 8000 | Gateway Kong |
 
-`ForgotInformationContext` configura explícitamente el esquema `ForgotInformation` y la tabla `VerificationRequest`; esto no comprueba su instalación. `ms-configuration` y `ms-exceptional` no se cuentan en el inventario actual (secciones 6.8–6.9 históricas).
+`ForgotInformationContext` configura explícitamente el esquema `ForgotInformation` y la tabla `VerificationRequest`; esto no comprueba su instalación.
 
 **Capas internas por servicio .NET.** El layout estándar es:
 
@@ -828,7 +828,7 @@ A continuación se documentan las tablas principales con sus campos, tipos y res
 | | ExpoToken | varchar(300) | not null, unique | Token de Expo. |
 | | UpdatedAt | datetime2 | not null | Actualización. |
 
-**Esquema `Settings` (grupo *Configuration*).**
+**Esquema `Settings`.**
 
 | Tabla | Campo | Tipo | Restricciones | Descripción |
 |---|---|---|---|---|
@@ -852,7 +852,7 @@ Se verificaron los *changelogs* de Liquibase de cada módulo (`database/ms-*-db/
 - **Tipos definidos por usuario:** no existen. Changelogs `02-types` vacíos.
 - **Índices:** no se declaran índices explícitos adicionales a las claves primarias y restricciones `unique` definidas en el DDL de tablas. Las claves foráneas generan los índices implícitos propios del motor.
 
-> **Hallazgos del modelo de datos:** (1) existe una carpeta `ms-audit-db` **vacía** (el servicio de auditoría fue eliminado del proyecto, ver commits `58ddf08` y `102fbb2`), por lo que **no hay esquema `Audit`**; (2) no hay un grupo `Exceptional` independiente en el DBML aunque el microservicio ms-exceptional persiste datos; (3) el diccionario se documenta a nivel de tipo y restricción del DBML; los detalles de colación, `NULL`/`NOT NULL` a nivel de columna y precisión se conservan en los changelogs Liquibase.
+> **Hallazgos del modelo de datos:** (1) existe una carpeta `ms-audit-db` **vacía** (el servicio de auditoría fue eliminado del proyecto, ver commits `58ddf08` y `102fbb2`), por lo que **no hay esquema `Audit`**; (2) el diccionario se documenta a nivel de tipo y restricción del DBML; los detalles de colación, `NULL`/`NOT NULL` a nivel de columna y precisión se conservan en los changelogs Liquibase.
 
 ### 4.4 Estrategia de respaldo y recuperación
 
@@ -876,7 +876,7 @@ El proyecto **no vive en un único repositorio**: el código se distribuye en re
 |---|---|---|
 | Documentación | Entregables bilingües y este manual | `main` |
 | Base de datos | DBML, changelogs Liquibase y compose de SQL Server | trabajo sobre una única rama (`database`) |
-| Backend | 10 microservicios, Kafka y gateway | ramas por microservicio/feature |
+| Backend | 8 microservicios, Kafka y gateway | ramas por microservicio/feature |
 | Frontend | Web, móvil y gps-backend | ramas por feature (p. ej. `fix/legal-page-shared-imports`) |
 
 ### 5.2 Árbol de carpetas y paquetes
@@ -899,8 +899,6 @@ backend/
 ├── ms-route/                 # .NET 10 (+ servidor gRPC)
 ├── ms-notification/          # .NET 10 (consumidor Kafka + push Expo)
 ├── sg-ms-forgot-information/ # .NET 10 (OTP por correo/SMS)
-├── ms-configuration/         # .NET 10
-├── ms-exceptional/           # .NET 10
 └── kafka/                    # Broker + init/create-topics.sh + topics.conf
 ```
 
@@ -1083,27 +1081,7 @@ Esta sección describe cada servicio: su responsabilidad, los casos de uso y cla
 - **Dependencias:** EF Core, HttpClient, Twilio, SMTP.
 - **Reglas de negocio:** los códigos OTP se validan con *pepper* (`OTP_HASH_PEPPER`); límite de 10 req/min por IP y un limitador interno por perfil; los flujos de teléfono responden `503` si Twilio no está configurado; validación *fail-fast* de SMTP/clave interna fuera de `Development`.
 
-### 6.8 ms-configuration (configuración)
-
-> **Antecedente histórico no verificado como servicio actual.** Se conserva la descripción previa; no se incluye en el conteo ni diagramas actuales.
-
-- **Responsabilidad:** ajustes de la plataforma y políticas de contraseñas.
-- **Casos de uso/controladores:** `SettingController` (`/api/settings`), `PasswordPolicyController` (`/api/password-policies`).
-- **Entradas/salidas:** REST; salida al esquema `Settings`.
-- **Dependencias:** EF Core.
-- **Reglas de negocio:** las operaciones de escritura están limitadas a 30 req/min (`writes`).
-
-### 6.9 ms-exceptional (usos excepcionales)
-
-> **Antecedente histórico no verificado como servicio actual.** Se conserva la descripción previa; no se incluye en el conteo ni diagramas actuales.
-
-- **Responsabilidad:** registrar novedades de conductores y rutas (eventos excepcionales).
-- **Casos de uso/controladores:** `DriverUsageController` (`/api/driver-usages`), `RouteUsageController` (`/api/route-usages`).
-- **Entradas/salidas:** REST; persistencia propia.
-- **Dependencias:** EF Core.
-- **Nota:** el servicio no tiene ruta en Kong (no es accesible desde el exterior en la configuración actual).
-
-### 6.10 gps-backend (ingesta GPS)
+### 6.8 gps-backend (ingesta GPS)
 
 - **Responsabilidad:** recibir tramas binarias de rastreadores GPS por **TCP** y exponer la última posición por REST.
 - **Componentes clave:** `GpsTcpServer` (puerto TCP **8842**), `GpsFrameDecoder`, `GpsPacketRouter`, handlers por protocolo (`0x01` login, `0x13` heartbeat, `0x31` ubicación, `0x32` alarma, `0x50` LBS, `0x80` comando, `79 79` legacy), `GpsLocationService`/`GpsDeviceService` en memoria, `GpsAckService` (ACK con CRC-16).
@@ -1111,12 +1089,12 @@ Esta sección describe cada servicio: su responsabilidad, los casos de uso y cla
 - **Dependencias:** Spring Web MVC (el DataSource/JPA están **desactivados** en `application.properties`).
 - **Limitación:** la persistencia es **en memoria** (mapas concurrentes), no SQL Server; REST 8080 y TCP 8842; `sg-ms-gps/Dockerfile` sí existe (Java 21). Esto no acredita una imagen desplegada.
 
-### 6.11 API Gateway (Kong) y Kafka
+### 6.9 API Gateway (Kong) y Kafka
 
 - **Kong:** declara rutas a los ocho backend, incluido GPS; `sg-jwt` global, CORS común por servicio y límites específicos de IAM/login (no un límite común a todos).
 - **Kafka:** nueve tópicos declarados, incluidos `admin.school.updated`, `user.status.changed` e `incident.reported` (sección 7.5); broker activo no comprobado.
 
-### 6.12 Frontend web y móvil
+### 6.10 Frontend web y móvil
 
 - **Web (Angular 21):** SPA con *roleGuard*; rutas públicas (home, contacto, login, recuperación, términos, privacidad), de administrador (usuarios, flota, rutas, perfil, cambios de datos) y de superadministrador (admins, colegios). Servicios REST por dominio contra Kong. SSR/pre-render configurable; i18n con 4 idiomas (es, en, fr, pt); interceptor que añade el token y renueva ante 401.
 - **Móvil (React Native/Expo):** login, datos personales, familia, notificaciones, ruta, perfil, seguridad, recuperación, idioma y apariencia; consumo de API mediante `apiClient` con renovación de token; mapa (`react-native-maps`), cámara/QR (`expo-camera`, `react-native-qrcode-svg`) y ubicación (`expo-location`).
@@ -1225,21 +1203,6 @@ La puerta de entrada pública es **Kong** en `http://<host>:8000`. Kong enruta p
 | POST | `/api/v1/email/change/request` · `/verify` · `/new` · `/resend-new` · `/verify-new` · `/confirm` | Flujo de cambio de correo. |
 | POST | `/api/v1/phone/change/request` · `/verify` · `/verification/request` · `/verification/resend` · `/verification/check` | Flujo de cambio de teléfono. |
 | GET | `/health` | Salud del servicio. |
-
-**ms-configuration** (referencia histórica; servicio actual no verificado).
-
-| Método | Ruta | Descripción |
-|---|---|---|
-| GET | `/api/settings` · `/api/settings/{name}` | Lista / consulta ajuste. |
-| PUT | `/api/settings/{name}` | Actualiza ajuste. |
-| GET/PUT | `/api/password-policies` · `/api/password-policies/{id}` | Políticas de contraseña. |
-
-**ms-exceptional** (referencia histórica; servicio actual no verificado).
-
-| Método | Ruta | Descripción |
-|---|---|---|
-| GET/POST | `/api/driver-usages` | Novedades de conductor. |
-| GET/POST | `/api/route-usages` | Novedades de ruta. |
 
 **gps-backend.**
 
