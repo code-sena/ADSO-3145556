@@ -83,3 +83,4 @@ Aquí solo van archivos demasiado pesados para GitHub, como videos de demostraci
 |---|---|---|
 | `tuevento-usage-tutorial.mp4` — usage tutorial / tutorial de uso | 20.2 MB | [Google Drive](https://drive.google.com/file/d/1JQwpBJMLQlUPd2DGHQo5i_C7UzpmvF-B/view?usp=sharing) |
 | `tuevento-advertising-pitch.mp4` — advertising pitch / pitch publicitario | 25.6 MB | [Google Drive](https://drive.google.com/file/d/1muZgLYzA7VaPwu_vAFrtiOllNIjjoIlN/view?usp=sharing) |
+| `tuevento-figma-design.fig` — Figma design of the interfaces / diseño de Figma de las interfaces (`04-software-design`) | 95.6 MB | [Google Drive](https://drive.google.com/file/d/1IqUr8mGdyXC-eBho1TBDQKNb4aDOKRzn/view?usp=sharing) |

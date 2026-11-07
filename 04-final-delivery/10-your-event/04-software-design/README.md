@@ -22,6 +22,7 @@
 |---|---|
 | [`software-design.pdf`](software-design.pdf) | Design patterns (where they are used), architecture, package, process, flow and activity diagrams / Patrones de diseño (dónde se usan), arquitectura, diagramas de paquetes, procesos, flujo y actividades |
 | [`user-interfaces-prototype.pdf`](user-interfaces-prototype.pdf) | Graphical interfaces: Figma prototype link and site map / Interfaces gráficas: enlace al prototipo en Figma y mapa del sitio |
+| [`tuevento-figma-design.fig`](https://drive.google.com/file/d/1IqUr8mGdyXC-eBho1TBDQKNb4aDOKRzn/view?usp=sharing) (Google Drive, 95.6 MB) | Figma design file of the graphical interfaces; it is on Drive because it exceeds the 50 MB limit for the repository; to open it, import it in Figma. / Archivo de diseño de Figma de las interfaces gráficas; está en Drive porque supera el límite de 50 MB del repositorio; para abrirlo, impórtelo en Figma. |
 | [`data-model.pdf`](data-model.pdf) | Data model: entity-relationship diagram and per-module models (conceptual and logical) and data dictionary / Modelo de datos: diagrama entidad-relación y modelos por módulo (conceptual y lógico) y diccionario de datos |
 | [`database-script-design.sql`](database-script-design.sql) | Physical model as designed / Modelo físico diseñado |
 | [`database-script-implemented.sql`](database-script-implemented.sql) | Physical model as implemented (Liquibase schema exported with pg_dump) / Modelo físico implementado (esquema de Liquibase exportado con pg_dump) |
