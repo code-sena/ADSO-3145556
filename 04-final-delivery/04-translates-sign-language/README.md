@@ -58,8 +58,8 @@ Each member gave the authorization from their own GitHub account / Cada integran
 | [`08-manuals/`](08-manuals/) | Manuals / Manuales | ☑ |
 | [`09-project-article/`](09-project-article/) | Project article / Artículo del proyecto | ☑ |
 | [`10-videos/`](10-videos/) | Videos / Videos | ☑ |
-| [`code-tag/`](code-tag/) | Repository links, tags and ZIP files / Enlaces, tags y ZIP | ☐ |
-| [`team-roster.md`](team-roster.md) | Team and roles / Equipo y roles | ☐ |
+| [`code-tag/`](code-tag/) | Repository links, tags and ZIP files / Enlaces, tags y ZIP | ☑ |
+| [`team-roster.md`](team-roster.md) | Team and roles / Equipo y roles | ☑ |
 | [`software-registration.md`](software-registration.md) | Software registration data / Datos para registro de software | ☑ |
 
 ## Large files on Google Drive / Archivos pesados en Google Drive
