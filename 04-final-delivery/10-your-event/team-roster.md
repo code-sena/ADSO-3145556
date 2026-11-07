@@ -23,9 +23,19 @@ Los aprendices completan su rol, por ejemplo backend, frontend, base de datos, Q
 | JHON WILLIAN CORREDOR ARAUJO | Instructor | Diseño, Evaluación de requisitos | ☐ Direct / Directo ☐ Indirect / Indirecto | Yes / Sí |
 | ANDRES MORENO COLLAZOS | Instructor | Diseño, Evaluación de requisitos | ☐ Direct / Directo ☐ Indirect / Indirecto | Yes / Sí |
 
+Support the team recorded during the project, as a reference for the instructor who marks the contribution type: / Apoyo que el equipo registró durante el proyecto, como referencia para el instructor que marca el tipo de aporte:
+
+| Instructor | Support / Apoyo |
+|---|---|
+| JESUS ARIEL GONZALEZ BONILLA | Project recommendations, the SDD documentation framework (`yev-docs`) and guidance on the payment sandbox (`fake-payment-gateway`). / Recomendaciones para el proyecto, el marco de documentación SDD (`yev-docs`) y orientación sobre la sandbox de pagos (`fake-payment-gateway`). |
+| CARLOS JULIO CADENA SARASTY | Lent a Mac to build and verify the mobile app on iOS. / Prestó un equipo Mac para compilar y comprobar la app móvil en iOS. |
+| JAVIER HUMBERTO PINTO DIAZ | Taught the design patterns applied in the project (Strategy, Observer). / Explicó los patrones de diseño aplicados en el proyecto (Strategy, Observer). |
+| JOSE DE JESUS MOTTA VARGAS | Guidance on the project documentation. / Orientación sobre la documentación del proyecto. |
+| KAROL DANIELA CORREA TRUJILLO | Guidance on the manuals. / Orientación sobre los manuales. |
+
 ## Apprentices / Aprendices
 
 | Full name / Nombre completo | Doc. type / Tipo | Doc. number / Número | Ficha | GitHub user / Usuario | Role in the project / Rol en el proyecto | Author / Autor |
 |---|---|---|---|---|---|---|
-| CRISTOFER DAVID LOZANO CONTRERAS | CC | 1075322976 | 3145556 | lozano2303 | | Yes / Sí |
-| JHAM PIER SANTOS ORTIZ | CC | 1077852139 | 3145556 | TheJhampierBoy | | Yes / Sí |
+| CRISTOFER DAVID LOZANO CONTRERAS | CC | 1075322976 | 3145556 | lozano2303 | Project lead; backend (catalog core, security, storage, themes, languages, geolocation, migration to microservices); mobile app (Expo/React Native, QR check-in); database (model, scripts, Liquibase); web co-developer (venue layout editor); CI/CD (shared) / Líder del proyecto; backend (núcleo de catálogo, seguridad, almacenamiento, temas, idiomas, geolocalización, migración a microservicios); app móvil (Expo/React Native, validación QR); base de datos (modelo, scripts, Liquibase); codesarrollador web (editor de planos); CI/CD (compartido) | Yes / Sí |
+| JHAMPIER SANTOS ORTIZ | CC | 1077852139 | 3145556 | TheJhampierBoy | Web frontend (admin panels, comments, notifications, login, general UI); CI/CD and deployment (GitHub Actions, production Docker Compose, releases); backend (identity-service, API Gateway, security fixes); documentation repository / Frontend web (paneles de administración, comentarios, notificaciones, login, interfaz general); CI/CD y despliegue (GitHub Actions, Docker Compose de producción, releases); backend (identity-service, API Gateway, correcciones de seguridad); repositorio de documentación | Yes / Sí |

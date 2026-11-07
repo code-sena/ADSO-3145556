@@ -1,1 +1,7 @@
 # sha256  file / archivo
+c61e6ee0acc533f6a6f7efa6b22dee89fc468652d9398ef04fabc81fd19dcf2a  TuEvento-final-delivery-2026-main.zip
+233d8625f7000ff4c1c77e85a53fbf8601da3f97f3e48930b918db21755c3539  TuEvento-full-export.zip
+107d50502c2a3bca5cd84705d89102d8137d5b9bba15eaa92a9d37d9bccf979f  TuEvento-Docs-final-delivery-2026-main.zip
+9fc8a74d8a36bd64fb7017b230fdaed6b220d45e85296e5c2d22347bf0be0b6f  TuEvento-Docs-full-export.zip
+c404e31213bb941e4f7695f91876444e45e21c77b508a1f2c01db5f6117a4214  yev-docs-final-delivery-2026-main.zip
+56c537ba3657dc710927315889978f3ee5907dbd9b5106821038aeff313dbdcb  yev-docs-full-export.zip
