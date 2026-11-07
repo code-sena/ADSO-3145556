@@ -49,6 +49,8 @@ flowchart LR
         FL[ms-fleet\n.NET 10]
         RT[ms-route\n.NET 10]
         NT[ms-notification\n.NET 10]
+        CF[ms-configuration\n.NET 10]
+        EX[ms-exceptional\n.NET 10]
         FI[ms-forgot-information\n.NET 10]
         KAFKA[(Kafka 4.1.0\nKRaft :9092)]
         DB[(SQL Server 2022\n:1433)]
@@ -75,6 +77,8 @@ flowchart LR
     FL --> DB
     RT --> DB
     NT --> DB
+    CF --> DB
+    EX --> DB
     FI --> DB
 ```
 
@@ -117,7 +121,7 @@ Los repositorios usan el esquema **Conventional Commits** (`feat:`, `fix:`, `cho
 
 ### 2.1 Requisitos de hardware
 
-> **Nota.** El repositorio **no define** requisitos de hardware. Los siguientes valores son **recomendaciones** basadas en los servicios desplegados (SQL Server 2022, Kafka, Kong y siete microservicios contenerizados).
+> **Nota.** El repositorio **no define** requisitos de hardware. Los siguientes valores son **recomendaciones** basadas en los servicios desplegados (SQL Server 2022, Kafka, Kong y nueve microservicios contenerizados).
 
 | Recurso | Mínimo | Recomendado |
 |---|---|---|
@@ -209,6 +213,8 @@ backend/
 ├── ms-fleet/                # .NET 10
 ├── ms-route/                # .NET 10
 ├── ms-notification/         # .NET 10 (puerto host 8081)
+├── ms-configuration/        # .NET 10
+├── ms-exceptional/          # .NET 10
 └── sg-ms-forgot-information/# .NET 10 (SMTP + Twilio + OTP)
 database/
 ├── docker-compose.yaml      # SQL Server 2022 + contenedores Liquibase + init
@@ -237,6 +243,8 @@ Cada componente es un **repositorio Git independiente**:
 | `sg-ms-fleet` | `https://github.com/school-guardian-project/sg-ms-fleet.git` | Flota (buses, tipos) |
 | `sg-ms-route` | `https://github.com/school-guardian-project/sg-ms-route.git` | Rutas, paradas y ciudades |
 | `sg-ms-notification` | `https://github.com/school-guardian-project/sg-ms-notification.git` | Notificaciones |
+| `sg-ms-configuration` | `https://github.com/school-guardian-project/sg-ms-configuration.git` | Configuración |
+| `sg-ms-exceptional` | `https://github.com/school-guardian-project/sg-ms-exceptional.git` | Registro de uso excepcional |
 | `sg-ms-forgot-information` | `https://github.com/school-guardian-project/sg-ms-forgot-information.git` | Recuperación de contraseña / correo / celular |
 | `sg-db` | `https://github.com/code-sena/sg-db.git` | Modelo y migraciones de base de datos |
 | `GuardianEscolar` | `https://github.com/school-guardian-project/GuardianEscolar.git` | Frontend web, móvil y `gps-backend` |
@@ -369,6 +377,8 @@ git clone https://github.com/school-guardian-project/sg-ms-school-management.git
 git clone https://github.com/school-guardian-project/sg-ms-fleet.git ms-fleet
 git clone https://github.com/school-guardian-project/sg-ms-route.git ms-route
 git clone https://github.com/school-guardian-project/sg-ms-notification.git ms-notification
+git clone https://github.com/school-guardian-project/sg-ms-configuration.git ms-configuration
+git clone https://github.com/school-guardian-project/sg-ms-exceptional.git ms-exceptional
 git clone https://github.com/school-guardian-project/sg-ms-forgot-information.git sg-ms-forgot-information
 
 cd <RUTA_PROYECTO>
@@ -408,7 +418,7 @@ docker compose logs liquibase-iam          # revisar "Liquibase: Update has been
 docker compose logs liquibase-route
 ```
 
-> **Nota.** `ms-audit-db` existe como carpeta pero **no tiene changelog** (la auditoría fue retirada del alcance). Las migraciones reales cubren **nueve esquemas**.
+> **Nota.** `ms-audit-db` existe como carpeta pero **no tiene changelog** (la auditoría fue retirada del alcance); `ms-exceptional` no tiene carpeta de base de datos propia. Las migraciones reales cubren **nueve esquemas**.
 
 ### 5.4 Mensajería (Kafka)
 
@@ -467,7 +477,7 @@ docker compose up -d --build
 **c) Resto de microservicios .NET** (mismo patrón `--build`):
 
 ```bash
-for svc in ms-user-management ms-fleet ms-route ms-notification sg-ms-forgot-information; do
+for svc in ms-user-management ms-fleet ms-route ms-notification ms-configuration ms-exceptional sg-ms-forgot-information; do
   ( cd <RUTA_PROYECTO>/backend/$svc && cp -n .env.example .env 2>/dev/null; docker compose up -d --build )
 done
 ```
@@ -480,6 +490,8 @@ Variables relevantes por servicio (según los `.env` reales):
 | `ms-fleet` | `ConnectionStrings__DefaultConnection`, `Kafka__BootstrapServers` |
 | `ms-route` | `ConnectionStrings__DefaultConnection`, `Kafka__BootstrapServers`, `ASPNETCORE_Kestrel__Endpoints__Http__*` |
 | `ms-notification` | `ConnectionStrings__DefaultConnection`, `Kafka__BootstrapServers`, `Services__UserManagement__BaseUrl`, `Services__Route__BaseUrl` |
+| `ms-configuration` | `ConnectionStrings__DefaultConnection`, `Kafka__BootstrapServers` |
+| `ms-exceptional` | `ConnectionStrings__DefaultConnection` |
 | `sg-ms-forgot-information` | `ConnectionStrings__DefaultConnection`, `INTERNAL_API_KEY`, `OTP_HASH_PEPPER`, `SMTP_*`, `TWILIO_*` |
 
 **Ejecución de pruebas (NUnit).** Los servicios .NET incluyen un servicio de pruebas en el perfil `tests`:
@@ -631,7 +643,7 @@ Roles sembrados en `Iam.Role`: **`Admin`**, `Student`, `Driver`, `Parent` y `Sup
 docker ps --format 'table {{.Names}}\t{{.Status}}\t{{.Ports}}'
 ```
 
-Lista esperada (nombres reales de contenedor): `school-guardian-db-dev`, `kafka`, `kong`, `ms-iam`, `ms-user-management`, `ms-school-management`, `ms-fleet`, `ms-route`, `ms-notification`, `ms-forgot-information` y `frontend-container-dev`.
+Lista esperada (nombres reales de contenedor): `school-guardian-db-dev`, `kafka`, `kong`, `ms-iam`, `ms-user-management`, `ms-school-management`, `ms-fleet`, `ms-route`, `ms-notification`, `ms-configuration`, `ms-exceptional`, `ms-forgot-information` y `frontend-container-dev`.
 
 Verificar la red:
 
@@ -652,7 +664,8 @@ Requiere `curl` y `jq`. El script:
 
 1. Inicia sesión con los usuarios semilla (obtiene `accessToken` y `refreshToken`).
 2. Recorre las rutas reales de `ms-iam`, `ms-school-management`, `ms-user-management`, `ms-route`, `ms-fleet` y `ms-notification` a través de Kong y compara el **código HTTP esperado**.
-3. Imprime `OK: n  FAIL: m` y devuelve código de salida distinto de cero si hay fallos.
+3. Comprueba que los servicios **sin ruta en Kong** (`ms-exceptional`, `ms-configuration`) respondan `404`.
+4. Imprime `OK: n  FAIL: m` y devuelve código de salida distinto de cero si hay fallos.
 
 > **Hallazgo (verificación).** Kong **no** expone una ruta `/health`, y la mayoría de los servicios .NET **no** publican `MapHealthChecks`. El único servicio con `/health` es `sg-ms-forgot-information`. Por esto, la verificación válida es la que ejercita **rutas reales** (el script anterior).
 

@@ -4,8 +4,8 @@ Two videos are required. / Se requieren dos videos.
 
 | Video | Duration / Duración | Link / Enlace | Done / Listo |
 |---|---|---|---|
-| Advertising pitch / Pitch publicitario | 1 to 2 minutes / 1 a 2 minutos | https://drive.google.com/file/d/1gxLx0um6Xr8BrGpv2HXajY2i0rYBZlaJ/view?usp=sharing | ☒ |
-| Short usage tutorial / Tutorial corto de uso | 3 to 5 minutes / 3 a 5 minutos | https://drive.google.com/file/d/1g4Qds8f0pgi7pU5eKhnMJ2zRfcEVd0Se/view?usp=sharing | ☒ |
+| Advertising pitch / Pitch publicitario | 1 to 2 minutes / 1 a 2 minutos | | ☐ |
+| Short usage tutorial / Tutorial corto de uso | 3 to 5 minutes / 3 a 5 minutos | | ☐ |
 
 ## 1. Advertising pitch / Pitch publicitario
 
