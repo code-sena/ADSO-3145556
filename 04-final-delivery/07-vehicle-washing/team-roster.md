@@ -27,6 +27,6 @@ Los aprendices completan su rol, por ejemplo backend, frontend, base de datos, Q
 
 | Full name / Nombre completo | Doc. type / Tipo | Doc. number / Número | Ficha | GitHub user / Usuario | Role in the project / Rol en el proyecto | Author / Autor |
 |---|---|---|---|---|---|---|
-| BRAYAN ESTIVEN PATIÑO CABRERA | CC | 1079177274 | 3145556 | BrayanCABRERA123 | | Yes / Sí |
-| JUAN CAMILO GUILOMBO OSORIO | CC | 1075795184 | 3145556 | camiloguilombo12 | | Yes / Sí |
-| MERARI URBANO QUINTERO | CC | 1077227809 | 3145556 | merari0322 | | Yes / Sí |
+| BRAYAN ESTIVEN PATIÑO CABRERA | CC | 1079177274 | 3145556 | BrayanCABRERA123 | Full stack developer / Desarrollador full stack | Yes / Sí |
+| JUAN CAMILO GUILOMBO OSORIO | CC | 1075795184 | 3145556 | camiloguilombo12 | Full stack developer / Desarrollador full stack | Yes / Sí |
+| MERARI URBANO QUINTERO | CC | 1077227809 | 3145556 | merari0322 | Full stack developer / Desarrollador full stack | Yes / Sí |

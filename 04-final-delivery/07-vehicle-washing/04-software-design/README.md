@@ -4,10 +4,10 @@
 
 ## Required content / Contenido requerido
 
-- [ ] Graphical interfaces: mockups or prototype / Interfaces gráficas: mockups o prototipo
-- [ ] Architectural model / Modelo arquitectónico
-- [ ] Design patterns applied, with where they are used / Patrones de diseño aplicados, indicando dónde se usan
-- [ ] Data model: conceptual, logical and physical / Modelo de datos: conceptual, lógico y físico
+- [x] Graphical interfaces: mockups or prototype / Interfaces gráficas: mockups o prototipo → software-design-es.pdf, sección 2 (pantallas, navegación y capturas)
+- [x] Architectural model / Modelo arquitectónico → software-design-es.pdf, sección 3 (C4 nivel 2, hexagonal y despliegue)
+- [x] Design patterns applied, with where they are used / Patrones de diseño aplicados, indicando dónde se usan → software-design-es.pdf, sección 4 (patrones y fragmentos de código)
+- [x] Data model: conceptual, logical and physical / Modelo de datos: conceptual, lógico y físico → software-design-es.pdf, sección 5: 5.2 entidad-relación (conceptual), 5.3 relacional (lógico), 5.4 diccionario de datos por esquema (físico)
 
 ## Format / Formato
 
