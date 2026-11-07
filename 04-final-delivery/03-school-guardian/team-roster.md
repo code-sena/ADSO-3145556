@@ -27,6 +27,6 @@ Los aprendices completan su rol, por ejemplo backend, frontend, base de datos, Q
 
 | Full name / Nombre completo | Doc. type / Tipo | Doc. number / Número | Ficha | GitHub user / Usuario | Role in the project / Rol en el proyecto | Author / Autor |
 |---|---|---|---|---|---|---|
-| JUAN PABLO CHALA RAMIREZ | CC | 1080292891 | 3145556 | Juan-Chala-123 | | Yes / Sí |
-| SHARIK DAYANNA ROJAS IBARRA | CC | 1081155289 | 3145556 | sharikrojas56 | | Yes / Sí |
-| JOHAN SMITH SANTAMARIA FERNANDEZ | CC | 1031652982 | 3145556 | Smithzz24 | | Yes / Sí |
+| JUAN PABLO CHALA RAMIREZ | CC | 1080292891 | 3145556 | Juan-Chala-123 | Fullstack, DevOps, Documentation | Yes / Sí |
+| SHARIK DAYANNA ROJAS IBARRA | CC | 1081155289 | 3145556 | sharikrojas56 | Fullstack, Documentation | Yes / Sí |
+| JOHAN SMITH SANTAMARIA FERNANDEZ | CC | 1031652982 | 3145556 | Smithzz24 | Fullstack, Documentation | Yes / Sí |
