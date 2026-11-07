@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EnergyMonitor — Unirse a hogar</title>
+  <link rel="icon" type="image/svg+xml" href="../../../../assets/icons/favicon.svg">
+  <link rel="stylesheet" href="../css/mobile-shell.css">
+  <link rel="stylesheet" href="css/dashboard-styles.css">
+</head>
+<body>
+
+  <p class="device-caption">EnergyMonitor · <span>/dashboard · JoinHomeModal</span></p>
+
+  <div class="phone">
+
+    <!-- Barra de estado: la dibuja el sistema, no la app -->
+    <div class="status-bar">
+      <span>9:41</span>
+      <span class="status-icons">
+        <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor" aria-hidden="true"><rect x="0" y="7" width="3" height="4" rx="1"/><rect x="4.5" y="5" width="3" height="6" rx="1"/><rect x="9" y="2.5" width="3" height="8.5" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/></svg>
+        <svg width="16" height="11" viewBox="0 0 16 12" fill="currentColor" aria-hidden="true"><path d="M8 9.2 6.2 11a3.2 3.2 0 0 1 3.6 0zM8 5.4c-1.6 0-3 .6-4.1 1.7L2.5 5.7A7.6 7.6 0 0 1 8 3.4c2 0 3.9.8 5.5 2.3l-1.4 1.4A5.6 5.6 0 0 0 8 5.4zM8 .8A11.8 11.8 0 0 0 .5 3.6l1.4 1.4A9.8 9.8 0 0 1 8 2.8c2.6 0 4.9 1 6.7 2.6l1.4-1.4A11.8 11.8 0 0 0 8 .8z"/></svg>
+        <svg width="25" height="12" viewBox="0 0 25 12" fill="none" aria-hidden="true"><rect x="0.5" y="0.5" width="21" height="11" rx="3.2" stroke="currentColor" opacity=".4"/><rect x="2" y="2" width="16" height="8" rx="1.8" fill="currentColor"/><path d="M23 4v4a2.2 2.2 0 0 0 0-4z" fill="currentColor" opacity=".4"/></svg>
+      </span>
+    </div>
+
+    <!-- ÁREA DE LA APP -->
+    <div class="screen">
+
+      <!-- FONDO: el /dashboard con su lista de hogares -->
+      <button class="drawer-trigger" aria-label="Abrir menú de navegación">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h18M3 12h18M3 17h18"></path></svg>
+      </button>
+
+      <header class="header header-with-trigger header-dashboard">
+        <div class="header-title-wrap">
+          <!-- dashboard:breadcrumb.home -->
+          <h1 class="header-title">Inicio</h1>
+        </div>
+        <div class="header-actions">
+          <button class="header-action" aria-label="Abrir menú de acciones">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg>
+          </button>
+        </div>
+      </header>
+
+      <div class="dash-list">
+        <article class="home-card" aria-label="Abrir hogar Casa Principal">
+          <div class="home-card-header is-owner">
+            <div class="home-card-header-text">
+              <h2 class="home-card-title">Casa Principal</h2>
+              <span class="home-card-responsible">Propietario</span>
+            </div>
+            <button class="home-card-favorite is-favorite" aria-label="Quitar favorito">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 20.4 4.7 13.1a4.7 4.7 0 0 1 6.6-6.7l.7.7.7-.7a4.7 4.7 0 0 1 6.6 6.7z"></path></svg>
+            </button>
+          </div>
+          <div class="home-card-body">
+            <p class="home-card-text"><strong class="home-card-label">Dirección: </strong>Cra. 45 # 18-32, Medellín</p>
+            <div class="home-card-description">
+              <p class="home-card-text"><strong class="home-card-label">Descripción: </strong>Casa unifamiliar de dos pisos en el barrio Los Alpes, con panel solar de 4 kWp y medición independiente por circuito. Los datos se reportan cada cinco…</p>
+              <button class="home-card-toggle">Ver más</button>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <!-- JoinHomeModal: <Modal visible animationType="fade"> -->
+      <div class="modal-overlay">
+        <div class="modal" role="dialog" aria-labelledby="modal-title">
+
+          <div class="modal-header">
+            <!-- joinHomeModal:title -->
+            <h2 class="modal-title" id="modal-title">Unirse a hogar</h2>
+            <button class="modal-close" aria-label="Cerrar">×</button>
+          </div>
+
+          <div class="modal-body">
+            <div class="join-body">
+
+              <!-- styles.iconCircle con Ionicons key-outline size xl (32) -->
+              <div class="join-icon-circle">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="7.5" cy="7.5" r="4.3"></circle><path d="M10.6 10.6 20.4 20.4"></path><path d="m16.5 16.5 1.8-1.7"></path><path d="m18.7 18.7 1.7-1.6"></path></svg>
+              </div>
+
+              <!-- joinHomeModal:description -->
+              <p class="join-description">Ingresa el código alfanumérico que te compartió el responsable del hogar.</p>
+
+              <!-- Input code · joinHomeModal:label / placeholder · JOIN_CODE_LENGTH = 8 -->
+              <div class="join-field">
+                <div class="input-container">
+                  <label class="input-label" for="join-code">Código de acceso</label>
+                  <div class="input-wrapper">
+                    <input class="input" id="join-code" type="text" placeholder="Ej: AB12CD34" maxlength="8" autocapitalize="characters">
+                  </div>
+                </div>
+                <!-- {value.length}/{JOIN_CODE_LENGTH} -->
+                <span class="modal-counter">0/8</span>
+              </div>
+
+              <!-- joinHomeModal:hint -->
+              <p class="join-hint">El código tiene 8 caracteres entre letras mayúsculas y números.</p>
+
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <!-- joinHomeModal:cancel -->
+            <button class="btn btn-secondary btn-medium">Cancelar</button>
+            <!-- joinHomeModal:join -->
+            <button class="btn btn-primary btn-medium">Unirme</button>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Indicador de inicio -->
+    <div class="home-indicator"></div>
+  </div>
+</body>
+</html>

@@ -4,13 +4,18 @@
 
 ## Required content / Contenido requerido
 
-- [ ] Corrective actions / Acciones correctivas
-- [ ] Preventive actions / Acciones preventivas
-- [ ] Software improvement actions / Acciones de mejoramiento del software
+- [x] Corrective actions / Acciones correctivas
+- [x] Preventive actions / Acciones preventivas
+- [x] Software improvement actions / Acciones de mejoramiento del software
+
+## Files / Archivos
+
+| Document / Documento | English | Español | Content / Contenido |
+|---|---|---|---|
+| `quality-and-improvements` | [PDF](en/quality-and-improvements.pdf) · [MD](en/quality-and-improvements.md) | [PDF](es/quality-and-improvements.pdf) · [MD](es/quality-and-improvements.md) | Quality and improvements report: audit, clean-code analysis, technical debt and improvement roadmap / Informe de calidad y mejoras: auditoría, análisis de código limpio, deuda técnica y plan de mejora |
 
 ## Format / Formato
 
-- Final version in PDF, plus the editable source when it exists. / Versión final en PDF y, si existe, el archivo fuente editable.
-- English file names, without spaces or accents: `requirements-specification.pdf`. / Nombres de archivo en inglés, sin espacios ni tildes.
-- Files over 50 MB go to Drive and are listed in the project `README.md`. / Los archivos de más de 50 MB van a Drive y se relacionan en el `README.md` del proyecto.
-- Do not add passwords, tokens, keys or real user data. / No incluya contraseñas, tokens, llaves ni datos reales de usuarios.
+- Final version in PDF, plus the editable source (Markdown). / Versión final en PDF y su fuente editable (Markdown).
+- Every document exists in English (`en/`) and Spanish (`es/`) with the same English file name. / Cada documento existe en inglés (`en/`) y en español (`es/`) con el mismo nombre de archivo en inglés.
+- No passwords, tokens, keys or real user data. / Sin contraseñas, tokens, llaves ni datos reales de usuarios.

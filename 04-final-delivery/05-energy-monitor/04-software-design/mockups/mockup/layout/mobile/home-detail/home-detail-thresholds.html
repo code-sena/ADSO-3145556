@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EnergyMonitor — Casa Principal · Umbrales</title>
+  <link rel="icon" type="image/svg+xml" href="../../../../assets/icons/favicon.svg">
+  <link rel="stylesheet" href="../css/mobile-shell.css">
+  <link rel="stylesheet" href="css/home-detail-styles.css">
+</head>
+<body>
+
+  <p class="device-caption">EnergyMonitor · <span>/home/[id] · ThresholdsTab</span></p>
+
+  <div class="phone">
+
+    <!-- Barra de estado (la dibuja el sistema, no la app) -->
+    <div class="status-bar">
+      <span>9:41</span>
+      <span class="status-icons">
+        <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor" aria-hidden="true"><rect x="0" y="7" width="3" height="4" rx="1"/><rect x="4.5" y="5" width="3" height="6" rx="1"/><rect x="9" y="2.5" width="3" height="8.5" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/></svg>
+        <svg width="16" height="11" viewBox="0 0 16 12" fill="currentColor" aria-hidden="true"><path d="M8 9.2 6.2 11a3.2 3.2 0 0 1 3.6 0zM8 5.4c-1.6 0-3 .6-4.1 1.7L2.5 5.7A7.6 7.6 0 0 1 8 3.4c2 0 3.9.8 5.5 2.3l-1.4 1.4A5.6 5.6 0 0 0 8 5.4zM8 .8A11.8 11.8 0 0 0 .5 3.6l1.4 1.4A9.8 9.8 0 0 1 8 2.8c2.6 0 4.9 1 6.7 2.6l1.4-1.4A11.8 11.8 0 0 0 8 .8z"/></svg>
+        <svg width="25" height="12" viewBox="0 0 25 12" fill="none" aria-hidden="true"><rect x="0.5" y="0.5" width="21" height="11" rx="3.2" stroke="currentColor" opacity=".4"/><rect x="2" y="2" width="16" height="8" rx="1.8" fill="currentColor"/><path d="M23 4v4a2.2 2.2 0 0 0 0-4z" fill="currentColor" opacity=".4"/></svg>
+      </span>
+    </div>
+
+    <div class="screen hd-screen">
+
+      <!-- HomeDetailScreen.header -->
+      <header class="header hd-header">
+        <a class="hd-back" href="../dashboard/dashboard.html" aria-label="Inicio">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"></path><path d="m12 19-7-7 7-7"></path></svg>
+        </a>
+        <div class="header-title-wrap">
+          <h1 class="header-title">Casa Principal</h1>
+        </div>
+      </header>
+
+      <!-- ThresholdsTab · contentContainerStyle.
+           isOwner = true → NO se pinta el aviso de solo lectura y SÍ se pinta el
+           botón Guardar. Estado con límites propios del hogar (useDefaults = false),
+           periodicidad Diaria. -->
+      <div class="hd-body">
+
+        <div>
+          <h2 class="hd-title">Umbrales de consumo</h2>
+          <p class="hd-subtitle-tall">Estos límites aplican únicamente a este hogar y se usan para generar alertas y recomendaciones personalizadas.</p>
+        </div>
+
+        <div class="card card-pad-md hd-card-stack">
+
+          <!-- defaults.label + defaults.hint · badge defaults.off + Switch -->
+          <div class="hd-row">
+            <div class="hd-row-left">
+              <span class="hd-row-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 17.4a8.6 8.6 0 1 1 16 0"></path><path d="m12 13.8 4.4-4.4"></path><path d="M12 17.6h.01"></path></svg>
+              </span>
+              <span class="hd-row-text">
+                <span class="hd-row-title">Usar los umbrales por defecto del sistema</span>
+                <span class="hd-row-hint">Los umbrales por defecto están pensados para un consumo residencial promedio. Desactívalos para definir tus propios límites en este hogar.</span>
+              </span>
+            </div>
+            <div class="hd-row-right">
+              <span class="hd-badge hd-badge-neutral">Desactivado</span>
+              <span class="switch" role="switch" aria-label="Usar los umbrales por defecto del sistema" aria-checked="false"></span>
+            </div>
+          </div>
+
+          <div class="hd-hairline"></div>
+
+          <!-- periodicity.label + periodicity.daily · Switch de periodicidad (off = diario) -->
+          <div class="hd-row">
+            <div class="hd-row-left">
+              <span class="hd-row-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.4" y="5" width="17.2" height="15.6" rx="2.2"></rect><path d="M3.4 9.6h17.2"></path><path d="M8 3v4"></path><path d="M16 3v4"></path></svg>
+              </span>
+              <span class="hd-row-text">
+                <span class="hd-row-title">Configurar por</span>
+                <span class="hd-periodicity">Diario</span>
+              </span>
+            </div>
+            <span class="switch" role="switch" aria-label="Configurar por periodicidad mensual" aria-checked="false"></span>
+          </div>
+
+          <div class="hd-hairline"></div>
+
+          <!-- fields.daily (editable) + fields.monthly (calculado = 15 × 30) -->
+          <div class="hd-fields">
+            <div class="hd-field">
+              <div class="hd-field-head">
+                <span class="hd-field-label">Límite diario</span>
+              </div>
+              <div class="hd-input-row">
+                <div class="input-wrapper">
+                  <input class="input" type="text" value="15" inputmode="decimal" aria-label="Límite diario en kWh">
+                </div>
+                <span class="hd-unit">kWh</span>
+              </div>
+            </div>
+
+            <div class="hd-field">
+              <div class="hd-field-head">
+                <span class="hd-field-label">Límite mensual</span>
+                <span class="hd-badge hd-badge-info">Calculado</span>
+              </div>
+              <div class="hd-input-row">
+                <!-- Campo NO editable: solo el owner puede escribir y aquí el valor
+                     es el que deriva el backend (DAYS_PER_MONTH = 30). -->
+                <div class="input-wrapper">
+                  <input class="input is-disabled" type="text" value="450" aria-label="Límite mensual en kWh">
+                </div>
+                <span class="hd-unit">kWh</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- errorSlot: reservado (min-height 15), sin mensaje -->
+          <div class="hd-error-slot"></div>
+
+          <button class="btn btn-primary btn-medium btn-full">Guardar cambios</button>
+        </div>
+
+        <!-- thresholds:scopeNote -->
+        <div class="hd-info-note">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.2"></circle><path d="M12 16.4v-5"></path><path d="M12 7.8h.01"></path></svg>
+          <p class="hd-info-note-text">Cada hogar guarda sus propios umbrales; cambiarlos aquí no afecta a tus otros hogares.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- BottomTabBar: SOLO iconos; activa = Umbrales -->
+    <nav class="tab-bar">
+      <a class="tab-item" href="home-detail.html" aria-label="Consumo"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12h4l2.4-6.8 4.8 13.6L15.6 12H22"></path></svg></a>
+      <a class="tab-item" href="home-detail-history.html" aria-label="Historial"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.2"></circle><path d="M12 6.8V12l3.6 2.2"></path></svg></a>
+      <a class="tab-item" href="home-detail-users.html" aria-label="Usuarios"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.6"></circle><path d="M2.6 20a6.4 6.4 0 0 1 12.8 0"></path><path d="M16.4 5a3.6 3.6 0 0 1 0 7"></path><path d="M17.6 14.4A6.4 6.4 0 0 1 21.4 20"></path></svg></a>
+      <a class="tab-item" href="home-detail-devices.html" aria-label="Dispositivos"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8.8a15.5 15.5 0 0 1 20 0"></path><path d="M5.4 12.4a10.6 10.6 0 0 1 13.2 0"></path><path d="M8.8 16a5.6 5.6 0 0 1 6.4 0"></path><path d="M12 19.6h.01"></path></svg></a>
+      <a class="tab-item tab-item-active" href="home-detail-thresholds.html" aria-label="Umbrales"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h9"></path><path d="M17 7h3"></path><path d="M4 17h3"></path><path d="M11 17h9"></path><circle cx="15" cy="7" r="2.2"></circle><circle cx="9" cy="17" r="2.2"></circle></svg></a>
+      <a class="tab-item" href="home-detail-home.html" aria-label="Hogar"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.6 12 3.3l9 7.3V20a1 1 0 0 1-1 1h-5v-6h-4v6H4a1 1 0 0 1-1-1z"></path></svg></a>
+    </nav>
+
+    <div class="home-indicator"></div>
+  </div>
+</body>
+</html>

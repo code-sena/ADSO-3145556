@@ -1,0 +1,813 @@
+@startuml diagrama_clases
+
+' ============================================================
+' DIAGRAMA DE CLASES DEL DOMINIO - EnergyMonitor
+' ------------------------------------------------------------
+' Estado: 27/10/2026. Se construyó a partir de los paquetes
+' domain/model de los siete microservicios con dominio:
+'   en-monitor-security-service       (8082)
+'   en-monitor-device-service         (8084)
+'   en-monitor-measurement-service    (8085)
+'   en-monitor-home-service           (8086)
+'   en-monitor-notification-service   (8087)
+'   en-monitor-alert-service          (8088)
+'   en-monitor-recommendation-service (8089)
+' El API gateway (8080) no tiene dominio. El backend modular
+' energy-monitor-backend está retirado: sus módulos home, alert,
+' recommendation y notification son hoy los servicios de arriba.
+'
+' Las clases de un servicio solo se relacionan con clases de otro
+' servicio por identificador (líneas punteadas "references"): no
+' hay llaves foráneas ni imports entre servicios. Los datos de otro
+' servicio se piden por la API interna /internal/** o llegan como
+' eventos de RabbitMQ.
+' ============================================================
+
+skinparam packageStyle rectangle
+hide empty members
+
+
+' ============================================================
+' ENUMS
+' ============================================================
+
+package enums {
+
+    enum UserStatus {
+        ACTIVE
+        INACTIVE
+        BLOCKED
+    }
+
+    enum LoginErrorType {
+        INVALID_PASSWORD
+        USER_NOT_FOUND
+        ACCOUNT_BLOCKED
+        ACCOUNT_INACTIVE
+        EMAIL_NOT_VERIFIED
+    }
+
+    enum AuditAction {
+        CREATE
+        UPDATE
+        DELETE
+        LOGIN
+        LOGIN_FAILED
+        LOGOUT
+    }
+
+    enum RevocationReason {
+        REFRESH_TOKEN_REUSE
+        PASSWORD_CHANGED
+        ADMINISTRATIVE
+    }
+
+    enum RefreshTokenStatus {
+        ACTIVE
+        ROTATED
+        REVOKED
+        EXPIRED
+    }
+
+    enum Role {
+        OWNER
+        MEMBER
+    }
+
+    enum LimitPeriod {
+        DAILY
+        MONTHLY
+    }
+
+    enum DeviceStatus {
+        ONLINE
+        OFFLINE
+    }
+
+    enum RiskConsumption {
+        LOW
+        MEDIUM
+        HIGH
+        CRITICAL
+    }
+
+    enum AlertType {
+        THRESHOLD
+        CONNECTIVITY
+        DEVICE
+        LIMIT
+    }
+
+    enum AlertStatus {
+        PENDING
+        RESOLVED
+    }
+
+    enum RecommendationType {
+        SAVING
+        PEAK_HOURS
+        HIGH_CONSUMPTION
+        HISTORICAL_COMPARISON
+        THRESHOLD
+    }
+
+    enum RecommendationStatus {
+        READ
+        UNREAD
+    }
+
+    enum NotificationChannel {
+        EMAIL
+        PUSH
+        IN_APP
+    }
+
+    enum NotificationSourceType {
+        ALERT
+        RECOMMENDATION
+        SECURITY
+        ADMINISTRATION
+        ACCOUNT
+        HOME
+        DEVICE
+    }
+
+    enum NotificationStatus {
+        PENDING
+        SENT
+        FAILED
+    }
+
+    enum PushDevicePlatform {
+        ANDROID
+        IOS
+    }
+}
+
+
+' ============================================================
+' SECURITY - en-monitor-security-service (8082)
+' ============================================================
+
+package "Domain_Security (en-monitor-security-service)" as Domain_Security {
+
+    class Person {
+        - idPerson : String
+        - name : String
+        - lastName : String
+
+        + rename(name : String, lastName : String) : void
+        + changeName(name : String) : void
+        + changeLastName(lastName : String) : void
+    }
+
+    ' El avatar es de la cuenta, no de la persona: vive en User.
+    ' person.address y person.cellphone se eliminaron (security-018 y 020).
+
+    class User {
+        - idUser : String
+        - idPerson : String
+        - passwordHash : PasswordHash
+        - email : Email
+        - emailVerified : boolean
+        - dateOfRegistration : Instant
+        - status : UserStatus
+        - failedLoginAttempts : int
+        - lastLoginAt : Instant
+        - profileImage : String
+        - googleSubject : String
+        - termsAcceptedAt : Instant
+
+        + {static} register(...) : User
+        + canAuthenticate() : boolean
+        + isGoogleAccount() : boolean
+        + bindGoogleAccount(subject : String) : void
+        + hasAcceptedTerms() : boolean
+        + acceptTerms(acceptedAt : Instant) : void
+        + changePassword(newHash : PasswordHash) : void
+        + changeEmail(newEmail : Email) : void
+        + changeProfileImage(profileImage : String) : void
+        + verifyEmail() : void
+        + activate() : void
+        + deactivate() : void
+        + block() : void
+        + incrementFailedLoginAttempts() : void
+        + resetFailedLoginAttempts() : void
+    }
+
+    ' Ninguna cuenta existe hasta verificar el correo: la solicitud se
+    ' guarda aquí (24 horas) y al verificar el código se crean Person y User.
+    class PendingRegistration {
+        - idUser : String
+        - email : Email
+        - name : String
+        - lastName : String
+        - passwordHash : PasswordHash
+        - profileImage : String
+        - ipAddress : String
+        - requestedAt : Instant
+        - expiresAt : Instant
+
+        + {static} request(...) : PendingRegistration
+        + isExpiredAt(instant : Instant) : boolean
+        + toPerson(idPerson : String) : Person
+        + toUser(person : Person, createdAt : Instant) : User
+    }
+
+    class Email <<value object>> {
+        - value : String
+    }
+
+    class PasswordHash <<value object>> {
+        - value : String
+    }
+
+    class UserConfiguration {
+        - idConfiguration : String
+        - userId : String
+        - notifyByEmail : boolean
+        - notifyByPush : boolean
+        - colorTheme : String
+        - language : String
+        - socialProvider : String
+    }
+
+    class PasswordResetToken {
+        - idResetToken : String
+        - userId : String
+        - resetTokenHash : String
+        - used : boolean
+        - attempts : int
+        - expirationAt : Instant
+
+        + isExpired(now : Instant) : boolean
+        + hasAttemptsLeft() : boolean
+        + markUsed() : void
+    }
+
+    class UserSession {
+        - idUserSession : String
+        - userId : String
+        - expirationAt : Instant
+        - ipAddress : String
+        - userAgent : String
+        - revoked : boolean
+        - revokedAt : Instant
+        - revokedReason : RevocationReason
+        - closedAt : Instant
+
+        + revoke(revokedAt : Instant, reason : RevocationReason) : void
+        + close(instant : Instant) : void
+        + isActive(now : Instant) : boolean
+    }
+
+    class RefreshToken {
+        - idRefreshToken : String
+        - userSessionId : String
+        - familyId : String
+        - parentId : String
+        - tokenHash : String
+        - status : RefreshTokenStatus
+        - expiresAt : Instant
+        - rotatedAt : Instant
+        - revokedAt : Instant
+        - revokedReason : RevocationReason
+
+        + isUsable(now : Instant) : boolean
+        + isReplayed() : boolean
+        + rotate(rotatedAt : Instant) : void
+        + revoke(revokedAt : Instant, reason : RevocationReason) : void
+    }
+
+    class SecurityConfiguration {
+        - idSecurityConfiguration : String
+        - configName : String
+        - configValue : String
+        - description : String
+    }
+
+    class PasswordPolicy {
+        - idPasswordPolicy : String
+        - minLength : int
+        - maxLength : int
+        - requireUppercase : boolean
+        - requireNumbers : boolean
+        - requireSymbols : boolean
+        - expirationDays : int
+
+        + isSatisfiedBy(password : String) : boolean
+    }
+
+    class LoginErrorLog {
+        - idLoginError : String
+        - userId : String
+        - errorType : LoginErrorType
+        - description : String
+        - ipAddress : String
+    }
+
+    class MistypedEmailDomains <<domain service>> {
+        + intendedProvider(domain : String) : Optional<String>
+    }
+}
+
+
+' ============================================================
+' ACCESS CONTROL (RBAC global) - en-monitor-security-service
+' ============================================================
+
+package "Domain_Access_Control (en-monitor-security-service)" as Domain_Access_Control {
+
+    class SystemRole {
+        - idSystemRole : String
+        - name : String
+        - description : String
+        - enabled : boolean
+    }
+
+    class UserSystemRole {
+        - userId : String
+        - systemRoleId : String
+        - assignedAt : Instant
+    }
+
+    class Permission {
+        - idPermission : String
+        - code : String
+        - name : String
+        - description : String
+    }
+
+    class SystemRolePermission {
+        - systemRoleId : String
+        - permissionId : String
+        - assignedAt : Instant
+    }
+
+    class PermissionCodes <<constants>> {
+        + ADMIN_ROLE = "ADMIN"
+        + USER_READ = "USER.READ"
+        + USER_MANAGE = "USER.MANAGE"
+        + ROLE_MANAGE = "ROLE.MANAGE"
+    }
+
+    class AuditLog {
+        - idAuditLog : String
+        - userId : String
+        - action : AuditAction
+        - description : String
+        - ipAddress : String
+        - application : String
+    }
+
+    note as N_Rbac
+        Rol global sembrado: ADMIN (security-025) con
+        USER.READ, USER.MANAGE y ROLE.MANAGE.
+        Los permisos se consultan en cada petición
+        (no viajan en el JWT). ADMIN no da acceso a
+        ningún hogar. El primer ADMIN se asigna con
+        make-admin.sh (energy-monitor-infra).
+    end note
+}
+
+
+' ============================================================
+' HOME MANAGEMENT - en-monitor-home-service (8086)
+' Incluye el patrón Strategy (autorización por rol en el hogar)
+' ============================================================
+
+package "Domain_Home_Management (en-monitor-home-service)" as Domain_Home_Management {
+
+    class HomeType {
+        - idHomeType : String
+        - name : String
+    }
+
+    class Home {
+        - idHome : String
+        - name : String
+        - homeTypeId : String
+        - address : String
+        - accessCode : String
+        - description : String
+        - creationDate : Instant
+
+        + {static} create(...) : Home
+        + matchesAccessCode(code : String) : boolean
+    }
+
+    class HomeThresholds {
+        - idThreshold : String
+        - homeId : String
+        - dailyLimit : double
+        - monthlyLimit : double
+        - useSystemDefault : boolean
+        - limitPeriod : LimitPeriod
+
+        + {static} create(...) : HomeThresholds
+        + setLimit(period : LimitPeriod, value : double) : void
+        + update(daily : double, monthly : double) : void
+        + resetToDefaults(daily : double, monthly : double) : void
+    }
+
+    note right of HomeThresholds
+        Los valores por defecto (6 kWh diarios y 180 kWh
+        mensuales) son configuración del servicio
+        (daily-limit / monthly-limit). El límite que no fija
+        el propietario se calcula con 30 días por mes.
+    end note
+
+    class UserHome {
+        - userId : String
+        - homeId : String
+        - role : Role
+        - favorite : boolean
+
+        + {static} owner(userId : String, homeId : String) : UserHome
+        + {static} member(userId : String, homeId : String) : UserHome
+        + isOwner() : boolean
+        + toggleFavorite() : void
+        + canBeRemovedBy(actor : UserHome) : boolean
+        + leaveHome(otherOwnersExist : boolean) : void
+        + withRole(newRole : Role) : UserHome
+        + getPermissions() : UserPermissions
+    }
+
+    package Strategy_Pattern {
+
+        interface UserPermissions {
+            + canManageDevices() : boolean
+            + canManageHome() : boolean
+        }
+
+        class OwnerPermissions implements UserPermissions {
+            + {static} INSTANCE : OwnerPermissions
+            + canManageDevices() : boolean
+            + canManageHome() : boolean
+        }
+
+        class MemberPermissions implements UserPermissions {
+            + {static} INSTANCE : MemberPermissions
+            + canManageDevices() : boolean
+            + canManageHome() : boolean
+        }
+    }
+
+    note as N_Join
+        Unirse a un hogar: solo con su código de acceso
+        (POST /api/v1/homes/join). No hay invitaciones
+        por correo. Cada hogar tiene un único OWNER; la
+        propiedad se transfiere a un miembro.
+    end note
+}
+
+
+' ============================================================
+' DEVICES - en-monitor-device-service (8084)
+' ============================================================
+
+package "Domain_Devices (en-monitor-device-service)" as Domain_Devices {
+
+    class ApplianceType {
+        - idApplianceType : String
+        - name : String
+    }
+
+    class Device {
+        - idDevice : String
+        - name : String
+        - applianceTypeId : String
+        - location : String
+        - description : String
+        - installationDate : Instant
+        - deviceCode : String
+        - apiKeyHash : ApiKeyHash
+
+        + {static} create(...) : Device
+        + relinked(...) : Device
+        + edited(name : String, applianceTypeId : String, location : String) : Device
+        + withApiKey(apiKey : String) : Device
+        + acceptsApiKey(candidate : String) : boolean
+    }
+
+    class ApiKeyHash <<value object>> {
+        - sha256 : String
+    }
+
+    class DeviceStatusLog {
+        - idDeviceStatus : String
+        - deviceId : String
+        - status : DeviceStatus
+        - signalStrength : int
+        - lastSeen : Instant
+    }
+
+    class DeviceHome {
+        - deviceId : String
+        - homeId : String
+
+        + {static} of(deviceId : String, homeId : String) : DeviceHome
+    }
+}
+
+
+' ============================================================
+' MEASUREMENTS - en-monitor-measurement-service (8085)
+' ============================================================
+
+package "Domain_Measurements (en-monitor-measurement-service)" as Domain_Measurements {
+
+    class Measurement {
+        - idMeasurement : String
+        - deviceId : String
+        - dateTime : Instant
+        - voltage : double
+        - current : double
+        - activePower : double
+        - storedEnergy : double
+
+        + {static} record(...) : Measurement
+    }
+
+    class ConsumptionLevel {
+        - idConsumptionLevel : String
+        - name : RiskConsumption
+        - description : String
+        - minLimit : double
+        - maxLimit : double
+    }
+}
+
+
+' ============================================================
+' ALERTS - en-monitor-alert-service (8088)
+' Observer: reacciona a measurement.recorded y device.* (RabbitMQ)
+' Factory Method: fábricas estáticas de Alert
+' ============================================================
+
+package "Domain_Alerts (en-monitor-alert-service)" as Domain_Alerts {
+
+    class Alert {
+        - idAlert : String
+        - homeId : String
+        - deviceId : String
+        - type : AlertType
+        - messageKey : String
+        - dateTime : Instant
+        - alertStatus : AlertStatus
+        - consumptionLevelId : String
+        - measurementId : String
+
+        + {static} threshold(...) : Alert
+        + {static} connectivity(...) : Alert
+        + {static} device(...) : Alert
+        + {static} limit(idAlert : String, homeId : String, messageKey : String, dateTime : Instant) : Alert
+        + isPending() : boolean
+        + resolve() : void
+    }
+
+    class AlertRaised <<event>> {
+        - idAlert : String
+        - homeId : String
+        - deviceId : String
+        - type : AlertType
+        - messageKey : String
+    }
+
+    package Observer_Pattern {
+
+        class MeasurementRecordedConsumer <<RabbitMQ listener>> {
+            + on(message : Message) : void
+        }
+
+        class DeviceEventsConsumer <<RabbitMQ listener>> {
+            + on(message : Message) : void
+        }
+    }
+}
+
+
+' ============================================================
+' RECOMMENDATIONS - en-monitor-recommendation-service (8089)
+' ============================================================
+
+package "Domain_Recommendations (en-monitor-recommendation-service)" as Domain_Recommendations {
+
+    class Recommendation {
+        - idRecommendation : String
+        - homeId : String
+        - deviceId : String
+        - type : RecommendationType
+        - messageKey : String
+        - dateTime : Instant
+        - status : RecommendationStatus
+
+        + {static} create(...) : Recommendation
+        + isRead() : boolean
+        + markRead() : void
+    }
+
+    class RecommendationRules <<domain service>> {
+        + {static} dataFrom(now : Instant, zone : ZoneId) : Instant
+        + evaluate(now : Instant, zone : ZoneId, devices : Collection<MonitoredDevice>,
+                   samples : List<HourSample>, limit : Optional<ConsumptionLimit>) : List<Suggestion>
+    }
+
+    note right of RecommendationRules
+        Reglas (cada hora, sin repetir el mismo consejo en 7 días):
+        PEAK_HOURS: >= 40 % de la energía de 7 días entre 18 y 22 h.
+        SAVING: equipo que no es de uso continuo con >= 15 W
+          de 01 a 05 h en las últimas 3 noches.
+        HISTORICAL_COMPARISON: +25 % frente a la semana anterior.
+        THRESHOLD: el ritmo actual supera el límite del hogar.
+        HIGH_CONSUMPTION: potencia media de un equipo +30 %
+          frente a los 21 días anteriores.
+    end note
+
+    class HourSample <<value object>> {
+        - deviceId : String
+        - hourStart : Instant
+        - averagePower : double
+        - energy : double
+    }
+
+    class MonitoredDevice <<value object>> {
+        - deviceId : String
+        - alwaysOn : boolean
+    }
+
+    class ConsumptionLimit <<value object>> {
+        - period : Period
+        - kwh : double
+    }
+
+    class Suggestion <<value object>> {
+        - type : RecommendationType
+        - deviceId : String
+        - messageKey : String
+    }
+
+    class RecommendationCreated <<event>> {
+        - idRecommendation : String
+        - homeId : String
+        - deviceId : String
+        - type : RecommendationType
+        - messageKey : String
+    }
+}
+
+
+' ============================================================
+' NOTIFICATIONS - en-monitor-notification-service (8087)
+' ============================================================
+
+package "Domain_Notifications (en-monitor-notification-service)" as Domain_Notifications {
+
+    ' Notification es el registro de la ENTREGA de un mensaje, no el
+    ' evento que lo originó: referencia el origen por sourceType + sourceId.
+    class Notification {
+        - idNotification : String
+        - userId : String
+        - homeId : String
+        - channel : NotificationChannel
+        - sourceType : NotificationSourceType
+        - sourceId : String
+        - messageKey : String
+        - messageParams : Map<String, String>
+        - deliveryStatus : NotificationStatus
+        - sentAt : LocalDateTime
+        - readAt : LocalDateTime
+        - failureReason : String
+
+        + {static} pending(...) : Notification
+        + {static} pendingInApp(...) : Notification
+        + markAsSent(sentAt : LocalDateTime) : void
+        + markAsFailed(reason : String) : void
+        + markAsRead(readAt : LocalDateTime) : void
+    }
+
+    class NotificationPreference <<record>> {
+        - userId : String
+        - emailEnabled : boolean
+        - pushEnabled : boolean
+
+        + {static} defaults(userId : String) : NotificationPreference
+    }
+
+    class PushSubscription <<record>> {
+        - idSubscription : String
+        - userId : String
+        - endpoint : String
+        - p256dh : String
+        - auth : String
+    }
+
+    class PushDevice <<record>> {
+        - idDevice : String
+        - userId : String
+        - token : String
+        - platform : PushDevicePlatform
+    }
+
+    note as N_NotificationDelivery
+        Canales: EMAIL y PUSH (Web Push del navegador y push
+        de la app móvil por Expo) según NotificationPreference;
+        IN_APP para la bandeja de la web y la app (actividad
+        de cuentas, hogares y dispositivos, y avisos de los
+        administradores). messageParams guarda los nombres
+        del momento para traducir el texto en el cliente.
+        deliveryStatus y readAt son ciclos distintos.
+    end note
+}
+
+
+' ============================================================
+' RELACIONES
+' ============================================================
+
+' ---- Security ----
+Person "1" -- "1" User
+User "1" *-- "0..1" UserConfiguration
+User "1" -- "0..*" PasswordResetToken
+User "1" -- "0..*" UserSession
+UserSession "1" *-- "1..*" RefreshToken
+RefreshToken "0..1" -- "1" RefreshToken : parent
+User "0..1" -- "0..*" LoginErrorLog
+User *-- Email
+User *-- PasswordHash
+PendingRegistration ..> Person : crea al verificar
+PendingRegistration ..> User : crea al verificar
+User ..> UserStatus : use
+LoginErrorLog ..> LoginErrorType : use
+UserSession ..> RevocationReason : use
+RefreshToken ..> RefreshTokenStatus : use
+
+' ---- Access Control ----
+User "1" -- "0..*" UserSystemRole
+SystemRole "1" -- "0..*" UserSystemRole
+SystemRole "1" -- "0..*" SystemRolePermission
+Permission "1" -- "0..*" SystemRolePermission
+User "0..1" -- "0..*" AuditLog
+AuditLog ..> AuditAction : use
+Permission ..> PermissionCodes : code
+
+' ---- Home Management ----
+Home "*" o-- "1" HomeType : uses
+Home "1" *-- "1" HomeThresholds
+Home "1" -- "0..*" UserHome
+UserHome ..> Role : use
+UserHome ..> UserPermissions : getPermissions()
+HomeThresholds ..> LimitPeriod : use
+
+' ---- Devices ----
+Device "*" o-- "1" ApplianceType : uses
+Device *-- ApiKeyHash
+Device "1" *-- "0..*" DeviceStatusLog
+Device "1" -- "0..*" DeviceHome
+DeviceStatusLog ..> DeviceStatus : use
+
+' ---- Measurements ----
+ConsumptionLevel ..> RiskConsumption : use
+
+' ---- Alerts ----
+Alert ..> AlertType : use
+Alert ..> AlertStatus : use
+MeasurementRecordedConsumer ..> Alert : threshold() / limit() / device()
+DeviceEventsConsumer ..> Alert : connectivity() / resolve()
+Alert ..> AlertRaised : publica (alert_outbox)
+
+' ---- Recommendations ----
+Recommendation ..> RecommendationType : use
+Recommendation ..> RecommendationStatus : use
+RecommendationRules ..> HourSample : analyzes
+RecommendationRules ..> MonitoredDevice : uses
+RecommendationRules ..> ConsumptionLimit : uses
+RecommendationRules ..> Suggestion : produces
+Suggestion ..> Recommendation : Recommendation.create()
+Recommendation ..> RecommendationCreated : publica (recommendation_outbox)
+
+' ---- Notifications ----
+Notification ..> NotificationChannel : use
+Notification ..> NotificationSourceType : use
+Notification ..> NotificationStatus : use
+PushDevice ..> PushDevicePlatform : use
+AlertRaised ..> Notification : alert.raised
+RecommendationCreated ..> Notification : recommendation.created
+
+' ---- Referencias entre servicios (solo por identificador) ----
+UserHome ..> User : references (userId)
+DeviceHome ..> Home : references (homeId)
+Measurement ..> Device : references (deviceId)
+Alert ..> Home : references (homeId)
+Alert ..> Device : references (deviceId)
+Alert ..> Measurement : references (measurementId)
+Alert ..> ConsumptionLevel : references (consumptionLevelId)
+Recommendation ..> Home : references (homeId)
+Recommendation ..> Device : references (deviceId)
+Notification ..> User : recipient (userId)
+Notification ..> Home : scoped to (homeId)
+NotificationPreference ..> User : references (userId)
+PushSubscription ..> User : references (userId)
+PushDevice ..> User : references (userId)
+
+@enduml

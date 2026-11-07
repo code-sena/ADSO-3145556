@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EnergyMonitor — Casa Principal · Hogar</title>
+  <link rel="icon" type="image/svg+xml" href="../../../../assets/icons/favicon.svg">
+  <link rel="stylesheet" href="../css/mobile-shell.css">
+  <link rel="stylesheet" href="css/home-detail-styles.css">
+</head>
+<body>
+
+  <p class="device-caption">EnergyMonitor · <span>/home/[id] · HomeInfoTab</span></p>
+
+  <div class="phone">
+
+    <!-- Barra de estado (la dibuja el sistema, no la app) -->
+    <div class="status-bar">
+      <span>9:41</span>
+      <span class="status-icons">
+        <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor" aria-hidden="true"><rect x="0" y="7" width="3" height="4" rx="1"/><rect x="4.5" y="5" width="3" height="6" rx="1"/><rect x="9" y="2.5" width="3" height="8.5" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/></svg>
+        <svg width="16" height="11" viewBox="0 0 16 12" fill="currentColor" aria-hidden="true"><path d="M8 9.2 6.2 11a3.2 3.2 0 0 1 3.6 0zM8 5.4c-1.6 0-3 .6-4.1 1.7L2.5 5.7A7.6 7.6 0 0 1 8 3.4c2 0 3.9.8 5.5 2.3l-1.4 1.4A5.6 5.6 0 0 0 8 5.4zM8 .8A11.8 11.8 0 0 0 .5 3.6l1.4 1.4A9.8 9.8 0 0 1 8 2.8c2.6 0 4.9 1 6.7 2.6l1.4-1.4A11.8 11.8 0 0 0 8 .8z"/></svg>
+        <svg width="25" height="12" viewBox="0 0 25 12" fill="none" aria-hidden="true"><rect x="0.5" y="0.5" width="21" height="11" rx="3.2" stroke="currentColor" opacity=".4"/><rect x="2" y="2" width="16" height="8" rx="1.8" fill="currentColor"/><path d="M23 4v4a2.2 2.2 0 0 0 0-4z" fill="currentColor" opacity=".4"/></svg>
+      </span>
+    </div>
+
+    <div class="screen hd-screen">
+
+      <!-- HomeDetailScreen.header -->
+      <header class="header hd-header">
+        <a class="hd-back" href="../dashboard/dashboard.html" aria-label="Inicio">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"></path><path d="m12 19-7-7 7-7"></path></svg>
+        </a>
+        <div class="header-title-wrap">
+          <h1 class="header-title">Casa Principal</h1>
+        </div>
+      </header>
+
+      <!-- HomeInfoTab · contentContainerStyle.
+           isOwner = true → se pinta el bloque del código de acceso. -->
+      <div class="hd-body">
+
+        <!-- Tarjeta 1 · información del hogar -->
+        <div class="card card-pad-md">
+
+          <div class="hd-card-title-row">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.6 12 3.3l9 7.3V20a1 1 0 0 1-1 1h-5v-6h-4v6H4a1 1 0 0 1-1-1z"></path></svg>
+            <h2 class="hd-card-title">Información del hogar</h2>
+          </div>
+
+          <div class="hd-field-block">
+            <span class="hd-field-label-sm">Nombre</span>
+            <p class="hd-value">Casa Principal</p>
+          </div>
+
+          <div class="hd-field-block">
+            <span class="hd-field-label-sm">Tipo de hogar</span>
+            <!-- homeTypeId hous000001 → createHomeModal:homeTypes.house + icono home-outline -->
+            <span class="hd-type-badge">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.6 12 3.3l9 7.3V20a1 1 0 0 1-1 1h-5v-6h-4v6H4a1 1 0 0 1-1-1z"></path></svg>
+              Casa
+            </span>
+          </div>
+
+          <div class="hd-field-block">
+            <span class="hd-field-label-sm">Dirección</span>
+            <p class="hd-value">Cra. 15 # 93-47, Bogotá</p>
+          </div>
+
+          <div class="hd-field-block">
+            <span class="hd-field-label-sm">Descripción</span>
+            <p class="hd-value-muted">Vivienda familiar con dos pisos y zona de ropas.</p>
+          </div>
+
+          <div class="hd-field-block">
+            <span class="hd-field-label-sm">Fecha de creación</span>
+            <p class="hd-value-muted">12 abr 2026</p>
+          </div>
+
+          <div class="hd-divider-flat"></div>
+
+          <!-- Solo con isOwner: código de acceso -->
+          <div class="hd-field-block">
+            <div class="hd-card-title-row">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8.4" cy="12" r="4.4"></circle><path d="M12.8 12h8.6"></path><path d="M18.6 12v3.2"></path><path d="M15.8 12v2.4"></path></svg>
+              <h3 class="hd-card-title">Código de acceso</h3>
+            </div>
+            <p class="hd-hint">Comparte este código para que otros usuarios puedan unirse.</p>
+
+            <div class="hd-code-box">
+              <span class="hd-code-text">A7B2C9D4</span>
+              <!-- Botón DESHABILITADO en la app: falta expo-clipboard (opacity 0.5) -->
+              <button class="hd-copy" disabled aria-label="Copiar código de acceso">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8.4" y="8.4" width="12" height="12" rx="2"></rect><path d="M5.6 15.6h-.8a2 2 0 0 1-2-2V3.8a2 2 0 0 1 2-2h9.8a2 2 0 0 1 2 2v.8"></path></svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="hd-action-row">
+            <!-- Abre ConfirmHomeActionModal (variant="danger") -->
+            <button class="btn btn-danger btn-medium btn-full">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.4 20.4H5.6a2 2 0 0 1-2-2V5.6a2 2 0 0 1 2-2h3.8"></path><path d="m15.4 16.6 4.6-4.6-4.6-4.6"></path><path d="M20 12H9.4"></path></svg>
+              Salirse del hogar
+            </button>
+          </div>
+        </div>
+
+        <!-- Tarjeta 2 · usuario responsable -->
+        <div class="card card-pad-md">
+
+          <div class="hd-card-title-row">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="7.6" r="3.9"></circle><path d="M4.5 21a7.5 7.5 0 0 1 15 0"></path></svg>
+            <h2 class="hd-card-title">Usuario responsable</h2>
+          </div>
+
+          <div class="hd-owner-row">
+            <div class="hd-owner-avatar">
+              <span class="hd-owner-initials">CR</span>
+            </div>
+            <div class="hd-owner-meta">
+              <p class="hd-owner-name">Camila Restrepo</p>
+              <span class="hd-owner-badge">Responsable</span>
+            </div>
+          </div>
+
+          <div class="hd-divider-flat"></div>
+
+          <div class="hd-field-block">
+            <span class="hd-field-label-sm">Correo</span>
+            <div class="hd-value-with-icon">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.6" y="4.8" width="18.8" height="14.4" rx="2.4"></rect><path d="m3.4 6.8 8.6 6 8.6-6"></path></svg>
+              <p class="hd-value-muted">camila.restrepo@energymonitor.co</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- BottomTabBar: SOLO iconos; activa = Hogar -->
+    <nav class="tab-bar">
+      <a class="tab-item" href="home-detail.html" aria-label="Consumo"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12h4l2.4-6.8 4.8 13.6L15.6 12H22"></path></svg></a>
+      <a class="tab-item" href="home-detail-history.html" aria-label="Historial"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.2"></circle><path d="M12 6.8V12l3.6 2.2"></path></svg></a>
+      <a class="tab-item" href="home-detail-users.html" aria-label="Usuarios"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.6"></circle><path d="M2.6 20a6.4 6.4 0 0 1 12.8 0"></path><path d="M16.4 5a3.6 3.6 0 0 1 0 7"></path><path d="M17.6 14.4A6.4 6.4 0 0 1 21.4 20"></path></svg></a>
+      <a class="tab-item" href="home-detail-devices.html" aria-label="Dispositivos"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8.8a15.5 15.5 0 0 1 20 0"></path><path d="M5.4 12.4a10.6 10.6 0 0 1 13.2 0"></path><path d="M8.8 16a5.6 5.6 0 0 1 6.4 0"></path><path d="M12 19.6h.01"></path></svg></a>
+      <a class="tab-item" href="home-detail-thresholds.html" aria-label="Umbrales"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h9"></path><path d="M17 7h3"></path><path d="M4 17h3"></path><path d="M11 17h9"></path><circle cx="15" cy="7" r="2.2"></circle><circle cx="9" cy="17" r="2.2"></circle></svg></a>
+      <a class="tab-item tab-item-active" href="home-detail-home.html" aria-label="Hogar"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.6 12 3.3l9 7.3V20a1 1 0 0 1-1 1h-5v-6h-4v6H4a1 1 0 0 1-1-1z"></path></svg></a>
+    </nav>
+
+    <div class="home-indicator"></div>
+  </div>
+</body>
+</html>

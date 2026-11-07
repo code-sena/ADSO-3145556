@@ -1,0 +1,360 @@
+/* =========================================
+   Ajustes — EnergyMonitor mobile
+   Origen: features/settings/screens/SettingsScreen/SettingsScreen.tsx
+           features/settings/components/SettingsSectionCard/
+           features/settings/components/LanguageSettings/
+           features/settings/components/ThemeSettings/
+           features/settings/components/NotificationSettings/
+           features/settings/components/HelpCenter/
+           components/Switch/Switch.tsx
+   ========================================= */
+
+/* El Header de esta pantalla aparta el botón del Sidebar:
+   marginLeft = spacing.md + TRIGGER_SIZE(32+8+4) + spacing.sm = 68px */
+.header-offset { margin-left: 68px; }
+
+/* ScrollView contentContainerStyle: solo paddingBottom 8 */
+.st-content { padding-bottom: 8px; }
+
+/* El Switch nativo del shell fija 51×31 pero no su display: en HTML un <span>
+   es inline y el ancho/alto no se aplicarían. */
+.switch { display: inline-block; }
+
+/* Los botones del navegador no heredan la tipografía del documento */
+button.st-lang-card,
+button.st-theme-card { font-family: var(--font); text-align: center; }
+
+/* =========================================
+   SettingsSectionCard
+   ========================================= */
+.st-card { margin: 0 var(--space-md) var(--space-lg); }
+
+.st-card:last-child { margin-bottom: var(--space-xl); }
+
+.st-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  padding-bottom: var(--space-md);
+  border-bottom: 1px solid var(--border);
+}
+
+.st-card-info {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-md);
+}
+
+.st-card-icon {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  border-radius: 18px;
+  background: var(--primary-soft);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* El círculo de SettingsSectionCard siempre es primarySoft; solo cambia el color
+   del icono, y en Notificaciones es warningText. */
+.st-card-icon-warning { color: var(--warning-text); }
+
+.st-card-text { flex: 1; min-width: 0; }
+
+.st-card-title { font-size: 18px; font-weight: 600; color: var(--text-primary); }
+
+.st-card-desc { margin-top: var(--space-xs); font-size: 16px; color: var(--text-secondary); }
+
+.st-card-trailing { flex-shrink: 0; }
+
+.st-card-body { padding-top: var(--space-lg); }
+
+/* Badge "trailing" de idioma y temas: 6px 12px · radius md · primarySoft */
+.st-badge {
+  display: inline-block;
+  padding: 6px var(--space-md);
+  border-radius: var(--radius-md);
+  background: var(--primary-soft);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--primary);
+  white-space: nowrap;
+}
+
+/* Contador de canales activos: radius 999 · successSoft · size13 */
+.st-counter {
+  display: inline-block;
+  padding: 6px var(--space-md);
+  border-radius: 999px;
+  background: var(--success-soft);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--success-text);
+  white-space: nowrap;
+}
+
+/* =========================================
+   LanguageSettings — rejilla de idiomas
+   ========================================= */
+.st-lang-grid { display: flex; flex-wrap: wrap; gap: var(--space-md); }
+
+.st-lang-card {
+  position: relative;
+  flex-grow: 1;
+  flex-basis: 45%;
+  min-height: 140px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  padding: var(--space-md);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  cursor: pointer;
+}
+
+.st-lang-card-active { border-color: var(--primary); background: var(--primary-soft); }
+
+.st-lang-check {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 24px;
+  height: 24px;
+  z-index: 2;
+  border-radius: 12px;
+  background: var(--primary);
+  color: var(--on-brand);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* flag: 64×64, borderRadius 32, borde 2, overflow hidden (react-native-country-flag) */
+.st-flag {
+  width: 64px;
+  height: 64px;
+  flex-shrink: 0;
+  border: 2px solid var(--border);
+  border-radius: 50%;
+  background: var(--surface);
+  object-fit: cover;
+  overflow: hidden;
+}
+
+.st-lang-name { font-size: 18px; font-weight: 600; color: var(--text-primary); }
+
+.st-lang-locale { font-size: 14px; color: var(--text-secondary); }
+
+/* =========================================
+   ThemeSettings — tarjetas de tema
+   ========================================= */
+.st-theme-section { padding-top: var(--space-lg); }
+
+.st-theme-label {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-md);
+}
+
+.st-theme-label-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+}
+
+/* Dentro de la fila el rótulo no repite el margen inferior */
+.st-theme-label-row .st-theme-label { margin-bottom: 0; }
+
+.st-theme-new {
+  padding: 2px var(--space-sm);
+  border-radius: var(--radius-sm);
+  background: var(--primary);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--on-brand);
+}
+
+.st-theme-grid { display: flex; flex-wrap: wrap; gap: var(--space-md); }
+
+/* Cada tarjeta toma sus colores de la paleta (src/theme/palettes.ts) vía variables */
+.st-theme-card {
+  position: relative;
+  flex-grow: 1;
+  flex-basis: 45%;
+  padding: 10px;
+  border: 1px solid var(--t-border);
+  border-radius: var(--radius-lg);
+  background: var(--t-bg);
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.st-theme-card-active { border: 2px solid var(--primary); }
+
+.st-theme-check {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 22px;
+  height: 22px;
+  z-index: 2;
+  border-radius: 11px;
+  background: var(--primary);
+  color: var(--on-brand);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.st-theme-preview {
+  display: flex;
+  height: 100px;
+  border: 1px solid var(--t-border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.st-theme-side {
+  width: 28%;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: var(--t-sidebar);
+}
+
+.st-theme-side-line { height: 5px; border-radius: 3px; background: rgba(255, 255, 255, 0.6); }
+.st-theme-side-line.is-dim { background: rgba(255, 255, 255, 0.35); }
+
+.st-theme-preview-body {
+  flex: 1;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: var(--t-content);
+}
+
+.st-theme-top-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+
+.st-theme-bar { height: 14px; border-radius: 4px; background: var(--t-main); }
+
+.st-theme-accent { width: 14px; height: 14px; border-radius: 7px; background: var(--t-dot1); }
+
+.st-theme-lines { display: flex; flex-direction: column; gap: 6px; }
+
+.st-theme-line { height: 6px; border-radius: 3px; background: var(--t-line); }
+
+.st-theme-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding-top: 10px;
+}
+
+.st-theme-info { flex: 1; min-width: 0; }
+
+.st-theme-name { display: block; font-size: 16px; font-weight: 600; color: var(--t-name); }
+
+.st-theme-subtitle { display: block; margin-top: 2px; font-size: 14px; color: var(--t-sub); }
+
+.st-theme-dots { display: flex; gap: 6px; }
+
+.st-theme-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+/* =========================================
+   NotificationSettings — filas con Switch
+   ========================================= */
+.st-nt-options { display: flex; flex-direction: column; gap: var(--space-xs); }
+
+.st-nt-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  padding: var(--space-md) 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.st-nt-row-left { flex: 1; min-width: 0; display: flex; align-items: center; gap: var(--space-md); }
+
+.st-nt-row-icon {
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: var(--card-soft);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.st-nt-row-info { flex: 1; min-width: 0; }
+
+.st-nt-row-title { font-size: 16px; font-weight: 600; color: var(--text-primary); }
+
+.st-nt-row-desc { margin-top: 2px; font-size: 13px; color: var(--text-secondary); }
+
+.st-nt-row-right { flex-shrink: 0; display: flex; align-items: center; gap: var(--space-sm); }
+
+.st-nt-status { padding: 4px var(--space-sm); border-radius: 999px; font-size: 11px; font-weight: 600; }
+
+.st-nt-status-active { background: var(--success-soft); color: var(--success-text); }
+
+.st-nt-status-inactive { background: var(--danger-soft); color: var(--danger-text); }
+
+.st-nt-message { padding: var(--space-xs) 0; font-size: 13px; color: var(--danger-text); }
+
+/* =========================================
+   HelpCenter — tarjetas de recursos
+   ========================================= */
+.st-help { display: flex; flex-direction: column; gap: var(--space-md); }
+
+.st-help-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  padding: var(--space-md);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+}
+
+.st-help-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.st-help-docs { background: #EEF2FF; color: #6366F1; }
+.st-help-support { background: #FFF1F2; color: #EF4444; }
+.st-help-updates { background: #ECFDF5; color: #22C55E; }
+
+.st-help-title { font-size: 18px; font-weight: 600; color: var(--text-primary); }
+
+.st-help-desc { font-size: 16px; line-height: 22px; color: var(--text-secondary); }
+
+.st-help-link-row { display: flex; align-items: center; gap: var(--space-xs); margin-top: var(--space-sm); }
+
+.st-help-link { font-size: 16px; font-weight: 600; color: var(--primary); }

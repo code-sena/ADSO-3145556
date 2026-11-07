@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EnergyMonitor - Soporte</title>
+  <meta name="description" content="Centro de ayuda de EnergyMonitor: preguntas frecuentes y contacto directo con el equipo.">
+  <link rel="icon" type="image/svg+xml" href="../../../../assets/icons/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap">
+  <link rel="stylesheet" href="css/support-styles.css">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <a href="index.html" class="brand">
+      <img src="../../../../assets/logos/project_logo.png" alt="EnergyMonitor Logo">
+      <span>EnergyMonitor</span>
+    </a>
+
+    <nav class="nav-center">
+      <a href="index.html#inicio">Inicio</a>
+      <a href="about.html">Sobre nosotros</a>
+      <a href="support.html">Soporte</a>
+    </nav>
+
+    <div class="nav-right">
+      <!-- Toggle de tema: muestra Moon en modo claro y Sun en modo oscuro (como Navbar.jsx) -->
+      <button class="icon-btn" type="button" aria-label="Cambiar a modo oscuro">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg>
+      </button>
+
+      <!-- Selector de idioma: Globe + bandera activa + menú desplegable -->
+      <div class="lang-wrapper">
+        <button class="icon-btn lang-btn" type="button" aria-label="Cambiar idioma" aria-haspopup="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg>
+          <img class="flag" src="../../../../assets/flags/flag-co.svg" alt="Español">
+          <svg class="chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg>
+        </button>
+
+        <ul class="lang-dropdown">
+          <li><a class="lang-option is-active" href="#" hreflang="es"><img class="flag" src="../../../../assets/flags/flag-co.svg" alt=""><span>Español</span></a></li>
+          <li><a class="lang-option" href="#" hreflang="en"><img class="flag" src="../../../../assets/flags/flag-us.svg" alt=""><span>English</span></a></li>
+          <li><a class="lang-option" href="#" hreflang="fr"><img class="flag" src="../../../../assets/flags/flag-fr.svg" alt=""><span>Français</span></a></li>
+          <li><a class="lang-option" href="#" hreflang="pt"><img class="flag" src="../../../../assets/flags/flag-br.svg" alt=""><span>Português</span></a></li>
+        </ul>
+      </div>
+
+      <a href="register.html" class="btn btn-outline">Regístrate</a>
+      <a href="login.html" class="btn btn-primary">Iniciar sesión</a>
+    </div>
+  </header>
+
+  <!-- HERO + BÚSQUEDA -->
+  <section class="page-hero">
+    <h1>¿En qué podemos <span>ayudarte?</span></h1>
+    <p>Encuentra respuestas rápidas o contacta directamente con nuestro equipo.</p>
+
+    <div class="search-box">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      <input type="search" placeholder="Buscar por palabra, ej: eliminar, código, límite..." aria-label="Buscar en preguntas frecuentes">
+    </div>
+  </section>
+
+  <!-- TEMAS POPULARES -->
+  <section class="section-container">
+    <h2 class="section-title">Temas populares</h2>
+    <div class="topics-grid">
+      <div class="topic-card">
+        <div class="icon-wrap">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+        </div>
+        <h3>Primeros pasos</h3>
+        <p>Crea tu primer proyecto, conecta dispositivos y empieza a monitorear tu consumo.</p>
+      </div>
+
+      <div class="topic-card">
+        <div class="icon-wrap">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+        </div>
+        <h3>Lectura de gráficas</h3>
+        <p>Entiende los indicadores de potencia, consumo diario y distribución por dispositivo.</p>
+      </div>
+
+      <div class="topic-card">
+        <div class="icon-wrap">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+        </div>
+        <h3>Gestión de usuarios</h3>
+        <p>Invita miembros, asigna roles y administra los permisos dentro de tu proyecto.</p>
+      </div>
+
+      <div class="topic-card">
+        <div class="icon-wrap">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+        </div>
+        <h3>Alertas y límites</h3>
+        <p>Configura límites de consumo diario y mensual para recibir notificaciones a tiempo.</p>
+      </div>
+
+      <div class="topic-card">
+        <div class="icon-wrap">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+        </div>
+        <h3>Código de acceso</h3>
+        <p>Cómo compartir el código de tu proyecto para que otros usuarios puedan unirse.</p>
+      </div>
+
+      <div class="topic-card">
+        <div class="icon-wrap">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+        </div>
+        <h3>Configuración</h3>
+        <p>Edita los datos de tu proyecto, tipo de propiedad y preferencias de cuenta.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PREGUNTAS FRECUENTES -->
+  <section class="section-container" style="background-color: var(--bg-body);">
+    <h2 class="section-title">Preguntas frecuentes</h2>
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary>
+          <span>¿Cómo creo un proyecto nuevo?</span>
+          <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </summary>
+        <p>Desde el panel principal haz clic en el botón "+" y selecciona "Crear Proyecto". Completa el nombre, dirección y tipo de propiedad.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>
+          <span>¿Qué diferencia hay entre responsable y miembro?</span>
+          <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </summary>
+        <p>El responsable puede ver el código de acceso, invitar usuarios, eliminar miembros y borrar el proyecto. El miembro solo puede consultar la información y salirse del proyecto.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>
+          <span>¿Por qué no veo el código de acceso?</span>
+          <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </summary>
+        <p>El código de acceso solo es visible para el usuario responsable. Si eres miembro, solicita el código al responsable.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>
+          <span>¿Cómo configuro un límite de consumo?</span>
+          <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </summary>
+        <p>Ve al apartado "Proyecto" dentro del panel y busca la sección de límites. Allí defines el límite diario y mensual en kWh.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>
+          <span>¿Puedo eliminar un proyecto?</span>
+          <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </summary>
+        <p>Sí, pero solo si eres el responsable. Ve al tab "Proyecto" y usa el botón "Eliminar proyecto". Esta acción es irreversible.</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- CONTACTO DIRECTO -->
+  <section class="section-container">
+    <h2 class="section-title">Contacto directo</h2>
+    <div class="contact-grid">
+      <div class="contact-card">
+        <svg class="wa-logo" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="24" cy="24" r="24" fill="#25D366"></circle>
+          <path d="M34.5 13.5A14.9 14.9 0 0 0 24 9C16.27 9 10 15.27 10 23a13.9 13.9 0 0 0 1.87 7L10 39l9.26-1.83A14.94 14.94 0 0 0 24 39c7.73 0 14-6.27 14-16a13.93 13.93 0 0 0-3.5-9.5ZM24 36.5a12.4 12.4 0 0 1-6.34-1.73l-.45-.27-4.69.93.95-4.56-.3-.47A12.38 12.38 0 0 1 11.5 23c0-6.9 5.6-12.5 12.5-12.5a12.5 12.5 0 0 1 12.5 12.5C36.5 30.9 30.9 36.5 24 36.5Zm6.86-9.38c-.37-.19-2.2-1.09-2.54-1.21-.34-.12-.59-.19-.84.19-.25.37-.96 1.21-1.18 1.46-.22.25-.43.28-.8.09a10.1 10.1 0 0 1-2.97-1.83 11.1 11.1 0 0 1-2.05-2.56c-.22-.37 0-.57.16-.76.16-.17.37-.43.56-.65.19-.22.25-.37.37-.62.12-.25.06-.47-.03-.65-.09-.19-.84-2.02-1.15-2.77-.3-.72-.61-.62-.84-.63h-.71c-.25 0-.65.09-.99.47s-1.3 1.27-1.3 3.1 1.33 3.6 1.52 3.85c.19.25 2.62 4 6.35 5.61a21.3 21.3 0 0 0 2.12.78 5.1 5.1 0 0 0 2.34.15c.71-.1 2.2-.9 2.51-1.76.31-.87.31-1.61.22-1.76-.09-.16-.34-.25-.71-.44Z" fill="white"></path>
+        </svg>
+        <h3>WhatsApp</h3>
+        <p>Respuesta en menos de 2 horas en horario laboral.</p>
+        <a href="#" class="btn btn-whatsapp">Escribir ahora</a>
+      </div>
+
+      <div class="contact-card">
+        <div class="contact-icon-circle">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+        </div>
+        <h3>Correo electrónico</h3>
+        <p>Envíanos un mensaje y respondemos en máximo 24 horas.</p>
+        <a href="#" class="btn btn-primary">Enviar mensaje</a>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>

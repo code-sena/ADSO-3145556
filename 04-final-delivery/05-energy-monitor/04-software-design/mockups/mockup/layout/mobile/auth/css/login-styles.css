@@ -1,0 +1,110 @@
+/* =========================================
+   Login — EnergyMonitor mobile
+   Origen: LoginScreen.tsx + LoginForm.tsx/.styles.ts + AuthBrandHeader
+   ========================================= */
+
+/* AuthBrandHeader: tarjeta con degradado */
+.brand-header {
+  padding: var(--space-lg);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  background: linear-gradient(
+    135deg,
+    var(--primary-dark) 0%,
+    var(--background-left) 55%,
+    var(--primary-dark) 100%
+  );
+}
+
+.brand-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+}
+
+.brand-logo { width: 64px; height: 64px; object-fit: contain; }
+
+.brand-name {
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--on-brand);
+  text-align: center;
+}
+
+.brand-subtitle {
+  font-size: 14px;
+  color: var(--on-brand);
+  opacity: 0.72;
+  text-align: center;
+  margin-top: var(--space-sm);
+}
+
+/* LoginForm */
+.form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.form-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-primary);
+  text-align: center;
+}
+
+.form-error { font-size: 13px; color: var(--danger); }
+
+/* Opciones: recordar datos / olvidé mi contraseña */
+.options {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  row-gap: var(--space-xs);
+  column-gap: var(--space-sm);
+}
+
+.remember { display: flex; align-items: center; gap: var(--space-sm); flex-shrink: 0; }
+
+.checkbox {
+  width: var(--space-lg);
+  height: var(--space-lg);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.checkbox-checked { background: var(--primary); border-color: var(--primary); }
+
+.remember-label { font-size: 14px; font-weight: 500; color: var(--text-primary); }
+
+/* Enlace verde: وزن bold */
+.link { font-size: 14px; font-weight: 600; color: var(--secondary); text-decoration: none; }
+
+.buttons-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  width: 100%;
+}
+
+.divider { display: flex; align-items: center; width: 100%; gap: var(--space-sm); }
+
+.divider-line { flex: 1; height: 1px; background: var(--border); }
+
+.divider-text { font-size: 12px; color: var(--text-secondary); }
+
+.login-with { font-size: 14px; color: var(--text-secondary); }
+
+.google-icon { width: var(--space-xl); height: var(--space-xl); object-fit: contain; }
+
+.register { font-size: 14px; font-weight: 500; color: var(--text-primary); text-align: center; }
+
+.register-link { font-weight: 600; color: var(--secondary); text-decoration: underline; }

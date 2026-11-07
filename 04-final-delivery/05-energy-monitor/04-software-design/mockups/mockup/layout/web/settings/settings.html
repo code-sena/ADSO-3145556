@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EnergyMonitor - Ajustes</title>
+  <meta name="description" content="Idioma, temas, notificaciones y centro de ayuda de EnergyMonitor.">
+  <!-- Favicon (versión vector del logo del proyecto) -->
+  <link rel="icon" type="image/svg+xml" href="../../../../assets/icons/favicon.svg">
+  <!-- Tipografías de la app: Inter (UI) + Poppins (titulares) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap">
+  <link rel="stylesheet" href="css/settings-styles.css">
+</head>
+<body>
+  <div class="app-shell">
+
+    <!-- SIDEBAR (MainLayout → Sidebar) -->
+    <aside class="sidebar">
+      <div class="sidebar-top">
+        <button class="sidebar-toggle" aria-label="Colapsar menú">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+        <div class="sidebar-brand">
+          <img src="../../../../assets/logos/project_logo.png" alt="EnergyMonitor">
+          <span>EnergyMonitor</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="#" class="sidebar-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+          <span>Inicio</span>
+        </a>
+
+        <button class="sidebar-item sidebar-group-toggle" type="button">
+          <span class="toggle-left">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 16.9A5 5 0 0 0 18 7h-1.26a8 8 0 1 0-11.62 9"></path><path d="M12 12v4"></path><path d="M12 16h.01"></path></svg>
+            <span>Hogares</span>
+          </span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="18 15 12 9 6 15"></polyline></svg>
+        </button>
+        <!-- Los hogares del grupo apuntan a "#": desde fuera del módulo home-detail
+             no se replica la ruta real (/homes/:idHome). -->
+        <div class="sidebar-homes">
+          <a href="#" class="sidebar-home"><span class="home-avatar">C</span><span>Casa Principal</span></a>
+          <a href="#" class="sidebar-home"><span class="home-avatar">A</span><span>Apartamento 502</span></a>
+        </div>
+
+        <a href="../favorites/favorites.html" class="sidebar-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.8 1-1a5.5 5.5 0 0 0 0-7.8z"></path></svg>
+          <span>Favoritos</span>
+        </a>
+        <a href="../notifications/notifications.html" class="sidebar-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+          <span>Notificaciones</span>
+        </a>
+        <a href="settings.html" class="sidebar-item active">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+          <span>Ajustes</span>
+        </a>
+      </nav>
+
+      <!-- El destino real es ../account/account.html; ese módulo todavía no está mockupeado. -->
+      <a href="#" class="sidebar-profile">
+        <span class="profile-avatar">
+          <img src="../../../../assets/images/mockup-assets/perfil.png" alt="Foto de perfil">
+        </span>
+        <span class="profile-info">
+          <span class="profile-name">User 1</span>
+        </span>
+        <button class="profile-more" aria-label="Más opciones">⋯</button>
+      </a>
+    </aside>
+
+    <main class="main-content">
+      <div class="settings-page">
+
+        <!-- CABECERA (design/components/Header + BreadCrumb) -->
+        <header class="page-header">
+          <nav class="breadcrumb">
+            <!-- i18n settings → header.home -->
+            <a href="#">Inicio</a>
+            <!-- Separador: ChevronRight de lucide, 20px (BreadCrumb.jsx) -->
+            <svg class="breadcrumb-sep" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
+            <!-- i18n settings → header.settings -->
+            <span class="breadcrumb-current">Ajustes</span>
+          </nav>
+        </header>
+
+        <!-- =====================================================
+             1. IDIOMA DEL SISTEMA — LanguageSettings.jsx
+             ===================================================== -->
+        <section class="card card-offset">
+          <div class="card-container">
+            <div class="card-header">
+              <div class="card-info">
+                <div class="icon-circle">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg>
+                </div>
+                <div>
+                  <!-- i18n settings → language.title -->
+                  <h3>Idioma del sistema</h3>
+                  <!-- i18n settings → language.description -->
+                  <p>Define el idioma de la interfaz y los reportes generados</p>
+                </div>
+              </div>
+              <!-- Nombre del idioma activo (currentLanguage.name del array LANGUAGES) -->
+              <span class="card-current">Español</span>
+            </div>
+
+            <div class="languages">
+              <!-- Español — idioma activo (i18n.language === "es") -->
+              <button class="language-card active" type="button">
+                <div class="check">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>
+                </div>
+                <span class="flag"><img src="../../../../assets/flags/flag-co.svg" alt="Bandera de Colombia"></span>
+                <h4>Español</h4>
+                <span>es-CO</span>
+              </button>
+
+              <!-- English -->
+              <button class="language-card" type="button">
+                <span class="flag"><img src="../../../../assets/flags/flag-us.svg" alt="Bandera de Estados Unidos"></span>
+                <h4>English</h4>
+                <span>en-US</span>
+              </button>
+
+              <!-- Português -->
+              <button class="language-card" type="button">
+                <span class="flag"><img src="../../../../assets/flags/flag-br.svg" alt="Bandera de Brasil"></span>
+                <h4>Português</h4>
+                <span>pt-BR</span>
+              </button>
+
+              <!-- Français -->
+              <button class="language-card" type="button">
+                <span class="flag"><img src="../../../../assets/flags/flag-fr.svg" alt="Bandera de Francia"></span>
+                <h4>Français</h4>
+                <span>fr-FR</span>
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- =====================================================
+             2. TEMAS DEL SISTEMA — ThemeSettings.jsx
+             Colores de la miniatura: ThemeContext.jsx → THEMES
+             ===================================================== -->
+        <section class="card card-offset">
+          <div class="card-container">
+            <div class="card-header">
+              <div class="card-info">
+                <div class="icon-circle">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"></circle><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"></circle><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"></circle><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"></circle><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"></path></svg>
+                </div>
+                <div>
+                  <!-- i18n settings → theme.title -->
+                  <h3>Temas del sistema</h3>
+                  <!-- i18n settings → theme.description -->
+                  <p>Apariencia visual del sistema para todos los usuarios</p>
+                </div>
+              </div>
+              <!-- i18n settings → theme.energy-light (tema activo por defecto) -->
+              <span class="card-current">Claro · Predeterminado</span>
+            </div>
+
+            <!-- Temas claros -->
+            <div class="theme-section">
+              <!-- i18n settings → theme.light -->
+              <span class="theme-section-label">Temas claros</span>
+              <div class="themes-grid">
+
+                <!-- energy-light — sidebar #3F6BAE, main #0078D7, indicators #0078D7/#32CD32/#E2E8F0 -->
+                <button class="theme-card theme-energy-light active" type="button">
+                  <div class="check-badge">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>
+                  </div>
+
+                  <div class="preview">
+                    <div class="preview-sidebar">
+                      <span class="sidebar-line is-brand"></span>
+                      <span class="sidebar-line is-item"></span>
+                      <span class="sidebar-line is-item-2"></span>
+                      <span class="sidebar-line is-item-3"></span>
+                    </div>
+                    <div class="preview-content">
+                      <div class="preview-top-row">
+                        <div class="preview-bar"></div>
+                        <span class="preview-accent"></span>
+                      </div>
+                      <div class="preview-line-group">
+                        <span class="preview-line is-1"></span>
+                        <span class="preview-line is-2"></span>
+                        <span class="preview-line is-3"></span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="theme-card-footer">
+                    <div class="theme-card-info">
+                      <!-- i18n settings → theme.energy-light -->
+                      <span class="theme-card-name">Claro · Predeterminado</span>
+                      <!-- theme.subtitle en ThemeContext.jsx: mismo texto que el nombre -->
+                      <span class="theme-card-subtitle">Claro · Predeterminado</span>
+                    </div>
+                    <div class="theme-dots">
+                      <span class="theme-dot" style="background:#0078D7"></span>
+                      <span class="theme-dot" style="background:#32CD32"></span>
+                      <span class="theme-dot" style="background:#E2E8F0"></span>
+                    </div>
+                  </div>
+                </button>
+
+                <!-- eco-light — sidebar #2E7D32, main #32CD32, indicators #1B5E20/#2ECC71/#A5D6A7 -->
+                <button class="theme-card theme-eco-light" type="button">
+                  <div class="preview">
+                    <div class="preview-sidebar">
+                      <span class="sidebar-line is-brand"></span>
+                      <span class="sidebar-line is-item"></span>
+                      <span class="sidebar-line is-item-2"></span>
+                      <span class="sidebar-line is-item-3"></span>
+                    </div>
+                    <div class="preview-content">
+                      <div class="preview-top-row">
+                        <div class="preview-bar"></div>
+                        <span class="preview-accent"></span>
+                      </div>
+                      <div class="preview-line-group">
+                        <span class="preview-line is-1"></span>
+                        <span class="preview-line is-2"></span>
+                        <span class="preview-line is-3"></span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="theme-card-footer">
+                    <div class="theme-card-info">
+                      <!-- i18n settings → theme.eco-light -->
+                      <span class="theme-card-name">Claro · Tema 2</span>
+                      <!-- theme.subtitle en ThemeContext.jsx: mismo texto que el nombre -->
+                      <span class="theme-card-subtitle">Claro · Tema 2</span>
+                    </div>
+                    <div class="theme-dots">
+                      <span class="theme-dot" style="background:#1B5E20"></span>
+                      <span class="theme-dot" style="background:#2ECC71"></span>
+                      <span class="theme-dot" style="background:#A5D6A7"></span>
+                    </div>
+                  </div>
+                </button>
+
+              </div>
+            </div>
+
+            <!-- Temas oscuros -->
+            <div class="theme-section">
+              <div class="theme-section-label-row">
+                <!-- i18n settings → theme.dark -->
+                <span class="theme-section-label">Temas oscuros</span>
+                <!-- i18n settings → theme.new — sin estilo propio en escritorio -->
+                <span class="theme-badge">Nuevo</span>
+              </div>
+              <div class="themes-grid">
+
+                <!-- energy-dark — sidebar #0F172A, main #1E293B, indicators #0078D7/#32CD32/#64748B -->
+                <button class="theme-card theme-energy-dark dark-card" type="button">
+                  <div class="preview">
+                    <div class="preview-sidebar">
+                      <span class="sidebar-line is-brand"></span>
+                      <span class="sidebar-line is-item"></span>
+                      <span class="sidebar-line is-item-2"></span>
+                      <span class="sidebar-line is-item-3"></span>
+                    </div>
+                    <div class="preview-content">
+                      <div class="preview-top-row">
+                        <div class="preview-bar"></div>
+                        <span class="preview-accent"></span>
+                      </div>
+                      <div class="preview-line-group">
+                        <span class="preview-line is-1"></span>
+                        <span class="preview-line is-2"></span>
+                        <span class="preview-line is-3"></span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="theme-card-footer">
+                    <div class="theme-card-info">
+                      <!-- i18n settings → theme.energy-dark -->
+                      <span class="theme-card-name">Oscuro · Tema 1</span>
+                      <!-- theme.subtitle en ThemeContext.jsx: mismo texto que el nombre -->
+                      <span class="theme-card-subtitle">Oscuro · Tema 1</span>
+                    </div>
+                    <div class="theme-dots">
+                      <span class="theme-dot" style="background:#0078D7"></span>
+                      <span class="theme-dot" style="background:#32CD32"></span>
+                      <span class="theme-dot" style="background:#64748B"></span>
+                    </div>
+                  </div>
+                </button>
+
+                <!-- eco-dark — sidebar #102A1A, main #183321, indicators #32CD32/#2ECC71/#1E4029 -->
+                <button class="theme-card theme-eco-dark dark-card" type="button">
+                  <div class="preview">
+                    <div class="preview-sidebar">
+                      <span class="sidebar-line is-brand"></span>
+                      <span class="sidebar-line is-item"></span>
+                      <span class="sidebar-line is-item-2"></span>
+                      <span class="sidebar-line is-item-3"></span>
+                    </div>
+                    <div class="preview-content">
+                      <div class="preview-top-row">
+                        <div class="preview-bar"></div>
+                        <span class="preview-accent"></span>
+                      </div>
+                      <div class="preview-line-group">
+                        <span class="preview-line is-1"></span>
+                        <span class="preview-line is-2"></span>
+                        <span class="preview-line is-3"></span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="theme-card-footer">
+                    <div class="theme-card-info">
+                      <!-- i18n settings → theme.eco-dark -->
+                      <span class="theme-card-name">Oscuro · Tema 2</span>
+                      <!-- theme.subtitle en ThemeContext.jsx: mismo texto que el nombre -->
+                      <span class="theme-card-subtitle">Oscuro · Tema 2</span>
+                    </div>
+                    <div class="theme-dots">
+                      <span class="theme-dot" style="background:#32CD32"></span>
+                      <span class="theme-dot" style="background:#2ECC71"></span>
+                      <span class="theme-dot" style="background:#1E4029"></span>
+                    </div>
+                  </div>
+                </button>
+
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- =====================================================
+             3. NOTIFICACIONES — NotificationSettings.jsx
+             OJO: esta tarjeta se renderiza SIN el style inline
+             (width/margin) que llevan las otras tres.
+             ===================================================== -->
+        <section class="card">
+          <div class="card-container">
+            <div class="card-header">
+              <div class="card-info">
+                <div class="icon-square">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+                </div>
+                <div>
+                  <!-- i18n settings → notifications.title -->
+                  <h3>Notificaciones</h3>
+                  <!-- i18n settings → notifications.description -->
+                  <p>Configura cómo deseas recibir alertas y eventos del sistema</p>
+                </div>
+              </div>
+              <!-- {activeCount} + t("notifications.active"): "2 activas" -->
+              <span class="notification-counter">2 activas</span>
+            </div>
+
+            <div class="notification-options">
+
+              <!-- Fila 1 — Correo electrónico -->
+              <div class="notification-row">
+                <div class="notification-row-left">
+                  <div class="notification-row-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
+                  </div>
+                  <div>
+                    <!-- i18n settings → notifications.email.title -->
+                    <h4>Correo electrónico</h4>
+                    <!-- i18n settings → notifications.email.description -->
+                    <p>Cada alerta de tus hogares llega también a tu correo registrado</p>
+                  </div>
+                </div>
+                <div class="notification-row-right">
+                  <!-- i18n settings → notifications.status.active -->
+                  <span class="notification-status is-active">Activo</span>
+                  <button class="switch switch-on" type="button" role="switch" aria-checked="true" aria-label="Correo electrónico">
+                    <span class="thumb"></span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Fila 2 — Notificaciones push -->
+              <div class="notification-row">
+                <div class="notification-row-left">
+                  <div class="notification-row-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"></rect><path d="M12 18h.01"></path></svg>
+                  </div>
+                  <div>
+                    <!-- i18n settings → notifications.push.title -->
+                    <h4>Notificaciones push</h4>
+                    <!-- i18n settings → notifications.push.description -->
+                    <p>Avisos en este navegador aunque la pestaña esté cerrada</p>
+                  </div>
+                </div>
+                <div class="notification-row-right">
+                  <span class="notification-status is-active">Activo</span>
+                  <button class="switch switch-on" type="button" role="switch" aria-checked="true" aria-label="Notificaciones push">
+                    <span class="thumb"></span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Fila 3 — Modo combinado (enabled = email && push) -->
+              <div class="notification-row">
+                <div class="notification-row-left">
+                  <div class="notification-row-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 7 17l-5-5"></path><path d="m22 10-7.5 7.5L13 16"></path></svg>
+                  </div>
+                  <div>
+                    <!-- i18n settings → notifications.combined.title -->
+                    <h4>Modo combinado</h4>
+                    <!-- i18n settings → notifications.combined.description -->
+                    <p>Activa ambos canales simultáneamente</p>
+                  </div>
+                </div>
+                <div class="notification-row-right">
+                  <span class="notification-status is-active">Activo</span>
+                  <button class="switch switch-on" type="button" role="switch" aria-checked="true" aria-label="Modo combinado">
+                    <span class="thumb"></span>
+                  </button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+        <!-- =====================================================
+             4. CENTRO DE AYUDA — HelpCenter.jsx
+             Esta tarjeta no lleva encabezado propio: solo las 3 tarjetas.
+             ===================================================== -->
+        <section class="card card-offset">
+          <div class="help-grid">
+
+            <!-- Documentación -->
+            <div class="help-card">
+              <div class="help-icon is-docs">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 7v14"></path><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"></path></svg>
+              </div>
+              <!-- i18n settings → help.docs.title -->
+              <h3>Documentación</h3>
+              <!-- i18n settings → help.docs.description -->
+              <p>Guías de uso, referencia de funciones y tutoriales paso a paso</p>
+              <!-- i18n settings → help.docs.action -->
+              <button class="help-link" type="button">Abrir documentación<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button>
+            </div>
+
+            <!-- Soporte técnico -->
+            <div class="help-card">
+              <div class="help-icon is-support">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3"></path></svg>
+              </div>
+              <!-- i18n settings → help.support.title -->
+              <h3>Soporte técnico</h3>
+              <!-- i18n settings → help.support.description -->
+              <p>Comunícate con el equipo de soporte para resolver incidencias</p>
+              <!-- i18n settings → help.support.action -->
+              <button class="help-link" type="button">Crear ticket<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button>
+            </div>
+
+            <!-- Novedades -->
+            <div class="help-card">
+              <div class="help-icon is-updates">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"></path><path d="M20 3v4"></path><path d="M22 5h-4"></path><path d="M4 17v2"></path><path d="M5 18H3"></path></svg>
+              </div>
+              <!-- i18n settings → help.updates.title -->
+              <h3>Novedades</h3>
+              <!-- i18n settings → help.updates.description -->
+              <p>Últimas actualizaciones, mejoras y correcciones del sistema</p>
+              <!-- i18n settings → help.updates.action -->
+              <button class="help-link" type="button">Ver registro de cambios<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button>
+            </div>
+
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+</body>
+</html>

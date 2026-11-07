@@ -1,0 +1,912 @@
+/* =========================================
+   Ajustes — EnergyMonitor
+   Mockup estático. Tokens copiados de src/styles/global.css
+   Reproduce Settings.jsx: 4 tarjetas apiladas (Idioma, Temas,
+   Notificaciones, Centro de ayuda) dentro del mismo shell del sidebar.
+   ========================================= */
+
+/* =========================================
+   1. Tokens y reset
+   ========================================= */
+:root {
+  --color-primary: #0078d7;
+  --color-primary-hover: #3399ff;
+  --color-primary-dark: #0a2540;
+
+  --color-secondary: #32cd32;
+
+  --color-success: #2ecc71;
+  --color-warning: #ffd700;
+  --color-danger: #e63946;
+  --color-info: #17a2b8;
+
+  --color-danger-soft: #fcebeb;
+  --color-danger-soft-hover: #f7c1c1;
+  --color-danger-text: #a32d2d;
+  --color-success-soft: #eaf3de;
+  --color-success-text: #3b6d11;
+  --color-warning-soft: #fff4d6;
+  --color-warning-text: #854f0b;
+  --color-info-soft: #d1ecf1;
+  --color-info-text: #0c5460;
+
+  --color-background: #f8f9fa;
+  --color-background-left: #3f6bae;
+  --color-surface: #ffffff;
+  --color-gradient: #e6f0fa;
+
+  --color-text-primary: #212529;
+  --color-text-secondary: #6c757d;
+  --color-border: #e5e7eb;
+
+  --color-primary-soft: #E8F3FF;
+
+  --font-primary: "Inter", sans-serif;
+  --font-secondary: "Poppins", sans-serif;
+
+  --font-size-11: 11px;
+  --font-size-xs: 12px;
+  --font-size-13: 13px;
+  --font-size-sm: 14px;
+  --font-size-md: 16px;
+  --font-size-18: 18px;
+  --font-size-lg: 20px;
+  --font-size-22: 22px;
+  --font-size-xl: 24px;
+  --font-size-xxl: 32px;
+  --font-size-xxxl: 60px;
+
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 600;
+
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.25);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font-primary);
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+  line-height: 1.5;
+}
+
+a { color: inherit; }
+
+/* =========================================
+   2. Shell: Sidebar + contenido principal
+   ========================================= */
+.app-shell {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 240px;
+  flex-shrink: 0;
+  background: var(--color-background-left);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 1.25rem 1rem;
+}
+
+.sidebar-top {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0 0.5rem 1.5rem;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.sidebar-toggle {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+}
+
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sidebar-brand img { height: 34px; width: auto; object-fit: contain; }
+
+.sidebar-brand span { font-weight: 700; font-size: 1rem; }
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  flex: 1;
+}
+
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.65rem 0.75rem;
+  border-radius: 8px;
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  background: none;
+  border: none;
+  width: 100%;
+  cursor: pointer;
+  text-align: left;
+}
+
+.sidebar-item:hover,
+.sidebar-item.active {
+  background: rgba(255, 255, 255, 0.12);
+  color: white;
+}
+
+.sidebar-item svg { flex-shrink: 0; }
+
+.sidebar-group-toggle { justify-content: space-between; }
+
+.sidebar-group-toggle .toggle-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.sidebar-homes {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding-left: 1.75rem;
+  margin: 0.15rem 0 0.5rem;
+}
+
+.sidebar-home {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.5rem 0.6rem;
+  border-radius: 8px;
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  font-size: 0.85rem;
+}
+
+.sidebar-home:hover,
+.sidebar-home.active {
+  background: rgba(255, 255, 255, 0.12);
+  color: white;
+}
+
+.home-avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.sidebar-profile {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.75rem 0.5rem 0.25rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  margin-top: 0.5rem;
+  text-decoration: none;
+}
+
+/* Avatar del usuario: imagen real del proyecto, como el <img class="avatar">
+   de Sidebar.jsx (fallback cuando la persona no tiene foto subida). */
+.profile-avatar {
+  width: 36px;
+  height: 36px;
+  padding: 2px;
+  border-radius: 50%;
+  background: var(--color-surface);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.profile-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  flex: 1;
+}
+
+.profile-name {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: white;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.profile-more {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.85);
+  cursor: pointer;
+  padding: 4px;
+}
+
+/* =========================================
+   3. Cabecera de página (design/components/Header + BreadCrumb)
+   ========================================= */
+
+/* MainLayout.module.css → .content { padding: var(--spacing-lg) } */
+.main-content {
+  flex: 1;
+  min-width: 0;
+  padding: var(--spacing-lg);
+}
+
+.page-header {
+  display: flex;
+  align-items: center;
+  min-height: 60px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: 0 var(--spacing-md);
+  margin: 0 16px 20px 16px;
+  width: calc(100% - 32px);
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  flex-wrap: wrap;
+}
+
+.breadcrumb a {
+  color: var(--color-primary);
+  font-weight: 500;
+  text-decoration: none;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+.breadcrumb a:hover {
+  background: rgba(0, 0, 0, 0.06);
+  text-decoration: underline;
+}
+
+.breadcrumb-current {
+  color: var(--color-text-secondary);
+  font-weight: 600;
+  padding: 4px 8px;
+}
+
+.breadcrumb-sep {
+  color: var(--color-text-secondary);
+  flex-shrink: 0;
+}
+
+/* =========================================
+   4. Página de Ajustes y tarjeta base del design system
+   ========================================= */
+
+/* Settings.module.css → .page */
+.settings-page {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  background-color: var(--color-background);
+}
+
+/* Card.jsx aplica estos valores en el style inline del componente */
+.card {
+  background-color: var(--color-surface);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-lg);
+  box-shadow: var(--shadow-lg);
+  max-width: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: all 0.2s ease;
+}
+
+.card:hover { transform: translateY(-2px); }
+
+/* Idioma, Temas y Centro de ayuda pasan
+   style={{ width: "calc(100% - 32px)", margin: "0 16px 20px 16px" }}.
+   La tarjeta de Notificaciones se renderiza SIN ese style (ver README). */
+.card-offset {
+  width: calc(100% - 32px);
+  margin: 0 16px 20px 16px;
+}
+
+.card-container {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Cabecera común de las tarjetas de Idioma / Temas / Notificaciones */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.card-info {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.card-info h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.card-info p {
+  margin-top: 4px;
+  font-size: 16px;
+  color: var(--color-text-secondary);
+}
+
+.card-current {
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: var(--color-primary-soft);
+  color: var(--color-primary);
+  font-size: 16px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* =========================================
+   5. Idioma del sistema (LanguageSettings)
+   ========================================= */
+
+/* LanguageSettings.module.css → .icon */
+.icon-circle {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--color-primary-soft);
+  color: var(--color-primary);
+  flex-shrink: 0;
+}
+
+/* En la app el color va como literal (#E8F3FF / #FFF4D6) en este módulo */
+.icon-square {
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: var(--color-warning-soft);
+  color: var(--color-warning-text);
+  flex-shrink: 0;
+}
+
+.languages {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 16px;
+  padding-top: 24px;
+}
+
+.language-card {
+  position: relative;
+  min-height: 150px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: var(--color-surface);
+  cursor: pointer;
+  transition: .2s;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.language-card:hover { transform: translateY(-2px); }
+
+.language-card.active {
+  border-color: var(--color-primary);
+  background: var(--color-primary-soft);
+}
+
+.check {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .15);
+}
+
+/* La app usa <ReactCountryFlag> (flagcdn.com); en los mockups se usan los
+   SVG del proyecto recortados en círculo con object-fit: cover. */
+.flag {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid var(--color-border);
+  background: var(--color-surface);
+  flex-shrink: 0;
+}
+
+.flag img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.language-card h4 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.language-card span {
+  color: var(--color-text-secondary);
+  font-size: 14px;
+}
+
+/* =========================================
+   6. Temas del sistema (ThemeSettings)
+   ========================================= */
+
+.theme-section { padding-top: 24px; }
+
+.theme-section-label {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+  display: block;
+  margin-bottom: 14px;
+}
+
+.theme-section-label-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.theme-section-label-row .theme-section-label { margin-bottom: 0; }
+
+/* Quirk de la app: .badge solo está definido dentro del media query MOBILE,
+   así que en escritorio "Nuevo" se ve como texto sin ningún estilo. */
+.theme-badge {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+}
+
+.themes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.theme-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  background: #FFFFFF;
+  cursor: pointer;
+  padding: 12px;
+  transition: 0.2s;
+  overflow: hidden;
+}
+
+.theme-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+}
+
+.theme-card.active {
+  border-color: var(--color-primary);
+  background: #F7FBFF;
+}
+
+.theme-card.dark-card { background: #0F1115; border-color: #1E293B; }
+
+.theme-card.dark-card.active { background: #0B1220; border-color: var(--color-primary); }
+
+.check-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+/* Miniatura wireframe: barra lateral + contenido, con los colores reales
+   del tema tal como los define ThemeContext.jsx (sidebar / main / indicators). */
+.preview {
+  display: flex;
+  width: 100%;
+  height: 110px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+}
+
+.dark-card .preview { border-color: #1E293B; }
+
+.preview-sidebar {
+  width: 28%;
+  height: 100%;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px 8px;
+  background: var(--t-sidebar);
+}
+
+.sidebar-line {
+  display: block;
+  height: 5px;
+  border-radius: 3px;
+}
+
+.sidebar-line.is-brand { background: rgba(255, 255, 255, 0.6); width: 70%; }
+.sidebar-line.is-item { background: rgba(255, 255, 255, 0.35); width: 50%; }
+.sidebar-line.is-item-2 { background: rgba(255, 255, 255, 0.35); width: 60%; }
+.sidebar-line.is-item-3 { background: rgba(255, 255, 255, 0.35); width: 45%; }
+
+.preview-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px;
+  background: #FFFFFF;
+}
+
+.dark-card .preview-content { background: var(--t-main); }
+
+.preview-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.preview-bar {
+  height: 14px;
+  border-radius: 4px;
+  width: 60%;
+  background: var(--t-main);
+}
+
+.preview-accent {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: var(--t-accent);
+}
+
+.preview-line-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.preview-line {
+  display: block;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--color-border);
+}
+
+.preview-line.is-1 { width: 85%; }
+.preview-line.is-2 { width: 65%; }
+.preview-line.is-3 { width: 75%; }
+
+.dark-card .preview-line { background: rgba(255, 255, 255, 0.12); }
+.dark-card .preview-line.is-1 { background: rgba(255, 255, 255, 0.18); }
+
+.theme-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 12px;
+}
+
+.theme-card-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.theme-card-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.theme-card-subtitle {
+  font-size: 14px;
+  color: var(--color-text-secondary);
+  margin-top: 2px;
+}
+
+.dark-card .theme-card-name { color: #F1F5F9; }
+.dark-card .theme-card-subtitle { color: #94A3B8; }
+
+.theme-dots { display: flex; gap: 6px; }
+
+.theme-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+/* Colores reales por tema (ThemeContext.jsx → THEMES) */
+.theme-energy-light { --t-sidebar: #3F6BAE; --t-main: #0078D7; --t-accent: #0078D7; }
+.theme-eco-light { --t-sidebar: #2E7D32; --t-main: #32CD32; --t-accent: #1B5E20; }
+.theme-energy-dark { --t-sidebar: #0F172A; --t-main: #1E293B; --t-accent: #0078D7; }
+.theme-eco-dark { --t-sidebar: #102A1A; --t-main: #183321; --t-accent: #32CD32; }
+
+/* =========================================
+   7. Notificaciones (NotificationSettings)
+   ========================================= */
+
+.notification-counter {
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: var(--color-success-soft);
+  color: var(--color-success-text);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.notification-options {
+  display: flex;
+  flex-direction: column;
+}
+
+.notification-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.notification-row:last-child { border-bottom: none; }
+
+.notification-row-left {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+
+.notification-row-icon {
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: #F8FAFC;
+  color: var(--color-primary);
+  flex-shrink: 0;
+}
+
+.notification-row-left h4 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.notification-row-left p {
+  margin-top: 4px;
+  font-size: 16px;
+  color: var(--color-text-secondary);
+}
+
+.notification-row-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.notification-status {
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.notification-status.is-active {
+  background: var(--color-success-soft);
+  color: var(--color-success-text);
+}
+
+.notification-status.is-inactive {
+  background: var(--color-danger-soft);
+  color: var(--color-danger-text);
+}
+
+/* Switch: 50 × 28 px, pista #CBD5E1 y pulgar blanco de 22 px
+   (NotificationSettings.module.css → .switch / .thumb) */
+.switch {
+  width: 50px;
+  height: 28px;
+  border: none;
+  border-radius: 999px;
+  background: #CBD5E1;
+  position: relative;
+  cursor: pointer;
+  transition: .25s;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.switch.switch-on { background: var(--color-primary); }
+
+.switch .thumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: white;
+  transition: .25s;
+}
+
+.switch.switch-on .thumb { transform: translateX(22px); }
+
+/* Solo se pinta cuando NotificationSettings recibe un error (styles.message);
+   no se dibuja en el estado normal del mockup. */
+.notification-message {
+  margin-top: 12px;
+  font-size: 13px;
+  color: var(--color-danger);
+}
+
+/* =========================================
+   8. Centro de ayuda (HelpCenter)
+   ========================================= */
+
+.help-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+.help-card {
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 20px;
+  background: var(--color-surface);
+  transition: .2s;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.help-card:hover { transform: translateY(-2px); }
+
+/* Ícono base */
+.help-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Tonos claros (sin :global([data-theme]), porque el mockup es claro) */
+.help-icon.is-docs { background: #EEF2FF; color: #6366F1; }
+.help-icon.is-support { background: #FFF1F2; color: #EF4444; }
+.help-icon.is-updates { background: #ECFDF5; color: #22C55E; }
+
+.help-card h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.help-card p {
+  margin: 0;
+  line-height: 1.6;
+  font-size: 16px;
+  color: var(--color-text-secondary);
+}
+
+.help-link {
+  margin-top: auto;
+  border: none;
+  background: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0;
+  cursor: pointer;
+  font-family: var(--font-primary);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.help-link:hover { opacity: .8; }

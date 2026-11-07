@@ -1,0 +1,89 @@
+/* =========================================
+   Favorites — EnergyMonitor mobile
+   Origen: features/favorites/screens/FavoritesScreen/FavoritesScreen.tsx
+           + FavoritesScreen.styles.ts
+   Usa además css/dashboard-styles.css: HomeCard vive en
+   features/dashboard/components/HomeCard y FavoritesScreen lo reutiliza tal cual.
+   ========================================= */
+
+/* ---------------------------------------------------------------
+   Header con Breadcrumb
+   styles.header.marginLeft = spacing.md + TRIGGER_SIZE(44) + spacing.sm = 68px
+   (mismo valor que la regla compartida `.header-with-trigger` del shell)
+   --------------------------------------------------------------- */
+.header-favorites { margin-left: 68px; }
+
+/* Breadcrumb.styles.ts: linkText y current usan Theme.typography.size.lg (20px)
+   y los dos envuelven el texto con padding 4px. El shell trae los 14px de la Web,
+   así que aquí se restituye la medida del móvil. */
+.breadcrumb-item { gap: 0; }
+
+.breadcrumb-link,
+.breadcrumb-current {
+  font-size: 20px;
+  padding: 4px;
+}
+
+.breadcrumb-sep {
+  margin: 0 2px;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+}
+
+/* ---------------------------------------------------------------
+   Contenido del ScrollView: styles.content
+   flexGrow 1 · paddingHorizontal spacing.md · paddingBottom spacing.xl
+   --------------------------------------------------------------- */
+.fav-content {
+  min-height: 100%;
+  padding: 0 var(--space-md) var(--space-xl);
+}
+
+/* styles.hero: alignItems center · gap spacing.xs · padding 24/24/16 */
+.fav-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-lg) var(--space-lg) var(--space-md);
+  text-align: center;
+}
+
+/* styles.title: Theme.typography.size.xl */
+.fav-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--text-primary);
+  text-align: center;
+}
+
+/* styles.subtitle: maxWidth 640 · lineHeight size22 */
+.fav-subtitle {
+  max-width: 640px;
+  font-size: 14px;
+  line-height: 22px;
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+/* styles.favoritesCard: minHeight spacing.xl * 12 + spacing.md */
+.fav-card {
+  min-height: 400px;
+  padding: var(--space-lg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+}
+
+/* styles.grid: flexDirection row · flexWrap wrap · gap spacing.md */
+.fav-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+}
+
+/* styles.gridItem: width "100%" → en 390px de ancho las tarjetas van en una
+   columna, aunque el contenedor sea una fila con wrap */
+.fav-grid-item { width: 100%; }

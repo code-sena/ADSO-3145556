@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EnergyMonitor - Controla tu consumo eléctrico</title>
+  <meta name="description" content="Monitorea, analiza y optimiza el consumo eléctrico de tu hogar en tiempo real.">
+  <!-- Favicon (mismo recurso que public/favicon.svg de la app React) -->
+  <link rel="icon" type="image/svg+xml" href="../../../../assets/icons/favicon.svg">
+  <!-- Tipografías de la app: Inter (UI) + Poppins (titulares) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap">
+  <!-- Enlace actualizado a la carpeta css y nueva convención de nombres -->
+  <link rel="stylesheet" href="css/index-styles.css">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <a href="#" class="brand">
+      <img src="../../../../assets/logos/project_logo.png" alt="EnergyMonitor Logo">
+      <span>EnergyMonitor</span>
+    </a>
+
+    <nav class="nav-center">
+      <a href="#inicio">Inicio</a>
+      <a href="about.html">Sobre nosotros</a>
+      <a href="support.html">Soporte</a>
+    </nav>
+
+    <div class="nav-right">
+      <!-- Toggle de tema: muestra Moon en modo claro y Sun en modo oscuro (como Navbar.jsx) -->
+      <button class="icon-btn" type="button" aria-label="Cambiar a modo oscuro">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg>
+      </button>
+
+      <!-- Selector de idioma: Globe + bandera activa + menú desplegable -->
+      <div class="lang-wrapper">
+        <button class="icon-btn lang-btn" type="button" aria-label="Cambiar idioma" aria-haspopup="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg>
+          <img class="flag" src="../../../../assets/flags/flag-co.svg" alt="Español">
+          <svg class="chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg>
+        </button>
+
+        <ul class="lang-dropdown">
+          <li><a class="lang-option is-active" href="#" hreflang="es"><img class="flag" src="../../../../assets/flags/flag-co.svg" alt=""><span>Español</span></a></li>
+          <li><a class="lang-option" href="#" hreflang="en"><img class="flag" src="../../../../assets/flags/flag-us.svg" alt=""><span>English</span></a></li>
+          <li><a class="lang-option" href="#" hreflang="fr"><img class="flag" src="../../../../assets/flags/flag-fr.svg" alt=""><span>Français</span></a></li>
+          <li><a class="lang-option" href="#" hreflang="pt"><img class="flag" src="../../../../assets/flags/flag-br.svg" alt=""><span>Português</span></a></li>
+        </ul>
+      </div>
+
+      <a href="register.html" class="btn btn-outline">Regístrate</a>
+      <a href="login.html" class="btn btn-primary">Iniciar sesión</a>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="hero-section" id="inicio">
+    <div class="hero-content">
+      <h1>
+        Controla tu<br>
+        <span class="highlight-secondary">consumo<br>eléctrico</span>
+        <span class="highlight-primary">en tiempo real</span>
+      </h1>
+      <p>Reduce costos, evita desperdicios y toma decisiones inteligentes desde tu hogar.</p>
+      
+      <a href="register.html" class="hero-btn">Comenzar ahora</a>
+      
+      <div class="hero-features">
+        <span>Sin costos iniciales ✔️</span>
+        <span>Fácil de usar ⚡</span>
+        <span>Datos en tiempo real 📊</span>
+      </div>
+    </div>
+    
+    <div class="hero-image">
+      <img src="../../../../assets/images/mockup-assets/hero_img.jpeg" alt="Panel de monitoreo del consumo eléctrico">
+    </div>
+  </section>
+
+  <!-- CÓMO FUNCIONA SECTION -->
+  <section class="section-container" id="nosotros">
+    <h2 class="section-title">¿Cómo funciona EnergyMonitor?</h2>
+    <p class="section-subtitle">Monitorea, analiza y optimiza tu consumo energético en pocos pasos.</p>
+    
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-header">
+          <div class="step-number">1</div>
+          <h3>Regístrate o inicia sesión</h3>
+        </div>
+        <p>Crea tu cuenta fácilmente o accede con tu cuenta de Google para comenzar a usar la plataforma de forma segura.</p>
+        <div class="step-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+        </div>
+      </div>
+      
+      <div class="step-card">
+        <div class="step-header">
+          <div class="step-number">2</div>
+          <h3>Crea y configura tu proyecto</h3>
+        </div>
+        <p>Registra tu hogar, vincula dispositivos eléctricos y define límites de consumo personalizados.</p>
+        <div class="step-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+        </div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-header">
+          <div class="step-number">3</div>
+          <h3>Visualiza y analiza</h3>
+        </div>
+        <p>Consulta tu consumo en tiempo real con gráficos claros y detallados.</p>
+        <div class="step-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+        </div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-header">
+          <div class="step-number">4</div>
+          <h3>Recibe alertas inteligentes</h3>
+        </div>
+        <p>Obtén notificaciones automáticas y recomendaciones para optimizar tu consumo energético.</p>
+        <div class="step-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- Imagen ilustrativa Dashboard (img_lp2.png de la app) -->
+    <img src="../../../../assets/images/mockup-assets/hero_img2.png" alt="Dashboard Ilustración" class="how-it-works-img">
+  </section>
+
+  <!-- POR QUÉ ELEGIR SECTION -->
+  <section class="section-container" style="background-color: var(--bg-body);">
+    <h2 class="section-title">¿Por qué elegir EnergyMonitor?</h2>
+    <p class="section-subtitle">Todo lo que necesitas para tomar el control de tu consumo energético.</p>
+
+    <div class="benefits-grid">
+      <div class="benefit-card">
+        <div class="benefit-icon-wrapper">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline points="16 7 22 7 22 13"></polyline></svg>
+        </div>
+        <h3>Ahorra en tu factura</h3>
+        <p>Identifica patrones de consumo innecesario y reduce tu gasto eléctrico hasta un 30%.</p>
+      </div>
+
+      <div class="benefit-card">
+        <div class="benefit-icon-wrapper">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+        </div>
+        <h3>Alertas en tiempo real</h3>
+        <p>Recibe notificaciones inmediatas ante picos de consumo o actividad inusual.</p>
+      </div>
+
+      <div class="benefit-card">
+        <div class="benefit-icon-wrapper">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"></path><line x1="2" y1="22" x2="22" y2="2"></line></svg>
+        </div>
+        <h3>Reduce tu huella</h3>
+        <p>Disminuye tu impacto ambiental con un uso de energía más inteligente y eficiente.</p>
+      </div>
+
+      <div class="benefit-card">
+        <div class="benefit-icon-wrapper">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg>
+        </div>
+        <h3>Configuración simple y segura</h3>
+        <p>Conecta tus dispositivos en minutos, con seguridad de nivel bancario y sin conocimientos técnicos.</p>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>

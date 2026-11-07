@@ -1,0 +1,281 @@
+/* =========================================
+   Dashboard — EnergyMonitor mobile
+   Origen: features/dashboard/screens/DashboardScreen/DashboardScreen.tsx
+           + DashboardScreen.styles.ts
+           features/dashboard/components/HomeCard/
+           features/dashboard/components/DashboardEmptyState/
+           features/dashboard/components/CreateHomeModal/
+           features/dashboard/components/JoinHomeModal/
+   ========================================= */
+
+/* ---------------------------------------------------------------
+   Header
+   styles.header.marginLeft = spacing.md + TRIGGER_SIZE(44) + spacing.sm
+   = 16 + 44 + 8 = 68px: deja libre el botón hamburguesa del Sidebar.
+   Mismo valor que la regla compartida `.header-with-trigger` del shell;
+   aquí se mantiene la copia local para que estas pantallas no dependan
+   de esa utilidad.
+   --------------------------------------------------------------- */
+.header-dashboard { margin-left: 68px; }
+
+/* ---------------------------------------------------------------
+   Contenido del ScrollView (contentContainerStyle)
+   contentList: gap spacing.md · paddingHorizontal spacing.md
+                paddingBottom spacing.xl
+   --------------------------------------------------------------- */
+.dash-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  padding: 0 var(--space-md) var(--space-xl);
+}
+
+/* contentEmpty: flexGrow 1 · justifyContent center · paddingBottom spacing.xl
+   `min-height: 100%` sustituye a flexGrow porque aquí el contenedor es
+   `.screen` (bloque con altura definida), no un ScrollView. */
+.dash-empty {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-bottom: var(--space-xl);
+}
+
+/* ---------------------------------------------------------------
+   HomeCard  (features/dashboard/components/HomeCard)
+   El componente es un Pressable: abre /home/[id] al pulsarlo.
+   --------------------------------------------------------------- */
+/* El Pressable raíz solo apila la cabecera de color encima del cuerpo blanco */
+.home-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.home-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  padding: var(--space-md);
+  min-height: 96px;                        /* HEADER_MIN_HEIGHT = spacing.xl * 3 */
+  border-top-left-radius: var(--radius-lg);
+  border-top-right-radius: var(--radius-lg);
+}
+
+/* headerColor = role === "MEMBER" ? colors.secondary : colors.primary */
+.home-card-header.is-owner { background: var(--primary); }
+.home-card-header.is-member { background: var(--secondary); }
+
+.home-card-header-text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.home-card-title {
+  font-size: 16px;                         /* Theme.typography.size.md */
+  font-weight: 600;
+  color: var(--on-brand);
+}
+
+/* RESPONSIBLE_TINT = rgba(255, 255, 255, 0.9) */
+.home-card-responsible {
+  font-size: 14px;                         /* Theme.typography.size.sm */
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* favoriteButton: FAVORITE_SIZE = spacing.xl + spacing.xs = 36 */
+.home-card-favorite {
+  width: 36px;
+  height: 36px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.18);   /* FAVORITE_TINT */
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--on-brand);
+}
+
+/* styles.favorited: fondo blanco y corazón en --primary */
+.home-card-favorite.is-favorite {
+  background: var(--surface);
+  color: var(--primary);
+}
+
+/* Card + styles.body: padding md, gap spacing.sm y solo los radios inferiores */
+.home-card-body {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  box-shadow: var(--shadow-sm);
+}
+
+.home-card-description { display: flex; flex-direction: column; gap: var(--space-xs); }
+
+.home-card-text {
+  font-size: 14px;                         /* Theme.typography.size.sm */
+  color: var(--text-secondary);
+}
+
+.home-card-label { font-weight: 600; color: var(--text-primary); }
+
+.home-card-toggle {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: var(--font);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--primary);
+  text-decoration: underline;
+  align-self: flex-start;
+}
+
+/* ---------------------------------------------------------------
+   DashboardEmptyState
+   --------------------------------------------------------------- */
+/* EmptyState.styles.containerFull: padding spacing.lg + paddingVertical spacing.xl,
+   o sea 24px de lado y 32px arriba/abajo. `.empty-state-full` del shell solo
+   deja 24px arriba y 32px abajo, así que se restituyen los laterales. */
+.dash-empty-state { padding: var(--space-xl) var(--space-lg); }
+
+/* IMAGE_SIZE = spacing.xl * 8 */
+.dash-empty-image {
+  width: 256px;
+  height: 256px;
+  object-fit: contain;
+}
+
+/* ---------------------------------------------------------------
+   CreateHomeModal  (formulario)
+   --------------------------------------------------------------- */
+/* <ScrollView style={{ maxHeight: height * 0.55 }}> con height = 844px
+   (marco del iPhone del shell) → 464.2px */
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  max-height: 464px;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.modal-form::-webkit-scrollbar { display: none; }
+
+/* styles.field: gap spacing.xs */
+.modal-field { display: flex; flex-direction: column; gap: var(--space-xs); }
+
+/* styles.label */
+.modal-label {
+  font-size: 14px;                         /* Theme.typography.size.sm */
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* styles.pickerWrapper + styles.picker (PICKER_HEIGHT = spacing.xl + spacing.lg) */
+.modal-picker {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  height: 56px;
+  padding: 0 var(--space-md);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--background);
+  font-size: 14px;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+/* styles.textarea: TEXTAREA_MIN_HEIGHT = spacing.xl * 3 se aplica al TextInput,
+   que va dentro del wrapper: 96px + sus 8px de padding vertical = 112px.
+   `align-items: stretch` replica textAlignVertical: "top" de React Native. */
+.modal-textarea-box { align-items: stretch; }
+
+.modal-textarea {
+  min-height: 96px;
+  resize: none;
+}
+
+/* styles.helperRow */
+.modal-helper-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-sm);
+}
+
+/* styles.examples */
+.modal-examples {
+  flex: 1;
+  font-size: 12px;                         /* Theme.typography.size.xs */
+  font-style: italic;
+  color: var(--text-secondary);
+}
+
+/* styles.counter */
+.modal-counter {
+  font-size: 12px;
+  color: var(--text-secondary);
+  text-align: right;
+}
+
+/* styles.error: Theme.typography.size.size13 */
+.modal-error { font-size: 13px; color: var(--danger); }
+
+/* ---------------------------------------------------------------
+   JoinHomeModal
+   --------------------------------------------------------------- */
+/* styles.body: alignItems center · gap spacing.md */
+.join-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+/* styles.iconCircle: ICON_CIRCLE_SIZE = spacing.xl * 2 */
+.join-icon-circle {
+  width: 64px;
+  height: 64px;
+  border-radius: 32px;
+  background: var(--primary-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary);
+}
+
+/* styles.description */
+.join-description {
+  font-size: 14px;
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+/* styles.field: width 100% · gap spacing.xs */
+.join-field {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+/* styles.hint */
+.join-hint {
+  font-size: 12px;
+  color: var(--text-secondary);
+  text-align: center;
+}

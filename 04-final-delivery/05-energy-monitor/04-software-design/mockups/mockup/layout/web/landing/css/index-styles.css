@@ -1,0 +1,543 @@
+/* =========================================
+   Variables y Reset Global
+   ========================================= */
+:root {
+  /* ── Tokens reales de la app (src/styles/global.css) ────────────── */
+  --color-primary: #0078d7;
+  --color-primary-hover: #3399ff;
+  --color-primary-dark: #0a2540;
+
+  --color-secondary: #32cd32;
+
+  --color-success: #2ecc71;
+  --color-warning: #ffd700;
+  --color-danger: #e63946;
+  --color-info: #17a2b8;
+
+  --color-background: #f8f9fa;
+  --color-background-left: #3f6bae;
+  --color-surface: #ffffff;
+  --color-gradient: #e6f0fa;
+
+  --color-text-primary: #212529;
+  --color-text-secondary: #6c757d;
+  --color-border: #e5e7eb;
+
+  --color-primary-soft: #E8F3FF;
+
+  --font-primary: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-secondary: "Poppins", "Inter", sans-serif;
+
+  /* ── Alias de este módulo (patrón self-contained por archivo) ───── */
+  --primary-blue: var(--color-primary);   /* Azul de botones y círculos */
+  --accent-green: var(--color-secondary); /* Verde de textos y logos */
+  --text-dark: var(--color-text-primary);
+  --text-gray: var(--color-text-secondary);
+  --bg-body: var(--color-background);
+  --bg-white: var(--color-surface);
+  --shadow-card: 0 8px 24px rgba(0, 0, 0, 0.08);
+  --font-family: var(--font-primary);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg-body);
+  color: var(--text-dark);
+  line-height: 1.5;
+}
+
+/* =========================================
+   1. Barra de Navegación (Header)
+   ========================================= */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 3rem;
+  background-color: var(--bg-white);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.brand img {
+  height: 44px;
+  width: auto;
+  object-fit: contain;
+}
+
+.brand span {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  white-space: nowrap;
+}
+
+.nav-center {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.nav-center a {
+  text-decoration: none;
+  color: var(--text-gray);
+  font-size: 0.95rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.nav-center a:hover {
+  color: var(--primary-blue);
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  background: none;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  padding: 6px 10px;
+  cursor: pointer;
+  color: var(--color-text-secondary);
+  font-size: 0.875rem;
+  line-height: 1;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.icon-btn:hover {
+  background: var(--color-gradient);
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.icon-btn:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Banderas del selector de idioma — assets/flags/*.svg */
+.flag {
+  width: 20px;
+  height: 13px;
+  object-fit: cover;
+  display: block;
+  flex-shrink: 0;
+  border-radius: 2px;
+  border: 1px solid var(--color-border);
+}
+
+.lang-btn .chevron { transition: transform 0.2s; }
+
+/* ── Menú desplegable de idioma (Navbar.jsx → langDropdown) ──────── */
+.lang-wrapper {
+  position: relative;
+}
+
+.lang-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 168px;
+  margin: 0;
+  padding: 6px;
+  list-style: none;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  flex-direction: column;
+  gap: 2px;
+  z-index: 200;
+  display: none; /* Mockup estático: se abre con hover o foco, sin JS */
+}
+
+.lang-wrapper:hover .lang-dropdown,
+.lang-wrapper:focus-within .lang-dropdown {
+  display: flex;
+}
+
+.lang-wrapper:hover .lang-btn .chevron,
+.lang-wrapper:focus-within .lang-btn .chevron {
+  transform: rotate(180deg);
+}
+
+.lang-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  color: var(--color-text-primary);
+  font-size: 0.875rem;
+  text-decoration: none;
+  transition: background-color 0.15s;
+}
+
+.lang-option:hover {
+  background: var(--color-gradient);
+}
+
+.lang-option.is-active {
+  background-color: var(--color-primary-soft);
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+/* Botones Generales */
+.btn {
+  padding: 0.5rem 1.25rem;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.btn-outline {
+  background: var(--bg-body);
+  border: 1px solid var(--color-border);
+  color: var(--text-dark);
+}
+
+.btn-outline:hover {
+  background-color: var(--color-border);
+}
+
+.btn-primary {
+  background: var(--primary-blue);
+  border: none;
+  color: white;
+}
+
+.btn-primary:hover {
+  filter: brightness(1.05);
+}
+
+/* =========================================
+   2. Sección Hero
+   ========================================= */
+.hero-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 5rem 3rem;
+  gap: 3rem;
+  background-color: var(--bg-white);
+}
+
+.hero-content {
+  flex: 1;
+  max-width: 600px;
+}
+
+.hero-content h1 {
+  font-size: 3.8rem;
+  line-height: 1.1;
+  font-weight: 800;
+  color: #333;
+  margin-bottom: 1.5rem;
+}
+
+/* Dos colores de énfasis, como los dos <span> del hero en Hero.jsx:
+   "consumo eléctrico" en verde (--color-secondary) y
+   "en tiempo real" en azul (--color-primary). */
+.hero-content h1 .highlight-secondary {
+  color: var(--color-secondary);
+}
+
+.hero-content h1 .highlight-primary {
+  color: var(--color-primary);
+}
+
+.hero-content p {
+  font-size: 1.2rem;
+  color: var(--text-gray);
+  margin-bottom: 2rem;
+  max-width: 500px;
+}
+
+.hero-btn {
+  display: inline-block;
+  padding: 0.8rem 2rem;
+  background-color: var(--primary-blue);
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  border-radius: 6px;
+  margin-bottom: 1.5rem;
+  transition: background-color 0.2s;
+}
+
+.hero-btn:hover {
+  filter: brightness(1.05);
+}
+
+.hero-features {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.9rem;
+  color: var(--text-gray);
+  flex-wrap: wrap;
+}
+
+.hero-features span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.hero-image {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.hero-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: var(--shadow-card);
+}
+
+/* =========================================
+   3. Títulos de Secciones Compartidos
+   ========================================= */
+.section-container {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 5rem 3rem;
+  text-align: center;
+}
+
+.section-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 0.5rem;
+}
+
+.section-subtitle {
+  font-size: 1.1rem;
+  color: var(--text-gray);
+  margin-bottom: 3rem;
+}
+
+/* =========================================
+   4. Sección: ¿Cómo Funciona?
+   ========================================= */
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.step-card {
+  background: var(--bg-white);
+  border-radius: 12px;
+  padding: 2rem 1.5rem;
+  box-shadow: var(--shadow-card);
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.step-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 1rem;
+}
+
+.step-number {
+  background: var(--primary-blue);
+  color: white;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 0.8rem;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.step-header h3 {
+  font-size: 1rem;
+  color: var(--text-dark);
+  margin: 0;
+  line-height: 1.3;
+}
+
+.step-card p {
+  font-size: 0.85rem;
+  color: var(--text-gray);
+  margin-bottom: 2rem;
+  flex-grow: 1;
+}
+
+.step-icon {
+  text-align: center;
+  color: var(--accent-green);
+  font-size: 2rem;
+  margin-top: auto;
+}
+
+.how-it-works-img {
+  max-width: 600px;
+  width: 100%;
+  margin: 0 auto;
+  display: block;
+  border-radius: 12px;
+  box-shadow: var(--shadow-card);
+}
+
+/* =========================================
+   5. Sección: ¿Por qué elegir?
+   ========================================= */
+.benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.benefit-card {
+  background: var(--bg-white);
+  border-radius: 12px;
+  padding: 2.5rem 1.5rem;
+  box-shadow: var(--shadow-card);
+  text-align: center;
+}
+
+.benefit-icon-wrapper {
+  width: 50px;
+  height: 50px;
+  background: color-mix(in srgb, var(--color-secondary) 10%, transparent);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem auto;
+  color: var(--accent-green);
+}
+
+.benefit-icon-wrapper svg {
+  width: 24px;
+  height: 24px;
+}
+
+.benefit-card h3 {
+  font-size: 1.1rem;
+  color: var(--text-dark);
+  margin-bottom: 1rem;
+}
+
+.benefit-card p {
+  font-size: 0.9rem;
+  color: var(--text-gray);
+  line-height: 1.5;
+}
+
+/* =========================================
+   6. Media Queries (Responsividad Básica)
+   ========================================= */
+@media (max-width: 1024px) {
+  /* El menú central se oculta antes de que el navbar deje de caber
+     (en la app ese espacio lo ocupa el botón hamburguesa). */
+  .nav-center {
+    display: none;
+  }
+
+  .navbar {
+    padding: 1rem 1.5rem;
+  }
+
+  .brand img {
+    height: 38px;
+  }
+
+  .nav-right {
+    gap: 0.6rem;
+  }
+
+  .hero-section {
+    flex-direction: column;
+    text-align: center;
+    padding: 3rem 1.5rem;
+  }
+
+  .hero-content h1 {
+    font-size: 3rem;
+  }
+
+  .hero-content p {
+    margin: 0 auto 2rem auto;
+  }
+
+  .hero-features {
+    justify-content: center;
+  }
+
+  .hero-image {
+    justify-content: center;
+  }
+
+  .steps-grid,
+  .benefits-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-center {
+    display: none; /* Oculta menú central en móviles */
+  }
+
+  .navbar {
+    padding: 1rem 1.5rem;
+  }
+
+  .hero-section {
+    padding: 2rem 1rem;
+  }
+
+  .steps-grid,
+  .benefits-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .section-container {
+    padding: 3rem 1rem;
+  }
+}

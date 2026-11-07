@@ -1,0 +1,785 @@
+/* =========================================
+   Home detail — EnergyMonitor mobile
+   Origen: app/home/[id].tsx · screens/HomeDetailScreen · components/{ConsumptionTab,
+   ConsumptionHistoryTab, UsersTab, DevicesTab, ThresholdsTab, HomeInfoTab} ·
+   components/layout/BottomTabBar
+   ---------------------------------------------------------------------------------
+   Los 8 archivos HTML de la pantalla comparten esta hoja: cada sección va rotulada
+   con la pestaña a la que pertenece. Lo único específico de la pantalla (encima del
+   shell) es la cabecera con el botón de volver, el cuerpo con scroll y el contenido
+   de las 6 pestañas + los 2 estados alternos.
+   ========================================= */
+
+/* =========================================
+   0. Tokens propios de la pantalla
+   Paleta fija por tipo de electrodoméstico (deviceChartColors.ts, variante light);
+   no son tokens de UI, por eso viven aquí.
+   ========================================= */
+:root {
+  --c-fridge: #2563EB;
+  --c-washer: #7C3AED;
+  --c-tv: #DB2777;
+  --c-microwave: #EA580C;
+  --c-ac: #0D9488;
+  --c-pc: #CA8A04;
+  --c-waterHeater: #DC2626;
+  --c-lighting: #65A30D;
+  --c-other: #64748B;
+
+  /* Avatar y badge de OWNER (userAvatarColors.ts): sin token en el tema. */
+  --avatar-owner-bg: #e6f1fb;
+  --avatar-owner-fg: #185fa5;
+
+  /* Tintes sin token (mismo criterio que Sidebar.styles.ts). */
+  --limit-track-tint: rgba(255, 255, 255, 0.15);
+  --limit-values-tint: rgba(255, 255, 255, 0.7);
+}
+
+/* =========================================
+   1. Pantalla — cabecera + cuerpo
+   HomeDetailScreen.styles.ts
+   ========================================= */
+.hd-screen { display: flex; flex-direction: column; }
+
+/* El header va FUERA del ScrollView de la pestaña (fijo); aquí se replica con
+   `sticky` porque el shell hace scroll de todo `.screen`. */
+.hd-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  gap: var(--space-sm);           /* la app usa spacing.sm, el shell spacing.lg */
+  margin: 0 var(--space-md) var(--space-md);   /* marginBottom md, no lg */
+}
+
+/* backButton: BACK_SIZE = spacing.xl + spacing.sm = 40 */
+.hd-back {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  border: none;
+  background: transparent;
+  color: var(--text-primary);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+/* body: cada pestaña pinta su ScrollView con este contentContainerStyle */
+.hd-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  padding: 0 var(--space-md) var(--space-xl);
+}
+
+/* Título grande de pestaña (Users / Devices / Thresholds): size.lg */
+.hd-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.hd-subtitle { font-size: 14px; color: var(--text-secondary); }
+
+/* ThresholdsTab.subtitle lleva lineHeight = size22 */
+.hd-subtitle-tall { font-size: 14px; line-height: 22px; color: var(--text-secondary); }
+
+/* Encabezado de pestaña con título + botón (DevicesTab.styles.ts) */
+.hd-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+}
+
+.hd-head-text { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: var(--space-xs); }
+
+.hd-head .btn { flex-shrink: 0; }
+
+/* =========================================
+   2. Consumo (ConsumptionTab)
+   ========================================= */
+
+/* kpiCard: borderWidth 2 + radius.lg sobre el Card por defecto (padding md) */
+.hd-kpi {
+  gap: var(--space-xs);
+  border-width: 2px;
+  border-radius: var(--radius-lg);
+}
+
+.hd-kpi-warning { border-color: var(--warning); }
+.hd-kpi-primary { border-color: var(--primary); }
+.hd-kpi-secondary { border-color: var(--secondary); }
+
+.hd-kpi-label {
+  font-size: 11px;                    /* typography.size.size11 */
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: var(--text-secondary);
+}
+
+.hd-kpi-value { font-size: 22px; font-weight: 600; color: var(--text-primary); }
+
+.hd-kpi-unit { font-size: 14px; font-weight: 500; color: var(--text-secondary); }
+
+.hd-kpi-sub { font-size: 12px; color: var(--text-secondary); }
+
+/* chartTitle / chartSubtitle / sectionTitle */
+.hd-chart-title { font-size: 14px; font-weight: 600; color: var(--text-primary); margin-bottom: 0; }
+.hd-chart-title-muted { font-weight: 400; color: var(--text-secondary); }
+.hd-chart-sub { font-size: 11px; color: var(--text-secondary); margin-bottom: var(--space-sm); }
+.hd-section-title { font-size: 14px; font-weight: 600; color: var(--text-primary); margin-bottom: var(--space-sm); }
+
+/* Gráficos esquemáticos (react-native-chart-kit): SVG/CSS reducido, sin librería.
+   El ancho real es `window.width - spacing.md × 4` = 326 px, que es justo el
+   ancho de contenido de la tarjeta. */
+.hd-chart { margin: 0; }
+.hd-chart svg { display: block; width: 100%; height: auto; }
+
+/* Pie/dona de la distribución actual */
+.hd-pie {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.hd-donut {
+  width: 96px;
+  height: 96px;
+  flex-shrink: 0;
+  border-radius: 50%;
+}
+
+.hd-pie-legend { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: var(--space-xs); }
+
+.hd-pie-legend-row { display: flex; align-items: center; gap: var(--space-xs); }
+
+.hd-dot { width: var(--space-sm); height: var(--space-sm); border-radius: 4px; flex-shrink: 0; }
+
+.hd-pie-legend-text {
+  font-size: 11px;                    /* legendFontSize del PieChart */
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Barras del "Consumo por dispositivo (ahora)" */
+.hd-bars {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+  gap: var(--space-sm);
+  height: 150px;
+  padding-top: 18px;                   /* hueco para showValuesOnTopOfBars */
+  border-bottom: 1px dashed var(--border);
+}
+
+.hd-bar-col { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; }
+
+.hd-bar-value { font-size: 11px; color: var(--text-secondary); margin-bottom: 2px; }
+
+.hd-bar { width: 100%; max-width: 39px; border-radius: 3px 3px 0 0; }
+
+.hd-bar-labels { display: flex; justify-content: space-around; gap: var(--space-sm); margin-top: var(--space-xs); }
+
+.hd-bar-label {
+  flex: 1;
+  text-align: center;
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+/* deviceLegend */
+.hd-device-legend { display: flex; flex-direction: column; gap: var(--space-xs); margin-top: var(--space-sm); }
+.hd-device-legend-row { display: flex; align-items: center; gap: var(--space-sm); }
+.hd-device-legend-text { font-size: 12px; color: var(--text-secondary); }
+
+/* LimitBar: tarjeta azul oscuro con pista y porcentaje */
+.hd-limit {
+  background: var(--primary-dark);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.hd-limit-top { display: flex; align-items: center; justify-content: space-between; }
+
+.hd-limit-label { font-size: 14px; font-weight: 600; color: var(--on-brand); }
+
+.hd-limit-pct { font-size: 14px; font-weight: 600; color: var(--secondary); }
+
+/* limitTrack: TRACK_HEIGHT = spacing.sm = 8 */
+.hd-limit-track { height: var(--space-sm); border-radius: var(--radius-sm); background: var(--limit-track-tint); overflow: hidden; }
+
+.hd-limit-fill { height: 100%; border-radius: var(--radius-sm); background: var(--secondary); }
+
+.hd-limit-values { font-size: 11px; color: var(--limit-values-tint); text-align: right; }
+
+/* =========================================
+   3. Historial (ConsumptionHistoryTab)
+   ========================================= */
+
+/* chipRow: en la app es un ScrollView horizontal sin barra visible */
+.hd-chip-row {
+  display: flex;
+  gap: var(--space-sm);
+  padding: var(--space-xs) 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.hd-chip-row::-webkit-scrollbar { display: none; }
+
+.hd-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.hd-chip-active { background: var(--primary); border-color: var(--primary); color: var(--on-brand); }
+.hd-chip-soft-active { background: var(--primary-soft); border-color: var(--primary); color: var(--primary); }
+
+.hd-date { font-size: 12px; color: var(--text-secondary); }
+
+/* Card title del módulo: size.xs bold con letter-spacing */
+.hd-card-title {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: var(--text-primary);
+  margin-bottom: var(--space-sm);
+}
+
+/* Gráfico de barras con scroll horizontal (más de 8 cubos → ancho = n × 56) */
+.hd-chart-scroll { overflow-x: auto; overflow-y: hidden; scrollbar-width: none; }
+.hd-chart-scroll::-webkit-scrollbar { display: none; }
+
+/* Eje Y fijo fuera del área desplazable (el original lo dibuja el BarChart) */
+.hd-chart-frame { display: flex; gap: var(--space-xs); }
+
+.hd-chart-axis {
+  width: 24px;
+  height: 232px;                      /* misma altura que el área de barras */
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 11px;
+  color: var(--text-secondary);
+  text-align: right;
+}
+
+.hd-chart-canvas { position: relative; height: 264px; }
+
+/* BAR_SLOT_WIDTH = spacing.xl + spacing.lg = 56 */
+.hd-chart-canvas .hd-bars { height: 232px; padding-top: 0; }
+.hd-chart-canvas .hd-bar-col { flex: 0 0 56px; }
+.hd-chart-canvas .hd-bar-label { flex: 0 0 56px; }
+
+/* Stat cards */
+.hd-stat-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: var(--text-secondary);
+}
+
+.hd-stat-value { font-size: 20px; font-weight: 600; color: var(--text-primary); margin: var(--space-xs) 0; }
+
+.hd-stat-sub { font-size: 12px; color: var(--text-secondary); }
+
+/* Ranking */
+.hd-rank-header {
+  display: flex;
+  align-items: center;
+  padding-bottom: var(--space-sm);
+  border-bottom: 1px solid var(--border);
+}
+
+.hd-rank-row {
+  display: flex;
+  align-items: center;
+  padding: var(--space-sm) 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.hd-rank-row:last-child { border-bottom: none; }
+
+.hd-rank-head-text {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.hd-rank-cell { font-size: 12px; color: var(--text-primary); }
+
+.hd-col-pos { width: var(--space-lg); flex-shrink: 0; }
+.hd-col-name { flex: 2; padding-right: var(--space-xs); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.hd-col-total { flex: 1.4; }
+.hd-col-pct { flex: 1.6; display: flex; flex-direction: column; gap: var(--space-xs); }
+
+/* track: TRACK_HEIGHT = spacing.sm - spacing.xs = 4 */
+.hd-track { height: 4px; border-radius: var(--radius-sm); background: var(--background); overflow: hidden; }
+.hd-fill { height: 100%; border-radius: var(--radius-sm); }
+
+/* =========================================
+   4. Usuarios (UsersTab)
+   ========================================= */
+
+.hd-card-header { padding: var(--space-md) var(--space-md) var(--space-sm); }
+
+.hd-block-title { font-size: 14px; font-weight: 600; color: var(--text-primary); }
+
+/* userRow */
+.hd-user-row { display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-md); }
+
+/* AVATAR_SIZE = spacing.xl + spacing.sm = 40 */
+.hd-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hd-avatar-text { font-size: 14px; font-weight: 600; }
+
+.hd-user-info { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: var(--space-xs); }
+
+.hd-user-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.hd-user-email {
+  font-size: 12px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* badge: BADGE_RADIUS = spacing.xl = 32 */
+.hd-role-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--space-xl);
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.hd-role-owner { background: var(--avatar-owner-bg); color: var(--avatar-owner-fg); }
+.hd-role-member { background: var(--success-soft); color: var(--success-text); }
+
+/* removeButton: spacing.xl = 32 */
+.hd-remove {
+  width: var(--space-xl);
+  height: var(--space-xl);
+  flex-shrink: 0;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--danger);
+  background: transparent;
+  color: var(--danger);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+/* divider: marginLeft = spacing.md + AVATAR_SIZE + spacing.sm = 64 */
+.hd-divider { height: 1px; margin-left: 64px; background: var(--border); }
+
+/* HomeInfoTab.divider: sin sangría, con marginTop = spacing.md */
+.hd-divider-flat { height: 1px; margin: var(--space-md) 0 0; background: var(--border); }
+
+/* =========================================
+   5. Dispositivos (DevicesTab)
+   ========================================= */
+
+/* deviceRow: flexDirection row · alignItems center · gap spacing.sm · padding spacing.md */
+.hd-device-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-md);
+}
+
+/* DEVICE_ICON_SIZE = spacing.xl + spacing.md = 48 */
+.hd-device-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 24px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hd-device-icon-online { background: var(--primary-soft); color: var(--primary); }
+.hd-device-icon-offline { background: var(--gradient); color: var(--text-secondary); }
+
+.hd-device-info { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: var(--space-xs); }
+
+.hd-device-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.hd-device-room {
+  font-size: 12px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.hd-device-meta { display: flex; flex-direction: column; align-items: flex-end; gap: var(--space-xs); flex-shrink: 0; }
+
+/* statusBadge: STATUS_RADIUS = spacing.xl = 32 */
+.hd-status {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--space-xl);
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.hd-status-online { background: var(--success-soft); color: var(--success-text); }
+.hd-status-offline { background: var(--danger-soft); color: var(--danger-text); }
+
+.hd-consumption { font-size: 14px; font-weight: 600; color: var(--text-primary); }
+
+/* divider: marginLeft = spacing.md + DEVICE_ICON_SIZE + spacing.sm = 72 */
+.hd-device-divider { height: 1px; margin-left: 72px; background: var(--border); }
+
+/* =========================================
+   6. Umbrales (ThresholdsTab)
+   ========================================= */
+
+/* El aviso de solo lectura (readOnly.notice) solo se pinta con isOwner = false:
+   esa variante no se maqueta, ver README → «Estados cubiertos». */
+
+/* card: gap = spacing.md (ThresholdsTab.styles.ts `card`) */
+.hd-card-stack { display: flex; flex-direction: column; gap: var(--space-md); }
+
+.hd-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+}
+
+.hd-row-left { flex: 1; min-width: 0; display: flex; align-items: flex-start; gap: var(--space-sm); }
+
+/* ROW_ICON_SIZE = spacing.xl + spacing.sm = 40 */
+.hd-row-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--primary-soft);
+  color: var(--primary);
+}
+
+.hd-row-text { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: var(--space-xs); }
+
+.hd-row-title { font-size: 14px; font-weight: 600; color: var(--text-primary); }
+
+.hd-row-hint { font-size: 12px; line-height: 18px; color: var(--text-secondary); }
+
+.hd-row-right { display: flex; align-items: center; gap: var(--space-sm); flex-shrink: 0; }
+
+.hd-periodicity { font-size: 12px; font-weight: 600; color: var(--primary); }
+
+/* Badge de ThresholdsTab: padding 2 / spacing.sm + spacing.xs, radio spacing.xl */
+.hd-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px var(--space-md);
+  border-radius: var(--space-xl);
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.hd-badge-success { background: var(--success-soft); color: var(--success-text); }
+.hd-badge-neutral { background: var(--background); color: var(--text-secondary); }
+.hd-badge-info { background: var(--info-soft); color: var(--info-text); }
+
+.hd-hairline { height: 1px; background: var(--border); }
+
+.hd-fields { display: flex; flex-direction: column; gap: var(--space-md); }
+
+.hd-field { display: flex; flex-direction: column; gap: var(--space-xs); }
+
+.hd-field-head { display: flex; align-items: center; justify-content: space-between; gap: var(--space-sm); }
+
+.hd-field-label { font-size: 14px; font-weight: 600; color: var(--text-primary); }
+
+.hd-input-row { display: flex; align-items: center; gap: var(--space-sm); }
+
+.hd-input-row .input-wrapper { flex: 1; min-width: 0; }
+
+.hd-unit { font-size: 14px; color: var(--text-secondary); flex-shrink: 0; }
+
+/* Input no editable: el color lo pone ThresholdsTab.styles.ts `inputDisabled` */
+.input.is-disabled { color: var(--text-secondary); }
+
+/* errorSlot: minHeight = size13 + 2 = 15 (reservado para que el scroll no salte) */
+.hd-error-slot { min-height: 15px; }
+
+.hd-info-note { display: flex; align-items: flex-start; gap: var(--space-xs); }
+
+.hd-info-note-text { flex: 1; font-size: 12px; line-height: 18px; color: var(--text-secondary); }
+
+/* =========================================
+   7. Hogar (HomeInfoTab)
+   ========================================= */
+
+.hd-card-title-row { display: flex; align-items: center; gap: var(--space-sm); }
+
+.hd-card-title { font-size: 14px; font-weight: 600; color: var(--text-primary); }
+
+/* field: gap xs + marginTop md */
+.hd-field-block { display: flex; flex-direction: column; gap: var(--space-xs); margin-top: var(--space-md); }
+
+.hd-field-label-sm {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.hd-value { font-size: 14px; color: var(--text-primary); }
+
+.hd-value-muted { font-size: 14px; color: var(--text-secondary); }
+
+.hd-type-badge {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  gap: var(--space-xs);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--space-xl);
+  background: var(--primary-soft);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--primary);
+}
+
+.hd-hint { font-size: 14px; color: var(--text-secondary); margin-top: var(--space-xs); }
+
+/* codeBox */
+.hd-code-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  margin-top: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--background);
+}
+
+.hd-code-text {
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: var(--text-primary);
+}
+
+/* copyButton: está `disabled` en la app (falta expo-clipboard) → opacity 0.5 */
+.hd-copy {
+  width: var(--space-xl);
+  height: var(--space-xl);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-secondary);
+  opacity: 0.5;
+  cursor: default;
+}
+
+.hd-action-row { margin-top: var(--space-md); }
+
+/* ownerRow */
+.hd-owner-row { display: flex; align-items: center; gap: var(--space-md); margin-top: var(--space-md); }
+
+.hd-owner-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--avatar-owner-bg);
+}
+
+.hd-owner-initials { font-size: 14px; font-weight: 600; color: var(--avatar-owner-fg); }
+
+.hd-owner-meta { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: var(--space-xs); }
+
+.hd-owner-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.hd-owner-badge {
+  align-self: flex-start;
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--space-xl);
+  background: var(--avatar-owner-bg);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--avatar-owner-fg);
+}
+
+.hd-value-with-icon { display: flex; align-items: center; gap: var(--space-xs); }
+
+/* =========================================
+   8. Modal «Vincular dispositivo» (LinkDeviceModal)
+   ========================================= */
+
+/* El cuerpo de la app es un ScrollView con maxHeight = window.height × 0.62. */
+.ld-body {
+  padding: var(--space-lg);
+  overflow-y: auto;
+  max-height: 430px;
+  scrollbar-width: none;
+}
+
+.ld-body::-webkit-scrollbar { display: none; }
+
+.ld-content { display: flex; flex-direction: column; gap: var(--space-sm); padding-bottom: var(--space-xs); }
+
+/* notice: aviso de que falta el paso por Bluetooth */
+.ld-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-xs);
+  padding: var(--space-sm);
+  border-radius: var(--radius-md);
+  background: var(--warning-soft);
+}
+
+.ld-notice-icon { color: var(--warning-text); margin-top: 1px; flex-shrink: 0; }
+
+.ld-notice-text { flex: 1; font-size: 12px; line-height: 13px; color: var(--warning-text); }
+
+.ld-block-label { font-size: 14px; font-weight: 600; color: var(--text-primary); }
+
+.ld-field { display: flex; flex-direction: column; gap: var(--space-xs); }
+
+.ld-hint { font-size: 12px; line-height: 13px; color: var(--text-secondary); }
+
+.ld-error { font-size: 13px; color: var(--danger-text); }
+
+/* errorSlot: minHeight = size13 + 2 = 15 */
+.ld-error-slot { min-height: 15px; }
+
+/* applianceGrid: flexBasis 47% → 2 columnas */
+.ld-grid { display: flex; flex-wrap: wrap; gap: var(--space-sm); }
+
+.ld-option {
+  flex: 0 0 calc(50% - 4px);          /* flexBasis "47%", redondeado a 2 columnas */
+  min-height: 96px;                   /* ICON_SIZE × 2 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  padding: var(--space-sm);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  position: relative;
+  cursor: pointer;
+}
+
+.ld-option-selected { border-color: var(--primary); background: var(--card-selected); }
+
+/* APPLIANCE_ICON_SIZE = spacing.xl + spacing.md + spacing.xs = 52 */
+.ld-option-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--primary-soft);
+  color: var(--primary);
+}
+
+.ld-option-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-primary);
+  text-align: center;
+  line-height: 14px;
+}
+
+.ld-option-check { position: absolute; top: var(--space-sm); right: var(--space-sm); color: var(--primary); }
+
+/* Picker de habitación */
+.ld-picker {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  height: 56px;                        /* PICKER_HEIGHT = spacing.xl + spacing.lg */
+  padding: 0 var(--space-md);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--background);
+  color: var(--text-primary);
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.ld-modal-footer .btn { flex: 1; }

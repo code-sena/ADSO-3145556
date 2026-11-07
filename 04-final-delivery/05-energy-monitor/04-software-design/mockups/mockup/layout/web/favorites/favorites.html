@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EnergyMonitor - Favoritos</title>
+  <meta name="description" content="Tus hogares marcados como favoritos aparecen aquí para que los encuentres de forma rápida.">
+  <!-- Favicon (versión vector del logo del proyecto) -->
+  <link rel="icon" type="image/svg+xml" href="../../../../assets/icons/favicon.svg">
+  <!-- Tipografías de la app: Inter (UI) + Poppins (titulares) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap">
+  <link rel="stylesheet" href="css/favorites-styles.css">
+</head>
+<body>
+  <div class="app-shell">
+
+    <!-- SIDEBAR (MainLayout → Sidebar) -->
+    <aside class="sidebar">
+      <div class="sidebar-top">
+        <button class="sidebar-toggle" aria-label="Colapsar menú">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+        <div class="sidebar-brand">
+          <img src="../../../../assets/logos/project_logo.png" alt="EnergyMonitor">
+          <span>EnergyMonitor</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="#" class="sidebar-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+          <span>Inicio</span>
+        </a>
+
+        <button class="sidebar-item sidebar-group-toggle" type="button">
+          <span class="toggle-left">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 16.9A5 5 0 0 0 18 7h-1.26a8 8 0 1 0-11.62 9"></path><path d="M12 12v4"></path><path d="M12 16h.01"></path></svg>
+            <span>Hogares</span>
+          </span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="18 15 12 9 6 15"></polyline></svg>
+        </button>
+        <!-- Los hogares del grupo apuntan a "#": desde fuera del módulo home-detail
+             no se replica la ruta real (/homes/:idHome). -->
+        <div class="sidebar-homes">
+          <a href="#" class="sidebar-home"><span class="home-avatar">C</span><span>Casa Principal</span></a>
+          <a href="#" class="sidebar-home"><span class="home-avatar">A</span><span>Apartamento 502</span></a>
+        </div>
+
+        <a href="favorites.html" class="sidebar-item active">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.8 1-1a5.5 5.5 0 0 0 0-7.8z"></path></svg>
+          <span>Favoritos</span>
+        </a>
+        <a href="../notifications/notifications.html" class="sidebar-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+          <span>Notificaciones</span>
+        </a>
+        <a href="../settings/settings.html" class="sidebar-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+          <span>Ajustes</span>
+        </a>
+      </nav>
+
+      <!-- El destino real es ../account/account.html; ese módulo todavía no está mockupeado. -->
+      <a href="#" class="sidebar-profile">
+        <span class="profile-avatar">
+          <img src="../../../../assets/images/mockup-assets/perfil.png" alt="Foto de perfil">
+        </span>
+        <span class="profile-info">
+          <span class="profile-name">User 1</span>
+        </span>
+        <button class="profile-more" aria-label="Más opciones">⋯</button>
+      </a>
+    </aside>
+
+    <main class="main-content">
+
+      <!-- CABECERA (design/components/Header + BreadCrumb) -->
+      <header class="page-header">
+        <nav class="breadcrumb">
+          <!-- i18n favorites → favorites.breadcrumb.home -->
+          <a href="#">Inicio</a>
+          <!-- Separador: ChevronRight de lucide, 20px (BreadCrumb.jsx) -->
+          <svg class="breadcrumb-sep" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
+          <!-- i18n favorites → favorites.breadcrumb.current -->
+          <span class="breadcrumb-current">Favoritos</span>
+        </nav>
+      </header>
+
+      <!-- ENCABEZADO DE PÁGINA (Favorites.jsx → styles.hero) -->
+      <section class="hero">
+        <!-- i18n favorites → favorites.title -->
+        <h1 class="hero-title">Favoritos</h1>
+        <!-- i18n favorites → favorites.subtitle -->
+        <p class="hero-subtitle">Tus hogares marcados como favoritos aparecen aquí para que los encuentres de forma rápida.</p>
+      </section>
+
+      <!-- RECUADRO DE TARJETAS (Favorites.jsx → styles.gridBox / styles.grid) -->
+      <div class="grid-box">
+        <div class="grid">
+
+          <!-- TARJETA 1 — Propietario (cabecera --color-primary).
+               La descripción supera los 150 caracteres (DESCRIPTION_LIMIT en HomeCard.jsx),
+               así que va recortada a 2 líneas con el botón "Ver más". -->
+          <a href="../home-detail/owner/home.html" class="home-card" aria-label="Abrir hogar Casa Principal">
+            <div class="home-card-header is-owner">
+              <div class="home-card-header-text">
+                <h3 class="home-card-title">Casa Principal</h3>
+                <!-- i18n homeCard → owner -->
+                <p class="home-card-role">Propietario</p>
+              </div>
+              <!-- Corazón marcado como favorito: fondo blanco, corazón en --color-primary.
+                   Es un <span role="button"> porque la tarjeta entera es un <a> (en la app
+                   es un div[role=button] con navigate(), y el corazón un <button> real). -->
+              <span class="favorite-button is-favorite" role="button" tabindex="0" aria-label="Quitar favorito">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg>
+              </span>
+            </div>
+
+            <div class="home-card-body-card">
+              <div class="home-card-body">
+                <p><strong>Dirección: </strong>Cra. 45 # 18-32, Medellín</p>
+                <div class="description-wrapper">
+                  <!-- description.slice(0, 150) + "…" (HomeCard.jsx), con .clamped de 2 líneas -->
+                  <p class="home-card-description clamped"><strong>Descripción: </strong>Casa unifamiliar de dos pisos en el barrio Los Alpes, con panel solar de 4 kWp y medición independiente por circuito. Los datos se reportan cada cinco…</p>
+                  <!-- i18n homeCard → showMore — <span role="button"> porque vive dentro del <a> de la tarjeta -->
+                  <span class="description-toggle" role="button" tabindex="0">Ver más</span>
+                </div>
+              </div>
+            </div>
+          </a>
+
+          <!-- TARJETA 2 — Propietario (cabecera --color-primary), descripción corta -->
+          <a href="../home-detail/owner/home.html" class="home-card" aria-label="Abrir hogar Apartamento 502">
+            <div class="home-card-header is-owner">
+              <div class="home-card-header-text">
+                <h3 class="home-card-title">Apartamento 502</h3>
+                <!-- i18n homeCard → owner -->
+                <p class="home-card-role">Propietario</p>
+              </div>
+              <span class="favorite-button is-favorite" role="button" tabindex="0" aria-label="Quitar favorito">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg>
+              </span>
+            </div>
+
+            <div class="home-card-body-card">
+              <div class="home-card-body">
+                <p><strong>Dirección: </strong>Calle 10 # 52-30, Bogotá</p>
+                <div class="description-wrapper">
+                  <!-- Descripción corta: sin recorte y sin botón "Ver más" -->
+                  <p class="home-card-description"><strong>Descripción: </strong>Apartamento en el piso 5 de un edificio residencial, medido con un módulo por circuito.</p>
+                </div>
+              </div>
+            </div>
+          </a>
+
+          <!-- TARJETA 3 — Miembro (cabecera --color-secondary), descripción corta -->
+          <a href="../home-detail/member/home.html" class="home-card" aria-label="Abrir hogar Casa de campo">
+            <div class="home-card-header is-member">
+              <div class="home-card-header-text">
+                <h3 class="home-card-title">Casa de campo</h3>
+                <!-- i18n homeCard → member -->
+                <p class="home-card-role">Miembro</p>
+              </div>
+              <span class="favorite-button is-favorite" role="button" tabindex="0" aria-label="Quitar favorito">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg>
+              </span>
+            </div>
+
+            <div class="home-card-body-card">
+              <div class="home-card-body">
+                <p><strong>Dirección: </strong>Vereda El Retiro, Envigado</p>
+                <div class="description-wrapper">
+                  <p class="home-card-description"><strong>Descripción: </strong>Finca de descanso familiar a la que tengo acceso como miembro invitado.</p>
+                </div>
+              </div>
+            </div>
+          </a>
+
+        </div>
+      </div>
+
+    </main>
+  </div>
+</body>
+</html>

@@ -1,0 +1,30 @@
+/* =========================================
+   Homes (placeholder) — EnergyMonitor mobile
+   Origen: src/app/homes.tsx
+   ========================================= */
+
+/* styles.container: flex 1 · alignItems/justifyContent center
+                    gap spacing.sm · padding spacing.md */
+.homes-placeholder {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  padding: var(--space-md);
+}
+
+/* styles.title: Theme.typography.size.lg · weight.bold */
+.homes-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* styles.subtitle: Theme.typography.size.sm · textAlign center */
+.homes-subtitle {
+  font-size: 14px;
+  color: var(--text-secondary);
+  text-align: center;
+}

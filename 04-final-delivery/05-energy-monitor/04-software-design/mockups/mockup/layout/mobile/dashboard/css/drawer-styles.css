@@ -1,0 +1,34 @@
+/* =========================================
+   Drawer abierto — EnergyMonitor mobile
+   Origen: components/layout/Sidebar/Sidebar.tsx
+           + Sidebar.styles.ts + NavHomes.tsx
+   El resto de clases (.drawer, .drawer-item, .drawer-profile…) ya están en el shell.
+   ========================================= */
+
+/* Sidebar.tsx: `{!isOpen ? <Pressable style={styles.trigger} … /> : null}`
+   El botón hamburguesa no se monta mientras el drawer está abierto. */
+.drawer-open-screen .drawer-trigger { display: none; }
+
+/* styles.profileName y styles.homeName llevan numberOfLines={1} */
+.drawer-profile-name,
+.drawer-home-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* NavHomes: el grupo "Hogares" no marca estado activo en /dashboard
+   (active = pathname === "/homes" || pathname.startsWith("/home/")), pero su lista
+   desplegada sí se puede abrir desde cualquier ruta. */
+.drawer-homes-toggle {
+  border: none;
+  background: none;
+  font-family: var(--font);
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+}
+
+/* El desplegable del perfil se pinta por encima del overlay del propio drawer
+   (styles.dropdown zIndex 2 frente a styles.drawer zIndex 999 sobre el overlay). */
+.drawer-profile { z-index: 3; }

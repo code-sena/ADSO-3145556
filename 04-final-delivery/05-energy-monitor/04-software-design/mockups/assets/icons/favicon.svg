@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48" role="img" aria-label="EnergyMonitor">
+  <title>EnergyMonitor</title>
+
+  <!-- Cable / arco azul: el mismo trazo en C que en logo_proyecto.png -->
+  <path d="M12.9 19.7 A 12.5 12.5 0 1 0 33.2 34.2"
+        fill="none" stroke="#0078D7" stroke-width="6" stroke-linecap="round"/>
+
+  <!-- Barras verdes de consumo (crecen hacia la derecha) -->
+  <rect x="21" y="22" width="5" height="9"  rx="2.5" fill="#32CD32"/>
+  <rect x="27.5" y="16" width="5" height="15" rx="2.5" fill="#32CD32"/>
+  <rect x="34" y="10" width="5" height="21" rx="2.5" fill="#32CD32"/>
+
+  <!-- Enchufe azul con sus dos pines -->
+  <g transform="rotate(-45 13 13)">
+    <rect x="6" y="9" width="14" height="10" rx="3.2" fill="#0078D7"/>
+    <rect x="9"  y="4.5" width="3.2" height="6" rx="1.6" fill="#0078D7"/>
+    <rect x="13.8" y="4.5" width="3.2" height="6" rx="1.6" fill="#0078D7"/>
+  </g>
+</svg>
