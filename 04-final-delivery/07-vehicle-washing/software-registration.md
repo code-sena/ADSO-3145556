@@ -79,7 +79,7 @@ Authors are the instructors and the apprentices listed in `team-roster.md`. Each
 | If derived, base work / Si es derivada, obra de base | Not applicable / No aplica |
 | Type of work / Clase de obra | ☐ Individual ☒ In collaboration / En colaboración ☐ Collective / Colectiva ☐ Anonymous / Anónima ☐ Pseudonymous / Seudónima ☐ Posthumous / Póstuma |
 | Publication / Publicación | ☐ Unpublished / Inédita ☒ Published / Publicada |
-| If published, date and place / Si está publicada, fecha y lugar | The source code is in public GitHub repositories (listed in `code-tag/README.md`) and the system runs on Azure at https://lavarapidovehicular.northcentralus.cloudapp.azure.com. The Centro decides the final declaration. / El código está en repositorios públicos de GitHub (relacionados en `code-tag/README.md`) y el sistema corre en Azure en esa URL. El Centro define la declaración final. |
+| If published, date and place / Si está publicada, fecha y lugar | 2026-11-05, Colombia: public GitHub repositories listed in `code-tag/README.md` (version `final-delivery-2026`) and the system running at https://lavarapidovehicular.northcentralus.cloudapp.azure.com / 2026-11-05, Colombia: repositorios públicos de GitHub relacionados en `code-tag/README.md` (versión `final-delivery-2026`) y el sistema en funcionamiento en esa URL |
 
 Software is treated as unpublished unless the rights holder states otherwise (art. 4). A public repository may count as publication: the team records it here, and the Centro decides the final declaration.
 
