@@ -1,0 +1,38 @@
+@startuml CU-06_acceso_compartido
+!include _estilo.iuml
+title CU-06 · Acceso compartido: invitado y colaborador (E9, E10)
+left to right direction
+
+actor "Dueño" as DU
+actor "Usuario base" as UB
+actor "Colaborador" as CO
+actor "Invitado\n(anónimo)" as IN
+actor "Servidor de correo" as MAIL <<sistema>>
+CO -|> UB
+rectangle "E9 · Invitado anónimo" {
+  usecase "Generar enlace de\nacceso (HU-039)" as G1
+  usecase "Revocar enlace" as G1b
+  usecase "Ver consumo como\ninvitado (HU-040)" as G2
+  usecase "Restringir a solo\nlectura (HU-041)" as G3
+}
+rectangle "E10 · Colaborador" {
+  usecase "Invitar colaborador\npor correo (HU-042)" as K1
+  usecase "Aceptar invitación\n(HU-043)" as K2
+  usecase "Definir permisos\n(HU-044)" as K3
+  usecase "Ejecutar acciones según\npermisos (HU-045)" as K4
+  usecase "Revocar acceso\n(HU-046)" as K5
+  usecase "Recibir alertas\ndel lugar (HU-047)" as K6
+}
+DU --> G1
+DU --> K1
+DU --> K3
+DU --> K5
+G1b ..> G1 : <<extend>>
+IN --> G2
+G2 ..> G3 : <<include>>
+UB --> K2
+CO --> K4
+CO --> K6
+K1 ..> K3 : <<include>>
+K1 --> MAIL
+@enduml

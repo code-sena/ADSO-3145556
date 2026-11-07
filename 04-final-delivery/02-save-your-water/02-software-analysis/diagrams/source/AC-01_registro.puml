@@ -1,0 +1,35 @@
+@startuml AC-01_registro
+!include _estilo.iuml
+title AC-01 · Actividad: registro y verificación de la cuenta (HU-001, HU-002)
+
+|Visitante|
+start
+:Abrir "Crear cuenta";
+:Ingresar nombres, apellidos, correo,\nteléfono (opcional) y contraseña;
+:Aceptar términos y tratamiento de datos;
+|Sistema|
+if (¿Datos válidos y contraseña cumple\nla política (8-128, mayúscula,\nnúmero y símbolo)?) then (no)
+  :Mostrar el error junto al campo;
+  |Visitante|
+  :Corregir datos;
+  stop
+endif
+|Sistema|
+if (¿Correo o teléfono ya registrado?) then (sí)
+  :Informar que ya existe una cuenta;
+  stop
+endif
+:Crear usuario sin verificar\ncon rol USER;
+:Generar código (vigencia 24 h)\ny enviarlo por correo;
+|Visitante|
+repeat
+  :Escribir el código recibido;
+  |Sistema|
+  backward:Pedir otro código\n(espera mínima 60 s);
+repeat while (¿Código correcto y vigente?) is (no, quedan intentos)
+->sí;
+:Marcar la cuenta como verificada;
+|Visitante|
+:Iniciar sesión;
+stop
+@enduml

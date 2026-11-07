@@ -1,0 +1,38 @@
+@startuml CO-02_integracion
+!include _estilo.iuml
+title CO-02 · Integración entre microservicios (eventos y llamadas internas)
+left to right direction
+skinparam linetype polyline
+skinparam nodesep 50
+skinparam ranksep 110
+skinparam ArrowThickness 1.6
+
+[Medidor ESP32] as FW
+queue "Mosquitto (MQTT)" as BRK
+[ms-device] as DEV
+queue "RabbitMQ\nexchange sywater.events" as MQ
+[ms-consumption] as CON
+[ms-valve] as VAL
+[ms-notification] as NOT
+[ms-iam] as IAM
+[ms-places] as PL
+
+FW -[bold]-> BRK : telemetry\nheartbeat\nvalve/state
+BRK -[bold]-> DEV
+DEV -[plain]-> MQ : device.linked / unlinked\ndevice.reading.received\ndevice.valve.reported
+MQ -[plain]-> CON : lecturas
+MQ -[plain]-> VAL : estado de válvula
+MQ -[plain]-> NOT : alertas
+
+VAL .> DEV : enviar orden\n(valve/set)
+VAL .> IAM : verificar código\nde acción
+NOT .> IAM : contacto\ndel usuario
+DEV .> PL : dueño del lugar
+
+legend right
+  |= Línea |= Conexión |
+  | gruesa | MQTT |
+  | continua | Evento AMQP (asíncrono) |
+  | punteada | HTTP interno /internal/** con X-Internal-Key |
+endlegend
+@enduml

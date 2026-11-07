@@ -1,0 +1,381 @@
+<!DOCTYPE html><html class="light" lang="es" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Editar Lugar - Cuida Tu Agua</title>
+<!-- Google Fonts & Material Symbols -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS v3 with Plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "tertiary-fixed": "#a7edff",
+            "background": "#f8f9ff",
+            "inverse-surface": "#213145",
+            "surface-canvas": "#F8FBFD",
+            "status-success": "#10B981",
+            "on-tertiary-fixed": "#001f25",
+            "on-primary-fixed": "#001e2c",
+            "surface-container-low": "#eff4ff",
+            "on-tertiary": "#ffffff",
+            "tertiary-container": "#008094",
+            "status-warning": "#F59E0B",
+            "secondary": "#315ca9",
+            "primary-fixed-dim": "#77d1ff",
+            "on-secondary-fixed": "#001a42",
+            "surface-container": "#e5eeff",
+            "surface-bright": "#f8f9ff",
+            "error-container": "#ffdad6",
+            "error": "#ba1a1a",
+            "surface-tint": "#006688",
+            "on-background": "#0b1c30",
+            "outline-variant": "#bdc8d0",
+            "on-primary": "#ffffff",
+            "primary": "#006385",
+            "on-tertiary-fixed-variant": "#004e5b",
+            "on-error": "#ffffff",
+            "status-danger": "#EF4444",
+            "surface-container-highest": "#d3e4fe",
+            "tertiary": "#006575",
+            "surface-container-high": "#dce9ff",
+            "surface-subtle": "#F2F2F2",
+            "inverse-on-surface": "#eaf1ff",
+            "primary-fixed": "#c2e8ff",
+            "primary-container": "#007ea7",
+            "surface-dim": "#cbdbf5",
+            "on-secondary-container": "#033e8a",
+            "on-tertiary-container": "#f8fdff",
+            "secondary-container": "#86adff",
+            "surface": "#f8f9ff",
+            "inverse-primary": "#77d1ff",
+            "surface-container-lowest": "#ffffff",
+            "on-secondary": "#ffffff",
+            "on-error-container": "#93000a",
+            "surface-card": "#FFFFFF",
+            "on-primary-fixed-variant": "#004d68",
+            "secondary-fixed-dim": "#aec6ff",
+            "on-secondary-fixed-variant": "#0f4490",
+            "on-surface": "#0b1c30",
+            "tertiary-fixed-dim": "#58d6f1",
+            "secondary-fixed": "#d8e2ff",
+            "on-surface-variant": "#3e484f",
+            "border-subtle": "#E2E8F0",
+            "surface-variant": "#d3e4fe",
+            "on-primary-container": "#fbfcff",
+            "outline": "#6e787f"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "margin": "2.5rem",
+            "space-md": "1rem",
+            "space-lg": "1.5rem",
+            "space-sm": "0.75rem",
+            "gutter": "2rem",
+            "space-xl": "3rem",
+            "space-xs": "0.5rem"
+          },
+          "fontFamily": {
+            "caption": ["Manrope"],
+            "display-hero": ["Manrope"],
+            "headline-lg": ["Manrope"],
+            "body-md": ["Manrope"],
+            "telemetry-md": ["IBM Plex Mono"],
+            "telemetry-sm": ["IBM Plex Mono"],
+            "headline-md": ["Manrope"],
+            "body-lg": ["Manrope"],
+            "headline-sm": ["Manrope"],
+            "telemetry-lg": ["IBM Plex Mono"],
+            "body-bold": ["Manrope"]
+          },
+          "fontSize": {
+            "caption": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+            "display-hero": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+            "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.015em", "fontWeight": "700" }],
+            "body-md": ["14px", { "lineHeight": "22px", "fontWeight": "400" }],
+            "telemetry-md": ["16px", { "lineHeight": "24px", "fontWeight": "500" }],
+            "telemetry-sm": ["12px", { "lineHeight": "18px", "letterSpacing": "0.04em", "fontWeight": "400" }],
+            "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "body-lg": ["16px", { "lineHeight": "26px", "fontWeight": "400" }],
+            "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+            "telemetry-lg": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "body-bold": ["14px", { "lineHeight": "22px", "fontWeight": "600" }]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    body {
+      background-color: #F8FBFD;
+      font-family: 'Manrope', sans-serif;
+      color: #0b1c30;
+      -webkit-font-smoothing: antialiased;
+    }
+    .custom-shadow {
+      box-shadow: 0 1px 3px 0 rgba(2, 62, 138, 0.04), 0 1px 2px -1px rgba(2, 62, 138, 0.04);
+    }
+  </style>
+</head>
+<body class="bg-surface-canvas min-h-screen flex flex-col justify-between selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- TOP APP BAR (Shared Component JSON faithfully rendered) -->
+<header class="bg-surface-card dark:bg-inverse-surface shadow-sm border-b border-border-subtle dark:border-outline-variant w-full sticky top-0 z-50">
+<div class="w-full h-16 max-w-[1600px] mx-auto px-margin flex items-center justify-between">
+<!-- Brand & Left Cluster -->
+<div class="flex items-center gap-8">
+<a class="text-headline-sm font-headline-sm font-bold text-primary dark:text-inverse-primary flex items-center gap-space-xs tracking-tight" href="#">
+<img src="https://lh3.googleusercontent.com/aida/AEtjO1XAcgthymaBhgC79CLgZ-JHDDgjQOYchvRT0V2DWvR8itykSJq8TomWpRo9f6a8jWciEUzK1Qy-E0bIvaij8pnV2XJqwi93Mp2b7sn0_8_KFrbXPdEdlYthqXTckR7007DKMAH0Uxrtd2HgvCd1qqmUrbQ5VhN0kqprCaFCkPDRmavj_qJSN5AYhRHwtqobOqKuDaGs4Lr5VnecwnnZvrGjDWxLEnVN9wCEr60XV50AogOIu_oG---Dma8" alt="Cuida Tu Agua" class="w-7 h-7 object-contain inline-block shrink-0">
+<span class="">Cuida Tu Agua</span>
+</a>
+<!-- Desktop Navigation: Active mapping is Lugares -->
+<nav class="hidden md:flex items-center h-16 space-x-1">
+<a class="text-primary dark:text-inverse-primary font-body-bold border-b-2 border-primary dark:border-inverse-primary h-full flex items-center px-space-sm transition-colors duration-150" href="#">
+            Lugares
+          </a>
+<a class="text-on-surface-variant dark:text-outline-variant font-body-md h-full flex items-center px-space-sm hover:text-primary dark:hover:text-inverse-primary hover:bg-surface-container-low dark:hover:bg-surface-variant transition-colors duration-150" href="#">
+            Dispositivos
+          </a>
+<a class="text-on-surface-variant dark:text-outline-variant font-body-md h-full flex items-center px-space-sm hover:text-primary dark:hover:text-inverse-primary hover:bg-surface-container-low dark:hover:bg-surface-variant transition-colors duration-150" href="#">
+            Alertas
+          </a>
+<a class="text-on-surface-variant dark:text-outline-variant font-body-md h-full flex items-center px-space-sm hover:text-primary dark:hover:text-inverse-primary hover:bg-surface-container-low dark:hover:bg-surface-variant transition-colors duration-150" href="#">
+            Configuración
+          </a>
+</nav>
+</div>
+<!-- Trailing Actions Cluster -->
+<div class="flex items-center gap-space-md">
+<!-- Icon Actions -->
+<button aria-label="Notificaciones" class="w-10 h-10 rounded-lg flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors duration-150 cursor-pointer active:scale-95" type="button">
+<span class="material-symbols-outlined text-xl">notifications</span>
+</button>
+<button aria-label="Ayuda" class="w-10 h-10 rounded-lg flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors duration-150 cursor-pointer active:scale-95" type="button">
+<span class="material-symbols-outlined text-xl">help_outline</span>
+</button>
+<div class="h-6 w-[1px] bg-border-subtle mx-1 hidden sm:block"></div>
+<!-- Trailing Primary Action -->
+<button class="hidden sm:inline-flex items-center gap-2 px-space-md h-10 bg-primary hover:bg-on-secondary-container text-on-primary font-body-bold text-body-md rounded-lg transition-colors duration-150 shadow-sm cursor-pointer active:scale-95" type="button">
+<span class="material-symbols-outlined text-lg">add_location_alt</span>
+<span class="">Nuevo Lugar</span>
+</button>
+<!-- User Profile Avatar -->
+<div class="flex items-center pl-2">
+<div class="w-9 h-9 rounded-full bg-primary-fixed flex items-center justify-center text-primary font-body-bold text-xs border border-primary-container/20 cursor-pointer ring-2 ring-transparent hover:ring-primary/20 transition-all duration-150" title="Foto de perfil del usuario administrador">
+            AD
+          </div>
+</div>
+</div>
+</div>
+</header>
+<!-- MAIN CANVAS -->
+<main class="flex-grow w-full max-w-[1600px] mx-auto px-margin py-8 flex-1 flex flex-col">
+<!-- Header de Navegación -->
+<section class="max-w-[1180px] mx-auto px-4 sm:px-6">
+  <div class="flex items-center justify-between mb-4">
+    <a class="inline-flex items-center gap-2 text-on-surface-variant hover:text-primary transition-colors duration-150 font-body-bold text-body-md group cursor-pointer" href="#">
+      <span class="material-symbols-outlined text-lg group-hover:-translate-x-1 transition-transform duration-150">arrow_back</span>
+      <span class="">Volver al lugar</span>
+    </a>
+    <div class="flex items-center gap-2">
+      <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 text-status-success font-telemetry-sm text-telemetry-sm font-medium border border-emerald-200">
+        <span class="w-1.5 h-1.5 rounded-full bg-status-success"></span>
+        Online
+      </span>
+      <span class="font-telemetry-sm text-telemetry-sm uppercase px-2.5 py-1 rounded-full bg-surface-container text-secondary font-medium tracking-wider">ID: LOC-8921</span>
+    </div>
+  </div>
+
+  <div class="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 border-b border-border-subtle pb-4">
+    <div>
+      <h1 class="font-['Manrope'] font-bold text-headline-md leading-[32px] text-on-surface tracking-tight">Editar Lugar</h1>
+      <p class="font-body-md text-body-md text-on-surface-variant mt-0.5">Actualice los parámetros de ubicación e información de monitoreo para esta infraestructura.</p>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+    <!-- Columna Principal: Formulario de Edición (8 cols) -->
+    <div class="lg:col-span-8 bg-surface-card rounded-xl border border-border-subtle p-6 sm:p-8 custom-shadow">
+      <div class="flex items-center justify-between pb-4 mb-6 border-b border-border-subtle">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-lg bg-surface-container-low flex items-center justify-center text-primary">
+            <span class="material-symbols-outlined text-xl">edit_location</span>
+          </div>
+          <div>
+            <h2 class="font-['Manrope'] font-bold text-body-bold text-on-surface">Datos del Lugar</h2>
+            <p class="font-caption text-caption text-on-surface-variant">Identificación y parámetros de georreferencia</p>
+          </div>
+        </div>
+        <span class="text-caption font-caption text-secondary bg-surface-container px-2 py-0.5 rounded">Edición activa</span>
+      </div>
+
+      <form id="edit-place-form" onsubmit="event.preventDefault();">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label class="block font-telemetry-sm text-[12px] font-medium text-[#64748B] mb-2 uppercase tracking-wide" for="place-name">Nombre del Lugar</label>
+            <div class="relative">
+              <input class="w-full h-[48px] px-4 rounded-lg bg-surface-card border border-border-subtle font-['Manrope'] font-medium text-body-md text-on-surface focus:outline-none focus:border-[#0096C7] focus:ring-2 focus:ring-[#0096C7]/20 transition-all duration-150" id="place-name" name="place-name" required="" type="text" value="Casa Principal">
+              <span class="material-symbols-outlined absolute right-3.5 top-1/2 -translate-y-1/2 text-outline-variant text-xl pointer-events-none">home_work</span>
+            </div>
+          </div>
+          <div>
+            <label class="block font-telemetry-sm text-[12px] font-medium text-[#64748B] mb-2 uppercase tracking-wide">Tipo de Lugar</label>
+            <div class="grid grid-cols-2 gap-3">
+              <label class="relative flex items-center p-3 rounded-lg border-2 border-primary/50 bg-surface-container-low/40 cursor-pointer transition-colors duration-150 select-none">
+                <input checked="" class="h-5 w-5 text-primary border-border-subtle focus:ring-0 focus:ring-offset-0 focus:border-primary accent-[#0096C7] cursor-pointer" name="place_type" type="radio" value="residencial">
+                <div class="ml-2.5 flex flex-col">
+                  <span class="font-body-bold text-body-md text-on-surface font-semibold leading-tight">Residencial</span>
+                  <span class="font-caption text-caption text-on-surface-variant text-[11px]">Hogar, cabaña</span>
+                </div>
+              </label>
+              <label class="relative flex items-center p-3 rounded-lg border border-border-subtle bg-surface-card hover:bg-surface-container-lowest transition-colors duration-150 cursor-pointer select-none">
+                <input class="h-5 w-5 text-primary border-border-subtle focus:ring-0 focus:ring-offset-0 focus:border-primary accent-[#0096C7] cursor-pointer" name="place_type" type="radio" value="comercial">
+                <div class="ml-2.5 flex flex-col">
+                  <span class="font-body-bold text-body-md text-on-surface font-semibold leading-tight">Comercial</span>
+                  <span class="font-caption text-caption text-on-surface-variant text-[11px]">Oficina, nave</span>
+                </div>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-5">
+          <div>
+            <label class="block font-telemetry-sm text-[12px] font-medium text-[#64748B] mb-2 uppercase tracking-wide" for="place-address">Dirección</label>
+            <div class="relative">
+              <input class="w-full h-[48px] px-4 rounded-lg bg-surface-card border border-border-subtle font-['Manrope'] font-medium text-body-md text-on-surface focus:outline-none focus:border-[#0096C7] focus:ring-2 focus:ring-[#0096C7]/20 transition-all duration-150" id="place-address" name="place-address" required="" type="text" value="Calle 10 #5-42, Apto 301">
+              <span class="material-symbols-outlined absolute right-3.5 top-1/2 -translate-y-1/2 text-outline-variant text-xl pointer-events-none">pin_drop</span>
+            </div>
+          </div>
+          <div>
+            <label class="block font-telemetry-sm text-[12px] font-medium text-[#64748B] mb-2 uppercase tracking-wide" for="place-city">Ciudad</label>
+            <div class="relative">
+              <input class="w-full h-[48px] px-4 rounded-lg bg-surface-card border border-border-subtle font-['Manrope'] font-medium text-body-md text-on-surface focus:outline-none focus:border-[#0096C7] focus:ring-2 focus:ring-[#0096C7]/20 transition-all duration-150" id="place-city" name="place-city" required="" type="text" value="Bogotá, Colombia">
+              <span class="material-symbols-outlined absolute right-3.5 top-1/2 -translate-y-1/2 text-outline-variant text-xl pointer-events-none">location_city</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-5">
+          <div class="flex items-center justify-between mb-2">
+            <label class="font-telemetry-sm text-[12px] font-medium text-[#64748B] uppercase tracking-wide" for="place-notes">Notas (Opcional)</label>
+            <span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant font-medium" id="char-counter">58/500</span>
+          </div>
+          <textarea class="w-full h-[100px] p-[12px_16px] rounded-lg bg-surface-card border border-border-subtle font-['Manrope'] font-normal text-body-md text-on-surface focus:outline-none focus:border-[#0096C7] focus:ring-2 focus:ring-[#0096C7]/20 resize-none transition-all duration-150" id="place-notes" maxlength="500" name="place-notes" oninput="document.getElementById('char-counter').textContent = this.value.length + '/500';" rows="3">Lugar con jardín trasero y sistema de riego por goteo.</textarea>
+        </div>
+
+        <div class="mt-8 pt-5 border-t border-border-subtle flex flex-col-reverse sm:flex-row items-center justify-end gap-3">
+          <button class="w-full sm:w-auto h-[44px] px-6 rounded-lg bg-surface-card border-[1.5px] border-border-subtle text-[#023E8A] font-['Manrope'] font-semibold text-body-md hover:bg-surface-canvas hover:border-outline-variant transition-colors duration-150 active:scale-[0.98] cursor-pointer" type="button">Cancelar</button>
+          <button class="w-full sm:w-auto h-[44px] px-8 rounded-lg bg-[#0096C7] hover:bg-[#023E8A] text-white font-['Manrope'] font-semibold text-body-md shadow-sm transition-colors duration-150 active:scale-[0.98] cursor-pointer flex items-center justify-center gap-2" type="submit">
+            <span class="material-symbols-outlined text-lg">check</span>
+            <span class="">Actualizar</span>
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Columna Lateral: Resumen de Infraestructura & Zona de Peligro (4 cols) -->
+    <div class="lg:col-span-4 flex flex-col gap-6">
+      <!-- Tarjeta Resumen de Infraestructura -->
+      <div class="bg-surface-card rounded-xl border border-border-subtle p-5 custom-shadow">
+        <div class="flex items-center gap-2.5 mb-4 pb-3 border-b border-border-subtle">
+          <span class="material-symbols-outlined text-primary text-xl">router</span>
+          <h3 class="font-['Manrope'] font-bold text-body-md text-on-surface">Resumen de Infraestructura</h3>
+        </div>
+        <div class="space-y-3.5">
+          <div class="flex items-center justify-between text-body-md">
+            <span class="text-on-surface-variant font-caption text-caption">Identificador</span>
+            <span class="font-telemetry-sm text-telemetry-sm font-semibold text-primary">LOC-8921</span>
+          </div>
+          <div class="flex items-center justify-between text-body-md">
+            <span class="text-on-surface-variant font-caption text-caption">Dispositivo Vinculado</span>
+            <span class="font-telemetry-sm text-telemetry-sm text-on-surface font-medium">ESP32-WROOM</span>
+          </div>
+          <div class="flex items-center justify-between text-body-md">
+            <span class="text-on-surface-variant font-caption text-caption">Sensores Conectados</span>
+            <span class="font-telemetry-sm text-telemetry-sm px-2 py-0.5 rounded bg-surface-container font-medium text-secondary">2 activos</span>
+          </div>
+          <div class="flex items-center justify-between text-body-md">
+            <span class="text-on-surface-variant font-caption text-caption">Última Sincronización</span>
+            <span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">Hace 2 min</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tarjeta Zona de Peligro -->
+      <div class="border border-[#FEE2E2] bg-[#FEF2F2] p-5 rounded-xl relative overflow-hidden">
+        <div class="flex items-center gap-2 mb-2">
+          <span class="material-symbols-outlined text-[#DC2626] text-lg" style="font-variation-settings: 'FILL' 1;">warning</span>
+          <span class="font-telemetry-sm font-bold text-[12px] text-[#DC2626] tracking-wider uppercase">ZONA DE PELIGRO</span>
+        </div>
+        <p class="font-body-md text-caption text-on-surface-variant mb-4 leading-relaxed">Una vez eliminado este lugar, se desvincularán todos los sensores asociados y no se podrán recuperar las métricas históricas.</p>
+        <button class="w-full px-4 h-[40px] rounded-lg border border-[#DC2626] text-[#DC2626] bg-white hover:bg-[#DC2626]/5 font-['Manrope'] font-semibold text-caption transition-colors duration-150 active:scale-[0.98] cursor-pointer flex items-center justify-center gap-2 whitespace-nowrap" id="btn-show-danger-modal" onclick="document.getElementById('danger-modal-box').classList.toggle('hidden');" type="button">
+          <span class="material-symbols-outlined text-lg">delete</span>
+          <span class="">Eliminar este lugar</span>
+        </button>
+
+        <div class="mt-4 pt-3 border-t border-[#FEE2E2] hidden" id="danger-modal-box">
+          <div class="bg-white p-3.5 rounded-lg border border-[#FEE2E2] shadow-sm">
+            <div class="flex items-start gap-2 mb-3">
+              <span class="material-symbols-outlined text-[#DC2626] text-lg mt-0.5" style="font-variation-settings: 'FILL' 1;">error</span>
+              <div>
+                <h4 class="font-['Manrope'] font-bold text-caption text-on-surface">¿Eliminar lugar definitivamente?</h4>
+                <p class="font-body-md text-[11px] text-on-surface-variant mt-0.5 leading-tight">Esta acción no se puede deshacer. Se perderá la calibración y el historial.</p>
+              </div>
+            </div>
+            <div class="flex items-center justify-end gap-2">
+              <button class="h-[32px] px-3 rounded-lg bg-white border border-border-subtle text-on-surface-variant hover:bg-surface-subtle font-['Manrope'] font-semibold text-caption transition-colors duration-150 cursor-pointer" onclick="document.getElementById('danger-modal-box').classList.add('hidden');" type="button">Cancelar</button>
+              <button class="h-[32px] px-3 rounded-lg bg-[#DC2626] hover:bg-[#b91c1c] text-white font-['Manrope'] font-semibold text-caption transition-colors duration-150 shadow-sm cursor-pointer active:scale-95 whitespace-nowrap" type="button">Sí, eliminar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Espaciador 100px hacia el pie -->
+
+<div class="h-8"></div></main>
+<!-- FOOTER (Shared Component JSON faithfully rendered) -->
+<footer class="bg-surface-canvas dark:bg-surface-dim border-t border-border-subtle dark:border-outline-variant w-full mt-auto">
+<div class="w-full max-w-[1600px] mx-auto px-margin py-space-lg flex flex-col md:flex-row items-center justify-between gap-space-md">
+<!-- Brand & Copyright -->
+<div class="flex flex-col sm:flex-row items-center gap-3 text-center sm:text-left">
+<span class="text-headline-sm font-headline-sm font-bold text-primary dark:text-inverse-primary flex items-center gap-1.5"><img src="https://lh3.googleusercontent.com/aida/AEtjO1XAcgthymaBhgC79CLgZ-JHDDgjQOYchvRT0V2DWvR8itykSJq8TomWpRo9f6a8jWciEUzK1Qy-E0bIvaij8pnV2XJqwi93Mp2b7sn0_8_KFrbXPdEdlYthqXTckR7007DKMAH0Uxrtd2HgvCd1qqmUrbQ5VhN0kqprCaFCkPDRmavj_qJSN5AYhRHwtqobOqKuDaGs4Lr5VnecwnnZvrGjDWxLEnVN9wCEr60XV50AogOIu_oG---Dma8" alt="Cuida Tu Agua" class="w-7 h-7 object-contain inline-block shrink-0"><span class="leading-none">Cuida Tu Agua</span></span>
+<span class="hidden sm:inline text-border-subtle">•</span>
+<p class="text-caption font-caption text-on-surface-variant dark:text-outline-variant">
+          © 2024 Cuida Tu Agua. Sistema de Monitoreo de Recursos Hídricos e IoT. Todos los derechos reservados.
+        </p>
+</div>
+<!-- Links -->
+<div class="flex items-center gap-6">
+<a class="text-on-surface-variant dark:text-outline-variant font-body-md hover:text-primary dark:hover:text-inverse-primary transition-colors duration-150" href="#">
+          Soporte Técnico
+        </a>
+<a class="text-on-surface-variant dark:text-outline-variant font-body-md hover:text-primary dark:hover:text-inverse-primary transition-colors duration-150" href="#">
+          Documentación API
+        </a>
+<a class="text-on-surface-variant dark:text-outline-variant font-body-md hover:text-primary dark:hover:text-inverse-primary transition-colors duration-150" href="#">
+          Privacidad
+        </a>
+<a class="text-on-surface-variant dark:text-outline-variant font-body-md hover:text-primary dark:hover:text-inverse-primary transition-colors duration-150" href="#">
+          Términos
+        </a>
+</div>
+</div>
+</footer>
+
+
+
+
+</body></html>

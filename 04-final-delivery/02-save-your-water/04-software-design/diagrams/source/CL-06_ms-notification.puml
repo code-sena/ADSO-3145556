@@ -1,0 +1,118 @@
+@startuml CL-06_ms-notification
+!include _estilo.iuml
+title CL-06 · Clases de dominio — ms-notification (alertas y canales)
+hide empty members
+skinparam linetype ortho
+
+package "ms-notification · schema notifications" {
+  class Notification <<aggregate root>> {
+    + id : Guid
+    + audience : Audience
+    + type : NotificationType
+    + severity : NotificationSeverity
+    + title : string
+    + body : string
+    + placeId : Guid?
+    + sourceEventId : string?
+    + createdAt : DateTime
+    + Create(...) : Notification
+  }
+  class Audience <<value object>> {
+    + userId : Guid?
+    + role : string?
+    + ForUser(id) / ForRole(role)
+    + Includes(userId, roles) : bool
+  }
+  class NotificationRead {
+    + notificationId : Guid
+    + userId : Guid
+    + readAt : DateTime
+  }
+  enum NotificationType {
+    LeakSuspected
+    GoalExceeded
+    GoalNear
+    DeviceOffline
+    ValveChanged
+    BillMisaligned
+    PaymentReminder
+    DeviceLinked
+    DeviceUnlinked
+    SystemAnnouncement
+  }
+  enum NotificationSeverity {
+    Info
+    Warning
+    Critical
+  }
+  class ChannelPreferences <<aggregate root>> {
+    + userId : Guid
+    + ChannelsFor(severity) : NotificationChannels
+    + Set(severity, channels)
+    + Defaults() : ChannelPreferences
+  }
+  enum NotificationChannels <<flags>> {
+    InApp
+    Push
+    Email
+    Sms
+  }
+  class PushToken {
+    + id : Guid
+    + userId : Guid
+    + token : string  // ExponentPushToken[...]
+    + platform : PushPlatform
+    + createdAt, lastSeenAt : DateTime
+  }
+  enum PushPlatform {
+    Android
+    Ios
+  }
+  class EmailOutboxItem <<entity>> {
+    + id : Guid
+    + userId : Guid
+    + subject : string
+    + textBody, htmlBody : string
+    + status : EmailStatus
+    + attempts : int
+    + nextAttemptAt : DateTime
+    + lastError : string?
+    + MarkSent() / RegisterFailure()
+  }
+  enum EmailStatus {
+    Pending
+    Sent
+    Failed
+  }
+  class PlaceDevice <<read model>> {
+    + placeId : Guid
+    + deviceId : Guid
+    + userId : Guid
+    + serialNumber : string
+    + valveState : ValveStatus?
+    + lastReadingAt : DateTime?
+    + offlineAlertedAt : DateTime?
+    + ApplyReading(at) : bool
+    + IsSilent(now, threshold) : bool
+  }
+  class AlertDispatcher <<domain service>> {
+    + Dispatch(notification, preferences)
+  }
+}
+Notification *-- Audience
+Notification --> NotificationType
+Notification --> NotificationSeverity
+Notification "1" -- "0..*" NotificationRead
+ChannelPreferences ..> NotificationChannels
+ChannelPreferences ..> NotificationSeverity
+PushToken --> PushPlatform
+EmailOutboxItem --> EmailStatus
+AlertDispatcher ..> Notification
+AlertDispatcher ..> ChannelPreferences
+AlertDispatcher ..> PushToken
+AlertDispatcher ..> EmailOutboxItem
+note bottom of ChannelPreferences
+  Las alertas críticas siempre conservan el canal App.
+  SMS / WhatsApp se habilita con el proveedor (HU-028).
+end note
+@enduml

@@ -1,0 +1,85 @@
+@startuml ER-00_general
+!include _estilo.iuml
+title ER-00 · Modelo físico general: schemas y referencias entre servicios
+hide circle
+hide members
+skinparam nodesep 30
+skinparam ranksep 70
+top to bottom direction
+package "security (ms-iam)" {
+  entity "users" as security_users
+  entity "roles" as security_roles
+  entity "user_roles" as security_user_roles
+  entity "user_credentials" as security_user_credentials
+  entity "refresh_tokens" as security_refresh_tokens
+  entity "email_verifications" as security_email_verifications
+  entity "password_resets" as security_password_resets
+  entity "action_codes" as security_action_codes
+  entity "login_attempts" as security_login_attempts
+  entity "activity_log" as security_activity_log
+}
+package "places (ms-places)" {
+  entity "countries" as places_countries
+  entity "subdivisions" as places_subdivisions
+  entity "cities" as places_cities
+  entity "places" as places_places
+  entity "activity_log" as places_activity_log
+  entity "place_tariffs" as places_place_tariffs
+  entity "tariff_catalog" as places_tariff_catalog
+  entity "tips" as places_tips
+  entity "tip_favorites" as places_tip_favorites
+}
+package "devices (ms-device)" {
+  entity "devices" as devices_devices
+  entity "device_link_history" as devices_device_link_history
+}
+package "monitoring (ms-consumption)" {
+  entity "readings" as monitoring_readings
+  entity "consumption_hourly" as monitoring_consumption_hourly
+}
+package "valve (ms-valve)" {
+  entity "valve_states" as valve_valve_states
+  entity "valve_commands" as valve_valve_commands
+}
+package "notification (ms-notification)" {
+  entity "notifications" as notification_notifications
+  entity "notification_reads" as notification_notification_reads
+  entity "notification_preferences" as notification_notification_preferences
+  entity "place_devices" as notification_place_devices
+  entity "email_outbox" as notification_email_outbox
+  entity "push_tokens" as notification_push_tokens
+}
+security_users ||--o{ security_user_roles
+security_roles ||--o{ security_user_roles
+security_users ||--o{ security_user_credentials
+security_users ||--o{ security_refresh_tokens
+security_users ||--o{ security_email_verifications
+security_users ||--o{ security_password_resets
+security_users ||--o{ security_action_codes
+security_users ||--o{ security_login_attempts
+security_users ||--o{ security_activity_log
+places_countries ||--o{ places_subdivisions
+places_subdivisions ||--o{ places_cities
+places_cities ||--o{ places_places
+places_places ||--o{ places_activity_log
+places_places ||--o{ places_place_tariffs
+places_cities ||--o{ places_tariff_catalog
+places_tips ||--o{ places_tip_favorites
+devices_devices ||--o{ devices_device_link_history
+notification_notifications ||--o{ notification_notification_reads
+security_login_attempts -[hidden]down-> devices_devices
+security_login_attempts -[hidden]down-> monitoring_readings
+security_login_attempts -[hidden]down-> monitoring_consumption_hourly
+security_login_attempts -[hidden]down-> valve_valve_states
+security_login_attempts -[hidden]down-> valve_valve_commands
+security_login_attempts -[hidden]down-> notification_notifications
+security_login_attempts -[hidden]down-> notification_email_outbox
+security_login_attempts -[hidden]down-> notification_push_tokens
+note as N
+  Referencias lógicas entre schemas (sin llave foránea física):
+  · user_id, owner_id, linked_by, requested_by → security.users
+  · place_id → places.places
+  · device_id → devices.devices
+  Cada servicio valida estas referencias por API o eventos.
+end note
+@enduml

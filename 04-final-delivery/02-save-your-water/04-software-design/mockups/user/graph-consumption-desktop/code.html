@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+
+<html lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&amp;family=Manrope:wght@400;600;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"surface-container-lowest":"#ffffff","surface-dim":"#d3daea","on-primary-fixed":"#001e2c","primary-fixed-dim":"#77d1ff","primary-container":"#007ea7","surface-variant":"#dce2f3","tertiary-container":"#4a73c1","on-tertiary":"#ffffff","surface-container-highest":"#dce2f3","surface":"#f9f9ff","secondary-fixed-dim":"#58d6f1","secondary":"#006878","surface-container-high":"#e2e8f8","tertiary":"#2e5aa7","on-error-container":"#93000a","surface-bright":"#f9f9ff","on-primary":"#ffffff","error-container":"#ffdad6","on-secondary-fixed-variant":"#004e5b","inverse-surface":"#2a313d","outline":"#6e787f","on-secondary-fixed":"#001f25","inverse-primary":"#77d1ff","on-tertiary-fixed-variant":"#0f4490","on-background":"#151c27","secondary-fixed":"#a7edff","surface-container":"#e7eefe","on-primary-container":"#fbfcff","background":"#f9f9ff","on-secondary":"#ffffff","on-tertiary-container":"#fefcff","on-secondary-container":"#006575","primary":"#006385","surface-container-low":"#f0f3ff","on-surface-variant":"#3e484f","outline-variant":"#bdc8d0","tertiary-fixed":"#d8e2ff","inverse-on-surface":"#ebf1ff","on-surface":"#151c27","surface-tint":"#006688","tertiary-fixed-dim":"#aec6ff","on-tertiary-fixed":"#001a42","on-primary-fixed-variant":"#004d68","on-error":"#ffffff","error":"#ba1a1a","secondary-container":"#69e5ff","primary-fixed":"#c2e8ff"},borderRadius:{DEFAULT:"0.25rem",lg:"0.5rem",xl:"0.75rem",full:"9999px"},spacing:{"space-xs":"0.25rem","space-sm":"0.5rem","space-md":"1rem",margin:"1rem","space-xl":"2rem","space-lg":"1.5rem",gutter:"1rem","margin-tablet":"1.5rem","space-2xl":"3rem","gutter-desktop":"1.5rem","margin-desktop":"2.5rem"},fontFamily:{"display-mobile":["Manrope"],"body-md":["Manrope"],"data-metric-sm":["JetBrains Mono"],"headline-md":["Manrope"],display:["Manrope"],"data-metric-md":["JetBrains Mono"],"label-lg":["Manrope"],"headline-lg":["Manrope"],"headline-sm":["Manrope"],"label-md":["Manrope"],"body-sm":["Manrope"],"data-metric-lg":["JetBrains Mono"],"body-lg":["Manrope"],"headline-lg-mobile":["Manrope"]},fontSize:{"display-mobile":["32px",{lineHeight:"40px",letterSpacing:"-0.02em",fontWeight:"800"}],"body-md":["14px",{lineHeight:"20px",fontWeight:"400"}],"data-metric-sm":["13px",{lineHeight:"18px",fontWeight:"400"}],"headline-md":["22px",{lineHeight:"30px",fontWeight:"600"}],display:["44px",{lineHeight:"52px",letterSpacing:"-0.02em",fontWeight:"800"}],"data-metric-md":["20px",{lineHeight:"26px",fontWeight:"600"}],"label-lg":["14px",{lineHeight:"20px",fontWeight:"600"}],"headline-lg":["32px",{lineHeight:"40px",letterSpacing:"-0.015em",fontWeight:"800"}],"headline-sm":["18px",{lineHeight:"26px",fontWeight:"600"}],"label-md":["12px",{lineHeight:"16px",fontWeight:"600"}],"body-sm":["12px",{lineHeight:"16px",fontWeight:"400"}],"data-metric-lg":["32px",{lineHeight:"36px",letterSpacing:"-0.02em",fontWeight:"600"}],"body-lg":["16px",{lineHeight:"24px",fontWeight:"400"}],"headline-lg-mobile":["24px",{lineHeight:"32px",letterSpacing:"-0.01em",fontWeight:"800"}]}}}};</script></head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased min-h-screen"><header class="sticky top-0 z-50 bg-surface-container-lowest border-b border-outline-variant/40"><div class="h-20 max-w-[1200px] mx-auto px-8 flex items-center justify-between gap-6"><div class="flex items-center gap-6"><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-primary to-secondary-container flex items-center justify-center shadow-[0_2px_8px_rgba(0,0,0,0.08)]"><span class="material-symbols-outlined text-on-primary text-[22px]">water_drop</span></div><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-on-surface tracking-tight leading-none">Cuida Tu Agua</span><span class="font-label-md text-label-md text-primary leading-none mt-1">Telemetría Activa</span></div></div><div class="h-6 w-px bg-outline-variant/50"></div><div class="relative"><button class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container hover:text-on-surface text-on-surface-variant font-label-lg text-label-lg transition-colors" type="button"><span class="material-symbols-outlined text-[18px] text-primary">home</span><span>Mi Casa</span><span class="material-symbols-outlined text-[16px]">expand_more</span></button></div></div><nav class="hidden lg:flex items-center gap-2 p-1.5 rounded-xl bg-surface-container-low" data-active-classes="bg-primary-container text-on-primary-container font-label-lg rounded-xl shadow-[0_2px_8px_rgba(0,0,0,0.08)]"><a class="px-4 py-2 rounded-xl text-on-surface-variant hover:text-on-surface transition-colors font-label-lg text-label-lg" data-path="dashboard" href="#">Dashboard</a><a class="px-4 py-2 rounded-xl text-on-surface-variant hover:text-on-surface transition-colors font-label-lg text-label-lg" data-path="grafica-expandida" href="#">Gráfica Expandida</a><a class="px-4 py-2 rounded-xl text-on-surface-variant hover:text-on-surface transition-colors font-label-lg text-label-lg" data-path="historial" href="#">Historial</a></nav><div class="flex items-center gap-4"><div class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-container-low"><span class="material-symbols-outlined text-secondary text-[16px] animate-spin" style="animation-duration: 8s;">sync</span><span class="font-data-metric-sm text-data-metric-sm text-on-surface-variant">Sincronizado hace <span class="font-semibold text-secondary">30s</span></span></div><div class="relative"><button aria-label="Notificaciones" class="w-10 h-10 rounded-xl bg-surface-container-low hover:bg-surface-container hover:text-on-surface flex items-center justify-center text-on-surface-variant transition-colors" type="button"><span class="material-symbols-outlined text-[20px]">notifications</span></button><span class="absolute top-2 right-2 w-2.5 h-2.5 rounded-full bg-error ring-2 ring-surface-container-lowest"></span></div><button aria-label="Configuración" class="w-10 h-10 rounded-xl bg-surface-container-low hover:bg-surface-container hover:text-on-surface flex items-center justify-center text-on-surface-variant transition-colors" type="button"><span class="material-symbols-outlined text-[20px]">settings</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-20 bg-surface"><div class="max-w-[1200px] mx-auto px-8 py-space-xl"><div class="flex flex-col w-full">
+<!-- Internal Navigation Top Bar -->
+<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 py-space-sm mb-space-xl">
+<div class="flex items-center gap-3">
+<a class="group flex items-center gap-2 px-3 py-2 rounded-xl bg-surface-container-lowest text-primary hover:bg-surface-container-low transition-all shadow-sm" href="#">
+<span class="material-symbols-outlined text-[18px] group-hover:-translate-x-0.5 transition-transform">arrow_back</span>
+<span class="font-label-lg text-label-lg font-semibold">Volver al Dashboard</span>
+</a>
+<span class="text-outline-variant select-none">/</span>
+<h1 class="font-headline-md text-headline-md text-on-surface font-extrabold tracking-tight">Consumo Detallado de Agua</h1>
+</div>
+<div class="flex items-center gap-3 w-full sm:w-auto justify-end">
+<button class="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-surface-container-lowest text-primary hover:bg-surface-container-low shadow-sm transition-all font-label-lg text-label-lg font-semibold cursor-pointer" type="button">
+<span class="material-symbols-outlined text-[18px] text-primary">download</span>
+<span>Exportar Datos</span>
+</button>
+<div class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-secondary-container/20 text-on-secondary-container">
+<span class="w-2 h-2 rounded-full bg-secondary animate-ping"></span>
+<span class="font-data-metric-sm text-data-metric-sm font-semibold">En Vivo</span>
+</div>
+</div>
+</div>
+<!-- Centered Content Canvas Container (1200px max, 40px padding feel) -->
+<div class="w-full max-w-[1200px] mx-auto flex flex-col">
+<!-- Time Range Selector -->
+<div class="bg-surface-container-lowest rounded-xl p-2 shadow-sm mb-space-xl flex flex-col md:flex-row md:items-center justify-between gap-3">
+<div class="flex items-center gap-1 overflow-x-auto pb-1 md:pb-0" id="time-range-tabs">
+<button class="tab-btn active relative px-5 py-2.5 rounded-lg font-label-lg text-label-lg text-primary font-bold flex items-center gap-2 transition-colors" type="button">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span>Hoy</span>
+<span class="absolute bottom-0 left-3 right-3 h-[3px] bg-primary rounded-full indicator-bar"></span>
+</button>
+<button class="tab-btn relative px-5 py-2.5 rounded-lg font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface font-medium flex items-center gap-2 transition-colors" type="button">
+<span class="w-2 h-2 rounded-full bg-outline-variant/60"></span>
+<span>Esta semana</span>
+<span class="absolute bottom-0 left-3 right-3 h-[3px] bg-transparent rounded-full indicator-bar"></span>
+</button>
+<button class="tab-btn relative px-5 py-2.5 rounded-lg font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface font-medium flex items-center gap-2 transition-colors" type="button">
+<span class="w-2 h-2 rounded-full bg-outline-variant/60"></span>
+<span>Este mes</span>
+<span class="absolute bottom-0 left-3 right-3 h-[3px] bg-transparent rounded-full indicator-bar"></span>
+</button>
+<button class="tab-btn relative px-4 py-2.5 rounded-lg font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface font-medium flex items-center gap-1.5 transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px] text-primary">calendar_month</span>
+<span>Custom</span>
+<span class="material-symbols-outlined text-[16px]">expand_more</span>
+<span class="absolute bottom-0 left-3 right-3 h-[3px] bg-transparent rounded-full indicator-bar"></span>
+</button>
+</div>
+<div class="flex items-center gap-3 px-3 py-1 text-on-surface-variant self-end md:self-auto">
+<span class="font-data-metric-sm text-data-metric-sm text-outline">Rango Activo:</span>
+<span class="font-data-metric-sm text-data-metric-sm font-semibold text-primary">17 Oct 2024 (00:00 - 23:59)</span>
+</div>
+</div>
+<!-- Interactive Graph Card (Large) -->
+<div class="relative bg-surface-container-lowest rounded-xl p-6 sm:p-8 shadow-sm mb-space-2xl overflow-hidden group">
+<!-- Graph Header & Floating Controls -->
+<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
+<div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">show_chart</span>
+<span class="font-headline-sm text-headline-sm text-on-surface tracking-tight">Curva Dinámica de Caudal</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Medición de caudal instantáneo por telemetría ultrasónica L/h</p>
+</div>
+<!-- Floating Quick Canvas Controls -->
+<div class="flex items-center gap-1.5 p-1 rounded-xl bg-surface-container-low shadow-inner self-end sm:self-auto">
+<button class="w-8 h-8 rounded-lg bg-surface-container-lowest hover:bg-surface text-on-surface-variant hover:text-primary flex items-center justify-center transition-all shadow-sm" id="zoom-in" title="Aumentar zoom" type="button">
+<span class="material-symbols-outlined text-[18px]">add</span>
+</button>
+<button class="w-8 h-8 rounded-lg bg-surface-container-lowest hover:bg-surface text-on-surface-variant hover:text-primary flex items-center justify-center transition-all shadow-sm" id="zoom-out" title="Disminuir zoom" type="button">
+<span class="material-symbols-outlined text-[18px]">remove</span>
+</button>
+<button class="px-2.5 h-8 rounded-lg bg-surface-container-lowest hover:bg-surface text-on-surface-variant hover:text-primary font-data-metric-sm text-data-metric-sm flex items-center gap-1 transition-all shadow-sm" id="zoom-reset" title="Restablecer vista" type="button">
+<span class="material-symbols-outlined text-[16px]">restart_alt</span>
+<span>Reset</span>
+</button>
+<div class="w-px h-5 bg-outline-variant/40 mx-0.5"></div>
+<button class="w-8 h-8 rounded-lg bg-surface-container-lowest text-primary hover:bg-surface flex items-center justify-center transition-all shadow-sm" id="pan-toggle" title="Modo Desplazamiento" type="button">
+<span class="material-symbols-outlined text-[18px]">drag_pan</span>
+</button>
+</div>
+</div>
+<!-- Main SVG Canvas Area (Responsive 400px height container) -->
+<div class="relative w-full h-[400px] select-none" id="telemetry-chart-container">
+<svg class="w-full h-full overflow-visible" id="telemetry-svg" preserveaspectratio="none" viewbox="0 0 1000 400">
+<defs>
+<!-- Water Flow Area Gradient -->
+<lineargradient id="waterFlowGradient" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#007ea7" stop-opacity="0.32"></stop>
+<stop offset="50%" stop-color="#69e5ff" stop-opacity="0.14"></stop>
+<stop offset="100%" stop-color="#f0f3ff" stop-opacity="0.0"></stop>
+</lineargradient>
+<lineargradient id="strokeGradient" x1="0" x2="1" y1="0" y2="0">
+<stop offset="0%" stop-color="#007ea7"></stop>
+<stop offset="50%" stop-color="#006385"></stop>
+<stop offset="100%" stop-color="#2e5aa7"></stop>
+</lineargradient>
+<!-- Interactive Cursor Glow Filter -->
+<filter height="140%" id="glow" width="140%" x="-20%" y="-20%">
+<fedropshadow dx="0" dy="2" flood-color="#007ea7" flood-opacity="0.4" stddeviation="4"></fedropshadow>
+</filter>
+</defs>
+<!-- Subtle Grid Horizontal Lines (Y-Axis levels) -->
+<!-- 1000 L -> Y: 30 -->
+<line opacity="0.4" stroke="#bdc8d0" stroke-dasharray="3,3" stroke-width="0.75" x1="60" x2="980" y1="30" y2="30"></line>
+<!-- 800 L -> Y: 94 -->
+<line opacity="0.4" stroke="#bdc8d0" stroke-dasharray="3,3" stroke-width="0.75" x1="60" x2="980" y1="94" y2="94"></line>
+<!-- 600 L -> Y: 158 -->
+<line opacity="0.4" stroke="#bdc8d0" stroke-dasharray="3,3" stroke-width="0.75" x1="60" x2="980" y1="158" y2="158"></line>
+<!-- 400 L -> Y: 222 -->
+<line opacity="0.4" stroke="#bdc8d0" stroke-dasharray="3,3" stroke-width="0.75" x1="60" x2="980" y1="222" y2="222"></line>
+<!-- 200 L -> Y: 286 -->
+<line opacity="0.4" stroke="#bdc8d0" stroke-dasharray="3,3" stroke-width="0.75" x1="60" x2="980" y1="286" y2="286"></line>
+<!-- 0 L Base -> Y: 350 -->
+<line opacity="0.6" stroke="#bdc8d0" stroke-width="1.2" x1="60" x2="980" y1="350" y2="350"></line>
+<!-- Y-Axis Dynamic Monospace Labels -->
+<g class="fill-outline font-data-metric-sm" font-size="11" text-anchor="end">
+<text x="48" y="34">1000 L</text>
+<text x="48" y="98">800 L</text>
+<text x="48" y="162">600 L</text>
+<text x="48" y="226">400 L</text>
+<text x="48" y="290">200 L</text>
+<text x="48" y="354">0 L</text>
+</g>
+<!-- X-Axis High Resolution Vertical Guidelines (Subtle) -->
+<g opacity="0.3" stroke="#bdc8d0" stroke-dasharray="2,4" stroke-width="0.75">
+<line x1="80" x2="80" y1="30" y2="350"></line>
+<line x1="190" x2="190" y1="30" y2="350"></line>
+<line x1="300" x2="300" y1="30" y2="350"></line>
+<line x1="410" x2="410" y1="30" y2="350"></line>
+<line x1="520" x2="520" y1="30" y2="350"></line>
+<line x1="630" x2="630" y1="30" y2="350"></line>
+<line x1="740" x2="740" y1="30" y2="350"></line>
+<line x1="850" x2="850" y1="30" y2="350"></line>
+<line x1="960" x2="960" y1="30" y2="350"></line>
+</g>
+<!-- Spline Area Fill Under Curve -->
+<path d="M 80 345
+                   C 130 342, 160 338, 190 340
+                   C 230 342, 270 310, 300 240
+                   C 330 180, 370 290, 410 270
+                   C 450 250, 480 230, 520 220
+                   C 570 210, 600 80, 630 68
+                   C 660 60, 690 280, 740 260
+                   C 790 240, 810 200, 850 210
+                   C 890 220, 930 330, 960 342
+                   L 960 350 L 80 350 Z" fill="url(#waterFlowGradient)"></path>
+<!-- Cubic Bezier Spline Line (3px stroke) -->
+<path d="M 80 345
+                   C 130 342, 160 338, 190 340
+                   C 230 342, 270 310, 300 240
+                   C 330 180, 370 290, 410 270
+                   C 450 250, 480 230, 520 220
+                   C 570 210, 600 80, 630 68
+                   C 660 60, 690 280, 740 260
+                   C 790 240, 810 200, 850 210
+                   C 890 220, 930 330, 960 342" fill="none" id="consumption-spline" stroke="url(#strokeGradient)" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5"></path>
+<!-- High-Resolution Temporal X Labels (Below Base Line) -->
+<g class="fill-outline font-data-metric-sm" font-size="11" text-anchor="middle">
+<text x="80" y="375">00:00</text>
+<text x="190" y="375">03:00</text>
+<text x="300" y="375">06:00</text>
+<text x="410" y="375">09:00</text>
+<text x="520" y="375">12:00</text>
+<text x="630" y="375">15:00</text>
+<text x="740" y="375">18:00</text>
+<text x="850" y="375">21:00</text>
+<text x="960" y="375">23:59</text>
+</g>
+<!-- Key Telemetry Interactive Markers along the Spline -->
+<!-- Dawn Wakeup Peak (07:30) -->
+<circle class="fill-surface-container-lowest stroke-primary cursor-pointer" cx="300" cy="240" r="4.5" stroke-width="2.5"></circle>
+<!-- Midday Shower Peak at 14:30 (Coordinate x=612, y=72) -->
+<line opacity="0.85" stroke="#007ea7" stroke-dasharray="4,4" stroke-width="1.5" x1="612" x2="612" y1="72" y2="350"></line>
+<circle class="fill-surface-container-lowest stroke-primary cursor-pointer animate-pulse" cx="612" cy="72" filter="url(#glow)" r="7" stroke-width="3"></circle>
+<circle class="fill-primary" cx="612" cy="72" r="3.5"></circle>
+<!-- Evening Dinner Peak (19:30) -->
+<circle class="fill-surface-container-lowest stroke-primary cursor-pointer" cx="740" cy="260" r="4.5" stroke-width="2.5"></circle>
+<!-- Late Night Low (04:00) -->
+<circle class="fill-surface-container-lowest stroke-secondary cursor-pointer" cx="215" cy="344" r="4.5" stroke-width="2.5"></circle>
+</svg>
+<!-- Peak 14:30 Floating Tooltip Callout Overlay -->
+<div class="absolute top-4 left-[46%] sm:left-[52%] -translate-x-1/2 z-20 pointer-events-auto transition-transform hover:scale-105">
+<div class="bg-surface-container-lowest rounded-xl p-3.5 shadow-xl flex flex-col gap-1 min-w-[280px]">
+<div class="flex items-center justify-between gap-3">
+<div class="flex items-center gap-1.5 text-primary">
+<span class="w-2 h-2 rounded-full bg-error animate-ping"></span>
+<span class="font-data-metric-md text-data-metric-md text-on-surface font-bold tracking-tight">14:30</span>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-error-container text-on-error-container font-data-metric-sm text-data-metric-sm font-semibold">
+                Pico Máximo
+              </span>
+</div>
+<div class="flex items-baseline gap-2 mt-1">
+<span class="font-data-metric-lg text-data-metric-lg font-bold text-primary">45 L</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant font-medium">(2.8 bar presión)</span>
+</div>
+<div class="pt-2 mt-1 bg-surface-container-low/60 rounded-lg p-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[16px]">water_voc</span>
+<span class="font-label-md text-label-md text-on-surface-variant leading-tight">
+                Flujo continuo detectado: <strong class="text-on-surface">Ducha y Lavado</strong>
+</span>
+</div>
+<!-- Speech bubble bottom triangle -->
+<div class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-surface-container-lowest rotate-45 shadow-sm"></div>
+</div>
+</div>
+</div>
+<!-- Canvas legend footnote -->
+<div class="flex flex-wrap items-center justify-between gap-4 mt-6 pt-4 text-outline font-data-metric-sm text-data-metric-sm">
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2">
+<span class="w-3 h-1 bg-primary rounded-full"></span>
+<span>Caudal Instantáneo (L/minuto)</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span>Sensor Ultrasónico TUF-2000</span>
+</div>
+</div>
+<div class="flex items-center gap-1.5 text-on-surface-variant">
+<span class="material-symbols-outlined text-[15px] text-primary">info</span>
+<span>Frecuencia muestreo: 5 segundos</span>
+</div>
+</div>
+</div>
+<!-- 4 Statistics Metric Cards (4 Columns at 25%) -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-space-2xl">
+<!-- Card 1: Total Consumo -->
+<div class="bg-surface-container-low rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+<div class="flex items-center justify-between mb-2">
+<span class="font-data-metric-sm text-data-metric-sm font-semibold tracking-wider uppercase text-outline">
+            Consumo Total Período
+          </span>
+<div class="w-8 h-8 rounded-lg bg-surface-container-lowest flex items-center justify-center text-primary shadow-xs">
+<span class="material-symbols-outlined text-[18px]">opacity</span>
+</div>
+</div>
+<div>
+<div class="font-data-metric-lg text-data-metric-lg font-bold text-on-surface">1,234 L</div>
+<div class="flex items-center gap-1.5 mt-1 font-body-sm text-body-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-primary">arrow_downward</span>
+<span class="text-primary font-semibold">-4.2%</span>
+<span>vs período previo</span>
+</div>
+</div>
+</div>
+<!-- Card 2: Hourly Average -->
+<div class="bg-surface-container-low rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+<div class="flex items-center justify-between mb-2">
+<span class="font-data-metric-sm text-data-metric-sm font-semibold tracking-wider uppercase text-outline">
+            Promedio Horario
+          </span>
+<div class="w-8 h-8 rounded-lg bg-surface-container-lowest flex items-center justify-center text-primary-container shadow-xs">
+<span class="material-symbols-outlined text-[18px]">speed</span>
+</div>
+</div>
+<div>
+<div class="font-data-metric-lg text-data-metric-lg font-bold text-primary">51.4 L/h</div>
+<div class="flex items-center gap-1.5 mt-1 font-body-sm text-body-sm text-on-surface-variant">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span>Rango óptimo para hogar (3 pers.)</span>
+</div>
+</div>
+</div>
+<!-- Card 3: Maximum Peak -->
+<div class="bg-surface-container-low rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+<div class="flex items-center justify-between mb-2">
+<span class="font-data-metric-sm text-data-metric-sm font-semibold tracking-wider uppercase text-outline">
+            Pico Máximo (14:30)
+          </span>
+<div class="w-8 h-8 rounded-lg bg-error-container/60 flex items-center justify-center text-error shadow-xs">
+<span class="material-symbols-outlined text-[18px]">emergency</span>
+</div>
+</div>
+<div>
+<div class="font-data-metric-lg text-data-metric-lg font-bold text-error">145 L</div>
+<div class="flex items-center gap-1.5 mt-1 font-body-sm text-body-sm text-error">
+<span class="material-symbols-outlined text-[16px]">priority_high</span>
+<span class="font-semibold">+18%</span>
+<span class="text-on-surface-variant">sobre pico diario habitual</span>
+</div>
+</div>
+</div>
+<!-- Card 4: Nightly Minimum -->
+<div class="bg-surface-container-low rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+<div class="flex items-center justify-between mb-2">
+<span class="font-data-metric-sm text-data-metric-sm font-semibold tracking-wider uppercase text-outline">
+            Mínimo Nocturno (04:00)
+          </span>
+<div class="w-8 h-8 rounded-lg bg-secondary-container/50 flex items-center justify-center text-secondary shadow-xs">
+<span class="material-symbols-outlined text-[18px]">nights_stay</span>
+</div>
+</div>
+<div>
+<div class="font-data-metric-lg text-data-metric-lg font-bold text-secondary">5 L</div>
+<div class="flex items-center gap-1.5 mt-1 font-body-sm text-body-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-secondary">verified</span>
+<span class="font-semibold text-secondary">Sin fugas</span>
+<span>en reposo total</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Detailed Telemetry Log Table Card -->
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm mb-space-2xl overflow-hidden">
+<!-- Table Filter and Title Bar -->
+<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-bold">Desglose Cronológico de Registros</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Eventos auditados por la válvula y sensores IoT</p>
+</div>
+<div class="flex items-center gap-2">
+<div class="relative">
+<input class="h-9 pl-9 pr-4 rounded-lg bg-surface-container-low text-on-surface font-body-sm text-body-sm outline-none placeholder:text-outline focus:bg-surface transition-all w-44 sm:w-56" placeholder="Filtrar por evento..." type="text"/>
+<span class="material-symbols-outlined text-[18px] text-outline absolute left-2.5 top-1/2 -translate-y-1/2">filter_alt</span>
+</div>
+<button class="w-9 h-9 rounded-lg bg-surface-container-low hover:bg-surface-container flex items-center justify-center text-on-surface-variant" title="Recargar" type="button">
+<span class="material-symbols-outlined text-[18px]">refresh</span>
+</button>
+</div>
+</div>
+<!-- Sticky Striped Table Container -->
+<div class="overflow-x-auto">
+<table class="w-full text-left font-data-metric-sm text-data-metric-sm border-collapse">
+<thead>
+<tr class="bg-surface-container-high/60 text-on-surface-variant font-label-md text-label-md uppercase tracking-wider sticky top-0 z-10">
+<th class="py-3 px-4 rounded-l-lg font-bold">Hora</th>
+<th class="py-3 px-4 font-bold">Consumo</th>
+<th class="py-3 px-4 font-bold">vs Ayer</th>
+<th class="py-3 px-4 font-bold">Nivel / Tipo</th>
+<th class="py-3 px-4 rounded-r-lg font-bold">Estado Sensor</th>
+</tr>
+</thead>
+<tbody class="text-on-surface font-medium">
+<!-- Row 1: 14:30 -->
+<tr class="bg-surface hover:bg-surface-container transition-colors h-11">
+<td class="py-2.5 px-4 font-bold text-on-surface flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span>
+<span>14:30</span>
+</td>
+<td class="py-2.5 px-4 font-bold text-primary">45 L</td>
+<td class="py-2.5 px-4 text-error font-semibold flex items-center gap-1">
+<span>↑ 12%</span>
+</td>
+<td class="py-2.5 px-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded-md bg-error-container/60 text-on-error-container text-[11px] font-semibold">
+                  Pico
+                </span>
+</td>
+<td class="py-2.5 px-4">
+<span class="inline-flex items-center gap-1 text-secondary font-semibold">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+<span>Óptimo</span>
+</span>
+</td>
+</tr>
+<!-- Row 2: 14:00 -->
+<tr class="bg-surface-container-lowest hover:bg-surface-container transition-colors h-11">
+<td class="py-2.5 px-4 font-bold text-on-surface flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+<span>14:00</span>
+</td>
+<td class="py-2.5 px-4 text-on-surface">38 L</td>
+<td class="py-2.5 px-4 text-secondary font-semibold">
+<span>↓ 3%</span>
+</td>
+<td class="py-2.5 px-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded-md bg-surface-container text-on-surface-variant text-[11px] font-semibold">
+                  Normal
+                </span>
+</td>
+<td class="py-2.5 px-4">
+<span class="inline-flex items-center gap-1 text-secondary font-semibold">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+<span>Óptimo</span>
+</span>
+</td>
+</tr>
+<!-- Row 3: 13:30 -->
+<tr class="bg-surface hover:bg-surface-container transition-colors h-11">
+<td class="py-2.5 px-4 font-bold text-on-surface flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span>
+<span>13:30</span>
+</td>
+<td class="py-2.5 px-4 font-bold text-primary">52 L</td>
+<td class="py-2.5 px-4 text-error font-semibold">
+<span>↑ 15%</span>
+</td>
+<td class="py-2.5 px-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded-md bg-error-container/60 text-on-error-container text-[11px] font-semibold">
+                  Pico
+                </span>
+</td>
+<td class="py-2.5 px-4">
+<span class="inline-flex items-center gap-1 text-secondary font-semibold">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+<span>Óptimo</span>
+</span>
+</td>
+</tr>
+<!-- Row 4: 13:00 -->
+<tr class="bg-surface-container-lowest hover:bg-surface-container transition-colors h-11">
+<td class="py-2.5 px-4 font-bold text-on-surface flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+<span>13:00</span>
+</td>
+<td class="py-2.5 px-4 text-on-surface">41 L</td>
+<td class="py-2.5 px-4 text-outline font-semibold">
+<span>= 0%</span>
+</td>
+<td class="py-2.5 px-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded-md bg-surface-container text-on-surface-variant text-[11px] font-semibold">
+                  Normal
+                </span>
+</td>
+<td class="py-2.5 px-4">
+<span class="inline-flex items-center gap-1 text-secondary font-semibold">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+<span>Óptimo</span>
+</span>
+</td>
+</tr>
+<!-- Row 5: 12:00 -->
+<tr class="bg-surface hover:bg-surface-container transition-colors h-11">
+<td class="py-2.5 px-4 font-bold text-on-surface flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+<span>12:00</span>
+</td>
+<td class="py-2.5 px-4 text-on-surface">28 L</td>
+<td class="py-2.5 px-4 text-secondary font-semibold">
+<span>↓ 8%</span>
+</td>
+<td class="py-2.5 px-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded-md bg-surface-container text-on-surface-variant text-[11px] font-semibold">
+                  Normal
+                </span>
+</td>
+<td class="py-2.5 px-4">
+<span class="inline-flex items-center gap-1 text-secondary font-semibold">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+<span>Óptimo</span>
+</span>
+</td>
+</tr>
+<!-- Row 6: 08:00 -->
+<tr class="bg-surface-container-lowest hover:bg-surface-container transition-colors h-11">
+<td class="py-2.5 px-4 font-bold text-on-surface flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span>
+<span>08:00</span>
+</td>
+<td class="py-2.5 px-4 font-bold text-primary">65 L</td>
+<td class="py-2.5 px-4 text-error font-semibold">
+<span>↑ 22%</span>
+</td>
+<td class="py-2.5 px-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded-md bg-error-container/60 text-on-error-container text-[11px] font-semibold">
+                  Pico matutino
+                </span>
+</td>
+<td class="py-2.5 px-4">
+<span class="inline-flex items-center gap-1 text-secondary font-semibold">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+<span>Óptimo</span>
+</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Table Footer / Pagination Metadata -->
+<div class="flex items-center justify-between pt-4 mt-2 text-on-surface-variant font-data-metric-sm text-data-metric-sm">
+<span>Mostrando 6 de 48 intervalos horarios auditados</span>
+<div class="flex items-center gap-2">
+<button class="px-3 py-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface disabled:opacity-40" disabled="" type="button">
+            Anterior
+          </button>
+<span class="font-bold text-primary">Página 1 de 8</span>
+<button class="px-3 py-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface font-semibold" type="button">
+            Siguiente
+          </button>
+</div>
+</div>
+</div>
+<!-- Bottom Action Buttons (48px height) -->
+<div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-start gap-4 mb-space-2xl">
+<!-- Primary CTA: Descargar Reporte Completo -->
+<button class="h-12 px-6 rounded-xl bg-primary hover:bg-primary-container text-on-primary font-label-lg text-label-lg font-bold flex items-center justify-center gap-2.5 shadow-md transition-all active:scale-[0.98]" type="button">
+<span class="material-symbols-outlined text-[20px]">file_download</span>
+<span>Descargar Reporte Completo (PDF/CSV)</span>
+</button>
+<!-- Secondary CTA: Compartir Telemetría -->
+<button class="h-12 px-6 rounded-xl bg-surface-container-lowest hover:bg-surface-container text-primary font-label-lg text-label-lg font-bold flex items-center justify-center gap-2.5 shadow-sm transition-all active:scale-[0.98]" type="button">
+<span class="material-symbols-outlined text-[20px]">share</span>
+<span>Compartir Datos de Telemetría</span>
+</button>
+</div>
+<!-- Safe Area Bottom Spacer (100px) -->
+<div aria-hidden="true" class="h-[100px] w-full"></div>
+</div>
+<!-- Interactive Logic for Zoom, Pan, and Tabs -->
+<script>
+    (function() {
+      // Time Range Tab Switching
+      const tabBtns = document.querySelectorAll('#time-range-tabs .tab-btn');
+      tabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          tabBtns.forEach(b => {
+            b.classList.remove('active', 'text-primary', 'font-bold');
+            b.classList.add('text-on-surface-variant', 'font-medium');
+            const dot = b.querySelector('span:first-child');
+            if (dot && !b.innerText.includes('Custom')) {
+              dot.className = 'w-2 h-2 rounded-full bg-outline-variant/60';
+            }
+            const bar = b.querySelector('.indicator-bar');
+            if (bar) bar.className = 'absolute bottom-0 left-3 right-3 h-[3px] bg-transparent rounded-full indicator-bar';
+          });
+          
+          btn.classList.add('active', 'text-primary', 'font-bold');
+          btn.classList.remove('text-on-surface-variant', 'font-medium');
+          const activeDot = btn.querySelector('span:first-child');
+          if (activeDot && !btn.innerText.includes('Custom')) {
+            activeDot.className = 'w-2 h-2 rounded-full bg-primary';
+          }
+          const activeBar = btn.querySelector('.indicator-bar');
+          if (activeBar) activeBar.className = 'absolute bottom-0 left-3 right-3 h-[3px] bg-primary rounded-full indicator-bar';
+        });
+      });
+
+      // SVG Interactive Micro-Zoom Simulator
+      const svg = document.getElementById('telemetry-svg');
+      const zoomInBtn = document.getElementById('zoom-in');
+      const zoomOutBtn = document.getElementById('zoom-out');
+      const zoomResetBtn = document.getElementById('zoom-reset');
+      let currentScale = 1.0;
+
+      if (svg && zoomInBtn && zoomOutBtn && zoomResetBtn) {
+        zoomInBtn.addEventListener('click', () => {
+          if (currentScale < 1.6) {
+            currentScale += 0.15;
+            svg.style.transform = `scale(${currentScale})`;
+            svg.style.transformOrigin = '50% 50%';
+            svg.style.transition = 'transform 200ms ease';
+          }
+        });
+
+        zoomOutBtn.addEventListener('click', () => {
+          if (currentScale > 0.8) {
+            currentScale -= 0.15;
+            svg.style.transform = `scale(${currentScale})`;
+            svg.style.transformOrigin = '50% 50%';
+            svg.style.transition = 'transform 200ms ease';
+          }
+        });
+
+        zoomResetBtn.addEventListener('click', () => {
+          currentScale = 1.0;
+          svg.style.transform = 'scale(1)';
+          svg.style.transition = 'transform 200ms ease';
+        });
+      }
+    })();
+  </script>
+</div></div></main><footer class="w-full bg-surface-container-lowest border-t border-outline-variant/30 py-space-lg mt-auto"><div class="max-w-[1200px] mx-auto px-8 flex flex-col md:flex-row items-center justify-between gap-4 font-body-sm text-body-sm text-on-surface-variant"><div class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-[16px]">eco</span><span>Cuida Tu Agua • Monitoreo Ecológico Inteligente</span></div><div class="flex items-center gap-6 font-data-metric-sm text-data-metric-sm"><span>Estado: Conectado</span><span>Latencia: 18ms</span><span>© 2024</span></div></div></footer></body></html>

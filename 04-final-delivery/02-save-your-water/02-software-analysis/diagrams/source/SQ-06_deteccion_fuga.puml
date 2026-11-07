@@ -1,0 +1,36 @@
+@startuml SQ-06_deteccion_fuga
+!include _estilo.iuml
+title SQ-06 · Detección de fuga sospechosa y alerta (HU-029)
+autonumber "<b>00"
+skinparam responseMessageBelowArrow true
+
+queue "RabbitMQ" as MQ
+participant "ms-consumption" as CON
+participant "LeakDetector" as LD
+participant "ms-notification" as NOT
+participant "Expo Push" as PUSH
+participant "Servidor SMTP" as MAIL
+participant "Proveedor SMS" as SMS
+participant "ms-valve" as VAL
+MQ -> CON : device.reading.received
+CON -> LD : Evaluate(lecturas recientes, ahora)
+note right of LD
+  Fuga = caudal ≥ 0,3 L/min sin parar
+  30 min (15 min entre 00:00 y 05:00).
+  Una lectura bajo el umbral o un hueco
+  > 3 min reinicia la cuenta.
+  Máximo una alerta por hora.
+end note
+alt se cumple la condición
+  LD --> CON : LeakSuspicion
+  CON -> MQ : consumption.leak.suspected\n{ placeId, since, liters, flowLpm, night }
+  MQ -> NOT : Crear notificación LeakSuspected (Crítica)
+  NOT -> PUSH : Push al celular
+  NOT -> MAIL : Correo (outbox con reintentos)
+  NOT -> SMS : WhatsApp / SMS
+  MQ -> VAL : ¿Regla de cierre automático activa?
+  VAL -> VAL : Crear AutoShutoffRequest (PENDING)\n→ ver SQ-07
+else no
+  LD --> CON : nada
+end
+@enduml

@@ -1,0 +1,36 @@
+@startuml AC-03_cierre_automatico
+!include _estilo.iuml
+title AC-03 · Actividad: detección de fuga y cierre automático con confirmación (HU-029, HU-036, HU-037)
+
+|Sistema|
+start
+:Recibir lectura de caudal;
+if (¿Caudal ≥ 0,3 L/min?) then (no)
+  :Reiniciar contador de flujo continuo;
+  stop
+endif
+:Acumular minutos de flujo continuo;
+if (¿30 min (15 min de 00:00 a 05:00)\ny sin alerta en la última hora?) then (no)
+  stop
+endif
+:Alerta crítica "Posible fuga"\npor App, Push, Correo y SMS/WhatsApp;
+if (¿Regla de cierre automático activa?) then (no)
+  stop
+endif
+:Pedir confirmación al Dueño;
+|Dueño|
+if (¿Confirma el cierre a tiempo?) then (sí)
+  |Sistema|
+  :Crear orden CLOSE (origen AUTO_LEAK);
+  :Cerrar la válvula (ver AC-02, desde el envío);
+  :Notificar "Válvula cerrada por fuga";
+  |Dueño|
+  :Revisar la instalación;
+  :Abrir la válvula manualmente\ncuando lo decida (HU-037);
+else (no / vence)
+  |Sistema|
+  :Registrar la solicitud como\nrechazada o vencida;
+  :No tocar la válvula;
+endif
+stop
+@enduml

@@ -1,0 +1,19 @@
+@startuml ST-01_cuenta
+!include _estilo.iuml
+title ST-01 · Estados de la cuenta de usuario
+
+[*] --> SinVerificar : registro (HU-001)
+SinVerificar : UNVERIFIED
+SinVerificar --> Activa : código correcto (HU-002)
+Activa : ACTIVE
+Activa --> BloqueoTemporal : 5 intentos fallidos
+BloqueoTemporal : bloqueo de 15 min
+BloqueoTemporal --> Activa : vence el bloqueo /\nrecupera la contraseña
+Activa --> Bloqueada : el administrador la bloquea (HU-060)
+Bloqueada : BLOCKED · sesiones revocadas
+Bloqueada --> Activa : el administrador la desbloquea
+Activa --> Eliminada : el usuario la elimina (HU-008)
+SinVerificar --> Eliminada : el usuario la elimina
+Eliminada : DELETED · borrado lógico
+Eliminada --> [*]
+@enduml

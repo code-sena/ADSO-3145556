@@ -1,0 +1,538 @@
+<!DOCTYPE html><html class="light" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Lugares - Cuida Tu Agua</title>
+<!-- Google Fonts: Manrope & IBM Plex Mono -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "tertiary-fixed": "#a7edff",
+            "background": "#f8f9ff",
+            "inverse-surface": "#213145",
+            "surface-canvas": "#F8FBFD",
+            "status-success": "#10B981",
+            "on-tertiary-fixed": "#001f25",
+            "on-primary-fixed": "#001e2c",
+            "surface-container-low": "#eff4ff",
+            "on-tertiary": "#ffffff",
+            "tertiary-container": "#008094",
+            "status-warning": "#F59E0B",
+            "secondary": "#315ca9",
+            "primary-fixed-dim": "#77d1ff",
+            "on-secondary-fixed": "#001a42",
+            "surface-container": "#e5eeff",
+            "surface-bright": "#f8f9ff",
+            "error-container": "#ffdad6",
+            "error": "#ba1a1a",
+            "surface-tint": "#006688",
+            "on-background": "#0b1c30",
+            "outline-variant": "#bdc8d0",
+            "on-primary": "#ffffff",
+            "primary": "#006385",
+            "on-tertiary-fixed-variant": "#004e5b",
+            "on-error": "#ffffff",
+            "status-danger": "#EF4444",
+            "surface-container-highest": "#d3e4fe",
+            "tertiary": "#006575",
+            "surface-container-high": "#dce9ff",
+            "surface-subtle": "#F2F2F2",
+            "inverse-on-surface": "#eaf1ff",
+            "primary-fixed": "#c2e8ff",
+            "primary-container": "#007ea7",
+            "surface-dim": "#cbdbf5",
+            "on-secondary-container": "#033e8a",
+            "on-tertiary-container": "#f8fdff",
+            "secondary-container": "#86adff",
+            "surface": "#f8f9ff",
+            "inverse-primary": "#77d1ff",
+            "surface-container-lowest": "#ffffff",
+            "on-secondary": "#ffffff",
+            "on-error-container": "#93000a",
+            "surface-card": "#FFFFFF",
+            "on-primary-fixed-variant": "#004d68",
+            "secondary-fixed-dim": "#aec6ff",
+            "on-secondary-fixed-variant": "#0f4490",
+            "on-surface": "#0b1c30",
+            "tertiary-fixed-dim": "#58d6f1",
+            "secondary-fixed": "#d8e2ff",
+            "on-surface-variant": "#3e484f",
+            "border-subtle": "#E2E8F0",
+            "surface-variant": "#d3e4fe",
+            "on-primary-container": "#fbfcff",
+            "outline": "#6e787f"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "margin": "2.5rem",
+            "space-md": "1rem",
+            "space-lg": "1.5rem",
+            "space-sm": "0.75rem",
+            "gutter": "2rem",
+            "space-xl": "3rem",
+            "space-xs": "0.5rem"
+          },
+          "fontFamily": {
+            "caption": ["Manrope"],
+            "display-hero": ["Manrope"],
+            "headline-lg": ["Manrope"],
+            "body-md": ["Manrope"],
+            "telemetry-md": ["IBM Plex Mono"],
+            "telemetry-sm": ["IBM Plex Mono"],
+            "headline-md": ["Manrope"],
+            "body-lg": ["Manrope"],
+            "headline-sm": ["Manrope"],
+            "telemetry-lg": ["IBM Plex Mono"],
+            "body-bold": ["Manrope"]
+          },
+          "fontSize": {
+            "caption": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+            "display-hero": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+            "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.015em", "fontWeight": "700" }],
+            "body-md": ["14px", { "lineHeight": "22px", "fontWeight": "400" }],
+            "telemetry-md": ["16px", { "lineHeight": "24px", "fontWeight": "500" }],
+            "telemetry-sm": ["12px", { "lineHeight": "18px", "letterSpacing": "0.04em", "fontWeight": "400" }],
+            "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "body-lg": ["16px", { "lineHeight": "26px", "fontWeight": "400" }],
+            "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+            "telemetry-lg": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "body-bold": ["14px", { "lineHeight": "22px", "fontWeight": "600" }]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    .place-card-shadow {
+      box-shadow: 0 1px 3px 0 rgba(2, 62, 138, 0.04), 0 1px 2px -1px rgba(2, 62, 138, 0.04);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .place-card-shadow:hover {
+      box-shadow: 0 10px 25px -5px rgba(2, 62, 138, 0.08), 0 8px 10px -6px rgba(2, 62, 138, 0.04);
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body class="bg-surface-canvas text-on-surface antialiased min-h-screen flex flex-col selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- TOP APP BAR (Shared Component) -->
+<header class="w-full bg-surface-card dark:bg-inverse-surface border-b border-border-subtle dark:border-outline-variant shadow-sm sticky top-0 z-50">
+<div class="w-full h-16 max-w-[1600px] mx-auto px-margin flex items-center justify-between">
+<!-- Brand Cluster -->
+<div class="flex items-center gap-8">
+<a class="text-headline-sm font-headline-sm font-bold text-primary dark:text-inverse-primary flex items-center gap-space-xs transition-opacity hover:opacity-90" href="#">
+<img src="https://lh3.googleusercontent.com/aida/AEtjO1XAcgthymaBhgC79CLgZ-JHDDgjQOYchvRT0V2DWvR8itykSJq8TomWpRo9f6a8jWciEUzK1Qy-E0bIvaij8pnV2XJqwi93Mp2b7sn0_8_KFrbXPdEdlYthqXTckR7007DKMAH0Uxrtd2HgvCd1qqmUrbQ5VhN0kqprCaFCkPDRmavj_qJSN5AYhRHwtqobOqKuDaGs4Lr5VnecwnnZvrGjDWxLEnVN9wCEr60XV50AogOIu_oG---Dma8" alt="Cuida Tu Agua" class="w-7 h-7 object-contain inline-block shrink-0">
+<span class="">Cuida Tu Agua</span>
+</a>
+<!-- Desktop Navigation Links (Places is current screen -> active) -->
+<nav class="hidden md:flex items-center h-16 gap-2">
+<!-- Active: Lugares -->
+<a class="text-primary dark:text-inverse-primary font-body-bold border-b-2 border-primary dark:border-inverse-primary h-full flex items-center px-space-sm cursor-pointer transition-colors duration-150" href="#">
+            Lugares
+          </a>
+<!-- Inactive: Dispositivos -->
+<a class="text-on-surface-variant dark:text-outline-variant font-body-md h-full flex items-center px-space-sm hover:text-primary dark:hover:text-inverse-primary hover:bg-surface-container-low dark:hover:bg-surface-variant transition-colors duration-150 cursor-pointer" href="#">
+            Dispositivos
+          </a>
+<!-- Inactive: Alertas -->
+<a class="text-on-surface-variant dark:text-outline-variant font-body-md h-full flex items-center px-space-sm hover:text-primary dark:hover:text-inverse-primary hover:bg-surface-container-low dark:hover:bg-surface-variant transition-colors duration-150 cursor-pointer" href="#">
+            Alertas
+          </a>
+<!-- Inactive: Configuración -->
+<a class="text-on-surface-variant dark:text-outline-variant font-body-md h-full flex items-center px-space-sm hover:text-primary dark:hover:text-inverse-primary hover:bg-surface-container-low dark:hover:bg-surface-variant transition-colors duration-150 cursor-pointer" href="#">
+            Configuración
+          </a>
+</nav>
+</div>
+<!-- Trailing Action Cluster -->
+<div class="flex items-center gap-space-md">
+<button aria-label="Notificaciones" class="w-10 h-10 rounded-lg flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors duration-150 relative cursor-pointer" type="button">
+<span class="material-symbols-outlined text-xl" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-status-danger"></span>
+</button>
+<button aria-label="Ayuda" class="w-10 h-10 rounded-lg flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors duration-150 cursor-pointer" type="button">
+<span class="material-symbols-outlined text-xl" data-icon="help_outline">help_outline</span>
+</button>
+<!-- Divider -->
+<div class="h-6 w-px bg-border-subtle"></div>
+<!-- Profile Cluster -->
+<div class="flex items-center gap-3 pl-1">
+<img alt="Foto de perfil del usuario administrador" class="w-9 h-9 rounded-full object-cover border border-border-subtle" data-alt="Professional corporate portrait of a municipal water grid engineer in clean attire against a soft neutral studio background with clinical high-key ambient light and cool cyan undertones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDC-k5-6nw7QaHeX3HlV47u6ldxlLyJ9088oDlxWL2kFqsY1z9duCAO9xWCzv46VRnQijzk16zQHWgHa5_36_LPX6C5-NEWYyMgoi8SniJnpKV7EftzwziSRxtOIWcxQQaTJHYxYY5tZWqAidZbwHyG441EP-N1Q0RfIdBuhbi4Lz1rD7KDgG1qN_SBk_dvcXJZETeJCOZor0jnFTQ-Dt5w117Hqvnp-ExaYNrA14Vi-CUTOKALVmqd">
+<div class="hidden lg:flex flex-col text-left">
+<span class="font-body-bold text-body-md text-on-surface leading-tight">Admin Hídrico</span>
+<span class="font-caption text-caption text-on-surface-variant">Sede Central</span>
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- MAIN CANVAS -->
+<main class="flex-1 w-full max-w-[850px] mx-auto px-4 sm:px-6 pt-10 pb-16 flex flex-col">
+<!-- PAGE HEADER -->
+<section class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+<!-- Title Lockup -->
+<div class="flex items-center gap-space-sm">
+<div class="w-12 h-12 rounded-xl bg-surface-card border border-border-subtle flex items-center justify-center text-primary shadow-sm">
+<span class="material-symbols-outlined text-2xl" data-icon="location_on" style="font-variation-settings: 'FILL' 1;">location_on</span>
+</div>
+<div>
+<h1 class="font-headline-lg text-headline-sm sm:text-headline-md font-bold text-on-surface tracking-tight">Mis Lugares</h1>
+<p class="font-caption text-caption text-on-surface-variant">Gestión y telemetría de instalaciones monitoreadas en tiempo real</p>
+</div>
+</div>
+<!-- Controls: Search bar + Primary action -->
+<div class="flex items-center gap-3 w-full sm:w-auto">
+<!-- Search bar -->
+<div class="relative flex-1 sm:w-[220px]">
+<span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-outline text-xl pointer-events-none" data-icon="search">search</span>
+<input class="w-full h-10 pl-10 pr-3 bg-surface-card border border-border-subtle rounded-lg font-body-md text-sm text-on-surface placeholder:text-outline focus:outline-none focus:border-primary-container focus:ring-2 focus:ring-primary/20 transition-all duration-150" placeholder="Buscar lugar..." type="text">
+</div>
+<!-- Primary Action (+ Nuevo Lugar) -->
+<button class="h-10 px-4 rounded-lg bg-primary-container hover:bg-secondary text-on-primary font-body-bold text-sm flex items-center gap-1.5 shadow-sm transition-all duration-150 active:scale-95 cursor-pointer shrink-0" type="button">
+<span class="material-symbols-outlined text-lg" data-icon="add">add</span>
+<span class="">Nuevo Lugar</span>
+</button>
+</div>
+</section>
+<!-- SPACER 20px -->
+<div class="h-5"></div>
+<!-- FILTERS SECTION -->
+<section class="w-full bg-surface-subtle rounded-lg px-4 py-3 flex flex-wrap items-center justify-between gap-3 border border-border-subtle/60">
+<div class="flex flex-wrap items-center gap-4">
+<!-- Filter 1: Ordenar por -->
+<div class="flex items-center gap-2">
+<label class="font-body-bold text-caption text-on-surface-variant" for="sort-select">Ordenar por:</label>
+<div class="relative">
+<select class="appearance-none bg-surface-card border border-border-subtle rounded-lg pl-2.5 pr-7 py-1 font-body-md text-sm text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary/20 cursor-pointer transition-colors shadow-xs" id="sort-select">
+<option value="reciente">Reciente</option>
+<option value="nombre">Nombre (A-Z)</option>
+<option value="consumo-alto">Mayor consumo</option>
+<option value="consumo-bajo">Menor consumo</option>
+</select>
+<span class="material-symbols-outlined absolute right-1.5 top-1/2 -translate-y-1/2 text-outline text-base pointer-events-none" data-icon="expand_more">expand_more</span>
+</div>
+</div>
+<!-- Filter 2: Tipo -->
+<div class="flex items-center gap-2">
+<label class="font-body-bold text-caption text-on-surface-variant" for="type-select">Tipo:</label>
+<div class="relative">
+<select class="appearance-none bg-surface-card border border-border-subtle rounded-lg pl-2.5 pr-7 py-1 font-body-md text-sm text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary/20 cursor-pointer transition-colors shadow-xs" id="type-select">
+<option value="todos">Todos</option>
+<option value="residencial">Residencial</option>
+<option value="comercial">Comercial</option>
+<option value="industrial">Industrial</option>
+</select>
+<span class="material-symbols-outlined absolute right-1.5 top-1/2 -translate-y-1/2 text-outline text-base pointer-events-none" data-icon="expand_more">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Quick Telemetry Summary Pill -->
+<div class="flex items-center gap-2">
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant bg-surface-card px-2.5 py-1 rounded-full border border-border-subtle">
+6 LUGARES REGISTRADOS
+</span>
+</div>
+</section>
+<!-- SPACER 24px -->
+<div class="h-6"></div>
+<!-- PLACE CARD GRID (2 COLUMNAS centradas y proporcionadas a escala 850px) -->
+<section class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
+<!-- TARJETA 1: Casa Principal -->
+<article class="bg-surface-card border border-border-subtle rounded-xl p-4 place-card-shadow flex flex-col justify-between relative group">
+<!-- Top Row -->
+<div class="flex items-start justify-between gap-2.5">
+<div class="flex items-start gap-2.5 min-w-0">
+<div class="w-9 h-9 rounded-lg bg-surface-container-low flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-xl" data-icon="home">home</span>
+</div>
+<div class="truncate">
+<div class="flex items-center gap-1.5">
+<h3 class="font-headline-sm text-base font-bold text-on-surface truncate">Casa Principal</h3>
+<span class="font-caption text-caption px-1.5 py-0.5 rounded-full bg-surface-container text-on-surface-variant border border-border-subtle">Residencial</span>
+</div>
+<p class="font-caption text-caption text-on-surface-variant flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-sm" data-icon="location_on">location_on</span>
+Bogotá, Colombia
+</p>
+</div>
+</div>
+<!-- Device status pill -->
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-status-success/10 text-status-success font-telemetry-sm text-telemetry-sm shrink-0 border border-status-success/20">
+<span class="w-1.5 h-1.5 rounded-full bg-status-success animate-pulse"></span>
+Conectado · <span class="font-telemetry-sm">ESP32-12345</span>
+</span>
+</div>
+<!-- Bottom Row: Metrics & Action -->
+<div class="flex items-end justify-between pt-3 mt-3 border-t border-border-subtle/80">
+<div>
+<span class="font-caption text-caption text-on-surface-variant block">Consumo actual</span>
+<div class="flex items-baseline gap-1">
+<span class="font-telemetry-lg text-telemetry-md font-bold text-primary">123.45</span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">L</span>
+</div>
+</div>
+<a class="inline-flex items-center gap-1 font-body-bold text-sm text-primary group-hover:text-secondary group-hover:translate-x-0.5 transition-all duration-150" href="#">
+<span class="">Ver detalles</span>
+<span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</article>
+<!-- TARJETA 2: Oficina Central -->
+<article class="bg-surface-card border border-border-subtle rounded-xl p-4 place-card-shadow flex flex-col justify-between relative group">
+<!-- Top Row -->
+<div class="flex items-start justify-between gap-2.5">
+<div class="flex items-start gap-2.5 min-w-0">
+<div class="w-9 h-9 rounded-lg bg-surface-container-low flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-xl" data-icon="domain">domain</span>
+</div>
+<div class="truncate">
+<div class="flex items-center gap-1.5">
+<h3 class="font-headline-sm text-base font-bold text-on-surface truncate">Oficina Central</h3>
+<span class="font-caption text-caption px-1.5 py-0.5 rounded-full bg-surface-container text-on-surface-variant border border-border-subtle">Comercial</span>
+</div>
+<p class="font-caption text-caption text-on-surface-variant flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-sm" data-icon="location_on">location_on</span>
+Medellín, Colombia
+</p>
+</div>
+</div>
+<!-- Device status pill -->
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-status-warning/10 text-status-warning font-telemetry-sm text-telemetry-sm shrink-0 border border-status-warning/20">
+<span class="w-1.5 h-1.5 rounded-full bg-status-warning"></span>
+Sin dispositivo
+</span>
+</div>
+<!-- Bottom Row: Metrics & Action -->
+<div class="flex items-end justify-between pt-3 mt-3 border-t border-border-subtle/80">
+<div>
+<span class="font-caption text-caption text-on-surface-variant block">Consumo actual</span>
+<div class="flex items-baseline gap-1">
+<span class="font-telemetry-lg text-telemetry-md font-bold text-on-surface-variant">0.00</span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">L</span>
+</div>
+</div>
+<a class="inline-flex items-center gap-1 font-body-bold text-sm text-primary group-hover:text-secondary group-hover:translate-x-0.5 transition-all duration-150" href="#">
+<span class="">Ver detalles</span>
+<span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</article>
+<!-- TARJETA 3: Bodega Norte -->
+<article class="bg-surface-card border border-border-subtle rounded-xl p-4 place-card-shadow flex flex-col justify-between relative group">
+<!-- Top Row -->
+<div class="flex items-start justify-between gap-2.5">
+<div class="flex items-start gap-2.5 min-w-0">
+<div class="w-9 h-9 rounded-lg bg-surface-container-low flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-xl" data-icon="warehouse">warehouse</span>
+</div>
+<div class="truncate">
+<div class="flex items-center gap-1.5">
+<h3 class="font-headline-sm text-base font-bold text-on-surface truncate">Bodega Norte</h3>
+<span class="font-caption text-caption px-1.5 py-0.5 rounded-full bg-surface-container text-on-surface-variant border border-border-subtle">Comercial</span>
+</div>
+<p class="font-caption text-caption text-on-surface-variant flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-sm" data-icon="location_on">location_on</span>
+Cali, Colombia
+</p>
+</div>
+</div>
+<!-- Device status pill -->
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-status-danger/10 text-status-danger font-telemetry-sm text-telemetry-sm shrink-0 border border-status-danger/20">
+<span class="w-1.5 h-1.5 rounded-full bg-status-danger"></span>
+Desconectado
+</span>
+</div>
+<!-- Bottom Row: Metrics & Action -->
+<div class="flex items-end justify-between pt-3 mt-3 border-t border-border-subtle/80">
+<div>
+<span class="font-caption text-caption text-on-surface-variant block">Última sincronía</span>
+<div class="flex items-baseline gap-1 mt-0.5">
+<span class="font-telemetry-md text-sm text-status-danger font-medium">hace 5 horas</span>
+</div>
+</div>
+<a class="inline-flex items-center gap-1 font-body-bold text-sm text-primary group-hover:text-secondary group-hover:translate-x-0.5 transition-all duration-150" href="#">
+<span class="">Ver detalles</span>
+<span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</article>
+<!-- TARJETA 4: Finca El Retiro -->
+<article class="bg-surface-card border border-border-subtle rounded-xl p-4 place-card-shadow flex flex-col justify-between relative group">
+<!-- Top Row -->
+<div class="flex items-start justify-between gap-2.5">
+<div class="flex items-start gap-2.5 min-w-0">
+<div class="w-9 h-9 rounded-lg bg-surface-container-low flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-xl" data-icon="cabin">cabin</span>
+</div>
+<div class="truncate">
+<div class="flex items-center gap-1.5">
+<h3 class="font-headline-sm text-base font-bold text-on-surface truncate">Finca El Retiro</h3>
+<span class="font-caption text-caption px-1.5 py-0.5 rounded-full bg-surface-container text-on-surface-variant border border-border-subtle">Residencial</span>
+</div>
+<p class="font-caption text-caption text-on-surface-variant flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-sm" data-icon="location_on">location_on</span>
+Rionegro, Colombia
+</p>
+</div>
+</div>
+<!-- Device status pill -->
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-status-success/10 text-status-success font-telemetry-sm text-telemetry-sm shrink-0 border border-status-success/20">
+<span class="w-1.5 h-1.5 rounded-full bg-status-success animate-pulse"></span>
+Conectado · <span class="font-telemetry-sm">ESP32-88219</span>
+</span>
+</div>
+<!-- Bottom Row: Metrics & Action -->
+<div class="flex items-end justify-between pt-3 mt-3 border-t border-border-subtle/80">
+<div>
+<span class="font-caption text-caption text-on-surface-variant block">Consumo actual</span>
+<div class="flex items-baseline gap-1">
+<span class="font-telemetry-lg text-telemetry-md font-bold text-primary">450.80</span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">L</span>
+</div>
+</div>
+<a class="inline-flex items-center gap-1 font-body-bold text-sm text-primary group-hover:text-secondary group-hover:translate-x-0.5 transition-all duration-150" href="#">
+<span class="">Ver detalles</span>
+<span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</article>
+<!-- TARJETA 5: Local Comercial 4 -->
+<article class="bg-surface-card border border-border-subtle rounded-xl p-4 place-card-shadow flex flex-col justify-between relative group">
+<!-- Top Row -->
+<div class="flex items-start justify-between gap-2.5">
+<div class="flex items-start gap-2.5 min-w-0">
+<div class="w-9 h-9 rounded-lg bg-surface-container-low flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-xl" data-icon="storefront">storefront</span>
+</div>
+<div class="truncate">
+<div class="flex items-center gap-1.5">
+<h3 class="font-headline-sm text-base font-bold text-on-surface truncate">Local Comercial 4</h3>
+<span class="font-caption text-caption px-1.5 py-0.5 rounded-full bg-surface-container text-on-surface-variant border border-border-subtle">Comercial</span>
+</div>
+<p class="font-caption text-caption text-on-surface-variant flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-sm" data-icon="location_on">location_on</span>
+Barranquilla, Colombia
+</p>
+</div>
+</div>
+<!-- Device status pill -->
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-status-success/10 text-status-success font-telemetry-sm text-telemetry-sm shrink-0 border border-status-success/20">
+<span class="w-1.5 h-1.5 rounded-full bg-status-success animate-pulse"></span>
+Conectado · <span class="font-telemetry-sm">ESP32-90112</span>
+</span>
+</div>
+<!-- Bottom Row: Metrics & Action -->
+<div class="flex items-end justify-between pt-3 mt-3 border-t border-border-subtle/80">
+<div>
+<span class="font-caption text-caption text-on-surface-variant block">Consumo actual</span>
+<div class="flex items-baseline gap-1">
+<span class="font-telemetry-lg text-telemetry-md font-bold text-primary">89.20</span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">L</span>
+</div>
+</div>
+<a class="inline-flex items-center gap-1 font-body-bold text-sm text-primary group-hover:text-secondary group-hover:translate-x-0.5 transition-all duration-150" href="#">
+<span class="">Ver detalles</span>
+<span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</article>
+<!-- TARJETA 6: Apartamento 502 -->
+<article class="bg-surface-card border border-border-subtle rounded-xl p-4 place-card-shadow flex flex-col justify-between relative group">
+<!-- Top Row -->
+<div class="flex items-start justify-between gap-2.5">
+<div class="flex items-start gap-2.5 min-w-0">
+<div class="w-9 h-9 rounded-lg bg-surface-container-low flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-xl" data-icon="apartment">apartment</span>
+</div>
+<div class="truncate">
+<div class="flex items-center gap-1.5">
+<h3 class="font-headline-sm text-base font-bold text-on-surface truncate">Apartamento 502</h3>
+<span class="font-caption text-caption px-1.5 py-0.5 rounded-full bg-surface-container text-on-surface-variant border border-border-subtle">Residencial</span>
+</div>
+<p class="font-caption text-caption text-on-surface-variant flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-sm" data-icon="location_on">location_on</span>
+Bucaramanga, Colombia
+</p>
+</div>
+</div>
+<!-- Device status pill -->
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-status-warning/10 text-status-warning font-telemetry-sm text-telemetry-sm shrink-0 border border-status-warning/20">
+<span class="w-1.5 h-1.5 rounded-full bg-status-warning"></span>
+Sin dispositivo
+</span>
+</div>
+<!-- Bottom Row: Metrics & Action -->
+<div class="flex items-end justify-between pt-3 mt-3 border-t border-border-subtle/80">
+<div>
+<span class="font-caption text-caption text-on-surface-variant block">Consumo actual</span>
+<div class="flex items-baseline gap-1">
+<span class="font-telemetry-lg text-telemetry-md font-bold text-outline">--</span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">L</span>
+</div>
+</div>
+<a class="inline-flex items-center gap-1 font-body-bold text-sm text-primary group-hover:text-secondary group-hover:translate-x-0.5 transition-all duration-150" href="#">
+<span class="">Ver detalles</span>
+<span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</article>
+</section>
+<!-- SPACER 48px -->
+<div class="h-12"></div>
+</main>
+<!-- WEB FOOTER (Shared Component) -->
+<footer class="w-full bg-surface-canvas dark:bg-surface-dim border-t border-border-subtle dark:border-outline-variant mt-auto">
+<div class="w-full max-w-[1600px] mx-auto px-margin py-space-lg flex flex-col md:flex-row items-center justify-between gap-space-md">
+<!-- Brand & Copyright -->
+<div class="flex flex-col sm:flex-row items-center gap-3 text-center sm:text-left">
+<span class="text-headline-sm font-headline-sm font-bold text-primary dark:text-inverse-primary flex items-center gap-1.5">
+<img src="https://lh3.googleusercontent.com/aida/AEtjO1XAcgthymaBhgC79CLgZ-JHDDgjQOYchvRT0V2DWvR8itykSJq8TomWpRo9f6a8jWciEUzK1Qy-E0bIvaij8pnV2XJqwi93Mp2b7sn0_8_KFrbXPdEdlYthqXTckR7007DKMAH0Uxrtd2HgvCd1qqmUrbQ5VhN0kqprCaFCkPDRmavj_qJSN5AYhRHwtqobOqKuDaGs4Lr5VnecwnnZvrGjDWxLEnVN9wCEr60XV50AogOIu_oG---Dma8" alt="Cuida Tu Agua" class="w-7 h-7 object-contain inline-block shrink-0">
+<span class="">Cuida Tu Agua</span>
+</span>
+<span class="hidden sm:inline text-outline-variant">|</span>
+<p class="font-caption text-caption text-on-surface-variant dark:text-outline-variant">
+          © 2024 Cuida Tu Agua. Sistema de Monitoreo de Recursos Hídricos e IoT. Todos los derechos reservados.
+        </p>
+</div>
+<!-- Links -->
+<nav class="flex flex-wrap items-center justify-center gap-6">
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-inverse-primary transition-colors duration-150 cursor-pointer" href="#">
+          Soporte Técnico
+        </a>
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-inverse-primary transition-colors duration-150 cursor-pointer" href="#">
+          Documentación API
+        </a>
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-inverse-primary transition-colors duration-150 cursor-pointer" href="#">
+          Privacidad
+        </a>
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-inverse-primary transition-colors duration-150 cursor-pointer" href="#">
+          Términos
+        </a>
+</nav>
+</div>
+</footer>
+
+
+
+
+</body></html>

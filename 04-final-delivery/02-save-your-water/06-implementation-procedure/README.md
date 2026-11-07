@@ -4,8 +4,16 @@
 
 ## Required content / Contenido requerido
 
-- [ ] Implementation procedure, with environments and steps / Procedimiento de implementación, con ambientes y pasos
-- [ ] Deployment evidence and production URL, if deployed / Evidencia de despliegue y URL de producción, si se desplegó
+- [x] Implementation procedure, with environments and steps / Procedimiento de implementación, con ambientes y pasos
+- [x] Deployment evidence and production URL, if deployed / Evidencia de despliegue y URL de producción, si se desplegó
+
+## Files / Archivos
+
+| File / Archivo | Content / Contenido |
+|---|---|
+| [`implementation-procedure.pdf`](implementation-procedure.pdf) | Implementation procedure v1.0, with environments, steps and deployment evidence. Production URL: https://sy-water.tech / Procedimiento de implementación v1.0, con ambientes, pasos y evidencia de despliegue. URL de producción: https://sy-water.tech |
+
+The documents are delivered in PDF; the diagrams include their editable PlantUML source. / Los documentos se entregan en PDF; los diagramas incluyen su fuente editable en PlantUML.
 
 ## Format / Formato
 

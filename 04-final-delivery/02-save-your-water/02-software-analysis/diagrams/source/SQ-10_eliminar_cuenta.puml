@@ -1,0 +1,26 @@
+@startuml SQ-10_eliminar_cuenta
+!include _estilo.iuml
+title SQ-10 · Eliminar la cuenta (HU-008)
+autonumber "<b>00"
+skinparam responseMessageBelowArrow true
+
+actor "Usuario" as U
+participant "App" as APP
+participant "ms-iam" as IAM
+database "Redis" as R
+participant "ms-device" as DEV
+participant "ms-places" as PL
+queue "RabbitMQ" as MQ
+U -> APP : Confirma "Eliminar mi cuenta" + contraseña
+APP -> IAM : DELETE /api/users/me { password }
+IAM -> IAM : Verificar contraseña
+IAM -> IAM : User.delete() (borrado lógico)\n+ revocar refresh tokens
+IAM -> R : Revocar access token actual
+IAM -> DEV : DELETE /internal/users/{id}/devices (X-Internal-Key)
+DEV -> DEV : Desvincular cada medidor del usuario
+DEV -> MQ : device.unlinked (uno por medidor)
+IAM -> PL : DELETE /internal/users/{id}/places (X-Internal-Key)
+PL -> PL : Borrado lógico de sus lugares\ny retiro de sus accesos de colaborador
+IAM --> APP : 204
+APP --> U : Sesión cerrada en todos los dispositivos
+@enduml

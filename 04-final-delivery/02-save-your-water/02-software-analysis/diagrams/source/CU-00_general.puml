@@ -1,0 +1,85 @@
+@startuml CU-00_general
+!include _estilo.iuml
+title CU-00 · Diagrama general de casos de uso — Cuida Tu Agua
+left to right direction
+skinparam nodesep 18
+skinparam ranksep 60
+skinparam ArrowThickness 1.4
+
+' ===== Actores humanos (izquierda) =====
+actor "Usuario base" as UB
+actor "Colaborador" as CO
+actor "Dueño" as DU
+actor "Invitado\n(anónimo)" as IN
+actor "Administrador" as AD
+
+' ===== Sistema =====
+rectangle "Sistema Cuida Tu Agua" {
+  usecase "UC1 Gestionar cuenta\n(registro, sesión, perfil)" as P1
+  usecase "UC2 Gestionar lugares" as P2
+
+  usecase "UC4 Consultar consumo y caudal" as P4
+  usecase "UC6 Controlar la válvula" as P6
+  usecase "UC8 Recibir y gestionar\nnotificaciones" as P8
+
+  usecase "UC3 Vincular y monitorear\nel medidor" as P3
+  usecase "UC5 Gestionar metas de consumo" as P5
+  usecase "UC7 Configurar cierre\nautomático por fuga" as P7
+  usecase "UC9 Compartir lugar\n(invitado / colaborador)" as P9
+  usecase "UC11 Gestionar recibos y tarifas" as P11
+  usecase "UC12 Generar reportes y exportar" as P12
+
+  usecase "UC10 Ver consumo de\nsolo lectura" as P10
+
+  usecase "UC13 Administrar plataforma\n(usuarios, dispositivos, métricas)" as P13
+  usecase "UC14 Gestionar consejos de ahorro" as P14
+}
+
+' ===== Actores de sistema (derecha) =====
+
+actor "Medidor IoT\n(ESP32)" as IOT <<sistema>>
+actor "Temporizador\ndel sistema" as TMP <<sistema>>
+actor "Servicios externos\n(correo, push, SMS, Google)" as EXT <<sistema>>
+
+' Herencia: el Dueño puede todo lo del Colaborador,
+' y el Colaborador todo lo del Usuario base.
+CO -up-|> UB
+DU -up-|> CO
+
+UB --> P1
+UB --> P2
+
+CO --> P4
+CO --> P6
+CO --> P8
+
+DU --> P3
+DU --> P5
+DU --> P7
+DU --> P9
+DU --> P11
+DU --> P12
+
+IN --> P10
+
+AD --> P13
+AD --> P14
+
+P6 -[hidden]right- P7
+P7 -[hidden]right- P4
+P4 -[hidden]right- P8
+
+' Actores de sistema: solo donde participan
+P7 --> IOT
+P3 --> IOT
+P6 --> IOT
+P8 --> TMP
+P1 --> EXT
+P8 --> EXT
+
+note right of CO
+  El Colaborador solo ejecuta las acciones
+  que el Dueño le habilitó (HU-044, HU-045).
+  El Dueño hereda todos sus casos de uso.
+end note
+@enduml

@@ -1,0 +1,34 @@
+@startuml SQ-04_telemetria_consumo
+!include _estilo.iuml
+title SQ-04 · Telemetría del medidor y consulta de consumo (HU-013, HU-015 a HU-018)
+autonumber "<b>00"
+skinparam responseMessageBelowArrow true
+
+participant "ESP32\n(YF-S201)" as ESP
+queue "Mosquitto\n(MQTT)" as BRK
+participant "ms-device" as DEV
+queue "RabbitMQ" as MQ
+participant "ms-consumption" as CON
+participant "ms-notification" as NOT
+participant "App" as APP
+actor "Dueño" as U
+loop cada 30 s
+  ESP -> BRK : sywater/devices/{serial}/heartbeat\n{ token, fw }
+  BRK -> DEV : heartbeat
+  DEV -> DEV : RecordHeartbeat()\n→ Connected, lastReportAt
+end
+loop cada 10 s
+  ESP -> BRK : sywater/devices/{serial}/telemetry\n{ token, ts, lpm, vol, total }
+  BRK -> DEV : lectura
+  DEV -> DEV : validar token y vínculo
+  DEV -> MQ : device.reading.received
+  MQ -> CON : guardar Reading (idempotente)\ny acumular HourlyTotal
+  MQ -> NOT : PlaceDevice.ApplyReading()
+end
+U -> APP : Abre el panel del lugar
+APP -> CON : GET /api/places/{id}/consumption?period=DAY&timeZone=...
+CON --> APP : { totalLiters, buckets[], currentFlowLpm, lastReadingAt }
+APP -> DEV : GET /api/places/{id}/device
+DEV --> APP : { status, lastReportAt, firmware }
+APP --> U : Total, gráfica, caudal actual\ny estado del medidor
+@enduml

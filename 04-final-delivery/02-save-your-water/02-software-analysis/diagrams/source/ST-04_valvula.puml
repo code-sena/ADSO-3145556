@@ -1,0 +1,23 @@
+@startuml ST-04_valvula
+!include _estilo.iuml
+title ST-04 · Estados de la válvula de un lugar
+
+[*] --> Desconocido : se vincula el medidor
+Desconocido : UNKNOWN
+Desconocido --> Abierta : primer reporte OPEN
+Desconocido --> Cerrada : primer reporte CLOSED
+Abierta : OPEN
+Cerrada : CLOSED
+Abierta --> Cerrada : orden CLOSE confirmada\n(manual o por fuga)
+Cerrada --> Abierta : orden OPEN confirmada\n(siempre manual)
+note right of Cerrada
+  Tras un corte de luz el medidor
+  restaura el último estado: una
+  válvula cerrada sigue cerrada.
+end note
+state "Sin comunicación" as SC
+Abierta --> SC : 3 min sin reportes
+Cerrada --> SC : 3 min sin reportes
+SC --> Abierta : reporte OPEN
+SC --> Cerrada : reporte CLOSED
+@enduml

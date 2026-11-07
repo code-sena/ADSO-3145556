@@ -4,7 +4,17 @@
 
 ## Required content / Contenido requerido
 
-- [ ] Final article of the project / Artículo final del proyecto
+- [x] Final article of the project / Artículo final del proyecto
+
+## Files / Archivos
+
+| File / Archivo | Content / Contenido |
+|---|---|
+| [`project-article-ieee.pdf`](project-article-ieee.pdf) | Final article, IEEE format / Artículo final, formato IEEE |
+| [`project-article-acm.pdf`](project-article-acm.pdf) | Final article, ACM format / Artículo final, formato ACM |
+| [`project-article-apa.pdf`](project-article-apa.pdf) | Final article, APA format / Artículo final, formato APA |
+
+The documents are delivered in PDF; the diagrams include their editable PlantUML source. / Los documentos se entregan en PDF; los diagramas incluyen su fuente editable en PlantUML.
 
 ## Format / Formato
 

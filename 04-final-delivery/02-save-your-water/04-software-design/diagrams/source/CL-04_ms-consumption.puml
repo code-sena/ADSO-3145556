@@ -1,0 +1,116 @@
+@startuml CL-04_ms-consumption
+!include _estilo.iuml
+title CL-04 · Clases de dominio — ms-consumption (lecturas, metas, recibos, fugas y reportes)
+hide empty members
+skinparam linetype ortho
+
+package "ms-consumption · schema consumption" {
+  class Reading <<entity>> {
+    + deviceId : Guid
+    + placeId : Guid
+    + recordedAtUtc : DateTime
+    + flowLpm : decimal
+    + volumeLiters : decimal
+    + totalLiters : decimal
+    + receivedAtUtc : DateTime
+    + Create(...) : Reading
+  }
+  class HourlyTotal <<entity>> {
+    + placeId : Guid
+    + hourStartUtc : DateTime
+    + liters : decimal
+    + readingCount : int
+  }
+  class PeriodWindow <<value object>> {
+    + period : ConsumptionPeriod
+    + zone : TimeZoneInfo
+    + fromUtc, toUtc : DateTime
+    + bucketStarts : DateTime[]
+    + For(period, zone, now) : PeriodWindow
+  }
+  enum ConsumptionPeriod {
+    Day
+    Week
+    Month
+  }
+  class ConsumptionSummary <<value object>> {
+    + totalLiters : decimal
+    + hasData : bool
+    + buckets : ConsumptionBucket[]
+  }
+  class CurrentFlow <<domain service>> {
+    + From(lastReadingAt, flowLpm, now) : decimal?
+  }
+  class MonthlyGoal <<aggregate root>> {
+    + id : Guid
+    + placeId : Guid
+    + month : YearMonth
+    + limit : decimal
+    + unit : MeasurementUnit
+    + preventiveAlertAt : percent  // 80 %
+    + exceededNotifiedAt : DateTime?
+    + nearNotifiedAt : DateTime?
+    + ProgressFor(consumed) : GoalProgress
+  }
+  class GoalProgress <<value object>> {
+    + consumed : decimal
+    + percent : decimal
+    + projected : decimal
+    + status : GoalStatus
+  }
+  enum GoalStatus {
+    OnTrack
+    Near
+    Exceeded
+  }
+  class LeakDetector <<domain service>> {
+    + minFlowLpm = 0.3
+    + minutesDay = 30
+    + minutesNight = 15
+    + Evaluate(readings, now) : LeakSuspicion?
+  }
+  class LeakSuspicion <<entity>> {
+    + placeId : Guid
+    + since : DateTime
+    + liters : decimal
+    + flowLpm : decimal
+    + night : bool
+    + detectedAt : DateTime
+  }
+  class Bill <<aggregate root>> {
+    + id : Guid
+    + placeId : Guid
+    + periodFrom, periodTo : Date
+    + billedM3 : decimal
+    + amount : decimal
+    + currency : Currency
+    + dueDate : Date
+    + paidAt : DateTime?
+    + CompareWith(measuredM3) : BillComparison
+  }
+  class BillComparison <<value object>> {
+    + measuredM3 : decimal
+    + billedM3 : decimal
+    + differencePercent : decimal
+    + misaligned : bool  // > umbral
+  }
+  class Report <<value object>> {
+    + placeId : Guid
+    + from, to : Date
+    + totals : ConsumptionSummary
+    + cost : CostBreakdown
+    + ToCsv() : bytes
+    + ToPdf() : bytes
+  }
+}
+Reading "0..*" ..> "1" HourlyTotal : se acumula en
+PeriodWindow --> ConsumptionPeriod
+ConsumptionSummary ..> PeriodWindow
+CurrentFlow ..> Reading
+MonthlyGoal ..> GoalProgress
+GoalProgress --> GoalStatus
+LeakDetector ..> Reading
+LeakDetector ..> LeakSuspicion : produce
+Bill ..> BillComparison
+Report ..> ConsumptionSummary
+@enduml

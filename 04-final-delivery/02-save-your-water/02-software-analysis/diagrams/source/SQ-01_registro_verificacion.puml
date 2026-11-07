@@ -1,0 +1,37 @@
+@startuml SQ-01_registro_verificacion
+!include _estilo.iuml
+title SQ-01 · Registro y verificación de la cuenta (HU-001, HU-002)
+autonumber "<b>00"
+skinparam responseMessageBelowArrow true
+
+actor "Visitante" as U
+participant "App\n(móvil / web)" as APP
+participant "ms-iam" as IAM
+database "SQL Server\nsecurity" as DB
+participant "Servidor SMTP" as MAIL
+U -> APP : Datos de registro\n(nombres, correo, teléfono, contraseña)
+APP -> IAM : POST /api/auth/register
+IAM -> IAM : Validar correo y PasswordPolicy\n(8-128, mayúscula, número, símbolo)
+alt correo ya registrado
+  IAM --> APP : 409 user.email_already_registered
+else datos válidos
+  IAM -> DB : Guardar User (UNVERIFIED)\n+ credencial BCrypt + rol USER
+  IAM -> DB : Guardar EmailVerification\n(hash del código, vence en 24 h)
+  IAM -> MAIL : Enviar código de 6 dígitos
+  IAM --> APP : 201 { maskedEmail, expiresAt }
+end
+U -> APP : Escribe el código recibido
+APP -> IAM : POST /api/auth/verify-email { email, code }
+IAM -> DB : Buscar verificación vigente
+alt código correcto
+  IAM -> DB : User.verifyEmail() → ACTIVE
+  IAM --> APP : 200 cuenta verificada
+else código incorrecto o vencido
+  IAM -> DB : failedAttempts + 1 (máx. 5)
+  IAM --> APP : 400 auth.invalid_code / auth.code_expired
+end
+opt el usuario pide otro código
+  APP -> IAM : POST /api/auth/verify-email/resend
+  IAM --> APP : 202 (o 429 si no han pasado 60 s)
+end
+@enduml

@@ -1,0 +1,118 @@
+@startuml ER-02_places
+!include _estilo.iuml
+title ER-02 · Modelo físico del schema places (ms-places)
+hide circle
+skinparam linetype ortho
+skinparam nodesep 40
+skinparam ranksep 60
+left to right direction
+entity "places.countries" as places_countries {
+  * id : uniqueidentifier <<PK>>
+  --
+  * code : nvarchar(2) <<UK>>
+  * name : nvarchar(100)
+  * default_currency : nvarchar(3)
+  * default_unit : nvarchar(15)
+}
+entity "places.subdivisions" as places_subdivisions {
+  * id : uniqueidentifier <<PK>>
+  --
+  * country_id : uniqueidentifier <<FK>>
+  * code : nvarchar(2)
+  * name : nvarchar(100)
+}
+entity "places.cities" as places_cities {
+  * id : uniqueidentifier <<PK>>
+  --
+  * subdivision_id : uniqueidentifier <<FK>>
+  * code : nvarchar(5)
+  * name : nvarchar(100)
+}
+entity "places.places" as places_places {
+  * id : uniqueidentifier <<PK>>
+  --
+  * owner_id : uniqueidentifier <<FK>>
+  * city_id : uniqueidentifier <<FK>>
+  * name : nvarchar(200)
+  * place_type : nvarchar(15)
+  * address : nvarchar(500)
+  * currency : nvarchar(3)
+  * measurement_unit : nvarchar(15)
+  * is_default : bit
+  * created_at : datetime2
+  * updated_at : datetime2
+    deleted_at : datetime2
+}
+entity "places.activity_log" as places_activity_log {
+  * id : bigint <<PK>>
+  --
+  * place_id : uniqueidentifier <<FK>>
+  * owner_id : uniqueidentifier
+  * action : nvarchar(30)
+    metadata : nvarchar(max)
+  * created_at : datetime2
+}
+entity "places.place_tariffs" as places_place_tariffs {
+  * id : bigint <<PK>>
+  --
+  * place_id : uniqueidentifier <<FK>>
+  * source : nvarchar(10)
+    unit_price : decimal(12,2)
+    fixed_charge : decimal(12,2)
+    stratum : tinyint
+  * valid_from : datetime2
+  * created_by : uniqueidentifier
+}
+entity "places.tariff_catalog" as places_tariff_catalog {
+  * id : uniqueidentifier <<PK>>
+  --
+  * city_id : uniqueidentifier <<FK>>
+  * stratum : tinyint
+  * currency : nvarchar(3)
+  * fixed_charge : decimal(12,2)
+  * basic_price : decimal(12,2)
+  * complementary_price : decimal(12,2)
+  * luxury_price : decimal(12,2)
+  * basic_limit_m3 : decimal(6,2)
+  * complementary_limit_m3 : decimal(6,2)
+  * effective_from : date
+  * source : nvarchar(max)
+}
+entity "places.tips" as places_tips {
+  * id : uniqueidentifier <<PK>>
+  --
+  * title : nvarchar(150)
+  * body : nvarchar(1000)
+  * category : nvarchar(15)
+  * is_active : bit
+    created_by : uniqueidentifier
+  * created_at : datetime2
+    updated_by : uniqueidentifier
+  * updated_at : datetime2
+}
+entity "places.tip_favorites" as places_tip_favorites {
+  * user_id : uniqueidentifier <<PK,FK>>
+  * tip_id : uniqueidentifier <<PK,FK>>
+  --
+  * created_at : datetime2
+}
+entity "security.users" as security_users <<otro servicio>> {
+  * id : uniqueidentifier <<PK>>
+}
+places_countries ||--o{ places_subdivisions : country_id
+places_subdivisions ||--o{ places_cities : subdivision_id
+security_users ..o{ places_places : owner_id
+places_cities ||--o{ places_places : city_id
+places_places ||--o{ places_activity_log : place_id
+places_places ||--o{ places_place_tariffs : place_id
+places_cities ||--o{ places_tariff_catalog : city_id
+security_users ..o{ places_tip_favorites : user_id
+places_tips ||--o{ places_tip_favorites : tip_id
+legend bottom right
+  |= Notación |= Significado |
+  | ● | columna obligatoria (NOT NULL) |
+  | PK / FK / UK | llave primaria / foránea / única |
+  | línea continua | llave foránea dentro del schema |
+  | línea punteada | referencia lógica a otro servicio (sin FK física) |
+endlegend
+@enduml

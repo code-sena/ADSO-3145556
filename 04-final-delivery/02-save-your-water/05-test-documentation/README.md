@@ -4,9 +4,17 @@
 
 ## Required content / Contenido requerido
 
-- [ ] Test plan / Plan de pruebas
-- [ ] Test cases / Casos de prueba
-- [ ] Test results with evidence / Resultados de las pruebas con evidencia
+- [x] Test plan / Plan de pruebas
+- [x] Test cases / Casos de prueba
+- [x] Test results with evidence / Resultados de las pruebas con evidencia
+
+## Files / Archivos
+
+| File / Archivo | Content / Contenido |
+|---|---|
+| [`test-documentation.pdf`](test-documentation.pdf) | Test plan, test cases and results with evidence (v1.0) / Plan, casos y resultados de pruebas con evidencia (v1.0) |
+
+The documents are delivered in PDF; the diagrams include their editable PlantUML source. / Los documentos se entregan en PDF; los diagramas incluyen su fuente editable en PlantUML.
 
 ## Format / Formato
 

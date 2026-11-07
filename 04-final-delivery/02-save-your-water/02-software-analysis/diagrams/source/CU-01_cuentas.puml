@@ -1,0 +1,42 @@
+@startuml CU-01_cuentas
+!include _estilo.iuml
+title CU-01 · Cuentas y acceso (E1)
+left to right direction
+
+actor "Visitante" as VI
+actor "Usuario base" as UB
+actor "Servidor de correo" as MAIL <<sistema>>
+actor "Google\n(OAuth 2.0)" as GO <<sistema>>
+rectangle "E1 · Cuentas y acceso" {
+  usecase "Registrarse con correo\ny contraseña\n(HU-001)" as U1
+  usecase "Verificar cuenta\npor correo (HU-002)" as U2
+  usecase "Reenviar código\nde verificación" as U2b
+  usecase "Iniciar sesión\n(HU-003)" as U3
+  usecase "Registrarse / iniciar\nsesión con Google\n(HU-004)" as U4
+  usecase "Recuperar contraseña\n(HU-005)" as U5
+  usecase "Cerrar sesión\n(HU-006)" as U6
+  usecase "Gestionar perfil\n(nombre, teléfono, foto)\n(HU-007)" as U7
+  usecase "Cambiar contraseña" as U7b
+  usecase "Eliminar cuenta\n(HU-008)" as U8
+  usecase "Bloqueo temporal tras\n5 intentos fallidos" as UL
+}
+VI --> U1
+VI --> U4
+VI --> U5
+UB --> U3
+UB --> U6
+UB --> U7
+UB --> U8
+U1 ..> U2 : <<include>>
+U2b ..> U2 : <<extend>>
+U3 <.. UL : <<extend>>
+U7b ..> U7 : <<extend>>
+U1 --> MAIL
+U5 --> MAIL
+U4 --> GO
+note right of U8
+  Borrado lógico: desvincula los medidores,
+  revoca las sesiones y quita los accesos
+  de colaborador del usuario.
+end note
+@enduml

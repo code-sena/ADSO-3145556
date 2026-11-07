@@ -1,0 +1,96 @@
+@startuml ER-06_notification
+!include _estilo.iuml
+title ER-06 · Modelo físico del schema notification (ms-notification)
+hide circle
+skinparam linetype ortho
+skinparam nodesep 40
+skinparam ranksep 60
+top to bottom direction
+entity "notification.notifications" as notification_notifications {
+  * id : uniqueidentifier <<PK>>
+  --
+    user_id : uniqueidentifier <<FK>>
+    role : nvarchar(20)
+  * type : nvarchar(30)
+  * severity : nvarchar(10)
+  * title : nvarchar(150)
+  * body : nvarchar(1000)
+    place_id : uniqueidentifier <<FK>>
+    source_event_id : nvarchar(100)
+  * created_at : datetime2
+}
+entity "notification.notification_reads" as notification_notification_reads {
+  * notification_id : uniqueidentifier <<PK,FK>>
+  * user_id : uniqueidentifier <<PK,FK>>
+  --
+  * read_at : datetime2
+}
+entity "notification.notification_preferences" as notification_notification_preferences {
+  * user_id : uniqueidentifier <<PK,FK>>
+  * severity : nvarchar(10) <<PK>>
+  --
+  * in_app : bit
+  * push : bit
+  * email : bit
+  * sms : bit
+  * updated_at : datetime2
+}
+entity "notification.place_devices" as notification_place_devices {
+  * place_id : uniqueidentifier <<PK,FK>>
+  --
+  * device_id : uniqueidentifier <<UK>>
+  * user_id : uniqueidentifier <<FK>>
+  * serial_number : nvarchar(32)
+    valve_state : nvarchar(10)
+    valve_reported_at : datetime2
+    last_reading_at : datetime2
+    offline_alerted_at : datetime2
+  * created_at : datetime2
+}
+entity "notification.email_outbox" as notification_email_outbox {
+  * id : uniqueidentifier <<PK>>
+  --
+  * user_id : uniqueidentifier <<FK>>
+    source_event_id : nvarchar(100)
+  * subject : nvarchar(max)
+  * text_body : nvarchar(max)
+  * html_body : nvarchar(max)
+  * status : nvarchar(10)
+  * attempts : int
+  * next_attempt_at : datetime2
+    last_error : nvarchar(500)
+  * created_at : datetime2
+    sent_at : datetime2
+}
+entity "notification.push_tokens" as notification_push_tokens {
+  * id : uniqueidentifier <<PK>>
+  --
+  * user_id : uniqueidentifier <<FK>>
+  * token : nvarchar(200) <<UK>>
+  * platform : nvarchar(10)
+  * created_at : datetime2
+  * last_seen_at : datetime2
+}
+entity "places.places" as places_places <<otro servicio>> {
+  * id : uniqueidentifier <<PK>>
+}
+entity "security.users" as security_users <<otro servicio>> {
+  * id : uniqueidentifier <<PK>>
+}
+security_users ..o{ notification_notifications : user_id
+places_places ..o{ notification_notifications : place_id
+notification_notifications ||--o{ notification_notification_reads : notification_id
+security_users ..o{ notification_notification_reads : user_id
+security_users ..o{ notification_notification_preferences : user_id
+places_places ..o{ notification_place_devices : place_id
+security_users ..o{ notification_place_devices : user_id
+security_users ..o{ notification_email_outbox : user_id
+security_users ..o{ notification_push_tokens : user_id
+legend bottom right
+  |= Notación |= Significado |
+  | ● | columna obligatoria (NOT NULL) |
+  | PK / FK / UK | llave primaria / foránea / única |
+  | línea continua | llave foránea dentro del schema |
+  | línea punteada | referencia lógica a otro servicio (sin FK física) |
+endlegend
+@enduml

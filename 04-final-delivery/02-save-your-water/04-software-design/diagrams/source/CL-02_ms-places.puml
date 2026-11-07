@@ -1,0 +1,178 @@
+@startuml CL-02_ms-places
+!include _estilo.iuml
+title CL-02 · Clases de dominio — ms-places (lugares, tarifas, consejos y acceso compartido)
+hide empty members
+skinparam linetype ortho
+
+package "ms-places · schema places" {
+  class Place <<aggregate root>> {
+    + id : Guid
+    + ownerId : Guid
+    + cityId : Guid
+    + name : string
+    + type : PlaceType
+    + address : string
+    + currency : Currency
+    + measurementUnit : MeasurementUnit
+    + isDefault : bool
+    + createdAt, updatedAt : DateTime
+    + deletedAt : DateTime?
+    + Create(...) : Place
+    + Update(...)
+    + MarkAsDefault()
+    + Delete()
+  }
+  enum PlaceType {
+    Residential
+    Commercial
+  }
+  enum MeasurementUnit {
+    Liters
+    CubicMeters
+    Gallons
+  }
+  enum Currency {
+    COP
+    USD
+  }
+  class Country {
+    + code : string  // CO, EC
+    + name : string
+    + defaultCurrency : Currency
+    + defaultUnit : MeasurementUnit
+  }
+  class Subdivision {
+    + id : Guid
+    + code : string
+    + name : string  // departamento / provincia
+  }
+  class City {
+    + id : Guid
+    + code : string
+    + name : string  // municipio / cantón
+  }
+  class PlaceActivity {
+    + placeId : Guid
+    + userId : Guid
+    + action : string
+    + detail : string
+    + createdAt : DateTime
+  }
+  class PlaceTariff {
+    + id : long
+    + placeId : Guid
+    + source : TariffSource
+    + unitPricePerM3 : decimal?
+    + fixedMonthlyCharge : decimal?
+    + stratum : int?  // 1..6
+    + validFrom : DateTime
+    + createdBy : Guid
+    + Manual(...) : PlaceTariff
+    + Catalog(...) : PlaceTariff
+  }
+  enum TariffSource {
+    Manual
+    Catalog
+  }
+  class TariffCatalog {
+    + cityId : Guid
+    + stratum : int
+    + rates : TariffRates
+    + validFrom : DateTime
+  }
+  class TariffRates <<value object>> {
+    + fixedCharge : decimal
+    + basicPrice : decimal
+    + complementaryPrice : decimal
+    + luxuryPrice : decimal
+    + basicLimitM3 : decimal
+  }
+  class CostCalculator <<domain service>> {
+    + Calculate(rates, m3) : CostBreakdown
+  }
+  class CostBreakdown <<value object>> {
+    + tiers : CostTier[]
+    + volumetricCost : decimal
+    + fixedCharge : decimal
+    + total : decimal
+  }
+  class Tip <<aggregate root>> {
+    + id : Guid
+    + title : string
+    + body : string
+    + category : TipCategory
+    + isActive : bool
+    + createdBy, updatedBy : Guid?
+    + Create(...) : Tip
+    + Edit(...)
+    + SetActive(active)
+  }
+  enum TipCategory {
+    Residential
+    Commercial
+  }
+  class TipFavorite {
+    + userId : Guid
+    + tipId : Guid
+    + createdAt : DateTime
+  }
+  class PlaceMember {
+    + placeId : Guid
+    + userId : Guid
+    + role : MemberRole
+    + permissions : Permission[]
+    + joinedAt : DateTime
+    + revokedAt : DateTime?
+  }
+  enum MemberRole {
+    Owner
+    Collaborator
+  }
+  enum Permission {
+    ViewConsumption
+    OperateValve
+    ManageGoals
+    ManageBills
+    ReceiveAlerts
+  }
+  class Invitation {
+    + id : Guid
+    + placeId : Guid
+    + email : string
+    + permissions : Permission[]
+    + tokenHash : string
+    + expiresAt : DateTime
+    + acceptedAt : DateTime?
+    + revokedAt : DateTime?
+  }
+  class GuestLink {
+    + id : Guid
+    + placeId : Guid
+    + tokenHash : string
+    + expiresAt : DateTime?
+    + revokedAt : DateTime?
+    + createdBy : Guid
+  }
+}
+Place --> PlaceType
+Place --> MeasurementUnit
+Place --> Currency
+Country "1" *-- "1..*" Subdivision
+Subdivision "1" *-- "1..*" City
+Place "0..*" --> "1" City
+Place "1" *-- "0..*" PlaceActivity
+Place "1" *-- "0..*" PlaceTariff : historial >
+PlaceTariff --> TariffSource
+PlaceTariff ..> TariffCatalog : estrato
+TariffCatalog "0..*" --> "1" City
+TariffCatalog *-- TariffRates
+CostCalculator ..> TariffRates
+CostCalculator ..> CostBreakdown
+Tip --> TipCategory
+Tip "1" -- "0..*" TipFavorite
+Place "1" *-- "1..*" PlaceMember
+PlaceMember --> MemberRole
+PlaceMember --> Permission
+Place "1" *-- "0..*" Invitation
+Place "1" *-- "0..*" GuestLink
+@enduml

@@ -1,0 +1,59 @@
+@startuml ER-03_devices
+!include _estilo.iuml
+title ER-03 · Modelo físico del schema devices (ms-device)
+hide circle
+skinparam linetype ortho
+skinparam nodesep 40
+skinparam ranksep 60
+top to bottom direction
+entity "devices.devices" as devices_devices {
+  * id : uniqueidentifier <<PK>>
+  --
+  * serial_number : nvarchar(32) <<UK>>
+  * auth_token_hash : varchar(64)
+    auth_token_last_used_at : datetime2
+    auth_token_revoked_at : datetime2
+  * pairing_code_hash : varchar(64)
+  * pairing_failed_attempts : int
+    pairing_locked_until : datetime2
+    place_id : uniqueidentifier <<FK,UK>>
+    linked_by : uniqueidentifier <<FK>>
+    linked_at : datetime2
+  * status : nvarchar(15)
+    last_report_at : datetime2
+    firmware_version : nvarchar(20)
+  * inactivity_threshold_min : int
+  * created_at : datetime2
+  * updated_at : datetime2
+}
+entity "devices.device_link_history" as devices_device_link_history {
+  * id : uniqueidentifier <<PK>>
+  --
+  * device_id : uniqueidentifier <<FK>>
+  * place_id : uniqueidentifier <<FK>>
+  * linked_by : uniqueidentifier <<FK>>
+  * linked_at : datetime2
+    unlinked_at : datetime2
+    unlinked_by : uniqueidentifier <<FK>>
+  * created_at : datetime2
+}
+entity "places.places" as places_places <<otro servicio>> {
+  * id : uniqueidentifier <<PK>>
+}
+entity "security.users" as security_users <<otro servicio>> {
+  * id : uniqueidentifier <<PK>>
+}
+places_places ..o| devices_devices : place_id
+security_users ..o{ devices_devices : linked_by
+devices_devices ||--o{ devices_device_link_history : device_id
+places_places ..o{ devices_device_link_history : place_id
+security_users ..o{ devices_device_link_history : linked_by
+security_users ..o{ devices_device_link_history : unlinked_by
+legend bottom right
+  |= Notación |= Significado |
+  | ● | columna obligatoria (NOT NULL) |
+  | PK / FK / UK | llave primaria / foránea / única |
+  | línea continua | llave foránea dentro del schema |
+  | línea punteada | referencia lógica a otro servicio (sin FK física) |
+endlegend
+@enduml

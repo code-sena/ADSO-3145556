@@ -1,0 +1,90 @@
+' Estilo común de los diagramas de Cuida Tu Agua
+skinparam defaultFontName "DejaVu Sans"
+skinparam defaultFontSize 12
+skinparam shadowing false
+skinparam monochrome true
+skinparam legendBackgroundColor #FFFFFF
+skinparam legendBorderColor #000000
+skinparam packageBackgroundColor #FFFFFF
+skinparam rectangleBackgroundColor #FFFFFF
+skinparam TitleFontStyle bold
+skinparam roundCorner 10
+skinparam dpi 150
+skinparam backgroundColor #FFFFFF
+skinparam ArrowColor #000000
+skinparam ArrowFontColor #000000
+skinparam ArrowFontSize 11
+skinparam TitleFontSize 16
+skinparam TitleFontColor #000000
+skinparam NoteBackgroundColor #FFFFFF
+skinparam NoteBorderColor #000000
+skinparam actor {
+  BorderColor #000000
+  BackgroundColor #FFFFFF
+}
+skinparam usecase {
+  BackgroundColor #FFFFFF
+  BorderColor #000000
+  FontColor #000000
+}
+skinparam rectangle {
+  BorderColor #000000
+  FontColor #000000
+}
+skinparam package {
+  BorderColor #000000
+  FontColor #000000
+}
+skinparam class {
+  BackgroundColor #FFFFFF
+  BorderColor #000000
+  HeaderBackgroundColor #FFFFFF
+  FontColor #000000
+  AttributeFontColor #000000
+  StereotypeFontColor #000000
+}
+skinparam enum {
+  BackgroundColor #FFFFFF
+  BorderColor #000000
+}
+skinparam sequence {
+  LifeLineBorderColor #000000
+  ParticipantBackgroundColor #FFFFFF
+  ParticipantBorderColor #000000
+  ParticipantFontColor #000000
+  ActorBackgroundColor #FFFFFF
+  ActorBorderColor #000000
+  GroupBorderColor #000000
+  GroupHeaderFontColor #000000
+  BoxBorderColor #000000
+}
+skinparam activity {
+  BackgroundColor #FFFFFF
+  BorderColor #000000
+  FontColor #000000
+  DiamondBackgroundColor #FFFFFF
+  DiamondBorderColor #000000
+}
+skinparam state {
+  BackgroundColor #FFFFFF
+  BorderColor #000000
+  FontColor #000000
+}
+skinparam component {
+  BackgroundColor #FFFFFF
+  BorderColor #000000
+  FontColor #000000
+}
+skinparam node {
+  BackgroundColor #FFFFFF
+  BorderColor #000000
+  FontColor #000000
+}
+skinparam database {
+  BackgroundColor #FFFFFF
+  BorderColor #000000
+}
+skinparam queue {
+  BackgroundColor #FFFFFF
+  BorderColor #000000
+}

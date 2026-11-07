@@ -1,0 +1,48 @@
+@startuml DE-01_despliegue
+!include _estilo.iuml
+title DE-01 · Diagrama de despliegue
+
+node "Celular del usuario\n(Android / iOS)" as PHONE {
+  artifact "App Cuida Tu Agua\n(Expo)" as A1
+}
+node "Navegador web" as BROWSER {
+  artifact "Web Cuida Tu Agua\n(usuario / administrador)" as A2
+}
+node "Lugar del usuario" as HOME {
+  node "ESP32" as ESP {
+    artifact "firmware\n(MicroPython)" as A3
+  }
+  [Sensor YF-S201] as S
+  [Electroválvula + relé] as V
+}
+node "Servidor VPS Linux\n(Docker / docker compose)" as VPS {
+  node "Proxy inverso\n(HTTPS / TLS)" as PROXY
+  node "Contenedores de aplicación" as APPS {
+    artifact "ms-iam" as I
+    artifact "ms-places" as P
+    artifact "ms-device" as D
+    artifact "ms-consumption" as C
+    artifact "ms-valve" as VA
+    artifact "ms-notification" as N
+  }
+  node "Contenedores de infraestructura" as INF {
+    database "SQL Server 2022\nsy-water-db" as DB
+    queue "RabbitMQ" as RMQ
+    queue "Mosquitto :1883" as MQTT
+    database "Redis" as R
+  }
+}
+cloud "Internet" as NET {
+  [SMTP] as SMTP
+  [Expo Push] as EXPO
+  [SMS / WhatsApp] as SMS
+}
+PHONE --> PROXY : HTTPS
+BROWSER --> PROXY : HTTPS
+PROXY --> APPS : HTTP interno
+ESP --> MQTT : MQTT (usuario por dispositivo)\nWiFi 2.4 GHz
+S --> ESP : pulsos
+ESP --> V : GPIO
+APPS --> INF
+APPS --> NET
+@enduml

@@ -1,0 +1,98 @@
+@startuml CL-05_ms-valve
+!include _estilo.iuml
+title CL-05 · Clases de dominio — ms-valve (válvula, órdenes y cierre automático)
+hide empty members
+skinparam linetype ortho
+
+package "ms-valve · schema valve" {
+  class PlaceValve <<aggregate root>> {
+    + placeId : Guid
+    + deviceId : Guid
+    + state : ValveState
+    + lastConfirmedAt : DateTime?
+    + ForNewDevice(placeId, deviceId) : PlaceValve
+    + ApplyReport(state, at) : bool
+    + CommunicationAt(now, policy) : ValveCommunication
+  }
+  class ValveCommand <<entity>> {
+    + id : Guid
+    + placeId : Guid
+    + deviceId : Guid
+    + action : ValveAction
+    + origin : CommandOrigin
+    + status : CommandStatus
+    + requestedBy : Guid?
+    + requestedByName : string?
+    + confirmedWithCode : bool
+    + createdAt : DateTime
+    + sentAt : DateTime?
+    + timeoutAt : DateTime
+    + acknowledgedAt : DateTime?
+    + failureReason : string?
+    + Manual(...) : ValveCommand
+    + MarkSent(at)
+    + Acknowledge(state, at) : bool
+    + TimeOutIfExpired(now) : bool
+    + Fail(reason)
+  }
+  class ValvePolicy <<value object>> {
+    + ackTimeout = 30 s
+    + communicationWindow = 3 min
+  }
+  class AutoShutoffRule <<aggregate root>> {
+    + placeId : Guid
+    + enabled : bool  // false por defecto
+    + trigger : LeakTrigger
+    + confirmationTimeout : TimeSpan
+    + Enable() / Disable()
+  }
+  class AutoShutoffRequest <<entity>> {
+    + id : Guid
+    + placeId : Guid
+    + leakDetectedAt : DateTime
+    + status : RequestStatus
+    + confirmedBy : Guid?
+    + decidedAt : DateTime?
+  }
+  enum RequestStatus {
+    Pending
+    Confirmed
+    Rejected
+    Expired
+  }
+  enum ValveState {
+    Open
+    Closed
+    Unknown
+  }
+  enum ValveCommunication {
+    Ok
+    NoCommunication
+  }
+  enum ValveAction {
+    Open
+    Close
+  }
+  enum CommandOrigin {
+    Manual
+    AutoLeak
+  }
+  enum CommandStatus {
+    Sent
+    AckSuccess
+    AckTimeout
+    Failed
+  }
+}
+PlaceValve "1" *-- "0..*" ValveCommand : historial >
+PlaceValve --> ValveState
+PlaceValve ..> ValveCommunication
+ValveCommand --> ValveAction
+ValveCommand --> CommandOrigin
+ValveCommand --> CommandStatus
+ValveCommand ..> ValvePolicy
+PlaceValve "1" -- "0..1" AutoShutoffRule
+AutoShutoffRule "1" *-- "0..*" AutoShutoffRequest
+AutoShutoffRequest --> RequestStatus
+AutoShutoffRequest ..> ValveCommand : origina (AutoLeak)
+@enduml

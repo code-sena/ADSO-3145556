@@ -1,0 +1,25 @@
+@startuml SQ-12_sensor_desconectado
+!include _estilo.iuml
+title SQ-12 · Alerta de sensor desconectado (HU-013, HU-032)
+autonumber "<b>00"
+skinparam responseMessageBelowArrow true
+
+participant "Temporizador\n(cada 60 s)" as T
+participant "ms-device" as DEV
+participant "ms-notification" as NOT
+participant "Expo Push" as PUSH
+participant "App" as APP
+actor "Dueño" as U
+T -> DEV : Barrido de estado
+DEV -> DEV : Device.StatusAt(ahora)\n> 10 min sin reportes → DISCONNECTED
+T -> NOT : DetectOfflineDevices
+NOT -> NOT : PlaceDevice.IsSilent(10 min)\ny aún no alertado
+alt silencioso
+  NOT -> NOT : Notification DeviceOffline (Importante)\nMarkOfflineAlerted()
+  NOT -> PUSH : Push "El medidor no reporta"
+  PUSH --> U : aviso
+end
+note over NOT : Una sola alerta por desconexión.\nLa siguiente lectura la rearma.
+U -> APP : Abre el lugar
+APP --> U : Banner "El medidor no está reportando"
+@enduml
