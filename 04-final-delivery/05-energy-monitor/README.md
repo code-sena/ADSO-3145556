@@ -14,16 +14,16 @@ Final delivery of the training project / Entrega final del proyecto formativo.
 | Process / Proceso | Completion of the technologist taught stage / Finalización de la etapa lectiva del tecnólogo |
 | Research seedbed / Semillero de investigación | Developers & Geeks |
 | Delivery version / Versión entregada | `final-delivery-2026` |
-| Delivery date / Fecha de entrega | |
-| Delivered by / Entregado por | |
+| Delivery date / Fecha de entrega | 2026-11-07 |
+| Delivered by / Entregado por | Juan Esteban Cortes Parra (project leader / líder del proyecto), on behalf of the team with Miguel Angel Garcia Artunduaga / en nombre del equipo con Miguel Angel Garcia Artunduaga |
 
 ## Summary / Resumen
 
-- **Problem it solves / Problema que resuelve:**
-- **Target users / Usuarios:**
-- **Main features / Funciones principales:**
-- **Technology stack / Tecnologías:**
-- **Production URL / URL en producción:**
+- **Problem it solves / Problema que resuelve:** A home receives a single monthly electricity bill and cannot tell which appliance used what, or when. Energy Monitor attributes consumption to each appliance, warns before a limit is reached and recommends savings based on what was measured. / Un hogar recibe una sola factura mensual de energía y no sabe qué aparato consumió qué ni cuándo. Energy Monitor atribuye el consumo a cada aparato, avisa antes de llegar a un límite y recomienda ahorros a partir de lo medido.
+- **Target users / Usuarios:** Households that want to understand and reduce their electricity use (home owners and members who share a home) and platform administrators who manage accounts. / Hogares que quieren entender y reducir su consumo eléctrico (responsables y miembros que comparten un hogar) y administradores de la plataforma que gestionan las cuentas.
+- **Main features / Funciones principales:** Per-appliance measurement with an ESP32 + PZEM-004T device linked over Bluetooth; consumption history and statistics; daily and monthly limits; alerts (high consumption, limit reached, lost connection, unusual consumption); hourly saving recommendations; email and push notifications; shared homes with owner and member roles; administration of accounts; web and Android apps in Spanish, English, French and Portuguese. / Medición por aparato con un dispositivo ESP32 + PZEM-004T vinculado por Bluetooth; historial y estadísticas de consumo; límites diario y mensual; alertas (consumo alto, límite alcanzado, conexión perdida, consumo inusual); recomendaciones de ahorro cada hora; notificaciones por correo y push; hogares compartidos con roles de responsable y miembro; administración de cuentas; apps web y Android en español, inglés, francés y portugués.
+- **Technology stack / Tecnologías:** Java 21 and Spring Boot (API gateway and seven microservices, hexagonal architecture), MySQL 8.4 with Liquibase, RabbitMQ (transactional outbox), MQTT with Mosquitto and TLS, React 19 + Vite (web), React Native + Expo (Android), C++ for Arduino (ESP32 firmware), Docker Compose, nginx and GitHub Actions (CI/CD). / Java 21 y Spring Boot (API gateway y siete microservicios, arquitectura hexagonal), MySQL 8.4 con Liquibase, RabbitMQ (outbox transaccional), MQTT con Mosquitto y TLS, React 19 + Vite (web), React Native + Expo (Android), C++ para Arduino (firmware del ESP32), Docker Compose, nginx y GitHub Actions (CI/CD).
+- **Production URL / URL en producción:** https://energy-monitor.tech
 - **Demo credentials / Credenciales de prueba:** do not write real passwords here / no escriba contraseñas reales aquí
 
 ## Team members / Integrantes
