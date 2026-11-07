@@ -13,19 +13,19 @@ Google Drive folder / Carpeta de Google Drive: [Traduce_señas](https://drive.go
 
 Sells the product to someone who does not know it. / Presenta el producto a alguien que no lo conoce.
 
-- [ ] Problem it solves / Problema que resuelve
-- [ ] Who it is for / Para quién es
-- [ ] The solution and what sets it apart / La solución y qué la diferencia
-- [ ] Clear closing message / Mensaje final claro
+- [x] Problem it solves / Problema que resuelve
+- [x] Who it is for / Para quién es
+- [x] The solution and what sets it apart / La solución y qué la diferencia
+- [x] Clear closing message / Mensaje final claro
 
 ## 2. Short usage tutorial / Tutorial corto de uso
 
 Shows how the system is used, on the real system. / Muestra cómo se usa el sistema, sobre el sistema real.
 
-- [ ] Sign-in and main roles / Ingreso y roles principales
-- [ ] The main flow, step by step / El flujo principal, paso a paso
-- [ ] The result the user gets / El resultado que obtiene el usuario
-- [ ] Voice or captions that explain each step / Voz o subtítulos que expliquen cada paso
+- [x] Sign-in and main roles / Ingreso y roles principales
+- [x] The main flow, step by step / El flujo principal, paso a paso
+- [x] The result the user gets / El resultado que obtiene el usuario
+- [x] Voice or captions that explain each step / Voz o subtítulos que expliquen cada paso
 
 ## Rules / Reglas
 

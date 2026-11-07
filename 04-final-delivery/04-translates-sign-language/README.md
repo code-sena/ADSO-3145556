@@ -14,7 +14,7 @@ Final delivery of the training project / Entrega final del proyecto formativo.
 | Process / Proceso | Completion of the technologist taught stage / Finalización de la etapa lectiva del tecnólogo |
 | Research seedbed / Semillero de investigación | Developers & Geeks |
 | Delivery version / Versión entregada | `final-delivery-2026` |
-| Delivery date / Fecha de entrega | |
+| Delivery date / Fecha de entrega | 2026-11-06 |
 | Delivered by / Entregado por | JUAN MAURICIO SUAZA SOLORZANO |
 
 ## Summary / Resumen
