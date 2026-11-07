@@ -4,9 +4,15 @@
 
 ## Required content / Contenido requerido
 
-- [ ] Requirements specification report / Informe de especificación de requisitos
-- [ ] Functional and non-functional requirements / Requisitos funcionales y no funcionales
-- [ ] User stories and prioritized backlog, if used / Historias de usuario y backlog priorizado, si se usaron
+- [x] Requirements specification report / Informe de especificación de requisitos
+- [x] Functional and non-functional requirements / Requisitos funcionales y no funcionales
+- [x] User stories and prioritized backlog, if used / Historias de usuario y backlog priorizado, si se usaron
+
+## Evidence / Evidencia
+
+- User stories: 55 stories grouped in epics, each with its MoSCoW priority, planned by cut and sprint / Historias de usuario: 55 historias agrupadas en épicas, cada una con prioridad MoSCoW y planificadas por corte y sprint: [`docs/04-requirements/user-stories.md`](https://github.com/mauro-1508/traduce-senas-evidencias/blob/final-delivery-2026/docs/04-requirements/user-stories.md)
+- Product backlog with acceptance criteria / Backlog del producto con criterios de aceptación: [`docs/03-product/product-backlog.md`](https://github.com/mauro-1508/traduce-senas-evidencias/blob/final-delivery-2026/docs/03-product/product-backlog.md)
+- Traceability from each requirement to its user story / Trazabilidad de cada requisito a su historia: section "Trazabilidad" of `requirements-specification-es.pdf` and [`docs/04-requirements/traceability-matrix.md`](https://github.com/mauro-1508/traduce-senas-evidencias/blob/final-delivery-2026/docs/04-requirements/traceability-matrix.md)
 
 ## Format / Formato
 

@@ -4,8 +4,14 @@
 
 ## Required content / Contenido requerido
 
-- [ ] Implementation procedure, with environments and steps / Procedimiento de implementación, con ambientes y pasos
-- [ ] Deployment evidence and production URL, if deployed / Evidencia de despliegue y URL de producción, si se desplegó
+- [x] Implementation procedure, with environments and steps / Procedimiento de implementación, con ambientes y pasos
+- [x] Deployment evidence and production URL, if deployed / Evidencia de despliegue y URL de producción, si se desplegó
+
+## Evidence / Evidencia
+
+- Production URL / URL de producción: https://traducesenas.tech
+- Production check of 2026-11-07 (health response, HTTPS certificate) / Verificación de producción del 2026-11-07 (respuesta de salud, certificado HTTPS): [`deployment-evidence.md`](deployment-evidence.md)
+- Smoke tests and evidence plan / Pruebas de humo y plan de evidencias: `deployment-plan-es.pdf`
 
 ## Format / Formato
 

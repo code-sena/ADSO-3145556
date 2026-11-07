@@ -4,10 +4,16 @@
 
 ## Required content / Contenido requerido
 
-- [ ] Graphical interfaces: mockups or prototype / Interfaces gráficas: mockups o prototipo
-- [ ] Architectural model / Modelo arquitectónico
-- [ ] Design patterns applied, with where they are used / Patrones de diseño aplicados, indicando dónde se usan
-- [ ] Data model: conceptual, logical and physical / Modelo de datos: conceptual, lógico y físico
+- [x] Graphical interfaces: mockups or prototype / Interfaces gráficas: mockups o prototipo
+- [x] Architectural model / Modelo arquitectónico
+- [x] Design patterns applied, with where they are used / Patrones de diseño aplicados, indicando dónde se usan
+- [x] Data model: conceptual, logical and physical / Modelo de datos: conceptual, lógico y físico
+
+## Evidence / Evidencia
+
+- Conceptual / Conceptual: domain entities and rules / entidades y reglas del dominio, [`docs/02-domain/entities-and-rules.md`](https://github.com/mauro-1508/traduce-senas-evidencias/blob/final-delivery-2026/docs/02-domain/entities-and-rules.md) and [`docs/02-domain/domain-map.md`](https://github.com/mauro-1508/traduce-senas-evidencias/blob/final-delivery-2026/docs/02-domain/domain-map.md)
+- Logical / Lógico: entity-relationship diagram and data dictionary in `software-design-es.pdf` (Figure 16, Tables 6 onwards) / diagrama entidad-relación y diccionario de datos en `software-design-es.pdf` (Figura 16, Tablas 6 en adelante); [`docs/06-data/models.md`](https://github.com/mauro-1508/traduce-senas-evidencias/blob/final-delivery-2026/docs/06-data/models.md) and [`traduce_senas.dbml`](https://github.com/mauro-1508/traduce-senas-evidencias/blob/final-delivery-2026/docs/06-data/traduce_senas.dbml)
+- Physical / Físico: SQL scripts of each service / scripts SQL de cada servicio, `services/<service>/db/*.sql` in [backendTS](https://github.com/mauro-1508/backendTS/tree/final-delivery-2026/services)
 
 ## Format / Formato
 

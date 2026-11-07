@@ -1,1 +1,11 @@
 # sha256  file / archivo
+a293eef0aa048e9c3cb47bfad1880d34b71916730d85e55d9f3069f4062c83c8  frontendTS-final-delivery-2026-main.zip
+d71d2d91134876af10ffe92a91be401e8be99f0fd62dcb178203aa109ce926f6  frontendTS-full-export.zip
+5057afec1f22c449b8af59da46686ba85d9b5328c6a42e54625c39432130814b  traducesenas-download-final-delivery-2026-main.zip
+380bb4efd02d07488cc031957cd8e2864d2c6250e36a9d62fd2b89e7e41fdad3  traducesenas-download-full-export.zip
+202ce9dcd94c5768332e1fc09b64d2664755f3616a7c3491014cba4d1ec0aedf  backendTS-final-delivery-2026-main.zip
+7ca4b4d009b993013eff0e69f7f1b12fc1c1b6696e045a80de88d09b9d0954ad  backendTS-full-export.zip
+84387aa42e7a278c4a70083e1bdb4d25c8a28bd08af2c5fc21acfcba0c9d563c  traduce-senas-evidencias-final-delivery-2026-main.zip
+26398f02c6c4aa6823159127d56eb1d0fd41c7f1d251e941e0e14c595ed9c8cb  traduce-senas-evidencias-full-export.zip
+5ba1702d4b49b7452058a07160263c97433de489fecdd465002320f24a35faa2  trans-sl-docs-final-delivery-2026-main.zip
+9c804ee77dcd04b87178e019c3444f43a25adfc24369805211d84567044a0246  trans-sl-docs-full-export.zip

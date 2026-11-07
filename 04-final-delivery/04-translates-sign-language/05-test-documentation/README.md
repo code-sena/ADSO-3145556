@@ -4,9 +4,13 @@
 
 ## Required content / Contenido requerido
 
-- [ ] Test plan / Plan de pruebas
-- [ ] Test cases / Casos de prueba
-- [ ] Test results with evidence / Resultados de las pruebas con evidencia
+- [x] Test plan / Plan de pruebas
+- [x] Test cases / Casos de prueba
+- [x] Test results with evidence / Resultados de las pruebas con evidencia
+
+## Evidence / Evidencia
+
+- Section "Resultados de las pruebas automatizadas" of `test-documentation-es.pdf`: run of 2026-11-04, backend 918 passed, 0 failed, 13 skipped; frontend 469 passed in 46 suites; line coverage per component; test cases with their status / Sección "Resultados de las pruebas automatizadas" de `test-documentation-es.pdf`: ejecución del 2026-11-04, backend 918 aprobadas, 0 fallidas, 13 omitidas; frontend 469 aprobadas en 46 suites; cobertura de líneas por componente; casos de prueba con su estado
 
 ## Format / Formato
 

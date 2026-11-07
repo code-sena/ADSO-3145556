@@ -27,6 +27,6 @@ Los aprendices completan su rol, por ejemplo backend, frontend, base de datos, Q
 
 | Full name / Nombre completo | Doc. type / Tipo | Doc. number / Número | Ficha | GitHub user / Usuario | Role in the project / Rol en el proyecto | Author / Autor |
 |---|---|---|---|---|---|---|
-| JUAN MAURICIO SUAZA SOLORZANO | CC | 1076907287 | 3145556 | mauro-1508 | | Yes / Sí |
-| LUIS ALEJANDRO DUARTE ALDANA | CC | 1069402330 | 3145556 |  | | Yes / Sí |
-| JUAN CAMILO FIERRO ESQUIVEL | CC | 1080292691 | 3145556 | fierroesquiveljuancamilo-svg | | Yes / Sí |
+| JUAN MAURICIO SUAZA SOLORZANO | CC | 1076907287 | 3145556 | mauro-1508 | Tech lead, Scrum Master and analyst-developer (lexicon and recognition backend, coordination) / Líder técnico, Scrum Master y analista-desarrollador (backend lexicon y recognition, coordinación) | Yes / Sí |
+| LUIS ALEJANDRO DUARTE ALDANA | CC | 1069402330 | 3145556 | tadeo77789 | Analyst-developer (interfaces and programming) / Analista-desarrollador (interfaces y programación) | Yes / Sí |
+| JUAN CAMILO FIERRO ESQUIVEL | CC | 1080292691 | 3145556 | fierroesquiveljuancamilo-svg | Analyst-developer (product documentation and programming) / Analista-desarrollador (documentación de producto y programación) | Yes / Sí |
