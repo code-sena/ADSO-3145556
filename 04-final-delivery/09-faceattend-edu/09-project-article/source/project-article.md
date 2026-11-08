@@ -1,7 +1,6 @@
 # FaceAttend EDU: Design, Implementation, and Review of a Facial Attendance Platform Based on Microservices
 
 
-*Note to the authors: names, affiliations, and emails are placeholders. Complete them before submission.*
 
 ---
 
