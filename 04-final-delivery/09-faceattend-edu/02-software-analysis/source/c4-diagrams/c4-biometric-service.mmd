@@ -29,7 +29,7 @@ C4Component
 
     ContainerDb(mongo, "MongoDB 7", "faceattend_biometric", "facial_embedding, fingerprint_embedding, biometric_match_logs, biometric_update_cases")
 
-    Container_Ext(kong, "Kong :8080", "Gateway", "Routes /api/v1/biometric/* here. Its edge pre-function already validated the bearer sessionId before forwarding")
+    Container_Ext(kong, "Kong :8000", "Gateway", "Routes /api/v1/biometric/* here. Its edge pre-function already validated the bearer sessionId before forwarding")
     Container_Ext(identity, "ms-identity :8081", "Session store", "GET /api/v1/sessions/{id} — called again by this service's own guard")
     Container_Ext(authorization, "ms-authorization :8082", "RBAC", "GET /api/v1/auth/evaluate with attendance.record:write, biometric.case:request, biometric.case:review")
 
