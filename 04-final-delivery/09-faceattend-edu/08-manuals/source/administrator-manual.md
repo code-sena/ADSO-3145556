@@ -20,7 +20,7 @@ October 6, 2026
 
 Document version 1.0 — Documented software version: 1.0.0
 
-> **Note.** English translation of *Manual de Administrador*. The original structure, section order, tables and figures have been preserved. Placeholders marked `[TO BE COMPLETED]` correspond to the `[COMPLETAR]` markers of the source document.
+> *Note.* English translation of *Manual de Administrador*. The original structure, section order, tables and figures have been preserved. Placeholders marked `[TO BE COMPLETED]` correspond to the `[COMPLETAR]` markers of the source document.
 
 ---
 
@@ -48,25 +48,25 @@ Every modification to this manual must be recorded before the document is submit
 
 # **Table of Contents**
 
-[**Version Control**](#) **2**
+[Version Control](#) 2
 
 > [Update Rule](#) 2
 
-[**Table of Contents**](#) **3**
+[Table of Contents](#) 3
 
-[**Introduction**](#) **6**
+[Introduction](#) 6
 
-[**Objective**](#) **8**
+[Objective](#) 8
 
 > [Specific Objectives](#) 8
 
-[**Scope**](#) **9**
+[Scope](#) 9
 
 > [Content Covered by the Manual](#) 9
 >
 > [Content Not Covered by the Manual](#) 9
 
-[**Administrator Profile**](#) **11**
+[Administrator Profile](#) 11
 
 > [Administrator Responsibilities](#) 11
 >
@@ -80,11 +80,11 @@ Every modification to this manual must be recorded before the document is submit
 >
 > [Limits of the Role](#) 12
 
-[**Access to the Administration Panel**](#) **13**
+[Access to the Administration Panel](#) 13
 
 > [Login Procedure](#) 13
 
-[**User Management**](#) **15**
+[User Management](#) 15
 
 > [Create a User](#) 15
 >
@@ -96,19 +96,19 @@ Every modification to this manual must be recorded before the document is submit
 >
 > [Query and Filter Users](#) 17
 
-[**Role and Permission Management**](#) **19**
+[Role and Permission Management](#) 19
 
 > [Assign or Change a Role](#) 19
 >
 > [Permission Matrix by Operation](#) 20
 
-[**System Configuration**](#) **21**
+[System Configuration](#) 21
 
 > [Procedure for Modifying a Parameter](#) 21
 >
 > [Parameters External to the Panel](#) 22
 
-[**Management of Core Information**](#) **23**
+[Management of Core Information](#) 23
 
 > [Manage Cohorts](#) 23
 >
@@ -124,7 +124,7 @@ Every modification to this manual must be recorded before the document is submit
 >
 > [Modules Pending Documentation](#) 26
 
-[**Administrative Reports**](#) **27**
+[Administrative Reports](#) 27
 
 > [Generate and Export a Report](#) 27
 >
@@ -132,7 +132,7 @@ Every modification to this manual must be recorded before the document is submit
 >
 > [Good Practices in Report Handling](#) 29
 
-[**Backups**](#) **30**
+[Backups](#) 30
 
 > [Procedure from the Panel](#) 30
 >
@@ -140,7 +140,7 @@ Every modification to this manual must be recorded before the document is submit
 >
 > [Backup Storage](#) 32
 
-[**Information Restoration**](#) **33**
+[Information Restoration](#) 33
 
 > [Restoration Procedure](#) 33
 >
@@ -148,7 +148,7 @@ Every modification to this manual must be recorded before the document is submit
 >
 > [Alternate Command-Line Procedure](#) 34
 
-[**Audit and Action History**](#) **36**
+[Audit and Action History](#) 36
 
 > [Query the History](#) 36
 >
@@ -156,7 +156,7 @@ Every modification to this manual must be recorded before the document is submit
 >
 > [Actions Not Logged by the System](#) 37
 
-[**Security Recommendations and Support Procedures**](#) **38**
+[Security Recommendations and Support Procedures](#) 38
 
 > [Account Security](#) 38
 >
@@ -170,21 +170,21 @@ Every modification to this manual must be recorded before the document is submit
 >
 > [Known Risks and Contingency Plan](#) 41
 
-[**Glossary**](#) **42**
+[Glossary](#) 42
 
-[**References**](#) **43**
+[References](#) 43
 
-[**Appendix A**](#) **44**
+[Appendix A](#) 44
 
-[**Appendix B**](#) **45**
+[Appendix B](#) 45
 
-[**Appendix C**](#) **46**
+[Appendix C](#) 46
 
-[**Appendix D**](#) **47**
+[Appendix D](#) 47
 
-[**Appendix E**](#) **48**
+[Appendix E](#) 48
 
-[**Appendix F**](#) **49**
+[Appendix F](#) 49
 
 # **Introduction**
 
@@ -359,7 +359,7 @@ The administration panel is the interface from which all the procedures in this 
 
 5. Confirm that the administration menu is visible.
 
-**Expected result:** the system presents the administration panel with the user's name and role at the top.
+*Expected result:* the system presents the administration panel with the user's name and role at the top.
 
 The screenshots corresponding to this procedure are included in Appendix E.
 
@@ -413,7 +413,7 @@ The users module allows accounts in the system to be created, queried, edited, a
 
 9. Verify that the user appears in the list and that the system displays the successful registration message.
 
-**Expected result:** the user is created and can access the system according to the assigned role.
+*Expected result:* the user is created and can access the system according to the assigned role.
 
 Before creating an account, the identification number must be searched for in the list. If the person already exists with Inactive status, the existing account must be reactivated instead of creating a new one, since a duplicate record splits that person's attendance history.
 
@@ -657,7 +657,7 @@ The core information of FaceAttend EDU is made up of cohorts, courses, and sched
 
 6. Save and verify the record in the list.
 
-**Expected result:** the course becomes available for schedule assignment and the assigned instructor sees it on their panel.
+*Expected result:* the course becomes available for schedule assignment and the assigned instructor sees it on their panel.
 
 ## **Manage Schedules**
 
@@ -739,7 +739,7 @@ Reports are the final product of the system. They make it possible to verify att
 
 7. Download the file and save it using the defined naming convention.
 
-**Expected result:** the system generates the file with the filtered data and downloads it to the machine.
+*Expected result:* the system generates the file with the filtered data and downloads it to the machine.
 
 **Figure 3**
 

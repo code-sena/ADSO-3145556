@@ -6,7 +6,7 @@ Jonattan Steven Rizo Solano
 Diego Andrés Gutiérrez Núñez
 Juan David Arboleda Perdomo
 
-> **Note.** English translation of *Manual de Usuario*. The original structure, section order and wording have been preserved.
+> *Note.* English translation of *Manual de Usuario*. The original structure, section order and wording have been preserved.
 
 ---
 
@@ -80,7 +80,7 @@ Login > Main menu > Environments
 
 4. Save the changes.
 
-> **Note.** The screen shows a "Type" field, but the `scheduling.environment` table stores only `code`, `name`, `capacity` and `status`: it has no column for the type of environment. The value selected on this screen is therefore not persisted in version 1.0.0. Either the column is added to the model or the field is removed from the screen; until then, the field should be ignored.
+> *Note.* The screen shows a "Type" field, but the `scheduling.environment` table stores only `code`, `name`, `capacity` and `status`: it has no column for the type of environment. The value selected on this screen is therefore not persisted in version 1.0.0. Either the column is added to the model or the field is removed from the screen; until then, the field should be ignored.
 
 ### Screenshot
 

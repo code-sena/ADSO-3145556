@@ -20,7 +20,7 @@ October 6, 2026
 
 Document version 1.1 — Documented software version: 1.0.0
 
-> **Note.** English translation of *Manual de Instalación*. The original structure, section order, tables, figures and commands have been preserved. Commands, file names, variable names and URLs are kept verbatim, since they are executed literally.
+> *Note.* English translation of *Manual de Instalación*. The original structure, section order, tables, figures and commands have been preserved. Commands, file names, variable names and URLs are kept verbatim, since they are executed literally.
 
 ---
 
@@ -52,25 +52,25 @@ The manual must be reviewed after every deployment that modifies the services, t
 
 # Table of Contents
 
-[**Version Control**](#) **2**
+[Version Control](#) 2
 
 > [Update Rule](#) 2
 
-[**Table of Contents**](#) **3**
+[Table of Contents](#) 3
 
-[**Introduction**](#) **6**
+[Introduction](#) 6
 
-[**Objective**](#) **8**
+[Objective](#) 8
 
 > [Specific Objectives](#) 8
 
-[**Scope**](#) **9**
+[Scope](#) 9
 
 > [Content Covered by the Manual](#) 9
 >
 > [Content Not Covered by the Manual](#) 9
 
-[**Installer Profile**](#) **10**
+[Installer Profile](#) 10
 
 > [Required Knowledge](#) 10
 >
@@ -78,7 +78,7 @@ The manual must be reviewed after every deployment that modifies the services, t
 >
 > [Limits of the Role](#) 11
 
-[**General System Description**](#) **12**
+[General System Description](#) 12
 
 > [Nature of the Installation](#) 12
 >
@@ -86,7 +86,7 @@ The manual must be reviewed after every deployment that modifies the services, t
 >
 > [Network Organization](#) 14
 
-[**Prerequisites**](#) **15**
+[Prerequisites](#) 15
 
 > [Hardware Requirements](#) 15
 >
@@ -102,7 +102,7 @@ The manual must be reviewed after every deployment that modifies the services, t
 >
 > [Network Connectivity](#) 18
 
-[**Download and Installation**](#) **19**
+[Download and Installation](#) 19
 
 > [Installing Docker](#) 19
 >
@@ -124,7 +124,7 @@ The manual must be reviewed after every deployment that modifies the services, t
 >
 > [Verifying the Project Structure](#) 21
 
-[**Initial Configuration**](#) **23**
+[Initial Configuration](#) 23
 
 > [Creating the Configuration File](#) 23
 >
@@ -140,7 +140,7 @@ The manual must be reviewed after every deployment that modifies the services, t
 >
 > [Email Channel](#) 26
 
-[**Bringing the System Up**](#) **28**
+[Bringing the System Up](#) 28
 
 > [Deploying the System](#) 28
 >
@@ -156,7 +156,7 @@ The manual must be reviewed after every deployment that modifies the services, t
 >
 > [Loading Test Data](#) 31
 
-[**Verifying the Installation**](#) **33**
+[Verifying the Installation](#) 33
 
 > [Checklist](#) 33
 >
@@ -170,13 +170,13 @@ The manual must be reviewed after every deployment that modifies the services, t
 >
 > [Fifth Test: Network Isolation](#) 36
 
-[**Installing the Mobile Application**](#) **37**
+[Installing the Mobile Application](#) 37
 
 > [Additional Requirements](#) 37
 >
 > [Installation Procedure](#) 37
 
-[**Day-to-Day Operation**](#) **39**
+[Day-to-Day Operation](#) 39
 
 > [Frequently Used Commands](#) 39
 >
@@ -186,7 +186,7 @@ The manual must be reviewed after every deployment that modifies the services, t
 >
 > [Uninstallation](#) 40
 
-[**Troubleshooting**](#) **41**
+[Troubleshooting](#) 41
 
 > [Initial Diagnosis](#) 41
 >
@@ -216,7 +216,7 @@ The manual must be reviewed after every deployment that modifies the services, t
 >
 > [Incident Escalation](#) 45
 
-[**Installation Without Containers**](#) **46**
+[Installation Without Containers](#) 46
 
 > [Tools Required by Programming Language](#) 46
 >
@@ -224,7 +224,7 @@ The manual must be reviewed after every deployment that modifies the services, t
 >
 > [Web Interface in Development Mode](#) 47
 
-[**Security Recommendations**](#) **48**
+[Security Recommendations](#) 48
 
 > [Credentials](#) 48
 >
@@ -234,19 +234,19 @@ The manual must be reviewed after every deployment that modifies the services, t
 >
 > [Handover to the System Administrator](#) 49
 
-[**Glossary**](#) **50**
+[Glossary](#) 50
 
-[**References**](#) **52**
+[References](#) 52
 
-[**Appendix A**](#) **54**
+[Appendix A](#) 54
 
-[**Appendix B**](#) **55**
+[Appendix B](#) 55
 
-[**Appendix C**](#) **56**
+[Appendix C](#) 56
 
-[**Appendix D**](#) **57**
+[Appendix D](#) 57
 
-[**Appendix E**](#) **58**
+[Appendix E](#) 58
 
 # Introduction
 
@@ -260,7 +260,7 @@ All of the technical information set out here — ports, service names, configur
 
 Table 2 delimits the function of this document in relation to the other three manuals that make up the project documentation.
 
-**Table 2**
+Table 2
 
 *Project manuals and the question each one answers*
 
@@ -365,7 +365,7 @@ The practical consequence of this decision is relevant for the installer: there 
 
 The complete deployment brings up twenty-five containers: sixteen that stay running and nine one-off tasks that prepare the database and then stop. They are grouped into three layers. Tables 3, 4, and 5 detail the components of the presentation layer, the application layer, and the data layer, respectively.
 
-**Table 3**
+Table 3
 
 *Presentation layer components*
 
@@ -373,7 +373,7 @@ The complete deployment brings up twenty-five containers: sixteen that stay runn
 |---------------|------------------|----------|-----------------------------------------------------------------------------------|
 | frontend-web  | Expo Web and nginx | 8090   | Graphical interface loaded by the browser, built as a single-page application     |
 
-**Table 4**
+Table 4
 
 *Application layer components*
 
@@ -393,7 +393,7 @@ The complete deployment brings up twenty-five containers: sixteen that stay runn
 
 *Note.* The nine microservices are identified by the prefix ms and are numbered 01 through 09 in the project repository.
 
-**Table 5**
+Table 5
 
 *Data layer components*
 
@@ -410,7 +410,7 @@ The complete deployment brings up twenty-five containers: sixteen that stay runn
 
 The containers are distributed across three networks isolated from one another. The purpose of this separation is for the data layer to be unreachable from the network that serves the browser. Figure 1 represents this organization.
 
-**Figure 1**
+Figure 1
 
 *Deployment diagram and network separation*
 
@@ -446,7 +446,7 @@ All of the requirements in this section must be verified before downloading the 
 
 The deployment keeps sixteen containers running at the same time, four of which run a Java virtual machine. Memory consumption is therefore considerable, and it is the requirement that is most frequently not met.
 
-**Table 6**
+Table 6
 
 *Minimum and recommended hardware requirements*
 
@@ -459,11 +459,11 @@ The deployment keeps sixteen containers running at the same time, four of which 
 
 *Note.* The memory values were estimated from the number of deployed containers and the characteristic consumption of the four Java virtual machines that make up the system.
 
-**Warning.** The container platform does not work when hardware virtualization is disabled. On Windows, this condition is checked in Task Manager, Performance tab, CPU section, where it must read "Virtualization: Enabled". Otherwise, it must be enabled in the machine's basic input/output system, under the designations Intel VT-x, SVM Mode, or Virtualization Technology, depending on the manufacturer.
+Warning. The container platform does not work when hardware virtualization is disabled. On Windows, this condition is checked in Task Manager, Performance tab, CPU section, where it must read "Virtualization: Enabled". Otherwise, it must be enabled in the machine's basic input/output system, under the designations Intel VT-x, SVM Mode, or Virtualization Technology, depending on the manufacturer.
 
 ## Operating System
 
-**Table 7**
+Table 7
 
 *Supported operating systems*
 
@@ -477,7 +477,7 @@ The deployment keeps sixteen containers running at the same time, four of which 
 
 Only two tools are required, since the container platform provides the rest of the runtime environment.
 
-**Table 8**
+Table 8
 
 *Software required for the installation*
 
@@ -487,13 +487,13 @@ Only two tools are required, since the container platform provides the rest of t
 | Docker Compose  | 2.20                | Included in Docker Desktop  | docker compose version    | Deploy and coordinate the twenty-five containers  |
 | Git             | 2.40                | git-scm.com                 | git --version             | Download the source code from the repository      |
 
-**Note.** The orchestration tool supports two invocation forms. Current versions use `docker compose`, in two words, since it is a Docker subcommand; earlier versions used `docker-compose`, with a hyphen, since it was a standalone program. This manual always uses the current form. If the machine only recognizes the hyphenated form, the platform must be updated: the project uses the *include* directive, which requires version 2.20 or higher.
+Note. The orchestration tool supports two invocation forms. Current versions use `docker compose`, in two words, since it is a Docker subcommand; earlier versions used `docker-compose`, with a hyphen, since it was a standalone program. This manual always uses the current form. If the machine only recognizes the hyphenated form, the platform must be updated: the project uses the *include* directive, which requires version 2.20 or higher.
 
 ## Optional Tools
 
 The tools listed below are not necessary for the installation, but they facilitate later review and diagnostic tasks.
 
-**Table 9**
+Table 9
 
 *Complementary support tools*
 
@@ -509,7 +509,7 @@ The tools listed below are not necessary for the installation, but they facilita
 
 The system requires fifteen free ports. When one of them is occupied by another program, the corresponding container does not start.
 
-**Table 10**
+Table 10
 
 *Required ports and frequent conflicts*
 
@@ -533,7 +533,7 @@ On Linux and macOS the following instruction is used:
 
 > lsof -i :5432
 
-**Verification.** When the command returns no lines, the port is free. When it returns one or more lines, the port is occupied: the program must be identified and stopped, or else the port must be changed in the configuration file, as explained in the Initial Configuration section.
+Verification. When the command returns no lines, the port is free. When it returns one or more lines, the port is occupied: the program must be identified and stopped, or else the port must be changed in the configuration file, as explained in the Initial Configuration section.
 
 ## Network Connectivity
 
@@ -593,11 +593,11 @@ docker compose version
 docker run hello-world
 ```
 
-**Verification.** The first two commands must display a version number. The third must end with a message confirming that the installation works correctly. The appearance of that message certifies that the platform was installed correctly.
+Verification. The first two commands must display a version number. The third must end with a message confirming that the installation works correctly. The appearance of that message certifies that the platform was installed correctly.
 
 ## Installing Git
 
-**Table 11**
+Table 11
 
 *Git installation procedure by operating system*
 
@@ -609,7 +609,7 @@ docker run hello-world
 
 > git --version
 
-**Verification.** The command must display version 2.40 or higher.
+Verification. The command must display version 2.40 or higher.
 
 ## Obtaining the Project
 
@@ -629,7 +629,7 @@ git clone https://github.com/Jonas7891/ProyectoFaceAttendEDU.git
 cd ProyectoFaceAttendEDU
 ```
 
-**Warning.** All of the commands in this manual are run from the ProyectoFaceAttendEDU folder, the root of the repository. It is the only folder from which the orchestration tool locates the configuration file and the files of the system's three tiers. Running them from another location produces configuration-not-found errors.
+Warning. All of the commands in this manual are run from the ProyectoFaceAttendEDU folder, the root of the repository. It is the only folder from which the orchestration tool locates the configuration file and the files of the system's three tiers. Running them from another location produces configuration-not-found errors.
 
 ### Second Route: Compressed Archive
 
@@ -643,7 +643,7 @@ When the project is received as a compressed archive, proceed as follows:
 
 Confirm that the root folder contains the elements represented in Figure 2.
 
-**Figure 2**
+Figure 2
 
 *Project folder structure*
 
@@ -684,7 +684,7 @@ dir      # Windows
 ls -la   # Linux and macOS
 ```
 
-**Verification.** The files docker-compose.yml and .env.example must appear, as well as the folders back-end, database, front-end, and tools. The absence of any of them indicates that the download was incomplete, in which case the retrieval procedure must be repeated.
+Verification. The files docker-compose.yml and .env.example must appear, as well as the folders back-end, database, front-end, and tools. The absence of any of them indicates that the download was incomplete, in which case the retrieval procedure must be repeated.
 
 # Initial Configuration
 
@@ -701,9 +701,9 @@ Copy-Item .env.example .env    # Windows, PowerShell
 cp .env.example .env           # Linux and macOS
 ```
 
-**Verification.** Using the command `dir .env` on Windows, or `ls -la .env` on Linux and macOS, confirm that the file exists and occupies approximately 3 kilobytes.
+Verification. Using the command `dir .env` on Windows, or `ls -la .env` on Linux and macOS, confirm that the file exists and occupies approximately 3 kilobytes.
 
-**Note.** The template leaves every password and encryption key empty on purpose, so that no published value can open an installation. The orchestration tool refuses to start while any of them is missing, with a message such as `POSTGRES_PASSWORD is required`. They are generated once, as described in the next subsection; the remaining variables already have working default values.
+Note. The template leaves every password and encryption key empty on purpose, so that no published value can open an installation. The orchestration tool refuses to start while any of them is missing, with a message such as `POSTGRES_PASSWORD is required`. They are generated once, as described in the next subsection; the remaining variables already have working default values.
 
 ## Generating the Passwords and Keys
 
@@ -733,17 +733,17 @@ sed -i "s|^MINIO_ROOT_USER=$|MINIO_ROOT_USER=faceattend|" .env
 sed -i "s|^MINIO_KMS_SECRET_KEY=$|MINIO_KMS_SECRET_KEY=faceattend-key:$(openssl rand -base64 32)|" .env
 ```
 
-**Verification.** The command `docker compose config --quiet` finishes without printing anything. If a value is still missing, it names the variable.
+Verification. The command `docker compose config --quiet` finishes without printing anything. If a value is still missing, it names the variable.
 
-**Warning.** BIOMETRIC_ENCRYPTION_KEY, PII_ENCRYPTION_KEY, PII_HASH_KEY, and MINIO_KMS_SECRET_KEY encrypt the stored data: without them, the biometric templates, the personal data, and the supporting documents cannot be read. A copy of the .env file must be kept in a safe place.
+Warning. BIOMETRIC_ENCRYPTION_KEY, PII_ENCRYPTION_KEY, PII_HASH_KEY, and MINIO_KMS_SECRET_KEY encrypt the stored data: without them, the biometric templates, the personal data, and the supporting documents cannot be read. A copy of the .env file must be kept in a safe place.
 
-**Warning.** The configuration file is never added to the repository. It is deliberately excluded, since it contains credentials. The template values constitute development credentials and not production secrets. For a production environment, all of the passwords must be changed and managed by means of operating system variables or a secrets manager, and never by means of a file belonging to the project.
+Warning. The configuration file is never added to the repository. It is deliberately excluded, since it contains credentials. The template values constitute development credentials and not production secrets. For a production environment, all of the passwords must be changed and managed by means of operating system variables or a secrets manager, and never by means of a file belonging to the project.
 
 ## Environment Variables
 
 The file is organized into thematic blocks. The following tables constitute the complete reference of the available variables.
 
-**Table 12**
+Table 12
 
 *PostgreSQL configuration variables*
 
@@ -755,7 +755,7 @@ The file is organized into thematic blocks. The following tables constitute the 
 | POSTGRES_PORT              | 5432                       | Port on the host machine; must be changed if a prior PostgreSQL installation exists          |
 | FACEATTEND_LIQUIBASE_IMAGE | liquibase/liquibase:4.29.0 | Image that runs the eight migrations                                                         |
 
-**Table 13**
+Table 13
 
 *MongoDB configuration variables*
 
@@ -766,7 +766,7 @@ The file is organized into thematic blocks. The following tables constitute the 
 | MONGO_DB       | faceattend_biometric  | Database where the facial and fingerprint vectors are stored       |
 | MONGO_PORT     | 27017                 | Port on the host machine                                           |
 
-**Table 14**
+Table 14
 
 *Supporting infrastructure variables*
 
@@ -777,7 +777,7 @@ The file is organized into thematic blocks. The following tables constitute the 
 | KONG_PROXY_PORT | 8000              | Port through which all requests to the programming interface arrive         |
 | KONG_ADMIN_PORT | 8001              | Reserved: the administration interface is not published to the host        |
 
-**Table 15**
+Table 15
 
 *Network exposure and web interface variables*
 
@@ -787,9 +787,9 @@ The file is organized into thematic blocks. The following tables constitute the 
 | FRONTEND_PORT       | 8090                  | Port of the web interface                                                                                                                                     |
 | EXPO_PUBLIC_API_URL | Empty                 | Address of the gateway used by the browser. When empty, the web application uses the host of the page itself with port 8000                                   |
 
-**Warning.** The EXPO_PUBLIC_API_URL variable is not read at startup; instead it is baked into the web application bundle at the moment the image is built. Changing it therefore requires rebuilding the interface with the command `docker compose up -d --build frontend-web`; restarting the system is not enough. This circumstance is the most frequent cause of the interface loading but failing to connect to the programming interface.
+Warning. The EXPO_PUBLIC_API_URL variable is not read at startup; instead it is baked into the web application bundle at the moment the image is built. Changing it therefore requires rebuilding the interface with the command `docker compose up -d --build frontend-web`; restarting the system is not enough. This circumstance is the most frequent cause of the interface loading but failing to connect to the programming interface.
 
-**Table 16**
+Table 16
 
 *First administrator variables*
 
@@ -818,7 +818,7 @@ Finally, rebuild the web interface:
 
 > docker compose up -d --build frontend-web
 
-**Warning.** The gateway only accepts requests coming from the origins listed in the KONG_CORS_ORIGINS variable. To serve the application from another address, that address must be added to that variable. Likewise, the value 127.0.0.1 must be restored to the BIND_IP variable when the test finishes, since the value 0.0.0.0 exposes the databases to the entire local network.
+Warning. The gateway only accepts requests coming from the origins listed in the KONG_CORS_ORIGINS variable. To serve the application from another address, that address must be added to that variable. Likewise, the value 127.0.0.1 must be restored to the BIND_IP variable when the test finishes, since the value 0.0.0.0 exposes the databases to the entire local network.
 
 ### Third Case: The Gateway Port Is Occupied
 
@@ -846,7 +846,7 @@ And configure the following variables:
 >
 > SMTP_STARTTLS=false
 
-**Verification.** On going to the address http://localhost:8025 the inbox in which the messages sent by the system are received must be displayed.
+Verification. On going to the address http://localhost:8025 the inbox in which the messages sent by the system are received must be displayed.
 
 # Bringing the System Up
 
@@ -866,13 +866,13 @@ The command breaks down as follows:
 >
 > • The --build option builds the service images before starting them; it is mandatory on the first run.
 
-**Warning.** The first run takes a long time, since the platform must download the base images and compile the nine services in three different languages. The estimated time ranges between fifteen and forty minutes, depending on the connection speed and the capacity of the machine. Subsequent runs take between one and three minutes, since they reuse the previously built components. The process must not be interrupted; if it is cancelled, simply run the same command again.
+Warning. The first run takes a long time, since the platform must download the base images and compile the nine services in three different languages. The estimated time ranges between fifteen and forty minutes, depending on the connection speed and the capacity of the machine. Subsequent runs take between one and three minutes, since they reuse the previously built components. The process must not be interrupted; if it is cancelled, simply run the same command again.
 
 ## Startup Order
 
 The orchestration tool does not start all of the containers simultaneously, but rather respects a dependency chain intended to prevent a service from attempting to use a resource that does not yet exist.
 
-**Table 17**
+Table 17
 
 *Phases of the system startup order*
 
@@ -884,7 +884,7 @@ The orchestration tool does not start all of the containers simultaneously, but 
 | 4         | Gateway                                                                                                                                                | Waits for the cache store, the messaging broker, and the eight main microservices               |
 | 5         | Web interface                                                                                                                                          | Waits for the gateway to reach the healthy state                                                |
 
-**Note.** The practical consequence of this chain is that, when a migration fails, the process stops and the services that depend on it do not start. In the event of any startup difficulty, the migration logs must therefore be reviewed first.
+Note. The practical consequence of this chain is that, when a migration fails, the process stops and the services that depend on it do not start. In the event of any startup difficulty, the migration logs must therefore be reviewed first.
 
 ## Database and Migrations
 
@@ -894,7 +894,7 @@ There is no need to create the database or to run any structured query file manu
 
 The first time the relational database starts with its data volume empty, it runs an initialization file that creates the eight schemas corresponding to the system's bounded contexts: identity, authorization, academic, scheduling, attendance, biometrics, configuration, and notification.
 
-**Note.** The organization into eight schemas, and not into eight independent databases, is due to the fact that each microservice is the exclusive owner of its schema and no service queries another's tables: references between contexts are established by means of identifiers, without physical foreign keys. This is the database-per-context pattern, implemented on a single instance for the purpose of simplifying the deployment.
+Note. The organization into eight schemas, and not into eight independent databases, is due to the fact that each microservice is the exclusive owner of its schema and no service queries another's tables: references between contexts are established by means of identifiers, without physical foreign keys. This is the database-per-context pattern, implemented on a single instance for the purpose of simplifying the deployment.
 
 ### Creation of Tables and Catalog Data
 
@@ -906,7 +906,7 @@ On subsequent startups, the migration tool detects the previously applied change
 
 On completion of the migrations, the system contains its catalogs, but no user account: no published password can open an installation.
 
-**Table 18**
+Table 18
 
 *Predefined system roles*
 
@@ -923,7 +923,7 @@ The system's base catalogs are also loaded: the permission matrix by role, the a
 
 The first Super Administrator is created with a script, run once from the ProyectoFaceAttendEDU folder in Git Bash on Windows or in the terminal on Linux and macOS. The credentials are chosen by the installer and never stored in the repository.
 
-**Table 19**
+Table 19
 
 *Variables of the first administrator script*
 
@@ -941,9 +941,9 @@ BOOTSTRAP_ADMIN_PASSWORD='<at least 12 characters>' \
   ./database/scripts/bootstrap-admin.sh
 ```
 
-**Verification.** Signing in at http://localhost:8090 with that user opens the password change screen. The system requires a new password on the first sign-in; until then, the gateway only allows reading and the password change.
+Verification. Signing in at http://localhost:8090 with that user opens the password change screen. The system requires a new password on the first sign-in; until then, the gateway only allows reading and the password change.
 
-**Note.** The script never runs on its own. The accounts admin.faceattend, instructor.faceattend, and aprendiz.faceattend of earlier versions no longer exist in a new installation, and a migration disables them in databases that still had them.
+Note. The script never runs on its own. The accounts admin.faceattend, instructor.faceattend, and aprendiz.faceattend of earlier versions no longer exist in a new installation, and a migration disables them in databases that still had them.
 
 ## Loading Test Data
 
@@ -957,7 +957,7 @@ cp .env.example .env
 # In .env, set BOOTSTRAP_USERNAME and BOOTSTRAP_PASSWORD to that administrator
 npm run seed
 ```
-**Verification.** The process finishes with a successful exit code. Running it repeatedly is safe, since the tool detects pre-existing records and continues without duplicating them.
+Verification. The process finishes with a successful exit code. Running it repeatedly is safe, since the tool detects pre-existing records and continues without duplicating them.
 
 # Verifying the Installation
 
@@ -985,9 +985,9 @@ The verification is considered complete when the following seven conditions are 
 
 > docker compose ps -a
 
-**Verification.** A table of twenty-five rows must be displayed. The microservices, the gateway, the web interface, and the databases must appear as running, and those that incorporate a health check must appear in a healthy state. The nine rows corresponding to the one-off tasks must appear with a successful exit status, which certifies that they completed their task.
+Verification. A table of twenty-five rows must be displayed. The microservices, the gateway, the web interface, and the databases must appear as running, and those that incorporate a health check must appear in a healthy state. The nine rows corresponding to the one-off tasks must appear with a successful exit status, which certifies that they completed their task.
 
-**Warning.** When any container appears in a permanent restart state, in an unhealthy state, or with an error exit, the installation is not complete. The logs of that container must be reviewed and the Troubleshooting section consulted before continuing.
+Warning. When any container appears in a permanent restart state, in an unhealthy state, or with an error exit, the installation is not complete. The logs of that container must be reviewed and the Troubleshooting section consulted before continuing.
 
 To additionally display the published ports, the following command is used:
 
@@ -1010,9 +1010,9 @@ curl http://localhost:8087/health             # configuration
 curl -i http://localhost:8000/api/v1/auth/session
 ```
 
-**Verification.** Each service command returns a JavaScript Object Notation response with a positive status, and the gateway answers 401. None of them must return a connection error.
+Verification. Each service command returns a JavaScript Object Notation response with a positive status, and the gateway answers 401. None of them must return a connection error.
 
-**Note.** When the command line tool is not available on Windows, the PowerShell instruction `Invoke-RestMethod` may be used instead, or else the address may be opened directly in the browser.
+Note. When the command line tool is not available on Windows, the PowerShell instruction `Invoke-RestMethod` may be used instead, or else the address may be opened directly in the browser.
 
 ## Third Test: Authentication
 
@@ -1024,7 +1024,7 @@ curl -X POST http://localhost:8000/api/v1/auth/login \
   -d "{\"identifier\":\"<administrator-user>\",\"password\":\"<password>\"}"
 ```
 
-**Verification.** A response is obtained containing a session identifier, the user identifier, and the active status of the session.
+Verification. A response is obtained containing a session identifier, the user identifier, and the active status of the session.
 
 That identifier is then used to check a protected endpoint:
 
@@ -1033,7 +1033,7 @@ curl http://localhost:8000/api/v1/persons \
   -H "Authorization: Bearer <session-identifier>"
 ```
 
-**Note.** The system does not use JSON Web Tokens (JWT). On login, the identity service issues an opaque session identifier that is sent with each request by means of the authorization header. The gateway requires that identifier on every non-public route and validates it against the identity service (with a ten-second cache); in addition, each service checks the session and the permissions again on its own. Consequently, an unauthorized error can come from either the gateway or the destination service.
+Note. The system does not use JSON Web Tokens (JWT). On login, the identity service issues an opaque session identifier that is sent with each request by means of the authorization header. The gateway requires that identifier on every non-public route and validates it against the identity service (with a ten-second cache); in addition, each service checks the session and the permissions again on its own. Consequently, an unauthorized error can come from either the gateway or the destination service.
 
 ## Fourth Test: Web Interface
 
@@ -1047,7 +1047,7 @@ curl http://localhost:8000/api/v1/persons \
 >
 > 5\. Confirm access to the main panel corresponding to the administrator role.
 
-**Verification.** The interface loads, accepts the credentials, and displays the panel. If the page loads but the login does not respond, open the browser developer tools and review the console: connection errors almost always indicate that the programming interface address does not match, a situation addressed in the Troubleshooting section.
+Verification. The interface loads, accepts the credentials, and displays the panel. If the page loads but the login does not respond, open the browser developer tools and review the console: connection errors almost always indicate that the programming interface address does not match, a situation addressed in the Troubleshooting section.
 
 The services implemented in Java additionally publish their interactive documentation at the addresses http://localhost:8081/swagger-ui.html and equivalents for ports 8082, 8084, and 8085.
 
@@ -1064,7 +1064,7 @@ docker exec faceattend-kong getent hosts postgres
 docker exec faceattend-kong getent hosts ms-identity
 ```
 
-**Verification.** The first two commands return a name resolution error and the third returns a network address. If the web interface manages to resolve the database name, the networks are not correctly separated and the data layer would be reachable from the layer exposed to the browser.
+Verification. The first two commands return a name resolution error and the third returns a network address. If the web interface manages to resolve the database name, the networks are not correctly separated and the data layer would be reachable from the layer exposed to the browser.
 
 Once the five tests are passed, the installation is considered complete and verified. The system is in a position to be used in accordance with the user manual, or to be configured with real users in accordance with the administrator manual.
 
@@ -1074,7 +1074,7 @@ The mobile application is not deployed by means of containers; instead it is run
 
 ## Additional Requirements
 
-**Table 20**
+Table 20
 
 *Additional requirements of the mobile application*
 
@@ -1103,17 +1103,17 @@ npm install
 npx expo start
 ```
 
-**Warning.** From the phone, the loopback designation `localhost` refers to the phone itself and not to the computer. It is mandatory to use the machine's address on the local network in the mobile application configuration, and to keep the exposure variable set to 0.0.0.0 in the main system configuration file.
+Warning. From the phone, the loopback designation `localhost` refers to the phone itself and not to the computer. It is mandatory to use the machine's address on the local network in the mobile application configuration, and to keep the exposure variable set to 0.0.0.0 in the main system configuration file.
 
 On starting up, the development tool displays a quick response code in the terminal. Open the client application on the phone and scan that code, after which the application is downloaded to the device and runs.
 
-**Verification.** The application displays the login screen and allows logging in with the student user credentials. If the screen loads but login fails, the problem lies in the programming interface address or in the machine's firewall, which may be blocking the gateway port.
+Verification. The application displays the login screen and allows logging in with the student user credentials. If the screen loads but login fails, the problem lies in the programming interface address or in the machine's firewall, which may be blocking the gateway port.
 
 # Day-to-Day Operation
 
 ## Frequently Used Commands
 
-**Table 21**
+Table 21
 
 *Frequent operation commands*
 
@@ -1139,7 +1139,7 @@ docker compose down
 docker compose up -d
 ```
 
-**Note.** Stopping the system removes the containers but not the data volumes: the database, the biometric vectors, and the events remain intact. On deploying it again, the system continues in the state in which it was left.
+Note. Stopping the system removes the containers but not the data volumes: the database, the biometric vectors, and the events remain intact. On deploying it again, the system continues in the state in which it was left.
 
 ## Updating to a New Version
 
@@ -1156,7 +1156,7 @@ docker compose up -d --build
 
 ## Uninstallation
 
-**Warning.** The first command in the following block irreversibly deletes all of the system's data: users, attendance records, justifications, and biometric vectors. The operation cannot be undone, so it must be run only when starting from scratch is intended.
+Warning. The first command in the following block irreversibly deletes all of the system's data: users, attendance records, justifications, and biometric vectors. The operation cannot be undone, so it must be run only when starting from scratch is intended.
 
 ```bash
 # Removes containers and data volumes
@@ -1184,7 +1184,7 @@ docker compose config                  # whether the configuration is valid
 
 ## Problems During Installation
 
-**Table 22**
+Table 22
 
 *Frequent problems during installation*
 
@@ -1250,7 +1250,7 @@ docker compose up identity-liquibase
 docker compose up -d
 ```
 
-**Warning.** As a last resort, when the database is left in an inconsistent state and this is a test environment, it may be reset from scratch by deleting the volumes. That operation erases all of the data and must never be run on an installation containing real information.
+Warning. As a last resort, when the database is left in an inconsistent state and this is a test environment, it may be reset from scratch by deleting the volumes. That operation erases all of the data and must never be run on an installation containing real information.
 
 ### The System Reports That a Table or a Schema Does Not Exist
 
@@ -1258,7 +1258,7 @@ The cause is that the migrations were not run or were left incomplete. Verify th
 
 ## Connection and Usage Problems
 
-**Table 23**
+Table 23
 
 *Frequent connection and usage problems*
 
@@ -1275,7 +1275,7 @@ The cause is that the migrations were not run or were left incomplete. Verify th
 
 ## Performance Problems
 
-**Table 24**
+Table 24
 
 *Frequent performance problems*
 
@@ -1302,7 +1302,7 @@ docker system prune -a
 docker compose up -d --build
 ```
 
-**Warning.** The procedure deletes all of the system's data, so it must be used exclusively in development or assessment environments.
+Warning. The procedure deletes all of the system's data, so it must be used exclusively in development or assessment environments.
 
 ## Incident Escalation
 
@@ -1310,13 +1310,13 @@ When a difficulty is not resolved by the previous procedures, it must be reporte
 
 # Installation Without Containers
 
-**Warning.** This section is optional and is not recommended for an ordinary installation. It is relevant only when the code of a service is to be modified and debugged from the development environment. To install and use the system, the container-based procedure is faster and considerably less error-prone.
+Warning. This section is optional and is not recommended for an ordinary installation. It is relevant only when the code of a service is to be modified and debugged from the development environment. To install and use the system, the container-based procedure is faster and considerably less error-prone.
 
 ## Tools Required by Programming Language
 
 Each service requires its own runtime environment installed on the machine.
 
-**Table 25**
+Table 25
 
 *Tools required by programming language*
 
@@ -1342,7 +1342,7 @@ cd back-end/06-ms-biometric && uvicorn main:app --reload
 cd back-end/08-ms-notification && go run ./cmd/server
 ```
 
-**Note.** The services read the same configuration file used by the containers. On starting up outside them, each service loads the configuration from the project root by means of the mechanism native to its language, so there is no need to duplicate the configuration.
+Note. The services read the same configuration file used by the containers. On starting up outside them, each service loads the configuration from the project root by means of the mechanism native to its language, so there is no need to duplicate the configuration.
 
 ## Web Interface in Development Mode
 
@@ -1394,7 +1394,7 @@ On completing the installation, the installer hands over to the administrator th
 
 The following table defines the technical terms used in this manual, in the specific context of the project.
 
-**Table 26**
+Table 26
 
 *Glossary of system terms*
 
@@ -1447,7 +1447,7 @@ Complete Port Map
 
 This appendix gathers in one place all of the ports used by the system, their degree of exposure, and the address through which each one is accessed.
 
-**Table 27**
+Table 27
 
 *Complete system port map*
 
@@ -1477,7 +1477,7 @@ Main Routes of the Programming Interface
 
 All of the routes listed below pass through the gateway and require the authorization header with the session identifier, except for the public authentication endpoints (login and its verification, refresh, logout and password recovery) and the campus sign-up.
 
-**Table 28**
+Table 28
 
 *API routes by destination service*
 
@@ -1497,9 +1497,9 @@ All of the routes listed below pass through the gateway and require the authoriz
 
 Test Accounts by Role
 
-**Warning.** These accounts exist only after running the test data tool, and only for local installations. Their passwords are the values of the tool's .env file, copied from a public template: the tool must never be run against an installation accessible to third parties.
+Warning. These accounts exist only after running the test data tool, and only for local installations. Their passwords are the values of the tool's .env file, copied from a public template: the tool must never be run against an installation accessible to third parties.
 
-**Table 29**
+Table 29
 
 *Test accounts by role*
 
@@ -1578,4 +1578,4 @@ BOOTSTRAP_ADMIN_PASSWORD='<at least 12 characters>' ./database/scripts/bootstrap
 # http://localhost:8090
 ```
 
-**Verification.** The procedure is considered finished only when the five tests of the Verifying the Installation section are passed.
+Verification. The procedure is considered finished only when the five tests of the Verifying the Installation section are passed.

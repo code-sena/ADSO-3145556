@@ -35,17 +35,17 @@ It does not replace specific procedures for security incident response, operatio
 
 For the purposes of this document, the following operational definitions are adopted:
 
-- **Corrective action**: action taken to eliminate the root cause of a detected nonconformity and prevent its recurrence.
-- **Preventive action**: action taken to eliminate the cause of a potential nonconformity, in order to prevent its occurrence.
-- **Improvement action**: action aimed at increasing the efficacy, efficiency, quality, security, maintainability, or perceived value of the product or process, without there necessarily being an active nonconformity.
-- **Nonconformity**: failure to meet a specified requirement, whether functional, regulatory, process, security, performance, or quality.
-- **Risk**: effect of uncertainty on project, product, or service objectives, expressed in terms of probability and impact.
-- **Opportunity**: risk with a positive effect, susceptible to being leveraged to improve performance, reduce cost, increase reliability, or strengthen user experience.
-- **Root cause**: fundamental factor whose elimination prevents the problem from recurring. It should not be confused with the symptom, the triggering event, or individual responsibility.
-- **Efficacy**: degree to which the implemented action achieves the intended result, measured through objective evidence and previously defined criteria.
-- **Verification**: confirmation that the action was implemented according to the approved plan.
-- **Validation**: confirmation that the implemented action produces the desired effect in the real context of use.
-- **Record**: document, data, or evidence that preserves the history of the process and allows reconstructing decisions, responsible parties, dates, and results.
+- *Corrective action*: action taken to eliminate the root cause of a detected nonconformity and prevent its recurrence.
+- *Preventive action*: action taken to eliminate the cause of a potential nonconformity, in order to prevent its occurrence.
+- *Improvement action*: action aimed at increasing the efficacy, efficiency, quality, security, maintainability, or perceived value of the product or process, without there necessarily being an active nonconformity.
+- *Nonconformity*: failure to meet a specified requirement, whether functional, regulatory, process, security, performance, or quality.
+- *Risk*: effect of uncertainty on project, product, or service objectives, expressed in terms of probability and impact.
+- *Opportunity*: risk with a positive effect, susceptible to being leveraged to improve performance, reduce cost, increase reliability, or strengthen user experience.
+- *Root cause*: fundamental factor whose elimination prevents the problem from recurring. It should not be confused with the symptom, the triggering event, or individual responsibility.
+- *Efficacy*: degree to which the implemented action achieves the intended result, measured through objective evidence and previously defined criteria.
+- *Verification*: confirmation that the action was implemented according to the approved plan.
+- *Validation*: confirmation that the implemented action produces the desired effect in the real context of use.
+- *Record*: document, data, or evidence that preserves the history of the process and allows reconstructing decisions, responsible parties, dates, and results.
 
 # Regulatory and Conceptual Framework
 

@@ -27,13 +27,13 @@ The document covers the environment preparation, base tool installation, environ
 # Implementation Strategy
 
 ## Deployment Model: Containerization
-The system utilizes **Docker** as the container platform and **Docker Compose** as the orchestrator. This choice allows the management of the 25 containers necessary (16 long-running services, databases, and gateway, plus 9 one-off migration tasks) through a single configuration file.
+The system utilizes *Docker* as the container platform and *Docker Compose* as the orchestrator. This choice allows the management of the 25 containers necessary (16 long-running services, databases, and gateway, plus 9 one-off migration tasks) through a single configuration file.
 
 ### Network Organization
 To ensure security, the deployment divides traffic into three isolated networks:
-1. **Edge Network**: Connects the web interface and the Gateway (Kong) (Kong Inc., n.d.).
-2. **App Network**: Connects the Gateway with the microservices.
-3. **Data Network**: Connects the microservices with the databases and the messaging broker.
+1. *Edge Network*: Connects the web interface and the Gateway (Kong) (Kong Inc., n.d.).
+2. *App Network*: Connects the Gateway with the microservices.
+3. *Data Network*: Connects the microservices with the databases and the messaging broker.
 
 This architecture prevents the presentation layer from having direct access to the data layer, mitigating the risk of direct attacks on the database.
 
@@ -48,10 +48,10 @@ This architecture prevents the presentation layer from having direct access to t
 | Network | Internet access | Download of base images and dependencies during the first build. |
 
 ## Software Requirements
-- **Operating System**: Windows 10/11 (with WSL2), Ubuntu 22.04 LTS, or macOS Ventura+.
-- **Docker**: Version 24.0 or higher.
-- **Docker Compose**: Version 2.20 or higher.
-- **Git**: Version 2.40 or higher for obtaining the source code.
+- *Operating System*: Windows 10/11 (with WSL2), Ubuntu 22.04 LTS, or macOS Ventura+.
+- *Docker*: Version 24.0 or higher.
+- *Docker Compose*: Version 2.20 or higher.
+- *Git*: Version 2.40 or higher for obtaining the source code.
 
 # Installation Procedure
 
@@ -78,10 +78,10 @@ docker compose up -d --build
 
 ### Startup Order and Migrations
 The system follows a strict dependency chain:
-1. **Data Layer**: PostgreSQL, MongoDB, Redis, and Kafka start.
-2. **Migrations**: Eight sequential **Liquibase** tasks run to create schemas and load master data (Liquibase, n.d.).
-3. **Microservices**: Once migrations finish, the business services start.
-4. **Gateway and Interface**: Finally, the Gateway (Kong) and the web interface are launched.
+1. *Data Layer*: PostgreSQL, MongoDB, Redis, and Kafka start.
+2. *Migrations*: Eight sequential *Liquibase* tasks run to create schemas and load master data (Liquibase, n.d.).
+3. *Microservices*: Once migrations finish, the business services start.
+4. *Gateway and Interface*: Finally, the Gateway (Kong) and the web interface are launched.
 
 # Verification of the Implementation
 
@@ -89,31 +89,31 @@ To declare the installation as successful, the following test protocol must be e
 
 | Test | Verification Method | Expected Result |
 |---|---|---|
-| **Container Status** | `docker compose ps -a` | 16 containers running (healthy) and 9 one-off tasks exited with code 0. |
-| **Service Health** | `curl http://localhost:8081/api/v1/health` (one port per service) | JSON response with status "UP". |
-| **Gateway Connectivity** | `curl -i http://localhost:8000/api/v1/auth/session` | 401 from the Kong Gateway: the route requires a session. |
-| **Authentication** | Login with the first administrator created by `bootstrap-admin.sh` | Return of a valid session token. |
-| **Interface Loading** | Access `http://localhost:8090` | Correct loading of the login screen. |
-| **Network Isolation** | `docker exec ... nslookup postgres` | Resolution failure from the frontend. |
+| Container Status | `docker compose ps -a` | 16 containers running (healthy) and 9 one-off tasks exited with code 0. |
+| Service Health | `curl http://localhost:8081/api/v1/health` (one port per service) | JSON response with status "UP". |
+| Gateway Connectivity | `curl -i http://localhost:8000/api/v1/auth/session` | 401 from the Kong Gateway: the route requires a session. |
+| Authentication | Login with the first administrator created by `bootstrap-admin.sh` | Return of a valid session token. |
+| Interface Loading | Access `http://localhost:8090` | Correct loading of the login screen. |
+| Network Isolation | `docker exec ... nslookup postgres` | Resolution failure from the frontend. |
 
 # Operation and Maintenance
 
 ## Frequent Commands
-- **Restart system**: `docker compose restart`
-- **View logs in real-time**: `docker compose logs -f <service>`
-- **Update version**: `git pull` → `docker compose up -d --build`
-- **Total cleanup (including data)**: `docker compose down -v`
+- *Restart system*: `docker compose restart`
+- *View logs in real-time*: `docker compose logs -f <service>`
+- *Update version*: `git pull` → `docker compose up -d --build`
+- *Total cleanup (including data)*: `docker compose down -v`
 
 ## Common Troubleshooting
-- **Port Occupied**: Identify the process with `netstat -ano` and terminate it or change the port in the `.env`.
-- **Migration Error**: Review the `identity-liquibase` logs to detect syntax or connectivity failures.
-- **Interface not connecting**: Verify that `EXPO_PUBLIC_API_URL` matches the host IP and that the frontend has been rebuilt (`--build`).
+- *Port Occupied*: Identify the process with `netstat -ano` and terminate it or change the port in the `.env`.
+- *Migration Error*: Review the `identity-liquibase` logs to detect syntax or connectivity failures.
+- *Interface not connecting*: Verify that `EXPO_PUBLIC_API_URL` matches the host IP and that the frontend has been rebuilt (`--build`).
 
 # Conclusions
 
 The implementation procedure for FaceAttendEDU minimizes manual intervention through Docker automation. The separation of networks and dependent orchestration ensure that the system is deployed consistently, drastically reducing "works on my machine" issues and deployment time.
 
-**Author's Note.** Jonattan Steven Rizo Solano is the technical lead for the implementation strategy. Technical correspondence can be directed to jonas@consultoria.example.
+*Author's Note.* Jonattan Steven Rizo Solano is the technical lead for the implementation strategy. Technical correspondence can be directed to jonas@consultoria.example.
 
 # References
 

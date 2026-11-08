@@ -5,11 +5,11 @@
 
 ---
 
-**Abstract**—Recording attendance in technical and higher education is still largely manual. It is slow, and it is easy to falsify with signatures or shared cards. This paper describes FaceAttend EDU, a platform that records attendance with facial recognition and a liveness check. The system has nine backend services behind an API gateway, a React web client, and an Expo mobile client. We describe the architecture, the relational model shared by the services, the biometric subsystem, and the security review we ran before any pilot. We do not report accuracy, latency, or cost figures, because the system has not been measured under field conditions. We report instead what can be checked in the repository: 1,138 commits across all branches between 26 March and 27 October 2026, a 37-table data model, and 2,317 automated tests in the web, mobile, TypeScript, and Java suites. The review found one critical and one serious access-control defect, both open when this text was written. We use the case to discuss three problems that were harder in practice than expected: business rules duplicated across three languages, different route normalization in the gateway and in the services, and documentation that drifted away from the code.
+*Abstract*—Recording attendance in technical and higher education is still largely manual. It is slow, and it is easy to falsify with signatures or shared cards. This paper describes FaceAttend EDU, a platform that records attendance with facial recognition and a liveness check. The system has nine backend services behind an API gateway, a React web client, and an Expo mobile client. We describe the architecture, the relational model shared by the services, the biometric subsystem, and the security review we ran before any pilot. We do not report accuracy, latency, or cost figures, because the system has not been measured under field conditions. We report instead what can be checked in the repository: 1,138 commits across all branches between 26 March and 27 October 2026, a 37-table data model, and 2,317 automated tests in the web, mobile, TypeScript, and Java suites. The review found one critical and one serious access-control defect, both open when this text was written. We use the case to discuss three problems that were harder in practice than expected: business rules duplicated across three languages, different route normalization in the gateway and in the services, and documentation that drifted away from the code.
 
-**Index Terms**—Facial recognition, liveness detection, microservices, attendance management, software architecture, security review, higher education.
+*Index Terms*—Facial recognition, liveness detection, microservices, attendance management, software architecture, security review, higher education.
 
-**Abstract (Spanish version, translated)**—Attendance recording in technical and higher education is still mostly manual, slow, and easy to falsify. This article describes FaceAttend EDU, a platform that records attendance through facial recognition with liveness verification. The system consists of nine backend services behind an API gateway, a React web client, and an Expo mobile client. We describe the architecture, the shared relational model, the biometric subsystem, and the security review conducted before any pilot. We do not report accuracy, latency, or cost figures, because the system has not been measured under real usage conditions. We report instead what can be verified in the repository, and we discuss three problems that turned out to be harder than expected: business rules duplicated across three languages, different route normalization between the gateway and the services, and documentation that drifted away from the code.
+*Abstract (Spanish version, translated)*—Attendance recording in technical and higher education is still mostly manual, slow, and easy to falsify. This article describes FaceAttend EDU, a platform that records attendance through facial recognition with liveness verification. The system consists of nine backend services behind an API gateway, a React web client, and an Expo mobile client. We describe the architecture, the shared relational model, the biometric subsystem, and the security review conducted before any pilot. We do not report accuracy, latency, or cost figures, because the system has not been measured under real usage conditions. We report instead what can be verified in the repository, and we discuss three problems that turned out to be harder than expected: business rules duplicated across three languages, different route normalization between the gateway and the services, and documentation that drifted away from the code.
 
 ---
 
@@ -31,11 +31,11 @@ Section II places the work in relation to the literature. Sections III to V desc
 
 We did not conduct a systematic literature review. This section presents the works we used as a technical basis and those we compared with our decisions.
 
-**Facial recognition.** FaceNet (Schroff et al., 2015) learns a 128-dimensional Euclidean embedding with triplet loss. ArcFace (Deng et al., 2019) adds an angular margin to the softmax loss and is frequently used as a baseline in verification. Our biometric service computes 128-dimensional embeddings with the `face_recognition` library (Geitgey, n.d.), which wraps dlib models (King, 2009). The benchmark figures for FaceNet and ArcFace are obtained on public datasets and do not transfer to a classroom, so we do not take them as evidence of our system's performance.
+*Facial recognition.* FaceNet (Schroff et al., 2015) learns a 128-dimensional Euclidean embedding with triplet loss. ArcFace (Deng et al., 2019) adds an angular margin to the softmax loss and is frequently used as a baseline in verification. Our biometric service computes 128-dimensional embeddings with the `face_recognition` library (Geitgey, n.d.), which wraps dlib models (King, 2009). The benchmark figures for FaceNet and ArcFace are obtained on public datasets and do not transfer to a classroom, so we do not take them as evidence of our system's performance.
 
-**Microservices.** Richardson (2018) and Newman (2021) describe decomposition by business context, asynchronous communication, and eventual consistency as recurring patterns. Several of these patterns, such as the circuit breaker or the saga, appear frequently in the literature and in industry presentations. In our code we did not find a circuit breaker implemented, so we do not describe it as part of the system.
+*Microservices.* Richardson (2018) and Newman (2021) describe decomposition by business context, asynchronous communication, and eventual consistency as recurring patterns. Several of these patterns, such as the circuit breaker or the saga, appear frequently in the literature and in industry presentations. In our code we did not find a circuit breaker implemented, so we do not describe it as part of the system.
 
-**Quality and development practices.** Martin (2008) argues that clean code reduces long-term maintenance cost. Piñero González et al. (2021) address performance-efficiency risks in software products from the early development phases. Both references guided our testing discipline and the decision to measure before optimizing, although in this version of the work we do not systematically measure performance.
+*Quality and development practices.* Martin (2008) argues that clean code reduces long-term maintenance cost. Piñero González et al. (2021) address performance-efficiency risks in software products from the early development phases. Both references guided our testing discipline and the decision to measure before optimizing, although in this version of the work we do not systematically measure performance.
 
 ## III. System Architecture
 
@@ -96,10 +96,10 @@ In attendance, the valid states are `Present`, `Absent`, `Late`, and `Justified`
 
 Several rules are expressed as database constraints and not only in code:
 
-- **One attendance record per actor and session.** The unique constraint on `(class_session_id, academic_actor_id)` prevents duplicates even if two requests arrive almost simultaneously. Services convert the database error into a conflict response.
-- **One justification per record.** Only records in `Absent` or `Late` state are justified, and the unique constraint on `attendance_record_id` prevents a second justification for the same record.
-- **Non-overlapping time blocks.** The database imposes uniqueness on the combination of classroom, day, and start time, and on that of instructor, day, and start time. This constraint only catches identical times. Therefore, the scheduling service also validates that intervals do not cross on the same day, both for the classroom and for the instructor. Blocks that only touch at one endpoint are valid.
-- **One session per block and date.** The session state goes from `Open` to `Closed` or `Cancelled`, and closing records who did it and when.
+- *One attendance record per actor and session.* The unique constraint on `(class_session_id, academic_actor_id)` prevents duplicates even if two requests arrive almost simultaneously. Services convert the database error into a conflict response.
+- *One justification per record.* Only records in `Absent` or `Late` state are justified, and the unique constraint on `attendance_record_id` prevents a second justification for the same record.
+- *Non-overlapping time blocks.* The database imposes uniqueness on the combination of classroom, day, and start time, and on that of instructor, day, and start time. This constraint only catches identical times. Therefore, the scheduling service also validates that intervals do not cross on the same day, both for the classroom and for the instructor. Blocks that only touch at one endpoint are valid.
+- *One session per block and date.* The session state goes from `Open` to `Closed` or `Cancelled`, and closing records who did it and when.
 
 Existence constraints between services cannot be expressed in the database and are validated in the application. This is the most fragile part of the design, and the first we would review in a second version.
 
@@ -117,11 +117,11 @@ We do not report false positive or false negative rates. The repository does not
 
 Before any pilot, we reviewed the code by reading the security filters, routers, Kong configuration, and Docker Compose. We also ran the test suites and `npm audit` on the production projects.
 
-**Findings fixed in a local branch** (unmerged as of the review date):
+*Findings fixed in a local branch* (unmerged as of the review date):
 
-- **Route-encoding bypass in Node services.** The authentication guard decided whether a route was public using the undecoded URL, but Fastify decodes when routing. A request to `/%61pi/v1/configurations/...` reached the protected handler and the guard treated it as public. Kong was not exploitable via this path: it was tested with `kong:3.6` and forwards the already normalized route. The services were exploitable when called directly on their port. The fix decodes and normalizes before comparing, returns 400 for ambiguous routes, and adds four tests. With real Fastify, the request goes from 200 to 401.
-- **Public authorization endpoints.** `GET /api/v1/auth/evaluate` and `GET /api/v1/users/{id}/roles` were marked `permitAll` and Kong routed them. The fix requires a session and, to query another user, the `configuration:manage` permission.
-- **Broken Maven wrapper in a clean clone.** `.gitignore` ignored `/.mvn/`, so `mvnw` was versioned but `maven-wrapper.properties` was not. A developer without Maven installed could not build. The fix adjusts `.gitignore` and versions the file.
+- *Route-encoding bypass in Node services.* The authentication guard decided whether a route was public using the undecoded URL, but Fastify decodes when routing. A request to `/%61pi/v1/configurations/...` reached the protected handler and the guard treated it as public. Kong was not exploitable via this path: it was tested with `kong:3.6` and forwards the already normalized route. The services were exploitable when called directly on their port. The fix decodes and normalizes before comparing, returns 400 for ambiguous routes, and adds four tests. With real Fastify, the request goes from 200 to 401.
+- *Public authorization endpoints.* `GET /api/v1/auth/evaluate` and `GET /api/v1/users/{id}/roles` were marked `permitAll` and Kong routed them. The fix requires a session and, to query another user, the `configuration:manage` permission.
+- *Broken Maven wrapper in a clean clone.* `.gitignore` ignored `/.mvn/`, so `mvnw` was versioned but `maven-wrapper.properties` was not. A developer without Maven installed could not build. The fix adjusts `.gitignore` and versions the file.
 
 **Open findings:**
 
@@ -159,17 +159,17 @@ Two observations from the review seem useful to anyone trying to repeat the work
 
 ## VIII. Discussion and Limitations
 
-**What cost us.** Much of the effort was not in facial recognition but in the seams between services. Site-scope rules were duplicated in three languages. According to the internal review report, that duplication explains failures such as cross-site access. If the project were redone, we would centralize those rules in a shared library from the start.
+*What cost us.* Much of the effort was not in facial recognition but in the seams between services. Site-scope rules were duplicated in three languages. According to the internal review report, that duplication explains failures such as cross-site access. If the project were redone, we would centralize those rules in a shared library from the start.
 
 Route normalization is the second case. Two components that interpret the same URL differently create an attack surface that neither sees on its own. In the local branch, the Node guard was fixed; the Java filter has the same pattern and remains open. The lesson is general: authorization should be evaluated on the route after routing, not on the string that arrived over the network.
 
-**What we do not know.** We do not know how accurate verification is in a real classroom, with variable lighting, glasses, or low-resolution cameras. Nor do we know how much time attendance recording saves compared with the previous method, because we did not make comparative measurements. A pilot at one site, with a measurement procedure defined before starting, would be the natural next step.
+*What we do not know.* We do not know how accurate verification is in a real classroom, with variable lighting, glasses, or low-resolution cameras. Nor do we know how much time attendance recording saves compared with the previous method, because we did not make comparative measurements. A pilot at one site, with a measurement procedure defined before starting, would be the natural next step.
 
-**Study limitations.** Those of us writing this work also developed the system and conducted its security review. This introduces bias. We mitigated the problem by recording each finding with code evidence, but it does not replace an external audit.
+*Study limitations.* Those of us writing this work also developed the system and conducted its security review. This introduces bias. We mitigated the problem by recording each finding with code evidence, but it does not replace an external audit.
 
-**Legal compliance.** Biometric data are sensitive data under Article 5 of Law 1581 of 2012 (Congress of Colombia, 2012). The same law restricts the processing of minors' data (Article 7), and Decree 1377 of 2013 regulates that processing (Presidency of the Republic of Colombia, 2013). As of the review date, the guardian authorization flow was not implemented, nor was the data processing policy or the impact assessment. These are prerequisites for any use with real data.
+*Legal compliance.* Biometric data are sensitive data under Article 5 of Law 1581 of 2012 (Congress of Colombia, 2012). The same law restricts the processing of minors' data (Article 7), and Decree 1377 of 2013 regulates that processing (Presidency of the Republic of Colombia, 2013). As of the review date, the guardian authorization flow was not implemented, nor was the data processing policy or the impact assessment. These are prerequisites for any use with real data.
 
-**Licenses and versions.** Liquibase 5.x is distributed under an FSL license, which requires an explicit decision before adopting that version. The fingerprint SDK used by the web client did not include its license notices in the review. The Kafka image in Docker Compose is 3.8.0, which according to secondary sources no longer receives community support; its update should be planned.
+*Licenses and versions.* Liquibase 5.x is distributed under an FSL license, which requires an explicit decision before adopting that version. The fingerprint SDK used by the web client did not include its license notices in the review. The Kafka image in Docker Compose is 3.8.0, which according to secondary sources no longer receives community support; its update should be planned.
 
 ## IX. Conclusions and Future Work
 
@@ -184,7 +184,7 @@ We propose four steps, in this order:
 
 ## Appendix. Data and Reproduction
 
-**Code.** Repository `Jonas7891/ProyectoFaceAttendEDU` (GitHub). The figures in Table II come from the review of October 27, 2026. We did not record with certainty the exact commit of that run. Commit `478785d1` exists in the repository and was the one consulted at the close of the review, but the `tmp/integration` branch no longer exists locally, and the active branch changed afterward (`develop`, commit `bb5f0fb7` at the time of this verification). Before submitting, it is advisable to repeat the tests on the commit that is cited.
+*Code.* Repository `Jonas7891/ProyectoFaceAttendEDU` (GitHub). The figures in Table II come from the review of October 27, 2026. We did not record with certainty the exact commit of that run. Commit `478785d1` exists in the repository and was the one consulted at the close of the review, but the `tmp/integration` branch no longer exists locally, and the active branch changed afterward (`develop`, commit `bb5f0fb7` at the time of this verification). Before submitting, it is advisable to repeat the tests on the commit that is cited.
 
 **Test reproduction (guidance):**
 
@@ -194,7 +194,7 @@ We propose four steps, in this order:
 - Java services: `./mvnw test` in each Java service; if the wrapper is not present, `mvn test` in an image with Maven and JDK 21.
 - Biometric service: `poetry install` and `pytest` in `back-end/06-ms-biometric`. It was not run during the review.
 
-**Data.** The article does not use learner data. The example identifiers in the documentation are fictitious.
+*Data.* The article does not use learner data. The example identifiers in the documentation are fictitious.
 
 ---
 

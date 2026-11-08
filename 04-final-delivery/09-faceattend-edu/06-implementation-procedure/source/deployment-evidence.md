@@ -8,10 +8,10 @@
 
 # Latest deployment
 
-- **Version:** `v1.7.0`, commit `07119ab7`.
-- **Date:** November 4, 2026. Times are in UTC.
-- **Result:** all stages finished green.
-- **Evidence:** [Deploy production run](https://github.com/Jonas7891/ProyectoFaceAttendEDU/actions/runs/41912162302).
+- *Version:* `v1.7.0`, commit `07119ab7`.
+- *Date:* November 4, 2026. Times are in UTC.
+- *Result:* all stages finished green.
+- *Evidence:* [Deploy production run](https://github.com/Jonas7891/ProyectoFaceAttendEDU/actions/runs/41912162302).
 
 | Stage | Jobs | Latest completion (UTC) | Result |
 |---|---|---|---|
