@@ -48,21 +48,21 @@ It includes:
 
 ## Definitions
 
-- **RF**: High-level functional requirement.
-- **ERF**: Specific functional requirement derived from an RF.
-- **Actor**: Person, system, or device that interacts with the software.
-- **Precondition**: State that must be met before starting a requirement.
-- **Postcondition**: Expected state upon successful completion of a requirement.
-- **Business Rule**: Restriction or policy governing system behavior.
-- **Acceptance Criterion**: Objective condition that allows a requirement to be declared fulfilled.
-- **RBAC**: Role-Based Access Control.
-- **Biometrics**: Physiological or behavioral measure used to identify or verify a person.
-- **Biometric Template**: Encrypted mathematical representation of facial or fingerprint features, distinct from the raw image.
-- **IoT**: Internet of Things; connected devices capable of generating telemetry or events.
-- **Cohort (Ficha)**: Group, course, or operational academic unit associated with responsibles, shifts, and environments.
-- **Shift (Jornada)**: Time slot or turn associated with academic or administrative activities.
-- **Justification**: Documentary support presented to explain an absence, delay, or irregularity.
-- **Audit**: Traceable record of who did what, when, from where, and on what data.
+- *RF*: High-level functional requirement.
+- *ERF*: Specific functional requirement derived from an RF.
+- *Actor*: Person, system, or device that interacts with the software.
+- *Precondition*: State that must be met before starting a requirement.
+- *Postcondition*: Expected state upon successful completion of a requirement.
+- *Business Rule*: Restriction or policy governing system behavior.
+- *Acceptance Criterion*: Objective condition that allows a requirement to be declared fulfilled.
+- *RBAC*: Role-Based Access Control.
+- *Biometrics*: Physiological or behavioral measure used to identify or verify a person.
+- *Biometric Template*: Encrypted mathematical representation of facial or fingerprint features, distinct from the raw image.
+- *IoT*: Internet of Things; connected devices capable of generating telemetry or events.
+- *Cohort (Ficha)*: Group, course, or operational academic unit associated with responsibles, shifts, and environments.
+- *Shift (Jornada)*: Time slot or turn associated with academic or administrative activities.
+- *Justification*: Documentary support presented to explain an absence, delay, or irregularity.
+- *Audit*: Traceable record of who did what, when, from where, and on what data.
 
 # System Actors
 
@@ -116,478 +116,478 @@ Every functional requirement described in this report must meet, at minimum, the
 
 ## RF 1 User Management
 
-**Purpose:** Administer the life cycle of digital identities in the system, including registration, authentication, roles, permissions, status, and information queries.
+*Purpose:* Administer the life cycle of digital identities in the system, including registration, authentication, roles, permissions, status, and information queries.
 
-**Platforms:** Administrative web and mobile depending on the specific requirement.
+*Platforms:* Administrative web and mobile depending on the specific requirement.
 
-**Main Dependencies:** RF 4.6, RF 5.2.
+*Main Dependencies:* RF 4.6, RF 5.2.
 
 ### ERF 1.1 Register Users
 
-- **Purpose:** Create a new user with personal data, initial credentials, and role relationship.
-- **Platform:** Web.
-- **Preconditions:** The authenticated operator possesses user creation permissions.
-- **Minimum Inputs:** Identity document, document type, first names, last names, email, optional phone, initial role, and status.
-- **Processing:** Validate formats, uniqueness of document and email, apply password policy or generate secure invitation, register audit, and link initial role.
-- **Outputs:** Created user, unique identifier, success or detailed error message, audit event.
-- **Business Rules:**
+- *Purpose:* Create a new user with personal data, initial credentials, and role relationship.
+- *Platform:* Web.
+- *Preconditions:* The authenticated operator possesses user creation permissions.
+- *Minimum Inputs:* Identity document, document type, first names, last names, email, optional phone, initial role, and status.
+- *Processing:* Validate formats, uniqueness of document and email, apply password policy or generate secure invitation, register audit, and link initial role.
+- *Outputs:* Created user, unique identifier, success or detailed error message, audit event.
+- *Business Rules:*
   - An identity document cannot be repeated within the same validity or document type.
   - Email must be unique for authentication, unless an approved contrary policy exists.
   - The user is born active only if the activation policy allows; otherwise, they remain pending activation.
-- **Acceptance Criteria:**
+- *Acceptance Criteria:*
   - The system prevents registering users with duplicate documents.
   - The system validates email and phone formats when mandatory.
   - The user is persisted with creation date and responsible operator.
   - An invitation or initial credential is sent via a secure channel.
-- **Security and Privacy:**
+- *Security and Privacy:*
   - Do not store passwords in plain text.
   - Minimize personal data in logs.
   - Register consent when processing sensitive data.
-- **Edge Cases:**
+- *Edge Cases:*
   - Email with invalid domain.
   - Document with prohibited characters.
   - Concurrent registration attempt of the same document.
   - Email service failure during invitation.
-- **Suggested Tests:**
+- *Suggested Tests:*
   - Unit tests for field validation.
   - Integration tests against uniqueness constraints.
   - Edge case: two simultaneous requests with the same document.
 
 #### ERF 1.1.1 Role Assignment
 
-- **Purpose:** Link one or more functional roles to the user.
-- **Platform:** Web.
-- **Inputs:** User, role, optional validity date, optional reason.
-- **Business Rules:**
+- *Purpose:* Link one or more functional roles to the user.
+- *Platform:* Web.
+- *Inputs:* User, role, optional validity date, optional reason.
+- *Business Rules:*
   - Only users with permission can assign roles.
   - A user can have a primary role and secondary roles if the model allows.
   - Assignment must be reversible and audited.
-- **Acceptance Criteria:**
+- *Acceptance Criteria:*
   - The system shows available roles according to the current catalog.
   - Prevents assigning non-existent or inactive roles.
   - Registers operator, date, previous role, and new role.
-- **Security:** Prevent privilege escalation through server-side validation of the operator's permission.
-- **Edge Cases:** Assigning a role to a deactivated user, removing the last mandatory role, role change during an active session.
+- *Security:* Prevent privilege escalation through server-side validation of the operator's permission.
+- *Edge Cases:* Assigning a role to a deactivated user, removing the last mandatory role, role change during an active session.
 
 #### ERF 1.1.2 Permission Assignment in Platform and Web
 
-- **Purpose:** Define technical and functional capabilities per role or user.
-- **Platform:** Web and API.
-- **Recommended Model:** RBAC with granular permissions, e.g., `user:create`, `attendance:view`, `iot:acknowledge`.
-- **Business Rules:**
+- *Purpose:* Define technical and functional capabilities per role or user.
+- *Platform:* Web and API.
+- *Recommended Model:* RBAC with granular permissions, e.g., `user:create`, `attendance:view`, `iot:acknowledge`.
+- *Business Rules:*
   - Denial by default.
   - Permissions must be evaluated in the API, not just in the interface.
   - The web and mobile platforms may share logical permissions, with different capabilities per channel.
-- **Acceptance Criteria:**
+- *Acceptance Criteria:*
   - A user without permission receives an error 403 or equivalent and does not visualize the sensitive action.
   - A user with permission executes the operation without client bypass.
   - Permission changes are reflected in a new session or token renewal.
-- **Security:** Signed tokens, short expiration, revocation if role or critical permission changes.
-- **Edge Cases:** Permission withdrawn during a long operation, outdated permission cache, role without assigned permissions.
+- *Security:* Signed tokens, short expiration, revocation if role or critical permission changes.
+- *Edge Cases:* Permission withdrawn during a long operation, outdated permission cache, role without assigned permissions.
 
 ### ERF 1.2 Register Users via CSV Files
 
-- **Purpose:** Allow mass import of users from a structured file.
-- **Platform:** Web.
-- **Inputs:** CSV file encoded in UTF-8, with mandatory header and defined delimiter.
-- **Minimum Suggested Columns:** `document,document_type,first_names,last_names,email,phone,initial_role,status`
-- **Processing:**
+- *Purpose:* Allow mass import of users from a structured file.
+- *Platform:* Web.
+- *Inputs:* CSV file encoded in UTF-8, with mandatory header and defined delimiter.
+- *Minimum Suggested Columns:* `document,document_type,first_names,last_names,email,phone,initial_role,status`
+- *Processing:*
   - Validate structure, encoding, maximum size, and header.
   - Parse rows without executing formulas.
   - Generate a preliminary report of valid, duplicate, and error rows.
   - Import in a transactional batch or with a partial success report, according to policy.
-- **Acceptance Criteria:**
+- *Acceptance Criteria:*
   - The system rejects files with an incomplete header.
   - Shows errors by row number and field.
   - Prevents CSV formula injection in exportable fields.
   - Registers an import audit with total processed, successful, and failed counts.
-- **Security:**
+- *Security:*
   - Sanitize values starting with `=`, `+`, `-`, `@`, tab, or carriage return.
   - Restrict upload to authorized users.
   - Store temporary file securely and delete it after processing.
-- **Edge Cases:**
+- *Edge Cases:*
   - Empty file.
   - Poorly encoded accents.
   - Duplicate rows within the same file.
   - Very large file exceeding request time.
-- **Suggested Tests:**
+- *Suggested Tests:*
   - Test with malicious CSV formulas.
   - Test partial import and rollback.
   - Performance test with ten thousand rows.
 
 ### ERF 1.3 Login
 
-- **Purpose:** Authenticate the user in the mobile application.
-- **Platform:** Web and Mobile.
-- **Methods:** Email or username with password; optionally local biometric unlock of the device.
-- **Business Rules:**
+- *Purpose:* Authenticate the user in the mobile application.
+- *Platform:* Web and Mobile.
+- *Methods:* Email or username with password; optionally local biometric unlock of the device.
+- *Business Rules:*
   - Temporarily block after N failed attempts.
   - Do not reveal if the user exists or the password is incorrect.
   - Require re-authentication for sensitive operations.
-- **Acceptance Criteria:**
+- *Acceptance Criteria:*
   - Valid credentials grant secure access and refresh tokens.
   - Invalid credentials show a generic message.
   - Session expires according to policy.
   - Local biometric unlock does not replace server-side authentication unless an approved design exists.
-- **Security:**
+- *Security:*
   - Store tokens in keystore or keychain.
   - Refresh token rotation.
   - Optional device binding based on risk.
-- **Edge Cases:** No connection, revoked token, device change, account deactivated during session.
+- *Edge Cases:* No connection, revoked token, device change, account deactivated during session.
 
 ### ERF 1.4 Password Recovery
 
-- **Purpose:** Allow secure credential resetting.
-- **Platform:** Web and Mobile.
-- **Flow:** Request recovery, issue single-use token, validate identity, allow new password.
-- **Business Rules:**
+- *Purpose:* Allow secure credential resetting.
+- *Platform:* Web and Mobile.
+- *Flow:* Request recovery, issue single-use token, validate identity, allow new password.
+- *Business Rules:*
   - Token with short expiration, e.g., fifteen to sixty minutes.
   - Single use.
   - Rate limiting by email, IP, and device.
   - Generic response if the email does not exist.
-- **Acceptance Criteria:**
+- *Acceptance Criteria:*
   - The user receives a link or code via a secure channel.
   - The system invalidates the token after use or expiration.
   - Upon password change, active sessions are revoked unless the policy allows the current one.
-- **Security:** Do not send the new password by email; do not log tokens.
-- **Edge Cases:** Unregistered email, reused token, user enumeration attempt, notification channel failure.
+- *Security:* Do not send the new password by email; do not log tokens.
+- *Edge Cases:* Unregistered email, reused token, user enumeration attempt, notification channel failure.
 
 ### ERF 1.5 Password Change
 
-- **Purpose:** Allow the authenticated user to modify their password.
-- **Platform:** Web and Mobile.
-- **Preconditions:** Valid session or re-authentication step.
-- **Business Rules:**
+- *Purpose:* Allow the authenticated user to modify their password.
+- *Platform:* Web and Mobile.
+- *Preconditions:* Valid session or re-authentication step.
+- *Business Rules:*
   - Require current password or an additional factor.
   - Apply complexity policy.
   - Prevent reuse of recent passwords if the policy defines it.
-- **Acceptance Criteria:**
+- *Acceptance Criteria:*
   - Weak password is rejected.
   - Successful change generates audit and revocation of other sessions.
   - The user remains authenticated only if the policy allows.
-- **Edge Cases:** Forgetting current password, locked account, simultaneous change on two devices.
+- *Edge Cases:* Forgetting current password, locked account, simultaneous change on two devices.
 
 ### ERF 1.6 Activate/Deactivate Users
 
-- **Purpose:** Suspend or restore access without deleting history.
-- **Platform:** Web.
-- **Business Rules:**
+- *Purpose:* Suspend or restore access without deleting history.
+- *Platform:* Web.
+- *Business Rules:*
   - Deactivated user cannot authenticate.
   - Active sessions must be revoked.
   - Attendance history, justifications, and auditing are preserved.
-- **Acceptance Criteria:**
+- *Acceptance Criteria:*
   - Status change is audited with reason and operator.
   - Login attempt by deactivated user is rejected.
   - Reactivation restores access according to current roles.
-- **Edge Cases:** Deactivating one's own administrator account, deactivating a user with an open process, reactivation without valid roles.
+- *Edge Cases:* Deactivating one's own administrator account, deactivating a user with an open process, reactivation without valid roles.
 
 ### ERF 1.7 Delete Users
 
-- **Purpose:** Remove a user from the system respecting legal retention and traceability.
-- **Platform:** Web.
-- **Recommended Model:** Logical deletion or anonymization, not immediate physical erasure.
-- **Business Rules:**
+- *Purpose:* Remove a user from the system respecting legal retention and traceability.
+- *Platform:* Web.
+- *Recommended Model:* Logical deletion or anonymization, not immediate physical erasure.
+- *Business Rules:*
   - Only elevated roles can delete.
   - A reason must be registered.
   - If critical historical records exist, the user is anonymized but operational evidence is preserved.
-- **Acceptance Criteria:**
+- *Acceptance Criteria:*
   - The user disappears from active lists.
   - Cannot authenticate.
   - Sensitive personal data is anonymized or encrypted according to policy.
   - An irreversible audit of the event remains.
-- **Edge Cases:** User with justifications in progress, user with assigned roles, erasure request (right to be forgotten) with legal exceptions.
+- *Edge Cases:* User with justifications in progress, user with assigned roles, erasure request (right to be forgotten) with legal exceptions.
 
 ### ERF 1.8 User Information Query
 
-- **Purpose:** Allow viewing profile data, status, roles, and assignments.
-- **Platform:** Web and Mobile.
-- **Business Rules:**
+- *Purpose:* Allow viewing profile data, status, roles, and assignments.
+- *Platform:* Web and Mobile.
+- *Business Rules:*
   - The user can query their own information.
   - Administrators and responsibles query according to authorized scope.
   - Sensitive fields are masked if no explicit permission exists.
-- **Acceptance Criteria:**
+- *Acceptance Criteria:*
   - The query shows updated data.
   - Does not expose other users' information without authorization.
   - Access to sensitive data is audited when applicable.
-- **Edge Cases:** Incomplete profile, expired roles, request from an expired session.
+- *Edge Cases:* Incomplete profile, expired roles, request from an expired session.
 
 ## RF 2 Environment Management
 
-**Purpose:** Administer physical or logical spaces, academic cohorts, responsibles, and associated shifts.
+*Purpose:* Administer physical or logical spaces, academic cohorts, responsibles, and associated shifts.
 
-**Platforms:** Primarily Web; mobile for queries according to role.
+*Platforms:* Primarily Web; mobile for queries according to role.
 
-**Main Dependencies:** RF 1, RF 3, RF 8.
+*Main Dependencies:* RF 1, RF 3, RF 8.
 
 ### ERF 2.1 Register Environments or Classrooms
 
-- **Purpose:** Create and maintain the catalog of environments where activities occur.
-- **Platform:** Web.
-- **Minimum Inputs:** Code, name, capacity, location, type, status.
-- **Business Rules:**
+- *Purpose:* Create and maintain the catalog of environments where activities occur.
+- *Platform:* Web.
+- *Minimum Inputs:* Code, name, capacity, location, type, status.
+- *Business Rules:*
   - Unique code.
   - Capacity greater than zero if physical.
   - Do not delete environment with active assignments; use inactivation.
-- **Acceptance Criteria:**
+- *Acceptance Criteria:*
   - The system validates code duplication.
   - Allows querying active and inactive environments according to permission.
   - Creation, editing, and inactivation are audited.
-- **Edge Cases:** Environment without location, zero capacity, code change with associated history.
+- *Edge Cases:* Environment without location, zero capacity, code change with associated history.
 
 ### ERF 2.2 Register Cohorts or Courses
 
-- **Purpose:** Define operational academic units linked to courses, periods, and responsibles.
-- **Platform:** Web.
-- **Minimum Inputs:** Cohort code, name, associated course, period, modality, capacity, status.
-- **Business Rules:**
+- *Purpose:* Define operational academic units linked to courses, periods, and responsibles.
+- *Platform:* Web.
+- *Minimum Inputs:* Cohort code, name, associated course, period, modality, capacity, status.
+- *Business Rules:*
   - A cohort must be linked to a current course from the RF 8 catalog.
   - Cohort code must be unique within the academic period.
   - Cannot be activated without an assigned responsible if the policy requires it.
-- **Acceptance Criteria:**
+- *Acceptance Criteria:*
   - Successful cohort creation is visible to authorized responsibles.
   - Editing a cohort preserves history if critical data changes.
   - Inactivating a cohort prevents new assignments but preserves histories.
-- **Edge Cases:** Duplicate cohort, deleted course, period change with previous attendees.
+- *Edge Cases:* Duplicate cohort, deleted course, period change with previous attendees.
 
 ### ERF 2.3 Assign Responsibles
 
-- **Purpose:** Link authorized persons to the management of environments, cohorts, or shifts.
-- **Platform:** Web.
-- **Business Rules:**
+- *Purpose:* Link authorized persons to the management of environments, cohorts, or shifts.
+- *Platform:* Web.
+- *Business Rules:*
   - The responsible must be an active user with a pertinent role.
   - Assignment can have a start-end validity.
   - A primary responsible and, optionally, substitutes must be allowed.
-- **Acceptance Criteria:**
+- *Acceptance Criteria:*
   - The system prevents assigning inactive users.
   - The assignment is reflected in query and operation permissions.
   - Assignment, removal, and validity change are audited.
 
 #### ERF 2.3.1 Assign Cohorts
 
-- **Purpose:** Relate responsibles with specific cohorts.
-- **Platform:** Web.
-- **Business Rules:**
+- *Purpose:* Relate responsibles with specific cohorts.
+- *Platform:* Web.
+- *Business Rules:*
   - A responsible only sees and operates assigned cohorts, unless they have a global role.
   - Assignment can be multiple.
   - Unjustified overlap of responsibilities must be controlled if the policy requires it.
-- **Acceptance Criteria:**
+- *Acceptance Criteria:*
   - Successful assignment enables actions on the cohort.
   - Immediate or scheduled removal revokes access according to validity.
-- **Edge Cases:** Responsible withdrawn with pending justifications, circular assignment, cohort without responsible.
+- *Edge Cases:* Responsible withdrawn with pending justifications, circular assignment, cohort without responsible.
 
 #### ERF 2.3.2 Assign Shifts
 
-- **Purpose:** Link responsibles to time slots or turns.
-- **Platform:** Web.
-- **Inputs:** Responsible, shift, optional environment, optional cohort, validity.
-- **Business Rules:**
+- *Purpose:* Link responsibles to time slots or turns.
+- *Platform:* Web.
+- *Inputs:* Responsible, shift, optional environment, optional cohort, validity.
+- *Business Rules:*
   - A shift defines start, end, day, or recurring pattern.
   - Time zone must be validated.
   - Overlaps that generate ambiguity of responsibility are not permitted, unless an approved exception exists.
-- **Acceptance Criteria:**
+- *Acceptance Criteria:*
   - The system correctly calculates the active shift by date and time.
   - The assignment impacts attendance and delay reports.
-- **Edge Cases:** Daylight saving time change, shift crossing midnight, responsible with multiple simultaneous shifts.
+- *Edge Cases:* Daylight saving time change, shift crossing midnight, responsible with multiple simultaneous shifts.
 
 ## RF 3 Entry and Exit Records
 
-**Purpose:** Capture entry and exit events of registered and unregistered personnel, with mobile biometric support and controlled alternatives.
+*Purpose:* Capture entry and exit events of registered and unregistered personnel, with mobile biometric support and controlled alternatives.
 
-**Platforms:** Primarily Mobile; web for supervision and auditing.
+*Platforms:* Primarily Mobile; web for supervision and auditing.
 
-**Main Dependencies:** RF 1, RF 2, RF 4.5, RF 4.7, RF 6.
+*Main Dependencies:* RF 1, RF 2, RF 4.5, RF 4.7, RF 6.
 
 ### ERF 3.1 Register Entries and Exits
 
-- **Purpose:** Create an attendance event with entry or exit direction.
-- **Platform:** Mobile, Web, and API.
-- **Minimum Inputs:** User or temporary credential, event type, timestamp, device, method, location or environment if applicable.
-- **Business Rules:**
+- *Purpose:* Create an attendance event with entry or exit direction.
+- *Platform:* Mobile, Web, and API.
+- *Minimum Inputs:* User or temporary credential, event type, timestamp, device, method, location or environment if applicable.
+- *Business Rules:*
   - The same user cannot register two consecutive entries without an exit, unless an authorized correction is made.
   - The timestamp must use server time or reliable synchronization.
   - The event must be idempotent to network retries.
-- **Acceptance Criteria:**
+- *Acceptance Criteria:*
   - Successful registration returns confirmation and saves evidence.
   - Duplicate registration is detected and rejected or corrected according to policy.
   - The event is linked to a cohort, environment, or shift when applicable.
-- **Security:** Sign mobile payload, validate device, prevent replay attacks.
-- **Edge Cases:** No connection, altered device clock, abrupt location change, user deactivated during attempt.
+- *Security:* Sign mobile payload, validate device, prevent replay attacks.
+- *Edge Cases:* No connection, altered device clock, abrupt location change, user deactivated during attempt.
 
 #### ERF 3.1.1 Facial Registration
 
-- **Purpose:** Identify or verify the user via facial recognition on mobile.
-- **Platform:** Web and Mobile.
-- **Flow:** Facial capture, liveness detection, template extraction, comparison with registered template, decision.
-- **Business Rules:**
+- *Purpose:* Identify or verify the user via facial recognition on mobile.
+- *Platform:* Web and Mobile.
+- *Flow:* Facial capture, liveness detection, template extraction, comparison with registered template, decision.
+- *Business Rules:*
   - Requires consent and prior enrollment registration.
   - Must apply a configurable matching threshold.
   - If it fails, enables an alternate route: fingerprint, credential, or assisted registration.
-- **Acceptance Criteria:**
+- *Acceptance Criteria:*
   - Valid user is recognized within the approved threshold.
   - Basic spoofing with a photo or screen must be rejected by liveness mechanisms.
   - Raw images are not stored unnecessarily; encrypted templates and audit metadata are preserved.
-- **Security and Privacy:**
+- *Security and Privacy:*
   - Encryption of biometric templates.
   - Defined retention.
   - Prohibition of sharing templates for unauthorized purposes.
   - Registration of failed attempts.
-- **Edge Cases:** Insufficient light, partially covered face, physiological changes, rooted device or emulator, sensor failure.
+- *Edge Cases:* Insufficient light, partially covered face, physiological changes, rooted device or emulator, sensor failure.
 
 #### ERF 3.1.2 Alternative Registration (Fingerprint)
 
-- **Purpose:** Use fingerprint as an alternative or complementary method (digitalPerson 4500).
-- **Platform:** Web and Mobile.
-- **Business Rules:**
+- *Purpose:* Use fingerprint as an alternative or complementary method (digitalPerson 4500).
+- *Platform:* Web and Mobile.
+- *Business Rules:*
   - Only available if the device and operating system support it.
   - Must respect the device's secure enclave when it exists.
   - Sensor failure enables an alternate method.
-- **Acceptance Criteria:**
+- *Acceptance Criteria:*
   - Valid fingerprint registers attendance.
   - Unregistered fingerprint generates a secure error and alternate option.
   - Raw fingerprint images are not stored outside the operating system if the platform offers a secure template.
-- **Edge Cases:** Wet or injured finger, dirty sensor, device change, user with multiple registered fingers.
+- *Edge Cases:* Wet or injured finger, dirty sensor, device change, user with multiple registered fingers.
 
 ## RF 4 System Configuration
 
-**Purpose:** Administer mobile preferences, alerts, language, themes, user parameters, role changes, and delay or justification rules.
+*Purpose:* Administer mobile preferences, alerts, language, themes, user parameters, role changes, and delay or justification rules.
 
-**Platforms:** Mobile and administrative web.
+*Platforms:* Mobile and administrative web.
 
-**Main Dependencies:** RF 1, RF 3, RF 5, RF 6, RF 7.
+*Main Dependencies:* RF 1, RF 3, RF 5, RF 6, RF 7.
 
 ### ERF 4.1 Configure Alerts
 
-- **Purpose:** Allow the user to manage system notifications.
-- **Platform:** Web and Mobile.
-- **Alert Types:** Attendance, approved or rejected justification, IoT failure, role change, academic reminders, critical security alerts.
-- **Business Rules:**
+- *Purpose:* Allow the user to manage system notifications.
+- *Platform:* Web and Mobile.
+- *Alert Types:* Attendance, approved or rejected justification, IoT failure, role change, academic reminders, critical security alerts.
+- *Business Rules:*
   - Critical security or compliance alerts may be non-disableable.
   - Configuration must sync between device and server if the user changes mobile devices.
-- **Acceptance Criteria:**
+- *Acceptance Criteria:*
   - The user activates or disables permitted categories.
   - The system respects operating system permissions.
   - Preferences persist after app restart.
 
 #### ERF 4.1.1 Activate/Deactivate Alerts
 
-- **Purpose:** Control reception by event type.
-- **Business Rules:**
+- *Purpose:* Control reception by event type.
+- *Business Rules:*
   - Deactivating does not suppress server-side audit records.
   - A secure default value must exist.
-- **Acceptance Criteria:**
+- *Acceptance Criteria:*
   - Immediate change reflected in the next notification.
   - Mandatory alerts cannot be deactivated from the end-user interface.
-- **Edge Cases:** Notification permission denied by OS, user with multiple devices, conflicting synchronization.
+- *Edge Cases:* Notification permission denied by OS, user with multiple devices, conflicting synchronization.
 
 ### ERF 4.2 Configure Languages
 
-- **Purpose:** Allow selection of the interface language.
-- **Platform:** Web and Mobile.
-- **Minimum Suggested Languages:** Spanish, English, French, and Portuguese.
-- **Business Rules:**
+- *Purpose:* Allow selection of the interface language.
+- *Platform:* Web and Mobile.
+- *Minimum Suggested Languages:* Spanish, English, French, and Portuguese.
+- *Business Rules:*
   - Automatic fallback to Spanish if a translation is missing.
   - Dates, numbers, and currency are formatted according to the person's locale.
-- **Acceptance Criteria:**
+- *Acceptance Criteria:*
   - Language change updates the interface without mandatory restart, or informs if a restart is required.
   - Error messages are also translated.
-- **Edge Cases:** Unsupported locale, truncated text, mixture of languages due to missing resources.
+- *Edge Cases:* Unsupported locale, truncated text, mixture of languages due to missing resources.
 
 ### ERF 4.3 Update Color Palettes
 
-- **Purpose:** Apply visual themes and institutional palettes.
-- **Platform:** Web and Mobile.
-- **Business Rules:**
+- *Purpose:* Apply visual themes and institutional palettes.
+- *Platform:* Web and Mobile.
+- *Business Rules:*
   - Must maintain accessible contrast.
   - Light and dark modes recommended.
   - Palette must not alter the semantics of states: success, warning, error.
-- **Acceptance Criteria:**
+- *Acceptance Criteria:*
   - The user selects a theme and it is applied immediately.
   - Critical components maintain legibility.
   - The preference persists.
-- **Edge Cases:** Custom theme with low contrast, app update with incompatible palette.
+- *Edge Cases:* Custom theme with low contrast, app update with incompatible palette.
 
 ### ERF 4.4 User Parameter Update (Mobile)
 
-- **Purpose:** Centralize personal user settings on mobile.
-- **Parameters:** Language, theme, notifications, optional contact data, biometric enrollment, password change, privacy.
-- **Business Rules:**
+- *Purpose:* Centralize personal user settings on mobile.
+- *Parameters:* Language, theme, notifications, optional contact data, biometric enrollment, password change, privacy.
+- *Business Rules:*
   - Sensitive changes require re-authentication.
   - Format and permissions must be validated.
-- **Acceptance Criteria:**
+- *Acceptance Criteria:*
   - Successful save confirms the change and audits if relevant.
   - Cancellation does not persist modifications.
-- **Edge Cases:** Session expired during editing, synchronization conflict, camera permission denied during facial enrollment.
+- *Edge Cases:* Session expired during editing, synchronization conflict, camera permission denied during facial enrollment.
 
 ### ERF 4.5 IoT Device Failure Alert Management
 
-- **Purpose:** Supervise the operational status of connected devices.
-- **Minimum Events:** Offline, low battery, sensor failing, tampering, invalid reading, reconnection.
-- **Business Rules:**
+- *Purpose:* Supervise the operational status of connected devices.
+- *Minimum Events:* Offline, low battery, sensor failing, tampering, invalid reading, reconnection.
+- *Business Rules:*
   - Configurable thresholds per device type.
   - Escalation to the responsible person if not attended within a defined time.
   - Mandatory acknowledgment for critical events.
-- **Acceptance Criteria:**
+- *Acceptance Criteria:*
   - The system detects heartbeat loss.
   - Generates an alert with device, location, time, and severity.
   - Allows assigning a ticket or corrective action.
-- **Security:** Mutual device-server authentication, credential rotation, network isolation.
-- **Edge Cases:** Compromised device, burst of repeated events, false alarm due to maintenance.
+- *Security:* Mutual device-server authentication, credential rotation, network isolation.
+- *Edge Cases:* Compromised device, burst of repeated events, false alarm due to maintenance.
 
 ### ERF 4.6 Change Role of a User
 
-- **Purpose:** Modify the role assigned to an existing user.
-- **Platform:** Web.
-- **Business Rules:**
+- *Purpose:* Modify the role assigned to an existing user.
+- *Platform:* Web.
+- *Business Rules:*
   - Requires an authorized operator.
   - Must register reason and validity.
   - Can revoke sessions or force permission refresh.
-- **Acceptance Criteria:**
+- *Acceptance Criteria:*
   - The new role is applied according to an immediate or scheduled policy.
   - The user loses or gains access according to permissions.
   - A complete audit of the change remains.
-- **Edge Cases:** Changing one's own role, non-existent role, user with multiple sessions, change during a critical process.
+- *Edge Cases:* Changing one's own role, non-existent role, user with multiple sessions, change during a critical process.
 
 ### ERF 4.7 Delays and Justifications (Parameterization)
 
-- **Purpose:** Configure rules to classify delays, absences, and the acceptance of justifications.
-- **Suggested Parameters:** Tolerance minutes, marking deadline, type of absence, justification deadlines, accepted support types, approvers, notifications.
-- **Business Rules:**
+- *Purpose:* Configure rules to classify delays, absences, and the acceptance of justifications.
+- *Suggested Parameters:* Tolerance minutes, marking deadline, type of absence, justification deadlines, accepted support types, approvers, notifications.
+- *Business Rules:*
   - Parameters must be versioned and have a validity date.
   - Changes must not alter already closed histories, unless an authorized correction is made.
   - It must be defined whether the delay is calculated by shift, cohort, or environment.
-- **Acceptance Criteria:**
+- *Acceptance Criteria:*
   - The system correctly classifies attendance, delay, and absence according to current parameters.
   - Allows querying active parameters and their history.
   - Impacts RF 5 and RF 7 reports without inconsistencies.
-- **Edge Cases:** Parameter change mid-day, shift crossing midnight, justification submitted past the deadline, inconsistent time zone.
+- *Edge Cases:* Parameter change mid-day, shift crossing midnight, justification submitted past the deadline, inconsistent time zone.
 
 ## RF 5 Generate Histories
 
-**Purpose:** Consult and preserve antecedents of attendance, absence, and user changes.
+*Purpose:* Consult and preserve antecedents of attendance, absence, and user changes.
 
-**Platforms:** Mobile and Web.
+*Platforms:* Mobile and Web.
 
-**Main Dependencies:** RF 1, RF 2, RF 3, RF 4.7.
+*Main Dependencies:* RF 1, RF 2, RF 3, RF 4.7.
 
 ### ERF 5.1 Attendance and Absence (Mobile) by Parameters
 
-- **Purpose:** Consult attendance movements filtered by date, cohort, environment, instructor, or person.
-- **Platform:** Mobile.
-- **Minimum Filters:** Date range, cohort, environment, instructor, person, status, registration method.
-- **Business Rules:**
+- *Purpose:* Consult attendance movements filtered by date, cohort, environment, instructor, or person.
+- *Platform:* Mobile.
+- *Minimum Filters:* Date range, cohort, environment, instructor, person, status, registration method.
+- *Business Rules:*
   - The responsible only sees data within their scope.
   - Absence calculation uses RF 4.7 parameters.
   - Must support pagination and sorting.
-- **Acceptance Criteria:**
+- *Acceptance Criteria:*
   - The query returns results consistent with the database.
   - Combined filters work without exposing unauthorized data.
   - Detail of the event is shown: time, method, device, status, and associated justification if it exists.
-- **Edge Cases:** Inverted date range, too many results, user without assignments, biometric data without confirmed match.
+- *Edge Cases:* Inverted date range, too many results, user without assignments, biometric data without confirmed match.
 
 ### ERF 5.2 User Change History
 
-- **Purpose:** Register a log of modifications to profile, roles, permissions, status, and credentials.
-- **Platform:** Web and API.
+- *Purpose:* Register a log of modifications to profile, roles, permissions, status, and credentials.
+- *Platform:* Web and API.
 - **Minimum Audit Fields:** Affected entity, identifier, operator, date/time, action, previous and new values, IP, device, reason.
 - **Business Rules:**
   - History must be immutable or append-only.
