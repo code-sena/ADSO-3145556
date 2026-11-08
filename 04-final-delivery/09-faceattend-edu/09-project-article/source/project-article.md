@@ -31,11 +31,11 @@ Section II places the work in relation to the literature. Sections III to V desc
 
 We did not conduct a systematic literature review. This section presents the works we used as a technical basis and those we compared with our decisions.
 
-**Facial recognition.** FaceNet [1] learns a 128-dimensional Euclidean embedding with triplet loss. ArcFace [2] adds an angular margin to the softmax loss and is frequently used as a baseline in verification. Our biometric service computes 128-dimensional embeddings with the `face_recognition` library [4], which wraps dlib models [3]. The benchmark figures for FaceNet and ArcFace are obtained on public datasets and do not transfer to a classroom, so we do not take them as evidence of our system's performance.
+**Facial recognition.** FaceNet (Schroff et al., 2015) learns a 128-dimensional Euclidean embedding with triplet loss. ArcFace (Deng et al., 2019) adds an angular margin to the softmax loss and is frequently used as a baseline in verification. Our biometric service computes 128-dimensional embeddings with the `face_recognition` library (Geitgey, n.d.), which wraps dlib models (King, 2009). The benchmark figures for FaceNet and ArcFace are obtained on public datasets and do not transfer to a classroom, so we do not take them as evidence of our system's performance.
 
-**Microservices.** Richardson [5] and Newman [6] describe decomposition by business context, asynchronous communication, and eventual consistency as recurring patterns. Several of these patterns, such as the circuit breaker or the saga, appear frequently in the literature and in industry presentations. In our code we did not find a circuit breaker implemented, so we do not describe it as part of the system.
+**Microservices.** Richardson (2018) and Newman (2021) describe decomposition by business context, asynchronous communication, and eventual consistency as recurring patterns. Several of these patterns, such as the circuit breaker or the saga, appear frequently in the literature and in industry presentations. In our code we did not find a circuit breaker implemented, so we do not describe it as part of the system.
 
-**Quality and development practices.** Martin [7] argues that clean code reduces long-term maintenance cost. Piñero González et al. [8] address performance-efficiency risks in software products from the early development phases. Both references guided our testing discipline and the decision to measure before optimizing, although in this version of the work we do not systematically measure performance.
+**Quality and development practices.** Martin (2008) argues that clean code reduces long-term maintenance cost. Piñero González et al. (2021) address performance-efficiency risks in software products from the early development phases. Both references guided our testing discipline and the decision to measure before optimizing, although in this version of the work we do not systematically measure performance.
 
 ## III. System Architecture
 
@@ -56,17 +56,17 @@ The backend has nine services and a gateway. Each service owns its data schema a
 | 07 configuration | Site and security parameters | TypeScript, Fastify 5 |
 | 08 notification | Alerts and notifications | TypeScript, Fastify 5 |
 | 09 quality | Project quality tracking | TypeScript, Fastify 5 |
-| 99 api-gateway | Single entry point, routing, limits | Kong 3.6 [9] |
+| 99 api-gateway | Single entry point, routing, limits | Kong 3.6 (Kong Inc., n.d.) |
 
 The clients are a web application in React 19 and a mobile application in Expo SDK 57. Both communicate only with the gateway.
 
-We use several languages, and this has a cost that we return to in Section VIII. The Java services rely on Spring Security and Liquibase migrations. The TypeScript services use Fastify [10]. The Python service uses FastAPI [11] and is the only one that depends on the computer vision ecosystem (OpenCV, dlib, and NumPy). The language assignment responds to team decisions; the repository does not justify it in writing beyond what is visible in the code.
+We use several languages, and this has a cost that we return to in Section VIII. The Java services rely on Spring Security and Liquibase migrations. The TypeScript services use Fastify (Fastify, n.d.). The Python service uses FastAPI (Ramírez, n.d.) and is the only one that depends on the computer vision ecosystem (OpenCV, dlib, and NumPy). The language assignment responds to team decisions; the repository does not justify it in writing beyond what is visible in the code.
 
 ### B. Communication and Persistence
 
-Each service has its own schema in PostgreSQL 17 [12]. Foreign keys do not cross schemas: when an attendance record references an academic actor, the column stores the identifier and the application validates that it exists. The project documentation sets this rule so that services can migrate separately. The price is that several validations remain outside the database's reach.
+Each service has its own schema in PostgreSQL 17 (PostgreSQL Global Development Group, n.d.). Foreign keys do not cross schemas: when an attendance record references an academic actor, the column stores the identifier and the application validates that it exists. The project documentation sets this rule so that services can migrate separately. The price is that several validations remain outside the database's reach.
 
-Kafka [13] publishes domain events in the Java services and in Academic. MongoDB stores biometric templates, because each record contains a vector and the model version that produced it. Redis stores failed login attempt counters in Identity. Justification support files are stored in MinIO, an S3-compatible service launched with Docker Compose.
+Kafka (Apache Software Foundation, n.d.) publishes domain events in the Java services and in Academic. MongoDB stores biometric templates, because each record contains a vector and the model version that produced it. Redis stores failed login attempt counters in Identity. Justification support files are stored in MinIO, an S3-compatible service launched with Docker Compose.
 
 ### C. Internal Organization of a Service
 
@@ -107,7 +107,7 @@ Existence constraints between services cannot be expressed in the database and a
 
 The flow has two phases. In enrollment, the biometric service receives an image, verifies that it contains exactly one face, computes the 128-dimensional vector, and stores it in MongoDB along with the model version. If the image has no face, the service reports it; if it has more than one, it rejects the request. In verification, it computes the vector of the captured image and compares it with the person's active template.
 
-The facial comparison uses Euclidean distance, not cosine similarity. According to the service's own configuration comment, dlib vectors are not centered and cosine similarity between different people frequently exceeds 0.85; therefore, the service uses the metric for which the models are trained. The score is `1 − distance`. The default value requires a maximum distance of 0.5 (`face_match_max_distance`). Each site can choose its confidence level on a slider from 50% to 100%. That choice is converted into a maximum distance between 0.60 (50%) and 0.35 (100%). Thus, a site can be stricter than the default value, but it cannot loosen the criterion beyond the 0.6 tolerance that the `face_recognition` library uses by default [4]. The 0.85 cosine threshold in the configuration is not applied to faces: it is used in fingerprint vector verification.
+The facial comparison uses Euclidean distance, not cosine similarity. According to the service's own configuration comment, dlib vectors are not centered and cosine similarity between different people frequently exceeds 0.85; therefore, the service uses the metric for which the models are trained. The score is `1 − distance`. The default value requires a maximum distance of 0.5 (`face_match_max_distance`). Each site can choose its confidence level on a slider from 50% to 100%. That choice is converted into a maximum distance between 0.60 (50%) and 0.35 (100%). Thus, a site can be stricter than the default value, but it cannot loosen the criterion beyond the 0.6 tolerance that the `face_recognition` library uses by default (Geitgey, n.d.). The 0.85 cosine threshold in the configuration is not applied to faces: it is used in fingerprint vector verification.
 
 Liveness verification requests actions from a closed list: blink, turn left, turn right, smile, and tilt the head. The service keeps legacy actions for old clients. Each challenge expires after 120 seconds and is signed with a configuration secret. An action answered in less than one second is considered not performed. During the challenge, the service compares each step with the identity reference of the challenge itself using cosine similarity, with a threshold of 0.75, to check that they belong to the same person. That threshold is looser than the facial comparison threshold because frames taken during a gesture change the vector. This test does not replace an evaluation of presentation attacks with an independent protocol, and we acknowledge this in Section VIII.
 
@@ -135,7 +135,7 @@ Before any pilot, we reviewed the code by reading the security filters, routers,
 - `npm audit` reports 51 vulnerabilities in production dependencies, 34 of them high. The `xlsx` 0.18.5 library has no patch on npm.
 - Backup files with secrets (`.env.bak`, `.env.prod.bak`, `.env.prod.bak2`) in the working directory, and a development `.env` in git history. The `.env.prod` file contains the liveness challenge secret. It is not versioned in git, but it is a secret-management risk that must be closed.
 
-None of these findings is resolved in the main branch. We document them because a system that will handle biometric data of minors must record its failures as well as its achievements. Access control and input validation are the areas we recommend auditing first in any similar API [14].
+None of these findings is resolved in the main branch. We document them because a system that will handle biometric data of minors must record its failures as well as its achievements. Access control and input validation are the areas we recommend auditing first in any similar API (OWASP Foundation, 2023).
 
 ## VII. Automated Verification
 
@@ -167,7 +167,7 @@ Route normalization is the second case. Two components that interpret the same U
 
 **Study limitations.** Those of us writing this work also developed the system and conducted its security review. This introduces bias. We mitigated the problem by recording each finding with code evidence, but it does not replace an external audit.
 
-**Legal compliance.** Biometric data are sensitive data under Article 5 of Law 1581 of 2012 [15]. The same law restricts the processing of minors' data (Article 7), and Decree 1377 of 2013 regulates that processing [16]. As of the review date, the guardian authorization flow was not implemented, nor was the data processing policy or the impact assessment. These are prerequisites for any use with real data.
+**Legal compliance.** Biometric data are sensitive data under Article 5 of Law 1581 of 2012 (Congress of Colombia, 2012). The same law restricts the processing of minors' data (Article 7), and Decree 1377 of 2013 regulates that processing (Presidency of the Republic of Colombia, 2013). As of the review date, the guardian authorization flow was not implemented, nor was the data processing policy or the impact assessment. These are prerequisites for any use with real data.
 
 **Licenses and versions.** Liquibase 5.x is distributed under an FSL license, which requires an explicit decision before adopting that version. The fingerprint SDK used by the web client did not include its license notices in the review. The Kafka image in Docker Compose is 3.8.0, which according to secondary sources no longer receives community support; its update should be planned.
 
@@ -198,40 +198,36 @@ We propose four steps, in this order:
 
 ---
 
-## Acknowledgments
-
-[Complete: people, institutions, and funding, if applicable.]
-
 ## References
 
-[1] F. Schroff, D. Kalenichenko, and J. Philbin, "FaceNet: A unified embedding for face recognition and clustering," in *Proc. IEEE Conf. Computer Vision and Pattern Recognition (CVPR)*, 2015, pp. 815–823, doi: 10.1109/CVPR.2015.7298682.
+Apache Software Foundation. (n.d.). *Apache Kafka documentation* (Version 3.8). https://kafka.apache.org/38/apis/
 
-[2] J. Deng, J. Guo, N. Xue, and S. Zafeiriou, "ArcFace: Additive angular margin loss for deep face recognition," in *Proc. IEEE/CVF Conf. Computer Vision and Pattern Recognition (CVPR)*, 2019, pp. 4690–4699.
+Congress of Colombia. (2012). *Statutory Law 1581 of 2012, which establishes general provisions for the protection of personal data* (Diario Oficial No. 48.587). https://www.unidadvictimas.gov.co/wp-content/uploads/Documentos/ley/Ley_1581_2012.pdf
 
-[3] D. E. King, "Dlib-ml: A machine learning toolkit," *J. Mach. Learn. Res.*, vol. 10, pp. 1755–1758, 2009. [Online]. Available: https://www.jmlr.org/beta/papers/v10/king09a.html
+Deng, J., Guo, J., Xue, N., & Zafeiriou, S. (2019). ArcFace: Additive angular margin loss for deep face recognition. In *Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition* (pp. 4690–4699). https://doi.org/10.1109/CVPR.2019.00482
 
-[4] Documentation for `face_recognition`, `compare_faces` function (default tolerance 0.6). [Online]. Available: https://face-recognition.readthedocs.io/en/stable/face_recognition.html
+Fastify. (n.d.). *Fastify documentation* (Version 5). https://fastify.dev/docs/latest/
 
-[5] C. Richardson, *Microservices Patterns: With Examples in Java*. Shelter Island, NY, USA: Manning, 2018.
+Geitgey, A. (n.d.). *face_recognition package* [Software documentation]. https://face-recognition.readthedocs.io/en/stable/face_recognition.html
 
-[6] S. Newman, *Building Microservices: Designing Fine-Grained Systems*, 2nd ed. Sebastopol, CA, USA: O'Reilly Media, 2021.
+King, D. E. (2009). Dlib-ml: A machine learning toolkit. *Journal of Machine Learning Research, 10*, 1755–1758. https://www.jmlr.org/papers/v10/king09a.html
 
-[7] R. C. Martin, *Clean Code: A Handbook of Agile Software Craftsmanship*. Upper Saddle River, NJ, USA: Prentice Hall, 2008.
+Kong Inc. (n.d.). *Kong Gateway documentation* (Version 3.6). https://docs.konghq.com/
 
-[8] M. Piñero González, A. Marín Díaz, Y. Trujillo Casañola, and D. Buedo Hidalgo, "Good practices to prevent performance-efficiency risks in software products," *Rev. Cubana de Ciencias Informáticas*, vol. 15, no. 1, pp. 89–113, 2021.
+Martin, R. C. (2008). *Clean code: A handbook of agile software craftsmanship*. Prentice Hall.
 
-[9] Kong Inc., *Kong Gateway Documentation*, version 3.6. [Online]. Available: https://docs.konghq.com/
+Newman, S. (2021). *Building microservices: Designing fine-grained systems* (2nd ed.). O'Reilly Media.
 
-[10] Fastify, *Fastify Documentation*, version 5. [Online]. Available: https://fastify.dev/docs/latest/
+OWASP Foundation. (2023). *OWASP API security top 10: 2023*. https://owasp.org/API-Security/editions/2023/en/0x11-t10/
 
-[11] FastAPI, *FastAPI Documentation*, version 0.162. [Online]. Available: https://fastapi.tiangolo.com/
+Piñero González, M., Marín Díaz, A., Trujillo Casañola, Y., & Buedo Hidalgo, D. (2021). Good practices to prevent performance-efficiency risks in software products. *Revista Cubana de Ciencias Informáticas, 15*(1), 89–113.
 
-[12] PostgreSQL Global Development Group, *PostgreSQL 17 Documentation*. [Online]. Available: https://www.postgresql.org/docs/17/
+PostgreSQL Global Development Group. (n.d.). *PostgreSQL 17 documentation*. https://www.postgresql.org/docs/17/
 
-[13] Apache Software Foundation, *Apache Kafka Documentation*, version 3.8. [Online]. Available: https://kafka.apache.org/38/apis/
+Presidency of the Republic of Colombia. (2013). *Decree 1377 of 2013, which partially regulates Law 1581 of 2012*. https://www.unidadvictimas.gov.co/wp-content/uploads/Documentos/decretos/DECRETO_1377_2013.pdf
 
-[14] OWASP Foundation, *OWASP API Security Top 10 — 2023*. [Online]. Available: https://owasp.org/API-Security/editions/2023/en/0x11-t10/
+Ramírez, S. (n.d.). *FastAPI documentation*. https://fastapi.tiangolo.com/
 
-[15] Congress of Colombia, *Statutory Law 1581 of 2012, which establishes general provisions for the protection of personal data*, Diario Oficial No. 48.587, Bogotá, Colombia, Oct. 2012. [Online]. Available: https://www.unidadvictimas.gov.co/wp-content/uploads/Documentos/ley/Ley_1581_2012.pdf
+Richardson, C. (2018). *Microservices patterns: With examples in Java*. Manning.
 
-[16] Presidency of the Republic of Colombia, *Decree 1377 of 2013, which partially regulates Law 1581 of 2012*. [Online]. Available: https://www.unidadvictimas.gov.co/wp-content/uploads/Documentos/decretos/DECRETO_1377_2013.pdf
+Schroff, F., Kalenichenko, D., & Philbin, J. (2015). FaceNet: A unified embedding for face recognition and clustering. In *Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition* (pp. 815–823). https://doi.org/10.1109/CVPR.2015.7298682
