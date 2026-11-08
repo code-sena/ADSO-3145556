@@ -2,9 +2,9 @@
 
 ## Story
 
-**As** a student/learner  
-**I want** to register my entry using facial recognition  
-**So that** my attendance is recorded quickly, securely, and without depending on manual roll call by the instructor.
+*As* a student/learner  
+*I want* to register my entry using facial recognition  
+*So that* my attendance is recorded quickly, securely, and without depending on manual roll call by the instructor.
 
 ---
 
@@ -12,21 +12,21 @@
 
 > Format: “Given [context/initial state], when [user action], then [expected and verifiable result].”
 
-- [ ] **AC1:** Given that the student is registered, active, has an active facial parameter, and has an assigned training block, when the student scans their face during the allowed entry period, then the system registers the entry, shows a confirmation message, and stores the date, time, training block, and registration method as “facial”.
+- [ ] *AC1:* Given that the student is registered, active, has an active facial parameter, and has an assigned training block, when the student scans their face during the allowed entry period, then the system registers the entry, shows a confirmation message, and stores the date, time, training block, and registration method as “facial”.
 
-- [ ] **AC2:** Given that the facial scan matches a registered user, when the system evaluates the entry time against the assigned training block, then the attendance record is marked as present or late according to the attendance rules configured in the system.
+- [ ] *AC2:* Given that the facial scan matches a registered user, when the system evaluates the entry time against the assigned training block, then the attendance record is marked as present or late according to the attendance rules configured in the system.
 
-- [ ] **AC3:** Given that the student already has an entry record for the same training block and date, when the student attempts to register entry again, then the system prevents duplicate registration and shows a clear message indicating that the entry was already registered.
+- [ ] *AC3:* Given that the student already has an entry record for the same training block and date, when the student attempts to register entry again, then the system prevents duplicate registration and shows a clear message indicating that the entry was already registered.
 
-- [ ] **AC4:** Given that the student is not registered, is inactive, or does not have an active facial parameter, when the student attempts facial attendance registration, then the system denies the registration and shows a clear error message.
+- [ ] *AC4:* Given that the student is not registered, is inactive, or does not have an active facial parameter, when the student attempts facial attendance registration, then the system denies the registration and shows a clear error message.
 
-- [ ] **AC5:** Given that the face is not detected, does not match a registered user, or the camera fails, when the facial scan fails, then the system shows an error message and offers the corresponding alternative flow according to RF 3.1.2 or RF 3.2.1.
+- [ ] *AC5:* Given that the face is not detected, does not match a registered user, or the camera fails, when the facial scan fails, then the system shows an error message and offers the corresponding alternative flow according to RF 3.1.2 or RF 3.2.1.
 
-- [ ] **AC6:** Given normal network, camera, and lighting conditions, when the student completes facial attendance registration, then the system responds in less than 5 seconds, according to RNF 1.
+- [ ] *AC6:* Given normal network, camera, and lighting conditions, when the student completes facial attendance registration, then the system responds in less than 5 seconds, according to RNF 1.
 
-- [ ] **AC7:** Given that biometric data is processed, when the registration is completed, then the system records an audit event and does not expose sensitive biometric data in logs, alerts, or the user interface.
+- [ ] *AC7:* Given that biometric data is processed, when the registration is completed, then the system records an audit event and does not expose sensitive biometric data in logs, alerts, or the user interface.
 
-- [ ] **AC8:** Given that the student exits the training session, when the student scans their face during the allowed exit period, then the system registers the exit, shows a confirmation message, and stores the exit time without duplicating the entry record.
+- [ ] *AC8:* Given that the student exits the training session, when the student scans their face during the allowed exit period, then the system registers the exit, shows a confirmation message, and stores the exit time without duplicating the entry record.
 
 ---
 
@@ -48,7 +48,7 @@
 - The attendance registration flow must generate audit information for traceability.
 - Performance requirement: response time under 5 seconds, according to RNF 1.
 
-**Responsible service(s):** Attendance service / Facial verification service, proposed.  
+*Responsible service(s):* Attendance service / Facial verification service, proposed.  
 **Endpoint(s) implemented:**  
 - `POST /api/v1/attendance/entry/facial` — proposed.  
 - `POST /api/v1/attendance/exit/facial` — proposed.  
@@ -105,9 +105,9 @@
 
 ## Story
 
-**As** a registered student/learner  
-**I want** to register my facial parameter in FaceAttend EDU  
-**So that** I can later register my attendance using facial recognition without depending on manual roll call.
+*As* a registered student/learner  
+*I want* to register my facial parameter in FaceAttend EDU  
+*So that* I can later register my attendance using facial recognition without depending on manual roll call.
 
 ---
 
@@ -115,19 +115,19 @@
 
 > Format: “Given [context/initial state], when [user action], then [expected and verifiable result].”
 
-- [ ] **AC1:** Given that the user is registered and has started a session in FaceAttend EDU, when the user initiates the facial enrollment process, then the system activates the camera and prepares for face capture, according to Use Case 4.
+- [ ] *AC1:* Given that the user is registered and has started a session in FaceAttend EDU, when the user initiates the facial enrollment process, then the system activates the camera and prepares for face capture, according to Use Case 4.
 
-- [ ] **AC2:** Given that the camera is active and the user positions their face correctly, when the system captures the facial image under adequate lighting and positioning conditions, then the system processes the capture and associates the resulting facial parameter with the authenticated user.
+- [ ] *AC2:* Given that the camera is active and the user positions their face correctly, when the system captures the facial image under adequate lighting and positioning conditions, then the system processes the capture and associates the resulting facial parameter with the authenticated user.
 
-- [ ] **AC3:** Given that the facial capture is successful, when the enrollment process finishes, then the system stores the facial parameter securely, shows a confirmation message, and records an audit event.
+- [ ] *AC3:* Given that the facial capture is successful, when the enrollment process finishes, then the system stores the facial parameter securely, shows a confirmation message, and records an audit event.
 
-- [ ] **AC4:** Given that the face is not detected, the image quality is insufficient, or the camera fails, when the enrollment attempt fails, then the system shows a clear error message and allows the user to retry.
+- [ ] *AC4:* Given that the face is not detected, the image quality is insufficient, or the camera fails, when the enrollment attempt fails, then the system shows a clear error message and allows the user to retry.
 
-- [ ] **AC5:** Given that the user already has an active facial parameter, when the user attempts initial enrollment again, then the system informs that a facial parameter already exists and redirects the user to the update flow, unless replacement is explicitly allowed and confirmed.
+- [ ] *AC5:* Given that the user already has an active facial parameter, when the user attempts initial enrollment again, then the system informs that a facial parameter already exists and redirects the user to the update flow, unless replacement is explicitly allowed and confirmed.
 
-- [ ] **AC6:** Given that biometric data is processed, when the facial parameter is stored, then the system protects sensitive data according to RNF 4 and does not expose raw biometric information in logs or user interface messages.
+- [ ] *AC6:* Given that biometric data is processed, when the facial parameter is stored, then the system protects sensitive data according to RNF 4 and does not expose raw biometric information in logs or user interface messages.
 
-- [ ] **AC7:** Given normal device, camera, and network conditions, when the user completes facial enrollment, then the system responds in less than 5 seconds, according to RNF 1.
+- [ ] *AC7:* Given normal device, camera, and network conditions, when the user completes facial enrollment, then the system responds in less than 5 seconds, according to RNF 1.
 
 ---
 
@@ -143,7 +143,7 @@
 - Facial parameter updates are covered separately in [HU-CONF-006](hu-conf.md#hu-conf-006-update-user-facial-parameters).
 - Sensitive biometric data must not be written to logs or shown in the interface.
 
-**Responsible service(s):** Attendance service / Biometric enrollment service, proposed.  
+*Responsible service(s):* Attendance service / Biometric enrollment service, proposed.  
 **Endpoint(s) implemented:**  
 - `POST /api/v1/biometrics/facial-enrollment` — proposed.  
 - `GET /api/v1/users/me/facial-status` — proposed.  
@@ -194,9 +194,9 @@
 
 ## Story
 
-**As** a registered student/learner whose facial scan fails  
-**I want** to complete a time-limited alternative registration process  
-**So that** my attendance can still be recorded even when facial recognition cannot validate me.
+*As* a registered student/learner whose facial scan fails  
+*I want* to complete a time-limited alternative registration process  
+*So that* my attendance can still be recorded even when facial recognition cannot validate me.
 
 ---
 
@@ -204,19 +204,19 @@
 
 > Format: “Given [context/initial state], when [user action], then [expected and verifiable result].”
 
-- [ ] **AC1:** Given that a registered user attempted facial attendance registration and the facial scan failed, when the user selects the alternative registration option, then the system presents a time-limited survey requesting the personal data required for validation, according to RF 3.1.2.
+- [ ] *AC1:* Given that a registered user attempted facial attendance registration and the facial scan failed, when the user selects the alternative registration option, then the system presents a time-limited survey requesting the personal data required for validation, according to RF 3.1.2.
 
-- [ ] **AC2:** Given that the user provides personal data within the configured time limit, when the alternative registration is submitted, then the system compares the provided data with the data registered in the system.
+- [ ] *AC2:* Given that the user provides personal data within the configured time limit, when the alternative registration is submitted, then the system compares the provided data with the data registered in the system.
 
-- [ ] **AC3:** Given that the provided data matches the registered data, when the comparison is completed, then the system registers attendance, shows a confirmation message, stores the record with the method marked as “alternative”, and records an audit event.
+- [ ] *AC3:* Given that the provided data matches the registered data, when the comparison is completed, then the system registers attendance, shows a confirmation message, stores the record with the method marked as “alternative”, and records an audit event.
 
-- [ ] **AC4:** Given that the provided data does not match the registered data, when the comparison is completed, then the system rejects the alternative registration and shows a clear error message.
+- [ ] *AC4:* Given that the provided data does not match the registered data, when the comparison is completed, then the system rejects the alternative registration and shows a clear error message.
 
-- [ ] **AC5:** Given that the configured time limit expires before the user submits the survey, when the user attempts to continue, then the system cancels the alternative registration attempt and shows a timeout message.
+- [ ] *AC5:* Given that the configured time limit expires before the user submits the survey, when the user attempts to continue, then the system cancels the alternative registration attempt and shows a timeout message.
 
-- [ ] **AC6:** Given that the person attempting alternative registration is not a registered user, when the alternative registration data is validated, then the system rejects the process and directs the person to the unregistered-user flow, if applicable.
+- [ ] *AC6:* Given that the person attempting alternative registration is not a registered user, when the alternative registration data is validated, then the system rejects the process and directs the person to the unregistered-user flow, if applicable.
 
-- [ ] **AC7:** Given normal system conditions, when the alternative registration request is processed, then the system responds in less than 5 seconds, according to RNF 1.
+- [ ] *AC7:* Given normal system conditions, when the alternative registration request is processed, then the system responds in less than 5 seconds, according to RNF 1.
 
 ---
 
@@ -233,7 +233,7 @@
 - If the alternative flow is used in a kiosk or shared device, the system must not expose unrelated user information.
 - This story does not cover unregistered or NN users. That case is handled by [HU-ATT-004](#hu-att-004-entry-control-for-unregistered-or-nn-users) and [HU-ATT-005](index.md#planned-stories-pending-documentation).
 
-**Responsible service(s):** Attendance service / Alternative validation service, proposed.  
+*Responsible service(s):* Attendance service / Alternative validation service, proposed.  
 **Endpoint(s) implemented:**  
 - `POST /api/v1/attendance/alternative/validate` — proposed.  
 - `POST /api/v1/attendance/alternative/register` — proposed.  
@@ -285,9 +285,9 @@
 
 ## Story
 
-**As** an administrator, supervisor, or attendance-control user  
-**I want** the system to classify people who are not part of the official attendance control as NN or casual users  
-**So that** the system can distinguish official registered users from visitors or unregistered people.
+*As* an administrator, supervisor, or attendance-control user  
+*I want* the system to classify people who are not part of the official attendance control as NN or casual users  
+*So that* the system can distinguish official registered users from visitors or unregistered people.
 
 ---
 
@@ -295,17 +295,17 @@
 
 > Format: “Given [context/initial state], when [user action], then [expected and verifiable result].”
 
-- [ ] **AC1:** Given that a person attempts to be registered in the attendance control process, when the system checks the person’s identification data, then the system determines whether the person is a registered user or an unregistered/NN user.
+- [ ] *AC1:* Given that a person attempts to be registered in the attendance control process, when the system checks the person’s identification data, then the system determines whether the person is a registered user or an unregistered/NN user.
 
-- [ ] **AC2:** Given that the person is registered in FaceAttend EDU, when the classification process is executed, then the system assigns the person the corresponding registered-user type and directs the process to the normal or alternative registered-user flow.
+- [ ] *AC2:* Given that the person is registered in FaceAttend EDU, when the classification process is executed, then the system assigns the person the corresponding registered-user type and directs the process to the normal or alternative registered-user flow.
 
-- [ ] **AC3:** Given that the person is not registered in FaceAttend EDU, when the classification process is executed, then the system assigns the person the NN or casual-user type and enables the corresponding unregistered-user flow.
+- [ ] *AC3:* Given that the person is not registered in FaceAttend EDU, when the classification process is executed, then the system assigns the person the NN or casual-user type and enables the corresponding unregistered-user flow.
 
-- [ ] **AC4:** Given that the identification data is incomplete, invalid, or cannot be processed, when the classification request is submitted, then the system rejects the classification and shows a clear validation message.
+- [ ] *AC4:* Given that the identification data is incomplete, invalid, or cannot be processed, when the classification request is submitted, then the system rejects the classification and shows a clear validation message.
 
-- [ ] **AC5:** Given that a person is classified as NN or casual user, when the classification is completed, then the system stores the classification separately from official student attendance records and records an audit event.
+- [ ] *AC5:* Given that a person is classified as NN or casual user, when the classification is completed, then the system stores the classification separately from official student attendance records and records an audit event.
 
-- [ ] **AC6:** Given normal system conditions, when the classification request is processed, then the system responds in less than 5 seconds, according to RNF 1.
+- [ ] *AC6:* Given normal system conditions, when the classification request is processed, then the system responds in less than 5 seconds, according to RNF 1.
 
 ---
 
@@ -321,7 +321,7 @@
 - Rate limiting and auditability are recommended to prevent abuse or unauthorized queries.
 - The team must define which identification fields are required to classify a person.
 
-**Responsible service(s):** Attendance service / Person classification service, proposed.  
+*Responsible service(s):* Attendance service / Person classification service, proposed.  
 **Endpoint(s) implemented:**  
 - `POST /api/v1/attendance/person-classification` — proposed.  
 - `GET /api/v1/attendance/classifications` — proposed for administrative review.  

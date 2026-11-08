@@ -2,9 +2,9 @@
 
 ## Story
 
-**As** an administrator or supervisor  
-**I want** to register environments or classrooms  
-**So that** attendance records can be associated with the correct training space where students attend class.
+*As* an administrator or supervisor  
+*I want* to register environments or classrooms  
+*So that* attendance records can be associated with the correct training space where students attend class.
 
 ---
 
@@ -12,17 +12,17 @@
 
 > Format: “Given [context/initial state], when [user action], then [expected and verifiable result].”
 
-- [ ] **AC1:** Given that an administrator or supervisor is authenticated in the system, when the user submits valid environment identifiers, then the system validates the data, registers the environment/classroom, stores the information securely, and shows a confirmation message.
+- [ ] *AC1:* Given that an administrator or supervisor is authenticated in the system, when the user submits valid environment identifiers, then the system validates the data, registers the environment/classroom, stores the information securely, and shows a confirmation message.
 
-- [ ] **AC2:** Given that the environment data is incomplete or invalid, when the registration is submitted, then the system rejects the operation and shows specific validation messages.
+- [ ] *AC2:* Given that the environment data is incomplete or invalid, when the registration is submitted, then the system rejects the operation and shows specific validation messages.
 
-- [ ] **AC3:** Given that an environment with the same unique identifier already exists, when the administrator attempts to register it again, then the system prevents duplicate registration and shows a clear error message.
+- [ ] *AC3:* Given that an environment with the same unique identifier already exists, when the administrator attempts to register it again, then the system prevents duplicate registration and shows a clear error message.
 
-- [ ] **AC4:** Given that an environment is successfully registered, when the system requires an environment for attendance registration or reporting, then the registered environment is available for selection.
+- [ ] *AC4:* Given that an environment is successfully registered, when the system requires an environment for attendance registration or reporting, then the registered environment is available for selection.
 
-- [ ] **AC5:** Given normal network conditions, when the administrator registers an environment, then the system responds in less than 5 seconds, according to RNF 1.
+- [ ] *AC5:* Given normal network conditions, when the administrator registers an environment, then the system responds in less than 5 seconds, according to RNF 1.
 
-- [ ] **AC6:** Given that an environment is registered, when the operation is completed, then the system records an audit event containing the action, user, date, and time.
+- [ ] *AC6:* Given that an environment is registered, when the operation is completed, then the system records an audit event containing the action, user, date, and time.
 
 ---
 
@@ -36,7 +36,7 @@
 - The user interface should allow consulting registered environments after creation.
 - Auditability is recommended for administrative changes.
 
-**Responsible service(s):** Academic Structure service, proposed.  
+*Responsible service(s):* Academic Structure service, proposed.  
 **Endpoint(s) implemented:**  
 - `POST /api/v1/environments` — proposed.  
 - `GET /api/v1/environments` — proposed.  
@@ -83,9 +83,9 @@
 
 ## Story
 
-**As** an administrator or supervisor  
-**I want** to register cohorts or courses, known as “fichas” in the SENA context  
-**So that** student groups can be associated with attendance control, responsible instructors, and training schedules.
+*As* an administrator or supervisor  
+*I want* to register cohorts or courses, known as “fichas” in the SENA context  
+*So that* student groups can be associated with attendance control, responsible instructors, and training schedules.
 
 ---
 
@@ -93,19 +93,19 @@
 
 > Format: “Given [context/initial state], when [user action], then [expected and verifiable result].”
 
-- [ ] **AC1:** Given that an administrator or supervisor is authenticated in the system, when the user submits valid cohort/course identifiers, then the system validates the data, registers the cohort/course associated with attendance control, stores the information securely, and shows a confirmation message.
+- [ ] *AC1:* Given that an administrator or supervisor is authenticated in the system, when the user submits valid cohort/course identifiers, then the system validates the data, registers the cohort/course associated with attendance control, stores the information securely, and shows a confirmation message.
 
-- [ ] **AC2:** Given that the cohort/course data is incomplete or invalid, when the registration is submitted, then the system rejects the operation and shows specific validation messages.
+- [ ] *AC2:* Given that the cohort/course data is incomplete or invalid, when the registration is submitted, then the system rejects the operation and shows specific validation messages.
 
-- [ ] **AC3:** Given that a cohort/course with the same unique identifier already exists, when the administrator attempts to register it again, then the system prevents duplicate registration and shows a clear error message.
+- [ ] *AC3:* Given that a cohort/course with the same unique identifier already exists, when the administrator attempts to register it again, then the system prevents duplicate registration and shows a clear error message.
 
-- [ ] **AC4:** Given that a cohort/course is successfully registered, when attendance registration or academic assignment is performed, then the system can display or use the cohort/course associated with the corresponding user or training group, according to RF 2.2.
+- [ ] *AC4:* Given that a cohort/course is successfully registered, when attendance registration or academic assignment is performed, then the system can display or use the cohort/course associated with the corresponding user or training group, according to RF 2.2.
 
-- [ ] **AC5:** Given that a cohort/course is successfully registered, when the administrator assigns responsible instructors or schedules, then the cohort/course is available for those relationships.
+- [ ] *AC5:* Given that a cohort/course is successfully registered, when the administrator assigns responsible instructors or schedules, then the cohort/course is available for those relationships.
 
-- [ ] **AC6:** Given normal network conditions, when the administrator registers a cohort/course, then the system responds in less than 5 seconds, according to RNF 1.
+- [ ] *AC6:* Given normal network conditions, when the administrator registers a cohort/course, then the system responds in less than 5 seconds, according to RNF 1.
 
-- [ ] **AC7:** Given that a cohort/course is registered, when the operation is completed, then the system records an audit event containing the action, user, date, and time.
+- [ ] *AC7:* Given that a cohort/course is registered, when the operation is completed, then the system records an audit event containing the action, user, date, and time.
 
 ---
 
@@ -119,7 +119,7 @@
 - Sensitive data is not expected in this entity, but administrative changes should be auditable.
 - The system should store data securely, according to RF 2.2 and RNF 4.
 
-**Responsible service(s):** Academic Structure service, proposed.  
+*Responsible service(s):* Academic Structure service, proposed.  
 **Endpoint(s) implemented:**  
 - `POST /api/v1/cohorts` — proposed, representing SENA “fichas”.  
 - `GET /api/v1/cohorts` — proposed.  
@@ -167,9 +167,9 @@
 
 ## Story
 
-**As** an administrator or supervisor  
-**I want** to assign a teacher/instructor as the responsible user for a cohort or training block  
-**So that** attendance records are linked to the correct instructor and instructors can view the groups assigned to them.
+*As* an administrator or supervisor  
+*I want* to assign a teacher/instructor as the responsible user for a cohort or training block  
+*So that* attendance records are linked to the correct instructor and instructors can view the groups assigned to them.
 
 ---
 
@@ -177,19 +177,19 @@
 
 > Format: “Given [context/initial state], when [user action], then [expected and verifiable result].”
 
-- [ ] **AC1:** Given that an administrator or supervisor has logged into FaceAttend EDU and users are registered in the system, when the user accesses the responsible assignment function, then the system shows the list of users associated with the administrator and the list of users of type teacher/instructor, according to RF 2.3.
+- [ ] *AC1:* Given that an administrator or supervisor has logged into FaceAttend EDU and users are registered in the system, when the user accesses the responsible assignment function, then the system shows the list of users associated with the administrator and the list of users of type teacher/instructor, according to RF 2.3.
 
-- [ ] **AC2:** Given that a valid teacher/instructor and a registered cohort/course are selected, when the administrator assigns the responsible user, then the system associates the instructor with the cohort/course or training block and shows a confirmation message.
+- [ ] *AC2:* Given that a valid teacher/instructor and a registered cohort/course are selected, when the administrator assigns the responsible user, then the system associates the instructor with the cohort/course or training block and shows a confirmation message.
 
-- [ ] **AC3:** Given that the selected user is not a valid user or is not of type teacher/instructor, when the administrator attempts the assignment, then the system rejects the operation and shows a validation error.
+- [ ] *AC3:* Given that the selected user is not a valid user or is not of type teacher/instructor, when the administrator attempts the assignment, then the system rejects the operation and shows a validation error.
 
-- [ ] **AC4:** Given that the cohort/course does not exist in the system, when the administrator attempts to assign a responsible user, then the system rejects the operation and shows a validation error.
+- [ ] *AC4:* Given that the cohort/course does not exist in the system, when the administrator attempts to assign a responsible user, then the system rejects the operation and shows a validation error.
 
-- [ ] **AC5:** Given that a responsible instructor is successfully assigned, when attendance is registered for the corresponding cohort or training block, then the system can identify the instructor responsible for that attendance record.
+- [ ] *AC5:* Given that a responsible instructor is successfully assigned, when attendance is registered for the corresponding cohort or training block, then the system can identify the instructor responsible for that attendance record.
 
-- [ ] **AC6:** Given normal network conditions, when the administrator assigns a responsible instructor, then the system responds in less than 5 seconds, according to RNF 1.
+- [ ] *AC6:* Given normal network conditions, when the administrator assigns a responsible instructor, then the system responds in less than 5 seconds, according to RNF 1.
 
-- [ ] **AC7:** Given that a responsible instructor is assigned or updated, when the operation is completed, then the system records an audit event containing the action, administrator, instructor, cohort/course, date, and time.
+- [ ] *AC7:* Given that a responsible instructor is assigned or updated, when the operation is completed, then the system records an audit event containing the action, administrator, instructor, cohort/course, date, and time.
 
 ---
 
@@ -206,7 +206,7 @@
 - Auditability is recommended because this assignment affects academic visibility and reporting permissions.
 - The team should define whether a cohort/course can have one or multiple responsible instructors.
 
-**Responsible service(s):** Academic Structure service, proposed.  
+*Responsible service(s):* Academic Structure service, proposed.  
 **Endpoint(s) implemented:**  
 - `GET /api/v1/users?role=instructor` — proposed.  
 - `POST /api/v1/cohorts/{cohortId}/responsible` — proposed.  
@@ -256,9 +256,9 @@
 
 ## Story
 
-**As** an administrator or supervisor  
-**I want** to assign registered cohorts/courses, known as “fichas”, to a valid responsible user  
-**So that** administrative users, instructors, and responsible users can view and manage the cohorts assigned to their academic responsibility.
+*As* an administrator or supervisor  
+*I want* to assign registered cohorts/courses, known as “fichas”, to a valid responsible user  
+*So that* administrative users, instructors, and responsible users can view and manage the cohorts assigned to their academic responsibility.
 
 ---
 
@@ -266,19 +266,19 @@
 
 > Format: “Given [context/initial state], when [user action], then [expected and verifiable result].”
 
-- [ ] **AC1:** Given that an administrator or supervisor is authenticated in the system, when the user selects a valid responsible user and an existing cohort/course, then the system associates the cohort/course with the responsible user and shows a confirmation message.
+- [ ] *AC1:* Given that an administrator or supervisor is authenticated in the system, when the user selects a valid responsible user and an existing cohort/course, then the system associates the cohort/course with the responsible user and shows a confirmation message.
 
-- [ ] **AC2:** Given that the selected responsible user is not a valid registered user, when the assignment is submitted, then the system rejects the operation and shows a validation error.
+- [ ] *AC2:* Given that the selected responsible user is not a valid registered user, when the assignment is submitted, then the system rejects the operation and shows a validation error.
 
-- [ ] **AC3:** Given that the selected cohort/course does not exist in the system, when the assignment is submitted, then the system rejects the operation and shows a validation error.
+- [ ] *AC3:* Given that the selected cohort/course does not exist in the system, when the assignment is submitted, then the system rejects the operation and shows a validation error.
 
-- [ ] **AC4:** Given that a responsible user has assigned cohorts/courses, when the user requests the list of cohorts under their responsibility, then the system displays the cohorts corresponding to their assigned responsibility, according to RF 2.3.1.
+- [ ] *AC4:* Given that a responsible user has assigned cohorts/courses, when the user requests the list of cohorts under their responsibility, then the system displays the cohorts corresponding to their assigned responsibility, according to RF 2.3.1.
 
-- [ ] **AC5:** Given that an administrative user, supervisor, administrator, or teacher/instructor accesses the cohort assignment module, when the system loads the information, then the user sees only the cohorts allowed by their role.
+- [ ] *AC5:* Given that an administrative user, supervisor, administrator, or teacher/instructor accesses the cohort assignment module, when the system loads the information, then the user sees only the cohorts allowed by their role.
 
-- [ ] **AC6:** Given normal network conditions, when the administrator assigns or consults cohorts for a responsible user, then the system responds in less than 5 seconds, according to RNF 1.
+- [ ] *AC6:* Given normal network conditions, when the administrator assigns or consults cohorts for a responsible user, then the system responds in less than 5 seconds, according to RNF 1.
 
-- [ ] **AC7:** Given that a cohort/course is assigned to a responsible user, when the operation is completed, then the system records an audit event containing the action, user, responsible user, cohort/course, date, and time.
+- [ ] *AC7:* Given that a cohort/course is assigned to a responsible user, when the operation is completed, then the system records an audit event containing the action, user, responsible user, cohort/course, date, and time.
 
 ---
 
@@ -293,7 +293,7 @@
 - Role-based access must be enforced on the server side.
 - Auditability is recommended because this assignment affects academic visibility and reporting permissions.
 
-**Responsible service(s):** Academic Structure service, proposed.  
+*Responsible service(s):* Academic Structure service, proposed.  
 **Endpoint(s) implemented:**  
 - `POST /api/v1/responsibles/{responsibleId}/cohorts` — proposed.  
 - `GET /api/v1/responsibles/{responsibleId}/cohorts` — proposed.  
@@ -342,9 +342,9 @@ conference
 
 ## Story
 
-**As** an administrator or supervisor  
-**I want** to assign  or time blocks to a registered cohort with a valid responsible instructor  
-**So that** the system knows the schedule in which students must attend and register their attendance.
+*As* an administrator or supervisor  
+*I want* to assign  or time blocks to a registered cohort with a valid responsible instructor  
+*So that* the system knows the schedule in which students must attend and register their attendance.
 
 ---
 
@@ -352,21 +352,21 @@ conference
 
 > Format: “Given [context/initial state], when [user action], then [expected and verifiable result].”
 
-- [ ] **AC1:** Given that an administrator or supervisor is authenticated in the system, when the user assigns a time block to a registered cohort with a valid responsible instructor, then the system associates the time block with the cohort and responsible user and shows a confirmation message.
+- [ ] *AC1:* Given that an administrator or supervisor is authenticated in the system, when the user assigns a time block to a registered cohort with a valid responsible instructor, then the system associates the time block with the cohort and responsible user and shows a confirmation message.
 
-- [ ] **AC2:** Given that the selected responsible user is not valid or is not registered, when the time block assignment is submitted, then the system rejects the operation and shows a validation error.
+- [ ] *AC2:* Given that the selected responsible user is not valid or is not registered, when the time block assignment is submitted, then the system rejects the operation and shows a validation error.
 
-- [ ] **AC3:** Given that the proposed time block overlaps with another time block already assigned, when the assignment is submitted, then the system rejects the operation and shows a clear conflict message.
+- [ ] *AC3:* Given that the proposed time block overlaps with another time block already assigned, when the assignment is submitted, then the system rejects the operation and shows a clear conflict message.
 
-- [ ] **AC4:** Given that the cohort is not available for the proposed time block, when the assignment is submitted, then the system rejects the operation and shows a validation error.
+- [ ] *AC4:* Given that the cohort is not available for the proposed time block, when the assignment is submitted, then the system rejects the operation and shows a validation error.
 
-- [ ] **AC5:** Given that a jornada/time block is successfully assigned, when attendance registration occurs for that cohort, then the system can identify the expected time in which students must register entry and exit.
+- [ ] *AC5:* Given that a jornada/time block is successfully assigned, when attendance registration occurs for that cohort, then the system can identify the expected time in which students must register entry and exit.
 
-- [ ] **AC6:** Given that users need to consult schedules, when an administrator, instructor, or student requests the corresponding schedule, then the system displays the schedules where users must attend and register, according to their role.
+- [ ] *AC6:* Given that users need to consult schedules, when an administrator, instructor, or student requests the corresponding schedule, then the system displays the schedules where users must attend and register, according to their role.
 
-- [ ] **AC7:** Given normal network conditions, when the administrator assigns or consults conference/time blocks, then the system responds in less than 5 seconds, according to RNF 1.
+- [ ] *AC7:* Given normal network conditions, when the administrator assigns or consults conference/time blocks, then the system responds in less than 5 seconds, according to RNF 1.
 
-- [ ] **AC8:** Given that a jornada/time block is assigned, updated, or rejected, when the operation is completed, then the system records an audit event containing the action, user, cohort, responsible user, time block, date, and time.
+- [ ] *AC8:* Given that a jornada/time block is assigned, updated, or rejected, when the operation is completed, then the system records an audit event containing the action, user, cohort, responsible user, time block, date, and time.
 
 ---
 
@@ -386,7 +386,7 @@ conference
   - Instructors can consult schedules assigned to them.
   - Students can consult schedules where they are registered, if applicable.
 
-**Responsible service(s):** Academic Structure service / Scheduling service, proposed.  
+*Responsible service(s):* Academic Structure service / Scheduling service, proposed.  
 **Endpoint(s) implemented:**  
 - `POST /api/v1/schedules` — proposed.  
 - `GET /api/v1/schedules` — proposed.  

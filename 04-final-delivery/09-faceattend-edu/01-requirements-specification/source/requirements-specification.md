@@ -588,171 +588,171 @@ Every functional requirement described in this report must meet, at minimum, the
 
 - *Purpose:* Register a log of modifications to profile, roles, permissions, status, and credentials.
 - *Platform:* Web and API.
-- **Minimum Audit Fields:** Affected entity, identifier, operator, date/time, action, previous and new values, IP, device, reason.
-- **Business Rules:**
+- *Minimum Audit Fields:* Affected entity, identifier, operator, date/time, action, previous and new values, IP, device, reason.
+- *Business Rules:*
   - History must be immutable or append-only.
   - Sensitive data is masked in non-privileged views.
   - Retention according to legal and operational policy.
-- **Acceptance Criteria:**
+- *Acceptance Criteria:*
   - Every relevant change generates a record.
   - The record allows reconstructing the user's timeline.
   - Only authorized roles consult the full history.
-- **Edge Cases:** Simultaneous change by two administrators, mass CSV import, logical deletion, access from a compromised session.
+- *Edge Cases:* Simultaneous change by two administrators, mass CSV import, logical deletion, access from a compromised session.
 
 ## RF 6 Justification Management
 
-**Purpose:** Allow presenting, reviewing, approving, or rejecting supports that explain attendance irregularities.
+*Purpose:* Allow presenting, reviewing, approving, or rejecting supports that explain attendance irregularities.
 
-**Platforms:** Mobile and Web.
+*Platforms:* Mobile and Web.
 
-**Main Dependencies:** RF 1, RF 3, RF 4.7, RF 5.
+*Main Dependencies:* RF 1, RF 3, RF 4.7, RF 5.
 
 ### ERF 6.1 Upload Justification Supports
 
-- **Purpose:** Upload a document or image that supports an absence or delay.
-- **Platform:** Mobile and Web.
-- **Inputs:** Associated attendance event, justification type, description, file.
-- **Minimum Suggested Formats:** PDF, JPG, PNG.
-- **Business Rules:**
+- *Purpose:* Upload a document or image that supports an absence or delay.
+- *Platform:* Mobile and Web.
+- *Inputs:* Associated attendance event, justification type, description, file.
+- *Minimum Suggested Formats:* PDF, JPG, PNG.
+- *Business Rules:*
   - Configurable maximum size.
   - Only events permitted by the deadline can be justified.
   - The file must be scanned for malware.
-- **Acceptance Criteria:**
+- *Acceptance Criteria:*
   - Successful upload associates support with the event.
   - Disallowed format is rejected with a clear message.
   - A digital fingerprint or hash of the file remains.
-- **Security:** Encrypted storage, access control, secure deletion if applicable.
-- **Edge Cases:** Corrupt file, filename with special characters, interrupted upload, sensitive document exposed in thumbnail.
+- *Security:* Encrypted storage, access control, secure deletion if applicable.
+- *Edge Cases:* Corrupt file, filename with special characters, interrupted upload, sensitive document exposed in thumbnail.
 
 ### ERF 6.2 Approval and Rejection
 
-- **Purpose:** Allow the evaluator to decide on the justification.
-- **Platform:** Web and Mobile according to role.
-- **Suggested States:** Pending, under review, approved, rejected, closed.
-- **Business Rules:**
+- *Purpose:* Allow the evaluator to decide on the justification.
+- *Platform:* Web and Mobile according to role.
+- *Suggested States:* Pending, under review, approved, rejected, closed.
+- *Business Rules:*
   - Only designated approvers can resolve.
   - Rejection requires a mandatory comment.
   - Double resolution is not permitted without an audited annulment.
-- **Acceptance Criteria:**
+- *Acceptance Criteria:*
   - Approval updates the event status if the policy requires it.
   - Rejection notifies the requester.
   - Every decision is audited with approver, date, and reason.
-- **Edge Cases:** Approver without permissions, justification already resolved, parameter change during review, appeal if it exists.
+- *Edge Cases:* Approver without permissions, justification already resolved, parameter change during review, appeal if it exists.
 
 ### ERF 6.3 Automatic Notification of Result (A/R)
 
-- **Purpose:** Automatically inform the user about approval or rejection.
-- **Channels:** Mobile push, email, optional SMS.
-- **Business Rules:**
+- *Purpose:* Automatically inform the user about approval or rejection.
+- *Channels:* Mobile push, email, optional SMS.
+- *Business Rules:*
   - Clear template without unnecessary sensitive data.
   - Retries if the channel fails.
   - Delivery record.
-- **Acceptance Criteria:**
+- *Acceptance Criteria:*
   - The user receives a notification after the decision.
   - The notification includes a secure link to the detail.
   - Delivery failure generates an operational alert and retry.
-- **Edge Cases:** Notification disabled, full email, invalid number, duplicate sending due to retry.
+- *Edge Cases:* Notification disabled, full email, invalid number, duplicate sending due to retry.
 
 ## RF 7 Advanced Visualization and Reports
 
-**Purpose:** Provide analytical queries, exportation, and operational reports on attendance, delays, absences, and system activity.
+*Purpose:* Provide analytical queries, exportation, and operational reports on attendance, delays, absences, and system activity.
 
-**Platforms:** Primarily Web; mobile for reduced queries.
+*Platforms:* Primarily Web; mobile for reduced queries.
 
-**Main Dependencies:** RF 2, RF 3, RF 4.7, RF 5, RF 6.
+*Main Dependencies:* RF 2, RF 3, RF 4.7, RF 5, RF 6.
 
 ### ERF 7.1 Export Report
 
-- **Purpose:** Generate a downloadable file with filtered data.
-- **Minimum Formats:** CSV, XLSX, PDF.
-- **Business Rules:**
+- *Purpose:* Generate a downloadable file with filtered data.
+- *Minimum Formats:* CSV, XLSX, PDF.
+- *Business Rules:*
   - Large exports must be asynchronous.
   - The download link expires.
   - Masking is applied according to role.
   - CSV must mitigate formula injection.
-- **Acceptance Criteria:**
+- *Acceptance Criteria:*
   - The exported file matches the filters seen on screen.
   - Export audit is registered: user, filters, format, date.
   - Does not export data outside the authorized scope.
-- **Edge Cases:** Empty dataset, timeouts, data sensitivity, repeated download, corrupt file.
+- *Edge Cases:* Empty dataset, timeouts, data sensitivity, repeated download, corrupt file.
 
 ### ERF 7.2 Analytical Dashboard
 
-- **Purpose:** Visualize key indicators of attendance, justifications, delays, IoT failures, and user activity.
-- **Platform:** Web.
-- **Suggested KPIs:** Attendance rate, delay rate, absences per cohort, pending justifications, approval/rejection, IoT devices with failure, active users.
-- **Business Rules:**
+- *Purpose:* Visualize key indicators of attendance, justifications, delays, IoT failures, and user activity.
+- *Platform:* Web.
+- *Suggested KPIs:* Attendance rate, delay rate, absences per cohort, pending justifications, approval/rejection, IoT devices with failure, active users.
+- *Business Rules:*
   - Global filters by period, environment, cohort, and instructor.
   - Drill-down to detail.
   - Periodic or on-demand updates.
-- **Acceptance Criteria:**
+- *Acceptance Criteria:*
   - Indicators calculate correctly according to current parameters.
   - Acceptable loading times for expected volume.
   - Access restricted by role.
-- **Edge Cases:** Null data, long ranges, concurrency of heavy queries, outdated cache.
+- *Edge Cases:* Null data, long ranges, concurrency of heavy queries, outdated cache.
 
 ### ERF 7.3 Date-Range Reports
 
-- **Purpose:** Consult information bounded temporarily.
-- **Business Rules:**
+- *Purpose:* Consult information bounded temporarily.
+- *Business Rules:*
   - Start date not later than end date.
   - Configurable maximum range limit.
   - Explicit time zone.
   - Days are inclusive or exclusive according to documented definition.
-- **Acceptance Criteria:**
+- *Acceptance Criteria:*
   - The report returns only events within the range.
   - Range errors are shown clearly.
   - Midnight crossovers are calculated correctly.
-- **Edge Cases:** Daylight saving time, single-day range, future date, device time zone different from server.
+- *Edge Cases:* Daylight saving time, single-day range, future date, device time zone different from server.
 
 ### ERF 7.4 Query of Delays and Absences by Parameters
 
-- **Purpose:** List events classified as delay or absence according to filters.
-- **Filters:** Date, cohort, environment, instructor, person, event type, justification status.
-- **Business Rules:**
+- *Purpose:* List events classified as delay or absence according to filters.
+- *Filters:* Date, cohort, environment, instructor, person, event type, justification status.
+- *Business Rules:*
   - Uses RF 4.7 parameters.
   - Must show the cause of classification: marking time, tolerance, absence of exit, etc.
-- **Acceptance Criteria:**
+- *Acceptance Criteria:*
   - The query is consistent with RF 5 histories.
   - Allows exporting results.
   - Respects the responsible's scope.
-- **Edge Cases:** Event without assigned shift, approved justification that reverses absence, retroactive parameter change.
+- *Edge Cases:* Event without assigned shift, approved justification that reverses absence, retroactive parameter change.
 
 ## RF 8 School Management
 
-**Purpose:** Administer the catalog of courses and study plans associated with subjects and academic cohorts.
+*Purpose:* Administer the catalog of courses and study plans associated with subjects and academic cohorts.
 
-**Platforms:** Web.
+*Platforms:* Web.
 
-**Main Dependencies:** RF 2, RF 5, RF 7.
+*Main Dependencies:* RF 2, RF 5, RF 7.
 
 ### ERF 8.1 Add and Delete Courses
 
-- **Purpose:** Maintain the master catalog of courses offered by the school.
-- **Minimum Inputs:** Code, name, description, duration, modality, status.
-- **Business Rules:**
+- *Purpose:* Maintain the master catalog of courses offered by the school.
+- *Minimum Inputs:* Code, name, description, duration, modality, status.
+- *Business Rules:*
   - Unique code.
   - Logical deletion if cohorts, plans, or histories are associated.
   - Inactivating a course prevents new cohorts but preserves previous reports.
-- **Acceptance Criteria:**
+- *Acceptance Criteria:*
   - Successful course creation enables it for assignment in cohorts.
   - Editing a course preserves traceability if critical data changes.
   - Deleting or inactivating requires confirmation and audit.
-- **Edge Cases:** Course with active cohorts, code duplication, modality change with assigned students.
+- *Edge Cases:* Course with active cohorts, code duplication, modality change with assigned students.
 
 ### ERF 8.2 Study Plan of Subjects
 
-- **Purpose:** Define the academic structure of subjects, hours, sequence, and prerequisites.
-- **Minimum Inputs:** Course, subject, code, hourly intensity, order, optional prerequisites, competencies, validity.
-- **Business Rules:**
+- *Purpose:* Define the academic structure of subjects, hours, sequence, and prerequisites.
+- *Minimum Inputs:* Course, subject, code, hourly intensity, order, optional prerequisites, competencies, validity.
+- *Business Rules:*
   - The plan must be versioned.
   - A cohort is associated with a current version of the plan.
   - Deleting a plan with active cohorts is not permitted; the version is inactivated or closed.
-- **Acceptance Criteria:**
+- *Acceptance Criteria:*
   - Publishing a plan makes it available for cohorts.
   - Consulting a plan shows subjects and hours correctly.
   - Version changes do not alter closed histories.
-- **Edge Cases:** Circular prerequisite, subject without hours, plan published without review, plan change mid-period.
+- *Edge Cases:* Circular prerequisite, subject without hours, plan published without review, plan change mid-period.
 
 # Requirements Traceability Matrix
 
@@ -987,7 +987,7 @@ The most critical points of the system are: secure management of roles and permi
 
 For production implementation, it is recommended to validate this report with product, security, privacy, quality, and key user areas before freezing the scope. Subsequently, each ERF must be traced to epics, user stories, test cases, commits, pipelines, and deployment evidence.
 
-**Author's Note.** Jonas is the author and technical responsible for this document. Correspondence related to this report may be directed to jonas@consultoria.example. The author declares the absence of conflicts of interest and external funding for the preparation of this document.
+*Author's Note.* Jonas is the author and technical responsible for this document. Correspondence related to this report may be directed to jonas@consultoria.example. The author declares the absence of conflicts of interest and external funding for the preparation of this document.
 
 # References
 
