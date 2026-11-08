@@ -2,9 +2,9 @@
 
 ## Story
 
-**As** an administrator, supervisor, instructor, or student  
-**I want** to query attendance and absence records using filters such as date, cohort, environment, instructor, or person  
-**So that** I can obtain accurate attendance information according to my role and make timely academic decisions.
+*As* an administrator, supervisor, instructor, or student  
+*I want* to query attendance and absence records using filters such as date, cohort, environment, instructor, or person  
+*So that* I can obtain accurate attendance information according to my role and make timely academic decisions.
 
 ---
 
@@ -14,47 +14,47 @@
 
 ### Parameter validation
 
-- [ ] **AC1:** Given that an authenticated user accesses the attendance history module, when the user selects one or more query parameters (date, cohort, environment, instructor, or person), then the system validates each parameter before processing the query.
+- [ ] *AC1:* Given that an authenticated user accesses the attendance history module, when the user selects one or more query parameters (date, cohort, environment, instructor, or person), then the system validates each parameter before processing the query.
 
-- [ ] **AC2:** Given that the user selects a date parameter, when the query is executed, then the system validates that the date is valid and applicable to the attendance control context before returning results.
+- [ ] *AC2:* Given that the user selects a date parameter, when the query is executed, then the system validates that the date is valid and applicable to the attendance control context before returning results.
 
-- [ ] **AC3:** Given that the user selects a cohort/ficha as a filter, when the query is executed, then the system validates that the cohort is registered in the system before returning results.
+- [ ] *AC3:* Given that the user selects a cohort/ficha as a filter, when the query is executed, then the system validates that the cohort is registered in the system before returning results.
 
-- [ ] **AC4:** Given that the user selects an environment as a filter, when the query is executed, then the system validates that the environment is registered in the system before returning results.
+- [ ] *AC4:* Given that the user selects an environment as a filter, when the query is executed, then the system validates that the environment is registered in the system before returning results.
 
-- [ ] **AC5:** Given that the user selects an instructor as a filter, when the query is executed, then the system validates that the instructor/teacher is registered in the system before returning results.
+- [ ] *AC5:* Given that the user selects an instructor as a filter, when the query is executed, then the system validates that the instructor/teacher is registered in the system before returning results.
 
-- [ ] **AC6:** Given that the user selects a person as a filter, when the query is executed, then the system validates that the person is registered in the system before returning results.
+- [ ] *AC6:* Given that the user selects a person as a filter, when the query is executed, then the system validates that the person is registered in the system before returning results.
 
 ### Query execution
 
-- [ ] **AC7:** Given that all selected parameters are valid, when the query is executed, then the system returns the attendance and absence records matching the requested filters.
+- [ ] *AC7:* Given that all selected parameters are valid, when the query is executed, then the system returns the attendance and absence records matching the requested filters.
 
-- [ ] **AC8:** Given that the selected parameters are valid but produce no matching records, when the query is executed, then the system shows a clear message indicating that no attendance records were found for the specified filters.
+- [ ] *AC8:* Given that the selected parameters are valid but produce no matching records, when the query is executed, then the system shows a clear message indicating that no attendance records were found for the specified filters.
 
-- [ ] **AC9:** Given that the user combines multiple filters, when the query is executed, then the system applies all filters simultaneously and returns only records matching all criteria.
+- [ ] *AC9:* Given that the user combines multiple filters, when the query is executed, then the system applies all filters simultaneously and returns only records matching all criteria.
 
 ### Role-based access
 
-- [ ] **AC10:** Given that the user is a student, when the user queries attendance records, then the system only returns the records belonging to that student, unless a broader permission is explicitly granted.
+- [ ] *AC10:* Given that the user is a student, when the user queries attendance records, then the system only returns the records belonging to that student, unless a broader permission is explicitly granted.
 
-- [ ] **AC11:** Given that the user is an instructor, when the user queries attendance records, then the system only returns records associated with the cohorts, environments, or training blocks assigned to that instructor.
+- [ ] *AC11:* Given that the user is an instructor, when the user queries attendance records, then the system only returns records associated with the cohorts, environments, or training blocks assigned to that instructor.
 
-- [ ] **AC12:** Given that the user is an administrator or supervisor, when the user queries attendance records, then the system returns records according to the administrative scope assigned to that role.
+- [ ] *AC12:* Given that the user is an administrator or supervisor, when the user queries attendance records, then the system returns records according to the administrative scope assigned to that role.
 
-- [ ] **AC13:** Given that an unauthorized user attempts to query attendance records outside their role scope, when the request is processed, then the system denies access and records an unauthorized access attempt.
+- [ ] *AC13:* Given that an unauthorized user attempts to query attendance records outside their role scope, when the request is processed, then the system denies access and records an unauthorized access attempt.
 
 ### Results display
 
-- [ ] **AC14:** Given that a query returns results, when the system displays them, then the records include at minimum the following information: user, date, entry time, exit time, attendance status (present, absent, late, justified), cohort, environment, and instructor, where applicable.
+- [ ] *AC14:* Given that a query returns results, when the system displays them, then the records include at minimum the following information: user, date, entry time, exit time, attendance status (present, absent, late, justified), cohort, environment, and instructor, where applicable.
 
-- [ ] **AC15:** Given that a query returns a large number of results, when the system displays them, then the results are paginated to maintain performance and usability.
+- [ ] *AC15:* Given that a query returns a large number of results, when the system displays them, then the results are paginated to maintain performance and usability.
 
 ### Performance and audit
 
-- [ ] **AC16:** Given normal network conditions, when the user executes an attendance query, then the system responds in less than 5 seconds, according to RNF 1.
+- [ ] *AC16:* Given normal network conditions, when the user executes an attendance query, then the system responds in less than 5 seconds, according to RNF 1.
 
-- [ ] **AC17:** Given that the query is executed, when the operation is completed, then the system records an audit event containing the user, applied parameters, date, and time.
+- [ ] *AC17:* Given that the query is executed, when the operation is completed, then the system records an audit event containing the user, applied parameters, date, and time.
 
 ---
 
@@ -83,7 +83,7 @@
 - This story does not cover delay/absence-specific queries by parameters. That is handled in [HU-REP-004](hu-rep.md#hu-rep-004-delay-and-absence-query-by-parameters).
 - Attendance data must be protected according to RNF 4, and access must be restricted according to the user's role.
 
-**Responsible service(s):** History service / Attendance query service, proposed.  
+*Responsible service(s):* History service / Attendance query service, proposed.  
 **Endpoint(s) implemented:**  
 - `GET /api/v1/attendance/history` — proposed, with query parameters for date, cohort, environment, instructor, and person.  
 - `GET /api/v1/attendance/history/me` — proposed, for students querying their own records.  
@@ -142,9 +142,9 @@
 
 ## Story
 
-**As** an administrator or supervisor  
-**I want** to consult the change history of a specific user  
-**So that** I can audit the modifications made to that user's data over time and maintain traceability of administrative actions.
+*As* an administrator or supervisor  
+*I want* to consult the change history of a specific user  
+*So that* I can audit the modifications made to that user's data over time and maintain traceability of administrative actions.
 
 ---
 
@@ -154,35 +154,35 @@
 
 ### Query validation
 
-- [ ] **AC1:** Given that an authenticated administrator or supervisor accesses the user change history module, when the user provides the parameters to identify the target user, then the system validates that the target user exists and is registered in the application.
+- [ ] *AC1:* Given that an authenticated administrator or supervisor accesses the user change history module, when the user provides the parameters to identify the target user, then the system validates that the target user exists and is registered in the application.
 
-- [ ] **AC2:** Given that the target user does not exist in the system, when the administrator queries the change history, then the system rejects the operation and shows a clear validation message.
+- [ ] *AC2:* Given that the target user does not exist in the system, when the administrator queries the change history, then the system rejects the operation and shows a clear validation message.
 
-- [ ] **AC3:** Given that the target user exists but has no registered changes, when the administrator queries the change history, then the system shows a clear message indicating that no changes have been recorded for that user.
+- [ ] *AC3:* Given that the target user exists but has no registered changes, when the administrator queries the change history, then the system shows a clear message indicating that no changes have been recorded for that user.
 
 ### History display
 
-- [ ] **AC4:** Given that the target user has registered changes, when the history is displayed, then the system shows each change with at least the following information: date and time of the change, type of change, the user who made the change, previous value (if applicable), and new value (if applicable).
+- [ ] *AC4:* Given that the target user has registered changes, when the history is displayed, then the system shows each change with at least the following information: date and time of the change, type of change, the user who made the change, previous value (if applicable), and new value (if applicable).
 
-- [ ] **AC5:** Given that the change history contains sensitive data, when the history is displayed, then the system protects sensitive fields (such as passwords or biometric parameters) and does not expose their actual values in the interface or logs.
+- [ ] *AC5:* Given that the change history contains sensitive data, when the history is displayed, then the system protects sensitive fields (such as passwords or biometric parameters) and does not expose their actual values in the interface or logs.
 
-- [ ] **AC6:** Given that the change history is displayed, when the administrator interacts with the results, then the system supports filtering by target user, date range, type of change, and user who made the change.
+- [ ] *AC6:* Given that the change history is displayed, when the administrator interacts with the results, then the system supports filtering by target user, date range, type of change, and user who made the change.
 
 ### Access control
 
-- [ ] **AC7:** Given that the querying user does not have administrator or supervisor permissions, when the user attempts to access the user change history module, then the system denies access and records an unauthorized access attempt.
+- [ ] *AC7:* Given that the querying user does not have administrator or supervisor permissions, when the user attempts to access the user change history module, then the system denies access and records an unauthorized access attempt.
 
-- [ ] **AC8:** Given that a regular user, instructor, or student attempts to access another user's change history, when the request is processed, then the system denies access and enforces role-based restrictions.
+- [ ] *AC8:* Given that a regular user, instructor, or student attempts to access another user's change history, when the request is processed, then the system denies access and enforces role-based restrictions.
 
 ### Audit integration
 
-- [ ] **AC9:** Given that a user's data is modified in any other module (user registration, role change, activation/deactivation, facial parameter update, etc.), when the modification is saved, then the system records the change in the user change history automatically.
+- [ ] *AC9:* Given that a user's data is modified in any other module (user registration, role change, activation/deactivation, facial parameter update, etc.), when the modification is saved, then the system records the change in the user change history automatically.
 
-- [ ] **AC10:** Given that the change history is consulted, when the operation is completed, then the system records an audit event containing the querying user, target user, date, and time.
+- [ ] *AC10:* Given that the change history is consulted, when the operation is completed, then the system records an audit event containing the querying user, target user, date, and time.
 
 ### Performance
 
-- [ ] **AC11:** Given normal network conditions, when the administrator queries the user change history, then the system responds in less than 5 seconds, according to RNF 1.
+- [ ] *AC11:* Given normal network conditions, when the administrator queries the user change history, then the system responds in less than 5 seconds, according to RNF 1.
 
 ---
 
@@ -210,7 +210,7 @@
 - This story does not cover general audit of all system actions. It focuses specifically on user data changes.
 - The team must define the retention period for change history records, considering institutional policies and data protection regulations.
 
-**Responsible service(s):** attendance-service (HIST-001) / identity-service via platform logging (HIST-002).  
+*Responsible service(s):* attendance-service (HIST-001) / identity-service via platform logging (HIST-002).  
 **Endpoint(s) implemented:**  
 - `GET /api/v1/users/{userId}/change-history` — proposed.  
 - `GET /api/v1/users/{userId}/change-history` with query parameters for date range, type of change, and author — proposed.  

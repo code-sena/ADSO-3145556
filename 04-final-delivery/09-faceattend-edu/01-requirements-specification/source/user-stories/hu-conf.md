@@ -2,9 +2,9 @@
 
 ## Story
 
-**As** an authenticated user  
-**I want** to configure the alerts and notifications of the application  
-**So that** I can customize how the system informs me about relevant events such as attendance records, justifications, and system alerts.
+*As* an authenticated user  
+*I want* to configure the alerts and notifications of the application  
+*So that* I can customize how the system informs me about relevant events such as attendance records, justifications, and system alerts.
 
 ---
 
@@ -12,21 +12,21 @@
 
 > Format: "Given [context/initial state], when [user action], then [expected and verifiable result]."
 
-- [ ] **AC1:** Given that the user is registered and has logged into the system, when the user accesses the alert configuration module, then the system displays the available alert configuration options.
+- [ ] *AC1:* Given that the user is registered and has logged into the system, when the user accesses the alert configuration module, then the system displays the available alert configuration options.
 
-- [ ] **AC2:** Given that the user modifies one or more alert configuration options, when the changes are saved, then the system stores the new configuration and reflects the changes in the system's behavior.
+- [ ] *AC2:* Given that the user modifies one or more alert configuration options, when the changes are saved, then the system stores the new configuration and reflects the changes in the system's behavior.
 
-- [ ] **AC3:** Given that the user is not registered or has not logged into the system, when the user attempts to access the alert configuration module, then the system denies access and shows a clear authentication error message.
+- [ ] *AC3:* Given that the user is not registered or has not logged into the system, when the user attempts to access the alert configuration module, then the system denies access and shows a clear authentication error message.
 
-- [ ] **AC4:** Given that the alert configuration is saved successfully, when the system processes the changes, then the system shows a confirmation message indicating that the configuration was updated.
+- [ ] *AC4:* Given that the alert configuration is saved successfully, when the system processes the changes, then the system shows a confirmation message indicating that the configuration was updated.
 
-- [ ] **AC5:** Given that the alert configuration fails to save due to a system error, when the operation is processed, then the system shows a clear error message and does not apply the changes.
+- [ ] *AC5:* Given that the alert configuration fails to save due to a system error, when the operation is processed, then the system shows a clear error message and does not apply the changes.
 
-- [ ] **AC6:** Given that the user's alert configuration is updated, when a relevant event occurs in the system, then the system sends notifications according to the user's configured preferences.
+- [ ] *AC6:* Given that the user's alert configuration is updated, when a relevant event occurs in the system, then the system sends notifications according to the user's configured preferences.
 
-- [ ] **AC7:** Given normal network conditions, when the user saves the alert configuration, then the system responds in less than 5 seconds, according to RNF 1.
+- [ ] *AC7:* Given normal network conditions, when the user saves the alert configuration, then the system responds in less than 5 seconds, according to RNF 1.
 
-- [ ] **AC8:** Given that the alert configuration is updated, when the operation is completed, then the system records an audit event containing the user, date, and time.
+- [ ] *AC8:* Given that the alert configuration is updated, when the operation is completed, then the system records an audit event containing the user, date, and time.
 
 ---
 
@@ -46,7 +46,7 @@
 - This story does not cover IoT device failure alerts. That is handled in [HU-CONF-007](#hu-conf-007-iot-device-failure-alerts-management).
 - The team must define the default alert configuration for new users.
 
-**Responsible service(s):** Configuration service / Notification service, proposed.  
+*Responsible service(s):* Configuration service / Notification service, proposed.  
 **Endpoint(s) implemented:**  
 - `GET /api/v1/config/alerts` — proposed, returns the user's current alert configuration.  
 - `PUT /api/v1/config/alerts` — proposed, updates the user's alert configuration.  
@@ -94,9 +94,9 @@
 
 ## Story
 
-**As** an authenticated user  
-**I want** to enable or disable specific alerts and notifications  
-**So that** I can control which notifications I receive and reduce unnecessary interruptions.
+*As* an authenticated user  
+*I want* to enable or disable specific alerts and notifications  
+*So that* I can control which notifications I receive and reduce unnecessary interruptions.
 
 ---
 
@@ -104,23 +104,23 @@
 
 > Format: "Given [context/initial state], when [user action], then [expected and verifiable result]."
 
-- [ ] **AC1:** Given that the user is registered and has logged into the system, when the user accesses the alert enable/disable module, then the system displays the list of available alerts with their current enabled/disabled status.
+- [ ] *AC1:* Given that the user is registered and has logged into the system, when the user accesses the alert enable/disable module, then the system displays the list of available alerts with their current enabled/disabled status.
 
-- [ ] **AC2:** Given that the user selects an alert to enable, when the change is saved, then the system enables the selected alert and reflects the change in the system's behavior.
+- [ ] *AC2:* Given that the user selects an alert to enable, when the change is saved, then the system enables the selected alert and reflects the change in the system's behavior.
 
-- [ ] **AC3:** Given that the user selects an alert to disable, when the change is saved, then the system disables the selected alert and limits the notifications the user receives for that alert type.
+- [ ] *AC3:* Given that the user selects an alert to disable, when the change is saved, then the system disables the selected alert and limits the notifications the user receives for that alert type.
 
-- [ ] **AC4:** Given that the user is not registered or has not logged into the system, when the user attempts to enable or disable alerts, then the system denies access and shows a clear authentication error message.
+- [ ] *AC4:* Given that the user is not registered or has not logged into the system, when the user attempts to enable or disable alerts, then the system denies access and shows a clear authentication error message.
 
-- [ ] **AC5:** Given that the alert status is changed successfully, when the system processes the change, then the system shows a confirmation message indicating that the alert was enabled or disabled.
+- [ ] *AC5:* Given that the alert status is changed successfully, when the system processes the change, then the system shows a confirmation message indicating that the alert was enabled or disabled.
 
-- [ ] **AC6:** Given that an alert is disabled, when the corresponding event occurs in the system, then the system does not send notifications for that alert type to the user.
+- [ ] *AC6:* Given that an alert is disabled, when the corresponding event occurs in the system, then the system does not send notifications for that alert type to the user.
 
-- [ ] **AC7:** Given that an alert is enabled, when the corresponding event occurs in the system, then the system sends notifications for that alert type to the user according to their configured preferences.
+- [ ] *AC7:* Given that an alert is enabled, when the corresponding event occurs in the system, then the system sends notifications for that alert type to the user according to their configured preferences.
 
-- [ ] **AC8:** Given normal network conditions, when the user enables or disables an alert, then the system responds in less than 5 seconds, according to RNF 1.
+- [ ] *AC8:* Given normal network conditions, when the user enables or disables an alert, then the system responds in less than 5 seconds, according to RNF 1.
 
-- [ ] **AC9:** Given that the alert status is changed, when the operation is completed, then the system records an audit event containing the user, alert type, new status, date, and time.
+- [ ] *AC9:* Given that the alert status is changed, when the operation is completed, then the system records an audit event containing the user, alert type, new status, date, and time.
 
 ---
 
@@ -139,7 +139,7 @@
 - The team must define whether critical alerts (such as security incidents) can be disabled by users or should always remain enabled.
 - This story does not cover changing notification tones. That is handled in [HU-CONF-003](#hu-conf-003-change-notification-tone).
 
-**Responsible service(s):** Configuration service / Notification service, proposed.  
+*Responsible service(s):* Configuration service / Notification service, proposed.  
 **Endpoint(s) implemented:**  
 - `GET /api/v1/config/alerts/status` — proposed, returns the enabled/disabled status of each alert.  
 - `PATCH /api/v1/config/alerts/{alertType}/status` — proposed, enables or disables a specific alert.  
@@ -190,9 +190,9 @@
 
 ## Story
 
-**As** an authenticated user  
-**I want** to change the tone or sound of the application's notifications  
-**So that** I can customize the audio feedback I receive when the system alerts me about relevant events.
+*As* an authenticated user  
+*I want* to change the tone or sound of the application's notifications  
+*So that* I can customize the audio feedback I receive when the system alerts me about relevant events.
 
 ---
 
@@ -200,23 +200,23 @@
 
 > Format: "Given [context/initial state], when [user action], then [expected and verifiable result]."
 
-- [ ] **AC1:** Given that the user is registered and has logged into the system, when the user accesses the notification tone configuration module, then the system displays the list of available notification tones.
+- [ ] *AC1:* Given that the user is registered and has logged into the system, when the user accesses the notification tone configuration module, then the system displays the list of available notification tones.
 
-- [ ] **AC2:** Given that the user selects a notification tone from the available options, when the change is saved, then the system stores the selected tone and applies it to the user's notifications.
+- [ ] *AC2:* Given that the user selects a notification tone from the available options, when the change is saved, then the system stores the selected tone and applies it to the user's notifications.
 
-- [ ] **AC3:** Given that the user selects a notification tone, when the user wants to preview the sound, then the system allows playing a preview of the selected tone before saving.
+- [ ] *AC3:* Given that the user selects a notification tone, when the user wants to preview the sound, then the system allows playing a preview of the selected tone before saving.
 
-- [ ] **AC4:** Given that the user is not registered or has not logged into the system, when the user attempts to change the notification tone, then the system denies access and shows a clear authentication error message.
+- [ ] *AC4:* Given that the user is not registered or has not logged into the system, when the user attempts to change the notification tone, then the system denies access and shows a clear authentication error message.
 
-- [ ] **AC5:** Given that the notification tone is changed successfully, when the system processes the change, then the system shows a confirmation message indicating that the tone was updated.
+- [ ] *AC5:* Given that the notification tone is changed successfully, when the system processes the change, then the system shows a confirmation message indicating that the tone was updated.
 
-- [ ] **AC6:** Given that a notification is triggered after the tone change, when the notification is delivered, then the system plays the newly selected tone.
+- [ ] *AC6:* Given that a notification is triggered after the tone change, when the notification is delivered, then the system plays the newly selected tone.
 
-- [ ] **AC7:** Given that the user does not select a tone or cancels the operation, when the module is closed, then the system retains the previous tone without applying changes.
+- [ ] *AC7:* Given that the user does not select a tone or cancels the operation, when the module is closed, then the system retains the previous tone without applying changes.
 
-- [ ] **AC8:** Given normal network conditions, when the user changes the notification tone, then the system responds in less than 5 seconds, according to RNF 1.
+- [ ] *AC8:* Given normal network conditions, when the user changes the notification tone, then the system responds in less than 5 seconds, according to RNF 1.
 
-- [ ] **AC9:** Given that the notification tone is changed, when the operation is completed, then the system records an audit event containing the user, selected tone, date, and time.
+- [ ] *AC9:* Given that the notification tone is changed, when the operation is completed, then the system records an audit event containing the user, selected tone, date, and time.
 
 ---
 
@@ -235,7 +235,7 @@
 - The tone change should apply to all notification types unless the team decides to allow per-alert-type tone configuration.
 - This story does not cover enabling/disabling alerts. That is handled in [HU-CONF-002](#hu-conf-002-enable-or-disable-alerts).
 
-**Responsible service(s):** Configuration service / Notification service, proposed.  
+*Responsible service(s):* Configuration service / Notification service, proposed.  
 **Endpoint(s) implemented:**  
 - `GET /api/v1/config/notification-tone` — proposed, returns the user's current notification tone.  
 - `PUT /api/v1/config/notification-tone` — proposed, updates the user's notification tone.  
@@ -287,9 +287,9 @@
 
 ## Story
 
-**As** an authenticated user  
-**I want** to configure the language of the application  
-**So that** I can interact with the system in my preferred language and improve my user experience.
+*As* an authenticated user  
+*I want* to configure the language of the application  
+*So that* I can interact with the system in my preferred language and improve my user experience.
 
 ---
 
@@ -297,23 +297,23 @@
 
 > Format: "Given [context/initial state], when [user action], then [expected and verifiable result]."
 
-- [ ] **AC1:** Given that the user is registered and has logged into the system, when the user accesses the language configuration module, then the system displays the list of available languages.
+- [ ] *AC1:* Given that the user is registered and has logged into the system, when the user accesses the language configuration module, then the system displays the list of available languages.
 
-- [ ] **AC2:** Given that the user selects a language from the available options, when the change is saved, then the system stores the selected language and applies it to the user's interface.
+- [ ] *AC2:* Given that the user selects a language from the available options, when the change is saved, then the system stores the selected language and applies it to the user's interface.
 
-- [ ] **AC3:** Given that the language is changed successfully, when the system processes the change, then the system shows a confirmation message in the newly selected language.
+- [ ] *AC3:* Given that the language is changed successfully, when the system processes the change, then the system shows a confirmation message in the newly selected language.
 
-- [ ] **AC4:** Given that the user is not registered or has not logged into the system, when the user attempts to change the language, then the system denies access and shows a clear authentication error message.
+- [ ] *AC4:* Given that the user is not registered or has not logged into the system, when the user attempts to change the language, then the system denies access and shows a clear authentication error message.
 
-- [ ] **AC5:** Given that the user selects a language, when subsequent screens and messages are displayed, then all interface texts, labels, and messages are shown in the selected language.
+- [ ] *AC5:* Given that the user selects a language, when subsequent screens and messages are displayed, then all interface texts, labels, and messages are shown in the selected language.
 
-- [ ] **AC6:** Given that the user does not select a language or cancels the operation, when the module is closed, then the system retains the previous language without applying changes.
+- [ ] *AC6:* Given that the user does not select a language or cancels the operation, when the module is closed, then the system retains the previous language without applying changes.
 
-- [ ] **AC7:** Given that a new user registers in the system, when no language preference has been set, then the system uses the default language defined by the team.
+- [ ] *AC7:* Given that a new user registers in the system, when no language preference has been set, then the system uses the default language defined by the team.
 
-- [ ] **AC8:** Given normal network conditions, when the user changes the language, then the system responds in less than 5 seconds, according to RNF 1.
+- [ ] *AC8:* Given normal network conditions, when the user changes the language, then the system responds in less than 5 seconds, according to RNF 1.
 
-- [ ] **AC9:** Given that the language is changed, when the operation is completed, then the system records an audit event containing the user, selected language, date, and time.
+- [ ] *AC9:* Given that the language is changed, when the operation is completed, then the system records an audit event containing the user, selected language, date, and time.
 
 ---
 
@@ -335,7 +335,7 @@
 - This story does not cover color palette configuration. That is handled in [HU-CONF-005](#hu-conf-005-update-color-palettes).
 - The team must define whether the language configuration applies only to the web interface or also to mobile notifications and emails.
 
-**Responsible service(s):** Configuration service / Internationalization service, proposed.  
+*Responsible service(s):* Configuration service / Internationalization service, proposed.  
 **Endpoint(s) implemented:**  
 - `GET /api/v1/config/language` — proposed, returns the user's current language.  
 - `PUT /api/v1/config/language` — proposed, updates the user's language.  
@@ -388,9 +388,9 @@
 
 ## Story
 
-**As** an administrator  
-**I want** to configure and add color palettes for the application interface  
-**So that** the institution's visual identity is reflected in the system and the user experience is customized according to institutional criteria.
+*As* an administrator  
+*I want* to configure and add color palettes for the application interface  
+*So that* the institution's visual identity is reflected in the system and the user experience is customized according to institutional criteria.
 
 ---
 
@@ -398,28 +398,28 @@
 
 > Format: "Given [context/initial state], when [user action], then [expected and verifiable result]."
 
-- [ ] **AC1:** Given that an authenticated administrator accesses the color palette configuration module, when the system loads the module, then it displays the current color palettes and the option to add or modify palettes.
+- [ ] *AC1:* Given that an authenticated administrator accesses the color palette configuration module, when the system loads the module, then it displays the current color palettes and the option to add or modify palettes.
 
-- [ ] **AC2:** Given that the administrator selects or creates a new color palette, when the changes are saved, then the system validates the color values, stores the new palette, and reflects the changes in the application's visual behavior.
+- [ ] *AC2:* Given that the administrator selects or creates a new color palette, when the changes are saved, then the system validates the color values, stores the new palette, and reflects the changes in the application's visual behavior.
 
-- [ ] **AC3:** Given that the administrator enters invalid color values (malformed codes, out-of-range values), when the save operation is submitted, then the system rejects the operation and shows specific validation messages.
+- [ ] *AC3:* Given that the administrator enters invalid color values (malformed codes, out-of-range values), when the save operation is submitted, then the system rejects the operation and shows specific validation messages.
 
-- [ ] **AC4:** Given that the user attempting to configure color palettes does not have administrator permissions, when the request is processed, then the system denies access and records an unauthorized access attempt.
+- [ ] *AC4:* Given that the user attempting to configure color palettes does not have administrator permissions, when the request is processed, then the system denies access and records an unauthorized access attempt.
 
-- [ ] **AC5:** Given that the color palette is updated successfully, when the system applies the changes, then subsequent screens and interface components reflect the new color scheme.
+- [ ] *AC5:* Given that the color palette is updated successfully, when the system applies the changes, then subsequent screens and interface components reflect the new color scheme.
 
-- [ ] **AC6:** Given that the administrator cancels the operation without saving, when the module is closed, then the system retains the previous color palette without applying changes.
+- [ ] *AC6:* Given that the administrator cancels the operation without saving, when the module is closed, then the system retains the previous color palette without applying changes.
 
-- [ ] **AC7:** Given normal network conditions, when the administrator saves the color palette configuration, then the system responds in less than 5 seconds, according to RNF 1.
+- [ ] *AC7:* Given normal network conditions, when the administrator saves the color palette configuration, then the system responds in less than 5 seconds, according to RNF 1.
 
-- [ ] **AC8:** Given that the color palette is updated, when the operation is completed, then the system records an audit event containing the administrator, date, and time.
+- [ ] *AC8:* Given that the color palette is updated, when the operation is completed, then the system records an audit event containing the administrator, date, and time.
 
 ---
 
 ## Technical notes
 
 - RF 4.3 indicates that the system must validate that the user is registered and has logged into the system before allowing color palette configuration.
-- RF 4.3 specifies that this is an **administrator-only** operation. Regular users, instructors, and students must not be able to modify color palettes.
+- RF 4.3 specifies that this is an *administrator-only* operation. Regular users, instructors, and students must not be able to modify color palettes.
 - The color palette configuration should support standard color formats such as hexadecimal codes (e.g., `#RRGGBB`) or RGB values.
 - The system should consider:
   - A preview functionality before saving changes.
@@ -430,7 +430,7 @@
 - This story does not cover language configuration. That is handled in [HU-CONF-004](#hu-conf-004-configure-application-language).
 - This story does not cover alert configuration. That is handled in [HU-CONF-001](#hu-conf-001-configure-system-alerts).
 
-**Responsible service(s):** Configuration service / UI theme service, proposed.  
+*Responsible service(s):* Configuration service / UI theme service, proposed.  
 **Endpoint(s) implemented:**  
 - `GET /api/v1/config/color-palettes` — proposed, returns current color palettes.  
 - `POST /api/v1/config/color-palettes` — proposed, adds a new color palette.  
@@ -483,9 +483,9 @@
 
 ## Story
 
-**As** an authenticated user or administrator  
-**I want** to update my facial parameters in the system  
-**So that** my facial recognition data remains accurate and up-to-date for reliable attendance registration.
+*As* an authenticated user or administrator  
+*I want* to update my facial parameters in the system  
+*So that* my facial recognition data remains accurate and up-to-date for reliable attendance registration.
 
 ---
 
@@ -493,23 +493,23 @@
 
 > Format: "Given [context/initial state], when [user action], then [expected and verifiable result]."
 
-- [ ] **AC1:** Given that the user is registered and has logged into the system, when the user requests a facial parameter update, then the system activates the camera and initiates the facial capture process.
+- [ ] *AC1:* Given that the user is registered and has logged into the system, when the user requests a facial parameter update, then the system activates the camera and initiates the facial capture process.
 
-- [ ] **AC2:** Given that the camera is active and the user positions their face correctly, when the system captures the new facial image, then the system processes the capture and validates the new facial parameters.
+- [ ] *AC2:* Given that the camera is active and the user positions their face correctly, when the system captures the new facial image, then the system processes the capture and validates the new facial parameters.
 
-- [ ] **AC3:** Given that the new facial parameters are valid, when the update is saved, then the system replaces the previous facial parameters with the new ones and reflects the changes in the system's behavior.
+- [ ] *AC3:* Given that the new facial parameters are valid, when the update is saved, then the system replaces the previous facial parameters with the new ones and reflects the changes in the system's behavior.
 
-- [ ] **AC4:** Given that the facial capture fails due to lighting, movement, or camera issues, when the update attempt is processed, then the system shows a clear error message and allows the user to retry.
+- [ ] *AC4:* Given that the facial capture fails due to lighting, movement, or camera issues, when the update attempt is processed, then the system shows a clear error message and allows the user to retry.
 
-- [ ] **AC5:** Given that the user is not registered or has not logged into the system, when the user attempts to update facial parameters, then the system denies access and shows a clear authentication error message.
+- [ ] *AC5:* Given that the user is not registered or has not logged into the system, when the user attempts to update facial parameters, then the system denies access and shows a clear authentication error message.
 
-- [ ] **AC6:** Given that the facial parameter update is successful, when the system processes the change, then the system shows a confirmation message and records an audit event containing the user, date, and time.
+- [ ] *AC6:* Given that the facial parameter update is successful, when the system processes the change, then the system shows a confirmation message and records an audit event containing the user, date, and time.
 
-- [ ] **AC7:** Given that the facial parameters are updated, when the user performs subsequent attendance registration, then the system uses the new facial parameters for recognition.
+- [ ] *AC7:* Given that the facial parameters are updated, when the user performs subsequent attendance registration, then the system uses the new facial parameters for recognition.
 
-- [ ] **AC8:** Given that an administrator requests a facial parameter update on behalf of another user, when the administrator has appropriate permissions, then the system allows the update and records the administrator's identity in the audit event.
+- [ ] *AC8:* Given that an administrator requests a facial parameter update on behalf of another user, when the administrator has appropriate permissions, then the system allows the update and records the administrator's identity in the audit event.
 
-- [ ] **AC9:** Given normal device, camera, and network conditions, when the user completes the facial parameter update, then the system responds in less than 5 seconds, according to RNF 1.
+- [ ] *AC9:* Given normal device, camera, and network conditions, when the user completes the facial parameter update, then the system responds in less than 5 seconds, according to RNF 1.
 
 ---
 
@@ -531,7 +531,7 @@
 - This story does not cover initial facial enrollment. That is handled in [HU-ATT-002](hu-att.md#hu-att-002-initial-facial-parameter-enrollment).
 - This story does not cover user activation/deactivation. That is handled in [HU-IAM-007](index.md#planned-stories-pending-documentation) or [HU-CONF-007](#hu-conf-007-iot-device-failure-alerts-management) depending on the SRS interpretation.
 
-**Responsible service(s):** Configuration service / Biometric service, proposed.  
+*Responsible service(s):* Configuration service / Biometric service, proposed.  
 **Endpoint(s) implemented:**  
 - `POST /api/v1/users/me/facial-parameters/update` — proposed, for self-service updates.  
 - `POST /api/v1/users/{userId}/facial-parameters/update` — proposed, for administrator-initiated updates.  
@@ -583,9 +583,9 @@
 
 ## Story
 
-**As** an administrator or supervisor  
-**I want** to receive alerts when IoT devices used for attendance registration experience failures  
-**So that** I can take timely corrective actions and maintain the availability of the attendance registration system.
+*As* an administrator or supervisor  
+*I want* to receive alerts when IoT devices used for attendance registration experience failures  
+*So that* I can take timely corrective actions and maintain the availability of the attendance registration system.
 
 ---
 
@@ -593,27 +593,27 @@
 
 > Format: "Given [context/initial state], when [user action], then [expected and verifiable result]."
 
-- [ ] **AC1:** Given that an IoT device registered in the system detects a failure (camera malfunction, connectivity loss, hardware error), when the failure is detected, then the system generates an alert and notifies the configured administrators or supervisors.
+- [ ] *AC1:* Given that an IoT device registered in the system detects a failure (camera malfunction, connectivity loss, hardware error), when the failure is detected, then the system generates an alert and notifies the configured administrators or supervisors.
 
-- [ ] **AC2:** Given that an IoT device failure alert is generated, when the administrator accesses the alert management module, then the system displays the alert with device information, failure type, date, and time.
+- [ ] *AC2:* Given that an IoT device failure alert is generated, when the administrator accesses the alert management module, then the system displays the alert with device information, failure type, date, and time.
 
-- [ ] **AC3:** Given that the administrator acknowledges the alert, when the acknowledgment is processed, then the system marks the alert as acknowledged and records the administrator's identity and timestamp.
+- [ ] *AC3:* Given that the administrator acknowledges the alert, when the acknowledgment is processed, then the system marks the alert as acknowledged and records the administrator's identity and timestamp.
 
-- [ ] **AC4:** Given that the administrator resolves the device failure, when the resolution is recorded, then the system marks the alert as resolved and updates the device status accordingly.
+- [ ] *AC4:* Given that the administrator resolves the device failure, when the resolution is recorded, then the system marks the alert as resolved and updates the device status accordingly.
 
-- [ ] **AC5:** Given that an IoT device reconnects or recovers automatically, when the system detects the recovery, then the system updates the device status and closes any open alerts associated with that device.
+- [ ] *AC5:* Given that an IoT device reconnects or recovers automatically, when the system detects the recovery, then the system updates the device status and closes any open alerts associated with that device.
 
-- [ ] **AC6:** Given that the user attempting to access the alert management module does not have administrator or supervisor permissions, when the request is processed, then the system denies access and records an unauthorized access attempt.
+- [ ] *AC6:* Given that the user attempting to access the alert management module does not have administrator or supervisor permissions, when the request is processed, then the system denies access and records an unauthorized access attempt.
 
-- [ ] **AC7:** Given normal network conditions, when the administrator accesses or manages IoT device alerts, then the system responds in less than 5 seconds, according to RNF 1.
+- [ ] *AC7:* Given normal network conditions, when the administrator accesses or manages IoT device alerts, then the system responds in less than 5 seconds, according to RNF 1.
 
-- [ ] **AC8:** Given that an IoT device failure alert is generated, when the operation is completed, then the system records an audit event containing the device, failure type, date, and time.
+- [ ] *AC8:* Given that an IoT device failure alert is generated, when the operation is completed, then the system records an audit event containing the device, failure type, date, and time.
 
 ---
 
 ## Technical notes
 
-- ⚠️ **SRS Inconsistency Note:** The SRS index lists RF 4.5 as "Gestión de alertas de fallos de dispositivos IoT" [IoT device failure alert management], but the detailed RF 4.5 section describes "Desactivar y reactivar usuarios" [Deactivate and reactivate users]. This story is documented based on the **index description** (IoT device failure alerts). The user activation/deactivation functionality is covered in [HU-IAM-007](index.md#planned-stories-pending-documentation) (RF 1.6). This inconsistency should be validated with the instructor.
+- ⚠️ *SRS Inconsistency Note:* The SRS index lists RF 4.5 as "Gestión de alertas de fallos de dispositivos IoT" [IoT device failure alert management], but the detailed RF 4.5 section describes "Desactivar y reactivar usuarios" [Deactivate and reactivate users]. This story is documented based on the *index description* (IoT device failure alerts). The user activation/deactivation functionality is covered in [HU-IAM-007](index.md#planned-stories-pending-documentation) (RF 1.6). This inconsistency should be validated with the instructor.
 - The IoT device failure alerts management should consider:
   - Device types: cameras, sensors, or other hardware used for attendance registration.
   - Failure types: connectivity loss, hardware malfunction, camera failure, low battery (if applicable).
@@ -628,7 +628,7 @@
 - This story does not cover user activation/deactivation. That is handled in [HU-IAM-007](index.md#planned-stories-pending-documentation).
 - The team must define the specific IoT device types and failure detection mechanisms.
 
-**Responsible service(s):** Configuration service / IoT monitoring service, proposed.  
+*Responsible service(s):* Configuration service / IoT monitoring service, proposed.  
 **Endpoint(s) implemented:**  
 - `GET /api/v1/iot-devices/alerts` — proposed, returns IoT device failure alerts.  
 - `PATCH /api/v1/iot-devices/alerts/{alertId}/acknowledge` — proposed, acknowledges an alert.  
@@ -684,9 +684,9 @@
 
 ## Story
 
-**As** an administrator  
-**I want** to configure which excuses or justifications are valid for supporting absences or delays  
-**So that** the justification evaluation process follows institutional criteria and ensures consistent treatment of all student cases.
+*As* an administrator  
+*I want* to configure which excuses or justifications are valid for supporting absences or delays  
+*So that* the justification evaluation process follows institutional criteria and ensures consistent treatment of all student cases.
 
 ---
 
@@ -694,30 +694,30 @@
 
 > Format: "Given [context/initial state], when [user action], then [expected and verifiable result]."
 
-- [ ] **AC1:** Given that an authenticated administrator accesses the delay and justification parametrization module, when the system loads the module, then it displays the list of currently configured valid justifications and the option to add, modify, or remove parameters.
+- [ ] *AC1:* Given that an authenticated administrator accesses the delay and justification parametrization module, when the system loads the module, then it displays the list of currently configured valid justifications and the option to add, modify, or remove parameters.
 
-- [ ] **AC2:** Given that the administrator adds a new valid justification parameter, when the save operation is submitted, then the system validates that the parameter does not already exist in the system and stores the new justification type.
+- [ ] *AC2:* Given that the administrator adds a new valid justification parameter, when the save operation is submitted, then the system validates that the parameter does not already exist in the system and stores the new justification type.
 
-- [ ] **AC3:** Given that the justification parameter already exists in the system, when the administrator attempts to add it again, then the system rejects the operation and shows a clear error message indicating that the parameter is already defined.
+- [ ] *AC3:* Given that the justification parameter already exists in the system, when the administrator attempts to add it again, then the system rejects the operation and shows a clear error message indicating that the parameter is already defined.
 
-- [ ] **AC4:** Given that the administrator modifies an existing justification parameter, when the changes are saved, then the system updates the parameter and reflects the changes in subsequent justification evaluations.
+- [ ] *AC4:* Given that the administrator modifies an existing justification parameter, when the changes are saved, then the system updates the parameter and reflects the changes in subsequent justification evaluations.
 
-- [ ] **AC5:** Given that the administrator removes a justification parameter, when the removal is confirmed, then the system deactivates the parameter and it is no longer considered valid for new justification evaluations.
+- [ ] *AC5:* Given that the administrator removes a justification parameter, when the removal is confirmed, then the system deactivates the parameter and it is no longer considered valid for new justification evaluations.
 
-- [ ] **AC6:** Given that the user attempting to access the parametrization module does not have administrator permissions, when the request is processed, then the system denies access and records an unauthorized access attempt.
+- [ ] *AC6:* Given that the user attempting to access the parametrization module does not have administrator permissions, when the request is processed, then the system denies access and records an unauthorized access attempt.
 
-- [ ] **AC7:** Given that a justification parameter is configured, when a student submits a justification in [HU-JUS-001](hu-jus.md#hu-jus-001-justification-support-upload), then the system uses the configured parameters to determine if the justification is valid during evaluation in [HU-JUS-002](hu-jus.md#hu-jus-002-justification-approval-and-rejection).
+- [ ] *AC7:* Given that a justification parameter is configured, when a student submits a justification in [HU-JUS-001](hu-jus.md#hu-jus-001-justification-support-upload), then the system uses the configured parameters to determine if the justification is valid during evaluation in [HU-JUS-002](hu-jus.md#hu-jus-002-justification-approval-and-rejection).
 
-- [ ] **AC8:** Given normal network conditions, when the administrator saves the parametrization changes, then the system responds in less than 5 seconds, according to RNF 1.
+- [ ] *AC8:* Given normal network conditions, when the administrator saves the parametrization changes, then the system responds in less than 5 seconds, according to RNF 1.
 
-- [ ] **AC9:** Given that a justification parameter is added, modified, or removed, when the operation is completed, then the system records an audit event containing the administrator, action type, parameter details, date, and time.
+- [ ] *AC9:* Given that a justification parameter is added, modified, or removed, when the operation is completed, then the system records an audit event containing the administrator, action type, parameter details, date, and time.
 
 ---
 
 ## Technical notes
 
 - RF 4.7 indicates that the system must validate that the configured parameter is not already defined in the system.
-- RF 4.7 specifies that this is an **administrator-only** operation for defining valid justifications.
+- RF 4.7 specifies that this is an *administrator-only* operation for defining valid justifications.
 - The justification parametrization should consider:
   - Justification type name (e.g., medical certificate, family emergency, institutional activity).
   - Whether a supporting document is required.
@@ -737,7 +737,7 @@
 - This story does not cover the justification evaluation process. That is handled in [HU-JUS-002](hu-jus.md#hu-jus-002-justification-approval-and-rejection).
 - This story does not cover delay detection. That is handled in [HU-ATT-001](hu-att.md#hu-att-001-facial-attendance-registration).
 
-**Responsible service(s):** Configuration service / Justification parametrization service, proposed.  
+*Responsible service(s):* Configuration service / Justification parametrization service, proposed.  
 **Endpoint(s) implemented:**  
 - `GET /api/v1/config/justifications` — proposed, returns configured justification parameters.  
 - `POST /api/v1/config/justifications` — proposed, adds a new justification parameter.  
