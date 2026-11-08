@@ -1,7 +1,7 @@
 # Domain: Configuration
 
-> **Owner:** Configuration bounded context
-> **DB Engine:** PostgreSQL 17 — key-value configuration storage with relational structure
+> *Owner:* Configuration bounded context
+> *DB Engine:* PostgreSQL 17 — key-value configuration storage with relational structure
 >
 > **Engine justification:**
 > - Configuration parameters require ACID transactions for safe updates.
@@ -13,13 +13,13 @@
 
 - Configuration is cross-cutting — it does not directly relate to User/Person.
 - `biometric_update_case` is the unified table for both facial and fingerprint update requests.
-- **Logical owner is Biometric (DBML v7):** this schema hosts it only transiently for Liquibase/service compatibility. See `06-biometric.md`.
+- *Logical owner is Biometric (DBML v7):* this schema hosts it only transiently for Liquibase/service compatibility. See `06-biometric.md`.
 
 ---
 
 ## 1. Table: academic_configuration
 
-**Purpose:** Configurable parameters per school that affect academic behavior.
+*Purpose:* Configurable parameters per school that affect academic behavior.
 
 ```sql
 CREATE TABLE academic_configuration (
@@ -65,7 +65,7 @@ CREATE UNIQUE INDEX uq_academic_configuration
 
 ## 2. Table: security_configuration
 
-**Purpose:** System-wide security configuration parameters (not per-school).
+*Purpose:* System-wide security configuration parameters (not per-school).
 
 ```sql
 CREATE TABLE security_configuration (
@@ -106,7 +106,7 @@ CREATE TABLE security_configuration (
 
 ## 3. Table: biometric_update_case — logical owner Biometric, physical host Configuration (transient)
 
-**Purpose:** Unified cases for requesting facial or fingerprint embedding updates.
+*Purpose:* Unified cases for requesting facial or fingerprint embedding updates.
 
 ```sql
 -- Native ENUMs (logical owner Biometric):

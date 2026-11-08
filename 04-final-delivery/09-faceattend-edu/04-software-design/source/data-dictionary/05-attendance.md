@@ -1,7 +1,7 @@
 # Domain: Attendance
 
-> **Owner:** Attendance bounded context
-> **DB Engine:** PostgreSQL 17 — ACID transactions, session-based attendance tracking
+> *Owner:* Attendance bounded context
+> *DB Engine:* PostgreSQL 17 — ACID transactions, session-based attendance tracking
 >
 > **Engine justification:**
 > - Attendance records require transactional integrity (one record per actor per session).
@@ -12,7 +12,7 @@
 
 ## Design Principles
 
-- Attendance has **NO** FK toward Scheduling or Academic.
+- Attendance has *NO* FK toward Scheduling or Academic.
 - `class_session_id` and `academic_actor_id` are external IDs.
 - Attendance can only be recorded while the associated session is `Open`.
 
@@ -20,7 +20,7 @@
 
 ## 1. Table: attendance_record
 
-**Purpose:** Individual attendance record of an academic_actor in a class_session.
+*Purpose:* Individual attendance record of an academic_actor in a class_session.
 
 ```sql
 -- Native ENUMs: CREATE TYPE attendance.attendance_status AS ENUM ('Present','Absent','Late','Justified');
@@ -81,7 +81,7 @@ CREATE INDEX idx_attendance_deleted ON attendance_record (deleted_at) WHERE dele
 
 ## 2. Table: justification_type
 
-**Purpose:** Catalog of justification types for absences.
+*Purpose:* Catalog of justification types for absences.
 
 ```sql
 CREATE TABLE justification_type (
@@ -134,7 +134,7 @@ CREATE INDEX idx_justification_type_school ON justification_type (school_id);
 
 ## 3. Table: justification
 
-**Purpose:** Justification request for a specific absence. Linked 1:1 to attendance_record.
+*Purpose:* Justification request for a specific absence. Linked 1:1 to attendance_record.
 
 ```sql
 -- Native ENUM: CREATE TYPE attendance.review_status AS ENUM ('Pending','Approved','Rejected');
@@ -193,7 +193,7 @@ CREATE INDEX idx_justification_reviewer ON justification (reviewed_by);
 
 ## 4. Table: supporting_document
 
-**Purpose:** Files attached to a justification (medical certificates, etc.).
+*Purpose:* Files attached to a justification (medical certificates, etc.).
 
 ```sql
 CREATE TABLE supporting_document (
@@ -220,7 +220,7 @@ CREATE INDEX idx_document_justification ON supporting_document (justification_id
 
 ## 5. Table: attendance_report (derived projection, outside 3NF core)
 
-> **Derived projection (JSONB, no FKs):** kept in the full model but outside the 3NF core. Cross-context ids are logical only.
+> *Derived projection (JSONB, no FKs):* kept in the full model but outside the 3NF core. Cross-context ids are logical only.
 
 ```sql
 CREATE TABLE attendance_report (

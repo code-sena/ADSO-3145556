@@ -1,9 +1,9 @@
 # Continuous integration
 
-- **Tested version:** `v1.7.0`, commit `07119ab7`, branch `main`.
-- **Run date:** November 4, 2026.
-- **Result:** all 13 jobs finished green.
-- **Evidence:** [CI run on GitHub Actions](https://github.com/Jonas7891/ProyectoFaceAttendEDU/actions/runs/41912162243).
+- *Tested version:* `v1.7.0`, commit `07119ab7`, branch `main`.
+- *Run date:* November 4, 2026.
+- *Result:* all 13 jobs finished green.
+- *Evidence:* [CI run on GitHub Actions](https://github.com/Jonas7891/ProyectoFaceAttendEDU/actions/runs/41912162243).
 
 | Component | Technology | Total | Passed | Failed | Skipped |
 |---|---|---|---|---|---|
@@ -19,7 +19,7 @@
 | 06-ms-biometric | Python / pytest | 213 | 213 | 0 | 0 |
 | Web | Expo / Jest | 998 | 909 | 0 | 89 |
 | Mobile | Expo / Jest | 614 | 614 | 0 | 0 |
-| **Total** | | **3322** | **3217** | **0** | **105** |
+| Total | | 3322 | 3217 | 0 | 105 |
 
 The `openapi / drift` job also finished green. It is not in the table because it compares contracts and does not report a test count.
 
@@ -27,10 +27,10 @@ The totals come from the logs of that run. For the Java services, the passed col
 
 # End-to-end flows
 
-- **Workflow:** `E2E flujos MVP`.
-- **Tested commit:** `b67a5933`, from November 2, 2026.
-- **Result:** finished green.
-- **Evidence:** [E2E run on GitHub Actions](https://github.com/Jonas7891/ProyectoFaceAttendEDU/actions/runs/41507144757).
+- *Workflow:* `E2E flujos MVP`.
+- *Tested commit:* `b67a5933`, from November 2, 2026.
+- *Result:* finished green.
+- *Evidence:* [E2E run on GitHub Actions](https://github.com/Jonas7891/ProyectoFaceAttendEDU/actions/runs/41507144757).
 
 This run predates `v1.7.0`. It is the most recent E2E run on `main` at the time of this delivery.
 

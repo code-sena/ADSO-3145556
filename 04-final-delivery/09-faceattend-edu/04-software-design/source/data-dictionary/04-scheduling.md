@@ -1,7 +1,7 @@
 # Domain: Scheduling
 
-> **Owner:** Scheduling bounded context
-> **DB Engine:** PostgreSQL 17 — ACID transactions, conflict prevention for room/instructor booking
+> *Owner:* Scheduling bounded context
+> *DB Engine:* PostgreSQL 17 — ACID transactions, conflict prevention for room/instructor booking
 >
 > **Engine justification:**
 > - Unique constraints on (environment, day, time) and (instructor, day, time) prevent double-booking.
@@ -19,7 +19,7 @@
 
 ## 1. Table: environment
 
-**Purpose:** Physical spaces where classes are held (classrooms, labs, auditoriums).
+*Purpose:* Physical spaces where classes are held (classrooms, labs, auditoriums).
 
 ```sql
 CREATE TABLE environment (
@@ -68,7 +68,7 @@ CREATE UNIQUE INDEX uq_environment_code_school ON environment (school_id, code);
 
 ## 2. Table: schedule_block
 
-**Purpose:** A recurring time slot in the timetable (e.g., "Calculus I, Mondays 8:00-9:30, Room 101").
+*Purpose:* A recurring time slot in the timetable (e.g., "Calculus I, Mondays 8:00-9:30, Room 101").
 
 ```sql
 CREATE TABLE schedule_block (
@@ -132,7 +132,7 @@ CREATE INDEX idx_block_course ON schedule_block (course_id);
 
 ## 3. Table: class_session
 
-**Purpose:** A real occurrence of a schedule_block on a specific date. Opened/closed by the instructor.
+*Purpose:* A real occurrence of a schedule_block on a specific date. Opened/closed by the instructor.
 
 ```sql
 -- Native ENUM: CREATE TYPE scheduling.class_session_status AS ENUM ('Open','Closed','Cancelled');

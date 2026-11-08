@@ -16,7 +16,7 @@ keywords:
 
 The architectural design of FaceAttendEDU represents the translation of functional and non-functional requirements into a robust technical structure. Unlike the software analysis, which defines the "what" and "why", this document focuses on the "how": code organization, data management, communication between components, and technology selection.
 
-The system has been conceived under a **polyglot microservice architecture** (organized in a monorepo), where each service is deployed independently with its own bounded context, allowing the coexistence of multiple programming languages based on technical needs (Java, TypeScript, and Python).
+The system has been conceived under a *polyglot microservice architecture* (organized in a monorepo), where each service is deployed independently with its own bounded context, allowing the coexistence of multiple programming languages based on technical needs (Java, TypeScript, and Python).
 
 ## Document Objective
 To provide a detailed and formal description of the system architecture, the applied design patterns, and the data model, establishing the technical base for implementation, deployment, and software evolution.
@@ -27,25 +27,25 @@ This document covers the back-end services architecture, the front-end structure
 # Architectural Model
 
 ## Hexagonal Architecture (Ports and Adapters)
-FaceAttendEDU implements **Hexagonal Architecture**, whose primary goal is to isolate the business logic (the core) from external technologies (frameworks, databases, APIs). This separation ensures that the system is testable and that changes in the infrastructure do not affect the business rules.
+FaceAttendEDU implements *Hexagonal Architecture*, whose primary goal is to isolate the business logic (the core) from external technologies (frameworks, databases, APIs). This separation ensures that the system is testable and that changes in the infrastructure do not affect the business rules.
 
 The internal structure of each service is divided into three main layers:
 
 ### 1. Domain Layer (The Core)
 The center of the hexagon and the most stable part of the system.
-- **Entities and Value Objects**: Represent business concepts (e.g., `User`, `AttendanceRecord`).
-- **Ports**: Interfaces that define how the domain interacts with the outside. There are input ports (for use cases) and output ports (for persistence or external services).
-- **Business Rules**: Pure logic that does not depend on any external library.
+- *Entities and Value Objects*: Represent business concepts (e.g., `User`, `AttendanceRecord`).
+- *Ports*: Interfaces that define how the domain interacts with the outside. There are input ports (for use cases) and output ports (for persistence or external services).
+- *Business Rules*: Pure logic that does not depend on any external library.
 
 ### 2. Application Layer
 Acts as the system orchestrator.
-- **Use Cases**: Implement the application logic. They receive data from input adapters, coordinate the domain, and return a response.
-- **Orchestration**: They do not contain complex business rules but instead direct the data flow between the domain and infrastructure.
+- *Use Cases*: Implement the application logic. They receive data from input adapters, coordinate the domain, and return a response.
+- *Orchestration*: They do not contain complex business rules but instead direct the data flow between the domain and infrastructure.
 
 ### 3. Infrastructure Layer (Adapters)
 Contains the concrete implementations of the ports.
-- **Input Adapters (Driving Adapters)**: REST Controllers (Spring Boot, FastAPI, etc.) that receive HTTP requests and translate them into use case calls.
-- **Output Adapters (Driven Adapters)**: Persistence implementations (JPA, MongoDB, pg) that translate domain needs into database queries.
+- *Input Adapters (Driving Adapters)*: REST Controllers (Spring Boot, FastAPI, etc.) that receive HTTP requests and translate them into use case calls.
+- *Output Adapters (Driven Adapters)*: Persistence implementations (JPA, MongoDB, pg) that translate domain needs into database queries.
 
 ## Information Flow
 A typical request flow follows this route:
@@ -56,19 +56,19 @@ A typical request flow follows this route:
 To ensure code quality and ease of maintenance, the following patterns have been applied (International Organization for Standardization & International Electrotechnical Commission [ISO & IEC], 2011):
 
 ## Structural and Behavioral Patterns
-- **Repository Pattern**: Used to abstract the data layer. The domain defines an interface (port) and the infrastructure implements it, allowing the database to be changed without affecting the business logic.
-- **Use Case / Interactor**: Each system functionality is encapsulated in a unique use case class, facilitating traceability and unit testing.
-- **Data Transfer Object (DTO)**: Specific objects are used for data transport between the API and the application, avoiding exposing domain entities directly to the client.
-- **Mapper Pattern**: Components responsible for transforming domain entities into DTOs and vice versa, maintaining the purity of the domain layer.
-- **API Gateway**: Implemented using **Kong 3.6**, centralizing routing, rate limiting, CORS and edge authentication: a Lua *pre-function* requires `Authorization: Bearer <sessionId>` (opaque UUID, not a JWT) and validates it against ms-identity (`GET /api/v1/sessions/{id}`, 10 s cache). Permission checks are evaluated in each microservice.
+- *Repository Pattern*: Used to abstract the data layer. The domain defines an interface (port) and the infrastructure implements it, allowing the database to be changed without affecting the business logic.
+- *Use Case / Interactor*: Each system functionality is encapsulated in a unique use case class, facilitating traceability and unit testing.
+- *Data Transfer Object (DTO)*: Specific objects are used for data transport between the API and the application, avoiding exposing domain entities directly to the client.
+- *Mapper Pattern*: Components responsible for transforming domain entities into DTOs and vice versa, maintaining the purity of the domain layer.
+- *API Gateway*: Implemented using *Kong 3.6*, centralizing routing, rate limiting, CORS and edge authentication: a Lua *pre-function* requires `Authorization: Bearer <sessionId>` (opaque UUID, not a JWT) and validates it against ms-identity (`GET /api/v1/sessions/{id}`, 10 s cache). Permission checks are evaluated in each microservice.
 
 ## Data and Messaging Patterns
-- **Database-per-Service**: Each microservice has its own PostgreSQL schema, eliminating physical dependencies (FKs) between contexts and ensuring loose coupling.
-- **Event-Driven Architecture (EDA)**: Use of **Apache Kafka** for asynchronous communication. Services publish domain events (e.g., `attendance-events`) that can be consumed by other modules in the future.
-- **Polyglot Persistence**: Selection of the database based on the data type:
-    - **PostgreSQL**: For structured and relational data.
-    - **MongoDB**: For storing biometric embeddings (facial and fingerprint vectors).
-    - **Redis**: For caching and traffic control in the Gateway.
+- *Database-per-Service*: Each microservice has its own PostgreSQL schema, eliminating physical dependencies (FKs) between contexts and ensuring loose coupling.
+- *Event-Driven Architecture (EDA)*: Use of *Apache Kafka* for asynchronous communication. Services publish domain events (e.g., `attendance-events`) that can be consumed by other modules in the future.
+- *Polyglot Persistence*: Selection of the database based on the data type:
+    - *PostgreSQL*: For structured and relational data.
+    - *MongoDB*: For storing biometric embeddings (facial and fingerprint vectors).
+    - *Redis*: For caching and traffic control in the Gateway.
 
 # Data Model
 
@@ -76,14 +76,14 @@ The system uses a distributed data architecture based on logical schemas linked 
 
 ## Main Entities and Relationships
 ### Identity and Authorization Context
-- **User**: Central entity linked to credentials and sessions.
-- **Role & Permission**: Implementation of **RBAC (Role-Based Access Control)**. A role groups multiple permissions, and a user can have one or more roles.
+- *User*: Central entity linked to credentials and sessions.
+- *Role & Permission*: Implementation of *RBAC (Role-Based Access Control)*. A role groups multiple permissions, and a user can have one or more roles.
 
 ### Academic and Attendance Context
-- **Academic Actor**: Represents the relationship between a person and their role in the school (student, instructor).
-- **Course (Ficha) & Program**: Hierarchical structure of the academic offer.
-- **Attendance Record**: Registers entry/exit, linking the user, the IoT device, and the timestamp.
-- **Justification**: Entity linked to an attendance record, allowing the upload of digital supporting documents.
+- *Academic Actor*: Represents the relationship between a person and their role in the school (student, instructor).
+- *Course (Ficha) & Program*: Hierarchical structure of the academic offer.
+- *Attendance Record*: Registers entry/exit, linking the user, the IoT device, and the timestamp.
+- *Justification*: Entity linked to an attendance record, allowing the upload of digital supporting documents.
 
 ## Persistence Strategy
 | Data Type | Technology | Justification |
@@ -99,26 +99,26 @@ The success of the FaceAttendEDU project is based on a technological selection o
 ## Technological Stack
 | Component | Technology | Version | Purpose |
 |---|---|---|---|
-| **Backend (Core)** | Java / Spring Boot | 21 / 4.1.2 | Identity and authorization services. |
-| **Backend (Biometrics)** | Python / FastAPI | 3.12 / 0.162 | Biometric vector processing. |
-| **Backend (Notifications)** | TypeScript / Fastify (Node.js) | 5.4 / 5.12 (Node 24) | High concurrency in alerts (async I/O). |
-| **Backend (TS)** | TypeScript / Fastify | 5.4 / 5.12 (Node 24) | Lightweight and fast services. |
-| **Frontend** | React Native / Expo | RN 0.86 / Expo 57 | Multiplatform mobile app. |
-| **Gateway** | Kong | 3.6 | API Orchestration and Security. |
-| **Messaging** | Apache Kafka | 3.8.0 | Asynchronous communication. |
-| **Migrations** | Liquibase | 4.29.0 | Database version control. |
+| Backend (Core) | Java / Spring Boot | 21 / 4.1.2 | Identity and authorization services. |
+| Backend (Biometrics) | Python / FastAPI | 3.12 / 0.162 | Biometric vector processing. |
+| Backend (Notifications) | TypeScript / Fastify (Node.js) | 5.4 / 5.12 (Node 24) | High concurrency in alerts (async I/O). |
+| Backend (TS) | TypeScript / Fastify | 5.4 / 5.12 (Node 24) | Lightweight and fast services. |
+| Frontend | React Native / Expo | RN 0.86 / Expo 57 | Multiplatform mobile app. |
+| Gateway | Kong | 3.6 | API Orchestration and Security. |
+| Messaging | Apache Kafka | 3.8.0 | Asynchronous communication. |
+| Migrations | Liquibase | 4.29.0 | Database version control. |
 
 ## Technical Success Factors
-1. **Total Decoupling**: Thanks to Hexagonal Architecture, the system can evolve its frameworks without rewriting the business logic.
-2. **Robust Security**: Opaque sessions (`sessionId` UUID persisted in `identity.user_session`) are validated twice: at Kong and again in each microservice (session against ms-identity and permissions against ms-authorization), so no request reaches business logic without being validated.
-3. **Polyglot Persistence**: The use of MongoDB for biometrics and PostgreSQL for administration optimizes performance according to the nature of the data.
-4. **Modular Scalability**: The microservices structure allows independent scaling of the attendance module (high load) and the configuration module (low load).
+1. *Total Decoupling*: Thanks to Hexagonal Architecture, the system can evolve its frameworks without rewriting the business logic.
+2. *Robust Security*: Opaque sessions (`sessionId` UUID persisted in `identity.user_session`) are validated twice: at Kong and again in each microservice (session against ms-identity and permissions against ms-authorization), so no request reaches business logic without being validated.
+3. *Polyglot Persistence*: The use of MongoDB for biometrics and PostgreSQL for administration optimizes performance according to the nature of the data.
+4. *Modular Scalability*: The microservices structure allows independent scaling of the attendance module (high load) and the configuration module (low load).
 
 # Conclusions
 
 The architectural design of FaceAttendEDU is not just a technical choice, but a strategy to mitigate the risks identified in the analysis phase. The adoption of Hexagonal Architecture and DDD allows the system to be resilient to change and easy to audit. The combination of specialized languages (Java for robustness, Python for biometrics, TypeScript for lightweight services) ensures that each component is implemented with the most efficient tool for its purpose.
 
-**Author's Note.** Jonas is the author and technical lead of the architectural design. Technical correspondence can be directed to jonas@consultoria.example.
+*Author's Note.* Jonas is the author and technical lead of the architectural design. Technical correspondence can be directed to jonas@consultoria.example.
 
 # References
 

@@ -1,7 +1,7 @@
 # Domain: Identity
 
-> **Owner:** Identity bounded context
-> **DB Engine:** PostgreSQL 17 — ACID transactions, relational integrity, multi-tenant isolation
+> *Owner:* Identity bounded context
+> *DB Engine:* PostgreSQL 17 — ACID transactions, relational integrity, multi-tenant isolation
 >
 > **Engine justification:**
 > - Strong relational guarantees for person-user relationships.
@@ -13,7 +13,7 @@
 
 ## 1. Table: city — DEPRECATED (legacy, still deployed)
 
-> **Deprecated:** `identity.city` was removed from the relational model — cities come from the
+> *Deprecated:* `identity.city` was removed from the relational model — cities come from the
 > external API `countriesnow.space` (see `academic.school.city_id`). The table is still created
 > by `01-ms-identity-db/01-ddl/03-tables/001-create-city-table.yaml` and Kong still routes
 > `GET/POST/PUT/DELETE /api/v1/cities` to `ms-identity` (marked `deprecated: true` in
@@ -25,7 +25,7 @@
 
 ## 2. Table: person
 
-**Purpose:** Generic record of any person in the system (student, instructor, admin, etc.).
+*Purpose:* Generic record of any person in the system (student, instructor, admin, etc.).
 
 ```sql
 CREATE TABLE person (
@@ -96,7 +96,7 @@ CREATE INDEX idx_person_deleted ON person (deleted_at) WHERE deleted_at IS NULL;
 
 ## 3. Table: app_user
 
-**Purpose:** Login credentials and authentication record. Linked 1:1 with Person.
+*Purpose:* Login credentials and authentication record. Linked 1:1 with Person.
 
 ```sql
 -- Native ENUM: CREATE TYPE identity.authentication_type AS ENUM ('Local','Windows','External');
@@ -151,7 +151,7 @@ CREATE UNIQUE INDEX uq_user_username ON app_user (username);
 
 ## 4. Table: user_session
 
-**Purpose:** Record of each user login session.
+*Purpose:* Record of each user login session.
 
 ```sql
 -- Native ENUM: CREATE TYPE identity.user_session_status AS ENUM ('Active','Closed');
@@ -202,7 +202,7 @@ CREATE INDEX idx_session_status ON user_session (session_status);
 
 ## 5. Table: password_policy
 
-**Purpose:** System password policy (complexity requirements, expiration).
+*Purpose:* System password policy (complexity requirements, expiration).
 
 ```sql
 CREATE TABLE password_policy (

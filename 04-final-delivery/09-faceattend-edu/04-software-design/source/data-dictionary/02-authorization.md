@@ -1,7 +1,7 @@
 # Domain: Authorization
 
-> **Owner:** Authorization bounded context
-> **DB Engine:** PostgreSQL 17 — ACID transactions, relational integrity for role-permission associations
+> *Owner:* Authorization bounded context
+> *DB Engine:* PostgreSQL 17 — ACID transactions, relational integrity for role-permission associations
 >
 > **Engine justification:**
 > - M:N relationships between roles, permissions, and users require relational integrity.
@@ -11,15 +11,15 @@
 
 ## Design Principles
 
-- Authorization does **NOT** depend directly on Person.
+- Authorization does *NOT* depend directly on Person.
 - `user_id` acts as an external reference to the Identity context.
-- Roles are **global** (no `school_id`) — the same role structure applies to all schools.
+- Roles are *global* (no `school_id`) — the same role structure applies to all schools.
 
 ---
 
 ## 1. Table: role
 
-**Purpose:** Definition of available roles in the system (e.g., Admin, Instructor, Student).
+*Purpose:* Definition of available roles in the system (e.g., Admin, Instructor, Student).
 
 ```sql
 CREATE TABLE role (
@@ -62,7 +62,7 @@ CREATE TABLE role (
 
 ## 2. Table: permission
 
-**Purpose:** Global catalog of permissions available in the system.
+*Purpose:* Global catalog of permissions available in the system.
 
 ```sql
 CREATE TABLE permission (
@@ -101,7 +101,7 @@ CREATE TABLE permission (
 
 ## 3. Table: role_permission
 
-**Purpose:** Association between roles and permissions.
+*Purpose:* Association between roles and permissions.
 
 ```sql
 CREATE TABLE role_permission (
@@ -147,7 +147,7 @@ ALTER TABLE role_permission ADD CONSTRAINT fk_rp_permission
 
 ## 4. Table: user_role
 
-**Purpose:** Assignment of roles to specific users.
+*Purpose:* Assignment of roles to specific users.
 
 ```sql
 CREATE TABLE user_role (
@@ -188,7 +188,7 @@ ALTER TABLE user_role ADD CONSTRAINT fk_ur_role
 | row_version | BIGINT | Optimistic lock version counter | `1` |
 
 **Modeling decisions:**
-1. `user_id` is an external reference (UUID from Identity.app_user) — **no physical FK** to respect bounded context isolation.
+1. `user_id` is an external reference (UUID from Identity.app_user) — *no physical FK* to respect bounded context isolation.
 2. A user can have multiple roles (M:N).
 
 ---

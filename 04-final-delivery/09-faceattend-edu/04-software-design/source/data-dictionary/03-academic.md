@@ -1,7 +1,7 @@
 # Domain: Academic
 
-> **Owner:** Academic bounded context
-> **DB Engine:** PostgreSQL 17 — ACID transactions, complex relationships, enrollment management
+> *Owner:* Academic bounded context
+> *DB Engine:* PostgreSQL 17 — ACID transactions, complex relationships, enrollment management
 >
 > **Engine justification:**
 > - Complex relational model with multiple FKs for school-program-cohort-course hierarchy.
@@ -19,7 +19,7 @@
 
 ## 1. Table: school
 
-**Purpose:** Institutional record of each school in the multi-tenant platform.
+*Purpose:* Institutional record of each school in the multi-tenant platform.
 
 ```sql
 CREATE TABLE school (
@@ -82,7 +82,7 @@ CREATE TABLE school (
 
 ## 2. Table: program
 
-**Purpose:** Academic programs offered by a school (e.g., Engineering, Medicine).
+*Purpose:* Academic programs offered by a school (e.g., Engineering, Medicine).
 
 ```sql
 CREATE TABLE program (
@@ -129,7 +129,7 @@ CREATE UNIQUE INDEX uq_program_code_school ON program (school_id, code);
 
 ## 3. Table: academic_period
 
-**Purpose:** Academic periods (semesters, trimesters).
+*Purpose:* Academic periods (semesters, trimesters).
 
 ```sql
 CREATE TABLE academic_period (
@@ -180,7 +180,7 @@ CREATE UNIQUE INDEX uq_period_name_school ON academic_period (school_id, name);
 
 ## 4. Table: cohort
 
-**Purpose:** A group of students enrolled in a program for a specific period.
+*Purpose:* A group of students enrolled in a program for a specific period.
 
 ```sql
 CREATE TABLE cohort (
@@ -225,7 +225,7 @@ CREATE TABLE cohort (
 
 ## 5. Table: course
 
-**Purpose:** Courses within a program, with credit hours.
+*Purpose:* Courses within a program, with credit hours.
 
 ```sql
 CREATE TABLE course (
@@ -274,7 +274,7 @@ CREATE UNIQUE INDEX uq_course_code_program ON course (program_id, code);
 
 ## 6. Table: academic_actor_type
 
-**Purpose:** Catalog of academic actor types (STUDENT, INSTRUCTOR).
+*Purpose:* Catalog of academic actor types (STUDENT, INSTRUCTOR).
 
 ```sql
 CREATE TABLE academic_actor_type (
@@ -313,7 +313,7 @@ CREATE TABLE academic_actor_type (
 
 ## 7. Table: academic_actor
 
-**Purpose:** Unified table for students and instructors. Replaces separate Student/Teacher tables.
+*Purpose:* Unified table for students and instructors. Replaces separate Student/Teacher tables.
 
 ```sql
 CREATE TABLE academic_actor (
@@ -375,7 +375,7 @@ CREATE INDEX idx_actor_deleted ON academic_actor (deleted_at) WHERE deleted_at I
 
 ## 8. Table: enrollment
 
-**Purpose:** Enrollment of an academic_actor in a cohort.
+*Purpose:* Enrollment of an academic_actor in a cohort.
 
 ```sql
 -- Native ENUM: CREATE TYPE academic.enrollment_status AS ENUM ('Active','Withdrawn','Completed');

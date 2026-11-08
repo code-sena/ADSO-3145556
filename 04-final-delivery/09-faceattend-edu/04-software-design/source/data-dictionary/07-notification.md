@@ -1,7 +1,7 @@
 # Domain: Notification
 
-> **Owner:** Notification bounded context
-> **DB Engine:** PostgreSQL 17 — ACID transactions, alert lifecycle management
+> *Owner:* Notification bounded context
+> *DB Engine:* PostgreSQL 17 — ACID transactions, alert lifecycle management
 >
 > **Engine justification:**
 > - Alerts require reliable state tracking (raised → resolved).
@@ -18,7 +18,7 @@
 
 ## 1. Table: alert_type
 
-**Purpose:** Catalog of alert types (e.g., absence threshold reached, schedule conflict).
+*Purpose:* Catalog of alert types (e.g., absence threshold reached, schedule conflict).
 
 ```sql
 CREATE TABLE alert_type (
@@ -61,7 +61,7 @@ CREATE TABLE alert_type (
 
 ## 2. Table: alert
 
-**Purpose:** An alert raised for an academic_actor.
+*Purpose:* An alert raised for an academic_actor.
 
 ```sql
 CREATE TABLE alert (

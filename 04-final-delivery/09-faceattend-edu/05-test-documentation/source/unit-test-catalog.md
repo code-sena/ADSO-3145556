@@ -18,7 +18,7 @@ keywords:
 
 This set of unit tests protects the transactional and security core of FaceAttendEDU. It focuses on validating the correct implementation of the RBAC model, the robustness of the authentication flow (including account lockout and session rotation), the prevention of overlaps in academic scheduling, and the integrity of attendance records. Additionally, it mitigates critical security risks through the validation of liveness logic and access control in the biometric service.
 
-**Keywords:** JUnit 5, Pytest, Mockito, RBAC, Biometrics, Traceability.
+*Keywords:* JUnit 5, Pytest, Mockito, RBAC, Biometrics, Traceability.
 
 # Introduction
 
@@ -46,15 +46,15 @@ This documents all unit tests for the services: `ms-identity`, `ms-authorization
 
 # Conventions Applied in this Module
 
-The **AAA (Arrange-Act-Assert)** structure and the **Given-When-Then** pattern are used for scenario writing. Identifier language is English, while result documentation is in English. `@Tags` are implemented in JUnit to categorize tests by requirement.
+The *AAA (Arrange-Act-Assert)* structure and the *Given-When-Then* pattern are used for scenario writing. Identifier language is English, while result documentation is in English. `@Tags` are implemented in JUnit to categorize tests by requirement.
 
 # Catalog of Documented Unit Tests
 
 ## 01-ms-identity: Authentication and Security
 
 ### AuthenticateUserUseCaseImpl - Successful Login
-- **Traceability Block:** `@requirement(ERF_1_3) @tags(Security, HappyPath)`
-- **Test Code:** 
+- *Traceability Block:* `@requirement(ERF_1_3) @tags(Security, HappyPath)`
+- *Test Code:* 
 ```java
 @Test
 void shouldStartSessionWhenCredentialsAreValid() {
@@ -70,12 +70,12 @@ void shouldStartSessionWhenCredentialsAreValid() {
     verify(sessionRepository).save(any());
 }
 ```
-- **Expected Result:** The system validates credentials and returns a `UserSessionDto` with an active session ID.
-- **Edge Case Covered:** Not applicable (happy path).
+- *Expected Result:* The system validates credentials and returns a `UserSessionDto` with an active session ID.
+- *Edge Case Covered:* Not applicable (happy path).
 
 ### AuthenticateUserUseCaseImpl - Lockout due to Failed Attempts
-- **Traceability Block:** `@requirement(ERF_1_3) @tags(Security, EdgeCase)`
-- **Test Code:** 
+- *Traceability Block:* `@requirement(ERF_1_3) @tags(Security, EdgeCase)`
+- *Test Code:* 
 ```java
 @Test
 void shouldLockAccountAfterFiveFailedAttempts() {
@@ -88,14 +88,14 @@ void shouldLockAccountAfterFiveFailedAttempts() {
         .hasMessageContaining("blocked for 30 minutes");
 }
 ```
-- **Expected Result:** The system throws an account locked exception upon reaching the limit of 5 attempts.
-- **Edge Case Covered:** Attempt to access an already locked account.
+- *Expected Result:* The system throws an account locked exception upon reaching the limit of 5 attempts.
+- *Edge Case Covered:* Attempt to access an already locked account.
 
 ## 02-ms-authorization: Access Control (RBAC)
 
 ### CheckPermissionUseCase - Permission Verification
-- **Traceability Block:** `@requirement(ERF_1_1_2) @tags(RBAC, HappyPath)`
-- **Test Code:** 
+- *Traceability Block:* `@requirement(ERF_1_1_2) @tags(RBAC, HappyPath)`
+- *Test Code:* 
 ```java
 @Test
 void shouldAllowAccessWhenUserHasPermissionViaRole() {
@@ -111,14 +111,14 @@ void shouldAllowAccessWhenUserHasPermissionViaRole() {
     assertThat(allowed).isTrue();
 }
 ```
-- **Expected Result:** The system returns `true` if the user possesses the permission through any of their assigned roles.
-- **Edge Case Covered:** User with multiple roles where only one grants the permission.
+- *Expected Result:* The system returns `true` if the user possesses the permission through any of their assigned roles.
+- *Edge Case Covered:* User with multiple roles where only one grants the permission.
 
 ## 04-ms-scheduling: Academic Scheduling
 
 ### CreateScheduleBlockUseCase - Overlap Prevention
-- **Traceability Block:** `@requirement(ERF_2_3_2) @tags(Scheduling, EdgeCase)`
-- **Test Code:** 
+- *Traceability Block:* `@requirement(ERF_2_3_2) @tags(Scheduling, EdgeCase)`
+- *Test Code:* 
 ```java
 @Test
 void shouldThrowExceptionWhenRoomIsBusy() {
@@ -131,14 +131,14 @@ void shouldThrowExceptionWhenRoomIsBusy() {
         .isInstanceOf(ScheduleOverlapException.class);
 }
 ```
-- **Expected Result:** The system prevents the creation of a time block if the room is already occupied in that range.
-- **Edge Case Covered:** Partial overlap of schedules (start in the middle of another block).
+- *Expected Result:* The system prevents the creation of a time block if the room is already occupied in that range.
+- *Edge Case Covered:* Partial overlap of schedules (start in the middle of another block).
 
 ## 06-ms-biometric: Facial Processing
 
 ### Facial Image Endpoints - Liveness Failure
-- **Traceability Block:** `@requirement(ERF_3_1_1) @tags(Biometrics, Security)`
-- **Test Code:** 
+- *Traceability Block:* `@requirement(ERF_3_1_1) @tags(Biometrics, Security)`
+- *Test Code:* 
 ```python
 def test_identify_fails_when_liveness_is_rejected():
     # Arrange
@@ -152,8 +152,8 @@ def test_identify_fails_when_liveness_is_rejected():
     assert response.status_code == 400
     assert "Liveness check failed" in response.json()["error"]
 ```
-- **Expected Result:** The system rejects identification if the liveness algorithm detects it is a photograph or screen.
-- **Edge Case Covered:** Presentation attack (Spoofing).
+- *Expected Result:* The system rejects identification if the liveness algorithm detects it is a photograph or screen.
+- *Edge Case Covered:* Presentation attack (Spoofing).
 
 # Test Doubles and Data
 
@@ -163,7 +163,7 @@ def test_identify_fails_when_liveness_is_rejected():
 | `SessionRepository` | Redis / DB | Fake (InMemory) | Execution speed and predictable state | Key-value storage |
 | `LivenessService` | Biometric API | Mock (Monkeypatch) | Avoid costly image processing in unit tests | Boolean (Pass/Fail) |
 
-**Test Data:** Random UUID generators and fixed seeds for biometric vectors are used in Python tests to ensure reproducibility. No real user data is used.
+*Test Data:* Random UUID generators and fixed seeds for biometric vectors are used in Python tests to ensure reproducibility. No real user data is used.
 
 # Coverage and Exclusions
 
@@ -198,7 +198,7 @@ A preventive action has been opened in `QMS-SW-CAPA-001` to implement mutation t
 
 The unit testing suite implemented covers the critical paths of FaceAttendEDU, especially in the security and biometrics modules. Severe risks such as identity impersonation and privilege escalation have been successfully mitigated. Remaining gaps lie in the integration with external services (Kafka), which will be covered in the next phase of integration testing.
 
-**Author's Note.** Diego Andres Gutierrez Nuñez is responsible for the execution and validation of these tests.
+*Author's Note.* Diego Andres Gutierrez Nuñez is responsible for the execution and validation of these tests.
 
 # References
 

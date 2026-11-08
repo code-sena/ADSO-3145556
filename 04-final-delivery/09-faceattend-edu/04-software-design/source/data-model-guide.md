@@ -2,7 +2,7 @@
 
 ## 1. Overview
 
-FaceAttend-Edu is an **attendance management platform based on biometric recognition** for educational institutions. The data model supports:
+FaceAttend-Edu is an *attendance management platform based on biometric recognition* for educational institutions. The data model supports:
 
 - Management of people, users, and credentials
 - Academic structure (campuses, programs, periods, cohorts, courses, actors, and enrollments)
@@ -10,10 +10,10 @@ FaceAttend-Edu is an **attendance management platform based on biometric recogni
 - Attendance recording from multiple sources (facial, manual, IoT, import)
 - Justifications with document support
 - Biometric template updates with an approval workflow (`biometric_update_case` unifies FACIAL/FINGERPRINT)
-- Biometric templates (facial and fingerprint) stored as **NoSQL collections in MongoDB**
+- Biometric templates (facial and fingerprint) stored as *NoSQL collections in MongoDB*
 - Alerts and notifications
 - Academic and security configuration
-- Quality evaluation of the microservices (ISO/IEC 25010, ISO/IEC 29110, ISTQB) — **Quality** context
+- Quality evaluation of the microservices (ISO/IEC 25010, ISO/IEC 29110, ISTQB) — *Quality* context
 
 ---
 
@@ -109,7 +109,7 @@ Consequently, the model comprises 9 business bounded contexts, although QUALITY 
 
 ## 3. Context: Identity
 
-**Responsibility:** Identity of people, access credentials, sessions, and password policies.
+*Responsibility:* Identity of people, access credentials, sessions, and password policies.
 
 | Table | Description | PK |
 |---|---|---|
@@ -122,15 +122,15 @@ Consequently, the model comprises 9 business bounded contexts, although QUALITY 
 - `app_user.person_id` → `person.person_id`
 - `user_session.user_id` → `app_user.user_id`
 
-**Key design:** `person` **does not have** `school_id`. Identity is campus-agnostic.
+*Key design:* `person` *does not have* `school_id`. Identity is campus-agnostic.
 
-> **Historical note:** the `city` table existed in this context but was **removed** (changeset `008-drop-city-table.yaml`). The geographic reference to a city is now resolved through an external catalog (countriesnow API), with no FK or dedicated table.
+> *Historical note:* the `city` table existed in this context but was *removed* (changeset `008-drop-city-table.yaml`). The geographic reference to a city is now resolved through an external catalog (countriesnow API), with no FK or dedicated table.
 
 ---
 
 ## 4. Context: Authorization
 
-**Responsibility:** Role-based access control (RBAC).
+*Responsibility:* Role-based access control (RBAC).
 
 | Table | Description | PK |
 |---|---|---|
@@ -142,13 +142,13 @@ Consequently, the model comprises 9 business bounded contexts, although QUALITY 
 **Cross-context (no FK):**
 - `user_role.user_id` → `Identity.app_user.user_id`
 
-**Key design:** `role` **does not have** `school_id`. Roles are global.
+*Key design:* `role` *does not have* `school_id`. Roles are global.
 
 ---
 
 ## 5. Context: Academic
 
-**Responsibility:** Academic structure: campuses, programs, periods, cohorts, courses, actors, and enrollments.
+*Responsibility:* Academic structure: campuses, programs, periods, cohorts, courses, actors, and enrollments.
 
 | Table | Description | PK |
 |---|---|---|
@@ -169,15 +169,15 @@ school → program → course school → program → cohort ← academic_period 
 - `academic_actor.person_id` → `Identity.person.person_id`
 
 **Key differences:**
-- **`program`**: Highest-level curricular container ("Technology in Data Analysis")
-- **`course`**: Unit of content within a program ("Databases I")
-- **`cohort`**: Specific group of students who progress together ("Cohort 2691234 — ADSI — Term 1 of 2026")
+- *`program`*: Highest-level curricular container ("Technology in Data Analysis")
+- *`course`*: Unit of content within a program ("Databases I")
+- *`cohort`*: Specific group of students who progress together ("Cohort 2691234 — ADSI — Term 1 of 2026")
 
 ---
 
 ## 6. Context: Scheduling
 
-**Responsibility:** Translates the academic structure into concrete schedules and sessions.
+*Responsibility:* Translates the academic structure into concrete schedules and sessions.
 
 | Table | Description | PK |
 |---|---|---|
@@ -196,13 +196,13 @@ school → program → course school → program → cohort ← academic_period 
 - `(environment_id, day_of_week, starts_at)` → prevents double-booking the same environment.
 - `(instructor_actor_id, day_of_week, starts_at)` → prevents double-assigning the same instructor.
 
-**Bridge to Attendance:** `class_session` is the entity that receives attendance records.
+*Bridge to Attendance:* `class_session` is the entity that receives attendance records.
 
 ---
 
 ## 7. Context: Attendance
 
-**Responsibility:** Attendance recording, justifications, supporting documents, and reports.
+*Responsibility:* Attendance recording, justifications, supporting documents, and reports.
 
 | Table | Description | PK |
 |---|---|---|
@@ -224,7 +224,7 @@ school → program → course school → program → cohort ← academic_period 
 - `attendance_report.school_id` / `cohort_id` → `Academic`
 - `attendance_report.generated_by` → `Identity.app_user.user_id`
 
-**Business rule (unique index):** `(class_session_id, academic_actor_id)` is **unique** → only **one attendance record can exist per actor per class session**.
+*Business rule (unique index):* `(class_session_id, academic_actor_id)` is *unique* → only *one attendance record can exist per actor per class session*.
 
 **ENUMs:**
 - `attendance_status`: Present, Absent, Late, Justified
@@ -235,24 +235,24 @@ school → program → course school → program → cohort ← academic_period 
 
 ## 8. Context: Biometric
 
-**Responsibility:** Biometric templates (facial and fingerprint).
+*Responsibility:* Biometric templates (facial and fingerprint).
 
-**It is not part of the relational SQL schema.** It is modeled as NoSQL collections in **MongoDB** (outside the relational DBML model):
+*It is not part of the relational SQL schema.* It is modeled as NoSQL collections in *MongoDB* (outside the relational DBML model):
 
 | Collection | Key fields |
 |---|---|
 | `facial_embedding` | `person_id`, `template_version`, `encoding`, `model_version`, `enrolled_at`, `is_active` |
 | `fingerprint_embedding` | `person_id`, `finger_number`, `template_version`, `encoding`, `model_version`, `enrolled_at`, `is_active` |
 
-**Why NoSQL?** Biometric embeddings are documents with a flexible structure and a high read/write volume due to real-time recognition.
+*Why NoSQL?* Biometric embeddings are documents with a flexible structure and a high read/write volume due to real-time recognition.
 
-**In PostgreSQL only the empty `biometric` schema exists** (`06-ms-biometric-db` only creates the schema, with no tables). The logical reference from `configuration.biometric_update_case.current_embedding_ref` points to the `_id` of the document in MongoDB (cross-paradigm, no FK).
+*In PostgreSQL only the empty `biometric` schema exists* (`06-ms-biometric-db` only creates the schema, with no tables). The logical reference from `configuration.biometric_update_case.current_embedding_ref` points to the `_id` of the document in MongoDB (cross-paradigm, no FK).
 
 ---
 
 ## 9. Context: Configuration
 
-**Responsibility:** Configurable parameters and biometric update cases.
+*Responsibility:* Configurable parameters and biometric update cases.
 
 | Table | Description | PK |
 |---|---|---|
@@ -260,7 +260,7 @@ school → program → course school → program → cohort ← academic_period 
 | `security_configuration` | Global security parameters | `configuration_id` (INT) |
 | `biometric_update_case` | Biometric update request | `case_id` (UUID) |
 
-**`biometric_update_case`** unifies facial and fingerprint update cases:
+*`biometric_update_case`* unifies facial and fingerprint update cases:
 - `biometric_type`: FACIAL / FINGERPRINT (ENUM)
 - `finger_number`: Only for FINGERPRINT (1..10), null for FACIAL
 - `current_embedding_ref`: Logical reference to the active document in NoSQL
@@ -269,7 +269,7 @@ school → program → course school → program → cohort ← academic_period 
 
 ## 9.5 Context: Quality
 
-**Responsibility:** Quality evaluation instrument (ISO/IEC 25010, ISO/IEC 29110, ISTQB) applied to the other microservices. Logical owner: `09-ms-quality`; temporary physical hosting in the `quality` schema inside `07-ms-configuration-db`, because there is no separate `quality-liquibase` service — documented debt, do not move without a compatibilized migration.
+*Responsibility:* Quality evaluation instrument (ISO/IEC 25010, ISO/IEC 29110, ISTQB) applied to the other microservices. Logical owner: `09-ms-quality`; temporary physical hosting in the `quality` schema inside `07-ms-configuration-db`, because there is no separate `quality-liquibase` service — documented debt, do not move without a compatibilized migration.
 
 | Table | Description | PK |
 |---|---|---|
@@ -295,7 +295,7 @@ The catalogs of sub-characteristics/objectives/items (e.g. `tech-bva`, `PM.O1`) 
 
 ## 10. Context: Notification
 
-**Responsibility:** Alert types and alerts generated about academic actors.
+*Responsibility:* Alert types and alerts generated about academic actors.
 
 | Table | Description | PK |
 |---|---|---|
@@ -365,7 +365,7 @@ authorization.user_role                        enrollment   │
 
 ## 13. Model ENUMs
 
-**ENUMs** are implemented as native PostgreSQL types (CREATE TYPE ... AS ENUM), not as VARCHAR columns with textual validation. Although the DBML documents them as varchar with the ENUM note, the physical implementation uses native types.
+*ENUMs* are implemented as native PostgreSQL types (CREATE TYPE ... AS ENUM), not as VARCHAR columns with textual validation. Although the DBML documents them as varchar with the ENUM note, the physical implementation uses native types.
 
 Below are the 14 actual ENUM types, with their exact values according to the Liquibase changesets.
 
@@ -407,27 +407,27 @@ row_version	BIGINT (default 1)	Optimistic concurrency control (optimistic lockin
 ```
 
 ### 14.2. Associated rules
-**Soft delete:** the value deleted_at IS NULL identifies active rows.
+*Soft delete:* the value deleted_at IS NULL identifies active rows.
 Partial unique indexes: unique indexes sensitive to soft delete use WHERE deleted_at IS NULL clauses; for example, uq_person_email.
-**ENUM types:** they are created as native PostgreSQL types during the 01-ddl/02-types/ phase of Liquibase.
-**Referential integrity:** real foreign keys are used only within each context, according to the rule described in section 11.
+*ENUM types:* they are created as native PostgreSQL types during the 01-ddl/02-types/ phase of Liquibase.
+*Referential integrity:* real foreign keys are used only within each context, according to the rule described in section 11.
 
 ## 15. Physical layer (implementation)
 ### 15.1. Database topology
 
-***PostgreSQL***
+*PostgreSQL*
 
-**Database:** faceattend_db.
+*Database:* faceattend_db.
 Development: one database with eight main schemas (identity, authorization, academic, scheduling, attendance, biometric, configuration, and notification), plus the quality schema, hosted in the same database.
 Production: serverless PostgreSQL on Neon. For more details, see DESPLIEGUE.md and database/docker-compose.neon.yml.
 
-***MongoDB***
+*MongoDB*
 
 Stores the biometric embedding collections:
 facial_embedding
 fingerprint_embedding
 
-**Deployment alternative:** the file database/scripts/init-multidb.sql exists, which allows a setup with eight independent databases. However, the development environment uses a single database with multiple schemas.
+*Deployment alternative:* the file database/scripts/init-multidb.sql exists, which allows a setup with eight independent databases. However, the development environment uses a single database with multiple schemas.
 
 ### 15.2. Folder → schema → context mapping
 

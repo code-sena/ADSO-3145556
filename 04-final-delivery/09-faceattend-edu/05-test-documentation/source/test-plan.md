@@ -24,9 +24,9 @@ Load tests and tests with the physical fingerprint reader are out of scope, beca
 
 # Entry and exit criteria
 
-- **Entry:** the code builds and the pull request targets the integration branch.
-- **Exit:** every CI job finishes green. The production deployment depends on that result, because `Deploy production` runs CI first.
-- **Skipped tests:** accepted only when explicitly marked in the code. They are reported in the results table.
+- *Entry:* the code builds and the pull request targets the integration branch.
+- *Exit:* every CI job finishes green. The production deployment depends on that result, because `Deploy production` runs CI first.
+- *Skipped tests:* accepted only when explicitly marked in the code. They are reported in the results table.
 
 # Responsibilities
 
