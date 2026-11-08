@@ -31,7 +31,7 @@ The flow was reconstructed from the implementation in `FULL` (compose files, `ko
 
 ## Stage 0 — Entry: Clients
 
-The only entry points in normal operation are the Expo web application (served through nginx on port 8090) and the native mobile application. Both address exclusively the Kong gateway (`http://<host>:8080`, configured through `EXPO_PUBLIC_API_URL`); there is no direct access to the microservices, whose ports (8081–8089) are bound to loopback for local development only. Each authenticated call carries `Authorization: Bearer <sessionId>`. Payloads are JSON with `?page&limit` pagination, except facial registration from mobile, which uses multipart (`POST face/register`).
+The only entry points in normal operation are the Expo web application (served through nginx on port 8090) and the native mobile application. Both address exclusively the Kong gateway (`http://<host>:8000`, configured through `EXPO_PUBLIC_API_URL`); there is no direct access to the microservices, whose ports (8081–8089) are bound to loopback for local development only. Each authenticated call carries `Authorization: Bearer <sessionId>`. Payloads are JSON with `?page&limit` pagination, except facial registration from mobile, which uses multipart (`POST face/register`).
 
 ## Stage 1 — Edge: Kong Gateway (DB-less)
 
@@ -39,7 +39,7 @@ Kong 3.6 in DB-less mode (`kong.yml`) applies, in order: a Lua pre-function, COR
 
 ## Stage 2 — Authentication and Authorization on Every Call
 
-Login (`POST /api/v1/auth/login` with email or username plus password) verifies the BCrypt hash against `identity.app_user.password_hash` and inserts a row in `identity.user_session` with `Active` status, returning `{sessionId, userId}` with a generic 401 that avoids user enumeration. The client then loads its context (roles, permission evaluation, person profile). Each subsequent request passes two checks: the Kong edge check and the owning microservice guard (token filter in the Java services, auth guard in the TypeScript services, permission requirement in Python, middleware in Go), which revalidates the session and the specific permission. Refresh rotates the session identifier (single use) and logout closes the row.
+Login (`POST /api/v1/auth/login` with email or username plus password) verifies the BCrypt hash against `identity.app_user.password_hash` and inserts a row in `identity.user_session` with `Active` status, returning `{sessionId, userId}` with a generic 401 that avoids user enumeration. The client then loads its context (roles, permission evaluation, person profile). Each subsequent request passes two checks: the Kong edge check and the owning microservice guard (token filter in the Java services, auth guard in the TypeScript services, permission requirement in Python), which revalidates the session and the specific permission. Refresh rotates the session identifier (single use) and logout closes the row.
 
 ## Stage 3 — Data Ownership: One Microservice, One Schema
 

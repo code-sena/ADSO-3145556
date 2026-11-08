@@ -205,16 +205,14 @@ FaceAttend EDU is a system composed of:
 | Technology | Version | Use |
 |------------|---------|-----|
 | Java | 21 LTS | 4 main microservices |
-| Spring Boot | 4.1.1 | Main Java framework |
-| Spring Security | 6.x | Authentication and authorization |
+| Spring Boot | 4.1.2 | Main Java framework |
+| Spring Security | 7.x (managed by Spring Boot) | Authentication and authorization |
 | Spring Data JPA | 4.x | Java persistence |
-| TypeScript | 5.x | 3 microservices + Web Frontend |
-| Fastify | 4.x | TypeScript HTTP framework |
-| Drizzle ORM | 0.31.0 | TypeScript ORM |
+| TypeScript | 5.x (Node 24) | 4 microservices |
+| Fastify | 5.x | TypeScript HTTP framework |
+| pg (node-postgres) | 8.x | PostgreSQL driver for the TypeScript services |
 | Python | 3.12 | Biometric microservice |
-| FastAPI | 0.110 | Python framework |
-| Go | 1.22 | Notification microservice |
-| Gin | 1.9.1 | Go HTTP framework |
+| FastAPI | 0.162 | Python framework |
 
 #### 4.1.3 Frontend Technologies
 
@@ -370,7 +368,7 @@ The system implements a **Polyglot Microservices** architecture with **Hexagonal
 │                      API GATEWAY                                        │
 │  ┌──────────────────────────────────────────────────────────────────┐   │
 │  │   Kong OSS 3.6 (DB-less)                                         │   │
-│  │   Port: 8080 (proxy) / 8001 (admin)                           │   │
+│  │   Port: 8000 (proxy); admin API not published                 │   │
 │  │   Plugins: CORS, Rate Limiting                                  │   │
 │  └──────────────────────────────────────────────────────────────────┘   │
 └─────────────────────────────────────────────────────────────────────────┘
@@ -384,7 +382,7 @@ The system implements a **Polyglot Microservices** architecture with **Hexagonal
 │  └─────────────┘ └─────────────┘ └─────────────┘ └─────────────┘       │
 │  ┌─────────────┐ ┌─────────────┐ ┌─────────────┐ ┌─────────────┐       │
 │  │05-Attendan. │ │06-Biometric │ │07-Config.   │ │08-Notif.    │       │
-│  │ Java 8085   │ │ Python 8086 │ │ TS 8087     │ │ Go 8088     │       │
+│  │ Java 8085   │ │ Python 8086 │ │ TS 8087     │ │ TS 8088     │       │
 │  └─────────────┘ └─────────────┘ └─────────────┘ └─────────────┘       │
 │  ┌─────────────┐                                                      │
 │  │ 09-Quality  │                                                      │
@@ -413,14 +411,14 @@ The system implements a **Polyglot Microservices** architecture with **Hexagonal
 |---|----------|--------|----------|-----------|---------------|-----------------|
 | 01 | ms-identity | 8081 | Java 21 | Spring Boot 4.1 | PostgreSQL | Persons, users, sessions, password policies |
 | 02 | ms-authorization | 8082 | Java 21 | Spring Boot 4.1 | PostgreSQL | RBAC (roles, permissions, assignments) |
-| 03 | ms-academic | 8083 | TypeScript | Fastify + Drizzle | PostgreSQL | Campuses, programs, cohorts, courses, enrollments |
+| 03 | ms-academic | 8083 | TypeScript | Fastify + pg | PostgreSQL | Campuses, programs, cohorts, courses, enrollments |
 | 04 | ms-scheduling | 8084 | Java 21 | Spring Boot 4.1 | PostgreSQL | Environments, schedule blocks, class sessions |
 | 05 | ms-attendance | 8085 | Java 21 | Spring Boot 4.1 | PostgreSQL | Attendance records, justifications, documents |
 | 06 | ms-biometric | 8086 | Python 3.12 | FastAPI | MongoDB | Facial embeddings + fingerprint templates, matching |
 | 07 | ms-configuration | 8087 | TypeScript | Fastify | PostgreSQL | Academic/security configuration, biometric cases |
-| 08 | ms-notification | 8088 | Go 1.22 | Gin | PostgreSQL | Alerts and notifications |
+| 08 | ms-notification | 8088 | TypeScript | Fastify | PostgreSQL | Alerts and notifications |
 | 09 | ms-quality | 8089 | TypeScript | Fastify | PostgreSQL | ISO 25010/29110 quality evaluation, ISTQB |
-| 99 | api-gateway | 8080/8001 | - | Kong OSS 3.6 | Redis | Routing, auth, rate-limit, CORS |
+| 99 | api-gateway | 8000 | - | Kong OSS 3.6 | Redis | Routing, auth, rate-limit, CORS |
 
 ### 6.4 Hexagonal Architecture
 
@@ -725,9 +723,8 @@ All services have OpenAPI 3.0.3 specifications in `07-api/contracts/openapi/`:
 
 | Port | Service | Bind |
 |--------|----------|------|
-| 8080 | Kong Gateway (proxy) | 0.0.0.0 |
+| 8000 | Kong Gateway (proxy) | 0.0.0.0 |
 | 8090 | Web Frontend | 0.0.0.0 |
-| 8001 | Kong Admin | 127.0.0.1 |
 | 5432 | PostgreSQL | 127.0.0.1 |
 | 27017 | MongoDB | 127.0.0.1 |
 | 6379 | Redis | 127.0.0.1 |
@@ -756,7 +753,7 @@ REDIS_PORT=6379
 KAFKA_PORT=9092
 
 # Kong
-KONG_PROXY_PORT=8080
+KONG_PROXY_PORT=8000
 KONG_ADMIN_PORT=8001
 
 # Frontend
@@ -785,7 +782,7 @@ SMTP_PORT=1025
 
 ### 10.5 Observability
 
-- **Logs:** Structured JSON (Pino for TS, structlog for Python, Zap for Go)
+- **Logs:** Structured JSON (Pino for TS, structlog for Python)
 - **Metrics:** RED (Rate, Errors, Duration)
 - **Tracing:** OpenTelemetry for distributed tracing
 - **Alerts:** Configured for response time < 5 min
@@ -961,7 +958,7 @@ SMTP_PORT=1025
 |----|-------------|-----------|
 | AT-001 | Single PostgreSQL instance is SPOF | P1 |
 | AT-002 | No import-boundary lint rule | P2 |
-| AT-003 | Go runtime adds 4th runtime for 2 tables | P2 |
+| AT-003 | ~~Go runtime adds 4th runtime for 2 tables~~ Resolved: ms-notification was rewritten in TypeScript | — |
 | AT-004 | ~~Bearer not validated in TS/Python services~~ Resolved | — |
 | AT-005 | ~~Password recovery endpoints not implemented~~ Resolved | — |
 | AT-006 | No circuit breaker, transactional outbox, or Kafka DLQ | P1 |

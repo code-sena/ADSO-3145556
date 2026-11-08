@@ -49,7 +49,7 @@ The backend has nine services and a gateway. Each service owns its data schema a
 |---|---|---|
 | 01 identity | People, users, sessions, second factor, recovery | Java, Spring Boot 4.1.x |
 | 02 authorization | Roles, permissions, RBAC evaluation | Java, Spring Boot 4.1.x |
-| 03 academic | Sites, programs, cohorts, enrollments | TypeScript, Fastify 5, Drizzle |
+| 03 academic | Sites, programs, cohorts, enrollments | TypeScript, Fastify 5 |
 | 04 scheduling | Time blocks, class sessions | Java, Spring Boot 4.1.x |
 | 05 attendance | Records, justifications, reports | Java, Spring Boot 4.1.x |
 | 06 biometric | Enrollment, verification, liveness detection | Python 3.12, FastAPI |

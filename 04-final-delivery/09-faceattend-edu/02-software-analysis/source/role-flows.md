@@ -34,7 +34,7 @@ All roles log in with an identifier (email or username) plus password (BCrypt, c
 
 ## 1. SUPER_ADMIN — Global Administrator
 
-**Objective.** Total control of the system and bootstrap (default user `admin.faceattend`); the only role with multi-school scope.
+**Objective.** Total control of the system; the first account is created with `database/scripts/bootstrap-admin.sh`; the only role with multi-school scope.
 
 **Screens and functions.** Web dashboard with the six tabs: institutional dashboard (KPIs, at-risk students), Users (CRUD, CSV import, enrolling faces on behalf of third parties), Courses, Environments (exclusive management), full-scope Reports with export and notify-all, and Settings (security, palettes, justification parameterization, language and theme). Mobile: user management, environment management, school configuration and report screens.
 

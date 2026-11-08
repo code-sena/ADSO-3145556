@@ -16,7 +16,7 @@ keywords:
 
 The architectural design of FaceAttendEDU represents the translation of functional and non-functional requirements into a robust technical structure. Unlike the software analysis, which defines the "what" and "why", this document focuses on the "how": code organization, data management, communication between components, and technology selection.
 
-The system has been conceived under a **Polyglot Modular Monolith** approach (organized in a monorepo), where each module operates as an independent microservice with its own bounded context, allowing the coexistence of multiple programming languages based on technical needs (Java, TypeScript, Python, and Go).
+The system has been conceived under a **polyglot microservice architecture** (organized in a monorepo), where each service is deployed independently with its own bounded context, allowing the coexistence of multiple programming languages based on technical needs (Java, TypeScript, and Python).
 
 ## Document Objective
 To provide a detailed and formal description of the system architecture, the applied design patterns, and the data model, establishing the technical base for implementation, deployment, and software evolution.
@@ -45,7 +45,7 @@ Acts as the system orchestrator.
 ### 3. Infrastructure Layer (Adapters)
 Contains the concrete implementations of the ports.
 - **Input Adapters (Driving Adapters)**: REST Controllers (Spring Boot, FastAPI, etc.) that receive HTTP requests and translate them into use case calls.
-- **Output Adapters (Driven Adapters)**: Persistence implementations (JPA, MongoDB, pgx) that translate domain needs into database queries.
+- **Output Adapters (Driven Adapters)**: Persistence implementations (JPA, MongoDB, pg) that translate domain needs into database queries.
 
 ## Information Flow
 A typical request flow follows this route:
@@ -99,10 +99,10 @@ The success of the FaceAttendEDU project is based on a technological selection o
 ## Technological Stack
 | Component | Technology | Version | Purpose |
 |---|---|---|---|
-| **Backend (Core)** | Java / Spring Boot | 21 / 4.1.1 | Identity and authorization services. |
-| **Backend (Biometrics)** | Python / FastAPI | 3.12 / 0.110 | Biometric vector processing. |
-| **Backend (Notifications)** | TypeScript / Fastify (Node.js) | 5.4 / 4.26 (Node 20) | High concurrency in alerts (async I/O). |
-| **Backend (TS)** | TypeScript / Fastify | 5.4 / 4.26.0 | Lightweight and fast services. |
+| **Backend (Core)** | Java / Spring Boot | 21 / 4.1.2 | Identity and authorization services. |
+| **Backend (Biometrics)** | Python / FastAPI | 3.12 / 0.162 | Biometric vector processing. |
+| **Backend (Notifications)** | TypeScript / Fastify (Node.js) | 5.4 / 5.12 (Node 24) | High concurrency in alerts (async I/O). |
+| **Backend (TS)** | TypeScript / Fastify | 5.4 / 5.12 (Node 24) | Lightweight and fast services. |
 | **Frontend** | React Native / Expo | RN 0.86 / Expo 57 | Multiplatform mobile app. |
 | **Gateway** | Kong | 3.6 | API Orchestration and Security. |
 | **Messaging** | Apache Kafka | 3.8.0 | Asynchronous communication. |
@@ -116,7 +116,7 @@ The success of the FaceAttendEDU project is based on a technological selection o
 
 # Conclusions
 
-The architectural design of FaceAttendEDU is not just a technical choice, but a strategy to mitigate the risks identified in the analysis phase. The adoption of Hexagonal Architecture and DDD allows the system to be resilient to change and easy to audit. The combination of specialized languages (Java for robustness, Python for AI/Biometrics, Go for speed) ensures that each component is implemented with the most efficient tool for its purpose.
+The architectural design of FaceAttendEDU is not just a technical choice, but a strategy to mitigate the risks identified in the analysis phase. The adoption of Hexagonal Architecture and DDD allows the system to be resilient to change and easy to audit. The combination of specialized languages (Java for robustness, Python for biometrics, TypeScript for lightweight services) ensures that each component is implemented with the most efficient tool for its purpose.
 
 **Author's Note.** Jonas is the author and technical lead of the architectural design. Technical correspondence can be directed to jonas@consultoria.example.
 

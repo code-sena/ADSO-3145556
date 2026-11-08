@@ -27,7 +27,7 @@ The document covers the environment preparation, base tool installation, environ
 # Implementation Strategy
 
 ## Deployment Model: Containerization
-The system utilizes **Docker** as the container platform and **Docker Compose** as the orchestrator. This choice allows the management of the 18 containers necessary (services, databases, gateway, and migration tasks) through a single configuration file.
+The system utilizes **Docker** as the container platform and **Docker Compose** as the orchestrator. This choice allows the management of the 25 containers necessary (16 long-running services, databases, and gateway, plus 9 one-off migration tasks) through a single configuration file.
 
 ### Network Organization
 To ensure security, the deployment divides traffic into three isolated networks:
@@ -56,7 +56,7 @@ This architecture prevents the presentation layer from having direct access to t
 # Installation Procedure
 
 ## 1. Environment Preparation
-Before starting, the installer must verify the availability of critical ports (e.g., 8080 for the Gateway, 5432 for PostgreSQL). In case of conflict, local services must be stopped or the configuration modified.
+Before starting, the installer must verify the availability of critical ports (e.g., 8000 for the Gateway, 5432 for PostgreSQL). In case of conflict, local services must be stopped or the configuration modified.
 
 ## 2. Obtaining the Project
 The source code is obtained by cloning the official repository:
@@ -89,10 +89,10 @@ To declare the installation as successful, the following test protocol must be e
 
 | Test | Verification Method | Expected Result |
 |---|---|---|
-| **Container Status** | `docker compose ps` | 18 containers operational (Running/Healthy). |
-| **Service Health** | `curl http://localhost:8080/health/...` | JSON response with status "UP". |
-| **Gateway Connectivity** | `curl http://localhost:8080` | Response from the Kong Gateway. |
-| **Authentication** | Login with `admin.faceattend` | Return of a valid session token. |
+| **Container Status** | `docker compose ps -a` | 16 containers running (healthy) and 9 one-off tasks exited with code 0. |
+| **Service Health** | `curl http://localhost:8081/api/v1/health` (one port per service) | JSON response with status "UP". |
+| **Gateway Connectivity** | `curl -i http://localhost:8000/api/v1/auth/session` | 401 from the Kong Gateway: the route requires a session. |
+| **Authentication** | Login with the first administrator created by `bootstrap-admin.sh` | Return of a valid session token. |
 | **Interface Loading** | Access `http://localhost:8090` | Correct loading of the login screen. |
 | **Network Isolation** | `docker exec ... nslookup postgres` | Resolution failure from the frontend. |
 
