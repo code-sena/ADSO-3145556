@@ -16,7 +16,7 @@
 - SERVICIO NACIONAL DE APRENDIZAJE – SENA
 - ANÁLISIS Y DESARROLLO DE SOFTWARE – 3145556
 
-**YEAR:** 2025
+*YEAR:* 2025
 
 ---
 
@@ -65,7 +65,7 @@ Develop a comprehensive software system that uses the device camera for facial r
 
 ### 1.4 Scope
 
-**In scope (MVP - Horizon 1, 0-3 months):**
+In scope (MVP - Horizon 1, 0-3 months):
 - User management with CSV and manual registration
 - Login and authentication with opaque sessionId
 - Password recovery and change
@@ -77,7 +77,7 @@ Develop a comprehensive software system that uses the device camera for facial r
 - Facial recognition with liveness detection
 - Responsive frontend (Web + Mobile)
 
-**Out of scope:**
+Out of scope:
 - Teacher payroll, grades, payments
 - Complete physical access control (doors/turnstiles)
 - Integration with external systems (enrollments/grades/IdP)
@@ -106,11 +106,11 @@ The FaceAttend EDU project represents a complete technological solution that tra
 
 In the current educational environment, manual attendance registration presents multiple issues:
 
-- **Inconsistencies in records:** Traditional methods (paper lists, roll calls) are prone to human error, forgetfulness, and manipulation.
-- **Administrative overload:** Instructors spend valuable class time on administrative tasks instead of focusing on teaching.
-- **Impersonation risk:** Without automated identity verification, it is easy for a student to register attendance for another.
-- **Lack of traceability:** No centralized system exists to efficiently consult attendance histories.
-- **Difficulty in report generation:** Manual data consolidation for reports is slow and error-prone.
+- Inconsistencies in records: Traditional methods (paper lists, roll calls) are prone to human error, forgetfulness, and manipulation.
+- Administrative overload: Instructors spend valuable class time on administrative tasks instead of focusing on teaching.
+- Impersonation risk: Without automated identity verification, it is easy for a student to register attendance for another.
+- Lack of traceability: No centralized system exists to efficiently consult attendance histories.
+- Difficulty in report generation: Manual data consolidation for reports is slow and error-prone.
 
 ### 2.2 Purpose
 
@@ -127,12 +127,12 @@ FaceAttend EDU emerges as a response to these issues, providing a platform that:
 
 The implementation of FaceAttend EDU is justified by:
 
-1. **Operational efficiency:** Reduction of attendance registration time from minutes to seconds per student.
-2. **Precision and security:** Elimination of human errors and identity impersonation through biometrics.
-3. **Complete traceability:** Complete and auditable attendance histories.
-4. **Academic improvement:** Early identification of absenteeism patterns affecting performance.
-5. **Scalability:** Microservices architecture that allows growth with the institution.
-6. **Regulatory compliance:** Alignment with Law 1581 on Personal Data Protection.
+1. Operational efficiency: Reduction of attendance registration time from minutes to seconds per student.
+2. Precision and security: Elimination of human errors and identity impersonation through biometrics.
+3. Complete traceability: Complete and auditable attendance histories.
+4. Academic improvement: Early identification of absenteeism patterns affecting performance.
+5. Scalability: Microservices architecture that allows growth with the institution.
+6. Regulatory compliance: Alignment with Law 1581 on Personal Data Protection.
 
 ---
 
@@ -148,33 +148,33 @@ The application integrates as a support tool for educational management, with fu
 
 FaceAttend EDU is a system composed of:
 
-- **Web and Mobile Frontend:** Responsive application built with React Native and Expo, compatible with modern browsers and iOS/Android mobile devices.
-- **Backend:** 9 microservices specialized in different business domains.
-- **API Gateway:** Kong OSS as the single entry point for all requests.
-- **Databases:** PostgreSQL 17 (relational data) and MongoDB 7 (biometric data).
-- **Messaging:** Apache Kafka for asynchronous communication between services.
-- **Infrastructure:** Docker Compose for container orchestration.
+- Web and Mobile Frontend: Responsive application built with React Native and Expo, compatible with modern browsers and iOS/Android mobile devices.
+- Backend: 9 microservices specialized in different business domains.
+- API Gateway: Kong OSS as the single entry point for all requests.
+- Databases: PostgreSQL 17 (relational data) and MongoDB 7 (biometric data).
+- Messaging: Apache Kafka for asynchronous communication between services.
+- Infrastructure: Docker Compose for container orchestration.
 
 ### 3.3 User Characteristics
 
 | User Type | Description | Main Needs |
 |-----------------|-------------|------------------------|
-| **Learner/Student** | Main user who registers attendance | Quick attendance registration, history consultation, absence justification |
-| **Instructor/Teacher** | Responsible for managing attendance in their classes | Automatic attendance capture, report visualization, justification management |
-| **Administrator** | Manages system configuration | User management, academic configuration, global report generation |
-| **Supervisor** | Monitors academic compliance | Absenteeism alerts, consolidated reports, participation metrics |
+| Learner/Student | Main user who registers attendance | Quick attendance registration, history consultation, absence justification |
+| Instructor/Teacher | Responsible for managing attendance in their classes | Automatic attendance capture, report visualization, justification management |
+| Administrator | Manages system configuration | User management, academic configuration, global report generation |
+| Supervisor | Monitors academic compliance | Absenteeism alerts, consolidated reports, participation metrics |
 
 ### 3.4 Main Features
 
-1. **Facial Attendance Registration:** Face capture with device camera (computer or mobile), liveness detection, and automatic registration with date/time.
-2. **Fingerprint Attendance Registration:** Fingerprint capture via DigitalPersona 4500 SDK, in-code processing, and automatic registration with date/time.
-3. **Manual/Import Registration:** Backup method for special cases or technical failures.
-4. **User Management:** Complete CRUD of learners, instructors, and administrators.
-5. **Academic Management:** Administration of campuses, programs, cohorts, courses, and periods.
-6. **Justifications:** Complete flow of request, review, and approval/rejection of justifications.
-7. **Reports and Dashboard:** Metrics visualization, Excel export, filters by date/cohort.
-8. **Notifications and Alerts:** Automatic alert system for absences or anomalies.
-9. **Configuration:** Academic, security, and biometric parameters.
+1. Facial Attendance Registration: Face capture with device camera (computer or mobile), liveness detection, and automatic registration with date/time.
+2. Fingerprint Attendance Registration: Fingerprint capture via DigitalPersona 4500 SDK, in-code processing, and automatic registration with date/time.
+3. Manual/Import Registration: Backup method for special cases or technical failures.
+4. User Management: Complete CRUD of learners, instructors, and administrators.
+5. Academic Management: Administration of campuses, programs, cohorts, courses, and periods.
+6. Justifications: Complete flow of request, review, and approval/rejection of justifications.
+7. Reports and Dashboard: Metrics visualization, Excel export, filters by date/cohort.
+8. Notifications and Alerts: Automatic alert system for absences or anomalies.
+9. Configuration: Academic, security, and biometric parameters.
 
 ---
 
@@ -184,19 +184,19 @@ FaceAttend EDU is a system composed of:
 
 #### 4.1.1 Operating Systems
 
-**Server:**
-- **Linux:** Ubuntu Server 22.04 LTS, CentOS 8 or Debian 12 (recommended for production)
-- **Windows:** Windows Server 2019/2022 (alternative)
-- **Containers:** Docker 24+ and Docker Compose 2+
+Server:
+- Linux: Ubuntu Server 22.04 LTS, CentOS 8 or Debian 12 (recommended for production)
+- Windows: Windows Server 2019/2022 (alternative)
+- Containers: Docker 24+ and Docker Compose 2+
 
-**Client (Web Browser):**
+Client (Web Browser):
 - Chrome 90+
 - Firefox 88+
 - Edge 90+
 - Safari 14+
 - Brave / Opera (any recent version)
 
-**Mobile:**
+Mobile:
 - Android 8.0 (API 26) or higher
 - iOS 14.0 or higher
 
@@ -259,7 +259,7 @@ FaceAttend EDU is a system composed of:
 | Facial Matching | Cosine similarity | 128-d vector comparison |
 | Fingerprint Matching | DigitalPersona SDK | Fingerprint template comparison |
 
-**Note:** The system uses two complementary biometric methods: facial recognition using the device camera (computer or mobile) and fingerprint recognition using the DigitalPersona 4500 SDK. All functionality will be implemented directly in code.
+Note: The system uses two complementary biometric methods: facial recognition using the device camera (computer or mobile) and fingerprint recognition using the DigitalPersona 4500 SDK. All functionality will be implemented directly in code.
 
 #### 4.1.7 Security and Validation
 
@@ -279,11 +279,11 @@ FaceAttend EDU is a system composed of:
 
 | Component | Minimum | Recommended |
 |------------|--------|-------------|
-| **Processor** | Intel i5 (8th gen) or AMD equivalent | Intel i7 (12th gen) or AMD Ryzen 7 |
-| **RAM** | 8 GB | 16 GB |
-| **Storage** | SSD 256 GB | SSD 512 GB |
-| **GPU** | Not required | Not required |
-| **Network** | Ethernet 100 Mbps | Ethernet 1 Gbps |
+| Processor | Intel i5 (8th gen) or AMD equivalent | Intel i7 (12th gen) or AMD Ryzen 7 |
+| RAM | 8 GB | 16 GB |
+| Storage | SSD 256 GB | SSD 512 GB |
+| GPU | Not required | Not required |
+| Network | Ethernet 100 Mbps | Ethernet 1 Gbps |
 
 #### 4.2.2 Biometric Devices
 
@@ -292,14 +292,14 @@ FaceAttend EDU is a system composed of:
 | Device camera | Webcam 720p+ (computer) or front camera (mobile) | Facial recognition |
 | DigitalPersona 4500 | USB fingerprint reader with SDK | Fingerprint recognition |
 
-**Note:** The system uses the device camera (computer or mobile) for facial recognition and DigitalPersona 4500 for fingerprint recognition. Both biometric methods work complementarily.
+Note: The system uses the device camera (computer or mobile) for facial recognition and DigitalPersona 4500 for fingerprint recognition. Both biometric methods work complementarily.
 
 #### 4.2.3 Mobile Devices
 
 | Platform | Requirements |
 |------------|------------|
-| **Android** | Android 8.0+, front camera 720p+, 2 GB RAM |
-| **iOS** | iOS 14.0+, front camera 720p+, 2 GB RAM |
+| Android | Android 8.0+, front camera 720p+, 2 GB RAM |
+| iOS | iOS 14.0+, front camera 720p+, 2 GB RAM |
 
 #### 4.2.4 IoT and Sensors (Future - Horizon 3)
 
@@ -319,27 +319,27 @@ The proposed solution is a comprehensive software system based on a polyglot mic
 
 ### 5.2 Solution Pillars
 
-1. **Automated Attendance Capture:** Dual biometric registration: facial (device camera) and fingerprint (DigitalPersona 4500 SDK).
-2. **Reliable Academic Tracking:** Complete histories, automatic reports, and alerts.
-3. **Transparent Justification Flow:** Complete process of request, review, and resolution.
-4. **Security, Privacy, and Usability:** Regulatory compliance, robust authentication, and intuitive UX.
-5. **Scalable and Compatible Operation:** Microservices architecture, Docker containers, and API Gateway.
+1. Automated Attendance Capture: Dual biometric registration: facial (device camera) and fingerprint (DigitalPersona 4500 SDK).
+2. Reliable Academic Tracking: Complete histories, automatic reports, and alerts.
+3. Transparent Justification Flow: Complete process of request, review, and resolution.
+4. Security, Privacy, and Usability: Regulatory compliance, robust authentication, and intuitive UX.
+5. Scalable and Compatible Operation: Microservices architecture, Docker containers, and API Gateway.
 
 ### 5.3 Product Roadmap
 
 | Horizon | Period | Deliverables |
 |-----------|---------|-------------|
-| **Horizon 1 (MVP)** | 0-3 months | Identity, Academic, Scheduling, Attendance core, Biometric facial enroll (camera) + fingerprint enroll (DigitalPersona 4500), Justification workflow, Notification in-app |
-| **Horizon 2 (Traceability)** | 3-6 months | End-to-end justifications, dashboards, alerts, per-school configuration |
-| **Horizon 3 (Scale)** | 6-12 months | Advanced analytics, multi-school tenancy, SDK optimization |
+| Horizon 1 (MVP) | 0-3 months | Identity, Academic, Scheduling, Attendance core, Biometric facial enroll (camera) + fingerprint enroll (DigitalPersona 4500), Justification workflow, Notification in-app |
+| Horizon 2 (Traceability) | 3-6 months | End-to-end justifications, dashboards, alerts, per-school configuration |
+| Horizon 3 (Scale) | 6-12 months | Advanced analytics, multi-school tenancy, SDK optimization |
 
 ### 5.4 Design Principles
 
-- **Precision over speed:** Recognition accuracy is paramount.
-- **Privacy by design:** Biometric data treated as sensitive PII.
-- **Offline-first (future):** Offline capture capability with later synchronization.
-- **API-First:** OpenAPI contracts as source of truth.
-- **Observability by Design:** Logs, metrics, and tracing from day one.
+- Precision over speed: Recognition accuracy is paramount.
+- Privacy by design: Biometric data treated as sensitive PII.
+- Offline-first (future): Offline capture capability with later synchronization.
+- API-First: OpenAPI contracts as source of truth.
+- Observability by Design: Logs, metrics, and tracing from day one.
 
 ---
 
@@ -347,7 +347,7 @@ The proposed solution is a comprehensive software system based on a polyglot mic
 
 ### 6.1 Architectural Style
 
-The system implements a **Polyglot Microservices** architecture with **Hexagonal Architecture** (Ports and Adapters) and **Domain-Driven Design** (Bounded Contexts).
+The system implements a Polyglot Microservices architecture with Hexagonal Architecture (Ports and Adapters) and Domain-Driven Design (Bounded Contexts).
 
 ### 6.2 Container Diagram (C4)
 
@@ -456,7 +456,7 @@ Each microservice follows the Ports and Adapters pattern:
 └─────────────────────────────────────────────────────────┘
 ```
 
-**Dependency rule:** `infrastructure → application → domain` (always inward).
+Dependency rule: `infrastructure → application → domain` (always inward).
 
 ### 6.5 Adopted Architectural Patterns
 
@@ -487,89 +487,89 @@ Each microservice follows the Ports and Adapters pattern:
 
 ### 7.1 Summary
 
-- **29 SQL tables** in PostgreSQL 17 (8 schemas)
-- **2 MongoDB collections** for biometric data (facial + fingerprint)
-- **28 entities** + **4 Value Objects**
-- **Normalization:** 3NF in the core with 0 intentional denormalizations
+- 29 SQL tables in PostgreSQL 17 (8 schemas)
+- 2 MongoDB collections for biometric data (facial + fingerprint)
+- 28 entities + 4 Value Objects
+- Normalization: 3NF in the core with 0 intentional denormalizations
 
 ### 7.2 PostgreSQL Schemas
 
 | Schema | Tables | Description |
 |--------|--------|-------------|
-| **identity** | person, app_user, user_session, password_policy | Identity and credentials |
-| **authorization** | role, permission, role_permission, user_role | RBAC |
-| **academic** | school, program, academic_period, cohort, course, academic_actor_type, academic_actor, enrollment | Academic structure |
-| **scheduling** | environment, schedule_block, class_session | Schedules and sessions |
-| **attendance** | attendance_record, justification_type, justification, supporting_document, attendance_report | Attendance |
-| **configuration** | academic_configuration, security_configuration, biometric_update_case | Configuration |
-| **notification** | alert_type, alert | Alerts |
-| **biometric** | (empty - uses MongoDB) | Schema only |
-| **quality** | quality_project, quality_evaluation, quality_evaluation_item, process_assessment, process_assessment_rating, istqb_assessment, istqb_assessment_item | Quality |
+| identity | person, app_user, user_session, password_policy | Identity and credentials |
+| authorization | role, permission, role_permission, user_role | RBAC |
+| academic | school, program, academic_period, cohort, course, academic_actor_type, academic_actor, enrollment | Academic structure |
+| scheduling | environment, schedule_block, class_session | Schedules and sessions |
+| attendance | attendance_record, justification_type, justification, supporting_document, attendance_report | Attendance |
+| configuration | academic_configuration, security_configuration, biometric_update_case | Configuration |
+| notification | alert_type, alert | Alerts |
+| biometric | (empty - uses MongoDB) | Schema only |
+| quality | quality_project, quality_evaluation, quality_evaluation_item, process_assessment, process_assessment_rating, istqb_assessment, istqb_assessment_item | Quality |
 
 ### 7.3 MongoDB Collections
 
 | Collection | Key Fields |
 |-----------|--------------|
-| **facial_embedding** | person_id, template_version, encoding (128-d), model_version, enrolled_at, is_active |
-| **fingerprint_embedding** | person_id, finger_number, template_version, encoding, model_version, enrolled_at, is_active |
+| facial_embedding | person_id, template_version, encoding (128-d), model_version, enrolled_at, is_active |
+| fingerprint_embedding | person_id, finger_number, template_version, encoding, model_version, enrolled_at, is_active |
 
 ### 7.4 Main Entities by Context
 
 #### Identity
-- **Person:** UUID, document_type, document_number (unique), primer_nombre, segundo_nombre, primer_apellido, segundo_apellido, email, phone, birth_date, status
-- **App_User:** UUID, username, password_hash, status, last_login_at, failed_attempts, locked_until
-- **User_Session:** UUID, session_id (opaque), user_id, status, start_date, end_date, source_ip, user_agent
-- **Password_Policy:** UUID, min_length, require_uppercase, require_lowercase, require_digit, require_special, max_age_days, history_count
+- Person: UUID, document_type, document_number (unique), primer_nombre, segundo_nombre, primer_apellido, segundo_apellido, email, phone, birth_date, status
+- App_User: UUID, username, password_hash, status, last_login_at, failed_attempts, locked_until
+- User_Session: UUID, session_id (opaque), user_id, status, start_date, end_date, source_ip, user_agent
+- Password_Policy: UUID, min_length, require_uppercase, require_lowercase, require_digit, require_special, max_age_days, history_count
 
 #### Authorization
-- **Role:** UUID, name, description, status
-- **Permission:** UUID, name (format: context.resource:action), description
-- **Role_Permission:** role_id, permission_id (composite PK)
-- **User_Role:** user_id, role_id (composite PK)
+- Role: UUID, name, description, status
+- Permission: UUID, name (format: context.resource:action), description
+- Role_Permission: role_id, permission_id (composite PK)
+- User_Role: user_id, role_id (composite PK)
 
 #### Academic
-- **School:** UUID, name, code, address, city_id, status
-- **Program:** UUID, school_id, name, code, duration_hours, status
-- **Academic_Period:** UUID, school_id, name, start_date, end_date, status
-- **Cohort:** UUID, program_id, instructor_id, name, code, start_date, end_date, status
-- **Course:** UUID, school_id, name, code, credits, status
-- **Academic_Actor_Type:** UUID, name (INSTRUCTOR, LEARNER, etc.)
-- **Academic_Actor:** UUID, person_id, actor_type_id, status
-- **Enrollment:** UUID, cohort_id, learner_id, status, enrollment_date
+- School: UUID, name, code, address, city_id, status
+- Program: UUID, school_id, name, code, duration_hours, status
+- Academic_Period: UUID, school_id, name, start_date, end_date, status
+- Cohort: UUID, program_id, instructor_id, name, code, start_date, end_date, status
+- Course: UUID, school_id, name, code, credits, status
+- Academic_Actor_Type: UUID, name (INSTRUCTOR, LEARNER, etc.)
+- Academic_Actor: UUID, person_id, actor_type_id, status
+- Enrollment: UUID, cohort_id, learner_id, status, enrollment_date
 
 #### Scheduling
-- **Environment:** UUID, school_id, name, capacity, status
-- **Schedule_Block:** UUID, environment_id, day_of_week, start_time, end_time
-- **Class_Session:** UUID, cohort_id, course_id, environment_id, session_date, status (Open/Closed/Cancelled)
+- Environment: UUID, school_id, name, capacity, status
+- Schedule_Block: UUID, environment_id, day_of_week, start_time, end_time
+- Class_Session: UUID, cohort_id, course_id, environment_id, session_date, status (Open/Closed/Cancelled)
 
 #### Attendance
-- **Attendance_Record:** UUID, class_session_id, learner_id, status (Present/Absent/Late/Justified), recording_method (FACIAL/MANUAL/IOT/IMPORT), recorded_at, confidence_score
-- **Justification_Type:** UUID, name, description, max_days, requires_document
-- **Justification:** UUID, attendance_record_id, justification_type_id, reason, status (Pending/Approved/Rejected), reviewed_by, reviewed_at
-- **Supporting_Document:** UUID, justification_id, file_name, file_path, file_size, mime_type, uploaded_at
-- **Attendance_Report:** UUID, cohort_id, generated_at, filters (JSONB), result (JSONB)
+- Attendance_Record: UUID, class_session_id, learner_id, status (Present/Absent/Late/Justified), recording_method (FACIAL/MANUAL/IOT/IMPORT), recorded_at, confidence_score
+- Justification_Type: UUID, name, description, max_days, requires_document
+- Justification: UUID, attendance_record_id, justification_type_id, reason, status (Pending/Approved/Rejected), reviewed_by, reviewed_at
+- Supporting_Document: UUID, justification_id, file_name, file_path, file_size, mime_type, uploaded_at
+- Attendance_Report: UUID, cohort_id, generated_at, filters (JSONB), result (JSONB)
 
 #### Biometric
-- **Facial_Embedding (MongoDB):** person_id, template_version, encoding (128-d array), model_version, enrolled_at, is_active
-- **Fingerprint_Embedding (MongoDB):** person_id, finger_number, template_version, encoding, model_version, enrolled_at, is_active
-- **Biometric_Update_Case (SQL):** UUID, person_id, update_type, status (Pending/In_Review/Approved/Rejected), requested_by, reviewed_by
+- Facial_Embedding (MongoDB): person_id, template_version, encoding (128-d array), model_version, enrolled_at, is_active
+- Fingerprint_Embedding (MongoDB): person_id, finger_number, template_version, encoding, model_version, enrolled_at, is_active
+- Biometric_Update_Case (SQL): UUID, person_id, update_type, status (Pending/In_Review/Approved/Rejected), requested_by, reviewed_by
 
 #### Notification
-- **Alert_Type:** UUID, name, severity (INFO/WARNING/CRITICAL), channel (DASHBOARD/EMAIL/PUSH)
-- **Alert:** UUID, alert_type_id, user_id, title, message, status, created_at, resolved_at
+- Alert_Type: UUID, name, severity (INFO/WARNING/CRITICAL), channel (DASHBOARD/EMAIL/PUSH)
+- Alert: UUID, alert_type_id, user_id, title, message, status, created_at, resolved_at
 
 #### Configuration
-- **Academic_Configuration:** UUID, school_id, attendance_threshold, late_tolerance_minutes, justification_window_days
-- **Security_Configuration:** UUID, session_timeout_minutes, max_failed_attempts, lockout_duration_minutes, password_policy_id
+- Academic_Configuration: UUID, school_id, attendance_threshold, late_tolerance_minutes, justification_window_days
+- Security_Configuration: UUID, session_timeout_minutes, max_failed_attempts, lockout_duration_minutes, password_policy_id
 
 ### 7.5 Design Rules
 
-- **No FK between contexts** (only comments, references by UUID)
-- **UUID** for cross-context entities
-- **Soft delete** with `deleted_at`
-- **Audit:** created_at, updated_at, deleted_at, created_by, updated_by, deleted_by, row_version
-- **ENUMs** native to PostgreSQL
-- **Naming:** snake_case, singular tables
+- No FK between contexts (only comments, references by UUID)
+- UUID for cross-context entities
+- Soft delete with `deleted_at`
+- Audit: created_at, updated_at, deleted_at, created_by, updated_by, deleted_by, row_version
+- ENUMs native to PostgreSQL
+- Naming: snake_case, singular tables
 
 ### 7.6 Business Rules (Summary)
 
@@ -623,21 +623,21 @@ Each microservice follows the Ports and Adapters pattern:
 
 ### 8.3 Authentication
 
-**Mechanism:** `Authorization: Bearer <sessionId>` where sessionId is an opaque UUID (never JWT).
+Mechanism: `Authorization: Bearer <sessionId>` where sessionId is an opaque UUID (never JWT).
 
-**Login Flow:**
+Login Flow:
 1. `POST /api/v1/auth/login` with `{identifier (email|username), password}`
 2. Server validates credentials with BCrypt
 3. A `user_session` is created with UUID sessionId
 4. Response: `{sessionId, userId, sessionStatus, startDate, endDate, sourceIp}`
 5. Failures always return 401 "Invalid email or password" (no user enumeration)
 
-**Session lifecycle:**
+Session lifecycle:
 - 480-minute lifetime (`session_timeout_minutes`) from `start_date`; expiry is lazy: it is applied when the session is read.
 - `POST /api/v1/auth/refresh` with `{sessionId}` rotates the session: it returns a new sessionId and closes the old one (single use; 401 if expired or already refreshed).
 - `POST /api/v1/auth/logout?sessionId=<UUID>` closes the session (204).
 
-**Validation:**
+Validation:
 - Kong (edge): a global Lua *pre-function* requires `Bearer <UUID>` on every non-public route (public: login, login/verify, refresh, logout, forgot-password, verify-code, reset-password, `POST /api/v1/onboarding/schools` and health) and validates it with `GET /api/v1/sessions/{id}` against ms-identity, with a 10 s cache. No `jwt` plugin and no identity headers injected.
 - Each service re-validates on its own: session against ms-identity (`/api/v1/sessions/{id}`) and permissions against ms-authorization (`/api/v1/users/{id}/roles` + `/api/v1/auth/evaluate?userId&permission`). Java (01/02/04/05): `AuthTokenFilter`; TypeScript (03/07/08/09): `authGuard.ts`; Python (06): `security.py`.
 
@@ -653,7 +653,7 @@ Each microservice follows the Ports and Adapters pattern:
 | Attendance | AttendanceRecorded, LateArrivalDetected, AbsenceDetected, JustificationRequested, SupportingDocumentUploaded, JustificationApproved, JustificationRejected |
 | Notification | AlertRaised, AlertResolved |
 
-**Delivery guarantees:** At-least-once with idempotent handlers, Dead Letter Queue (DLQ) with 3-5 retries, exponential backoff, 7-day retention.
+Delivery guarantees: At-least-once with idempotent handlers, Dead Letter Queue (DLQ) with 3-5 retries, exponential backoff, 7-day retention.
 
 ### 8.5 OpenAPI Contracts
 
@@ -686,18 +686,18 @@ All services have OpenAPI 3.0.3 specifications in `07-api/contracts/openapi/`:
 
 ### 9.2 Data Protection
 
-- **Biometric data as PII:** Facial embeddings and fingerprint templates are treated as sensitive personal information.
-- **Law 1581:** Compliance with Colombian personal data protection regulations.
-- **Consent:** Explicit consent required for biometric registration.
-- **Encryption at rest:** Sensitive data encrypted in the database.
-- **Encryption in transit:** All communications use HTTPS/TLS.
+- Biometric data as PII: Facial embeddings and fingerprint templates are treated as sensitive personal information.
+- Law 1581: Compliance with Colombian personal data protection regulations.
+- Consent: Explicit consent required for biometric registration.
+- Encryption at rest: Sensitive data encrypted in the database.
+- Encryption in transit: All communications use HTTPS/TLS.
 
 ### 9.3 Biometric Validation
 
-- **Liveness Detection (facial):** Liveness verification through blink and movement detection.
-- **Fingerprint capture:** Via DigitalPersona 4500 SDK with fingerprint quality validation.
-- **Biometric Rate Limiting:** Maximum 20 attempts per 60-second window.
-- **Secure storage:** Facial embeddings and fingerprint templates encrypted in MongoDB.
+- Liveness Detection (facial): Liveness verification through blink and movement detection.
+- Fingerprint capture: Via DigitalPersona 4500 SDK with fingerprint quality validation.
+- Biometric Rate Limiting: Maximum 20 attempts per 60-second window.
+- Secure storage: Facial embeddings and fingerprint templates encrypted in MongoDB.
 
 ### 9.4 Security Technical Debt
 
@@ -715,9 +715,9 @@ All services have OpenAPI 3.0.3 specifications in `07-api/contracts/openapi/`:
 
 | Environment | Description |
 |---------|-------------|
-| **Development** | Local Docker Compose with all dependencies |
-| **Staging** | Production replica with test data |
-| **Production** | Deployment with monitoring and alerts |
+| Development | Local Docker Compose with all dependencies |
+| Staging | Production replica with test data |
+| Production | Deployment with monitoring and alerts |
 
 ### 10.2 Ports
 
@@ -775,17 +775,17 @@ SMTP_PORT=1025
 
 ### 10.4 CI/CD
 
-- **Jenkins** for continuous integration
-- **GitHub Actions** for automated checks
-- **Liquibase migrations** for database versioning
-- **Docker** for consistent packaging
+- Jenkins for continuous integration
+- GitHub Actions for automated checks
+- Liquibase migrations for database versioning
+- Docker for consistent packaging
 
 ### 10.5 Observability
 
-- **Logs:** Structured JSON (Pino for TS, structlog for Python)
-- **Metrics:** RED (Rate, Errors, Duration)
-- **Tracing:** OpenTelemetry for distributed tracing
-- **Alerts:** Configured for response time < 5 min
+- Logs: Structured JSON (Pino for TS, structlog for Python)
+- Metrics: RED (Rate, Errors, Duration)
+- Tracing: OpenTelemetry for distributed tracing
+- Alerts: Configured for response time < 5 min
 
 ---
 
@@ -793,20 +793,20 @@ SMTP_PORT=1025
 
 ### 11.1 Methodology
 
-- **Framework:** Agile with 2-week sprints
-- **Approach:** TDD (Test-Driven Development)
-- **Documentation:** SDD (Software Design Documentation) - design before code
+- Framework: Agile with 2-week sprints
+- Approach: TDD (Test-Driven Development)
+- Documentation: SDD (Software Design Documentation) - design before code
 
 ### 11.2 Project Phases
 
 | Phase | Activities | Duration |
 |------|-------------|----------|
-| **Phase 1: Discovery** | Problem analysis, user research, benchmarking | Week 1 |
-| **Phase 2: Definition** | Requirements definition, user stories, scope | Week 2 |
-| **Phase 3: Detailed Design** | Architecture, data model, API contracts, ADRs | Weeks 2-3 |
-| **Phase 4: Implementation** | TDD development of microservices and frontend | Weeks 3-10 |
-| **Phase 5: Testing** | Unit, integration, E2E tests, IEEE 829 | Weeks 8-12 |
-| **Phase 6: Deployment** | Production configuration, monitoring, go-live | Weeks 12-14 |
+| Phase 1: Discovery | Problem analysis, user research, benchmarking | Week 1 |
+| Phase 2: Definition | Requirements definition, user stories, scope | Week 2 |
+| Phase 3: Detailed Design | Architecture, data model, API contracts, ADRs | Weeks 2-3 |
+| Phase 4: Implementation | TDD development of microservices and frontend | Weeks 3-10 |
+| Phase 5: Testing | Unit, integration, E2E tests, IEEE 829 | Weeks 8-12 |
+| Phase 6: Deployment | Production configuration, monitoring, go-live | Weeks 12-14 |
 
 ### 11.3 Gantt Chart
 
@@ -865,7 +865,7 @@ SMTP_PORT=1025
 | AI/Facial Recognition Specialist | 5,000,000 | 3 | 15,000,000 |
 | Database Administrator | 10,000,000 | 3 | 30,000,000 |
 | Hardware/IoT Engineer | 10,000,000 | 2 | 20,000,000 |
-| **TOTAL HUMAN RESOURCES** | | | **161,000,000** |
+| TOTAL HUMAN RESOURCES | | | 161,000,000 |
 
 ### 13.2 Vendors and Technologies
 
@@ -893,9 +893,9 @@ SMTP_PORT=1025
 | Human Resources | 161,000,000 |
 | Hardware (economic option) | 7,200,000 |
 | Software (Open Source) | 0 |
-| **ESTIMATED TOTAL** | **168,200,000** |
+| ESTIMATED TOTAL | 168,200,000 |
 
-**Estimated minimum budget:** $163,800,000 COP
+Estimated minimum budget: $163,800,000 COP
 
 ---
 
@@ -905,10 +905,10 @@ SMTP_PORT=1025
 
 | Standard | Application |
 |----------|------------|
-| **IEEE 829** | Software test documentation |
-| **ISO 25010** | Software product quality model |
-| **ISO 29110** | Processes for small software systems |
-| **ISTQB** | Software testing certification |
+| IEEE 829 | Software test documentation |
+| ISO 25010 | Software product quality model |
+| ISO 29110 | Processes for small software systems |
+| ISTQB | Software testing certification |
 
 ### 14.2 Testing Strategy
 
@@ -972,16 +972,16 @@ SMTP_PORT=1025
 
 | Term | Definition |
 |---------|------------|
-| **Bounded Context** | Delimited context in DDD where a domain model is consistent |
-| **Liveness Detection** | Verification that the captured face belongs to a living person |
-| **Embedding** | 128-dimensional numerical vector representing facial characteristics |
-| **SessionId** | Opaque identifier (UUID) of an `identity.user_session` row; used as the Bearer token and validated against ms-identity |
-| **RBAC** | Role-based access control |
-| **Saga** | Pattern for managing distributed transactions |
-| **DLQ** | Dead Letter Queue - queue of messages that could not be processed |
-| **ADR** | Architecture Decision Record - architectural decision document |
-| **TDD** | Test-Driven Development - test-driven development |
-| **SDD** | Software Design Documentation - software design documentation |
+| Bounded Context | Delimited context in DDD where a domain model is consistent |
+| Liveness Detection | Verification that the captured face belongs to a living person |
+| Embedding | 128-dimensional numerical vector representing facial characteristics |
+| SessionId | Opaque identifier (UUID) of an `identity.user_session` row; used as the Bearer token and validated against ms-identity |
+| RBAC | Role-based access control |
+| Saga | Pattern for managing distributed transactions |
+| DLQ | Dead Letter Queue - queue of messages that could not be processed |
+| ADR | Architecture Decision Record - architectural decision document |
+| TDD | Test-Driven Development - test-driven development |
+| SDD | Software Design Documentation - software design documentation |
 
 ### 16.2 References
 
@@ -997,11 +997,11 @@ International Software Testing Qualifications Board. (2018). *Certified Tester F
 
 ### 16.3 Repository
 
-- **Documentation:** `fae-docs/`
-- **Source code:** `ProyectoFaceAttendEDU/`
+- Documentation: `fae-docs/`
+- Source code: `ProyectoFaceAttendEDU/`
 
 ---
 
-**End of document**
+End of document
 
 *Document generated for the FaceAttend EDU project - SENA Software Analysis and Development 3145556*
