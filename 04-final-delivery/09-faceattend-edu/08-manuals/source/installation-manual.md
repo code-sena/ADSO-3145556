@@ -36,6 +36,7 @@ Every modification to this manual must be recorded before the document is submit
 |-------------|------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------|
 | 1.0         | 06/10/2026 | Initial creation of the installation manual. Documents the deployment of the full set of 18 containers, configuration by means of the single environment file, the chain of versioned migrations, and the verification procedure. | Development team |
 | 1.1         | 06/10/2026 | Application of the APA standards in their 7th edition and alignment with the common structure of the project manuals.                                                                           | Development team |
+| 1.2         | 08/11/2026 | Alignment with the delivered version: generation of passwords and keys, creation of the first administrator, gateway port 8000, project folder, and container count. | Development team |
 
 *Note.* Minor changes, such as wording adjustments or the addition of screenshots, increment the second digit; changes that alter the installation procedure increment the first.
 
@@ -356,13 +357,13 @@ It is worth understanding the nature of what is to be installed before starting 
 
 The system is built on a microservice architecture. Instead of a single large program, it is composed of nine independent services, each responsible for a delimited portion of the business: identity, authorization, academic management, scheduling, attendance, biometrics, configuration, notifications, and quality. In front of them operates a gateway that receives all of the requests and directs them to the corresponding service; behind them sit the databases and the messaging broker.
 
-Installing this set manually would be unfeasible, since each service is implemented in a different programming language — Java, TypeScript, Python, and Go — and has its own dependencies. For this reason, the project uses containers, a mechanism that packages each service together with all of its runtime requirements (Docker Inc., n.d.-a), and an orchestration tool that deploys the eighteen containers in the correct order with a single command (Docker Inc., n.d.-b).
+Installing this set manually would be unfeasible, since each service is implemented in a different programming language — Java, TypeScript, and Python — and has its own dependencies. For this reason, the project uses containers, a mechanism that packages each service together with all of its runtime requirements (Docker Inc., n.d.-a), and an orchestration tool that deploys the twenty-five containers in the correct order with a single command (Docker Inc., n.d.-b).
 
-The practical consequence of this decision is relevant for the installer: there is no need to install Java, Node.js, Python, or Go on the machine, since the container platform downloads and runs them inside each container. Only Docker and Git are required. Manual installation of the languages is described in the Installation Without Containers section and is only necessary when the source code is to be modified.
+The practical consequence of this decision is relevant for the installer: there is no need to install Java, Node.js, or Python on the machine, since the container platform downloads and runs them inside each container. Only Docker and Git are required. Manual installation of the languages is described in the Installation Without Containers section and is only necessary when the source code is to be modified.
 
 ## System Components
 
-The complete deployment brings up eighteen containers, grouped into three layers. Tables 3, 4, and 5 detail the components of the presentation layer, the application layer, and the data layer, respectively.
+The complete deployment brings up twenty-five containers: sixteen that stay running and nine one-off tasks that prepare the database and then stop. They are grouped into three layers. Tables 3, 4, and 5 detail the components of the presentation layer, the application layer, and the data layer, respectively.
 
 **Table 3**
 
@@ -378,7 +379,7 @@ The complete deployment brings up eighteen containers, grouped into three layers
 
 | **Container**     | **Technology**          | **Port**     | **Function**                                                                               |
 |-------------------|-------------------------|--------------|--------------------------------------------------------------------------------------------|
-| kong-gateway      | Kong OSS 3.6            | 8080 and 8001| Gateway: routes requests, applies the cross-origin policy and the rate limit               |
+| kong-gateway      | Kong OSS 3.6            | 8000         | Gateway: routes requests, applies the cross-origin policy and the rate limit               |
 | ms-identity       | Java 21 and Spring Boot | 8081         | Persons, users, credentials, and sessions                                                  |
 | ms-authorization  | Java 21 and Spring Boot | 8082         | Roles and permissions                                                                      |
 | ms-academic       | TypeScript and Fastify  | 8083         | Campuses, programs, periods, cohorts, courses, and enrollments                             |
@@ -386,7 +387,7 @@ The complete deployment brings up eighteen containers, grouped into three layers
 | ms-attendance     | Java 21 and Spring Boot | 8085         | Attendance records and justifications                                                      |
 | ms-biometric      | Python 3.12 and FastAPI | 8086         | Facial and fingerprint biometric vectors                                                   |
 | ms-configuration  | TypeScript and Fastify  | 8087         | Academic and security parameters                                                           |
-| ms-notification   | Go 1.22 and Gin         | 8088         | Alerts and email sending                                                                   |
+| ms-notification   | TypeScript and Fastify  | 8088         | Alerts and email sending                                                                   |
 | ms-quality        | TypeScript and Fastify  | 8089         | Quality assessment instrument                                                              |
 | redis             | Redis 7                 | 6379         | Store for the gateway's rate limit                                                         |
 
@@ -401,7 +402,9 @@ The complete deployment brings up eighteen containers, grouped into three layers
 | postgres             | PostgreSQL 17  | 5432           | Main database, organized into eight schemas, one per bounded context                                    |
 | mongodb              | MongoDB 7      | 27017          | Storage of the biometric vectors                                                                        |
 | kafka                | Kafka 3.8      | 9092           | Messaging of domain events between services                                                             |
+| minio                | MinIO          | Not published  | Encrypted storage of the supporting documents of the justifications                                      |
 | Migrations (eight)   | Liquibase 4.29 | Not applicable | Temporary tasks that create the tables and load the initial data; they run, finish, and stop            |
+| db-service-logins    | PostgreSQL 17  | Not applicable | Temporary task that creates one database login per service, limited to its own schema                   |
 
 ## Network Organization
 
@@ -418,7 +421,7 @@ The containers are distributed across three networks isolated from one another. 
 |                           |                                         |
 |   +---------------------+ network: faceattend-edge                   |
 |                           |                                         |
-|   --:8080--> kong-gateway -------------> redis                       |
+|   --:8000--> kong-gateway -------------> redis                       |
 |                           |  network: faceattend-app                 |
 |                           v                                         |
 |   ms-identity · ms-authorization · ms-academic · ms-scheduling       |
@@ -426,14 +429,14 @@ The containers are distributed across three networks isolated from one another. 
 |   ms-notification · ms-quality (ports 8081 to 8089)                  |
 |                           |                                         |
 |                           v  network: faceattend-data                |
-|   postgres · mongodb · kafka · migrations (eight)                    |
+|   postgres · mongodb · kafka · minio · one-off tasks (nine)          |
 |                                                                     |
 +---------------------------------------------------------------------+
 ```
 
-*Note.* Only ports 8080, intended for the application programming interface, and 8090, intended for the web interface, remain open to the outside. The remainder listen exclusively on the loopback address 127.0.0.1, in accordance with the value of the BIND_IP variable.
+*Note.* Only ports 8000, intended for the application programming interface, and 8090, intended for the web interface, remain open to the outside. The remainder listen exclusively on the loopback address 127.0.0.1, in accordance with the value of the BIND_IP variable.
 
-For the installer, this organization means that, once the system is deployed, only two addresses are needed: http://localhost:8090 for the graphical interface and http://localhost:8080 for the application programming interface. The databases are not exposed and must not be opened to the outside.
+For the installer, this organization means that, once the system is deployed, only two addresses are needed: http://localhost:8090 for the graphical interface and http://localhost:8000 for the application programming interface. The databases are not exposed and must not be opened to the outside.
 
 # Prerequisites
 
@@ -441,7 +444,7 @@ All of the requirements in this section must be verified before downloading the 
 
 ## Hardware Requirements
 
-The deployment brings up eighteen simultaneous containers, four of which run a Java virtual machine. Memory consumption is therefore considerable, and it is the requirement that is most frequently not met.
+The deployment keeps sixteen containers running at the same time, four of which run a Java virtual machine. Memory consumption is therefore considerable, and it is the requirement that is most frequently not met.
 
 **Table 6**
 
@@ -481,7 +484,7 @@ Only two tools are required, since the container platform provides the rest of t
 | **Tool**        | **Minimum version** | **Source**                  | **Verification command**  | **Purpose**                                       |
 |-----------------|---------------------|-----------------------------|---------------------------|---------------------------------------------------|
 | Docker          | 24.0                | docker.com                  | docker --version          | Run each service in its own container             |
-| Docker Compose  | 2.20                | Included in Docker Desktop  | docker compose version    | Deploy and coordinate the eighteen containers     |
+| Docker Compose  | 2.20                | Included in Docker Desktop  | docker compose version    | Deploy and coordinate the twenty-five containers  |
 | Git             | 2.40                | git-scm.com                 | git --version             | Download the source code from the repository      |
 
 **Note.** The orchestration tool supports two invocation forms. Current versions use `docker compose`, in two words, since it is a Docker subcommand; earlier versions used `docker-compose`, with a hyphen, since it was a standalone program. This manual always uses the current form. If the machine only recognizes the hyphenated form, the platform must be updated: the project uses the *include* directive, which requires version 2.20 or higher.
@@ -512,9 +515,8 @@ The system requires fifteen free ports. When one of them is occupied by another 
 
 | **Port**     | **Service**                | **Exposure**         | **Frequent conflict**                                                      |
 |--------------|----------------------------|----------------------|----------------------------------------------------------------------------|
-| 8080         | Gateway                    | The whole network    | Tomcat, Jenkins, or another application server                             |
+| 8000         | Gateway                    | The whole network    | Development servers such as Django, PHP, or Portainer                      |
 | 8090         | Web interface              | The whole network    | Infrequent                                                                 |
-| 8001         | Gateway administration     | Local machine only   | Infrequent                                                                 |
 | 8081 to 8089 | The nine microservices     | Local machine only   | Ports 8081 and 8085 are often occupied by other development environments   |
 | 5432         | PostgreSQL                 | Local machine only   | Very frequent: a prior PostgreSQL installation on the machine              |
 | 27017        | MongoDB                    | Local machine only   | A prior MongoDB installation                                               |
@@ -544,8 +546,6 @@ During the first installation, the machine downloads container images and depend
 > • repo.maven.apache.org, for the dependencies of the Java services.
 >
 > • pypi.org, for the dependencies of the Python service.
->
-> • proxy.golang.org, for the dependencies of the Go service.
 >
 > • github.com, for downloading the project source code.
 
@@ -626,10 +626,10 @@ cd ~/Documents                  # Linux and macOS
 git clone https://github.com/Jonas7891/ProyectoFaceAttendEDU.git
 
 # 3. Enter the folder containing the code
-cd ProyectoFaceAttendEDU/FULL
+cd ProyectoFaceAttendEDU
 ```
 
-**Warning.** All of the commands in this manual are run from the FULL folder, the root of the source code. It is the only folder from which the orchestration tool locates the configuration file and the files of the system's three tiers. Running them from another location produces configuration-not-found errors.
+**Warning.** All of the commands in this manual are run from the ProyectoFaceAttendEDU folder, the root of the repository. It is the only folder from which the orchestration tool locates the configuration file and the files of the system's three tiers. Running them from another location produces configuration-not-found errors.
 
 ### Second Route: Compressed Archive
 
@@ -637,7 +637,7 @@ When the project is received as a compressed archive, proceed as follows:
 
 > 1\. Extract the archive to a path whose name contains no spaces or accented characters, since such paths cause problems in some container platform commands.
 >
-> 2\. Open a terminal inside the resulting FULL folder.
+> 2\. Open a terminal inside the resulting ProyectoFaceAttendEDU folder.
 
 ## Verifying the Project Structure
 
@@ -648,7 +648,7 @@ Confirm that the root folder contains the elements represented in Figure 2.
 *Project folder structure*
 
 ```
-FULL/
+ProyectoFaceAttendEDU/
 |
 +-- .env.example            configuration template
 +-- docker-compose.yml      main orchestrator, entry point
@@ -662,7 +662,7 @@ FULL/
 |   +-- 05-ms-attendance/      Java 21 and Spring Boot
 |   +-- 06-ms-biometric/       Python 3.12 and FastAPI
 |   +-- 07-ms-configuration/   TypeScript and Fastify
-|   +-- 08-ms-notification/    Go 1.22 and Gin
+|   +-- 08-ms-notification/    TypeScript and Fastify
 |   +-- 09-ms-quality/         TypeScript and Fastify
 |   +-- 99-api-gateway/        Kong OSS 3.6
 |
@@ -688,14 +688,14 @@ ls -la   # Linux and macOS
 
 # Initial Configuration
 
-All of the system configuration resides in a single file, named .env, located at the root of the FULL folder. The orchestration tool reads it automatically and distributes its values across the eighteen containers.
+All of the system configuration resides in a single file, named .env, located at the root of the ProyectoFaceAttendEDU folder. The orchestration tool reads it automatically and distributes its values across the twenty-five containers.
 
 ## Creating the Configuration File
 
 The project includes a documented template named .env.example. The first configuration step is to copy it under the name .env:
 
 ```bash
-# From the FULL folder
+# From the ProyectoFaceAttendEDU folder
 copy .env.example .env         # Windows, command interpreter
 Copy-Item .env.example .env    # Windows, PowerShell
 cp .env.example .env           # Linux and macOS
@@ -703,7 +703,39 @@ cp .env.example .env           # Linux and macOS
 
 **Verification.** Using the command `dir .env` on Windows, or `ls -la .env` on Linux and macOS, confirm that the file exists and occupies approximately 3 kilobytes.
 
-**Note.** For a local installation it is not necessary to modify any value, since all of the variables have functional default values. The reader may continue directly with the Bringing the System Up section and return to this section only if a port needs to be changed or if a failure occurs.
+**Note.** The template leaves every password and encryption key empty on purpose, so that no published value can open an installation. The orchestration tool refuses to start while any of them is missing, with a message such as `POSTGRES_PASSWORD is required`. They are generated once, as described in the next subsection; the remaining variables already have working default values.
+
+## Generating the Passwords and Keys
+
+The following commands fill in the nineteen empty values of the .env file. They are run once, from the ProyectoFaceAttendEDU folder, in Git Bash on Windows or in the terminal on Linux and macOS; Git Bash includes the openssl tool.
+
+```bash
+# Remove Windows line endings, so that the replacements find every line
+sed -i 's/\r$//' .env
+
+# Passwords and tokens: 48 hexadecimal characters each
+for v in POSTGRES_PASSWORD IDENTITY_DB_PASSWORD AUTHORIZATION_DB_PASSWORD \
+         ACADEMIC_DB_PASSWORD SCHEDULING_DB_PASSWORD ATTENDANCE_DB_PASSWORD \
+         CONFIGURATION_DB_PASSWORD QUALITY_DB_PASSWORD NOTIFICATION_DB_PASSWORD \
+         MONGO_PASSWORD MINIO_ROOT_PASSWORD EMAIL_INTERNAL_TOKEN \
+         BIOMETRIC_LIVENESS_CHALLENGE_SECRET; do
+  sed -i "s|^$v=$|$v=$(openssl rand -hex 24)|" .env
+done
+
+# Encryption keys: base64 of 32 random bytes each
+for v in BIOMETRIC_ENCRYPTION_KEY PII_ENCRYPTION_KEY PII_HASH_KEY; do
+  sed -i "s|^$v=$|$v=$(openssl rand -base64 32)|" .env
+done
+
+# User names and the key of the document storage
+sed -i "s|^MONGO_USER=$|MONGO_USER=faceattend|" .env
+sed -i "s|^MINIO_ROOT_USER=$|MINIO_ROOT_USER=faceattend|" .env
+sed -i "s|^MINIO_KMS_SECRET_KEY=$|MINIO_KMS_SECRET_KEY=faceattend-key:$(openssl rand -base64 32)|" .env
+```
+
+**Verification.** The command `docker compose config --quiet` finishes without printing anything. If a value is still missing, it names the variable.
+
+**Warning.** BIOMETRIC_ENCRYPTION_KEY, PII_ENCRYPTION_KEY, PII_HASH_KEY, and MINIO_KMS_SECRET_KEY encrypt the stored data: without them, the biometric templates, the personal data, and the supporting documents cannot be read. A copy of the .env file must be kept in a safe place.
 
 **Warning.** The configuration file is never added to the repository. It is deliberately excluded, since it contains credentials. The template values constitute development credentials and not production secrets. For a production environment, all of the passwords must be changed and managed by means of operating system variables or a secrets manager, and never by means of a file belonging to the project.
 
@@ -718,7 +750,7 @@ The file is organized into thematic blocks. The following tables constitute the 
 | **Variable**               | **Default value**          | **Element it controls**                                                                      |
 |----------------------------|----------------------------|----------------------------------------------------------------------------------------------|
 | POSTGRES_USER              | postgres                   | Database administrator user                                                                  |
-| POSTGRES_PASSWORD          | YOUR_VALUE                   | Password of that user; must be changed in production                                         |
+| POSTGRES_PASSWORD          | Empty, required            | Password of that user; generated as described above                                          |
 | POSTGRES_DB                | faceattend_db              | Name of the database that contains the eight schemas                                         |
 | POSTGRES_PORT              | 5432                       | Port on the host machine; must be changed if a prior PostgreSQL installation exists          |
 | FACEATTEND_LIQUIBASE_IMAGE | liquibase/liquibase:4.29.0 | Image that runs the eight migrations                                                         |
@@ -729,8 +761,8 @@ The file is organized into thematic blocks. The following tables constitute the 
 
 | **Variable**   | **Default value**     | **Element it controls**                                            |
 |----------------|-----------------------|--------------------------------------------------------------------|
-| MONGO_USER     | mongoadmin            | User of the document database                                      |
-| MONGO_PASSWORD | YOUR_VALUE             | Password of that user; must be changed in production               |
+| MONGO_USER     | Empty, required       | User of the document database                                      |
+| MONGO_PASSWORD | Empty, required       | Password of that user; generated as described above                |
 | MONGO_DB       | faceattend_biometric  | Database where the facial and fingerprint vectors are stored       |
 | MONGO_PORT     | 27017                 | Port on the host machine                                           |
 
@@ -742,8 +774,8 @@ The file is organized into thematic blocks. The following tables constitute the 
 |-----------------|-------------------|-----------------------------------------------------------------------------|
 | REDIS_PORT      | 6379              | Port of the store that supports the rate limit                              |
 | KAFKA_PORT      | 9092              | Port of the domain event broker                                             |
-| KONG_PROXY_PORT | 8080              | Port through which all requests to the programming interface arrive         |
-| KONG_ADMIN_PORT | 8001              | Gateway administration port, of local scope                                 |
+| KONG_PROXY_PORT | 8000              | Port through which all requests to the programming interface arrive         |
+| KONG_ADMIN_PORT | 8001              | Reserved: the administration interface is not published to the host        |
 
 **Table 15**
 
@@ -753,20 +785,18 @@ The file is organized into thematic blocks. The following tables constitute the 
 |---------------------|-----------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | BIND_IP             | 127.0.0.1             | Address to which the internal ports are bound. With the default value they are accessible only from the machine itself; with the value 0.0.0.0 they become visible across the whole local network |
 | FRONTEND_PORT       | 8090                  | Port of the web interface                                                                                                                                     |
-| EXPO_PUBLIC_API_URL | http://localhost:8080 | Address of the programming interface used by the browser                                                                                                      |
+| EXPO_PUBLIC_API_URL | Empty                 | Address of the gateway used by the browser. When empty, the web application uses the host of the page itself with port 8000                                   |
 
 **Warning.** The EXPO_PUBLIC_API_URL variable is not read at startup; instead it is baked into the web application bundle at the moment the image is built. Changing it therefore requires rebuilding the interface with the command `docker compose up -d --build frontend-web`; restarting the system is not enough. This circumstance is the most frequent cause of the interface loading but failing to connect to the programming interface.
 
 **Table 16**
 
-*Initial users and test data variables*
+*First administrator variables*
 
 | **Variable**       | **Default value**     | **Element it controls**                                                     |
 |--------------------|-----------------------|-----------------------------------------------------------------------------|
-| BOOTSTRAP_USERNAME | admin.faceattend      | Administrator user created automatically by the migrations                  |
-| BOOTSTRAP_PASSWORD | YOUR_PASSWORD     | Password of that user; must be changed after the first login                |
-| SEED_USERNAME      | seed.admin            | User employed by the test data loading tool                                 |
-| SEED_PASSWORD      | YOUR_PASSWORD         | Password of that user                                                       |
+| BOOTSTRAP_USERNAME | Empty                 | User of the first Super Administrator, created as described in Creating the First Administrator |
+| BOOTSTRAP_PASSWORD | Empty                 | Its current password; the test data tool signs in with this pair            |
 
 ## Customization Cases
 
@@ -782,13 +812,13 @@ The procedure comprises three modifications and one rebuild. First, find out the
 
 > BIND_IP=0.0.0.0
 >
-> EXPO_PUBLIC_API_URL=http://192.168.1.10:8080
+> EXPO_PUBLIC_API_URL=http://192.168.1.10:8000
 
 Finally, rebuild the web interface:
 
 > docker compose up -d --build frontend-web
 
-**Warning.** The gateway only accepts requests coming from three preconfigured origins. To serve the application from another address, that address must be added to the list of allowed origins in the gateway configuration. Likewise, the value 127.0.0.1 must be restored to the BIND_IP variable when the test finishes, since the value 0.0.0.0 exposes the databases to the entire local network.
+**Warning.** The gateway only accepts requests coming from the origins listed in the KONG_CORS_ORIGINS variable. To serve the application from another address, that address must be added to that variable. Likewise, the value 127.0.0.1 must be restored to the BIND_IP variable when the test finishes, since the value 0.0.0.0 exposes the databases to the entire local network.
 
 ### Third Case: The Gateway Port Is Occupied
 
@@ -820,11 +850,11 @@ And configure the following variables:
 
 # Bringing the System Up
 
-With the project downloaded and the configuration file created, the system is deployed with a single command. The database, the tables, and the initial data are created automatically.
+With the project downloaded and the configuration file created, the system is deployed with a single command. The database, the tables, and the catalogs are created automatically; user accounts are not, as explained in Creating the First Administrator.
 
 ## Deploying the System
 
-From the FULL folder, with the container platform running, use the following command:
+From the ProyectoFaceAttendEDU folder, with the container platform running, use the following command:
 
 > docker compose up -d --build
 
@@ -836,7 +866,7 @@ The command breaks down as follows:
 >
 > • The --build option builds the service images before starting them; it is mandatory on the first run.
 
-**Warning.** The first run takes a long time, since the platform must download the base images and compile the nine services in four different languages. The estimated time ranges between fifteen and forty minutes, depending on the connection speed and the capacity of the machine. Subsequent runs take between one and three minutes, since they reuse the previously built components. The process must not be interrupted; if it is cancelled, simply run the same command again.
+**Warning.** The first run takes a long time, since the platform must download the base images and compile the nine services in three different languages. The estimated time ranges between fifteen and forty minutes, depending on the connection speed and the capacity of the machine. Subsequent runs take between one and three minutes, since they reuse the previously built components. The process must not be interrupted; if it is cancelled, simply run the same command again.
 
 ## Startup Order
 
@@ -849,7 +879,7 @@ The orchestration tool does not start all of the containers simultaneously, but 
 | **Phase** | **Components that start**                                                                                                                              | **Condition for advancing**                                                                     |
 |-----------|--------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------|
 | 1         | Relational database                                                                                                                                    | The database responds correctly to its health check                                             |
-| 2         | The eight migrations, run consecutively in the order identity, authorization, academic, scheduling, attendance, biometrics, configuration, and notification | Each migration must finish successfully before the next one starts                          |
+| 2         | The eight migrations, run consecutively in the order identity, authorization, academic, scheduling, attendance, biometrics, configuration, and notification, and the task that creates the database login of each service | Each migration must finish successfully before the next one starts                          |
 | 3         | The nine microservices                                                                                                                                 | Each one waits for its own migration and for the database to be in a healthy state              |
 | 4         | Gateway                                                                                                                                                | Waits for the cache store, the messaging broker, and the eight main microservices               |
 | 5         | Web interface                                                                                                                                          | Waits for the gateway to reach the healthy state                                                |
@@ -874,44 +904,59 @@ On subsequent startups, the migration tool detects the previously applied change
 
 ## Initial System Data
 
-On completion of the migrations, the system contains the minimum elements required for its use.
+On completion of the migrations, the system contains its catalogs, but no user account: no published password can open an installation.
 
 **Table 18**
 
 *Predefined system roles*
 
-| **Role**      | **Scope of privileges**                                                                       |
-|---------------|-----------------------------------------------------------------------------------------------|
-| Administrator | Full access: manages users, roles, academic structure, and system configuration               |
-| Instructor    | Teaching: opens and closes class sessions, records attendance, and reviews justifications     |
-| Student       | Queries their own information and submits justifications                                      |
-
-**Table 19**
-
-*Automatically created users*
-
-| **User**              | **Initial password**   | **Assigned role** |
-|-----------------------|------------------------|-------------------|
-| admin.faceattend      | YOUR_PASSWORD      | Administrator     |
-| instructor.faceattend | YOUR_PASSWORD | Instructor        |
-| aprendiz.faceattend   | YOUR_PASSWORD   | Student           |
-
-*Note.* The password suffix expressly warns of the need to change them.
-
-**Warning.** The above credentials are publicly known, since they appear in the project source code. They are acceptable in a development or assessment environment. In any installation accessible to third parties, the three passwords must be changed immediately after the first login and the demonstration accounts that are not going to be used must be deactivated. The procedure is described in the administrator manual.
+| **Role**            | **Scope of privileges**                                                                       |
+|---------------------|-----------------------------------------------------------------------------------------------|
+| Super Administrator | Global administration without a campus: activates campuses and manages the whole platform     |
+| Administrator       | Full access within their campus: users, roles, academic structure, and configuration          |
+| Instructor          | Teaching: opens and closes class sessions, records attendance, and reviews justifications     |
+| Student             | Queries their own information and submits justifications                                      |
 
 The system's base catalogs are also loaded: the permission matrix by role, the academic actor types, the justification types, and the alert types.
 
-## Loading Test Data
+## Creating the First Administrator
 
-When the system is required to be populated with sample campuses, programs, cohorts, courses, and enrollments — a common situation in demonstrations and in user interface testing — the project includes a tool that creates them by means of calls to the programming interface. Running it requires Node.js version 20 or higher installed on the machine, since it does not use containers:
+The first Super Administrator is created with a script, run once from the ProyectoFaceAttendEDU folder in Git Bash on Windows or in the terminal on Linux and macOS. The credentials are chosen by the installer and never stored in the repository.
+
+**Table 19**
+
+*Variables of the first administrator script*
+
+| **Variable**              | **Required** | **Content**                                                    |
+|---------------------------|--------------|----------------------------------------------------------------|
+| BOOTSTRAP_ADMIN_USERNAME  | Yes          | User name of the administrator                                 |
+| BOOTSTRAP_ADMIN_EMAIL     | Yes          | Email address of the administrator                             |
+| BOOTSTRAP_ADMIN_PASSWORD  | Yes          | Temporary password of at least twelve characters               |
+| BOOTSTRAP_ADMIN_DOCUMENT  | No           | Identity document; a generated value is used when it is empty  |
 
 ```bash
-# With the system deployed and all of the services healthy
-cd tools/seed-api-test-data
-npm run seed
+BOOTSTRAP_ADMIN_USERNAME=admin.local \
+BOOTSTRAP_ADMIN_EMAIL=admin@faceattend.local \
+BOOTSTRAP_ADMIN_PASSWORD='<at least 12 characters>' \
+  ./database/scripts/bootstrap-admin.sh
 ```
 
+**Verification.** Signing in at http://localhost:8090 with that user opens the password change screen. The system requires a new password on the first sign-in; until then, the gateway only allows reading and the password change.
+
+**Note.** The script never runs on its own. The accounts admin.faceattend, instructor.faceattend, and aprendiz.faceattend of earlier versions no longer exist in a new installation, and a migration disables them in databases that still had them.
+
+## Loading Test Data
+
+When the system is required to be populated with sample campuses, programs, cohorts, courses, and enrollments — a common situation in demonstrations and in user interface testing — the project includes a tool that creates them by means of calls to the programming interface. It creates one test account per role, listed in Appendix C. Running it requires Node.js version 20 or higher installed on the machine, since it does not use containers:
+
+```bash
+# With the system deployed, all of the services healthy, and the
+# first administrator created with its password already changed
+cd tools/seed-api-test-data
+cp .env.example .env
+# In .env, set BOOTSTRAP_USERNAME and BOOTSTRAP_PASSWORD to that administrator
+npm run seed
+```
 **Verification.** The process finishes with a successful exit code. Running it repeatedly is safe, since the tool detects pre-existing records and continues without duplicating them.
 
 # Verifying the Installation
@@ -922,9 +967,9 @@ The installation must not be considered finished until this section is completed
 
 The verification is considered complete when the following seven conditions are satisfied:
 
-> 1\. The eighteen containers appear in the listing, and the service containers are running and in a healthy state.
+> 1\. The twenty-five containers appear in the listing: the sixteen services are running and in a healthy state, and the nine one-off tasks have finished.
 >
-> 2\. The eight migration tasks finished with a successful exit code.
+> 2\. The nine one-off tasks, the eight migrations and the database logins, finished with a successful exit code.
 >
 > 3\. Each microservice responds to its health check.
 >
@@ -938,9 +983,9 @@ The verification is considered complete when the following seven conditions are 
 
 ## First Test: Container Status
 
-> docker compose ps
+> docker compose ps -a
 
-**Verification.** A table of eighteen rows must be displayed. The microservices, the gateway, the web interface, and the databases must appear as running, and those that incorporate a health check must appear in a healthy state. The eight rows corresponding to the migrations must appear with a successful exit status, which certifies that they completed their task.
+**Verification.** A table of twenty-five rows must be displayed. The microservices, the gateway, the web interface, and the databases must appear as running, and those that incorporate a health check must appear in a healthy state. The nine rows corresponding to the one-off tasks must appear with a successful exit status, which certifies that they completed their task.
 
 **Warning.** When any container appears in a permanent restart state, in an unhealthy state, or with an error exit, the installation is not complete. The logs of that container must be reviewed and the Troubleshooting section consulted before continuing.
 
@@ -961,22 +1006,22 @@ curl http://localhost:8084/actuator/health    # scheduling
 curl http://localhost:8083/health             # academic
 curl http://localhost:8087/health             # configuration
 
-# Through the gateway
-curl http://localhost:8080/health/quality
+# Through the gateway: 401, because the route requires a session
+curl -i http://localhost:8000/api/v1/auth/session
 ```
 
-**Verification.** Each command returns a JavaScript Object Notation response with a positive status. None of them must return a connection error.
+**Verification.** Each service command returns a JavaScript Object Notation response with a positive status, and the gateway answers 401. None of them must return a connection error.
 
 **Note.** When the command line tool is not available on Windows, the PowerShell instruction `Invoke-RestMethod` may be used instead, or else the address may be opened directly in the browser.
 
 ## Third Test: Authentication
 
-This is the most important test, since it traverses the complete chain — browser, gateway, identity service, and database — and confirms that the initial data was loaded correctly:
+This is the most important test, since it traverses the complete chain — browser, gateway, identity service, and database — and confirms that the first administrator was created correctly:
 
 ```bash
-curl -X POST http://localhost:8080/api/v1/auth/login \
+curl -X POST http://localhost:8000/api/v1/auth/login \
   -H "Content-Type: application/json" \
-  -d "{\"identifier\":\"admin.faceattend\",\"password\":\"YOUR_PASSWORD\"}"
+  -d "{\"identifier\":\"<administrator-user>\",\"password\":\"<password>\"}"
 ```
 
 **Verification.** A response is obtained containing a session identifier, the user identifier, and the active status of the session.
@@ -984,7 +1029,7 @@ curl -X POST http://localhost:8080/api/v1/auth/login \
 That identifier is then used to check a protected endpoint:
 
 ```bash
-curl http://localhost:8080/api/v1/persons \
+curl http://localhost:8000/api/v1/persons \
   -H "Authorization: Bearer <session-identifier>"
 ```
 
@@ -1236,7 +1281,7 @@ The cause is that the migrations were not run or were left incomplete. Verify th
 
 | **Symptom**                                      | **Cause and solution**                                                                                                                                                                                                                                     |
 |--------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| The machine becomes considerably slow after deployment | The eighteen containers, four of them with a Java virtual machine, consume a noticeable amount of memory. Close the other applications and allocate at least 6 GB of memory to the container platform. Consumption per container can be examined with the statistics command |
+| The machine becomes considerably slow after deployment | The sixteen running containers, four of them with a Java virtual machine, consume a noticeable amount of memory. Close the other applications and allocate at least 6 GB of memory to the container platform. Consumption per container can be examined with the statistics command |
 | The build takes more than an hour                | This is normal behavior on the first run with a slow connection, since approximately 5 GB are downloaded. Subsequent runs are considerably faster. The process must not be interrupted                                                                       |
 | The containers stop by themselves               | The platform ran out of the allocated memory. Increase it or deploy only the required services                                                                                                                                                              |
 
@@ -1279,9 +1324,8 @@ Each service requires its own runtime environment installed on the machine.
 |--------------|-------------|--------------------------------------------------------|------------------|------------------|
 | Java         | 21 LTS      | Identity, authorization, scheduling, and attendance    | adoptium.net     | java --version   |
 | Maven        | 3.9         | The same four services                                 | maven.apache.org | mvn --version    |
-| Node.js      | 20          | Academic, configuration, quality, and both interfaces  | nodejs.org       | node --version   |
+| Node.js      | 24          | Academic, configuration, notification, quality, and both interfaces | nodejs.org | node --version |
 | Python       | 3.12        | Biometrics                                             | python.org       | python --version |
-| Go           | 1.22        | Notifications                                          | go.dev           | go version       |
 
 ## Recommended Approach: Hybrid Mode
 
@@ -1316,7 +1360,7 @@ The following guidance applies from the moment the installation stops being an i
 
 ## Credentials
 
-> • Change the three bootstrap passwords immediately after the first login and deactivate the demonstration accounts that are not going to be used.
+> • Never run the test data tool on an installation accessible to third parties, and deactivate any test account that exists there.
 >
 > • Replace the default credentials of the relational and document databases with values specific to the installation.
 >
@@ -1426,8 +1470,7 @@ This appendix gathers in one place all of the ports used by the system, their de
 | **Port** | **Service**              | **Exposure**      | **Access address**                    |
 |----------|--------------------------|-------------------|---------------------------------------|
 | 8090     | Web interface            | The whole network | http://localhost:8090                 |
-| 8080     | Gateway                  | The whole network | http://localhost:8080                 |
-| 8001     | Gateway administration   | Local             | http://localhost:8001                 |
+| 8000     | Gateway                  | The whole network | http://localhost:8000                 |
 | 8081     | Identity                 | Local             | http://localhost:8081/swagger-ui.html |
 | 8082     | Authorization            | Local             | http://localhost:8082/swagger-ui.html |
 | 8083     | Academic                 | Local             | http://localhost:8083/health          |
@@ -1468,19 +1511,23 @@ All of the routes listed below pass through the gateway and require the authoriz
 
 # Appendix C
 
-Initial System Credentials
+Test Accounts by Role
 
-**Warning.** The credentials listed below are publicly known and for exclusive use in development environments. They must be changed as soon as the installation becomes accessible to third parties.
+**Warning.** These accounts exist only after running the test data tool, and only for local installations. Their passwords are the values of the tool's .env file, copied from a public template: the tool must never be run against an installation accessible to third parties.
 
 **Table 29**
 
-*Initial credentials created by the migrations*
+*Test accounts by role*
 
-| **User**              | **Password**           | **Role**      |
-|-----------------------|------------------------|---------------|
-| admin.faceattend      | YOUR_PASSWORD      | Administrator |
-| instructor.faceattend | YOUR_PASSWORD | Instructor    |
-| aprendiz.faceattend   | YOUR_PASSWORD   | Student       |
+| **User**                         | **Role**            | **Created by**     | **Password**                                                        |
+|----------------------------------|---------------------|--------------------|---------------------------------------------------------------------|
+| The value of BOOTSTRAP_ADMIN_USERNAME | Super Administrator | bootstrap-admin.sh | The one chosen when running the script, changed on the first sign-in |
+| carolina.mendoza                 | Super Administrator | Test data tool     | SEED_PASSWORD in tools/seed-api-test-data/.env                      |
+| admin.ict and admin.smp          | Administrator       | Test data tool     | SCHOOL_ADMIN_PASSWORD in the same file                              |
+| carlos.restrepo                  | Instructor          | Test data tool     | INSTRUCTOR_PASSWORD in the same file                                |
+| valentina.rios                   | Student             | Test data tool     | STUDENT_PASSWORD in the same file                                   |
+
+*Note.* The tool also creates eighty instructor accounts, named name.surname, which sign in with TEACHER_PASSWORD.
 
 # Appendix D
 
@@ -1527,20 +1574,24 @@ This appendix gathers the complete sequence for whoever already knows the proced
 git clone https://github.com/Jonas7891/ProyectoFaceAttendEDU.git
 
 # 2. Enter the folder containing the code
-cd ProyectoFaceAttendEDU/FULL
+cd ProyectoFaceAttendEDU
 
-# 3. Create the configuration file
+# 3. Create the configuration file and generate its passwords and keys
 cp .env.example .env
+# (commands of the Generating the Passwords and Keys section)
 
 # 4. Deploy the system (15 to 40 minutes the first time)
 docker compose up -d --build
 
 # 5. Verify the status of the containers
-docker compose ps
+docker compose ps -a
 
-# 6. Open the web interface
+# 6. Create the first administrator
+BOOTSTRAP_ADMIN_USERNAME=admin.local BOOTSTRAP_ADMIN_EMAIL=admin@faceattend.local \
+BOOTSTRAP_ADMIN_PASSWORD='<at least 12 characters>' ./database/scripts/bootstrap-admin.sh
+
+# 7. Open the web interface and sign in with that administrator
 # http://localhost:8090
-# User: admin.faceattend   Password: YOUR_PASSWORD
 ```
 
 **Verification.** The procedure is considered finished only when the five tests of the Verifying the Installation section are passed.
