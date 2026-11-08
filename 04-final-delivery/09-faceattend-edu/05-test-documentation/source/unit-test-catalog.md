@@ -5,7 +5,7 @@ author:
     affiliation: "FaceAttendEDU Technical Consultancy"
 date: "October 10, 2026"
 abstract: |
-  This document details the execution and results of the unit tests applied to the FaceAttendEDU back-end microservices. It covers the Identity, Authorization, Scheduling, Attendance, and Biometrics modules, validating specific requirements (ERF) and mitigating technical risks (PA) identified in the analysis. JUnit 5 and Mockito were used for Java services, and Pytest for the Python biometric service. The goal is to ensure the stability of the business logic, the security of authentication, and the precision of biometric processes, achieving exhaustive coverage of happy paths and critical edge cases.
+  This document details the execution and results of the unit tests applied to the FaceAttendEDU back-end microservices. It covers the Identity, Authorization, Scheduling, Attendance, and Biometrics modules, validating specific requirements (ERF) and mitigating technical risks (PA) identified in the analysis (International Organization for Standardization, International Electrotechnical Commission, & Institute of Electrical and Electronics Engineers [ISO, IEC, & IEEE], 2018). JUnit 5 and Mockito were used for Java services, and Pytest for the Python biometric service. The goal is to ensure the stability of the business logic, the security of authentication, and the precision of biometric processes, achieving exhaustive coverage of happy paths and critical edge cases.
 keywords:
   - unit testing
   - back-end
@@ -202,8 +202,4 @@ The unit testing suite implemented covers the critical paths of FaceAttendEDU, e
 
 # References
 
-American Psychological Association. (2020). *Publication manual of the American Psychological Association* (7th ed.). https://doi.org/10.1037/0000165-000
-
-ISO/IEC/IEEE 29148:2018. *Systems and software engineering — Life cycle processes — Requirements engineering*.
-
-IEEE 829. *Standard for Software and System Test Documentation*.
+International Organization for Standardization, International Electrotechnical Commission, & Institute of Electrical and Electronics Engineers. (2018). *Systems and software engineering — Life cycle processes — Requirements engineering* (ISO/IEC/IEEE 29148:2018). https://www.iso.org/standard/72089.html

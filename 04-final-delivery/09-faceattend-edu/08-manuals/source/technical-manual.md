@@ -10,7 +10,7 @@
 | **Date** | October 2026 |
 | **Standards applied** | ISO/IEC 25010 · IEEE 829 · ISTQB · ISO/IEC 29110 |
 
-> **About this version.** This is the **completed and translated** version of the technical manual. Sections 1 to 10 are a translation of the original document. Sections **11 to 16** (programming interface, testing and quality assurance, deployment and environments, development conventions and version control, glossary and references) were written to finish the manual, based on the information declared in the earlier sections and in the repository documents cited there. All technical claims were checked against the repository on October 7, 2026. That check corrected the Kafka section: the real topics are per-entity `*-events` channels, and no service consumes them yet, so Sections 4 and 6.3 of the original text were adjusted to match the code.
+> **About this version.** This is the **completed and translated** version of the technical manual. Sections 1 to 10 are a translation of the original document. Sections **11 to 16** (programming interface, testing and quality assurance, deployment and environments, development conventions and version control, glossary and references) were written to finish the manual, based on the information declared in the earlier sections and in the repository documents cited there (FaceAttend EDU development team, 2026). All technical claims were checked against the repository on October 7, 2026. That check corrected the Kafka section: the real topics are per-entity `*-events` channels, and no service consumes them yet, so Sections 4 and 6.3 of the original text were adjusted to match the code (Apache Software Foundation, n.d.).
 
 ---
 
@@ -18,7 +18,7 @@
 
 **FaceAttend EDU** is an educational attendance management platform that replaces manual attendance taking with an automated process based on **facial and fingerprint biometric identification**. The system validates the identity of students and teachers, manages the complete academic cycle (programs, courses, schedules, sessions and enrollments) and issues auditable, traceable attendance records.
 
-The solution is conceived as a formal software engineering project: every design decision is documented by means of **Architecture Decision Records (ADRs)**, the services are organized by **bounded contexts** under DDD, and quality is verified against recognized standards (ISO/IEC 25010 for quality attributes, IEEE 829 and ISTQB for test documentation).
+The solution is conceived as a formal software engineering project: every design decision is documented by means of **Architecture Decision Records (ADRs)**, the services are organized by **bounded contexts** under DDD, and quality is verified against recognized standards (ISO/IEC 25010 for quality attributes, IEEE 829 and ISTQB for test documentation) (Institute of Electrical and Electronics Engineers [IEEE], 1998; International Organization for Standardization & International Electrotechnical Commission [ISO & IEC], 2011; International Software Testing Qualifications Board, 2018).
 
 ## 2. Objective
 
@@ -28,7 +28,7 @@ To develop and implement a technology platform that makes it possible to:
 2. **Manage the complete academic cycle**: programs, courses, schedules, scheduled sessions and student enrollment.
 3. **Guarantee security and traceability**: opaque-session authentication (UUID sessionId validated against ms-identity), RBAC authorization, auditing on all entities and layered network isolation.
 4. **Demonstrate software quality under formal standards**, with objective metrics reported by a dedicated microservice (ms-quality) and test documentation compliant with IEEE 829 / ISTQB.
-5. **Operate reproducibly** by means of infrastructure as code (Docker Compose) and database as code (Liquibase + versioned SQL scripts).
+5. **Operate reproducibly** by means of infrastructure as code (Docker Compose) and database as code (Liquibase + versioned SQL scripts) (Docker Inc., n.d.).
 
 ## 3. Technical scope
 
@@ -36,12 +36,12 @@ To develop and implement a technology platform that makes it possible to:
 
 - **Polyglot modular monolith** architecture with DDD (8 domain bounded contexts + API Gateway) and **hexagonal architecture** (ports and adapters) inside each service.
 - **9 microservices** specialized in Java 21, TypeScript, Python 3.12 and Go 1.22, orchestrated with Docker Compose.
-- **Kong 3.6 API Gateway** (DB-less mode) as the only public entry point, with rate limiting via Redis.
-- Persistence: **PostgreSQL 17** multi-schema (database-per-service strategy), **MongoDB 7** for biometric embeddings, **Redis 7** for caching/rate limiting and **Kafka 3.8 (KRaft)** as the asynchronous event bus.
+- **Kong 3.6 API Gateway** (DB-less mode) as the only public entry point, with rate limiting via Redis (Redis Ltd., n.d.).
+- Persistence: **PostgreSQL 17** multi-schema (database-per-service strategy), **MongoDB 7** for biometric embeddings, **Redis 7** for caching/rate limiting and **Kafka 3.8 (KRaft)** as the asynchronous event bus (MongoDB Inc., n.d.).
 - Versioned migrations with **Liquibase 4.29** and golang-migrate; documentary schema modeling in **DBML**.
-- **Web** and **Mobile** clients built with React Native + Expo (the web app exported with `expo export --platform web` and served by Nginx), organized under the **MVVM** pattern.
+- **Web** and **Mobile** clients built with React Native + Expo (the web app exported with `expo export --platform web` and served by Nginx), organized under the **MVVM** pattern (Expo, n.d.).
 - Network segmentation into **3 zones** (`edge`, `app`, `data`) as an infrastructure security control.
-- Quality module with ISO/IEC 25010, ISTQB, IEEE 829 and ISO 29110 reports, and a catalog of error/quality codes.
+- Quality module with ISO/IEC 25010, ISTQB, IEEE 829 and ISO 29110 reports, and a catalog of error/quality codes (International Organization for Standardization & International Electrotechnical Commission [ISO & IEC], 2016).
 
 **Out of scope (for now):**
 
@@ -320,7 +320,7 @@ The system uses **polyglot persistence**: each technology covers the type of dat
 
 ### 8.2 Database organization (database-per-context)
 
-A single PostgreSQL server hosts **eight schemas**, one per bounded context. This design makes it possible to migrate each context to its own server in the future without redesigning the model.
+A single PostgreSQL server hosts **eight schemas**, one per bounded context (PostgreSQL Global Development Group, n.d.). This design makes it possible to migrate each context to its own server in the future without redesigning the model.
 
 | Schema | Owning microservice | Tables | Content |
 |---|---|---|---|
@@ -491,7 +491,7 @@ Every table listed below additionally carries the seven **audit columns** descri
 
 ### 8.6 Divergences between the model and the implemented schema
 
-The relational model file and the Liquibase changelogs do not cover exactly the same set of tables. The difference matters when reading the schema, so it is recorded here.
+The relational model file and the Liquibase changelogs do not cover exactly the same set of tables (Liquibase, n.d.). The difference matters when reading the schema, so it is recorded here.
 
 | Divergence | Detail |
 |---|---|
@@ -630,7 +630,7 @@ docker compose exec -T mongo mongorestore --archive --gzip < mongo_YYYY-MM-DD.gz
 **Recommendations:**
 
 - Review vulnerabilities **at least once a month** and always before a delivery.
-- Update *patch/minor* versions first; *major* ones (e.g. Spring Boot, Expo) require testing the complete system with the ms-quality test suite.
+- Update *patch/minor* versions first; *major* ones (e.g. Spring Boot, Expo) require testing the complete system with the ms-quality test suite (VMware, n.d.).
 - After every update: run the tests, bring the stack up with `docker compose up --build` and validate the *healthchecks*.
 - **Rotate the `.env` secrets** (DB passwords, `EMAIL_INTERNAL_TOKEN`, SMTP) periodically (**every 6 months** or on suspicion of compromise). To end every active session, close them in `identity.user_session`.
 - Change the default passwords of the development environments before any real deployment.
@@ -649,7 +649,7 @@ docker compose exec -T mongo mongorestore --archive --gzip < mongo_YYYY-MM-DD.gz
 
 ### 11.1 General conventions
 
-The whole API is exposed through **Kong** at a single entry point. Clients never invoke a microservice directly.
+The whole API is exposed through **Kong** at a single entry point (Kong Inc., n.d.). Clients never invoke a microservice directly.
 
 | Aspect | Convention |
 |---|---|
@@ -1041,23 +1041,15 @@ Apache Software Foundation. (n.d.). *Apache Kafka documentation*. https://kafka.
 
 Docker Inc. (n.d.). *Docker docs*. https://docs.docker.com/
 
-FaceAttend EDU development team. (2026a). *COMPOSE.md: Docker Compose y redes* [Unpublished internal document]. FaceAttend EDU training project, Servicio Nacional de Aprendizaje.
-
-FaceAttend EDU development team. (2026b). *DATABASE.md · CONVENCIONES.md · ESTRUCTURA.md · MODELO.md · SEEDS.md* [Unpublished internal documents]. FaceAttend EDU training project, Servicio Nacional de Aprendizaje.
-
-FaceAttend EDU development team. (2026c). *FaceAttend EDU* (Version 1.0.0) [Software]. GitHub.
-
-FaceAttend EDU development team. (2026d). *QUALITY.md · quality-codes.md · ISO25010, IEEE829, ISTQB and ISO29110 reports* [Unpublished internal documents]. FaceAttend EDU training project, Servicio Nacional de Aprendizaje.
-
-FaceAttend EDU development team. (2026e). *SERVICES.md: guía general de microservicios* [Unpublished internal document]. FaceAttend EDU training project, Servicio Nacional de Aprendizaje.
-
 Expo. (n.d.). *Expo documentation*. https://docs.expo.dev/
 
-Institute of Electrical and Electronics Engineers. (1998). *IEEE Std 829-1998: Standard for software test documentation*. IEEE.
+FaceAttend EDU development team. (2026). *FaceAttend EDU* (Version 1.0.0) [Software]. GitHub. https://github.com/Jonas7891/ProyectoFaceAttendEDU
 
-International Organization for Standardization. (2011). *ISO/IEC 25010:2011 — Systems and software engineering — Systems and software Quality Requirements and Evaluation (SQuaRE) — System and software quality models*. ISO.
+Institute of Electrical and Electronics Engineers. (1998). *IEEE standard for software test documentation* (IEEE Std 829-1998).
 
-International Organization for Standardization. (2016). *ISO/IEC 29110 — Systems and software engineering — Lifecycle profiles for Very Small Entities (VSEs)*. ISO.
+International Organization for Standardization & International Electrotechnical Commission. (2011). *Systems and software engineering — Systems and software quality requirements and evaluation (SQuaRE) — System and software quality models* (ISO/IEC 25010:2011). https://www.iso.org/standard/35733.html
+
+International Organization for Standardization & International Electrotechnical Commission. (2016). *Systems and software engineering — Lifecycle profiles for very small entities (VSEs) — Part 1: Overview* (ISO/IEC TR 29110-1:2016).
 
 International Software Testing Qualifications Board. (2018). *Certified Tester Foundation Level syllabus*. ISTQB.
 

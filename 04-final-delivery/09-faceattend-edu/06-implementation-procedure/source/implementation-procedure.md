@@ -2,7 +2,7 @@
 title: "Software Implementation Documentation"
 authors: Jonattan Steven Rizo Solano, Diego Andres Gutierrez Nuñez, Juan David Arboleda Perdomo
 abstract: |
-  This document describes the technical procedure for the implementation, deployment, and startup of the FaceAttendEDU system. It details the deployment strategy based on containerization using Docker and orchestration with Docker Compose, ensuring the correct configuration of the data infrastructure (PostgreSQL, MongoDB, Redis, and Apache Kafka) and the deployment of polyglot microservices. The document provides a step-by-step guide covering from the minimum hardware and software requirements to the final verification protocol, ensuring that the operational environment is consistent, secure, and traceable.
+  This document describes the technical procedure for the implementation, deployment, and startup of the FaceAttendEDU system. It details the deployment strategy based on containerization using Docker and orchestration with Docker Compose, ensuring the correct configuration of the data infrastructure (PostgreSQL, MongoDB, Redis, and Apache Kafka) and the deployment of polyglot microservices (Docker Inc., n.d.). The document provides a step-by-step guide covering from the minimum hardware and software requirements to the final verification protocol, ensuring that the operational environment is consistent, secure, and traceable.
 keywords:
   - software implementation
   - microservices deployment
@@ -31,7 +31,7 @@ The system utilizes **Docker** as the container platform and **Docker Compose** 
 
 ### Network Organization
 To ensure security, the deployment divides traffic into three isolated networks:
-1. **Edge Network**: Connects the web interface and the Gateway (Kong).
+1. **Edge Network**: Connects the web interface and the Gateway (Kong) (Kong Inc., n.d.).
 2. **App Network**: Connects the Gateway with the microservices.
 3. **Data Network**: Connects the microservices with the databases and the messaging broker.
 
@@ -79,7 +79,7 @@ docker compose up -d --build
 ### Startup Order and Migrations
 The system follows a strict dependency chain:
 1. **Data Layer**: PostgreSQL, MongoDB, Redis, and Kafka start.
-2. **Migrations**: Eight sequential **Liquibase** tasks run to create schemas and load master data.
+2. **Migrations**: Eight sequential **Liquibase** tasks run to create schemas and load master data (Liquibase, n.d.).
 3. **Microservices**: Once migrations finish, the business services start.
 4. **Gateway and Interface**: Finally, the Gateway (Kong) and the web interface are launched.
 
@@ -116,8 +116,6 @@ The implementation procedure for FaceAttendEDU minimizes manual intervention thr
 **Author's Note.** Jonattan Steven Rizo Solano is the technical lead for the implementation strategy. Technical correspondence can be directed to jonas@consultoria.example.
 
 # References
-
-American Psychological Association. (2020). *Publication manual of the American Psychological Association* (7th ed.). https://doi.org/10.1037/0000165-000
 
 Docker Inc. (n.d.). *Docker documentation*. https://docs.docker.com/
 

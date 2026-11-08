@@ -1140,8 +1140,6 @@ If an applied change produces unexpected behavior, it is rolled back using the p
 
 Servicio Nacional de Aprendizaje. (2026). *Guía para elaborar manuales de software: Manual de usuario, manual técnico, manual de instalación, manual de administrador* [Support material for students]. Centro de la Industria, la Empresa y los Servicios.
 
-The team must complete the institutional authorship details of the guide before the final submission. If additional sources are consulted during the development of the manual, they must be cited in the text and listed in this section in alphabetical order, with a hanging indent.
-
 # **Appendix A**
 
 **Administrator Activity Checklist**

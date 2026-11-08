@@ -2,7 +2,7 @@
 title: "Architectural Design Documentation"
 authors: Jonattan Steven Rizo Solano, Diego Andres Gutierrez Nuñez, Juan David Arboleda Perdomo
 abstract: |
-  This document details the technical architecture of the FaceAttendEDU system, describing the architectural model, the implemented design patterns, the data model, and the technological stack used. It explains the application of Hexagonal Architecture and Domain-Driven Design (DDD) principles to ensure the scalability, maintainability, and security of the system. The document serves as a technical guide for developers, auditors, and software architects, ensuring that the technical implementation is aligned with the strategic and functional objectives of the project.
+  This document details the technical architecture of the FaceAttendEDU system, describing the architectural model, the implemented design patterns, the data model, and the technological stack used. It explains the application of Hexagonal Architecture and Domain-Driven Design (DDD) principles to ensure the scalability, maintainability, and security of the system (Cockburn, 2005; Evans, 2003). The document serves as a technical guide for developers, auditors, and software architects, ensuring that the technical implementation is aligned with the strategic and functional objectives of the project.
 keywords:
   - architectural design
   - hexagonal architecture
@@ -53,7 +53,7 @@ A typical request flow follows this route:
 
 # Design Patterns
 
-To ensure code quality and ease of maintenance, the following patterns have been applied:
+To ensure code quality and ease of maintenance, the following patterns have been applied (International Organization for Standardization & International Electrotechnical Commission [ISO & IEC], 2011):
 
 ## Structural and Behavioral Patterns
 - **Repository Pattern**: Used to abstract the data layer. The domain defines an interface (port) and the infrastructure implements it, allowing the database to be changed without affecting the business logic.
@@ -122,10 +122,8 @@ The architectural design of FaceAttendEDU is not just a technical choice, but a 
 
 # References
 
-American Psychological Association. (2020). *Publication manual of the American Psychological Association* (7th ed.). https://doi.org/10.1037/0000165-000
+Cockburn, A. (2005). *Hexagonal architecture*. https://alistair.cockburn.us/hexagonal-architecture/
+
+Evans, E. (2003). *Domain-driven design: Tackling complexity in the heart of software*. Addison-Wesley.
 
 International Organization for Standardization & International Electrotechnical Commission. (2011). *Systems and software engineering — Systems and software quality requirements and evaluation (SQuaRE) — System and software quality models* (ISO/IEC 25010:2011). https://www.iso.org/standard/35733.html
-
-Evans, E. (2003). *Domain-Driven Design: Tackling Complexity in the Heart of Software*. Addison-Wesley.
-
-Alistair Cockburn. (2005). *Hexagonal Architecture (Ports and Adapters)*.

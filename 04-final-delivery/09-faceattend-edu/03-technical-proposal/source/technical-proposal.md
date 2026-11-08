@@ -61,7 +61,7 @@ Develop a comprehensive software system that uses the device camera for facial r
 
 4. Ensure software scalability and compatibility with various market technologies, allowing adaptation to different educational institutions and learning environments.
 
-5. Implement security and privacy measures in the software, including data encryption and compliance with regulations such as Law 1581 on Personal Data Protection (Colombia), to protect sensitive student information and ensure ethical use of integrated technologies.
+5. Implement security and privacy measures in the software, including data encryption and compliance with regulations such as Law 1581 on Personal Data Protection (Colombia), to protect sensitive student information and ensure ethical use of integrated technologies (Congress of Colombia, 2012).
 
 ### 1.4 Scope
 
@@ -96,7 +96,7 @@ Develop a comprehensive software system that uses the device camera for facial r
 
 ### 1.6 Summary
 
-The FaceAttend EDU project represents a complete technological solution that transforms attendance management in educational institutions through facial recognition, polyglot microservices architecture, and a unified frontend with React Native/Expo. The system is designed with professional quality standards, including IEEE 829, ISO 25010, ISO 29110, and ISTQB documentation.
+The FaceAttend EDU project represents a complete technological solution that transforms attendance management in educational institutions through facial recognition, polyglot microservices architecture, and a unified frontend with React Native/Expo. The system is designed with professional quality standards, including IEEE 829, ISO 25010, ISO 29110, and ISTQB documentation (Institute of Electrical and Electronics Engineers [IEEE], 2008; International Organization for Standardization & International Electrotechnical Commission [ISO & IEC], 2011; International Organization for Standardization & International Electrotechnical Commission [ISO & IEC], 2016; International Software Testing Qualifications Board, 2018).
 
 ---
 
@@ -988,12 +988,15 @@ SMTP_PORT=1025
 
 ### 16.2 References
 
-- SRS FaceAttendEdu - Software Requirements Specification
-- IEEE 829 documentation for software testing
-- ISO/IEC 25010 - Software product quality
-- ISO/IEC 29110 - Processes for small systems
-- ISTQB - International Software Testing Qualifications Board
-- Law 1581 of 2012 - Personal Data Protection (Colombia)
+Congress of Colombia. (2012). *Statutory Law 1581 of 2012, which establishes general provisions for the protection of personal data* (Diario Oficial No. 48.587).
+
+Institute of Electrical and Electronics Engineers. (2008). *IEEE standard for software and system test documentation* (IEEE Std 829-2008).
+
+International Organization for Standardization & International Electrotechnical Commission. (2011). *Systems and software engineering — Systems and software quality requirements and evaluation (SQuaRE) — System and software quality models* (ISO/IEC 25010:2011). https://www.iso.org/standard/35733.html
+
+International Organization for Standardization & International Electrotechnical Commission. (2016). *Systems and software engineering — Lifecycle profiles for very small entities (VSEs) — Part 1: Overview* (ISO/IEC TR 29110-1:2016).
+
+International Software Testing Qualifications Board. (2018). *Certified Tester Foundation Level syllabus*. ISTQB.
 
 ### 16.3 Repository
 

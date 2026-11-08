@@ -15,7 +15,7 @@ keywords:
 
 Software quality management cannot be limited to detecting defects, incidents, or audit findings. It requires a structured mechanism to transform those events into verifiable, traceable, and effective actions. In this context, corrective, preventive, and improvement actions constitute a technical and organizational feedback cycle that allows reducing variability, improving product reliability, and strengthening the maturity of development processes.
 
-This document is based on quality management systems standards (International Organization for Standardization [ISO], 2015), system and software lifecycle processes (International Organization for Standardization & International Electrotechnical Commission [ISO & IEC], 2017), risk management (ISO, 2018), and system and software quality models (ISO & IEC, 2011). Its documentation structure also seeks to align with internationally recognized professional and academic presentation criteria, including the principles of clarity, heading hierarchy, author-date citation, and reference listing characteristic of the seventh edition of APA Standards (American Psychological Association [APA], 2020).
+This document is based on quality management systems standards (International Organization for Standardization [ISO], 2015), system and software lifecycle processes (International Organization for Standardization, International Electrotechnical Commission, & Institute of Electrical and Electronics Engineers [ISO, IEC, & IEEE], 2017), risk management (ISO, 2018), and system and software quality models (International Organization for Standardization & International Electrotechnical Commission [ISO & IEC], 2011). Its documentation structure also seeks to align with internationally recognized professional and academic presentation criteria, including the principles of clarity, heading hierarchy, author-date citation, and reference listing characteristic of the seventh edition of APA Standards (American Psychological Association [APA], 2020).
 
 From a software engineering perspective, a corrective action should not be confused with a superficial fix. A fix eliminates the visible effect of a problem, while a corrective action attacks the root cause to prevent recurrence. Similarly, a preventive action does not wait for the failure to materialize, but acts on identified risks, weak trends, near-misses, or controlled strengthening opportunities. An improvement action, in turn, does not necessarily respond to a nonconformity, but to the deliberate intention to increase efficacy, efficiency, maintainability, security, or user experience.
 
@@ -57,7 +57,7 @@ A relevant point for organizations that migrated from earlier versions of ISO 90
 
 ## Software Lifecycle
 
-ISO/IEC/IEEE 12207:2017 describes processes for the definition, implementation, maintenance, and improvement of system and software lifecycles (ISO & IEC, 2017). From this perspective, corrective, preventive, and improvement actions do not belong exclusively to the testing or operation phase, but must be integrated into requirements, design, implementation, verification, validation, deployment, support, and retirement.
+ISO/IEC/IEEE 12207:2017 describes processes for the definition, implementation, maintenance, and improvement of system and software lifecycles (ISO, IEC, & IEEE, 2017). From this perspective, corrective, preventive, and improvement actions do not belong exclusively to the testing or operation phase, but must be integrated into requirements, design, implementation, verification, validation, deployment, support, and retirement.
 
 In agile, DevOps, or DevSecOps environments, this integration implies that each action must be linked to living artifacts: backlog, user stories, technical tasks, pull requests, pipelines, service metrics, observability dashboards, and documentation repositories. Traceability should not depend solely on static documents, but on verifiable links between technical evidence and business decisions.
 
@@ -285,3 +285,15 @@ Closure requires approval from the quality responsible party or equivalent role.
 Closure is not an administrative end. It must feed the organizational knowledge system: defect databases, review checklists, static analysis rules, test cases, runbooks, risk matrices, and training programs.
 
 In small organizations, the same role may assume multiple responsibilities, provided minimum segregation is preserved between who implements and who validates efficacy, especially in critical changes.
+
+# References
+
+American Psychological Association. (2020). *Publication manual of the American Psychological Association* (7th ed.). https://doi.org/10.1037/0000165-000
+
+International Organization for Standardization & International Electrotechnical Commission. (2011). *Systems and software engineering — Systems and software quality requirements and evaluation (SQuaRE) — System and software quality models* (ISO/IEC 25010:2011). https://www.iso.org/standard/35733.html
+
+International Organization for Standardization. (2015). *Quality management systems — Requirements* (ISO 9001:2015). https://www.iso.org/standard/62085.html
+
+International Organization for Standardization. (2018). *Risk management — Guidelines* (ISO 31000:2018). https://www.iso.org/standard/65694.html
+
+International Organization for Standardization, International Electrotechnical Commission, & Institute of Electrical and Electronics Engineers. (2017). *Systems and software engineering — Software life cycle processes* (ISO/IEC/IEEE 12207:2017). https://www.iso.org/standard/63712.html

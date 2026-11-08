@@ -359,7 +359,7 @@ The system is built on a microservice architecture. Instead of a single large pr
 
 Installing this set manually would be unfeasible, since each service is implemented in a different programming language — Java, TypeScript, and Python — and has its own dependencies. For this reason, the project uses containers, a mechanism that packages each service together with all of its runtime requirements (Docker Inc., n.d.-a), and an orchestration tool that deploys the twenty-five containers in the correct order with a single command (Docker Inc., n.d.-b).
 
-The practical consequence of this decision is relevant for the installer: there is no need to install Java, Node.js, or Python on the machine, since the container platform downloads and runs them inside each container. Only Docker and Git are required. Manual installation of the languages is described in the Installation Without Containers section and is only necessary when the source code is to be modified.
+The practical consequence of this decision is relevant for the installer: there is no need to install Java, Node.js, or Python on the machine, since the container platform downloads and runs them inside each container. Only Docker and Git are required (Git, n.d.). Manual installation of the languages is described in the Installation Without Containers section and is only necessary when the source code is to be modified.
 
 ## System Components
 
@@ -613,7 +613,7 @@ docker run hello-world
 
 ## Obtaining the Project
 
-There are two routes for obtaining the source code. The first should be used when access to the repository is available.
+There are two routes for obtaining the source code (FaceAttend EDU development team, 2026). The first should be used when access to the repository is available.
 
 ### First Route: Cloning the Repository
 
@@ -802,7 +802,7 @@ The file is organized into thematic blocks. The following tables constitute the 
 
 ### First Case: The Database Port Is Occupied
 
-When the machine has a prior PostgreSQL installation, the port on the host machine must be changed. The container's internal port remains unchanged, so the rest of the system continues to work without modification:
+When the machine has a prior PostgreSQL installation, the port on the host machine must be changed (PostgreSQL Global Development Group, n.d.). The container's internal port remains unchanged, so the rest of the system continues to work without modification:
 
 > POSTGRES_PORT=5433
 
@@ -1429,33 +1429,17 @@ The following table defines the technical terms used in this manual, in the spec
 
 # References
 
-Apache Software Foundation. (n.d.). *Apache Kafka documentation*. Retrieved October 6, 2026, from https://kafka.apache.org/documentation/
-
 Docker Inc. (n.d.-a). *Docker docs*. Retrieved October 6, 2026, from https://docs.docker.com/
 
 Docker Inc. (n.d.-b). *Docker Compose documentation*. Retrieved October 6, 2026, from https://docs.docker.com/compose/
 
-FaceAttend EDU development team. (2026a). *COMPOSE.md: Docker Compose y redes* [Unpublished internal document]. FaceAttend EDU training project, Servicio Nacional de Aprendizaje.
-
-FaceAttend EDU development team. (2026b). *FaceAttend EDU* (Version 1.0) [Software]. GitHub. https://github.com/Jonas7891/ProyectoFaceAttendEDU
-
-FaceAttend EDU development team. (2026c). *SEEDS.md: registros predefinidos* [Unpublished internal document]. FaceAttend EDU training project, Servicio Nacional de Aprendizaje.
-
-FaceAttend EDU development team. (2026d). *SERVICES.md: guía general de microservicios* [Unpublished internal document]. FaceAttend EDU training project, Servicio Nacional de Aprendizaje.
-
-Expo. (n.d.). *Expo documentation*. Retrieved October 6, 2026, from https://docs.expo.dev/
+FaceAttend EDU development team. (2026). *FaceAttend EDU* (Version 1.0) [Software]. GitHub. https://github.com/Jonas7891/ProyectoFaceAttendEDU
 
 Git. (n.d.). *Git documentation*. Retrieved October 6, 2026, from https://git-scm.com/doc
 
-Kong Inc. (n.d.). *Kong Gateway documentation*. Retrieved October 6, 2026, from https://docs.konghq.com/gateway/
-
 Liquibase. (n.d.). *Liquibase documentation*. Retrieved October 6, 2026, from https://docs.liquibase.com/
 
-MongoDB Inc. (n.d.). *MongoDB manual*. Retrieved October 6, 2026, from https://www.mongodb.com/docs/manual/
-
 PostgreSQL Global Development Group. (n.d.). *PostgreSQL 17 documentation*. Retrieved October 6, 2026, from https://www.postgresql.org/docs/17/
-
-Redis Ltd. (n.d.). *Redis documentation*. Retrieved October 6, 2026, from https://redis.io/docs/
 
 # Appendix A
 

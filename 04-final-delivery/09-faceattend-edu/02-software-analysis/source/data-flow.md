@@ -3,7 +3,7 @@ title: "Data Flow Within the System — FaceAttend EDU"
 authors: Jonattan Steven Rizo Solano, Diego Andres Gutierrez Nuñez, Juan David Arboleda Perdomo
 date: "October 13, 2026"
 abstract: |
-  This document describes the flow that data performs within the FaceAttend EDU system: entry points through the web and mobile clients, edge routing and authentication at the Kong gateway, per-microservice data ownership with polyglot persistence (PostgreSQL, MongoDB, Redis), asynchronous communication through Apache Kafka, and exit points (synchronous responses, SMTP mail, alerts and derived reports). It is based on the implementation in FULL and the fae-docs sections 02-domain, 05-architecture, 06-data, 07-api and 09-microservices.
+  This document describes the flow that data performs within the FaceAttend EDU system: entry points through the web and mobile clients, edge routing and authentication at the Kong gateway, per-microservice data ownership with polyglot persistence (PostgreSQL, MongoDB, Redis), asynchronous communication through Apache Kafka, and exit points (synchronous responses, SMTP mail, alerts and derived reports) (Apache Software Foundation, 2024; Kong Inc., 2024; Newman, 2021). It is based on the implementation in FULL and the fae-docs sections 02-domain, 05-architecture, 06-data, 07-api and 09-microservices.
 keywords:
   - data flow
   - microservices
@@ -88,11 +88,7 @@ The data flow confirms the governing principle that each microservice owns its d
 
 # References
 
-American Psychological Association. (2020). *Publication manual of the American Psychological Association* (7th ed.). https://doi.org/10.1037/0000165-000
-
 Apache Software Foundation. (2024). *Apache Kafka documentation*. https://kafka.apache.org/documentation/
-
-Fielding, R. T. (2000). *Architectural styles and the design of network-based software architectures* (Doctoral dissertation, University of California, Irvine).
 
 Kong Inc. (2024). *Kong Gateway documentation (DB-less mode)*. https://docs.konghq.com/gateway/
 

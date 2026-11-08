@@ -104,13 +104,3 @@ All roles log in with an identifier (email or username) plus password (BCrypt, c
 # Discussion and Conclusion
 
 The four flows form a coherent chain: administrators prepare the structure and people, instructors operate the sessions and validate exceptions, and students produce attendance evidence and justify absences. The analysis confirms segregation of duties through the 12-permission catalog, with the global administrator as the only multi-school role and the student as the most restricted one.
-
-# References
-
-American Psychological Association. (2020). *Publication manual of the American Psychological Association* (7th ed.). https://doi.org/10.1037/0000165-000
-
-Ferreira, M., & Smith, J. (2022). Role-based access control patterns in educational platforms. *Journal of Software Engineering Practice, 14*(3), 45–62.
-
-Nielsen, J. (1994). *Usability engineering*. Morgan Kaufmann.
-
-Shneiderman, B., Plaisant, C., Cohen, M., Jacobs, S., & Elmqvist, N. (2016). *Designing the user interface: Strategies for effective human-computer interaction* (6th ed.). Pearson.

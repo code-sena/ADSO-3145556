@@ -2,10 +2,10 @@
 title: "Software Analysis Documentation"
 authors: Jonattan Steven Rizo Solano, Diego Andres Gutierrez Nuñez, Juan David Arboleda Perdomo
 abstract: |
-  This document constitutes the software analysis documentation for an academic, administrative, and attendance management system with web and mobile components. It describes the project objectives, scope, justification, expected utility, strategic purpose, the contribution of the analysis during software creation, and the main beneficiaries. Additionally, it incorporates elements of context analysis, stakeholders, feasibility, risks, data, software quality, success criteria, and traceability with other life cycle artifacts. The document aims to serve as a technical, managerial, and audit base for requirements specification, design, implementation, testing, and continuous improvement of the system.
+  This document constitutes the software analysis documentation for an academic, administrative, and attendance management system with web and mobile components. It describes the project objectives, scope, justification, expected utility, strategic purpose, the contribution of the analysis during software creation, and the main beneficiaries. Additionally, it incorporates elements of context analysis, stakeholders, feasibility, risks, data, software quality, success criteria, and traceability with other life cycle artifacts (International Organization for Standardization, International Electrotechnical Commission, & Institute of Electrical and Electronics Engineers [ISO, IEC, & IEEE], 2017). The document aims to serve as a technical, managerial, and audit base for requirements specification, design, implementation, testing, and continuous improvement of the system.
 keywords:
   - software analysis
-  - requirements engineering
+  - requirements engineering (International Organization for Standardization, International Electrotechnical Commission, & Institute of Electrical and Electronics Engineers [ISO, IEC, & IEEE], 2018)
   - project objectives
   - functional scope
   - justification
@@ -16,7 +16,7 @@ keywords:
 
 # Introduction
 
-The software analysis documentation for the FaceAttendEDU system allows for an understanding of the problem, the context, and the conditions necessary for the technological solution to generate real value. In this project, the analysis is critical as it integrates human processes, regulatory constraints, information security, and attendance traceability.
+The software analysis documentation for the FaceAttendEDU system allows for an understanding of the problem, the context, and the conditions necessary for the technological solution to generate real value. In this project, the analysis is critical as it integrates human processes, regulatory constraints, information security, and attendance traceability (OWASP Foundation, 2021).
 
 The system focuses on the management of users, environments, courses, attendance records, and advanced reports, starting from a situation of fragmented processes and security risks. This document establishes the objectives, delimits the scope, and provides a verifiable base for requirements specification and architectural design, reducing ambiguity and aligning stakeholder expectations.
 
@@ -376,7 +376,7 @@ Main entities and their basic relationships were identified.
 
 ## Software Quality Analysis
 
-The system and software quality model (ISO/IEC 25010:2011) was used as a reference.
+The system and software quality model (International Organization for Standardization & International Electrotechnical Commission [ISO & IEC], 2011) was used as a reference.
 
 | Characteristic | Relevance in the Project | Derived Requirement |
 |---|---|---|
@@ -530,20 +530,6 @@ This document should be considered a living base. Its value increases when conne
 
 **Author's Note.** Jonas is the author and technical lead of the document. Correspondence related to this analysis can be directed to jonas@consultoria.example. The author declares the absence of conflicts of interest and external funding for the preparation of this document.
 
-# References and Additional Annexes
-
-This section remains open for the incorporation of new standards, technical manuals, or supporting documents that emerge during the system evolution. and Additional Annexes
-
-This section remains open for the incorporation of new standards, technical manuals, or supporting documents that emerge during the system evolution.
-
-American Psychological Association. (2020). *Publication manual of the American Psychological Association* (7th ed.). https://doi.org/10.1037/0000165-000
-
-International Organization for Standardization. (2015). *Quality management systems — Requirements* (ISO 9001:2015). https://www.iso.org/standard/62085.html
-
-International Organization for Standardization & International Electrotechnical Commission. (2011). *Systems and software engineering — Systems and software quality requirements and evaluation (SQuaRE) — System and software quality models* (ISO/IEC 25010:2011). https://www.iso.org/standard/35733.html
-
-International Organization for Standardization, International Electrotechnical Commission, & Institute of Electrical and Electronics Engineers. (2017). *Systems and software engineering — Software life cycle processes* (ISO/IEC/IEEE 12207:2017). https://www.iso.org/standard/63712.html
-
-International Organization for Standardization, International Electrotechnical Commission, & Institute of Electrical and Electronics Engineers. (2018). *Systems and software engineering — Life cycle processes — Requirements engineering* (ISO/IEC/IEEE 29148:2018). https://www.iso.org/standard/72089.html
+# References
 
 OWASP Foundation. (2021). *OWASP Application Security Verification Standard 4.0*. https://owasp.org/www-project-application-security-verification-standard/
