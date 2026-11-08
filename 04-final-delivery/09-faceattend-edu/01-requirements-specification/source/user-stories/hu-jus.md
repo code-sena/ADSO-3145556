@@ -52,7 +52,7 @@
 - The justification must be linked to a single attendance record, according to the domain rule RN-32 defined in `entities-and-rules.md`.
 - A justification cannot be approved without at least one valid support document, according to domain rule RN-33.
 - The support document must be stored securely and must not expose its content in logs or the interface.
-- Justification parametrization, such as valid justification types, is managed in [HU-CONF-008](../HU-CONF/user-stories.md#hu-conf-008-delay-and-justification-parametrization) and RF 4.7.
+- Justification parametrization, such as valid justification types, is managed in [HU-CONF-008](hu-conf.md#hu-conf-008-delay-and-justification-parametrization) and RF 4.7.
 - This story does not cover the approval/rejection workflow. That is handled in [HU-JUS-002](#hu-jus-002-justification-approval-and-rejection).
 - This story does not cover the automatic notification of the result. That is handled in [HU-JUS-003](#hu-jus-003-automatic-notification-of-justification-result).
 
@@ -103,7 +103,7 @@
 | Story Points | 8 |
 | Priority | High |
 | Target sprint | Sprint 2 |
-| Dependencies | [HU-IAM-001](../HU-IAM/user-stories.md#hu-iam-001-user-login): User login; [HU-ATT-001](../HU-ATT/user-stories.md#hu-att-001-facial-attendance-registration): Facial attendance registration; [HU-HIST-001](../HU-HIST/user-stories.md#hu-hist-001-attendance-and-absence-query-by-parameters): Attendance and absence query by parameters; [HU-CONF-008](../HU-CONF/user-stories.md#hu-conf-008-delay-and-justification-parametrization): Delay and justification parametrization |
+| Dependencies | [HU-IAM-001](hu-iam.md#hu-iam-001-user-login): User login; [HU-ATT-001](hu-att.md#hu-att-001-facial-attendance-registration): Facial attendance registration; [HU-HIST-001](hu-hist.md#hu-hist-001-attendance-and-absence-query-by-parameters): Attendance and absence query by parameters; [HU-CONF-008](hu-conf.md#hu-conf-008-delay-and-justification-parametrization): Delay and justification parametrization |
 
 ---
 
@@ -212,7 +212,7 @@
 | Story Points | 8 |
 | Priority | High |
 | Target sprint | Sprint 2 |
-| Dependencies | [HU-JUS-001](#hu-jus-001-justification-support-upload): Justification support upload; [HU-CONF-008](../HU-CONF/user-stories.md#hu-conf-008-delay-and-justification-parametrization): Delay and justification parametrization; [HU-IAM-003](../HU-IAM/user-stories.md#hu-iam-003-role-based-permission-assignment): Role-based permission assignment |
+| Dependencies | [HU-JUS-001](#hu-jus-001-justification-support-upload): Justification support upload; [HU-CONF-008](hu-conf.md#hu-conf-008-delay-and-justification-parametrization): Delay and justification parametrization; [HU-IAM-003](hu-iam.md#hu-iam-003-role-based-permission-assignment): Role-based permission assignment |
 
 ---
 
@@ -266,7 +266,7 @@
   - Retry according to a configured policy, or mark it for administrative review.
   - Not block the justification evaluation process.
 - The student must be able to consult their notifications even if they missed the initial delivery.
-- Notification preferences may be managed by the student through [HU-CONF-001](../HU-CONF/user-stories.md#hu-conf-001-configure-system-alerts) and [HU-CONF-002](../HU-CONF/user-stories.md#hu-conf-002-enable-or-disable-alerts), if those stories are implemented.
+- Notification preferences may be managed by the student through [HU-CONF-001](hu-conf.md#hu-conf-001-configure-system-alerts) and [HU-CONF-002](hu-conf.md#hu-conf-002-enable-or-disable-alerts), if those stories are implemented.
 - Domain rule RN-36 states that the result of a justification must be notified automatically to the requesting user.
 - The team must define the maximum acceptable delay between evaluation and notification delivery. Proposed initial value: 60 seconds.
 
@@ -316,4 +316,4 @@
 | Story Points | 5 |
 | Priority | High |
 | Target sprint | Sprint 2 |
-| Dependencies | [HU-JUS-002](#hu-jus-002-justification-approval-and-rejection): Justification approval and rejection; [HU-CONF-001](../HU-CONF/user-stories.md#hu-conf-001-configure-system-alerts): Configure system alerts, if applicable; [HU-CONF-002](../HU-CONF/user-stories.md#hu-conf-002-enable-or-disable-alerts): Enable or disable alerts, if applicable |
+| Dependencies | [HU-JUS-002](#hu-jus-002-justification-approval-and-rejection): Justification approval and rejection; [HU-CONF-001](hu-conf.md#hu-conf-001-configure-system-alerts): Configure system alerts, if applicable; [HU-CONF-002](hu-conf.md#hu-conf-002-enable-or-disable-alerts): Enable or disable alerts, if applicable |

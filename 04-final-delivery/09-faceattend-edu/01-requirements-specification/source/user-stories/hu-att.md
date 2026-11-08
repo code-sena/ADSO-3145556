@@ -97,7 +97,7 @@
 | Story Points | 8 |
 | Priority | High |
 | Target sprint | Sprint 1 / MVP |
-| Dependencies | [HU-IAM-001](../HU-IAM/user-stories.md#hu-iam-001-user-login): User login; [HU-IAM-002](../HU-IAM/user-stories.md#hu-iam-002-user-registration-with-role-assignment): User registration with role assignment; [HU-ATT-002](#hu-att-002-initial-facial-parameter-enrollment): Initial facial parameter enrollment; [HU-ACAD-005](../HU-ACAD/user-stories.md#hu-acad-005-assign-conferencetime-blocks): Assign conference/time blocks |
+| Dependencies | [HU-IAM-001](hu-iam.md#hu-iam-001-user-login): User login; [HU-IAM-002](hu-iam.md#hu-iam-002-user-registration-with-role-assignment): User registration with role assignment; [HU-ATT-002](#hu-att-002-initial-facial-parameter-enrollment): Initial facial parameter enrollment; [HU-ACAD-005](hu-acad.md#hu-acad-005-assign-conferencetime-blocks): Assign conference/time blocks |
 
 ---
 
@@ -140,7 +140,7 @@
 - Biometric data must comply with applicable data-protection regulations, such as Colombian Law 1581 of 2012.
 - The user must be authenticated before associating a facial parameter with their account.
 - Camera permissions must be requested and handled gracefully if denied.
-- Facial parameter updates are covered separately in [HU-CONF-006](../HU-CONF/user-stories.md#hu-conf-006-update-user-facial-parameters).
+- Facial parameter updates are covered separately in [HU-CONF-006](hu-conf.md#hu-conf-006-update-user-facial-parameters).
 - Sensitive biometric data must not be written to logs or shown in the interface.
 
 **Responsible service(s):** Attendance service / Biometric enrollment service, proposed.  
@@ -186,7 +186,7 @@
 | Story Points | 8 |
 | Priority | High |
 | Target sprint | Sprint 1 / MVP |
-| Dependencies | [HU-IAM-001](../HU-IAM/user-stories.md#hu-iam-001-user-login): User login; [HU-IAM-002](../HU-IAM/user-stories.md#hu-iam-002-user-registration-with-role-assignment): User registration with role assignment |
+| Dependencies | [HU-IAM-001](hu-iam.md#hu-iam-001-user-login): User login; [HU-IAM-002](hu-iam.md#hu-iam-002-user-registration-with-role-assignment): User registration with role assignment |
 
 ---
 
@@ -231,7 +231,7 @@
 - The system should prevent abuse of the alternative registration flow using rate limiting or attempt controls.
 - Personal data used for validation must not be written to logs or shown in the interface.
 - If the alternative flow is used in a kiosk or shared device, the system must not expose unrelated user information.
-- This story does not cover unregistered or NN users. That case is handled by [HU-ATT-004](#hu-att-004-entry-control-for-unregistered-or-nn-users) and [HU-ATT-005](../Index_HU.md#planned-stories-pending-documentation).
+- This story does not cover unregistered or NN users. That case is handled by [HU-ATT-004](#hu-att-004-entry-control-for-unregistered-or-nn-users) and [HU-ATT-005](index.md#planned-stories-pending-documentation).
 
 **Responsible service(s):** Attendance service / Alternative validation service, proposed.  
 **Endpoint(s) implemented:**  
@@ -277,7 +277,7 @@
 | Story Points | 5 |
 | Priority | High |
 | Target sprint | Sprint 1 / MVP |
-| Dependencies | [HU-IAM-002](../HU-IAM/user-stories.md#hu-iam-002-user-registration-with-role-assignment): User registration with role assignment; [HU-ATT-001](#hu-att-001-facial-attendance-registration): Facial attendance registration; [HU-ACAD-005](../HU-ACAD/user-stories.md#hu-acad-005-assign-conferencetime-blocks): Assign conference/time blocks |
+| Dependencies | [HU-IAM-002](hu-iam.md#hu-iam-002-user-registration-with-role-assignment): User registration with role assignment; [HU-ATT-001](#hu-att-001-facial-attendance-registration): Facial attendance registration; [HU-ACAD-005](hu-acad.md#hu-acad-005-assign-conferencetime-blocks): Assign conference/time blocks |
 
 ---
 
@@ -314,7 +314,7 @@
 - The SRS RF 3.2 describes this requirement as determining which users are target users of attendance control and which are casual users.
 - The output defined by the SRS is the assignment of user type: NN/user.
 - The SRS acceptance criterion says the system must validate whether the user is registered. For this story, that validation is interpreted as checking whether the person exists in the official user registry.
-- This story covers classification and control. The actual alternative registration for NN users is handled in [HU-ATT-005](../Index_HU.md#planned-stories-pending-documentation).
+- This story covers classification and control. The actual alternative registration for NN users is handled in [HU-ATT-005](index.md#planned-stories-pending-documentation).
 - The system must avoid mixing official attendance records with casual or NN records unless the institution explicitly requires consolidated reporting.
 - Personal data used to classify a person must be minimized and protected.
 - The classification process may be used in kiosk, reception, or attendance-terminal scenarios.
@@ -365,7 +365,7 @@
 | Story Points | 5 |
 | Priority | High |
 | Target sprint | Sprint 2 |
-| Dependencies | [HU-IAM-002](../HU-IAM/user-stories.md#hu-iam-002-user-registration-with-role-assignment): User registration with role assignment; [HU-ATT-001](#hu-att-001-facial-attendance-registration): Facial attendance registration; related to [HU-ATT-005](../Index_HU.md#planned-stories-pending-documentation) |
+| Dependencies | [HU-IAM-002](hu-iam.md#hu-iam-002-user-registration-with-role-assignment): User registration with role assignment; [HU-ATT-001](#hu-att-001-facial-attendance-registration): Facial attendance registration; related to [HU-ATT-005](index.md#planned-stories-pending-documentation) |
 
 ---
 

@@ -120,7 +120,7 @@
 
 ## Technical notes
 
-- This story covers basic user registration and role assignment. Massive user import by CSV is covered separately in [HU-IAM-004](../Index_HU.md#planned-stories-pending-documentation).
+- This story covers basic user registration and role assignment. Massive user import by CSV is covered separately in [HU-IAM-004](index.md#planned-stories-pending-documentation).
 - The system must validate that the user does not exist before registration, according to RF 1.1 acceptance criteria.
 - The system must validate the entered data, according to RF 1.1 acceptance criteria.
 - Role assignment must include the relationship between user identifier and person identifier, according to RF 1.1.1.

@@ -114,7 +114,7 @@
 | Story Points | 8 |
 | Priority | Medium |
 | Target sprint | Sprint 3 |
-| Dependencies | [HU-IAM-001](../HU-IAM/user-stories.md#hu-iam-001-user-login): User login; [HU-IAM-003](../HU-IAM/user-stories.md#hu-iam-003-role-based-permission-assignment): Role-based permission assignment; [HU-HIST-001](../HU-HIST/user-stories.md#hu-hist-001-attendance-and-absence-query-by-parameters): Attendance and absence query by parameters |
+| Dependencies | [HU-IAM-001](hu-iam.md#hu-iam-001-user-login): User login; [HU-IAM-003](hu-iam.md#hu-iam-003-role-based-permission-assignment): Role-based permission assignment; [HU-HIST-001](hu-hist.md#hu-hist-001-attendance-and-absence-query-by-parameters): Attendance and absence query by parameters |
 
 ---
 
@@ -233,7 +233,7 @@
 | Story Points | 8 |
 | Priority | High |
 | Target sprint | Sprint 3 |
-| Dependencies | [HU-IAM-001](../HU-IAM/user-stories.md#hu-iam-001-user-login): User login; [HU-IAM-003](../HU-IAM/user-stories.md#hu-iam-003-role-based-permission-assignment): Role-based permission assignment; [HU-HIST-001](../HU-HIST/user-stories.md#hu-hist-001-attendance-and-absence-query-by-parameters): Attendance and absence query by parameters; [HU-ATT-001](../HU-ATT/user-stories.md#hu-att-001-facial-attendance-registration): Facial attendance registration |
+| Dependencies | [HU-IAM-001](hu-iam.md#hu-iam-001-user-login): User login; [HU-IAM-003](hu-iam.md#hu-iam-003-role-based-permission-assignment): Role-based permission assignment; [HU-HIST-001](hu-hist.md#hu-hist-001-attendance-and-absence-query-by-parameters): Attendance and absence query by parameters; [HU-ATT-001](hu-att.md#hu-att-001-facial-attendance-registration): Facial attendance registration |
 
 ---
 
@@ -348,7 +348,7 @@
 | Story Points | 5 |
 | Priority | Medium |
 | Target sprint | Sprint 3 |
-| Dependencies | [HU-REP-001](#hu-rep-001-report-export): Report export; [HU-IAM-003](../HU-IAM/user-stories.md#hu-iam-003-role-based-permission-assignment): Role-based permission assignment; [HU-HIST-001](../HU-HIST/user-stories.md#hu-hist-001-attendance-and-absence-query-by-parameters): Attendance and absence query by parameters |
+| Dependencies | [HU-REP-001](#hu-rep-001-report-export): Report export; [HU-IAM-003](hu-iam.md#hu-iam-003-role-based-permission-assignment): Role-based permission assignment; [HU-HIST-001](hu-hist.md#hu-hist-001-attendance-and-absence-query-by-parameters): Attendance and absence query by parameters |
 
 ---
 
@@ -407,7 +407,7 @@
   - Export option for query results, if applicable.
   - Integration with [HU-REP-001](#hu-rep-001-report-export) for exporting query results.
 - This story does not cover the analytical dashboard. That is handled in [HU-REP-002](#hu-rep-002-role-based-analytical-dashboard).
-- This story does not cover general attendance/absence history queries. That is handled in [HU-HIST-001](../HU-HIST/user-stories.md#hu-hist-001-attendance-and-absence-query-by-parameters).
+- This story does not cover general attendance/absence history queries. That is handled in [HU-HIST-001](hu-hist.md#hu-hist-001-attendance-and-absence-query-by-parameters).
 - This story focuses specifically on delays and absences, not on all attendance records.
 - Attendance data must be protected according to RNF 4, and access must be restricted according to the user's role.
 
@@ -460,4 +460,4 @@
 | Story Points | 5 |
 | Priority | High |
 | Target sprint | Sprint 3 |
-| Dependencies | [HU-IAM-001](../HU-IAM/user-stories.md#hu-iam-001-user-login): User login; [HU-IAM-003](../HU-IAM/user-stories.md#hu-iam-003-role-based-permission-assignment): Role-based permission assignment; [HU-HIST-001](../HU-HIST/user-stories.md#hu-hist-001-attendance-and-absence-query-by-parameters): Attendance and absence query by parameters; [HU-CONF-008](../HU-CONF/user-stories.md#hu-conf-008-delay-and-justification-parametrization): Delay and justification parametrization |
+| Dependencies | [HU-IAM-001](hu-iam.md#hu-iam-001-user-login): User login; [HU-IAM-003](hu-iam.md#hu-iam-003-role-based-permission-assignment): Role-based permission assignment; [HU-HIST-001](hu-hist.md#hu-hist-001-attendance-and-absence-query-by-parameters): Attendance and absence query by parameters; [HU-CONF-008](hu-conf.md#hu-conf-008-delay-and-justification-parametrization): Delay and justification parametrization |
