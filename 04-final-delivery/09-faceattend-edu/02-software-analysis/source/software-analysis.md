@@ -212,12 +212,12 @@ The system provides an operational tool to register, consult, and audit critical
 
 Software analysis transforms vague needs into actionable and verifiable artifacts, adding value in the following dimensions:
 
-- **Reduction of Ambiguity:** Breaks down general statements (e.g., "manage users") into specific requirements (registration, roles, authentication), avoiding divergent interpretations.
-- **Prioritization and Criteria:** Allows distinguishing critical functionalities and associating them with objective compliance conditions, facilitating testing and acceptance.
-- **Risk Identification:** Exposes technical and privacy risks early, reducing the cost of correction.
-- **Design-Development Alignment:** Corrects deviations between mockups and the frontend before they become technical debt.
-- **Security by Design:** Incorporates controls from conception (server-side RBAC, biometric encryption, auditing).
-- **Traceability and Improvement:** Links findings with requirements and corrective actions (CAPA), fundamental for auditing.
+- *Reduction of Ambiguity:* Breaks down general statements (e.g., "manage users") into specific requirements (registration, roles, authentication), avoiding divergent interpretations.
+- *Prioritization and Criteria:* Allows distinguishing critical functionalities and associating them with objective compliance conditions, facilitating testing and acceptance.
+- *Risk Identification:* Exposes technical and privacy risks early, reducing the cost of correction.
+- *Design-Development Alignment:* Corrects deviations between mockups and the frontend before they become technical debt.
+- *Security by Design:* Incorporates controls from conception (server-side RBAC, biometric encryption, auditing).
+- *Traceability and Improvement:* Links findings with requirements and corrective actions (CAPA), fundamental for auditing.
 
 | Activity | Analysis Contribution | Expected Result |
 |---|---|---|
@@ -292,10 +292,10 @@ Software analysis transforms vague needs into actionable and verifiable artifact
 | Approve analysis document | A | R | R | C | C | C | C |
 
 Notes:
-- **R**: responsible for executing.
-- **A**: approver or accountable.
-- **C**: consulted.
-- **I**: informed.
+- *R*: responsible for executing.
+- *A*: approver or accountable.
+- *C*: consulted.
+- *I*: informed.
 
 # Applied Analysis Methodology
 
@@ -474,10 +474,10 @@ The system and software quality model (International Organization for Standardiz
 
 The system generates value in four main dimensions:
 
-1. **Operational:** Reduces registration and information consolidation time, decreasing daily friction and manual errors.
-2. **Risk:** Prevents unauthorized access, impersonation, and loss of traceability. The value is preventive and evidenced by the reduction of incidents.
-3. **Decisional:** Allows moving from intuitive decisions to data-driven decisions through dashboards and analytical reports.
-4. **Institutional:** Strengthens organizational maturity by institutionalizing software quality and traceability as recurrent practices.
+1. *Operational:* Reduces registration and information consolidation time, decreasing daily friction and manual errors.
+2. *Risk:* Prevents unauthorized access, impersonation, and loss of traceability. The value is preventive and evidenced by the reduction of incidents.
+3. *Decisional:* Allows moving from intuitive decisions to data-driven decisions through dashboards and analytical reports.
+4. *Institutional:* Strengthens organizational maturity by institutionalizing software quality and traceability as recurrent practices.
 
 # Recommended Approach for the Next Phase
 
@@ -528,7 +528,7 @@ Likewise, the analysis helps during project creation by reducing ambiguity, prio
 
 This document should be considered a living base. Its value increases when connected to the requirements specification, the backlog, test cases, the risk register, and corrective, preventive, and improvement actions. In this way, the analysis is not a static artifact, but an engineering and governance mechanism for building robust, secure, and useful software.
 
-**Author's Note.** Jonas is the author and technical lead of the document. Correspondence related to this analysis can be directed to jonas@consultoria.example. The author declares the absence of conflicts of interest and external funding for the preparation of this document.
+*Author's Note.* Jonas is the author and technical lead of the document. Correspondence related to this analysis can be directed to jonas@consultoria.example. The author declares the absence of conflicts of interest and external funding for the preparation of this document.
 
 # References
 

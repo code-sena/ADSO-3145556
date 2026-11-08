@@ -34,9 +34,9 @@ All roles log in with an identifier (email or username) plus password (BCrypt, c
 
 ## 1. SUPER_ADMIN — Global Administrator
 
-**Objective.** Total control of the system; the first account is created with `database/scripts/bootstrap-admin.sh`; the only role with multi-school scope.
+*Objective.* Total control of the system; the first account is created with `database/scripts/bootstrap-admin.sh`; the only role with multi-school scope.
 
-**Screens and functions.** Web dashboard with the six tabs: institutional dashboard (KPIs, at-risk students), Users (CRUD, CSV import, enrolling faces on behalf of third parties), Courses, Environments (exclusive management), full-scope Reports with export and notify-all, and Settings (security, palettes, justification parameterization, language and theme). Mobile: user management, environment management, school configuration and report screens.
+*Screens and functions.* Web dashboard with the six tabs: institutional dashboard (KPIs, at-risk students), Users (CRUD, CSV import, enrolling faces on behalf of third parties), Courses, Environments (exclusive management), full-scope Reports with export and notify-all, and Settings (security, palettes, justification parameterization, language and theme). Mobile: user management, environment management, school configuration and report screens.
 
 **Typical sequence.**
 
@@ -47,13 +47,13 @@ All roles log in with an identifier (email or username) plus password (BCrypt, c
 5. Parameterize justification types, tardiness tolerance, alerts and security policies.
 6. Audit the change history of any user and export any report.
 
-**Key permissions.** All 12 of the catalog (full assignment).
+*Key permissions.* All 12 of the catalog (full assignment).
 
 ## 2. SCHOOL_ADMIN — School Administrator
 
-**Objective.** Operate one school: its users, academic structure, schedules, justifications and reports.
+*Objective.* Operate one school: its users, academic structure, schedules, justifications and reports.
 
-**Screens and functions.** The same six web tabs as the global administrator but scoped to the school; equivalent mobile screens except global functions. Manages the school users, creates environments and blocks, approves justifications, reviews biometric cases, configures the school and exports its reports.
+*Screens and functions.* The same six web tabs as the global administrator but scoped to the school; equivalent mobile screens except global functions. Manages the school users, creates environments and blocks, approves justifications, reviews biometric cases, configures the school and exports its reports.
 
 **Typical sequence.**
 
@@ -64,13 +64,13 @@ All roles log in with an identifier (email or username) plus password (BCrypt, c
 5. Resolve the school pending justifications and biometric update cases (`Pending → In_Review → Approved | Rejected`).
 6. Generate and export reports by cohort and date, and notify the school population.
 
-**Key permissions.** All 12 within the school scope (person write, school management, enrollment management, session management, attendance write, justification approval, biometric review, configuration management, plus read and alert permissions).
+*Key permissions.* All 12 within the school scope (person write, school management, enrollment management, session management, attendance write, justification approval, biometric review, configuration management, plus read and alert permissions).
 
 ## 3. INSTRUCTOR — Teacher
 
-**Objective.** Move from manual roll call to supervision: open and close sessions, record attendance manually when facial capture fails, validate justifications and follow up cohorts.
+*Objective.* Move from manual roll call to supervision: open and close sessions, record attendance manually when facial capture fails, validate justifications and follow up cohorts.
 
-**Screens and functions.** Web with five tabs (dashboard, Students read-only with face registration, Courses management, own Reports with export, teacher Settings; Environments visible but not manageable). Mobile: teacher dashboard, pending-justification queue with approve/reject, attendance display, photo update, justification consultation and news.
+*Screens and functions.* Web with five tabs (dashboard, Students read-only with face registration, Courses management, own Reports with export, teacher Settings; Environments visible but not manageable). Mobile: teacher dashboard, pending-justification queue with approve/reject, attendance display, photo update, justification consultation and news.
 
 **Typical sequence.**
 
@@ -82,13 +82,13 @@ All roles log in with an identifier (email or username) plus password (BCrypt, c
 6. Validate justifications: review the pending queue with reason and attachments, approve (record becomes `Justified`) or reject (keeps `Absent`/`Late`), triggering automatic notification to the student.
 7. Consult cohort history and reports, and monitor absenteeism, tardiness, low-attendance and pending-justification alerts.
 
-**Key permissions (8).** Person read, session management, attendance read and write, justification approval, biometric case request and review, alert read. Explicitly excluded: configuration management, school management, person write and notify-all.
+*Key permissions (8).* Person read, session management, attendance read and write, justification approval, biometric case request and review, alert read. Explicitly excluded: configuration management, school management, person write and notify-all.
 
 ## 4. STUDENT — Learner
 
-**Objective.** Register attendance quickly without depending on roll call, justify absences and consult personal history.
+*Objective.* Register attendance quickly without depending on roll call, justify absences and consult personal history.
 
-**Screens and functions.** Web with three tabs (personal dashboard, read-only courses, student settings; classmates read-only; no reports or environments). Mobile carries the main flow: facial registration with success confirmation (single active embedding), personal attendance display, justification menu (date, instructor, environment, reason, PDF/JPG/PNG attachments up to 5 MB), justification status consultation, photo update (verify, scan, validate), news, profile and language/appearance settings.
+*Screens and functions.* Web with three tabs (personal dashboard, read-only courses, student settings; classmates read-only; no reports or environments). Mobile carries the main flow: facial registration with success confirmation (single active embedding), personal attendance display, justification menu (date, instructor, environment, reason, PDF/JPG/PNG attachments up to 5 MB), justification status consultation, photo update (verify, scan, validate), news, profile and language/appearance settings.
 
 **Typical sequence.**
 
@@ -99,7 +99,7 @@ All roles log in with an identifier (email or username) plus password (BCrypt, c
 5. Receive the outcome notification (in-app, email or push) and review personal history and reports in personal scope.
 6. Adjust personal settings (alerts, tone, language); request facial updates, which require administrator approval.
 
-**Key permissions (4).** Person read, attendance read, biometric case request, alert read. Explicitly excluded: exporting third-party reports, approving justifications, managing users, courses or environments, and configuration management.
+*Key permissions (4).* Person read, attendance read, biometric case request, alert read. Explicitly excluded: exporting third-party reports, approving justifications, managing users, courses or environments, and configuration management.
 
 # Discussion and Conclusion
 

@@ -1,6 +1,6 @@
 # Gantt Chart — FaceAttend EDU (2026)
 
-> Source: `Copia_de_Copia_de_Diagrama_de_Gantt.xlsx`, sheet **Gantt**. The schedule spans 7 months (January–July 2026), with 4 weeks per month (28 weeks total). The Excel bars (colored cells) were converted to start/end columns.
+> Source: `Copia_de_Copia_de_Diagrama_de_Gantt.xlsx`, sheet *Gantt*. The schedule spans 7 months (January–July 2026), with 4 weeks per month (28 weeks total). The Excel bars (colored cells) were converted to start/end columns.
 
 ## Budget Executive Summary
 

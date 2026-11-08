@@ -1,6 +1,6 @@
 # Activity Plan — FaceAttend EDU
 
-> Source: `Copia_de_Copia_de_Plan_de_actividades_FaceAttendEDU.xlsx` (sheets **Roles** and **Plan de actividades**). Merged cells are repeated in each row to make each row self-contained.
+> Source: `Copia_de_Copia_de_Plan_de_actividades_FaceAttendEDU.xlsx` (sheets *Roles* and *Plan de actividades*). Merged cells are repeated in each row to make each row self-contained.
 
 ## Roles (Scrum)
 

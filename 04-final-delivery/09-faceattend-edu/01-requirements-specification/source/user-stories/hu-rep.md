@@ -2,9 +2,9 @@
 
 ## Story
 
-**As** an administrator, supervisor, instructor, or authorized user  
-**I want** to export attendance reports including assistances, absences, delays, cohorts/groups, instructors, and environments  
-**So that** I can obtain structured files for institutional analysis, academic follow-up, and administrative record-keeping according to my role.
+*As* an administrator, supervisor, instructor, or authorized user  
+*I want* to export attendance reports including assistances, absences, delays, cohorts/groups, instructors, and environments  
+*So that* I can obtain structured files for institutional analysis, academic follow-up, and administrative record-keeping according to my role.
 
 ---
 
@@ -12,23 +12,23 @@
 
 > Format: "Given [context/initial state], when [user action], then [expected and verifiable result]."
 
-- [ ] **AC1:** Given that an authenticated user accesses the report export module, when the system displays the available report types, then the user can see the following options: assistances, absences, delays, cohorts/groups, instructors/teachers, and environments/classrooms.
+- [ ] *AC1:* Given that an authenticated user accesses the report export module, when the system displays the available report types, then the user can see the following options: assistances, absences, delays, cohorts/groups, instructors/teachers, and environments/classrooms.
 
-- [ ] **AC2:** Given that the user selects a report type, when the export request is submitted, then the system validates that the user's role is authorized to export that specific report type before processing the request.
+- [ ] *AC2:* Given that the user selects a report type, when the export request is submitted, then the system validates that the user's role is authorized to export that specific report type before processing the request.
 
-- [ ] **AC3:** Given that the user's role is authorized for the selected report type, when the export is processed, then the system generates the report file and provides it to the user for download.
+- [ ] *AC3:* Given that the user's role is authorized for the selected report type, when the export is processed, then the system generates the report file and provides it to the user for download.
 
-- [ ] **AC4:** Given that the user's role is not authorized for the selected report type, when the export is requested, then the system denies the request, shows a clear permission error message, and records an unauthorized access attempt.
+- [ ] *AC4:* Given that the user's role is not authorized for the selected report type, when the export is requested, then the system denies the request, shows a clear permission error message, and records an unauthorized access attempt.
 
-- [ ] **AC5:** Given that the report generation completes successfully, when the file is downloaded, then the exported data matches the current authorized scope of the user and includes the report type, generation date, and user who requested the export.
+- [ ] *AC5:* Given that the report generation completes successfully, when the file is downloaded, then the exported data matches the current authorized scope of the user and includes the report type, generation date, and user who requested the export.
 
-- [ ] **AC6:** Given that the report contains no data matching the user's scope, when the export is requested, then the system shows a clear message indicating that no data is available for export under the current criteria.
+- [ ] *AC6:* Given that the report contains no data matching the user's scope, when the export is requested, then the system shows a clear message indicating that no data is available for export under the current criteria.
 
-- [ ] **AC7:** Given that a student attempts to export reports outside their personal scope, when the request is processed, then the system denies the request and enforces role-based restrictions.
+- [ ] *AC7:* Given that a student attempts to export reports outside their personal scope, when the request is processed, then the system denies the request and enforces role-based restrictions.
 
-- [ ] **AC8:** Given normal network conditions, when the user submits a standard export request, then the system responds in less than 10 seconds for typical data volumes.
+- [ ] *AC8:* Given normal network conditions, when the user submits a standard export request, then the system responds in less than 10 seconds for typical data volumes.
 
-- [ ] **AC9:** Given that the export request is processed, when the operation is completed, then the system records an audit event containing the user, report type, date, time, and result.
+- [ ] *AC9:* Given that the export request is processed, when the operation is completed, then the system records an audit event containing the user, report type, date, time, and result.
 
 ---
 
@@ -65,7 +65,7 @@
 - Performance for large exports may exceed the standard 5-second response time. The team should define whether asynchronous export is required.
 - Sensitive data included in exports must be protected according to RNF 4.
 
-**Responsible service(s):** Report service / Export service, proposed.  
+*Responsible service(s):* Report service / Export service, proposed.  
 **Endpoint(s) implemented:**  
 - `GET /api/v1/reports/types` — proposed, returns report types available for the user's role.  
 - `POST /api/v1/reports/export` — proposed, generates and returns the report file.  
@@ -122,9 +122,9 @@
 
 ## Story
 
-**As** an administrator, supervisor, instructor, or student  
-**I want** to access an analytical dashboard corresponding to my role  
-**So that** I can visualize relevant attendance indicators and make timely decisions according to my responsibilities.
+*As* an administrator, supervisor, instructor, or student  
+*I want* to access an analytical dashboard corresponding to my role  
+*So that* I can visualize relevant attendance indicators and make timely decisions according to my responsibilities.
 
 ---
 
@@ -132,23 +132,23 @@
 
 > Format: "Given [context/initial state], when [user action], then [expected and verifiable result]."
 
-- [ ] **AC1:** Given that an authenticated user accesses the dashboard module, when the system processes the request, then the system validates the user's role and displays the dashboard corresponding to that role.
+- [ ] *AC1:* Given that an authenticated user accesses the dashboard module, when the system processes the request, then the system validates the user's role and displays the dashboard corresponding to that role.
 
-- [ ] **AC2:** Given that the user is a student, when the dashboard is displayed, then the system shows personal attendance information such as attendance percentage, absences, delays, and justification status.
+- [ ] *AC2:* Given that the user is a student, when the dashboard is displayed, then the system shows personal attendance information such as attendance percentage, absences, delays, and justification status.
 
-- [ ] **AC3:** Given that the user is an instructor, when the dashboard is displayed, then the system shows attendance information for the cohorts, environments, or training blocks assigned to that instructor.
+- [ ] *AC3:* Given that the user is an instructor, when the dashboard is displayed, then the system shows attendance information for the cohorts, environments, or training blocks assigned to that instructor.
 
-- [ ] **AC4:** Given that the user is an administrator or supervisor, when the dashboard is displayed, then the system shows institutional or administrative-scope attendance indicators.
+- [ ] *AC4:* Given that the user is an administrator or supervisor, when the dashboard is displayed, then the system shows institutional or administrative-scope attendance indicators.
 
-- [ ] **AC5:** Given that the user's role does not have an associated dashboard, when the user accesses the dashboard module, then the system shows a clear message indicating that no dashboard is available for their role.
+- [ ] *AC5:* Given that the user's role does not have an associated dashboard, when the user accesses the dashboard module, then the system shows a clear message indicating that no dashboard is available for their role.
 
-- [ ] **AC6:** Given that the dashboard is displayed, when the user interacts with the visual components, then the information is updated according to the user's scope without exposing unauthorized data.
+- [ ] *AC6:* Given that the dashboard is displayed, when the user interacts with the visual components, then the information is updated according to the user's scope without exposing unauthorized data.
 
-- [ ] **AC7:** Given that an unauthorized user attempts to access a dashboard outside their role, when the request is processed, then the system denies access and records an unauthorized access attempt.
+- [ ] *AC7:* Given that an unauthorized user attempts to access a dashboard outside their role, when the request is processed, then the system denies access and records an unauthorized access attempt.
 
-- [ ] **AC8:** Given normal network conditions, when the user accesses the dashboard, then the system responds in less than 5 seconds, according to RNF 1.
+- [ ] *AC8:* Given normal network conditions, when the user accesses the dashboard, then the system responds in less than 5 seconds, according to RNF 1.
 
-- [ ] **AC9:** Given that the dashboard is accessed, when the operation is completed, then the system records an audit event containing the user, role, date, and time.
+- [ ] *AC9:* Given that the dashboard is accessed, when the operation is completed, then the system records an audit event containing the user, role, date, and time.
 
 ---
 
@@ -156,18 +156,18 @@
 
 - RF 7.2 indicates that the system must validate the user's role and associate it with the corresponding dashboard.
 - The dashboard content must be defined per role. Proposed initial content:
-  - **Student dashboard:**
+  - *Student dashboard:*
     - Attendance percentage.
     - Total absences.
     - Total delays.
     - Justification status.
     - Recent attendance records.
-  - **Instructor dashboard:**
+  - *Instructor dashboard:*
     - Attendance summary for assigned cohorts.
     - Students with most absences or delays.
     - Recent attendance records.
     - Pending justifications, if applicable.
-  - **Administrator/Supervisor dashboard:**
+  - *Administrator/Supervisor dashboard:*
     - Institutional attendance summary.
     - Attendance by cohort.
     - Attendance by environment.
@@ -185,7 +185,7 @@
 - This story does not cover delay/absence-specific queries. That is handled in [HU-REP-004](#hu-rep-004-delay-and-absence-query-by-parameters).
 - The team must define the specific KPIs and visual components for each role.
 
-**Responsible service(s):** Report service / Dashboard service, proposed.  
+*Responsible service(s):* Report service / Dashboard service, proposed.  
 **Endpoint(s) implemented:**  
 - `GET /api/v1/dashboard` — proposed, returns dashboard data based on user role.  
 - `GET /api/v1/dashboard/student` — proposed.  
@@ -241,9 +241,9 @@
 
 ## Story
 
-**As** an administrator, supervisor, instructor, or authorized user  
-**I want** to export reports filtered by a date range  
-**So that** I can analyze attendance information for specific periods such as weeks, months, or academic terms according to my role.
+*As* an administrator, supervisor, instructor, or authorized user  
+*I want* to export reports filtered by a date range  
+*So that* I can analyze attendance information for specific periods such as weeks, months, or academic terms according to my role.
 
 ---
 
@@ -251,23 +251,23 @@
 
 > Format: "Given [context/initial state], when [user action], then [expected and verifiable result]."
 
-- [ ] **AC1:** Given that an authenticated user accesses the date-range report module, when the user selects start date, end date, and report type, then the system validates the input parameters before processing the request.
+- [ ] *AC1:* Given that an authenticated user accesses the date-range report module, when the user selects start date, end date, and report type, then the system validates the input parameters before processing the request.
 
-- [ ] **AC2:** Given that the selected date range is valid and the user's role is authorized, when the export request is submitted, then the system generates the report filtered by the specified date range and provides it for download.
+- [ ] *AC2:* Given that the selected date range is valid and the user's role is authorized, when the export request is submitted, then the system generates the report filtered by the specified date range and provides it for download.
 
-- [ ] **AC3:** Given that the start date is later than the end date, when the request is submitted, then the system rejects the operation and shows a clear validation message.
+- [ ] *AC3:* Given that the start date is later than the end date, when the request is submitted, then the system rejects the operation and shows a clear validation message.
 
-- [ ] **AC4:** Given that the selected date range exceeds the maximum allowed period, when the request is submitted, then the system rejects the operation and shows a clear message indicating the maximum allowed period.
+- [ ] *AC4:* Given that the selected date range exceeds the maximum allowed period, when the request is submitted, then the system rejects the operation and shows a clear message indicating the maximum allowed period.
 
-- [ ] **AC5:** Given that the user's role is not authorized for the selected report type, when the export is requested, then the system denies the request, shows a permission error, and records an unauthorized access attempt.
+- [ ] *AC5:* Given that the user's role is not authorized for the selected report type, when the export is requested, then the system denies the request, shows a permission error, and records an unauthorized access attempt.
 
-- [ ] **AC6:** Given that no data exists within the selected date range, when the export is requested, then the system shows a clear message indicating that no data is available for the specified period.
+- [ ] *AC6:* Given that no data exists within the selected date range, when the export is requested, then the system shows a clear message indicating that no data is available for the specified period.
 
-- [ ] **AC7:** Given that the date-range report is generated, when the file is downloaded, then the exported data respects the user's role scope and includes the applied date range, report type, generation date, and requesting user.
+- [ ] *AC7:* Given that the date-range report is generated, when the file is downloaded, then the exported data respects the user's role scope and includes the applied date range, report type, generation date, and requesting user.
 
-- [ ] **AC8:** Given normal network conditions, when the user submits a standard date-range export request, then the system responds in less than 10 seconds for typical data volumes.
+- [ ] *AC8:* Given normal network conditions, when the user submits a standard date-range export request, then the system responds in less than 10 seconds for typical data volumes.
 
-- [ ] **AC9:** Given that the date-range export is processed, when the operation is completed, then the system records an audit event containing the user, report type, date range, date, time, and result.
+- [ ] *AC9:* Given that the date-range export is processed, when the operation is completed, then the system records an audit event containing the user, report type, date range, date, time, and result.
 
 ---
 
@@ -300,7 +300,7 @@
 - Performance for large date ranges may require asynchronous export with notification when ready.
 - Sensitive data included in exports must be protected according to RNF 4.
 
-**Responsible service(s):** Report service / Export service, proposed.  
+*Responsible service(s):* Report service / Export service, proposed.  
 **Endpoint(s) implemented:**  
 - `POST /api/v1/reports/export/by-date-range` — proposed.  
 - `GET /api/v1/reports/export/{exportId}` — proposed, retrieves an asynchronous export result.  
@@ -356,9 +356,9 @@
 
 ## Story
 
-**As** an administrator, supervisor, instructor, or authorized user  
-**I want** to query delays and absences using parameters such as user, date, cohort/group, environment/classroom, and instructor  
-**So that** I can identify attendance issues and take timely corrective actions according to my role.
+*As* an administrator, supervisor, instructor, or authorized user  
+*I want* to query delays and absences using parameters such as user, date, cohort/group, environment/classroom, and instructor  
+*So that* I can identify attendance issues and take timely corrective actions according to my role.
 
 ---
 
@@ -366,23 +366,23 @@
 
 > Format: "Given [context/initial state], when [user action], then [expected and verifiable result]."
 
-- [ ] **AC1:** Given that an authenticated user accesses the delay/absence query module, when the user selects one or more parameters (user, date, cohort/group, environment/classroom, instructor), then the system validates the parameters before processing the query.
+- [ ] *AC1:* Given that an authenticated user accesses the delay/absence query module, when the user selects one or more parameters (user, date, cohort/group, environment/classroom, instructor), then the system validates the parameters before processing the query.
 
-- [ ] **AC2:** Given that the selected parameters are valid and the user's role is authorized, when the query is executed, then the system returns the delays and absences matching the requested filters.
+- [ ] *AC2:* Given that the selected parameters are valid and the user's role is authorized, when the query is executed, then the system returns the delays and absences matching the requested filters.
 
-- [ ] **AC3:** Given that the user's role is not authorized for the requested query scope, when the query is executed, then the system denies access, shows a permission error, and records an unauthorized access attempt.
+- [ ] *AC3:* Given that the user's role is not authorized for the requested query scope, when the query is executed, then the system denies access, shows a permission error, and records an unauthorized access attempt.
 
-- [ ] **AC4:** Given that the selected parameters produce no matching records, when the query is executed, then the system shows a clear message indicating that no delays or absences were found for the specified filters.
+- [ ] *AC4:* Given that the selected parameters produce no matching records, when the query is executed, then the system shows a clear message indicating that no delays or absences were found for the specified filters.
 
-- [ ] **AC5:** Given that a student queries delays and absences, when the request is processed, then the system only returns records belonging to that student.
+- [ ] *AC5:* Given that a student queries delays and absences, when the request is processed, then the system only returns records belonging to that student.
 
-- [ ] **AC6:** Given that an instructor queries delays and absences, when the request is processed, then the system only returns records associated with the cohorts, environments, or training blocks assigned to that instructor.
+- [ ] *AC6:* Given that an instructor queries delays and absences, when the request is processed, then the system only returns records associated with the cohorts, environments, or training blocks assigned to that instructor.
 
-- [ ] **AC7:** Given that the query returns results, when the system displays them, then each record includes at minimum the following information: user, date, type (delay or absence), cohort, environment, instructor, and justification status where applicable.
+- [ ] *AC7:* Given that the query returns results, when the system displays them, then each record includes at minimum the following information: user, date, type (delay or absence), cohort, environment, instructor, and justification status where applicable.
 
-- [ ] **AC8:** Given normal network conditions, when the user executes a delay/absence query, then the system responds in less than 5 seconds, according to RNF 1.
+- [ ] *AC8:* Given normal network conditions, when the user executes a delay/absence query, then the system responds in less than 5 seconds, according to RNF 1.
 
-- [ ] **AC9:** Given that the query is executed, when the operation is completed, then the system records an audit event containing the user, applied parameters, date, and time.
+- [ ] *AC9:* Given that the query is executed, when the operation is completed, then the system records an audit event containing the user, applied parameters, date, and time.
 
 ---
 
@@ -411,7 +411,7 @@
 - This story focuses specifically on delays and absences, not on all attendance records.
 - Attendance data must be protected according to RNF 4, and access must be restricted according to the user's role.
 
-**Responsible service(s):** Report service / Delay-Absence query service, proposed.  
+*Responsible service(s):* Report service / Delay-Absence query service, proposed.  
 **Endpoint(s) implemented:**  
 - `GET /api/v1/reports/delays-absences` — proposed, with query parameters for user, date, cohort, environment, and instructor.  
 - `GET /api/v1/reports/delays-absences/me` — proposed, for students querying their own records.  
