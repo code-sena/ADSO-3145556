@@ -1,0 +1,136 @@
+<!DOCTYPE html><html lang="es" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Reconocimiento Facial - Información Personal</title>
+<!-- Tailwind CSS v3 with Plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts: Plus Jakarta Sans -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style data-purpose="typography">
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+  </style>
+<style data-purpose="custom-styling">
+    /* Custom light tints matching the screenshot design */
+    .bg-canvas {
+      background-color: #F8F9FA;
+    }
+    .input-field {
+      border-color: #E2E8F0;
+      background-color: #FAFBFD;
+      transition: all 0.2s ease-in-out;
+    }
+    .input-field:focus {
+      border-color: #0E7FE3;
+      box-shadow: 0 0 0 1px #0E7FE3;
+      background-color: #FFFFFF;
+      outline: none;
+    }
+    .btn-green {
+      background-color: #8FD3A8;
+    }
+    .btn-green:active {
+      background-color: #7EC296;
+    }
+    .btn-blue {
+      background-color: #0E7FE3;
+    }
+    .btn-blue:active {
+      background-color: #0B6BBE;
+    }
+  </style>
+</head>
+<body class="bg-canvas min-h-screen flex justify-center text-[#1A1C1E]">
+<!-- Mobile Screen Container (390px viewport width) -->
+<main class="w-full max-w-[390px] h-[844px] min-h-[844px] flex flex-col justify-between px-5 pt-7 pb-6 overflow-y-auto" style="width: 390px; max-width: 390px; height: 889px; min-height: 889px; max-height: 889px; overflow: hidden;">
+<!-- BEGIN: TopContent -->
+<div class="flex flex-col items-center flex-1 justify-center w-full">
+<!-- BEGIN: FacialRecognitionIcon -->
+<!-- Large camera frame with person silhouette inside -->
+<div class="mb-5 mt-2 flex justify-center items-center" data-purpose="biometric-icon">
+<svg class="w-24 h-24 text-black" fill="none" viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg">
+<!-- Top Left Viewfinder Corner -->
+<path d="M12 28V18C12 14.6863 14.6863 12 18 12H28" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.5"></path>
+<!-- Top Right Viewfinder Corner -->
+<path d="M68 12H78C81.3137 12 84 14.6863 84 18V28" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.5"></path>
+<!-- Bottom Left Viewfinder Corner -->
+<path d="M12 68V78C12 81.3137 14.6863 84 18 84H28" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.5"></path>
+<!-- Bottom Right Viewfinder Corner -->
+<path d="M68 84H78C81.3137 84 84 81.3137 84 78V68" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.5"></path>
+<!-- Head / Face Outline -->
+<circle cx="48" cy="34" fill="none" r="11" stroke="currentColor" stroke-width="4.5"></circle>
+<!-- Torso / Shoulders Outline -->
+<path d="M25 68C25 57.5066 33.5066 49 44 49H52C62.4934 49 71 57.5066 71 68" stroke="currentColor" stroke-linecap="round" stroke-width="4.5"></path>
+</svg>
+</div>
+<!-- END: FacialRecognitionIcon -->
+<!-- BEGIN: TitleAndInstructions -->
+<section class="text-center px-1 mb-6" data-purpose="instructions-header">
+<h1 class="text-[21px] font-extrabold text-black tracking-tight mb-2.5">
+          Foto para Reconocimiento Facial
+        </h1>
+<p class="text-[13px] font-medium leading-[1.45] text-[#8592A2] max-w-[325px] mx-auto">
+          Centra tu rostro de tal manera que cubra la mayor parte de la cámara para un mejor escaneo y velocidad de reconocimiento.
+        </p>
+</section>
+<!-- END: TitleAndInstructions -->
+<!-- BEGIN: PersonalInformationCard -->
+<section class="w-full bg-white rounded-3xl p-5 shadow-[0_2px_12px_rgba(0,0,0,0.03)] border border-gray-100" data-purpose="form-card">
+<h2 class="text-[17px] font-bold text-black mb-4">
+          Información Personal
+        </h2>
+<form class="space-y-4" onsubmit="event.preventDefault();">
+<!-- Field 1: Full Name -->
+<div>
+<label class="block text-[13px] font-bold text-black mb-1.5" for="fullName">
+              Nombre Completo
+            </label>
+<input class="input-field w-full px-3.5 py-2.5 rounded-xl text-[14px] text-gray-800 placeholder-[#9AA5B5] border focus:ring-0" id="fullName" name="fullName" placeholder="Ejemplo: Juan Pérez" type="text">
+</div>
+<!-- Field 2: Document Number -->
+<div>
+<label class="block text-[13px] font-bold text-black mb-1.5" for="documentNumber">
+              Número de documento de identidad
+            </label>
+<input class="input-field w-full px-3.5 py-2.5 rounded-xl text-[14px] text-gray-800 placeholder-[#9AA5B5] border focus:ring-0" id="documentNumber" name="documentNumber" placeholder="Ejemplo: 12345678" type="text">
+</div>
+<!-- Field 3: Phone Number -->
+<div>
+<label class="block text-[13px] font-bold text-black mb-1.5" for="phoneNumber">
+              Número de Teléfono
+            </label>
+<input class="input-field w-full px-3.5 py-2.5 rounded-xl text-[14px] text-gray-800 placeholder-[#9AA5B5] border focus:ring-0" id="phoneNumber" name="phoneNumber" placeholder="Ejemplo: 3001234567" type="tel">
+</div>
+<!-- Card Action Button -->
+<div class="pt-3 pb-1 flex justify-center">
+<button class="btn-green text-white font-bold text-[14px] px-5 py-2.5 rounded-xl inline-flex items-center justify-center gap-2 shadow-sm transition-colors duration-150" data-purpose="submit-parameters" type="button">
+<!-- Camera Icon -->
+<svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+<path d="M4 4h3l2-2h6l2 2h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm8 3a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"></path>
+</svg>
+<span class="">Actualizar Parametros</span>
+</button>
+</div>
+</form>
+</section>
+<!-- END: PersonalInformationCard -->
+</div>
+<!-- END: TopContent -->
+<!-- BEGIN: BottomNavigation -->
+<div class="w-full mt-6 mt-auto" data-purpose="bottom-action">
+<button class="btn-blue w-full py-3.5 text-white font-bold text-[15px] rounded-xl shadow-[0_4px_12px_rgba(14,127,227,0.25)] transition-colors duration-150 text-center flex items-center justify-center" type="button">
+        Volver
+      </button>
+</div>
+<!-- END: BottomNavigation -->
+</main>
+
+
+
+
+</body></html>

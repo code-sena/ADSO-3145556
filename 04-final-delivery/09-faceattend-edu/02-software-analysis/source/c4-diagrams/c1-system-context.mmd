@@ -1,0 +1,19 @@
+C4Context
+    title System Context — FaceAttend EDU
+
+    Person(student, "Student / Learner", "Signs in from the mobile or web app and registers attendance with a facial scan or a manual capture")
+    Person(instructor, "Instructor", "Opens and closes class sessions, reviews attendance and low-confidence matches, manages justifications")
+    Person(admin, "School Administrator", "Manages schools, programs, cohorts, schedules, configuration and platform users")
+
+    System(faceattend, "FaceAttend EDU", "Attendance and facial-recognition platform for a single educational institution: 9 microservices behind Kong, web and mobile clients")
+
+    System_Ext(countriesnow, "countriesnow.space", "Public city and country catalog. Called straight from the mobile client to fill the country/city pickers of the school form (the local identity.city table is legacy)")
+    System_Ext(smtp, "SMTP relay", "Delivers the password-recovery e-mail owned by ms-notification (single template: verification_code). Alert e-mails are not sent today — no code reads alert_type.channel = EMAIL")
+    System_Ext(institutional, "Institutional academic system (future)", "Planned source of schools, programs and enrollments — not integrated in v1.x")
+
+    Rel(student, faceattend, "Registers attendance, submits justifications, manages biometric enrollment", "HTTPS / REST")
+    Rel(instructor, faceattend, "Manages class sessions and attendance", "HTTPS / REST")
+    Rel(admin, faceattend, "Configures the platform", "HTTPS / REST")
+
+    Rel(faceattend, countriesnow, "Reads country codes and city lists (from the mobile client)", "HTTPS / REST")
+    Rel(faceattend, smtp, "Sends the password-recovery e-mail", "SMTP")

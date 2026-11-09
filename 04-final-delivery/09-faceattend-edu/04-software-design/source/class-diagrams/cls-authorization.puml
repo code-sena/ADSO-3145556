@@ -1,0 +1,71 @@
+@startuml cls-authorization
+title Class Diagram — Authorization
+
+skinparam classAttributeIconSize 0
+hide circle
+
+class AppUser <<external — identity>> {
+}
+
+class Role {
+  +roleId: Int
+  +roleName: String
+  +description: String
+}
+
+class Permission {
+  +permissionId: Int
+  +permissionName: String
+  +description: String
+}
+
+class RolePermission {
+  +roleId: Int
+  +permissionId: Int
+  +assignmentDate: DateTime
+}
+
+class UserRole {
+  +userId: UUID
+  +roleId: Int
+  +assignmentDate: DateTime
+}
+
+Role "1" -- "0..*" RolePermission : role_permission.role_id FK
+Permission "1" -- "0..*" RolePermission : role_permission.permission_id FK
+Role "1" -- "0..*" UserRole : user_role.role_id FK
+AppUser ..> UserRole : user_role.user_id\n(cross-context, no FK)
+
+note right of Role
+  RN-07: roles are global, no school_id. Seeds:
+  Administrador, Instructor, Aprendiz (legacy
+  SUPER_ADMIN/SCHOOL_ADMIN/INSTRUCTOR/STUDENT
+  merged).
+end note
+
+note right of Permission
+  Format context.resource:action, e.g.
+  attendance.justification:approve.
+  RN-09/RN-10: access depends on the assigned
+  role's permissions.
+end note
+
+note bottom of RolePermission
+  PK (role_id, permission_id).
+end note
+
+note bottom of UserRole
+  PK (user_id, role_id). RN-07: every AppUser
+  must have at least one role.
+end note
+
+note as N1
+  All classes also carry the standard audit block
+  (created_at/updated_at/deleted_at/created_by/
+  updated_by/deleted_by/row_version) — omitted
+  here for readability. See AGENTS.md §2.2 and
+  06-data/domains/02-authorization.md for the
+  column-level ER view.
+end note
+
+@enduml

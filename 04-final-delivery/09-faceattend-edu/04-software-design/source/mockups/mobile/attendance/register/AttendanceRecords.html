@@ -1,0 +1,247 @@
+<!DOCTYPE html><html lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+<title>Asistencia</title>
+<!-- Tailwind CSS v3 with Plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Custom Configuration & Font Styling -->
+<style data-purpose="custom-typography">
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+  </style>
+<style data-purpose="custom-layout">
+    /* Custom subtle styling for mobile UI precision */
+    .card-shadow {
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+    }
+    .bottom-bar-shadow {
+      box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.06);
+    }
+  </style>
+</head>
+<body class="bg-[#F4F6F8] min-h-screen text-slate-800 flex justify-center items-start antialiased selection:bg-blue-100">
+<!-- BEGIN: MobileDeviceContainer -->
+<!-- Container scaled to mobile viewport proportions -->
+<div class="w-full max-w-[440px] min-h-screen flex flex-col relative pb-28">
+<!-- BEGIN: TopNavigationTabs -->
+<!-- Top Pill Buttons Header (Sin barra de estado superior) -->
+<header class="pt-6 px-4 pb-4">
+<nav aria-label="Navegación de secciones" class="flex items-center justify-between gap-2.5">
+<!-- Tab 1: Inicio -->
+<button class="flex-1 py-2.5 px-3 rounded-full bg-[#E5E9EE] text-[#1E293B] font-bold text-[14px] text-center active:scale-95 transition-transform duration-150" type="button">
+          Inicio
+        </button>
+<!-- Tab 2: Novedades -->
+<button class="flex-1 py-2.5 px-3 rounded-full bg-[#E5E9EE] text-[#1E293B] font-bold text-[14px] text-center active:scale-95 transition-transform duration-150" type="button">
+          Novedades
+        </button>
+<!-- Tab 3: Asistencia (Activo) -->
+<button class="flex-1 py-2.5 px-3 rounded-full bg-[#42A5F5] text-white font-extrabold text-[14px] text-center shadow-sm active:scale-95 transition-transform duration-150" type="button">
+          Asistencia
+        </button>
+</nav>
+</header>
+<!-- END: TopNavigationTabs -->
+<!-- BEGIN: SearchFilterSection -->
+<!-- Campo de filtrado por fecha -->
+<section class="px-4 pb-4" data-purpose="filter-container">
+<div class="relative w-full">
+<input class="w-full bg-white border border-[#E2E8F0] text-slate-400 placeholder-[#94A3B8] text-[15px] font-medium rounded-2xl py-3.5 px-5 outline-none shadow-sm focus:border-blue-400 cursor-pointer" placeholder="Filtrar por fecha" readonly="" type="text">
+</div>
+</section>
+<!-- END: SearchFilterSection -->
+<!-- BEGIN: AttendanceCardList -->
+<!-- Lista de tarjetas de registro de asistencia -->
+<main class="flex-1 px-4 space-y-3" data-purpose="attendance-list">
+<!-- Card 1: 2024-03-20 07:58 AM (Matemáticas) -->
+<article class="bg-white rounded-2xl p-4 border border-[#EDF2F7] card-shadow">
+<!-- Card Top Bar: Fecha y Estado Visual -->
+<div class="flex items-center justify-between pb-3 border-b border-gray-100">
+<div class="flex items-center gap-1.5">
+<span class="text-[#1E88E5] font-extrabold text-[15px] tracking-tight">2024-03-20</span>
+<span class="text-slate-400 text-xs font-bold">·</span>
+<span class="text-slate-500 font-semibold text-[13px]">07:58 AM</span>
+</div>
+<!-- Eye Icon (Verde / Presente) -->
+<div class="w-8 h-8 rounded-full bg-[#DCFCE7] flex items-center justify-center text-[#22C55E]">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.3" viewBox="0 0 24 24">
+<path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+<path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+</div>
+<!-- Card Details: Materia y Docente -->
+<div class="pt-3 grid grid-cols-2 gap-2">
+<div>
+<span class="block text-[11px] font-semibold text-slate-400 uppercase tracking-wide">Materia</span>
+<span class="block text-[14px] font-extrabold text-[#0F172A] mt-0.5">Matemáticas</span>
+</div>
+<div>
+<span class="block text-[11px] font-semibold text-slate-400 uppercase tracking-wide">Docente</span>
+<span class="block text-[14px] font-extrabold text-[#0F172A] mt-0.5 truncate">Ana Martínez</span>
+</div>
+</div>
+</article>
+<!-- Card 2: 2024-03-20 10:05 AM (Ciencias) -->
+<article class="bg-white rounded-2xl p-4 border border-[#EDF2F7] card-shadow">
+<!-- Card Top Bar -->
+<div class="flex items-center justify-between pb-3 border-b border-gray-100">
+<div class="flex items-center gap-1.5">
+<span class="text-[#1E88E5] font-extrabold text-[15px] tracking-tight">2024-03-20</span>
+<span class="text-slate-400 text-xs font-bold">·</span>
+<span class="text-slate-500 font-semibold text-[13px]">10:05 AM</span>
+</div>
+<!-- Eye Icon (Verde) -->
+<div class="w-8 h-8 rounded-full bg-[#DCFCE7] flex items-center justify-center text-[#22C55E]">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.3" viewBox="0 0 24 24">
+<path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+<path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+</div>
+<!-- Card Details -->
+<div class="pt-3 grid grid-cols-2 gap-2">
+<div>
+<span class="block text-[11px] font-semibold text-slate-400 uppercase tracking-wide">Materia</span>
+<span class="block text-[14px] font-extrabold text-[#0F172A] mt-0.5">Ciencias</span>
+</div>
+<div>
+<span class="block text-[11px] font-semibold text-slate-400 uppercase tracking-wide">Docente</span>
+<span class="block text-[14px] font-extrabold text-[#0F172A] mt-0.5 truncate">Luis Fernández</span>
+</div>
+</div>
+</article>
+<!-- Card 3: 2024-03-19 08:40 AM (Español) -->
+<article class="bg-white rounded-2xl p-4 border border-[#EDF2F7] card-shadow">
+<!-- Card Top Bar -->
+<div class="flex items-center justify-between pb-3 border-b border-gray-100">
+<div class="flex items-center gap-1.5">
+<span class="text-[#1E88E5] font-extrabold text-[15px] tracking-tight">2024-03-19</span>
+<span class="text-slate-400 text-xs font-bold">·</span>
+<span class="text-slate-500 font-semibold text-[13px]">08:40 AM</span>
+</div>
+<!-- Eye Icon (Ámbar / Retardo o Alerta) -->
+<div class="w-8 h-8 rounded-full bg-[#FEF3C7] flex items-center justify-center text-[#D97706]">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.3" viewBox="0 0 24 24">
+<path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+<path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+</div>
+<!-- Card Details -->
+<div class="pt-3 grid grid-cols-2 gap-2">
+<div>
+<span class="block text-[11px] font-semibold text-slate-400 uppercase tracking-wide">Materia</span>
+<span class="block text-[14px] font-extrabold text-[#0F172A] mt-0.5">Español</span>
+</div>
+<div>
+<span class="block text-[11px] font-semibold text-slate-400 uppercase tracking-wide">Docente</span>
+<span class="block text-[14px] font-extrabold text-[#0F172A] mt-0.5 truncate">Carmen López</span>
+</div>
+</div>
+</article>
+<!-- Card 4: 2024-03-19 (Historia - Justificado) -->
+<article class="bg-white rounded-2xl p-4 border border-[#EDF2F7] card-shadow">
+<!-- Card Top Bar -->
+<div class="flex items-center justify-between pb-3 border-b border-gray-100">
+<div class="flex items-center gap-1.5">
+<span class="text-[#1E88E5] font-extrabold text-[15px] tracking-tight">2024-03-19</span>
+</div>
+<!-- Eye Icon (Rojizo / Ausencia) -->
+<div class="w-8 h-8 rounded-full bg-[#FEE2E2] flex items-center justify-center text-[#EF4444]">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.3" viewBox="0 0 24 24">
+<path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+<path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+</div>
+<!-- Card Details with "Justificado" Badge -->
+<div class="pt-3 flex items-end justify-between">
+<div class="w-1/3">
+<span class="block text-[11px] font-semibold text-slate-400 uppercase tracking-wide">Materia</span>
+<span class="block text-[14px] font-extrabold text-[#0F172A] mt-0.5">Historia</span>
+</div>
+<div class="w-1/3">
+<span class="block text-[11px] font-semibold text-slate-400 uppercase tracking-wide">Docente</span>
+<span class="block text-[14px] font-extrabold text-[#0F172A] mt-0.5 truncate">Roberto Díaz</span>
+</div>
+<!-- Pill badge Justificado -->
+<div class="w-1/3 flex justify-end">
+<span class="px-3.5 py-1 rounded-full bg-[#EDE9FE] text-[#7C3AED] font-extrabold text-[12px] tracking-tight whitespace-nowrap">
+              Justificado
+            </span>
+</div>
+</div>
+</article>
+<!-- Card 5: Tarjeta complementada completa (2024-03-18 08:02 AM) -->
+<article class="bg-white rounded-2xl p-4 border border-[#EDF2F7] card-shadow">
+<!-- Card Top Bar -->
+<div class="flex items-center justify-between pb-3 border-b border-gray-100">
+<div class="flex items-center gap-1.5">
+<span class="text-[#1E88E5] font-extrabold text-[15px] tracking-tight">2024-03-18</span>
+<span class="text-slate-400 text-xs font-bold">·</span>
+<span class="text-slate-500 font-semibold text-[13px]">08:02 AM</span>
+</div>
+<!-- Eye Icon (Verde) -->
+<div class="w-8 h-8 rounded-full bg-[#DCFCE7] flex items-center justify-center text-[#22C55E]">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.3" viewBox="0 0 24 24">
+<path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+<path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+</div>
+<!-- Card Details -->
+<div class="pt-3 grid grid-cols-2 gap-2">
+<div>
+<span class="block text-[11px] font-semibold text-slate-400 uppercase tracking-wide">Materia</span>
+<span class="block text-[14px] font-extrabold text-[#0F172A] mt-0.5">Física</span>
+</div>
+<div>
+<span class="block text-[11px] font-semibold text-slate-400 uppercase tracking-wide">Docente</span>
+<span class="block text-[14px] font-extrabold text-[#0F172A] mt-0.5 truncate">Sofía Morales</span>
+</div>
+</div>
+</article>
+</main>
+<!-- END: AttendanceCardList -->
+<!-- BEGIN: FloatingBottomNavigation -->
+<!-- Barra de navegación inferior flotante con esquinas superiores redondeadas -->
+<nav aria-label="Menú principal de navegación" class="fixed bottom-0 left-0 right-0 max-w-[440px] mx-auto bg-white/95 backdrop-blur-md rounded-t-[32px] border-t border-slate-100 bottom-bar-shadow py-3.5 px-8 z-30">
+<div class="flex items-center justify-between">
+<!-- Icono 1: Configuración / Engrane -->
+<button aria-label="Configuración" class="p-2 text-[#1E293B] hover:text-blue-600 transition-colors flex items-center justify-center" type="button">
+<svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24">
+<circle cx="12" cy="12" r="3"></circle>
+<path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+</svg>
+</button>
+<!-- Icono 2: Escáner Biométrico / Face ID Central -->
+<button aria-label="Escanear Asistencia" class="p-2 text-[#0F172A] hover:text-blue-600 transition-colors flex items-center justify-center" type="button">
+<svg class="w-10 h-10" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.3" viewBox="0 0 36 36">
+<!-- Marco esquinas externas -->
+<path d="M 6 12 V 8 A 2 2 0 0 1 8 6 H 12"></path>
+<path d="M 24 6 H 28 A 2 2 0 0 1 30 8 V 12"></path>
+<path d="M 6 24 V 28 A 2 2 0 0 0 8 30 H 12"></path>
+<path d="M 24 30 H 28 A 2 2 0 0 0 30 28 V 24"></path>
+<!-- Cabeza y hombros biométricos internos -->
+<circle cx="18" cy="14" r="4.2"></circle>
+<path d="M 11.5 24.5 C 11.5 21.2 14.4 19.5 18 19.5 C 21.6 19.5 24.5 21.2 24.5 24.5"></path>
+</svg>
+</button>
+<!-- Icono 3: Usuario / Perfil -->
+<button aria-label="Perfil de Usuario" class="p-2 text-[#1E293B] hover:text-blue-600 transition-colors flex items-center justify-center" type="button">
+<svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24">
+<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+<circle cx="12" cy="7" r="4"></circle>
+</svg>
+</button>
+</div>
+</nav>
+<!-- END: FloatingBottomNavigation -->
+</div>
+<!-- END: MobileDeviceContainer -->
+</body></html>

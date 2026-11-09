@@ -4,7 +4,15 @@
 
 ## Required content / Contenido requerido
 
-- [ ] Final article of the project / Artículo final del proyecto
+- [x] Final article of the project / Artículo final del proyecto
+
+## Files / Archivos
+
+| File / Archivo | Content / Contenido |
+|---|---|
+| [`project-article.pdf`](project-article.pdf) | Project article / Artículo del proyecto |
+
+Editable sources are in [`source/`](source/). / Las fuentes editables están en [`source/`](source/).
 
 ## Format / Formato
 

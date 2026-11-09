@@ -1,0 +1,69 @@
+@startuml cls-notification
+title Class Diagram — Notification
+
+skinparam classAttributeIconSize 0
+hide circle
+
+class AcademicActor <<external — academic>> {
+}
+
+enum Severity <<enumeration>> {
+  INFO
+  WARNING
+  CRITICAL
+}
+
+enum Channel <<enumeration>> {
+  DASHBOARD
+  EMAIL
+  PUSH
+}
+
+class AlertType {
+  +alertTypeId: Int
+  +code: String
+  +name: String
+  +severity: Severity
+  +channel: Channel
+}
+
+class Alert {
+  +alertId: Long
+  +academicActorId: Long
+  +alertTypeId: Int
+  +raisedAt: DateTime
+  +resolvedAt: DateTime
+  +raise()
+  +resolve()
+}
+
+AlertType "1" -- "0..*" Alert : alert.alert_type_id FK
+Alert --> Severity
+AlertType --> Channel
+
+Alert ..> AcademicActor : academic_actor_id\n(cross-context, no FK)
+
+note right of Alert
+  RN-42: alerts are system-generated for
+  defined event types. RN-43: resolution
+  requires the appropriate permission.
+  resolvedAt NULL = unresolved. No code raises
+  channel=EMAIL alerts today — only the
+  password-recovery e-mail flow sends mail (see
+  c1-system-context.mmd and
+  seq-password-recovery.mmd). An optional
+  outbound webhook also fires on every alert
+  create when WEBHOOK_URL is configured — see
+  09-microservices/communication-patterns.md §1.
+end note
+
+note as N1
+  All classes also carry the standard audit block
+  (created_at/updated_at/deleted_at/created_by/
+  updated_by/deleted_by/row_version) — omitted
+  here for readability. See AGENTS.md §2.2 and
+  06-data/domains/07-notification.md for the
+  column-level ER view.
+end note
+
+@enduml

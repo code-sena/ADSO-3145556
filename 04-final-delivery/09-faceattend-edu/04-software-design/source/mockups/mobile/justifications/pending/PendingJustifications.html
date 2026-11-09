@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FaceAttendEDU - Pending Justifications</title>
+    <style>
+        :root {
+            --color-primary: #2196F3;
+            --color-bg-page: #F8FAFC;
+            --color-bg-card: #FFFFFF;
+            --color-text-primary: #0F172A;
+            --color-text-secondary: #64748B;
+            --color-warning: #F59E0B;
+            --space-md: 16px;
+            --space-lg: 24px;
+            --radius-lg: 12px;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+        }
+        body {
+            font-family: sans-serif;
+            background-color: #cbd5e1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .mobile-viewport {
+            width: 375px;
+            height: 812px;
+            background-color: var(--color-bg-page);
+            border-radius: 40px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+            border: 8px solid #334155;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            padding: 40px var(--space-lg) var(--space-md);
+            background-color: var(--color-bg-card);
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .header h1 {
+            font-size: 22px;
+            color: var(--color-text-primary);
+            margin: 0;
+        }
+        .content {
+            padding: var(--space-lg);
+            flex: 1;
+            overflow-y: auto;
+        }
+        .justification-item {
+            background: var(--color-bg-card);
+            padding: var(--space-md);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            margin-bottom: var(--space-md);
+            border-left: 4px solid var(--color-warning);
+        }
+        .justification-item h4 {
+            margin: 0;
+            font-size: 16px;
+            color: var(--color-text-primary);
+        }
+        .justification-item p {
+            margin: 4px 0 0 0;
+            font-size: 13px;
+            color: var(--color-text-secondary);
+        }
+        .status-badge {
+            display: inline-block;
+            margin-top: 8px;
+            font-size: 11px;
+            font-weight: bold;
+            padding: 2px 8px;
+            border-radius: 4px;
+            background: #fef3c7;
+            color: #92400e;
+        }
+        .footer {
+            padding: var(--space-lg);
+            background-color: var(--color-bg-card);
+            border-top: 1px solid #e2e8f0;
+        }
+        .btn-primary {
+            background-color: var(--color-primary);
+            color: white;
+            text-align: center;
+            padding: 14px;
+            border-radius: var(--radius-lg);
+            text-decoration: none;
+            display: block;
+            font-weight: bold;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="mobile-viewport">
+        <div class="header">
+            <h1>Justificaciones Pendientes</h1>
+        </div>
+        <div class="content">
+            <div class="justification-item">
+                <h4>Falta de Salud</h4>
+                <p>Fecha: 10 Oct 2023</p>
+                <p>Motivo: Cita médica de urgencia.</p>
+                <span class="status-badge">Pendiente de Revisión</span>
+            </div>
+            <div class="justification-item">
+                <h4>Trámite Personal</h4>
+                <p>Fecha: 05 Oct 2023</p>
+                <p>Motivo: Renovación de documento de identidad.</p>
+                <span class="status-badge">Pendiente de Revisión</span>
+            </div>
+        </div>
+        <div class="footer">
+            <a href="#" class="btn-primary">Volver</a>
+        </div>
+    </div>
+</body>
+</html>

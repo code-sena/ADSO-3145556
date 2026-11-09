@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FaceAttend EDU – Mockup</title>
+<style>
+:root{--bg:#f8fafc;--surface:#fff;--text:#0b1220;--muted:#64748b;--blue:#1a85ff;--blue-soft:#c5dffb;--line:#e8edf3;--card:#fff;--ring:#d3d9e0}
+:root[data-theme="dark"]{--bg:#0d1420;--surface:#111a28;--text:#f1f5f9;--muted:#94a3b8;--blue:#3b97ff;--blue-soft:#1b3350;--line:#1f2b3d;--card:#14202f;--ring:#3a4a60}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{font-family:"Inter","Segoe UI",system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.5}
+button{font:inherit;cursor:pointer}
+header{position:sticky;top:0;z-index:10;height:86px;background:var(--surface);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 26px}
+.brand{display:flex;align-items:center;gap:16px;font-weight:700;font-size:21px}
+.brand b{color:var(--blue)}
+.logo{width:60px;height:60px}
+.tools{display:flex;gap:14px}
+.round{width:54px;height:54px;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--text);font-weight:700;font-size:18px;display:grid;place-items:center}
+.round:hover{border-color:var(--blue)}
+.hero{min-height:calc(100vh - 86px);display:grid;grid-template-columns:1fr 1fr;align-items:center;max-width:1500px;margin:auto;padding:60px 160px 60px 187px;gap:40px}
+.hero h1{font-size:clamp(38px,4vw,48px);line-height:1.15;font-weight:800;letter-spacing:-.5px}
+.hero h1 em{font-style:normal;color:var(--blue)}
+.cta{display:flex;gap:16px;margin:42px 0 44px}
+.btn{height:66px;padding:0 37px;border-radius:8px;border:2px solid var(--blue);font-weight:600;font-size:18px;transition:transform .15s}
+.btn:hover{transform:translateY(-2px)}
+.btn.fill{background:var(--blue);color:#fff}
+.btn.line{background:transparent;color:var(--blue)}
+.stats{display:flex;gap:44px}
+.stats strong{display:block;font-size:28px;font-weight:800}
+.stats span{color:var(--muted);font-size:15px}
+.visual{position:relative;justify-self:center;width:432px;height:432px;max-width:100%}
+.disc{position:absolute;inset:0;border-radius:50%;background:var(--blue-soft);overflow:hidden;display:grid;place-items:center}
+.disc::before{content:"";position:absolute;inset:80px;background-image:linear-gradient(var(--ring) 1px,transparent 1px),linear-gradient(90deg,var(--ring) 1px,transparent 1px);background-size:46px 46px;opacity:.35}
+.disc i{position:absolute;border:2px solid var(--ring);border-radius:50%}
+.disc i:nth-child(1){width:160px;height:160px;animation:pulse 3s ease-in-out infinite}
+.disc i:nth-child(2){width:124px;height:124px;animation:pulse 3s .3s ease-in-out infinite}
+.disc i:nth-child(3){width:62px;height:62px}
+.scan{position:absolute;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--blue),transparent);animation:scan 3.5s ease-in-out infinite}
+@keyframes scan{0%,100%{top:20%}50%{top:80%}}
+@keyframes pulse{50%{transform:scale(1.07);opacity:.6}}
+.chip{position:absolute;background:var(--surface);border-radius:30px;padding:9px 18px;font-size:15px;font-weight:500;box-shadow:0 6px 22px rgba(20,40,80,.12);display:flex;gap:8px;align-items:center;white-space:nowrap;animation:float 5s ease-in-out infinite}
+.chip.a{top:20px;right:-28px}.chip.b{top:119px;left:-122px;animation-delay:1s}.chip.c{bottom:34px;right:-28px;animation-delay:2s}
+@keyframes float{50%{transform:translateY(-7px)}}
+.ok{width:16px;height:16px;background:#34b36b;border-radius:3px;color:#fff;font-size:11px;display:grid;place-items:center}
+.features{background:var(--blue);color:#fff;padding:168px 24px 106px}
+.wrap{max-width:1326px;margin:auto}
+.tag{display:block;width:fit-content;margin:0 auto 24px;padding:9px 22px;border-radius:30px;font-size:14px;font-weight:600;letter-spacing:2px}
+.features .tag{background:rgba(255,255,255,.2)}
+h2{text-align:center;font-size:34px;font-weight:800;letter-spacing:-.3px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:66px}
+.fcard{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:26px;padding:60px 60px 56px;min-height:395px;transition:background .2s}
+.fcard:hover{background:rgba(255,255,255,.18)}
+.ico{width:75px;height:75px;border-radius:16px;background:rgba(255,255,255,.22);display:grid;place-items:center;margin-bottom:34px}
+.ico svg{width:38px;height:38px;stroke:#fff;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.fcard h3{font-size:26px;line-height:1.45;font-weight:700;margin-bottom:20px}
+.fcard p{font-size:16.5px;line-height:1.6;opacity:.85}
+.testi{padding:140px 24px 130px}
+.testi .tag{background:#b9d8fd;color:var(--blue)}
+:root[data-theme="dark"] .testi .tag{background:var(--blue-soft)}
+.tcard{background:var(--card);border-radius:20px;padding:56px 54px 54px;box-shadow:0 2px 14px rgba(20,40,80,.05)}
+.stars{color:#f5a300;letter-spacing:6px;font-size:18px;margin-bottom:26px}
+.tcard q{display:block;quotes:none;font-size:20px;line-height:1.45;margin-bottom:34px;min-height:116px}
+.tcard q::before{content:'"'}.tcard q::after{content:'"'}
+.tcard strong{display:block;font-size:17px}
+.tcard small{display:block;color:var(--muted);font-size:15px;margin:2px 0 10px}
+.tcard span{font-size:15px}
+.final{background:var(--blue);color:#fff;text-align:center;padding:140px 24px 150px}
+.final h2{font-size:42px;font-weight:800}
+.final p{max-width:680px;margin:28px auto 42px;font-size:19px;line-height:1.7;opacity:.95}
+.final .cta{justify-content:center;margin:0}
+.final .btn{border-color:#fff}.final .fill{background:#fff;color:var(--blue)}.final .line{color:#fff}
+footer{background:var(--surface);padding:44px 24px 40px}
+.fgrid{max-width:1217px;margin:auto;display:grid;grid-template-columns:1.1fr 1fr 1fr 1fr;gap:30px}
+.fbrand{display:flex;align-items:center;gap:20px;font-weight:700;font-size:22px;margin-bottom:22px}
+.fbrand b{color:var(--blue)}.fbrand .logo{width:44px;height:44px}
+.fgrid p{color:var(--muted);font-size:15px;line-height:1.5;max-width:250px}
+.fgrid h4{font-size:17px;margin:6px 0 24px}
+.fgrid a{display:block;color:var(--muted);font-size:15.5px;text-decoration:none;margin-bottom:12px}
+.fgrid a:hover{color:var(--blue)}
+.copy{max-width:1217px;margin:30px auto 0;padding-top:30px;border-top:1px solid var(--line);display:flex;justify-content:space-between;font-size:14px}
+.copy div{display:flex;gap:40px;color:var(--muted)}
+@media(max-width:1100px){.hero{padding:50px 40px;grid-template-columns:1fr}.visual{margin:50px auto}.chip.b{left:-20px}.chip.a,.chip.c{right:-10px}.grid{grid-template-columns:1fr}.fgrid{grid-template-columns:1fr 1fr}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <svg class="logo" viewBox="0 0 60 60" aria-hidden="true">
+      <circle cx="30" cy="30" r="27" fill="none" stroke="#4cc3e6" stroke-width="2.5" stroke-dasharray="40 6 12 6"/>
+      <path d="M30 10a20 20 0 0 0 0 40z" fill="#3aa7d9"/>
+      <path d="M30 10a20 20 0 0 1 0 40z" fill="#ef8a2c"/>
+      <circle cx="30" cy="30" r="9" fill="#fff"/>
+      <text x="30" y="35" text-anchor="middle" font-size="12" font-weight="700" fill="#0b1220" font-family="sans-serif">F</text>
+    </svg>
+    <span>FaceAttend <b>EDU</b></span>
+  </div>
+  <div class="tools">
+    <button class="round" id="theme" aria-label="Cambiar tema">🌙</button>
+    <button class="round" aria-label="Idioma">ES</button>
+  </div>
+</header>
+
+<section class="hero">
+  <div>
+    <h1>Asistencia<br><em>inteligente</em><br>para tu institución</h1>
+    <div class="cta">
+      <button class="btn fill">Registrarse</button>
+      <button class="btn line">Iniciar sesión</button>
+    </div>
+    <div class="stats">
+      <div><strong>99%</strong><span>Precisión</span></div>
+      <div><strong>&lt;1s</strong><span>Detección</span></div>
+      <div><strong>∞</strong><span>estudiantes</span></div>
+    </div>
+  </div>
+  <div class="visual">
+    <div class="disc"><i></i><i></i><i></i><div class="scan"></div></div>
+    <div class="chip a">📷 Escaneando...</div>
+    <div class="chip b"><span class="ok">✓</span> Reconociendo</div>
+    <div class="chip c">📋 Asistencia OK</div>
+  </div>
+</section>
+
+<section class="features" id="caracteristicas">
+  <div class="wrap">
+    <span class="tag">CARACTERÍSTICAS</span>
+    <h2>Todo lo que necesitas en una sola plataforma</h2>
+    <div class="grid">
+      <article class="fcard">
+        <div class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m14.31 8 5.74 9.94M9.69 8h11.48M7.38 12l5.74-9.94M9.69 16 3.95 6.06M14.31 16H2.83M16.62 12l-5.74 9.94"/></svg></div>
+        <h3>Reconocimiento facial en tiempo real</h3>
+        <p>Registra asistencia automáticamente con IA. Sin listas en papel, sin errores humanos.</p>
+      </article>
+      <article class="fcard">
+        <div class="ico"><svg viewBox="0 0 24 24"><path d="M12 20V8M18 20V4M6 20v-6"/></svg></div>
+        <h3>Reportes y estadísticas detalladas</h3>
+        <p>Analiza patrones de asistencia por curso, semana y estudiante. Exporta en PDF o Excel.</p>
+      </article>
+      <article class="fcard">
+        <div class="ico"><svg viewBox="0 0 24 24"><circle cx="9" cy="7" r="4"/><path d="M2 21v-2a4 4 0 0 1 4-4h6a4 4 0 0 1 4 4v2M16 3.1a4 4 0 0 1 0 7.8M22 21v-2a4 4 0 0 0-3-3.9"/></svg></div>
+        <h3>Gestión completa de estudiantes</h3>
+        <p>Centraliza toda la información académica. Detecta estudiantes en riesgo de manera proactiva.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="testi" id="testimonios">
+  <div class="wrap">
+    <span class="tag">TESTIMONIOS</span>
+    <h2>Instituciones que confían en nosotros</h2>
+    <div class="grid">
+      <article class="tcard">
+        <div class="stars">☆☆☆☆☆</div>
+        <q>FaceAttend transformó completamente nuestra gestión de asistencia. Ahorramos horas de trabajo manual cada semana.</q>
+        <strong>María González</strong><small>Coordinadora Académica</small><span>SENA - Centro Industrial</span>
+      </article>
+      <article class="tcard">
+        <div class="stars">☆☆☆☆☆</div>
+        <q>La precisión del reconocimiento facial es impresionante. Nunca más problemas con falsificación de asistencia.</q>
+        <strong>Carlos Ramírez</strong><small>Instructor SENA</small><span>Centro de Manufactura</span>
+      </article>
+      <article class="tcard">
+        <div class="stars">☆☆☆☆☆</div>
+        <q>Los reportes detallados nos ayudan a identificar estudiantes en riesgo temprano. Excelente herramienta.</q>
+        <strong>Ana Martínez</strong><small>Directora de Formación</small><span>SENA Regional</span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="final">
+  <h2>¿Listo para modernizar tu institución?</h2>
+  <p>Únete a las instituciones que ya están usando FaceAttend EDU para mejorar su gestión académica.</p>
+  <div class="cta">
+    <button class="btn fill">Comenzar gratis</button>
+    <button class="btn line">Ver demo</button>
+  </div>
+</section>
+
+<footer>
+  <div class="fgrid">
+    <div>
+      <div class="fbrand">
+        <svg class="logo" viewBox="0 0 60 60" aria-hidden="true"><circle cx="30" cy="30" r="27" fill="none" stroke="#4cc3e6" stroke-width="2.5" stroke-dasharray="40 6 12 6"/><path d="M30 10a20 20 0 0 0 0 40z" fill="#3aa7d9"/><path d="M30 10a20 20 0 0 1 0 40z" fill="#ef8a2c"/><circle cx="30" cy="30" r="9" fill="#fff"/></svg>
+        <span>FaceAttend <b>EDU</b></span>
+      </div>
+      <p>Sistema inteligente de gestión de asistencia con reconocimiento facial para instituciones educativas.</p>
+    </div>
+    <div><h4>Producto</h4><a href="#">Características</a><a href="#">Precios</a><a href="#">Testimonios</a></div>
+    <div><h4>Empresa</h4><a href="#">Acerca de</a><a href="#">Blog</a><a href="#">Contacto</a></div>
+    <div><h4>Legal</h4><a href="#">Privacidad</a><a href="#">Términos</a><a href="#">Cookies</a></div>
+  </div>
+  <div class="copy">
+    <span>© 2026 FaceAttend EDU. Todos los derechos reservados.</span>
+    <div><span>GitHub</span><span>Twitter</span><span>in</span></div>
+  </div>
+</footer>
+
+<script>
+// Solo el cambio de tema es interactivo; el resto de botones son decorativos.
+const root=document.documentElement,btn=document.getElementById('theme');
+btn.addEventListener('click',()=>{
+  const dark=root.dataset.theme==='dark';
+  root.dataset.theme=dark?'light':'dark';
+  btn.textContent=dark?'🌙':'☀️';
+});
+document.querySelectorAll('a[href="#"]').forEach(a=>a.addEventListener('click',e=>e.preventDefault()));
+</script>
+</body>
+</html>

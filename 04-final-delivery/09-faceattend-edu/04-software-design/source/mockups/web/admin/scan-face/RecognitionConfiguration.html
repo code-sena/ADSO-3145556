@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Configuración — Reconocimiento — Mockup</title>
+<style>
+  :root{
+    --sidebar-bg:#ffffff;
+    --sidebar-active:#2563eb;
+    --sidebar-active-bg:#dbe6fd;
+    --border:#e8eaed;
+    --bg:#f7f8fa;
+    --card-bg:#ffffff;
+    --text-main:#111827;
+    --text-muted:#6b7280;
+    --blue:#2563eb;
+    --blue-light:#eef2ff;
+    --green:#16a34a;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:var(--bg);
+    color:var(--text-main);
+    display:flex;
+    min-height:100vh;
+  }
+
+  /* ---------- SIDEBAR ---------- */
+  .sidebar{
+    width:262px;
+    min-width:262px;
+    background:var(--sidebar-bg);
+    border-right:1px solid var(--border);
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    padding:20px 14px;
+    position:relative;
+  }
+  .sidebar-top{display:flex;flex-direction:column;gap:22px;}
+  .user-box{padding:6px 10px 18px 10px;border-bottom:1px solid var(--border);}
+  .user-name{font-weight:700;font-size:15px;color:var(--text-main);}
+  .user-role{font-size:12.5px;color:#9ca3af;margin-top:2px;}
+
+  nav.menu{display:flex;flex-direction:column;gap:4px;}
+  .menu-item{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:10px 12px;
+    border-radius:8px;
+    font-size:14.5px;
+    font-weight:600;
+    color:#374151;
+    cursor:pointer;
+    text-decoration:none;
+  }
+  .menu-item .left{display:flex;align-items:center;gap:10px;}
+  .menu-item svg{width:18px;height:18px;flex-shrink:0;color:#6b7280;}
+  .menu-item.active{
+    background:var(--sidebar-active-bg);
+    color:var(--sidebar-active);
+  }
+  .menu-item.active svg{color:var(--sidebar-active);}
+  .menu-item .chev{width:14px;height:14px;opacity:.6;transition:transform .15s;}
+  .menu-item.active .chev{transform:rotate(90deg);}
+
+  .submenu{
+    display:flex;
+    flex-direction:column;
+    gap:2px;
+    padding:4px 0 6px 0;
+    position:relative;
+  }
+  .submenu::before{
+    content:"";
+    position:absolute;
+    left:20px;
+    top:0;
+    bottom:0;
+    width:2px;
+    background:var(--border);
+  }
+  .submenu-item{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:9px 12px 9px 40px;
+    border-radius:8px;
+    font-size:14px;
+    font-weight:600;
+    color:#4b5563;
+    cursor:pointer;
+    text-decoration:none;
+    position:relative;
+  }
+  .submenu-item svg{width:16px;height:16px;color:#9ca3af;flex-shrink:0;}
+  .submenu-item.active{
+    background:var(--blue-light);
+    color:var(--blue);
+  }
+  .submenu-item.active::before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:6px;
+    bottom:6px;
+    width:2px;
+    background:var(--blue);
+  }
+  .submenu-item.active svg{color:var(--blue);}
+
+  .collapse-btn{
+    position:absolute;
+    top:150px;
+    right:-13px;
+    width:26px;height:26px;
+    border-radius:50%;
+    background:#fff;
+    border:1px solid var(--border);
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 1px 3px rgba(0,0,0,.08);
+  }
+  .collapse-btn svg{width:14px;height:14px;color:#6b7280;}
+
+  .logout{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:10px 12px;
+    color:#dc2626;
+    font-weight:600;
+    font-size:14.5px;
+    cursor:pointer;
+  }
+  .logout svg{width:18px;height:18px;}
+
+  /* ---------- MAIN ---------- */
+  .main{
+    flex:1;
+    padding:28px 40px 60px 40px;
+    max-width:1720px;
+  }
+
+  .top-bar{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    margin-bottom:26px;
+  }
+  .top-bar h1{
+    font-size:28px;
+    font-weight:800;
+    margin:0 0 4px 0;
+    letter-spacing:-0.01em;
+  }
+  .top-bar p{
+    margin:0;
+    color:var(--text-muted);
+    font-size:14.5px;
+  }
+  .btn-primary{
+    background:var(--blue);
+    color:#fff;
+    border:none;
+    padding:11px 20px;
+    border-radius:9px;
+    font-size:14.5px;
+    font-weight:600;
+    cursor:pointer;
+    white-space:nowrap;
+  }
+
+  .panel{
+    background:var(--card-bg);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:28px 30px 32px 30px;
+  }
+
+  .section-title{
+    font-size:15px;
+    font-weight:700;
+    margin-bottom:22px;
+  }
+
+  .slider-section .label{font-size:14px;font-weight:700;margin-bottom:4px;}
+  .slider-head-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    margin-bottom:20px;
+  }
+  .slider-head-row .desc{font-size:13px;color:var(--text-muted);}
+  .slider-pct{font-size:19px;font-weight:800;color:var(--blue);}
+
+  .slider-track-wrap{position:relative;margin-bottom:10px;}
+  .slider-track{
+    height:5px;
+    border-radius:999px;
+    background:#e5e7eb;
+    position:relative;
+  }
+  .slider-fill{
+    position:absolute;top:0;left:0;height:100%;
+    background:var(--blue);
+    border-radius:999px;
+    width:64%;
+  }
+  .slider-thumb{
+    position:absolute;
+    top:50%;
+    left:64%;
+    transform:translate(-50%,-50%);
+    width:18px;height:18px;
+    border-radius:50%;
+    background:#0d9488;
+    border:3px solid #fff;
+    box-shadow:0 1px 4px rgba(0,0,0,.25);
+  }
+
+  .slider-scale{
+    display:flex;
+    justify-content:space-between;
+    font-size:12.5px;
+    color:#9ca3af;
+    margin-bottom:20px;
+  }
+  .slider-scale .current{color:#4b5563;}
+
+  .banner-note{
+    background:#eef2ff;
+    border-left:3px solid var(--blue);
+    border-radius:0 10px 10px 0;
+    padding:14px 18px;
+    margin-bottom:26px;
+  }
+  .banner-note .tag{
+    font-size:13.5px;
+    font-weight:700;
+    color:var(--blue);
+    margin-bottom:4px;
+  }
+  .banner-note .desc{
+    font-size:13px;
+    color:#374151;
+  }
+
+  .divider{
+    border:none;
+    border-top:1px solid var(--border);
+    margin:0 0 24px 0;
+  }
+
+  .toggle-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    margin-bottom:24px;
+  }
+  .toggle-row:last-child{margin-bottom:0;}
+  .toggle-row .label{font-size:14.5px;font-weight:700;margin-bottom:4px;}
+  .toggle-row .desc{font-size:13px;color:var(--text-muted);max-width:640px;}
+
+  .switch{
+    width:42px;
+    height:24px;
+    border-radius:999px;
+    position:relative;
+    flex-shrink:0;
+    margin-top:2px;
+  }
+  .switch.on{background:linear-gradient(90deg,#2563eb,#16a34a);}
+  .switch.off{background:#e5e7eb;}
+  .switch-knob{
+    position:absolute;
+    top:3px;
+    width:18px;height:18px;
+    border-radius:50%;
+    background:#fff;
+    box-shadow:0 1px 3px rgba(0,0,0,.25);
+  }
+  .switch.on .switch-knob{right:3px;}
+  .switch.off .switch-knob{left:3px;}
+</style>
+</head>
+<body>
+
+  <!-- ================= SIDEBAR ================= -->
+  <aside class="sidebar">
+    <div class="sidebar-top">
+      <div class="user-box">
+        <div class="user-name">Admin. General</div>
+        <div class="user-role">admin</div>
+      </div>
+
+      <nav class="menu">
+        <a class="menu-item" href="#">
+          <span class="left">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/></svg>
+            Inicio
+          </span>
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+        </a>
+        <a class="menu-item" href="#">
+          <span class="left">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="7" r="4"/><path d="M2 21v-2a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v2"/><path d="M17 11a4 4 0 1 0 0-8"/><path d="M23 21v-2a4.5 4.5 0 0 0-3-4.2"/></svg>
+            Usuarios
+          </span>
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+        </a>
+        <a class="menu-item" href="#">
+          <span class="left">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4h6a4 4 0 0 1 4 4v12a3 3 0 0 0-3-3H2z"/><path d="M22 4h-6a4 4 0 0 0-4 4v12a3 3 0 0 1 3-3h7z"/></svg>
+            Cursos
+          </span>
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+        </a>
+        <a class="menu-item" href="#">
+          <span class="left">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9.5"/></svg>
+            Ambientes
+          </span>
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+        </a>
+        <a class="menu-item" href="#">
+          <span class="left">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><rect x="7" y="12" width="3" height="6"/><rect x="12" y="8" width="3" height="10"/><rect x="17" y="5" width="3" height="13"/></svg>
+            Reportes
+          </span>
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+        </a>
+        <a class="menu-item active" href="#">
+          <span class="left">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.6V21a2 2 0 1 1-4 0v-.2a1.7 1.7 0 0 0-1-1.5 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.2a1.7 1.7 0 0 0 1.5-1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.2a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.2a1.7 1.7 0 0 0-1.5 1z"/></svg>
+            Configuración
+          </span>
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+        </a>
+
+        <div class="submenu">
+          <a class="submenu-item" href="#">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg>
+            General
+          </a>
+          <a class="submenu-item active" href="#">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3.2"/><path d="M4 12a8 8 0 0 1 8-8M20 12a8 8 0 0 1-8 8M4 12c0 1.8.6 3.4 1.6 4.7M20 12c0-1.8-.6-3.4-1.6-4.7"/></svg>
+            Reconocimiento
+          </a>
+          <a class="submenu-item" href="#">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
+            Notificaciones
+          </a>
+          <a class="submenu-item" href="#">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 4 5v6c0 5 3.5 8.5 8 11 4.5-2.5 8-6 8-11V5z"/></svg>
+            Seguridad
+          </a>
+          <a class="submenu-item" href="#">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 21V10M4 6V3M12 21v-7M12 10V3M20 21v-4M20 13V3"/><circle cx="4" cy="8" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="20" cy="15" r="2"/></svg>
+            Apariencia
+          </a>
+        </div>
+      </nav>
+
+      <div class="collapse-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 6l-6 6 6 6"/></svg>
+      </div>
+    </div>
+
+    <div class="logout">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/></svg>
+      Cerrar sesión
+    </div>
+  </aside>
+
+  <!-- ================= MAIN ================= -->
+  <main class="main">
+
+    <div class="top-bar">
+      <div>
+        <h1>Configuración</h1>
+        <p>Personaliza FaceAttend EDU a tu institución</p>
+      </div>
+      <button class="btn-primary">Guardar cambios</button>
+    </div>
+
+    <div class="panel">
+
+      <div class="section-title">Reconocimiento facial</div>
+
+      <div class="slider-section">
+        <div class="slider-head-row">
+          <div>
+            <div class="label">Umbral de confianza</div>
+            <div class="desc">Qué tan seguro debe estar el modelo para registrar</div>
+          </div>
+          <div class="slider-pct">85%</div>
+        </div>
+
+        <div class="slider-track-wrap">
+          <div class="slider-track">
+            <div class="slider-fill"></div>
+            <div class="slider-thumb"></div>
+          </div>
+        </div>
+        <div class="slider-scale">
+          <span>60 — Permisivo</span>
+          <span>75</span>
+          <span class="current">85 ✓</span>
+          <span>95 — Estricto</span>
+          <span>99</span>
+        </div>
+
+        <div class="banner-note">
+          <div class="tag">Equilibrado</div>
+          <div class="desc">Buen balance entre precisión y tolerancia. Recomendado para la mayoría.</div>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <div class="toggle-row">
+        <div>
+          <div class="label">Registro automático</div>
+          <div class="desc">Registra automáticamente al detectar el rostro sin confirmación manual</div>
+        </div>
+        <div class="switch on"><div class="switch-knob"></div></div>
+      </div>
+
+      <div class="toggle-row">
+        <div>
+          <div class="label">Guardar fotos de registro</div>
+          <div class="desc">Almacena la foto tomada al registrar. Útil para auditorías pero consume más espacio.</div>
+        </div>
+        <div class="switch off"><div class="switch-knob"></div></div>
+      </div>
+
+    </div>
+
+  </main>
+
+</body>
+</html>

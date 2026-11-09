@@ -1,1 +1,7 @@
 # sha256  file / archivo
+c3b6463d768dbb6fbee90ea46d50c58b3dbf5fffbf281383125943a63c2cb9f3  FaceAttendEDU-RAPS-final-delivery-2026-main.zip
+6d934fd07c33779934c519f20b4a2a5cd10b03f3065c4321224e8b0b82526c6f  FaceAttendEDU-RAPS-full-export.zip
+cb5482ce61dd328ef0cc9493d4afa0fec7167236a44d8f82d3eb411bba79936e  ProyectoFaceAttendEDU-final-delivery-2026-main.zip
+a15029ba19945bcbb8033eb41fe94ae15dda9442485be48ae846094da3469740  ProyectoFaceAttendEDU-full-export.zip
+a4cd8f10112d91672dc3c601f88dc300697a11eecc4de5f976f26a03230e6264  fae-docs-final-delivery-2026-main.zip
+1507ea05f086783c9c67231b8b491272dce6a298329314e5ea03c83376832cbc  fae-docs-full-export.zip

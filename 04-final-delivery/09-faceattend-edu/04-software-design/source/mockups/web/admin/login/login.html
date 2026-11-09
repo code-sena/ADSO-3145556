@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Inicio de sesión – FaceAttend EDU (Mockup)</title>
+<style>
+:root{--blue:#1a85ff;--text:#0b1220;--muted:#64748b;--line:#e5eaf1}
+*{box-sizing:border-box;margin:0}
+html,body{height:100%}
+body{font-family:"Inter","Segoe UI",system-ui,sans-serif;color:var(--text);display:grid;grid-template-columns:1fr 1fr;min-height:100vh;background:#fff}
+button,input{font:inherit}
+.left{position:relative;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.left::before,.left::after{content:"";position:absolute;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.04);border-radius:28px}
+.left::before{top:-30px;left:-30px;width:126px;height:128px;border-radius:0 0 28px 0}
+.left::after{bottom:-60px;right:-60px;width:204px;height:260px}
+.back{position:absolute;top:22px;left:34px;display:flex;align-items:center;gap:12px;color:#fff;text-decoration:none;font-weight:600;font-size:17px;z-index:1}
+.back:hover{opacity:.85}
+.back svg{width:20px;height:20px;stroke:#fff;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.intro{width:380px;max-width:86%;text-align:left}
+.logo{display:block;width:112px;height:112px;margin:0 auto 38px}
+.intro h1{text-align:center;font-size:30px;font-weight:800;letter-spacing:-.3px;margin-bottom:26px}
+.sub{text-align:center;font-size:18px;margin-bottom:38px;opacity:.95}
+.intro ul{list-style:none;padding:0;display:grid;gap:15px}
+.intro li{position:relative;padding-left:22px}
+.intro li::before{content:"";position:absolute;left:0;top:8px;width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.85)}
+.intro li b{display:block;font-size:17px;font-weight:600}
+.intro li span{font-size:15px;opacity:.85}
+.right{display:flex;align-items:center;justify-content:center;padding:40px}
+.form{width:508px;max-width:100%}
+.form h2{font-size:31px;font-weight:800;letter-spacing:-.3px}
+.lead{color:var(--muted);font-size:17px;margin:6px 0 30px}
+label{display:block;font-size:15px;font-weight:500;color:#334155;margin-bottom:8px}
+.field{position:relative;margin-bottom:22px}
+.field>svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:22px;height:22px;stroke:#475569;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;pointer-events:none}
+input{width:100%;height:54px;border:1px solid var(--line);border-radius:12px;padding:0 50px 0 50px;font-size:17px;color:var(--text);background:#fff;box-shadow:0 1px 3px rgba(20,40,80,.05);transition:border-color .15s,box-shadow .15s}
+input::placeholder{color:#94a3b8}
+input:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 4px rgba(26,133,255,.15)}
+.eye{position:absolute;right:16px;top:50%;transform:translateY(-50%);background:none;border:0;padding:6px;display:grid;place-items:center}
+.eye svg{width:22px;height:22px;stroke:#475569;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.forgot{display:block;text-align:right;color:var(--blue);font-size:15px;font-weight:500;text-decoration:none;margin:-8px 0 62px}
+.forgot:hover,.reg:hover{text-decoration:underline}
+.submit{width:100%;height:54px;border:0;border-radius:10px;background:var(--blue);color:#fff;font-size:17px;font-weight:600;transition:transform .15s,box-shadow .15s}
+.submit:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(26,133,255,.3)}
+.signup{text-align:center;color:var(--muted);font-size:16px;margin-top:20px}
+.reg{color:var(--blue);font-weight:600;text-decoration:none}
+.copy{text-align:center;font-size:13.5px;margin-top:16px}
+@media(max-width:860px){body{grid-template-columns:1fr}.left{min-height:70vh;padding:90px 0 50px}}
+</style>
+</head>
+<body>
+
+<aside class="left">
+  <a class="back" href="#">
+    <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    Volver al inicio
+  </a>
+  <div class="intro">
+    <svg class="logo" viewBox="0 0 60 60" aria-hidden="true">
+      <circle cx="30" cy="30" r="27" fill="none" stroke="#4cc3e6" stroke-width="2.5" stroke-dasharray="40 6 12 6"/>
+      <path d="M30 10a20 20 0 0 0 0 40z" fill="#3aa7d9"/>
+      <path d="M30 10a20 20 0 0 1 0 40z" fill="#ef8a2c"/>
+      <circle cx="30" cy="30" r="9" fill="#fff"/>
+      <text x="30" y="35" text-anchor="middle" font-size="12" font-weight="700" fill="#0b1220" font-family="sans-serif">F</text>
+    </svg>
+    <h1>FaceAttend EDU</h1>
+    <p class="sub">Asistencia inteligente para tu institución</p>
+    <ul>
+      <li><b>Reconocimiento facial en tiempo real</b><span>Registra asistencia automáticamente con IA.</span></li>
+      <li><b>Reportes y estadísticas detalladas</b><span>Analiza patrones de asistencia por curso.</span></li>
+      <li><b>Gestión completa de estudiantes</b><span>Centraliza toda la información académica.</span></li>
+    </ul>
+  </div>
+</aside>
+
+<main class="right">
+  <div class="form">
+    <h2>Inicio de sesión</h2>
+    <p class="lead">Bienvenido de vuelta. Ingresa tus credenciales.</p>
+
+    <label for="email">Correo electrónico</label>
+    <div class="field">
+      <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+      <input id="email" type="email" placeholder="correo@universidad.edu" autocomplete="off">
+    </div>
+
+    <label for="pass">Contraseña</label>
+    <div class="field">
+      <svg viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+      <input id="pass" type="password" placeholder="Tu contraseña" autocomplete="off">
+      <button class="eye" id="eye" type="button" aria-label="Mostrar contraseña">
+        <svg viewBox="0 0 24 24"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>
+      </button>
+    </div>
+    <a class="forgot" href="#">¿Olvidaste tu contraseña?</a>
+
+    <button class="submit" type="button">Ingresar</button>
+    <p class="signup">¿No tienes cuenta? <a class="reg" href="#">Regístrate aquí</a></p>
+    <p class="copy">© FaceAttend EDU 2026 — Derechos reservados</p>
+  </div>
+</main>
+
+<script>
+// Mockup: solo se puede escribir en los campos y mostrar/ocultar la contraseña.
+const pass=document.getElementById('pass');
+document.getElementById('eye').addEventListener('click',()=>{
+  pass.type=pass.type==='password'?'text':'password';
+});
+document.querySelectorAll('a[href="#"]').forEach(a=>a.addEventListener('click',e=>e.preventDefault()));
+</script>
+</body>
+</html>

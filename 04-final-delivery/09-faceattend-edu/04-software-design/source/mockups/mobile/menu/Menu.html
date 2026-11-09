@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FaceAttendEDU - Menu</title>
+    <style>
+        :root {
+            --color-primary: #2196F3;
+            --color-bg-page: #F8FAFC;
+            --color-bg-card: #FFFFFF;
+            --color-text-primary: #0F172A;
+            --color-text-secondary: #64748B;
+            --color-error: #EF4444;
+            --space-md: 16px;
+            --space-lg: 24px;
+            --radius-lg: 12px;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+        }
+        body {
+            font-family: sans-serif;
+            background-color: #cbd5e1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .mobile-viewport {
+            width: 375px;
+            height: 812px;
+            background-color: var(--color-bg-page);
+            border-radius: 40px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+            border: 8px solid #334155;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            padding: 40px var(--space-lg) var(--space-md);
+            text-align: center;
+            background-color: var(--color-bg-card);
+        }
+        .profile-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: var(--space-lg);
+        }
+        .profile-logo {
+            width: 100px;
+            height: 100px;
+            background: #e2e8f0;
+            border-radius: 50%;
+            margin-bottom: var(--space-md);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            color: var(--color-text-secondary);
+        }
+        .profile-name {
+            font-size: 20px;
+            font-weight: bold;
+            color: var(--color-text-primary);
+        }
+        .content {
+            padding: var(--space-lg);
+            flex: 1;
+            overflow-y: auto;
+        }
+        .menu-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .menu-item {
+            background: var(--color-bg-card);
+            padding: var(--space-md);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-decoration: none;
+            color: var(--color-text-primary);
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+        .menu-item:hover {
+            background: #f1f5f9;
+        }
+        .arrow {
+            color: var(--color-text-secondary);
+            font-weight: bold;
+        }
+        .footer {
+            padding: var(--space-lg);
+            background-color: var(--color-bg-card);
+            border-top: 1px solid #e2e8f0;
+        }
+        .btn-danger {
+            background-color: var(--color-error);
+            color: white;
+            text-align: center;
+            padding: 14px;
+            border-radius: var(--radius-lg);
+            text-decoration: none;
+            display: block;
+            font-weight: bold;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="mobile-viewport">
+        <div class="header">
+            <div class="profile-section">
+                <div class="profile-logo">LOGO</div>
+                <div class="profile-name">Juan Pérez</div>
+            </div>
+        </div>
+        <div class="content">
+            <div class="menu-list">
+                <a href="#" class="menu-item">Actualizar Parámetros Faciales <span class="arrow">→</span></a>
+                <a href="#" class="menu-item">Información de Justificaciones <span class="arrow">→</span></a>
+                <a href="#" class="menu-item">Ajustes de la Aplicación <span class="arrow">→</span></a>
+                <a href="#" class="menu-item">Fallo de Reconocimiento Facial <span class="arrow">→</span></a>
+                <a href="#" class="menu-item">Configuración Escolar <span class="arrow">→</span></a>
+            </div>
+        </div>
+        <div class="footer">
+            <button class="btn-danger">Cerrar Sesión</button>
+        </div>
+    </div>
+</body>
+</html>

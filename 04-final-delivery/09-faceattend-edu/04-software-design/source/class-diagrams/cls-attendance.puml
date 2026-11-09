@@ -1,0 +1,169 @@
+@startuml cls-attendance
+title Class Diagram — Attendance
+
+skinparam classAttributeIconSize 0
+hide circle
+
+class ClassSession <<external — scheduling>> {
+}
+class AcademicActor <<external — academic>> {
+}
+class School <<external — academic>> {
+}
+class Cohort <<external — academic>> {
+}
+class AppUser <<external — identity>> {
+}
+
+enum AttendanceStatus <<enumeration>> {
+  Present
+  Absent
+  Late
+  Justified
+}
+
+enum CaptureMethod <<enumeration>> {
+  FACIAL
+  MANUAL
+  IOT
+  IMPORT
+}
+
+enum ReviewStatus <<enumeration>> {
+  Pending
+  Approved
+  Rejected
+}
+
+class AttendanceRecord {
+  +attendanceRecordId: Long
+  +classSessionId: Long
+  +academicActorId: Long
+  +attendanceStatus: AttendanceStatus
+  +capturedAt: DateTime
+  +captureMethod: CaptureMethod
+  +matchScore: Decimal
+  +record()
+}
+
+class JustificationType {
+  +justificationTypeId: Int
+  +schoolId: Int
+  +name: String
+  +description: String
+  +requiresAttachment: Boolean
+  +status: Boolean
+}
+
+class Justification {
+  +justificationId: Long
+  +attendanceRecordId: Long
+  +justificationTypeId: Int
+  +reason: String
+  +submittedAt: DateTime
+  +reviewedBy: UUID
+  +reviewedAt: DateTime
+  +reviewStatus: ReviewStatus
+  +resolutionNotes: String
+  +submit()
+  +review(decision)
+}
+
+class SupportingDocument {
+  +supportingDocumentId: Long
+  +justificationId: Long
+  +fileName: String
+  +storageUri: String
+  +mimeType: String
+  +sizeBytes: Long
+  +upload()
+}
+
+class AttendanceReport <<derived projection, no FKs>> {
+  +reportId: UUID
+  +schoolId: Int
+  +cohortId: Long
+  +generatedBy: UUID
+  +reportType: String
+  +filters: JSON
+  +result: JSON
+  +generatedAt: DateTime
+}
+
+AttendanceRecord "1" -- "0..1" Justification : justification.attendance_record_id FK\nUNIQUE one-to-one
+JustificationType "1" -- "0..*" Justification : justification.justification_type_id FK
+Justification "1" -- "0..*" SupportingDocument : supporting_document.justification_id FK
+AttendanceRecord --> AttendanceStatus
+AttendanceRecord --> CaptureMethod
+Justification --> ReviewStatus
+
+AttendanceRecord ..> ClassSession : class_session_id\n(cross-context, no FK)
+AttendanceRecord ..> AcademicActor : academic_actor_id\n(cross-context, no FK)
+Justification ..> AppUser : reviewed_by\n(cross-context, no FK)
+AttendanceReport ..> School : school_id\n(no FK, derived projection)
+AttendanceReport ..> Cohort : cohort_id\n(no FK, derived projection)
+AttendanceReport ..> AppUser : generated_by\n(no FK, derived projection)
+
+note right of AttendanceRecord
+  RN-22: one record per academic_actor per
+  class_session (uq_attendance_session_actor),
+  the only real guard -- RecordAttendanceUseCaseImpl
+  only depends on AttendanceRecordRepository, so
+  RN-23 (the session must be Open) is NOT checked
+  server-side (corrected 2026-10-12 against FULL/):
+  a record can be written against a Closed or
+  Cancelled class_session with no error. Absent
+  records leave capturedAt NULL. Only
+  captureMethod=MANUAL is wired for the alternative
+  path (RN-26) — FACIAL capture is designed but no
+  client calls the write yet, see SEQ-01.
+end note
+
+note left of JustificationType
+  school_id NULL = global type.
+  uq_justification_type_school_name plus a
+  partial unique on name WHERE school_id IS NULL.
+end note
+
+note right of Justification
+  RN-32: exactly one justification per
+  attendance_record (1:1, UNIQUE). Review is a
+  one-shot transition: Pending -> Approved or
+  Rejected only, a resolved justification cannot
+  be reviewed again (corrected 2026-10-12 against
+  FULL/). RN-33 IS enforced: approving a type
+  that requires an attachment 400s unless a
+  SupportingDocument row exists -- it only checks
+  the row exists, not that its file was really
+  uploaded (see the SupportingDocument note).
+  RN-36 (intended): approval should cascade
+  attendance_status to Justified
+  -- it does not (see ST-02 / SEQ-03). See
+  act-justification-process.mmd for the full
+  intended-vs-real process.
+end note
+
+note bottom of SupportingDocument
+  Both Web and Mobile call this endpoint with
+  real metadata right after a justification is
+  created, but storageUri is fabricated
+  client-side -- no multipart upload, no MinIO
+  or S3 SDK call exists anywhere, ADR-009 was
+  never implemented. The row is real, the file
+  it names was never transmitted. See SEQ-03.
+end note
+
+note as N1
+  All classes also carry the standard audit block
+  (created_at/updated_at/deleted_at/created_by/
+  updated_by/deleted_by/row_version) — omitted
+  here for readability. See AGENTS.md §2.2 and
+  06-data/domains/05-attendance.md for the
+  column-level ER view. Biometric entities
+  (FacialEmbedding, FingerprintEmbedding,
+  BiometricUpdateCase) live in
+  cls-biometric.puml — ms-attendance never calls
+  ms-biometric directly, see SEQ-01.
+end note
+
+@enduml

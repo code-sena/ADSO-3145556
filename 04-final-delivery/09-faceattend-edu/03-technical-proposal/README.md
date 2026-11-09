@@ -4,8 +4,17 @@
 
 ## Required content / Contenido requerido
 
-- [ ] Software technical proposal / Propuesta técnica del software
-- [ ] Selected technologies and why / Tecnologías seleccionadas y su justificación
+- [x] Software technical proposal / Propuesta técnica del software
+- [x] Selected technologies and why / Tecnologías seleccionadas y su justificación
+
+## Files / Archivos
+
+| File / Archivo | Content / Contenido |
+|---|---|
+| [`technical-proposal.pdf`](technical-proposal.pdf) | Technical report, activity plan, hardware requirements / Informe técnico, plan de actividades, requerimientos físicos |
+| [`gantt-chart.pdf`](gantt-chart.pdf) | Gantt chart / Diagrama de Gantt |
+
+Editable sources are in [`source/`](source/). / Las fuentes editables están en [`source/`](source/).
 
 ## Format / Formato
 

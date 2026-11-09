@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FaceAttendEDU - Manage Environments</title>
+    <style>
+        :root {
+            --color-primary: #2196F3;
+            --color-bg-page: #F8FAFC;
+            --color-bg-card: #FFFFFF;
+            --color-text-primary: #0F172A;
+            --color-text-secondary: #64748B;
+            --color-error: #EF4444;
+            --space-md: 16px;
+            --space-lg: 24px;
+            --radius-lg: 12px;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+        }
+        body {
+            font-family: sans-serif;
+            background-color: #cbd5e1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .mobile-viewport {
+            width: 375px;
+            height: 812px;
+            background-color: var(--color-bg-page);
+            border-radius: 40px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+            border: 8px solid #334155;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            padding: 40px var(--space-lg) var(--space-md);
+            background-color: var(--color-bg-card);
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .header h1 {
+            font-size: 22px;
+            color: var(--color-text-primary);
+            margin: 0;
+        }
+        .content {
+            padding: var(--space-lg);
+            flex: 1;
+            overflow-y: auto;
+        }
+        .search-bar {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: var(--radius-lg);
+            box-sizing: border-box;
+            margin-bottom: var(--space-lg);
+        }
+        .env-item {
+            background: var(--color-bg-card);
+            padding: var(--space-md);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            margin-bottom: var(--space-md);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .env-info h4 {
+            margin: 0;
+            font-size: 16px;
+            color: var(--color-text-primary);
+        }
+        .env-info p {
+            margin: 4px 0 0 0;
+            font-size: 13px;
+            color: var(--color-text-secondary);
+        }
+        .env-actions {
+            display: flex;
+            gap: 8px;
+        }
+        .btn-small {
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            cursor: pointer;
+            border: none;
+            font-weight: bold;
+        }
+        .btn-edit { background: #e2e8f0; color: var(--color-text-primary); }
+        .btn-delete { background: #fee2e2; color: var(--color-error); }
+        .footer {
+            padding: var(--space-lg);
+            background-color: var(--color-bg-card);
+            border-top: 1px solid #e2e8f0;
+        }
+        .btn-primary {
+            background-color: var(--color-primary);
+            color: white;
+            text-align: center;
+            padding: 14px;
+            border-radius: var(--radius-lg);
+            text-decoration: none;
+            display: block;
+            font-weight: bold;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="mobile-viewport">
+        <div class="header">
+            <h1>Gestionar Entornos</h1>
+        </div>
+        <div class="content">
+            <input type="text" class="search-bar" placeholder="Buscar entorno...">
+            <button class="btn-primary" style="margin-bottom: var(--space-lg); width: 100%;">+ Agregar Entorno</button>
+
+            <div class="env-item">
+                <div class="env-info">
+                    <h4>Laboratorio A1</h4>
+                    <p>Capacidad: 30 • Piso 1</p>
+                </div>
+                <div class="env-actions">
+                    <button class="btn-small btn-edit">Editar</button>
+                    <button class="btn-small btn-delete">Borrar</button>
+                </div>
+            </div>
+            <div class="env-item">
+                <div class="env-info">
+                    <h4>Aula Magna</h4>
+                    <p>Capacidad: 120 • Auditorio</p>
+                </div>
+                <div class="env-actions">
+                    <button class="btn-small btn-edit">Editar</button>
+                    <button class="btn-small btn-delete">Borrar</button>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <a href="#" class="btn-primary">Volver</a>
+        </div>
+    </div>
+</body>
+</html>

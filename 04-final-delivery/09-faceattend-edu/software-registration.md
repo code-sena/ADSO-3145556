@@ -17,10 +17,10 @@ Llene todos los campos vacíos. Sigue el Decreto 1360 de 1989.
 
 | Field / Campo | Value / Valor |
 |---|---|
-| Full name / Nombre |  |
-| ID document / Identificación | |
-| Acts on own behalf or as representative / Actúa en nombre propio o como representante | ☐ Own behalf / Nombre propio ☐ Representative / Representante |
-| Proof of representation / Prueba de representación, si aplica | |
+| Full name / Nombre | DIEGO ANDRES GUTIERREZ NUÑEZ |
+| ID document / Identificación | CC 1077228601 |
+| Acts on own behalf or as representative / Actúa en nombre propio o como representante | ☐ Own behalf / Nombre propio ☑ Representative / Representante: of the co-holders in section 4 / de los cotitulares de la sección 4 |
+| Proof of representation / Prueba de representación, si aplica | Written authorization signed by the other co-holders (sections 2 and 4), to be attached when filing / Autorización escrita firmada por los demás cotitulares (secciones 2 y 4), que se adjunta al radicar |
 
 ## 2. Authors / Autores (art. 5, num. 2)
 
@@ -38,9 +38,9 @@ Authors are the instructors and the apprentices listed in `team-roster.md`. Each
 | EDDIER YAIR LIBERATO CUENCA | | Kept privately / En custodia | | Instructor: see `team-roster.md` / ver `team-roster.md` |
 | JHON WILLIAN CORREDOR ARAUJO | | Kept privately / En custodia | | Instructor: see `team-roster.md` / ver `team-roster.md` |
 | ANDRES MORENO COLLAZOS | | Kept privately / En custodia | | Instructor: see `team-roster.md` / ver `team-roster.md` |
-| JONATTAN STEVEN RIZO SOLANO | CC | 1077228536 | 3145556 | |
-| DIEGO ANDRES GUTIERREZ NUÑEZ | CC | 1077228601 | 3145556 | |
-| JUAN DAVID ARBOLEDA PERDOMO | CC | 1077229270 | 3145556 | |
+| JONATTAN STEVEN RIZO SOLANO | CC | 1077228536 | 3145556 | Full-stack developer: Mobile app, attendance, authorization and biometric services, shared libraries, quality service and production deployment / Desarrollador full-stack: app Mobile, servicios de asistencia, autorización y biometría, librerías compartidas, servicio de calidad y despliegue a producción |
+| DIEGO ANDRES GUTIERREZ NUÑEZ | CC | 1077228601 | 3145556 | Full-stack developer: Web app, identity, academic, scheduling, configuration and notification services, database migrations (Liquibase), API Gateway and CI/CD / Desarrollador full-stack: app Web, servicios de identidad, académico, horarios, configuración y notificaciones, migraciones de base de datos (Liquibase), API Gateway y CI/CD |
+| JUAN DAVID ARBOLEDA PERDOMO | CC | 1077229270 | 3145556 | Full-stack developer: user interface of the Web and Mobile apps (components, screens and design) / Desarrollador full-stack: interfaz de usuario de las apps Web y Mobile (componentes, pantallas y diseño) |
 
 ## 3. Producer / Productor (art. 5, num. 3)
 
@@ -63,23 +63,23 @@ Authors are the instructors and the apprentices listed in `team-roster.md`. Each
 | Field / Campo | Value / Valor |
 |---|---|
 | Title / Título de la obra | FaceAttend EDU |
-| Year of creation / Año de creación | |
+| Year of creation / Año de creación | 2026 |
 | Country of origin / País de origen | Colombia |
 | Version registered / Versión a registrar | `final-delivery-2026` |
-| Short description of its functions / Breve descripción de sus funciones | |
-| What sets it apart from similar software / Qué la diferencia de obras similares |  |
-| Programming languages / Lenguajes | |
-| Type: web, mobile, desktop, device / Tipo: web, móvil, escritorio, dispositivo | |
+| Short description of its functions / Breve descripción de sus funciones | Attendance management platform for educational institutions based on biometric recognition (face and fingerprint): registration of people, academic programs, schedules and class sessions, attendance taking with facial verification and liveness check, absence justifications, notifications and a quality module (ISO 25010). Backend of 9 microservices behind an API Gateway, plus a Web app and a Mobile app. / Plataforma de gestión de asistencia mediante reconocimiento biométrico (rostro y huella) para instituciones educativas: registro de personas, programas académicos, horarios y sesiones de clase, toma de asistencia con verificación facial y prueba de vida, justificaciones, notificaciones y un módulo de calidad (ISO 25010). Backend de 9 microservicios detrás de un API Gateway, más una app Web y una app Mobile. |
+| What sets it apart from similar software / Qué la diferencia de obras similares | Biometric attendance with liveness check; biometric data encrypted at rest (AES-256-GCM) and designed for Ley 1581 de 2012 (personal data protection); multi-campus isolation (each campus only sees its own data); polyglot microservice architecture (Java, TypeScript, Python); built-in quality module for ISO 25010, ISO 29110 and ISTQB evaluations. / Asistencia biométrica con prueba de vida; datos biométricos cifrados en reposo (AES-256-GCM) y diseñados según la Ley 1581 de 2012 (protección de datos personales); aislamiento por sede (cada sede solo ve sus datos); arquitectura de microservicios políglota (Java, TypeScript, Python); módulo de calidad integrado para evaluaciones ISO 25010, ISO 29110 e ISTQB. |
+| Programming languages / Lenguajes | Java 21, TypeScript, JavaScript, Python 3.12, SQL (PostgreSQL / Liquibase), YAML (Docker Compose, Kong, GitHub Actions) |
+| Type: web, mobile, desktop, device / Tipo: web, móvil, escritorio, dispositivo | Web and mobile (Expo / React Native), with backend services (REST API) / Web y móvil (Expo / React Native), con servicios backend (API REST) |
 
 ## 6. Declarations / Declaraciones (art. 4 y art. 5, num. 5 y 6)
 
 | Declaration / Declaración | Option / Opción |
 |---|---|
-| Origin / Origen | ☐ Original ☐ Derived work / Obra derivada |
-| If derived, base work / Si es derivada, obra de base | |
-| Type of work / Clase de obra | ☐ Individual ☐ In collaboration / En colaboración ☐ Collective / Colectiva ☐ Anonymous / Anónima ☐ Pseudonymous / Seudónima ☐ Posthumous / Póstuma |
-| Publication / Publicación | ☐ Unpublished / Inédita ☐ Published / Publicada |
-| If published, date and place / Si está publicada, fecha y lugar | |
+| Origin / Origen | ☑ Original ☐ Derived work / Obra derivada |
+| If derived, base work / Si es derivada, obra de base | Not applicable: third-party components are only used, see section 8 / No aplica: los componentes de terceros solo se usan, ver sección 8 |
+| Type of work / Clase de obra | ☐ Individual ☑ In collaboration / En colaboración ☐ Collective / Colectiva ☐ Anonymous / Anónima ☐ Pseudonymous / Seudónima ☐ Posthumous / Póstuma |
+| Publication / Publicación | ☐ Unpublished / Inédita ☑ Published / Publicada |
+| If published, date and place / Si está publicada, fecha y lugar | 2026-03-11, public GitHub repository / repositorio público en GitHub: [Jonas7891/ProyectoFaceAttendEDU](https://github.com/Jonas7891/ProyectoFaceAttendEDU) |
 
 Software is treated as unpublished unless the rights holder states otherwise (art. 4). A public repository may count as publication: the team records it here, and the Centro decides the final declaration.
 
@@ -91,9 +91,9 @@ At least one is required. Attach all three. / Se exige al menos uno. Adjunte los
 
 | Element / Elemento | Where it is / Dónde está | Ready / Listo |
 |---|---|---|
-| Computer program / Programa de computador | ZIP files `final-delivery-2026` listed in `code-tag/README.md` / ZIP relacionados en `code-tag/README.md` | ☐ |
-| Program description / Descripción de programa | `02-software-analysis/` and `04-software-design/` | ☐ |
-| Auxiliary material / Material auxiliar | `08-manuals/` | ☐ |
+| Computer program / Programa de computador | ZIP files `final-delivery-2026` listed in `code-tag/README.md` / ZIP relacionados en `code-tag/README.md` | ☑ |
+| Program description / Descripción de programa | `02-software-analysis/` and `04-software-design/` | ☑ |
+| Auxiliary material / Material auxiliar | `08-manuals/` | ☑ |
 
 ## 8. Third-party components / Componentes de terceros
 
@@ -103,7 +103,31 @@ Relacione código, librerías, modelos, imágenes o datos que el equipo no creó
 
 | Component / Componente | Author or source / Autor o fuente | License / Licencia | Where it is used / Dónde se usa |
 |---|---|---|---|
-| | | | |
+| Spring Boot (and Spring libraries) | VMware / Broadcom (Spring project) | Apache 2.0 | Java services 01, 02, 04, 05 |
+| Fastify, `pg` (node-postgres), Axios | Fastify team; Brian Carlson and contributors; Axios contributors | MIT | TypeScript services 03, 07, 08, 09; apps |
+| FastAPI, Starlette, Pydantic, Uvicorn | Sebastián Ramírez and contributors; Encode; Pydantic team | MIT / BSD-3-Clause | Biometric service 06 |
+| OpenCV (`opencv-python-headless`), NumPy, Pillow | OpenCV; NumPy; Pillow contributors | Apache 2.0 / BSD-3-Clause / HPND | Biometric service 06 |
+| `face_recognition` | Adam Geitgey | MIT | Biometric service 06 (face encoding) |
+| dlib (HOG detector) | Davis King | Boost Software License 1.0 | Biometric service 06 (face detection) |
+| dlib models `dlib_face_recognition_resnet_model_v1`, `shape_predictor_5_face_landmarks` | Davis King | Public domain / Dominio público | Biometric service 06 (face template, alignment) |
+| dlib model `shape_predictor_68_face_landmarks` (trained on iBUG 300-W) | Davis King / iBUG (Imperial College London) | Non-commercial use only / Solo uso no comercial | Biometric service 06 (liveness check only). Used by SENA for non-commercial educational purposes, within the license; see `docs/LICENCIAS_MODELOS_BIOMETRICOS.md` in the repository / Usado por el SENA con fines educativos no comerciales, dentro de la licencia |
+| React, React Native, React Native Web, React Navigation | Meta; Necolas; React Navigation contributors | MIT | Web and Mobile apps |
+| Expo SDK (`expo-*` packages) | Expo | MIT | Web and Mobile apps |
+| Kong Gateway OSS | Kong Inc. | Apache 2.0 | API Gateway |
+| PostgreSQL | PostgreSQL Global Development Group | PostgreSQL License | Relational database |
+| MongoDB | MongoDB Inc. | SSPL (server software, used as an external service) / SSPL (servidor, usado como servicio externo) | Biometric embeddings |
+| Redis 7 | Redis contributors | RSALv2 / SSPLv1 (7.4 series: `redis:7-alpine` pinned on 2026-10-30) / RSALv2 / SSPLv1 (serie 7.4: `redis:7-alpine` fijada el 2026-10-30) | Gateway cache |
+| Apache Kafka | Apache Software Foundation | Apache 2.0 | Messaging between services |
+| Liquibase 4.29 | Liquibase | Apache 2.0 | Database migrations (run as a container) |
+| Caddy | Caddy contributors | Apache 2.0 | Reverse proxy / TLS |
+| `@digitalpersona/websdk`, `@digitalpersona/fingerprint` | HID Global | MIT (the agent and reader drivers are proprietary / el agente y los controladores son propietarios) | Web, fingerprint / Web, huella |
+| FFmpeg (bundled in `opencv-python-headless` / empaquetado en `opencv-python-headless`) | FFmpeg project | LGPL-2.1 | Biometric service 06 |
+| nginx (`nginx-unprivileged` image / imagen `nginx-unprivileged`) | F5 / nginx | BSD-2-Clause | Web app container / Contenedor de la app Web |
+| MinIO | MinIO Inc. | AGPLv3 | Supporting document storage / Almacenamiento de soportes |
+| countriesnow.space | countriesnow.space | Public API, terms not stated / API pública, sin términos claros | School sign-up: cities / Alta de sede: ciudades |
+| Icons in `Mobile/src/assets/images` (except `logoFaceAttend.png`) / Iconos en `Mobile/src/assets/images` (salvo `logoFaceAttend.png`) | Flaticon (Freepik and other authors / Freepik y otros autores) | Flaticon free license: attribution required / Licencia gratuita de Flaticon: exige atribución | Mobile / Móvil |
+
+The full list of dependencies and exact versions is in each service's `pom.xml`, `package.json` and `pyproject.toml`. / La lista completa de dependencias y versiones está en el `pom.xml`, `package.json` y `pyproject.toml` de cada servicio.
 
 ## 9. Private data / Datos privados
 
@@ -116,4 +140,4 @@ Relacione código, librerías, modelos, imágenes o datos que el equipo no creó
 - [ ] The information is true and the names match the official ID documents. / La información es veraz y los nombres coinciden con los documentos de identidad.
 - [ ] The listed authors are the people who created the software. / Los autores relacionados son quienes crearon el software.
 - [ ] Third-party components are declared. / Los componentes de terceros están declarados.
-- [ ] No passwords, tokens or keys are included. / No se incluyen contraseñas, tokens ni llaves.
+- [x] No passwords, tokens or keys are included. / No se incluyen contraseñas, tokens ni llaves.

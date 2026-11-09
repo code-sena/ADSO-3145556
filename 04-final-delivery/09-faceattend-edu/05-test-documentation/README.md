@@ -4,9 +4,17 @@
 
 ## Required content / Contenido requerido
 
-- [ ] Test plan / Plan de pruebas
-- [ ] Test cases / Casos de prueba
-- [ ] Test results with evidence / Resultados de las pruebas con evidencia
+- [x] Test plan / Plan de pruebas
+- [x] Test cases / Casos de prueba
+- [x] Test results with evidence / Resultados de las pruebas con evidencia
+
+## Files / Archivos
+
+| File / Archivo | Content / Contenido |
+|---|---|
+| [`test-documentation.pdf`](test-documentation.pdf) | Test plan, test cases, results with evidence, unit test catalog / Plan, casos, resultados con evidencia, catálogo unitario |
+
+Editable sources are in [`source/`](source/). / Las fuentes editables están en [`source/`](source/).
 
 ## Format / Formato
 

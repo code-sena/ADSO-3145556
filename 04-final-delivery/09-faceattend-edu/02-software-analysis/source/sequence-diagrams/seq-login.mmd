@@ -1,0 +1,76 @@
+sequenceDiagram
+    autonumber
+    actor U as User (Web / Mobile)
+    participant GW as Kong :8000
+    participant ID as ms-identity :8081
+    participant AZ as ms-authorization :8082
+    participant SVC as Any service 01-09
+
+    Note over GW: Kong's global pre-function validates the opaque sessionId against identity on every non-public route (401/503 at the edge), plus cors + rate-limiting — no jwt plugin, no consumers. Every service behind it (Java 01/02/04/05, TS 03/07/08/09, Python 06) also re-validates the session and evaluates RBAC again on its own, through a per-service guard — "duplicated per service on purpose: no shared module" (see note at the bottom)
+
+    rect rgb(238, 245, 238)
+    Note over U,ID: 1. Sign in — public bootstrap route, the pre-function does not run
+    U->>GW: POST /api/v1/auth/login {identifier, password}
+    GW->>ID: forward (no bearer required yet)
+    ID->>ID: BCrypt match against app_user.password_hash
+    alt credentials valid
+        ID->>ID: INSERT user_session (session_status = Active, start_date, source_ip)
+        ID-->>U: 200 {sessionId, userId, sessionStatus: Active, startDate, sourceIp}
+        U->>U: store sessionId (SecureStore on Mobile, storage on Web)
+    else unknown user or wrong password
+        ID-->>U: 401 "Invalid email or password" (same message for both cases)
+    end
+    end
+
+    rect rgb(240, 245, 255)
+    Note over U,AZ: 2. Client-side context (fail-closed on Mobile) — every call below carries Authorization Bearer sessionId
+    U->>GW: GET /api/v1/users/{id}/roles
+    GW->>ID: edge pre-function: GET /api/v1/sessions/{sessionId}
+    ID-->>GW: 200 Active
+    GW->>AZ: forward
+    AZ-->>U: [roleName...]
+    U->>GW: GET /api/v1/auth/evaluate?userId&permission=attendance.record:read
+    GW->>ID: edge pre-function: GET /api/v1/sessions/{sessionId}
+    ID-->>GW: 200 Active
+    GW->>AZ: forward
+    AZ-->>U: {allowed: true|false}
+    U->>GW: GET /api/v1/users/{id} + GET /api/v1/persons/{id}
+    GW->>ID: edge pre-function: GET /api/v1/sessions/{sessionId}
+    ID-->>GW: 200 Active
+    GW->>ID: forward
+    ID-->>U: profile
+    end
+
+    rect rgb(255, 246, 236)
+    Note over U,SVC: 3. Every authenticated call, on every one of the 9 services — Kong's edge check runs first, then the service's own guard re-validates (AuthTokenFilter in Java, registerAuthGuard in TS, require_permission in Python — same contract, duplicated per service, no shared module)
+    U->>GW: GET/PATCH/POST ... header: Authorization Bearer sessionId
+    GW->>ID: edge pre-function: GET /api/v1/sessions/{sessionId}
+    alt missing header, non-UUID token, or session not Active
+        ID-->>GW: 401 / session not Active
+        GW-->>U: 401 (request never reaches the service)
+    else session Active
+        ID-->>GW: 200 Active
+        GW->>SVC: forward
+        SVC->>ID: GET /api/v1/sessions/{sessionId} (re-validates — no cache, no shared state with Kong)
+        ID-->>SVC: session (must be Active)
+        SVC->>AZ: GET /api/v1/users/{id}/roles (Java only) or GET /api/v1/auth/evaluate directly (TS/Python — coarser, route-derived permission)
+        AZ-->>SVC: roles / allowed?
+        SVC->>SVC: Java sets X-User-Id / X-User-Roles — TS/Python set req.userId only
+        alt permission granted
+            SVC-->>U: 2xx response
+        else permission denied
+            SVC-->>U: 403 forbidden
+        end
+    end
+    end
+
+    rect rgb(245, 240, 255)
+    Note over U,ID: 4. Logout and refresh (rotation) — public bootstrap routes, the pre-function does not run
+    U->>GW: POST /api/v1/auth/logout?sessionId=...
+    GW->>ID: forward
+    ID->>ID: session_status = Closed (end_date set)
+    ID-->>U: 204 No Content
+    Note over U,ID: refresh is single-use: POST /api/v1/auth/refresh {sessionId} closes the old session and returns a new one — a replayed or expired sessionId gets 401
+    end
+
+    Note over SVC: Verified 2026-10 against FULL — every service, not just Java, registers its own session+RBAC guard at boot (03/07/08/09 TS registerAuthGuard, 06 Python require_permission), applied to every /api/** route except /health. A direct call to a service's own port still hits a real auth check, it is not an open bypass. 07-api/authentication.md's coverage gap AT-004 (only 01/02/04/05 have a filter) and 15-project-control/risks.md R-003 describe an earlier state of the code, now stale and never updated when these guards were added
