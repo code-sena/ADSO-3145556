@@ -48,143 +48,75 @@ Every modification to this manual must be recorded before the document is submit
 
 # **Table of Contents**
 
-[Version Control](#) 2
-
-> [Update Rule](#) 2
-
-[Table of Contents](#) 3
-
-[Introduction](#) 6
-
-[Objective](#) 8
-
-> [Specific Objectives](#) 8
-
-[Scope](#) 9
-
-> [Content Covered by the Manual](#) 9
->
-> [Content Not Covered by the Manual](#) 9
-
-[Administrator Profile](#) 11
-
-> [Administrator Responsibilities](#) 11
->
-> [Daily Responsibilities](#) 11
->
-> [Weekly Responsibilities](#) 11
->
-> [Monthly Responsibilities](#) 12
->
-> [Event-Driven Responsibilities](#) 12
->
-> [Limits of the Role](#) 12
-
-[Access to the Administration Panel](#) 13
-
-> [Login Procedure](#) 13
-
-[User Management](#) 15
-
-> [Create a User](#) 15
->
-> [Edit a User](#) 16
->
-> [Activate or Deactivate a User](#) 16
->
-> [Reset a User's Password](#) 17
->
-> [Query and Filter Users](#) 17
-
-[Role and Permission Management](#) 19
-
-> [Assign or Change a Role](#) 19
->
-> [Permission Matrix by Operation](#) 20
-
-[System Configuration](#) 21
-
-> [Procedure for Modifying a Parameter](#) 21
->
-> [Parameters External to the Panel](#) 22
-
-[Management of Core Information](#) 23
-
-> [Manage Cohorts](#) 23
->
-> [Create a Cohort](#) 23
->
-> [Cohort Administration Rules](#) 23
->
-> [Manage Courses](#) 24
->
-> [Manage Schedules](#) 24
->
-> [Attendance Issue Management](#) 25
->
-> [Modules Pending Documentation](#) 26
-
-[Administrative Reports](#) 27
-
-> [Generate and Export a Report](#) 27
->
-> [Monitoring Metrics](#) 28
->
-> [Good Practices in Report Handling](#) 29
-
-[Backups](#) 30
-
-> [Procedure from the Panel](#) 30
->
-> [Alternate Command-Line Procedure](#) 31
->
-> [Backup Storage](#) 32
-
-[Information Restoration](#) 33
-
-> [Restoration Procedure](#) 33
->
-> [Post-Restoration Verification](#) 34
->
-> [Alternate Command-Line Procedure](#) 34
-
-[Audit and Action History](#) 36
-
-> [Query the History](#) 36
->
-> [Periodic Review](#) 37
->
-> [Actions Not Logged by the System](#) 37
-
-[Security Recommendations and Support Procedures](#) 38
-
-> [Account Security](#) 38
->
-> [Information Security](#) 38
->
-> [Communication with Users](#) 38
->
-> [Incident Management and Escalation](#) 39
->
-> [Change Management](#) 40
->
-> [Known Risks and Contingency Plan](#) 41
-
-[Glossary](#) 42
-
-[References](#) 43
-
-[Appendix A](#) 44
-
-[Appendix B](#) 45
-
-[Appendix C](#) 46
-
-[Appendix D](#) 47
-
-[Appendix E](#) 48
-
-[Appendix F](#) 49
+- [Version Control](#version-control)
+  - [Update Rule](#update-rule)
+- [Table of Contents](#table-of-contents)
+- [Introduction](#introduction)
+- [Objective](#objective)
+  - [Specific Objectives](#specific-objectives)
+- [Scope](#scope)
+  - [Content Covered by the Manual](#content-covered-by-the-manual)
+  - [Content Not Covered by the Manual](#content-not-covered-by-the-manual)
+- [Administrator Profile](#administrator-profile)
+  - [Administrator Responsibilities](#administrator-responsibilities)
+  - [Daily Responsibilities](#daily-responsibilities)
+  - [Weekly Responsibilities](#weekly-responsibilities)
+  - [Monthly Responsibilities](#monthly-responsibilities)
+  - [Event-Driven Responsibilities](#event-driven-responsibilities)
+  - [Limits of the Role](#limits-of-the-role)
+- [Access to the Administration Panel](#access-to-the-administration-panel)
+  - [Login Procedure](#login-procedure)
+- [User Management](#user-management)
+  - [Create a User](#create-a-user)
+  - [Edit a User](#edit-a-user)
+  - [Activate or Deactivate a User](#activate-or-deactivate-a-user)
+  - [Reset a User's Password](#reset-a-users-password)
+  - [Query and Filter Users](#query-and-filter-users)
+- [Role and Permission Management](#role-and-permission-management)
+  - [Assign or Change a Role](#assign-or-change-a-role)
+  - [Permission Matrix by Operation](#permission-matrix-by-operation)
+- [System Configuration](#system-configuration)
+  - [Procedure for Modifying a Parameter](#procedure-for-modifying-a-parameter)
+  - [Parameters External to the Panel](#parameters-external-to-the-panel)
+- [Management of Core Information](#management-of-core-information)
+  - [Manage Cohorts](#manage-cohorts)
+  - [Create a Cohort](#create-a-cohort)
+  - [Cohort Administration Rules](#cohort-administration-rules)
+  - [Manage Courses](#manage-courses)
+  - [Manage Schedules](#manage-schedules)
+  - [Attendance Issue Management](#attendance-issue-management)
+  - [Modules Pending Documentation](#modules-pending-documentation)
+- [Administrative Reports](#administrative-reports)
+  - [Generate and Export a Report](#generate-and-export-a-report)
+  - [Monitoring Metrics](#monitoring-metrics)
+  - [Good Practices in Report Handling](#good-practices-in-report-handling)
+- [Backups](#backups)
+  - [Procedure from the Panel](#procedure-from-the-panel)
+  - [Alternate Command-Line Procedure](#alternate-command-line-procedure)
+  - [Backup Storage](#backup-storage)
+- [Information Restoration](#information-restoration)
+  - [Restoration Procedure](#restoration-procedure)
+  - [Post-Restoration Verification](#post-restoration-verification)
+  - [Alternate Command-Line Procedure](#alternate-command-line-procedure-1)
+- [Audit and Action History](#audit-and-action-history)
+  - [Query the History](#query-the-history)
+  - [Periodic Review](#periodic-review)
+  - [Actions Not Logged by the System](#actions-not-logged-by-the-system)
+- [Security Recommendations and Support Procedures](#security-recommendations-and-support-procedures)
+  - [Account Security](#account-security)
+  - [Information Security](#information-security)
+  - [Communication with Users](#communication-with-users)
+  - [Incident Management and Escalation](#incident-management-and-escalation)
+  - [Change Management](#change-management)
+  - [Known Risks and Contingency Plan](#known-risks-and-contingency-plan)
+- [Glossary](#glossary)
+- [References](#references)
+- [Appendix A](#appendix-a)
+- [Appendix B](#appendix-b)
+- [Appendix C](#appendix-c)
+- [Appendix D](#appendix-d)
+- [Appendix E](#appendix-e)
+- [Appendix F](#appendix-f)
 
 # **Introduction**
 
