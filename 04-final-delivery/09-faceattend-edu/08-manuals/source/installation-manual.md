@@ -52,201 +52,104 @@ The manual must be reviewed after every deployment that modifies the services, t
 
 # Table of Contents
 
-[Version Control](#) 2
-
-> [Update Rule](#) 2
-
-[Table of Contents](#) 3
-
-[Introduction](#) 6
-
-[Objective](#) 8
-
-> [Specific Objectives](#) 8
-
-[Scope](#) 9
-
-> [Content Covered by the Manual](#) 9
->
-> [Content Not Covered by the Manual](#) 9
-
-[Installer Profile](#) 10
-
-> [Required Knowledge](#) 10
->
-> [Installer Responsibilities](#) 10
->
-> [Limits of the Role](#) 11
-
-[General System Description](#) 12
-
-> [Nature of the Installation](#) 12
->
-> [System Components](#) 13
->
-> [Network Organization](#) 14
-
-[Prerequisites](#) 15
-
-> [Hardware Requirements](#) 15
->
-> [Operating System](#) 16
->
-> [Required Software](#) 16
->
-> [Optional Tools](#) 17
->
-> [Port Availability](#) 17
->
-> [Checking the Availability of a Port](#) 18
->
-> [Network Connectivity](#) 18
-
-[Download and Installation](#) 19
-
-> [Installing Docker](#) 19
->
-> [Procedure on Windows](#) 19
->
-> [Procedure on Ubuntu and Debian](#) 19
->
-> [Procedure on macOS](#) 19
->
-> [Verifying the Docker Installation](#) 20
->
-> [Installing Git](#) 20
->
-> [Obtaining the Project](#) 20
->
-> [First Route: Cloning the Repository](#) 20
->
-> [Second Route: Compressed Archive](#) 21
->
-> [Verifying the Project Structure](#) 21
-
-[Initial Configuration](#) 23
-
-> [Creating the Configuration File](#) 23
->
-> [Environment Variables](#) 23
->
-> [Customization Cases](#) 25
->
-> [First Case: The Database Port Is Occupied](#) 25
->
-> [Second Case: Testing from a Mobile Device](#) 26
->
-> [Third Case: The Gateway Port Is Occupied](#) 26
->
-> [Email Channel](#) 26
-
-[Bringing the System Up](#) 28
-
-> [Deploying the System](#) 28
->
-> [Startup Order](#) 29
->
-> [Database and Migrations](#) 29
->
-> [Creation of the Schemas](#) 29
->
-> [Creation of Tables and Catalog Data](#) 30
->
-> [Initial System Data](#) 30
->
-> [Loading Test Data](#) 31
-
-[Verifying the Installation](#) 33
-
-> [Checklist](#) 33
->
-> [First Test: Container Status](#) 33
->
-> [Second Test: Service Health](#) 34
->
-> [Third Test: Authentication](#) 34
->
-> [Fourth Test: Web Interface](#) 35
->
-> [Fifth Test: Network Isolation](#) 36
-
-[Installing the Mobile Application](#) 37
-
-> [Additional Requirements](#) 37
->
-> [Installation Procedure](#) 37
-
-[Day-to-Day Operation](#) 39
-
-> [Frequently Used Commands](#) 39
->
-> [Stopping and Restarting the System](#) 39
->
-> [Updating to a New Version](#) 39
->
-> [Uninstallation](#) 40
-
-[Troubleshooting](#) 41
-
-> [Initial Diagnosis](#) 41
->
-> [Problems During Installation](#) 41
->
-> [Problems When Deploying the System](#) 41
->
-> [The Port Address Is Already Allocated](#) 41
->
-> [A Service Declares an Undefined Dependency](#) 42
->
-> [A Container Remains in an Endless Restart Loop](#) 42
->
-> [The Web Interface Shows an Unhealthy Status](#) 42
->
-> [Problems with the Migrations](#) 43
->
-> [A Migration Ends with an Error](#) 43
->
-> [The System Reports That a Table or a Schema Does Not Exist](#) 43
->
-> [Connection and Usage Problems](#) 43
->
-> [Performance Problems](#) 44
->
-> [Clean Restart Procedure](#) 44
->
-> [Incident Escalation](#) 45
-
-[Installation Without Containers](#) 46
-
-> [Tools Required by Programming Language](#) 46
->
-> [Recommended Approach: Hybrid Mode](#) 46
->
-> [Web Interface in Development Mode](#) 47
-
-[Security Recommendations](#) 48
-
-> [Credentials](#) 48
->
-> [Network Exposure](#) 48
->
-> [Preservation of Information](#) 49
->
-> [Handover to the System Administrator](#) 49
-
-[Glossary](#) 50
-
-[References](#) 52
-
-[Appendix A](#) 54
-
-[Appendix B](#) 55
-
-[Appendix C](#) 56
-
-[Appendix D](#) 57
-
-[Appendix E](#) 58
+- [Version Control](#version-control)
+  - [Update Rule](#update-rule)
+- [Table of Contents](#table-of-contents)
+- [Introduction](#introduction)
+- [Objective](#objective)
+  - [Specific Objectives](#specific-objectives)
+- [Scope](#scope)
+  - [Content Covered by the Manual](#content-covered-by-the-manual)
+  - [Content Not Covered by the Manual](#content-not-covered-by-the-manual)
+- [Installer Profile](#installer-profile)
+  - [Required Knowledge](#required-knowledge)
+  - [Installer Responsibilities](#installer-responsibilities)
+  - [Limits of the Role](#limits-of-the-role)
+- [General System Description](#general-system-description)
+  - [Nature of the Installation](#nature-of-the-installation)
+  - [System Components](#system-components)
+  - [Network Organization](#network-organization)
+- [Prerequisites](#prerequisites)
+  - [Hardware Requirements](#hardware-requirements)
+  - [Operating System](#operating-system)
+  - [Required Software](#required-software)
+  - [Optional Tools](#optional-tools)
+  - [Port Availability](#port-availability)
+  - [Checking the Availability of a Port](#checking-the-availability-of-a-port)
+  - [Network Connectivity](#network-connectivity)
+- [Download and Installation](#download-and-installation)
+  - [Installing Docker](#installing-docker)
+  - [Procedure on Windows](#procedure-on-windows)
+  - [Procedure on Ubuntu and Debian](#procedure-on-ubuntu-and-debian)
+  - [Procedure on macOS](#procedure-on-macos)
+  - [Verifying the Docker Installation](#verifying-the-docker-installation)
+  - [Installing Git](#installing-git)
+  - [Obtaining the Project](#obtaining-the-project)
+  - [First Route: Cloning the Repository](#first-route-cloning-the-repository)
+  - [Second Route: Compressed Archive](#second-route-compressed-archive)
+  - [Verifying the Project Structure](#verifying-the-project-structure)
+- [Initial Configuration](#initial-configuration)
+  - [Creating the Configuration File](#creating-the-configuration-file)
+  - [Environment Variables](#environment-variables)
+  - [Customization Cases](#customization-cases)
+  - [First Case: The Database Port Is Occupied](#first-case-the-database-port-is-occupied)
+  - [Second Case: Testing from a Mobile Device](#second-case-testing-from-a-mobile-device)
+  - [Third Case: The Gateway Port Is Occupied](#third-case-the-gateway-port-is-occupied)
+  - [Email Channel](#email-channel)
+- [Bringing the System Up](#bringing-the-system-up)
+  - [Deploying the System](#deploying-the-system)
+  - [Startup Order](#startup-order)
+  - [Database and Migrations](#database-and-migrations)
+  - [Creation of the Schemas](#creation-of-the-schemas)
+  - [Creation of Tables and Catalog Data](#creation-of-tables-and-catalog-data)
+  - [Initial System Data](#initial-system-data)
+  - [Loading Test Data](#loading-test-data)
+- [Verifying the Installation](#verifying-the-installation)
+  - [Checklist](#checklist)
+  - [First Test: Container Status](#first-test-container-status)
+  - [Second Test: Service Health](#second-test-service-health)
+  - [Third Test: Authentication](#third-test-authentication)
+  - [Fourth Test: Web Interface](#fourth-test-web-interface)
+  - [Fifth Test: Network Isolation](#fifth-test-network-isolation)
+- [Installing the Mobile Application](#installing-the-mobile-application)
+  - [Additional Requirements](#additional-requirements)
+  - [Installation Procedure](#installation-procedure)
+- [Day-to-Day Operation](#day-to-day-operation)
+  - [Frequently Used Commands](#frequently-used-commands)
+  - [Stopping and Restarting the System](#stopping-and-restarting-the-system)
+  - [Updating to a New Version](#updating-to-a-new-version)
+  - [Uninstallation](#uninstallation)
+- [Troubleshooting](#troubleshooting)
+  - [Initial Diagnosis](#initial-diagnosis)
+  - [Problems During Installation](#problems-during-installation)
+  - [Problems When Deploying the System](#problems-when-deploying-the-system)
+  - [The Port Address Is Already Allocated](#the-port-address-is-already-allocated)
+  - [A Service Declares an Undefined Dependency](#a-service-declares-an-undefined-dependency)
+  - [A Container Remains in an Endless Restart Loop](#a-container-remains-in-an-endless-restart-loop)
+  - [The Web Interface Shows an Unhealthy Status](#the-web-interface-shows-an-unhealthy-status)
+  - [Problems with the Migrations](#problems-with-the-migrations)
+  - [A Migration Ends with an Error](#a-migration-ends-with-an-error)
+  - [The System Reports That a Table or a Schema Does Not Exist](#the-system-reports-that-a-table-or-a-schema-does-not-exist)
+  - [Connection and Usage Problems](#connection-and-usage-problems)
+  - [Performance Problems](#performance-problems)
+  - [Clean Restart Procedure](#clean-restart-procedure)
+  - [Incident Escalation](#incident-escalation)
+- [Installation Without Containers](#installation-without-containers)
+  - [Tools Required by Programming Language](#tools-required-by-programming-language)
+  - [Recommended Approach: Hybrid Mode](#recommended-approach-hybrid-mode)
+  - [Web Interface in Development Mode](#web-interface-in-development-mode)
+- [Security Recommendations](#security-recommendations)
+  - [Credentials](#credentials)
+  - [Network Exposure](#network-exposure)
+  - [Preservation of Information](#preservation-of-information)
+  - [Handover to the System Administrator](#handover-to-the-system-administrator)
+- [Glossary](#glossary)
+- [References](#references)
+- [Appendix A](#appendix-a)
+- [Appendix B](#appendix-b)
+- [Appendix C](#appendix-c)
+- [Appendix D](#appendix-d)
+- [Appendix E](#appendix-e)
 
 # Introduction
 
